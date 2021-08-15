@@ -1,0 +1,4531 @@
+State 38 conflicts: 1 shift/reduce
+State 46 conflicts: 3 shift/reduce
+State 67 conflicts: 9 shift/reduce
+State 88 conflicts: 3 shift/reduce
+State 112 conflicts: 3 shift/reduce
+State 113 conflicts: 3 shift/reduce
+State 151 conflicts: 3 shift/reduce
+State 152 conflicts: 3 shift/reduce
+State 153 conflicts: 3 shift/reduce
+State 154 conflicts: 3 shift/reduce
+State 155 conflicts: 3 shift/reduce
+State 156 conflicts: 3 shift/reduce
+State 157 conflicts: 3 shift/reduce
+State 158 conflicts: 3 shift/reduce
+State 159 conflicts: 3 shift/reduce
+State 160 conflicts: 3 shift/reduce
+State 161 conflicts: 3 shift/reduce
+State 162 conflicts: 3 shift/reduce
+State 163 conflicts: 3 shift/reduce
+State 200 conflicts: 1 shift/reduce
+State 201 conflicts: 5 shift/reduce
+State 213 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: decs
+
+    2 decs: funcAndVar
+    3     | jsLoad
+    4     | classDec
+    5     | templateDec
+    6     | templateDec decs
+    7     | classDec decs
+    8     | jsLoad decs
+    9     | funcAndVar decs
+
+   10 funcAndVar: declare
+   11           | funcDec
+
+   12 exp: INT
+   13    | STRING
+   14    | REAL
+   15    | NUL
+   16    | CHAR
+   17    | TRUEE
+   18    | FALSEE
+   19    | exp PLUS exp
+   20    | exp MINUS exp
+   21    | exp TIMES exp
+   22    | exp DIVIDE exp
+   23    | exp MOD exp
+   24    | MINUS exp
+   25    | exp EQ exp
+   26    | exp NEQ exp
+   27    | exp GE exp
+   28    | exp GT exp
+   29    | exp LE exp
+   30    | exp LT exp
+   31    | varExp LPAREN explist RPAREN
+   32    | LPAREN exp RPAREN
+   33    | exp AND exp
+   34    | exp OR exp
+   35    | AMPERSAND lvalue
+   36    | SIZEOF LPAREN lvalue RPAREN
+   37    | LBRACK explist RBRACK
+   38    | varExp
+
+   39 varExp: lvalue
+   40       | exp DOT id
+   41       | exp LBRACK exp RBRACK
+   42       | exp RIGHTARROW id
+
+   43 stm: funcDec
+   44    | funcCall SEMICOLON
+   45    | assign SEMICOLON
+   46    | declare
+   47    | if
+   48    | while
+   49    | for
+   50    | return SEMICOLON
+   51    | loop
+   52    | BREAK SEMICOLON
+   53    | CONTINUE SEMICOLON
+   54    | LBRACE stmlist RBRACE
+
+   55 stmlist: stm
+   56        | stm stmlist
+
+   57 return: RETURN
+   58       | RETURN LPAREN exp RPAREN
+
+   59 type: id
+   60     | VOID
+   61     | INTTYPE
+   62     | REALTYPE
+   63     | BOOLEAN
+   64     | CHARTYPE
+   65     | SHORTTYPE
+   66     | TIMES type
+   67     | id LT type GT
+
+   68 tyfield: %empty
+   69        | VOID
+   70        | tyfield1
+
+   71 tyfield1: type COLON lvalue
+   72         | type COLON lvalue COMMA tyfield1
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm
+
+   74 funcCall: varExp LPAREN RPAREN
+   75         | varExp LPAREN explist RPAREN
+
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+   77 funcvarlist: funcAndVar
+   78            | funcAndVar funcvarlist
+
+   79 memlist: funcvarlist
+   80        | PUBLIC COLON funcvarlist
+   81        | PROTECTED COLON funcvarlist
+   82        | PRIVATE COLON funcvarlist
+
+   83 mems: memlist
+   84     | memlist mems
+
+   85 classDec: CLASS COLON id LBRACE mems RBRACE
+   86         | CLASS COLON id LEFTARROW id LBRACE mems RBRACE
+
+   87 templateDec: TYPE LT id GT COLON funcDec
+   88            | TYPE LT id GT COLON classDec
+
+   89 assign: lvalue ASSIGN exp
+   90       | lvalue PLUS PLUS
+   91       | lvalue MINUS MINUS
+   92       | lvalue PLUS ASSIGN exp
+   93       | lvalue MINUS ASSIGN exp
+
+   94 declare: type COLON assign SEMICOLON
+   95        | type COLON lvalue SEMICOLON
+   96        | type COLON lvalue LBRACK RBRACK SEMICOLON
+   97        | type COLON id LPAREN explist RPAREN SEMICOLON
+   98        | type COLON id SEMICOLON
+
+   99 if: IF LPAREN exp RPAREN THEN stm
+  100   | IF LPAREN exp RPAREN THEN stm ELSE stm
+
+  101 while: LPAREN exp RPAREN TO stm
+
+  102 for: LPAREN stm RPAREN FROM LPAREN exp RPAREN TO LPAREN stm RPAREN stm
+  103    | LPAREN exp RPAREN REPEAT stm
+
+  104 loop: LOOP stm
+
+  105 explist: exp COMMA explist
+  106        | exp
+  107        | %empty
+
+  108 id: ID
+
+  109 lvalue: id
+  110       | lvalue DOT id
+  111       | TIMES lvalue
+  112       | lvalue LBRACK exp RBRACK
+  113       | lvalue RIGHTARROW id
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    CHAR <cval> (258) 16
+    ID <sval> (259) 108
+    STRING <sval> (260) 13 76
+    INT <ival> (261) 12
+    REAL <fval> (262) 14
+    COMMA (263) 72 76 105
+    COLON (264) 71 72 73 76 80 81 82 85 86 87 88 94 95 96 97 98
+    SEMICOLON (265) 44 45 50 52 53 76 94 95 96 97 98
+    LPAREN (266) 31 32 36 58 73 74 75 76 97 99 100 101 102 103
+    RPAREN (267) 31 32 36 58 73 74 75 76 97 99 100 101 102 103
+    LBRACK (268) 37 41 96 112
+    RBRACK (269) 37 41 96 112
+    LBRACE (270) 54 85 86
+    RBRACE (271) 54 85 86
+    DOT (272) 40 110
+    PLUS (273) 19 90 92
+    MINUS (274) 20 24 91 93
+    TIMES (275) 21 66 111
+    DIVIDE (276) 22
+    EQ (277) 25
+    NEQ (278) 26
+    LT (279) 30 67 87 88
+    LE (280) 29
+    GT (281) 28 67 87 88
+    GE (282) 27
+    AND (283) 33
+    OR (284) 34
+    ASSIGN (285) 76 89 92 93
+    IF (286) 99 100
+    THEN (287) 99 100
+    ELSE (288) 100
+    FROM (289) 102
+    TO (290) 101 102
+    BREAK (291) 52
+    INTTYPE (292) 61
+    REALTYPE (293) 62
+    CONTINUE (294) 53
+    RETURN (295) 57 58
+    TYPE (296) 87 88
+    VOID (297) 60 69
+    NUL (298) 15
+    TRUEE (299) 17
+    FALSEE (300) 18
+    BOOLEAN (301) 63
+    CHARTYPE (302) 64
+    MOD (303) 23
+    AMPERSAND (304) 35
+    SHORTTYPE (305) 65
+    FUNCTION (306) 73 76
+    ARROW (307) 73 76
+    LOOP (308) 104
+    JSLOAD (309) 76
+    SIZEOF (310) 36
+    CLASS (311) 85 86
+    LEFTARROW (312) 86
+    PRIVATE (313) 82
+    PUBLIC (314) 80
+    PROTECTED (315) 81
+    RIGHTARROW (316) 42 113
+    REPEAT (317) 103
+    UMINUS (318)
+    LOWER_THAN_ELSE (319)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (65)
+        on left: 0
+    program (66)
+        on left: 1
+        on right: 0
+    decs <decList> (67)
+        on left: 2 3 4 5 6 7 8 9
+        on right: 1 6 7 8 9
+    funcAndVar <dec> (68)
+        on left: 10 11
+        on right: 2 9 77 78
+    exp <exp> (69)
+        on left: 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
+        on right: 19 20 21 22 23 24 25 26 27 28 29 30 32 33 34 40 41 42 58 89 92 93 99 100 101 102 103 105 106 112
+    varExp <exp> (70)
+        on left: 39 40 41 42
+        on right: 31 38 74 75
+    stm <stm> (71)
+        on left: 43 44 45 46 47 48 49 50 51 52 53 54
+        on right: 55 56 73 99 100 101 102 103 104
+    stmlist <stmList> (72)
+        on left: 55 56
+        on right: 54 56
+    return <stm> (73)
+        on left: 57 58
+        on right: 50
+    type <type> (74)
+        on left: 59 60 61 62 63 64 65 66 67
+        on right: 66 67 71 72 94 95 96 97 98
+    tyfield <fieldList> (75)
+        on left: 68 69 70
+        on right: 73 76
+    tyfield1 <fieldList> (76)
+        on left: 71 72
+        on right: 70 72
+    funcDec <dec> (77)
+        on left: 73
+        on right: 11 43 87
+    funcCall <stm> (78)
+        on left: 74 75
+        on right: 44
+    jsLoad <dec> (79)
+        on left: 76
+        on right: 3 8
+    funcvarlist <decList> (80)
+        on left: 77 78
+        on right: 78 79 80 81 82
+    memlist <memList> (81)
+        on left: 79 80 81 82
+        on right: 83 84
+    mems <memList> (82)
+        on left: 83 84
+        on right: 84 85 86
+    classDec <dec> (83)
+        on left: 85 86
+        on right: 4 7 88
+    templateDec <dec> (84)
+        on left: 87 88
+        on right: 5 6
+    assign <stm> (85)
+        on left: 89 90 91 92 93
+        on right: 45 94
+    declare <dec> (86)
+        on left: 94 95 96 97 98
+        on right: 10 46
+    if <stm> (87)
+        on left: 99 100
+        on right: 47
+    while <stm> (88)
+        on left: 101
+        on right: 48
+    for <stm> (89)
+        on left: 102 103
+        on right: 49
+    loop <stm> (90)
+        on left: 104
+        on right: 51
+    explist <expList> (91)
+        on left: 105 106 107
+        on right: 31 37 75 97 105
+    id <sym> (92)
+        on left: 108
+        on right: 40 42 59 67 73 76 85 86 87 88 97 98 109 110 113
+    lvalue <var> (93)
+        on left: 109 110 111 112 113
+        on right: 35 36 39 71 72 89 90 91 92 93 95 96 110 111 112 113
+
+
+State 0
+
+    0 $accept: . program $end
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    TYPE       shift, and go to state 5
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 10
+    CLASS      shift, and go to state 11
+
+    program      go to state 12
+    decs         go to state 13
+    funcAndVar   go to state 14
+    type         go to state 15
+    funcDec      go to state 16
+    jsLoad       go to state 17
+    classDec     go to state 18
+    templateDec  go to state 19
+    declare      go to state 20
+    id           go to state 21
+
+
+State 1
+
+  108 id: ID .
+
+    $default  reduce using rule 108 (id)
+
+
+State 2
+
+   66 type: TIMES . type
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+
+    type  go to state 22
+    id    go to state 21
+
+
+State 3
+
+   61 type: INTTYPE .
+
+    $default  reduce using rule 61 (type)
+
+
+State 4
+
+   62 type: REALTYPE .
+
+    $default  reduce using rule 62 (type)
+
+
+State 5
+
+   87 templateDec: TYPE . LT id GT COLON funcDec
+   88            | TYPE . LT id GT COLON classDec
+
+    LT  shift, and go to state 23
+
+
+State 6
+
+   60 type: VOID .
+
+    $default  reduce using rule 60 (type)
+
+
+State 7
+
+   63 type: BOOLEAN .
+
+    $default  reduce using rule 63 (type)
+
+
+State 8
+
+   64 type: CHARTYPE .
+
+    $default  reduce using rule 64 (type)
+
+
+State 9
+
+   65 type: SHORTTYPE .
+
+    $default  reduce using rule 65 (type)
+
+
+State 10
+
+   73 funcDec: FUNCTION . COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm
+   76 jsLoad: FUNCTION . COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    COLON  shift, and go to state 24
+
+
+State 11
+
+   85 classDec: CLASS . COLON id LBRACE mems RBRACE
+   86         | CLASS . COLON id LEFTARROW id LBRACE mems RBRACE
+
+    COLON  shift, and go to state 25
+
+
+State 12
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 26
+
+
+State 13
+
+    1 program: decs .
+
+    $default  reduce using rule 1 (program)
+
+
+State 14
+
+    2 decs: funcAndVar .
+    9     | funcAndVar . decs
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    TYPE       shift, and go to state 5
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 10
+    CLASS      shift, and go to state 11
+
+    $default  reduce using rule 2 (decs)
+
+    decs         go to state 27
+    funcAndVar   go to state 14
+    type         go to state 15
+    funcDec      go to state 16
+    jsLoad       go to state 17
+    classDec     go to state 18
+    templateDec  go to state 19
+    declare      go to state 20
+    id           go to state 21
+
+
+State 15
+
+   94 declare: type . COLON assign SEMICOLON
+   95        | type . COLON lvalue SEMICOLON
+   96        | type . COLON lvalue LBRACK RBRACK SEMICOLON
+   97        | type . COLON id LPAREN explist RPAREN SEMICOLON
+   98        | type . COLON id SEMICOLON
+
+    COLON  shift, and go to state 28
+
+
+State 16
+
+   11 funcAndVar: funcDec .
+
+    $default  reduce using rule 11 (funcAndVar)
+
+
+State 17
+
+    3 decs: jsLoad .
+    8     | jsLoad . decs
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    TYPE       shift, and go to state 5
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 10
+    CLASS      shift, and go to state 11
+
+    $default  reduce using rule 3 (decs)
+
+    decs         go to state 29
+    funcAndVar   go to state 14
+    type         go to state 15
+    funcDec      go to state 16
+    jsLoad       go to state 17
+    classDec     go to state 18
+    templateDec  go to state 19
+    declare      go to state 20
+    id           go to state 21
+
+
+State 18
+
+    4 decs: classDec .
+    7     | classDec . decs
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    TYPE       shift, and go to state 5
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 10
+    CLASS      shift, and go to state 11
+
+    $default  reduce using rule 4 (decs)
+
+    decs         go to state 30
+    funcAndVar   go to state 14
+    type         go to state 15
+    funcDec      go to state 16
+    jsLoad       go to state 17
+    classDec     go to state 18
+    templateDec  go to state 19
+    declare      go to state 20
+    id           go to state 21
+
+
+State 19
+
+    5 decs: templateDec .
+    6     | templateDec . decs
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    TYPE       shift, and go to state 5
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 10
+    CLASS      shift, and go to state 11
+
+    $default  reduce using rule 5 (decs)
+
+    decs         go to state 31
+    funcAndVar   go to state 14
+    type         go to state 15
+    funcDec      go to state 16
+    jsLoad       go to state 17
+    classDec     go to state 18
+    templateDec  go to state 19
+    declare      go to state 20
+    id           go to state 21
+
+
+State 20
+
+   10 funcAndVar: declare .
+
+    $default  reduce using rule 10 (funcAndVar)
+
+
+State 21
+
+   59 type: id .
+   67     | id . LT type GT
+
+    LT  shift, and go to state 32
+
+    $default  reduce using rule 59 (type)
+
+
+State 22
+
+   66 type: TIMES type .
+
+    $default  reduce using rule 66 (type)
+
+
+State 23
+
+   87 templateDec: TYPE LT . id GT COLON funcDec
+   88            | TYPE LT . id GT COLON classDec
+
+    ID  shift, and go to state 1
+
+    id  go to state 33
+
+
+State 24
+
+   73 funcDec: FUNCTION COLON . id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm
+   76 jsLoad: FUNCTION COLON . id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    ID  shift, and go to state 1
+
+    id  go to state 34
+
+
+State 25
+
+   85 classDec: CLASS COLON . id LBRACE mems RBRACE
+   86         | CLASS COLON . id LEFTARROW id LBRACE mems RBRACE
+
+    ID  shift, and go to state 1
+
+    id  go to state 35
+
+
+State 26
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 27
+
+    9 decs: funcAndVar decs .
+
+    $default  reduce using rule 9 (decs)
+
+
+State 28
+
+   94 declare: type COLON . assign SEMICOLON
+   95        | type COLON . lvalue SEMICOLON
+   96        | type COLON . lvalue LBRACK RBRACK SEMICOLON
+   97        | type COLON . id LPAREN explist RPAREN SEMICOLON
+   98        | type COLON . id SEMICOLON
+
+    ID     shift, and go to state 1
+    TIMES  shift, and go to state 36
+
+    assign  go to state 37
+    id      go to state 38
+    lvalue  go to state 39
+
+
+State 29
+
+    8 decs: jsLoad decs .
+
+    $default  reduce using rule 8 (decs)
+
+
+State 30
+
+    7 decs: classDec decs .
+
+    $default  reduce using rule 7 (decs)
+
+
+State 31
+
+    6 decs: templateDec decs .
+
+    $default  reduce using rule 6 (decs)
+
+
+State 32
+
+   67 type: id LT . type GT
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+
+    type  go to state 40
+    id    go to state 21
+
+
+State 33
+
+   87 templateDec: TYPE LT id . GT COLON funcDec
+   88            | TYPE LT id . GT COLON classDec
+
+    GT  shift, and go to state 41
+
+
+State 34
+
+   73 funcDec: FUNCTION COLON id . LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm
+   76 jsLoad: FUNCTION COLON id . LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    LPAREN  shift, and go to state 42
+
+
+State 35
+
+   85 classDec: CLASS COLON id . LBRACE mems RBRACE
+   86         | CLASS COLON id . LEFTARROW id LBRACE mems RBRACE
+
+    LBRACE     shift, and go to state 43
+    LEFTARROW  shift, and go to state 44
+
+
+State 36
+
+  111 lvalue: TIMES . lvalue
+
+    ID     shift, and go to state 1
+    TIMES  shift, and go to state 36
+
+    id      go to state 45
+    lvalue  go to state 46
+
+
+State 37
+
+   94 declare: type COLON assign . SEMICOLON
+
+    SEMICOLON  shift, and go to state 47
+
+
+State 38
+
+   97 declare: type COLON id . LPAREN explist RPAREN SEMICOLON
+   98        | type COLON id . SEMICOLON
+  109 lvalue: id .
+
+    SEMICOLON  shift, and go to state 48
+    LPAREN     shift, and go to state 49
+
+    SEMICOLON  [reduce using rule 109 (lvalue)]
+    $default   reduce using rule 109 (lvalue)
+
+
+State 39
+
+   89 assign: lvalue . ASSIGN exp
+   90       | lvalue . PLUS PLUS
+   91       | lvalue . MINUS MINUS
+   92       | lvalue . PLUS ASSIGN exp
+   93       | lvalue . MINUS ASSIGN exp
+   95 declare: type COLON lvalue . SEMICOLON
+   96        | type COLON lvalue . LBRACK RBRACK SEMICOLON
+  110 lvalue: lvalue . DOT id
+  112       | lvalue . LBRACK exp RBRACK
+  113       | lvalue . RIGHTARROW id
+
+    SEMICOLON   shift, and go to state 50
+    LBRACK      shift, and go to state 51
+    DOT         shift, and go to state 52
+    PLUS        shift, and go to state 53
+    MINUS       shift, and go to state 54
+    ASSIGN      shift, and go to state 55
+    RIGHTARROW  shift, and go to state 56
+
+
+State 40
+
+   67 type: id LT type . GT
+
+    GT  shift, and go to state 57
+
+
+State 41
+
+   87 templateDec: TYPE LT id GT . COLON funcDec
+   88            | TYPE LT id GT . COLON classDec
+
+    COLON  shift, and go to state 58
+
+
+State 42
+
+   73 funcDec: FUNCTION COLON id LPAREN . tyfield RPAREN ARROW LPAREN tyfield RPAREN stm
+   76 jsLoad: FUNCTION COLON id LPAREN . tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 59
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+
+    $default  reduce using rule 68 (tyfield)
+
+    type      go to state 60
+    tyfield   go to state 61
+    tyfield1  go to state 62
+    id        go to state 21
+
+
+State 43
+
+   85 classDec: CLASS COLON id LBRACE . mems RBRACE
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    PRIVATE    shift, and go to state 64
+    PUBLIC     shift, and go to state 65
+    PROTECTED  shift, and go to state 66
+
+    funcAndVar   go to state 67
+    type         go to state 15
+    funcDec      go to state 16
+    funcvarlist  go to state 68
+    memlist      go to state 69
+    mems         go to state 70
+    declare      go to state 20
+    id           go to state 21
+
+
+State 44
+
+   86 classDec: CLASS COLON id LEFTARROW . id LBRACE mems RBRACE
+
+    ID  shift, and go to state 1
+
+    id  go to state 71
+
+
+State 45
+
+  109 lvalue: id .
+
+    $default  reduce using rule 109 (lvalue)
+
+
+State 46
+
+  110 lvalue: lvalue . DOT id
+  111       | TIMES lvalue .
+  112       | lvalue . LBRACK exp RBRACK
+  113       | lvalue . RIGHTARROW id
+
+    LBRACK      shift, and go to state 72
+    DOT         shift, and go to state 52
+    RIGHTARROW  shift, and go to state 56
+
+    LBRACK      [reduce using rule 111 (lvalue)]
+    DOT         [reduce using rule 111 (lvalue)]
+    RIGHTARROW  [reduce using rule 111 (lvalue)]
+    $default    reduce using rule 111 (lvalue)
+
+
+State 47
+
+   94 declare: type COLON assign SEMICOLON .
+
+    $default  reduce using rule 94 (declare)
+
+
+State 48
+
+   98 declare: type COLON id SEMICOLON .
+
+    $default  reduce using rule 98 (declare)
+
+
+State 49
+
+   97 declare: type COLON id LPAREN . explist RPAREN SEMICOLON
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    $default  reduce using rule 107 (explist)
+
+    exp      go to state 85
+    varExp   go to state 86
+    explist  go to state 87
+    id       go to state 45
+    lvalue   go to state 88
+
+
+State 50
+
+   95 declare: type COLON lvalue SEMICOLON .
+
+    $default  reduce using rule 95 (declare)
+
+
+State 51
+
+   96 declare: type COLON lvalue LBRACK . RBRACK SEMICOLON
+  112 lvalue: lvalue LBRACK . exp RBRACK
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    RBRACK     shift, and go to state 89
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 90
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 52
+
+  110 lvalue: lvalue DOT . id
+
+    ID  shift, and go to state 1
+
+    id  go to state 91
+
+
+State 53
+
+   90 assign: lvalue PLUS . PLUS
+   92       | lvalue PLUS . ASSIGN exp
+
+    PLUS    shift, and go to state 92
+    ASSIGN  shift, and go to state 93
+
+
+State 54
+
+   91 assign: lvalue MINUS . MINUS
+   93       | lvalue MINUS . ASSIGN exp
+
+    MINUS   shift, and go to state 94
+    ASSIGN  shift, and go to state 95
+
+
+State 55
+
+   89 assign: lvalue ASSIGN . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 96
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 56
+
+  113 lvalue: lvalue RIGHTARROW . id
+
+    ID  shift, and go to state 1
+
+    id  go to state 97
+
+
+State 57
+
+   67 type: id LT type GT .
+
+    $default  reduce using rule 67 (type)
+
+
+State 58
+
+   87 templateDec: TYPE LT id GT COLON . funcDec
+   88            | TYPE LT id GT COLON . classDec
+
+    FUNCTION  shift, and go to state 63
+    CLASS     shift, and go to state 11
+
+    funcDec   go to state 98
+    classDec  go to state 99
+
+
+State 59
+
+   60 type: VOID .
+   69 tyfield: VOID .
+
+    RPAREN    reduce using rule 69 (tyfield)
+    $default  reduce using rule 60 (type)
+
+
+State 60
+
+   71 tyfield1: type . COLON lvalue
+   72         | type . COLON lvalue COMMA tyfield1
+
+    COLON  shift, and go to state 100
+
+
+State 61
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield . RPAREN ARROW LPAREN tyfield RPAREN stm
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield . RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    RPAREN  shift, and go to state 101
+
+
+State 62
+
+   70 tyfield: tyfield1 .
+
+    $default  reduce using rule 70 (tyfield)
+
+
+State 63
+
+   73 funcDec: FUNCTION . COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm
+
+    COLON  shift, and go to state 102
+
+
+State 64
+
+   82 memlist: PRIVATE . COLON funcvarlist
+
+    COLON  shift, and go to state 103
+
+
+State 65
+
+   80 memlist: PUBLIC . COLON funcvarlist
+
+    COLON  shift, and go to state 104
+
+
+State 66
+
+   81 memlist: PROTECTED . COLON funcvarlist
+
+    COLON  shift, and go to state 105
+
+
+State 67
+
+   77 funcvarlist: funcAndVar .
+   78            | funcAndVar . funcvarlist
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+
+    ID         [reduce using rule 77 (funcvarlist)]
+    TIMES      [reduce using rule 77 (funcvarlist)]
+    INTTYPE    [reduce using rule 77 (funcvarlist)]
+    REALTYPE   [reduce using rule 77 (funcvarlist)]
+    VOID       [reduce using rule 77 (funcvarlist)]
+    BOOLEAN    [reduce using rule 77 (funcvarlist)]
+    CHARTYPE   [reduce using rule 77 (funcvarlist)]
+    SHORTTYPE  [reduce using rule 77 (funcvarlist)]
+    FUNCTION   [reduce using rule 77 (funcvarlist)]
+    $default   reduce using rule 77 (funcvarlist)
+
+    funcAndVar   go to state 67
+    type         go to state 15
+    funcDec      go to state 16
+    funcvarlist  go to state 106
+    declare      go to state 20
+    id           go to state 21
+
+
+State 68
+
+   79 memlist: funcvarlist .
+
+    $default  reduce using rule 79 (memlist)
+
+
+State 69
+
+   83 mems: memlist .
+   84     | memlist . mems
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    PRIVATE    shift, and go to state 64
+    PUBLIC     shift, and go to state 65
+    PROTECTED  shift, and go to state 66
+
+    $default  reduce using rule 83 (mems)
+
+    funcAndVar   go to state 67
+    type         go to state 15
+    funcDec      go to state 16
+    funcvarlist  go to state 68
+    memlist      go to state 69
+    mems         go to state 107
+    declare      go to state 20
+    id           go to state 21
+
+
+State 70
+
+   85 classDec: CLASS COLON id LBRACE mems . RBRACE
+
+    RBRACE  shift, and go to state 108
+
+
+State 71
+
+   86 classDec: CLASS COLON id LEFTARROW id . LBRACE mems RBRACE
+
+    LBRACE  shift, and go to state 109
+
+
+State 72
+
+  112 lvalue: lvalue LBRACK . exp RBRACK
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 90
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 73
+
+   16 exp: CHAR .
+
+    $default  reduce using rule 16 (exp)
+
+
+State 74
+
+   13 exp: STRING .
+
+    $default  reduce using rule 13 (exp)
+
+
+State 75
+
+   12 exp: INT .
+
+    $default  reduce using rule 12 (exp)
+
+
+State 76
+
+   14 exp: REAL .
+
+    $default  reduce using rule 14 (exp)
+
+
+State 77
+
+   32 exp: LPAREN . exp RPAREN
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 110
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 78
+
+   37 exp: LBRACK . explist RBRACK
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    $default  reduce using rule 107 (explist)
+
+    exp      go to state 85
+    varExp   go to state 86
+    explist  go to state 111
+    id       go to state 45
+    lvalue   go to state 88
+
+
+State 79
+
+   24 exp: MINUS . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 112
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 80
+
+   15 exp: NUL .
+
+    $default  reduce using rule 15 (exp)
+
+
+State 81
+
+   17 exp: TRUEE .
+
+    $default  reduce using rule 17 (exp)
+
+
+State 82
+
+   18 exp: FALSEE .
+
+    $default  reduce using rule 18 (exp)
+
+
+State 83
+
+   35 exp: AMPERSAND . lvalue
+
+    ID     shift, and go to state 1
+    TIMES  shift, and go to state 36
+
+    id      go to state 45
+    lvalue  go to state 113
+
+
+State 84
+
+   36 exp: SIZEOF . LPAREN lvalue RPAREN
+
+    LPAREN  shift, and go to state 114
+
+
+State 85
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+  105 explist: exp . COMMA explist
+  106        | exp .
+
+    COMMA       shift, and go to state 115
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+    $default  reduce using rule 106 (explist)
+
+
+State 86
+
+   31 exp: varExp . LPAREN explist RPAREN
+   38    | varExp .
+
+    LPAREN  shift, and go to state 132
+
+    $default  reduce using rule 38 (exp)
+
+
+State 87
+
+   97 declare: type COLON id LPAREN explist . RPAREN SEMICOLON
+
+    RPAREN  shift, and go to state 133
+
+
+State 88
+
+   39 varExp: lvalue .
+  110 lvalue: lvalue . DOT id
+  112       | lvalue . LBRACK exp RBRACK
+  113       | lvalue . RIGHTARROW id
+
+    LBRACK      shift, and go to state 72
+    DOT         shift, and go to state 52
+    RIGHTARROW  shift, and go to state 56
+
+    LBRACK      [reduce using rule 39 (varExp)]
+    DOT         [reduce using rule 39 (varExp)]
+    RIGHTARROW  [reduce using rule 39 (varExp)]
+    $default    reduce using rule 39 (varExp)
+
+
+State 89
+
+   96 declare: type COLON lvalue LBRACK RBRACK . SEMICOLON
+
+    SEMICOLON  shift, and go to state 134
+
+
+State 90
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+  112 lvalue: lvalue LBRACK exp . RBRACK
+
+    LBRACK      shift, and go to state 116
+    RBRACK      shift, and go to state 135
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+
+State 91
+
+  110 lvalue: lvalue DOT id .
+
+    $default  reduce using rule 110 (lvalue)
+
+
+State 92
+
+   90 assign: lvalue PLUS PLUS .
+
+    $default  reduce using rule 90 (assign)
+
+
+State 93
+
+   92 assign: lvalue PLUS ASSIGN . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 136
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 94
+
+   91 assign: lvalue MINUS MINUS .
+
+    $default  reduce using rule 91 (assign)
+
+
+State 95
+
+   93 assign: lvalue MINUS ASSIGN . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 137
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 96
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+   89 assign: lvalue ASSIGN exp .
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+    $default  reduce using rule 89 (assign)
+
+
+State 97
+
+  113 lvalue: lvalue RIGHTARROW id .
+
+    $default  reduce using rule 113 (lvalue)
+
+
+State 98
+
+   87 templateDec: TYPE LT id GT COLON funcDec .
+
+    $default  reduce using rule 87 (templateDec)
+
+
+State 99
+
+   88 templateDec: TYPE LT id GT COLON classDec .
+
+    $default  reduce using rule 88 (templateDec)
+
+
+State 100
+
+   71 tyfield1: type COLON . lvalue
+   72         | type COLON . lvalue COMMA tyfield1
+
+    ID     shift, and go to state 1
+    TIMES  shift, and go to state 36
+
+    id      go to state 45
+    lvalue  go to state 138
+
+
+State 101
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN . ARROW LPAREN tyfield RPAREN stm
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN . ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    ARROW  shift, and go to state 139
+
+
+State 102
+
+   73 funcDec: FUNCTION COLON . id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm
+
+    ID  shift, and go to state 1
+
+    id  go to state 140
+
+
+State 103
+
+   82 memlist: PRIVATE COLON . funcvarlist
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+
+    funcAndVar   go to state 67
+    type         go to state 15
+    funcDec      go to state 16
+    funcvarlist  go to state 141
+    declare      go to state 20
+    id           go to state 21
+
+
+State 104
+
+   80 memlist: PUBLIC COLON . funcvarlist
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+
+    funcAndVar   go to state 67
+    type         go to state 15
+    funcDec      go to state 16
+    funcvarlist  go to state 142
+    declare      go to state 20
+    id           go to state 21
+
+
+State 105
+
+   81 memlist: PROTECTED COLON . funcvarlist
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+
+    funcAndVar   go to state 67
+    type         go to state 15
+    funcDec      go to state 16
+    funcvarlist  go to state 143
+    declare      go to state 20
+    id           go to state 21
+
+
+State 106
+
+   78 funcvarlist: funcAndVar funcvarlist .
+
+    $default  reduce using rule 78 (funcvarlist)
+
+
+State 107
+
+   84 mems: memlist mems .
+
+    $default  reduce using rule 84 (mems)
+
+
+State 108
+
+   85 classDec: CLASS COLON id LBRACE mems RBRACE .
+
+    $default  reduce using rule 85 (classDec)
+
+
+State 109
+
+   86 classDec: CLASS COLON id LEFTARROW id LBRACE . mems RBRACE
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    PRIVATE    shift, and go to state 64
+    PUBLIC     shift, and go to state 65
+    PROTECTED  shift, and go to state 66
+
+    funcAndVar   go to state 67
+    type         go to state 15
+    funcDec      go to state 16
+    funcvarlist  go to state 68
+    memlist      go to state 69
+    mems         go to state 144
+    declare      go to state 20
+    id           go to state 21
+
+
+State 110
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   32    | LPAREN exp . RPAREN
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    RPAREN      shift, and go to state 145
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+
+State 111
+
+   37 exp: LBRACK explist . RBRACK
+
+    RBRACK  shift, and go to state 146
+
+
+State 112
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   24    | MINUS exp .
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+    LBRACK      [reduce using rule 24 (exp)]
+    DOT         [reduce using rule 24 (exp)]
+    RIGHTARROW  [reduce using rule 24 (exp)]
+    $default    reduce using rule 24 (exp)
+
+
+State 113
+
+   35 exp: AMPERSAND lvalue .
+  110 lvalue: lvalue . DOT id
+  112       | lvalue . LBRACK exp RBRACK
+  113       | lvalue . RIGHTARROW id
+
+    LBRACK      shift, and go to state 72
+    DOT         shift, and go to state 52
+    RIGHTARROW  shift, and go to state 56
+
+    LBRACK      [reduce using rule 35 (exp)]
+    DOT         [reduce using rule 35 (exp)]
+    RIGHTARROW  [reduce using rule 35 (exp)]
+    $default    reduce using rule 35 (exp)
+
+
+State 114
+
+   36 exp: SIZEOF LPAREN . lvalue RPAREN
+
+    ID     shift, and go to state 1
+    TIMES  shift, and go to state 36
+
+    id      go to state 45
+    lvalue  go to state 147
+
+
+State 115
+
+  105 explist: exp COMMA . explist
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    $default  reduce using rule 107 (explist)
+
+    exp      go to state 85
+    varExp   go to state 86
+    explist  go to state 148
+    id       go to state 45
+    lvalue   go to state 88
+
+
+State 116
+
+   41 varExp: exp LBRACK . exp RBRACK
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 149
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 117
+
+   40 varExp: exp DOT . id
+
+    ID  shift, and go to state 1
+
+    id  go to state 150
+
+
+State 118
+
+   19 exp: exp PLUS . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 151
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 119
+
+   20 exp: exp MINUS . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 152
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 120
+
+   21 exp: exp TIMES . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 153
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 121
+
+   22 exp: exp DIVIDE . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 154
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 122
+
+   25 exp: exp EQ . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 155
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 123
+
+   26 exp: exp NEQ . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 156
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 124
+
+   30 exp: exp LT . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 157
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 125
+
+   29 exp: exp LE . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 158
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 126
+
+   28 exp: exp GT . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 159
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 127
+
+   27 exp: exp GE . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 160
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 128
+
+   33 exp: exp AND . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 161
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 129
+
+   34 exp: exp OR . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 162
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 130
+
+   23 exp: exp MOD . exp
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 163
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 131
+
+   42 varExp: exp RIGHTARROW . id
+
+    ID  shift, and go to state 1
+
+    id  go to state 164
+
+
+State 132
+
+   31 exp: varExp LPAREN . explist RPAREN
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    $default  reduce using rule 107 (explist)
+
+    exp      go to state 85
+    varExp   go to state 86
+    explist  go to state 165
+    id       go to state 45
+    lvalue   go to state 88
+
+
+State 133
+
+   97 declare: type COLON id LPAREN explist RPAREN . SEMICOLON
+
+    SEMICOLON  shift, and go to state 166
+
+
+State 134
+
+   96 declare: type COLON lvalue LBRACK RBRACK SEMICOLON .
+
+    $default  reduce using rule 96 (declare)
+
+
+State 135
+
+  112 lvalue: lvalue LBRACK exp RBRACK .
+
+    $default  reduce using rule 112 (lvalue)
+
+
+State 136
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+   92 assign: lvalue PLUS ASSIGN exp .
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+    $default  reduce using rule 92 (assign)
+
+
+State 137
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+   93 assign: lvalue MINUS ASSIGN exp .
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+    $default  reduce using rule 93 (assign)
+
+
+State 138
+
+   71 tyfield1: type COLON lvalue .
+   72         | type COLON lvalue . COMMA tyfield1
+  110 lvalue: lvalue . DOT id
+  112       | lvalue . LBRACK exp RBRACK
+  113       | lvalue . RIGHTARROW id
+
+    COMMA       shift, and go to state 167
+    LBRACK      shift, and go to state 72
+    DOT         shift, and go to state 52
+    RIGHTARROW  shift, and go to state 56
+
+    $default  reduce using rule 71 (tyfield1)
+
+
+State 139
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW . LPAREN tyfield RPAREN stm
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW . LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    LPAREN  shift, and go to state 168
+
+
+State 140
+
+   73 funcDec: FUNCTION COLON id . LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm
+
+    LPAREN  shift, and go to state 169
+
+
+State 141
+
+   82 memlist: PRIVATE COLON funcvarlist .
+
+    $default  reduce using rule 82 (memlist)
+
+
+State 142
+
+   80 memlist: PUBLIC COLON funcvarlist .
+
+    $default  reduce using rule 80 (memlist)
+
+
+State 143
+
+   81 memlist: PROTECTED COLON funcvarlist .
+
+    $default  reduce using rule 81 (memlist)
+
+
+State 144
+
+   86 classDec: CLASS COLON id LEFTARROW id LBRACE mems . RBRACE
+
+    RBRACE  shift, and go to state 170
+
+
+State 145
+
+   32 exp: LPAREN exp RPAREN .
+
+    $default  reduce using rule 32 (exp)
+
+
+State 146
+
+   37 exp: LBRACK explist RBRACK .
+
+    $default  reduce using rule 37 (exp)
+
+
+State 147
+
+   36 exp: SIZEOF LPAREN lvalue . RPAREN
+  110 lvalue: lvalue . DOT id
+  112       | lvalue . LBRACK exp RBRACK
+  113       | lvalue . RIGHTARROW id
+
+    RPAREN      shift, and go to state 171
+    LBRACK      shift, and go to state 72
+    DOT         shift, and go to state 52
+    RIGHTARROW  shift, and go to state 56
+
+
+State 148
+
+  105 explist: exp COMMA explist .
+
+    $default  reduce using rule 105 (explist)
+
+
+State 149
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   41       | exp LBRACK exp . RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    RBRACK      shift, and go to state 172
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+
+State 150
+
+   40 varExp: exp DOT id .
+
+    $default  reduce using rule 40 (varExp)
+
+
+State 151
+
+   19 exp: exp . PLUS exp
+   19    | exp PLUS exp .
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+    LBRACK      [reduce using rule 19 (exp)]
+    DOT         [reduce using rule 19 (exp)]
+    RIGHTARROW  [reduce using rule 19 (exp)]
+    $default    reduce using rule 19 (exp)
+
+
+State 152
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   20    | exp MINUS exp .
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+    LBRACK      [reduce using rule 20 (exp)]
+    DOT         [reduce using rule 20 (exp)]
+    RIGHTARROW  [reduce using rule 20 (exp)]
+    $default    reduce using rule 20 (exp)
+
+
+State 153
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   21    | exp TIMES exp .
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    RIGHTARROW  shift, and go to state 131
+
+    LBRACK      [reduce using rule 21 (exp)]
+    DOT         [reduce using rule 21 (exp)]
+    RIGHTARROW  [reduce using rule 21 (exp)]
+    $default    reduce using rule 21 (exp)
+
+
+State 154
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   22    | exp DIVIDE exp .
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    RIGHTARROW  shift, and go to state 131
+
+    LBRACK      [reduce using rule 22 (exp)]
+    DOT         [reduce using rule 22 (exp)]
+    RIGHTARROW  [reduce using rule 22 (exp)]
+    $default    reduce using rule 22 (exp)
+
+
+State 155
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   25    | exp EQ exp .
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    RIGHTARROW  shift, and go to state 131
+
+    EQ   error (nonassociative)
+    NEQ  error (nonassociative)
+    LT   error (nonassociative)
+    LE   error (nonassociative)
+    GT   error (nonassociative)
+    GE   error (nonassociative)
+
+    LBRACK      [reduce using rule 25 (exp)]
+    DOT         [reduce using rule 25 (exp)]
+    RIGHTARROW  [reduce using rule 25 (exp)]
+    $default    reduce using rule 25 (exp)
+
+
+State 156
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   26    | exp NEQ exp .
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    RIGHTARROW  shift, and go to state 131
+
+    EQ   error (nonassociative)
+    NEQ  error (nonassociative)
+    LT   error (nonassociative)
+    LE   error (nonassociative)
+    GT   error (nonassociative)
+    GE   error (nonassociative)
+
+    LBRACK      [reduce using rule 26 (exp)]
+    DOT         [reduce using rule 26 (exp)]
+    RIGHTARROW  [reduce using rule 26 (exp)]
+    $default    reduce using rule 26 (exp)
+
+
+State 157
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   30    | exp LT exp .
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    RIGHTARROW  shift, and go to state 131
+
+    EQ   error (nonassociative)
+    NEQ  error (nonassociative)
+    LT   error (nonassociative)
+    LE   error (nonassociative)
+    GT   error (nonassociative)
+    GE   error (nonassociative)
+
+    LBRACK      [reduce using rule 30 (exp)]
+    DOT         [reduce using rule 30 (exp)]
+    RIGHTARROW  [reduce using rule 30 (exp)]
+    $default    reduce using rule 30 (exp)
+
+
+State 158
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   29    | exp LE exp .
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    RIGHTARROW  shift, and go to state 131
+
+    EQ   error (nonassociative)
+    NEQ  error (nonassociative)
+    LT   error (nonassociative)
+    LE   error (nonassociative)
+    GT   error (nonassociative)
+    GE   error (nonassociative)
+
+    LBRACK      [reduce using rule 29 (exp)]
+    DOT         [reduce using rule 29 (exp)]
+    RIGHTARROW  [reduce using rule 29 (exp)]
+    $default    reduce using rule 29 (exp)
+
+
+State 159
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   28    | exp GT exp .
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    RIGHTARROW  shift, and go to state 131
+
+    EQ   error (nonassociative)
+    NEQ  error (nonassociative)
+    LT   error (nonassociative)
+    LE   error (nonassociative)
+    GT   error (nonassociative)
+    GE   error (nonassociative)
+
+    LBRACK      [reduce using rule 28 (exp)]
+    DOT         [reduce using rule 28 (exp)]
+    RIGHTARROW  [reduce using rule 28 (exp)]
+    $default    reduce using rule 28 (exp)
+
+
+State 160
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   27    | exp GE exp .
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    RIGHTARROW  shift, and go to state 131
+
+    EQ   error (nonassociative)
+    NEQ  error (nonassociative)
+    LT   error (nonassociative)
+    LE   error (nonassociative)
+    GT   error (nonassociative)
+    GE   error (nonassociative)
+
+    LBRACK      [reduce using rule 27 (exp)]
+    DOT         [reduce using rule 27 (exp)]
+    RIGHTARROW  [reduce using rule 27 (exp)]
+    $default    reduce using rule 27 (exp)
+
+
+State 161
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   33    | exp AND exp .
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    RIGHTARROW  shift, and go to state 131
+
+    LBRACK      [reduce using rule 33 (exp)]
+    DOT         [reduce using rule 33 (exp)]
+    RIGHTARROW  [reduce using rule 33 (exp)]
+    $default    reduce using rule 33 (exp)
+
+
+State 162
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   34    | exp OR exp .
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    RIGHTARROW  shift, and go to state 131
+
+    LBRACK      [reduce using rule 34 (exp)]
+    DOT         [reduce using rule 34 (exp)]
+    RIGHTARROW  [reduce using rule 34 (exp)]
+    $default    reduce using rule 34 (exp)
+
+
+State 163
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   23    | exp MOD exp .
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    RIGHTARROW  shift, and go to state 131
+
+    LBRACK      [reduce using rule 23 (exp)]
+    DOT         [reduce using rule 23 (exp)]
+    RIGHTARROW  [reduce using rule 23 (exp)]
+    $default    reduce using rule 23 (exp)
+
+
+State 164
+
+   42 varExp: exp RIGHTARROW id .
+
+    $default  reduce using rule 42 (varExp)
+
+
+State 165
+
+   31 exp: varExp LPAREN explist . RPAREN
+
+    RPAREN  shift, and go to state 173
+
+
+State 166
+
+   97 declare: type COLON id LPAREN explist RPAREN SEMICOLON .
+
+    $default  reduce using rule 97 (declare)
+
+
+State 167
+
+   72 tyfield1: type COLON lvalue COMMA . tyfield1
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+
+    type      go to state 60
+    tyfield1  go to state 174
+    id        go to state 21
+
+
+State 168
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN . tyfield RPAREN stm
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN . tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 59
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+
+    $default  reduce using rule 68 (tyfield)
+
+    type      go to state 60
+    tyfield   go to state 175
+    tyfield1  go to state 62
+    id        go to state 21
+
+
+State 169
+
+   73 funcDec: FUNCTION COLON id LPAREN . tyfield RPAREN ARROW LPAREN tyfield RPAREN stm
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 59
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+
+    $default  reduce using rule 68 (tyfield)
+
+    type      go to state 60
+    tyfield   go to state 176
+    tyfield1  go to state 62
+    id        go to state 21
+
+
+State 170
+
+   86 classDec: CLASS COLON id LEFTARROW id LBRACE mems RBRACE .
+
+    $default  reduce using rule 86 (classDec)
+
+
+State 171
+
+   36 exp: SIZEOF LPAREN lvalue RPAREN .
+
+    $default  reduce using rule 36 (exp)
+
+
+State 172
+
+   41 varExp: exp LBRACK exp RBRACK .
+
+    $default  reduce using rule 41 (varExp)
+
+
+State 173
+
+   31 exp: varExp LPAREN explist RPAREN .
+
+    $default  reduce using rule 31 (exp)
+
+
+State 174
+
+   72 tyfield1: type COLON lvalue COMMA tyfield1 .
+
+    $default  reduce using rule 72 (tyfield1)
+
+
+State 175
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield . RPAREN stm
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield . RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    RPAREN  shift, and go to state 177
+
+
+State 176
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield . RPAREN ARROW LPAREN tyfield RPAREN stm
+
+    RPAREN  shift, and go to state 178
+
+
+State 177
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN . stm
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN . ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    ASSIGN     shift, and go to state 182
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 190
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 178
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN . ARROW LPAREN tyfield RPAREN stm
+
+    ARROW  shift, and go to state 202
+
+
+State 179
+
+   32 exp: LPAREN . exp RPAREN
+  101 while: LPAREN . exp RPAREN TO stm
+  102 for: LPAREN . stm RPAREN FROM LPAREN exp RPAREN TO LPAREN stm RPAREN stm
+  103    | LPAREN . exp RPAREN REPEAT stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 203
+    varExp    go to state 189
+    stm       go to state 204
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 180
+
+   54 stm: LBRACE . stmlist RBRACE
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 205
+    stmlist   go to state 206
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 181
+
+   66 type: TIMES . type
+  111 lvalue: TIMES . lvalue
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 181
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 6
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+
+    type    go to state 22
+    id      go to state 200
+    lvalue  go to state 46
+
+
+State 182
+
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN . JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    JSLOAD  shift, and go to state 207
+
+
+State 183
+
+   99 if: IF . LPAREN exp RPAREN THEN stm
+  100   | IF . LPAREN exp RPAREN THEN stm ELSE stm
+
+    LPAREN  shift, and go to state 208
+
+
+State 184
+
+   52 stm: BREAK . SEMICOLON
+
+    SEMICOLON  shift, and go to state 209
+
+
+State 185
+
+   53 stm: CONTINUE . SEMICOLON
+
+    SEMICOLON  shift, and go to state 210
+
+
+State 186
+
+   57 return: RETURN .
+   58       | RETURN . LPAREN exp RPAREN
+
+    LPAREN  shift, and go to state 211
+
+    $default  reduce using rule 57 (return)
+
+
+State 187
+
+  104 loop: LOOP . stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 212
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 188
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+
+State 189
+
+   31 exp: varExp . LPAREN explist RPAREN
+   38    | varExp .
+   74 funcCall: varExp . LPAREN RPAREN
+   75         | varExp . LPAREN explist RPAREN
+
+    LPAREN  shift, and go to state 213
+
+    $default  reduce using rule 38 (exp)
+
+
+State 190
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm .
+
+    $default  reduce using rule 73 (funcDec)
+
+
+State 191
+
+   50 stm: return . SEMICOLON
+
+    SEMICOLON  shift, and go to state 214
+
+
+State 192
+
+   43 stm: funcDec .
+
+    $default  reduce using rule 43 (stm)
+
+
+State 193
+
+   44 stm: funcCall . SEMICOLON
+
+    SEMICOLON  shift, and go to state 215
+
+
+State 194
+
+   45 stm: assign . SEMICOLON
+
+    SEMICOLON  shift, and go to state 216
+
+
+State 195
+
+   46 stm: declare .
+
+    $default  reduce using rule 46 (stm)
+
+
+State 196
+
+   47 stm: if .
+
+    $default  reduce using rule 47 (stm)
+
+
+State 197
+
+   48 stm: while .
+
+    $default  reduce using rule 48 (stm)
+
+
+State 198
+
+   49 stm: for .
+
+    $default  reduce using rule 49 (stm)
+
+
+State 199
+
+   51 stm: loop .
+
+    $default  reduce using rule 51 (stm)
+
+
+State 200
+
+   59 type: id .
+   67     | id . LT type GT
+  109 lvalue: id .
+
+    LT  shift, and go to state 32
+
+    COLON     reduce using rule 59 (type)
+    LT        [reduce using rule 109 (lvalue)]
+    $default  reduce using rule 109 (lvalue)
+
+
+State 201
+
+   39 varExp: lvalue .
+   89 assign: lvalue . ASSIGN exp
+   90       | lvalue . PLUS PLUS
+   91       | lvalue . MINUS MINUS
+   92       | lvalue . PLUS ASSIGN exp
+   93       | lvalue . MINUS ASSIGN exp
+  110 lvalue: lvalue . DOT id
+  112       | lvalue . LBRACK exp RBRACK
+  113       | lvalue . RIGHTARROW id
+
+    LBRACK      shift, and go to state 72
+    DOT         shift, and go to state 52
+    PLUS        shift, and go to state 53
+    MINUS       shift, and go to state 54
+    ASSIGN      shift, and go to state 55
+    RIGHTARROW  shift, and go to state 56
+
+    LBRACK      [reduce using rule 39 (varExp)]
+    DOT         [reduce using rule 39 (varExp)]
+    PLUS        [reduce using rule 39 (varExp)]
+    MINUS       [reduce using rule 39 (varExp)]
+    RIGHTARROW  [reduce using rule 39 (varExp)]
+    $default    reduce using rule 39 (varExp)
+
+
+State 202
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW . LPAREN tyfield RPAREN stm
+
+    LPAREN  shift, and go to state 217
+
+
+State 203
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   32    | LPAREN exp . RPAREN
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+  101 while: LPAREN exp . RPAREN TO stm
+  103 for: LPAREN exp . RPAREN REPEAT stm
+
+    RPAREN      shift, and go to state 218
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+
+State 204
+
+  102 for: LPAREN stm . RPAREN FROM LPAREN exp RPAREN TO LPAREN stm RPAREN stm
+
+    RPAREN  shift, and go to state 219
+
+
+State 205
+
+   55 stmlist: stm .
+   56        | stm . stmlist
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    $default  reduce using rule 55 (stmlist)
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 205
+    stmlist   go to state 220
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 206
+
+   54 stm: LBRACE stmlist . RBRACE
+
+    RBRACE  shift, and go to state 221
+
+
+State 207
+
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD . LPAREN STRING COMMA STRING RPAREN SEMICOLON
+
+    LPAREN  shift, and go to state 222
+
+
+State 208
+
+   99 if: IF LPAREN . exp RPAREN THEN stm
+  100   | IF LPAREN . exp RPAREN THEN stm ELSE stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 223
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 209
+
+   52 stm: BREAK SEMICOLON .
+
+    $default  reduce using rule 52 (stm)
+
+
+State 210
+
+   53 stm: CONTINUE SEMICOLON .
+
+    $default  reduce using rule 53 (stm)
+
+
+State 211
+
+   58 return: RETURN LPAREN . exp RPAREN
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 224
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 212
+
+  104 loop: LOOP stm .
+
+    $default  reduce using rule 104 (loop)
+
+
+State 213
+
+   31 exp: varExp LPAREN . explist RPAREN
+   74 funcCall: varExp LPAREN . RPAREN
+   75         | varExp LPAREN . explist RPAREN
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    RPAREN     shift, and go to state 225
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    RPAREN  [reduce using rule 107 (explist)]
+
+    exp      go to state 85
+    varExp   go to state 86
+    explist  go to state 226
+    id       go to state 45
+    lvalue   go to state 88
+
+
+State 214
+
+   50 stm: return SEMICOLON .
+
+    $default  reduce using rule 50 (stm)
+
+
+State 215
+
+   44 stm: funcCall SEMICOLON .
+
+    $default  reduce using rule 44 (stm)
+
+
+State 216
+
+   45 stm: assign SEMICOLON .
+
+    $default  reduce using rule 45 (stm)
+
+
+State 217
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN . tyfield RPAREN stm
+
+    ID         shift, and go to state 1
+    TIMES      shift, and go to state 2
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    VOID       shift, and go to state 59
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    SHORTTYPE  shift, and go to state 9
+
+    $default  reduce using rule 68 (tyfield)
+
+    type      go to state 60
+    tyfield   go to state 227
+    tyfield1  go to state 62
+    id        go to state 21
+
+
+State 218
+
+   32 exp: LPAREN exp RPAREN .
+  101 while: LPAREN exp RPAREN . TO stm
+  103 for: LPAREN exp RPAREN . REPEAT stm
+
+    TO      shift, and go to state 228
+    REPEAT  shift, and go to state 229
+
+    $default  reduce using rule 32 (exp)
+
+
+State 219
+
+  102 for: LPAREN stm RPAREN . FROM LPAREN exp RPAREN TO LPAREN stm RPAREN stm
+
+    FROM  shift, and go to state 230
+
+
+State 220
+
+   56 stmlist: stm stmlist .
+
+    $default  reduce using rule 56 (stmlist)
+
+
+State 221
+
+   54 stm: LBRACE stmlist RBRACE .
+
+    $default  reduce using rule 54 (stm)
+
+
+State 222
+
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN . STRING COMMA STRING RPAREN SEMICOLON
+
+    STRING  shift, and go to state 231
+
+
+State 223
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+   99 if: IF LPAREN exp . RPAREN THEN stm
+  100   | IF LPAREN exp . RPAREN THEN stm ELSE stm
+
+    RPAREN      shift, and go to state 232
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+
+State 224
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+   58 return: RETURN LPAREN exp . RPAREN
+
+    RPAREN      shift, and go to state 233
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+
+State 225
+
+   74 funcCall: varExp LPAREN RPAREN .
+
+    $default  reduce using rule 74 (funcCall)
+
+
+State 226
+
+   31 exp: varExp LPAREN explist . RPAREN
+   75 funcCall: varExp LPAREN explist . RPAREN
+
+    RPAREN  shift, and go to state 234
+
+
+State 227
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield . RPAREN stm
+
+    RPAREN  shift, and go to state 235
+
+
+State 228
+
+  101 while: LPAREN exp RPAREN TO . stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 236
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 229
+
+  103 for: LPAREN exp RPAREN REPEAT . stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 237
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 230
+
+  102 for: LPAREN stm RPAREN FROM . LPAREN exp RPAREN TO LPAREN stm RPAREN stm
+
+    LPAREN  shift, and go to state 238
+
+
+State 231
+
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING . COMMA STRING RPAREN SEMICOLON
+
+    COMMA  shift, and go to state 239
+
+
+State 232
+
+   99 if: IF LPAREN exp RPAREN . THEN stm
+  100   | IF LPAREN exp RPAREN . THEN stm ELSE stm
+
+    THEN  shift, and go to state 240
+
+
+State 233
+
+   58 return: RETURN LPAREN exp RPAREN .
+
+    $default  reduce using rule 58 (return)
+
+
+State 234
+
+   31 exp: varExp LPAREN explist RPAREN .
+   75 funcCall: varExp LPAREN explist RPAREN .
+
+    SEMICOLON  reduce using rule 75 (funcCall)
+    $default   reduce using rule 31 (exp)
+
+
+State 235
+
+   73 funcDec: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN . stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 190
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 236
+
+  101 while: LPAREN exp RPAREN TO stm .
+
+    $default  reduce using rule 101 (while)
+
+
+State 237
+
+  103 for: LPAREN exp RPAREN REPEAT stm .
+
+    $default  reduce using rule 103 (for)
+
+
+State 238
+
+  102 for: LPAREN stm RPAREN FROM LPAREN . exp RPAREN TO LPAREN stm RPAREN stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 77
+    LBRACK     shift, and go to state 78
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 36
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    AMPERSAND  shift, and go to state 83
+    SIZEOF     shift, and go to state 84
+
+    exp     go to state 241
+    varExp  go to state 86
+    id      go to state 45
+    lvalue  go to state 88
+
+
+State 239
+
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA . STRING RPAREN SEMICOLON
+
+    STRING  shift, and go to state 242
+
+
+State 240
+
+   99 if: IF LPAREN exp RPAREN THEN . stm
+  100   | IF LPAREN exp RPAREN THEN . stm ELSE stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 243
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 241
+
+   19 exp: exp . PLUS exp
+   20    | exp . MINUS exp
+   21    | exp . TIMES exp
+   22    | exp . DIVIDE exp
+   23    | exp . MOD exp
+   25    | exp . EQ exp
+   26    | exp . NEQ exp
+   27    | exp . GE exp
+   28    | exp . GT exp
+   29    | exp . LE exp
+   30    | exp . LT exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   40 varExp: exp . DOT id
+   41       | exp . LBRACK exp RBRACK
+   42       | exp . RIGHTARROW id
+  102 for: LPAREN stm RPAREN FROM LPAREN exp . RPAREN TO LPAREN stm RPAREN stm
+
+    RPAREN      shift, and go to state 244
+    LBRACK      shift, and go to state 116
+    DOT         shift, and go to state 117
+    PLUS        shift, and go to state 118
+    MINUS       shift, and go to state 119
+    TIMES       shift, and go to state 120
+    DIVIDE      shift, and go to state 121
+    EQ          shift, and go to state 122
+    NEQ         shift, and go to state 123
+    LT          shift, and go to state 124
+    LE          shift, and go to state 125
+    GT          shift, and go to state 126
+    GE          shift, and go to state 127
+    AND         shift, and go to state 128
+    OR          shift, and go to state 129
+    MOD         shift, and go to state 130
+    RIGHTARROW  shift, and go to state 131
+
+
+State 242
+
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING . RPAREN SEMICOLON
+
+    RPAREN  shift, and go to state 245
+
+
+State 243
+
+   99 if: IF LPAREN exp RPAREN THEN stm .
+  100   | IF LPAREN exp RPAREN THEN stm . ELSE stm
+
+    ELSE  shift, and go to state 246
+
+    $default  reduce using rule 99 (if)
+
+
+State 244
+
+  102 for: LPAREN stm RPAREN FROM LPAREN exp RPAREN . TO LPAREN stm RPAREN stm
+
+    TO  shift, and go to state 247
+
+
+State 245
+
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN . SEMICOLON
+
+    SEMICOLON  shift, and go to state 248
+
+
+State 246
+
+  100 if: IF LPAREN exp RPAREN THEN stm ELSE . stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 249
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 247
+
+  102 for: LPAREN stm RPAREN FROM LPAREN exp RPAREN TO . LPAREN stm RPAREN stm
+
+    LPAREN  shift, and go to state 250
+
+
+State 248
+
+   76 jsLoad: FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON .
+
+    $default  reduce using rule 76 (jsLoad)
+
+
+State 249
+
+  100 if: IF LPAREN exp RPAREN THEN stm ELSE stm .
+
+    $default  reduce using rule 100 (if)
+
+
+State 250
+
+  102 for: LPAREN stm RPAREN FROM LPAREN exp RPAREN TO LPAREN . stm RPAREN stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 251
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 251
+
+  102 for: LPAREN stm RPAREN FROM LPAREN exp RPAREN TO LPAREN stm . RPAREN stm
+
+    RPAREN  shift, and go to state 252
+
+
+State 252
+
+  102 for: LPAREN stm RPAREN FROM LPAREN exp RPAREN TO LPAREN stm RPAREN . stm
+
+    CHAR       shift, and go to state 73
+    ID         shift, and go to state 1
+    STRING     shift, and go to state 74
+    INT        shift, and go to state 75
+    REAL       shift, and go to state 76
+    LPAREN     shift, and go to state 179
+    LBRACK     shift, and go to state 78
+    LBRACE     shift, and go to state 180
+    MINUS      shift, and go to state 79
+    TIMES      shift, and go to state 181
+    IF         shift, and go to state 183
+    BREAK      shift, and go to state 184
+    INTTYPE    shift, and go to state 3
+    REALTYPE   shift, and go to state 4
+    CONTINUE   shift, and go to state 185
+    RETURN     shift, and go to state 186
+    VOID       shift, and go to state 6
+    NUL        shift, and go to state 80
+    TRUEE      shift, and go to state 81
+    FALSEE     shift, and go to state 82
+    BOOLEAN    shift, and go to state 7
+    CHARTYPE   shift, and go to state 8
+    AMPERSAND  shift, and go to state 83
+    SHORTTYPE  shift, and go to state 9
+    FUNCTION   shift, and go to state 63
+    LOOP       shift, and go to state 187
+    SIZEOF     shift, and go to state 84
+
+    exp       go to state 188
+    varExp    go to state 189
+    stm       go to state 253
+    return    go to state 191
+    type      go to state 15
+    funcDec   go to state 192
+    funcCall  go to state 193
+    assign    go to state 194
+    declare   go to state 195
+    if        go to state 196
+    while     go to state 197
+    for       go to state 198
+    loop      go to state 199
+    id        go to state 200
+    lvalue    go to state 201
+
+
+State 253
+
+  102 for: LPAREN stm RPAREN FROM LPAREN exp RPAREN TO LPAREN stm RPAREN stm .
+
+    $default  reduce using rule 102 (for)
