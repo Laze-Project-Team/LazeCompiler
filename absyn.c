@@ -422,6 +422,15 @@ A_dec A_FuncImport(A_pos pos, S_symbol name, A_fieldList params, A_fieldList res
     return p;
 }
 
+A_dec A_FuncExport(A_pos pos, S_symbol name, string exportName){
+    A_dec p = checked_malloc(sizeof(*p));
+    p -> kind = A_funcExportDec;
+    p -> pos = pos;
+    p -> u.funcExport.name = name;
+    p -> u.funcExport.exportName = exportName;
+    return p;
+}
+
 A_dec A_ClassDec(A_pos pos, S_symbol name, A_classMemberList members, S_symbolList inheritance)
 {
     A_dec p = checked_malloc(sizeof(*p));

@@ -50,7 +50,7 @@
 %type <expList> explist
 %type <stm> stm if while assign funcCall for return loop
 %type <stmList> stmlist
-%type <dec> declare funcDec jsLoad classDec funcAndVar templateDec
+%type <dec> declare funcDec jsLoad classDec funcAndVar templateDec jsExport
 /* %type <funcdec> funcDec */
 %type <type> type
 %type <fieldList> tyfield1 tyfield
@@ -62,7 +62,7 @@
     NEQ LT LE GT GE AND OR ASSIGN IF THEN ELSE FROM TO BREAK INTTYPE
     REALTYPE CONTINUE RETURN TYPE VOID NUL TRUEE FALSEE BOOLEAN CHARTYPE 
     MOD AMPERSAND SHORTTYPE FUNCTION ARROW LOOP JSLOAD SIZEOF CLASS LEFTARROW PRIVATE
-    PUBLIC PROTECTED RIGHTARROW REPEAT
+    PUBLIC PROTECTED RIGHTARROW REPEAT JSEXPORT
  
 %left SEMICOLON
 
@@ -85,10 +85,12 @@ decs :      funcAndVar {$$ = A_DecList($1, NULL);}
             | jsLoad {$$ = A_DecList($1, NULL);}
             | classDec {$$ = A_DecList($1, NULL);}
             | templateDec {$$ = A_DecList($1, NULL);}
+            | jsExport {$$ = A_DecList($1, NULL);}
             | templateDec decs {$$ = A_DecList($1, $2);}
             | classDec decs {$$ = A_DecList($1, $2);}
             | jsLoad decs {$$ = A_DecList($1, $2);}
             | funcAndVar decs {$$ = A_DecList($1, $2);}
+            | jsExport decs {$$ = A_DecList($1, $2);}
 
 funcAndVar: declare {$$ = $1;}
             | funcDec {$$ = $1;}
@@ -222,6 +224,8 @@ funcCall :  varExp LPAREN RPAREN {$$ = A_CallStm(EM_tokPos, $1, NULL);}
             | varExp LPAREN explist RPAREN {$$ = A_CallStm(EM_tokPos, $1, $3);}
 
 jsLoad :    FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON {$$ = A_FuncImport(EM_tokPos, $3, $5, $9, $14, $16);}
+
+jsExport:   JSEXPORT LPAREN STRING COMMA STRING RPAREN SEMICOLON {$$ = A_FuncExport(EM_tokPos, S_Symbol($3), $5);}
 
 funcvarlist: funcAndVar {$$ = A_DecList($1, NULL);}
             | funcAndVar funcvarlist {$$ = A_DecList($1, $2);}

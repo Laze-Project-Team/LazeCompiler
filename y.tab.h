@@ -109,8 +109,9 @@ extern int yydebug;
     PROTECTED = 315,
     RIGHTARROW = 316,
     REPEAT = 317,
-    UMINUS = 318,
-    LOWER_THAN_ELSE = 319
+    JSEXPORT = 318,
+    UMINUS = 319,
+    LOWER_THAN_ELSE = 320
   };
 #endif
 /* Tokens.  */
@@ -174,8 +175,9 @@ extern int yydebug;
 #define PROTECTED 315
 #define RIGHTARROW 316
 #define REPEAT 317
-#define UMINUS 318
-#define LOWER_THAN_ELSE 319
+#define JSEXPORT 318
+#define UMINUS 319
+#define LOWER_THAN_ELSE 320
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -203,7 +205,7 @@ union YYSTYPE
     A_decList decList;
     A_classMemberList memList;
 
-#line 207 "y.tab.h"
+#line 209 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -105,7 +105,7 @@ struct T_module_
         struct { T_exp exp; string data; } data;
 
         struct { string module; string name; T_module import; } import;
-        struct { string name; T_module export; } export;
+        struct { string name; int export; } export;
         T_moduleList seq;
     } u;
 };
@@ -141,7 +141,7 @@ T_module T_GlobalMod(T_type type, T_exp exp);
 T_module T_MemMod(int pageSize);
 T_module T_DataMod(T_exp exp, string data);
 T_module T_ImportMod(string module, string name, T_module import);
-T_module T_ExportMod(string name, T_module export);
+T_module T_ExportMod(string name, int export);
 T_module T_SeqMod(T_moduleList list);
 
 T_stmList T_StmList(T_stm head, T_stmList tail);

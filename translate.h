@@ -64,7 +64,6 @@ Tr_exp Tr_ForStm(A_pos pos, T_stm assign, T_exp condition, T_stm increment, T_st
 Tr_exp Tr_BreakStm(A_pos pos, int depth);
 Tr_exp Tr_ContinueStm(A_pos pos);
 Tr_exp Tr_CompoundStm(A_pos pos, T_stmList stmlist);
-// Tr_exp Tr_DeclarationStm(A_pos pos, A_dec dec);
 Tr_exp Tr_CallStm(A_pos pos, int index, string func, T_expList args);
 Tr_exp Tr_ReturnStm(A_pos pos, T_exp exp);
 Tr_exp Tr_LoopStm(A_pos pos);
@@ -78,7 +77,6 @@ Tr_exp Tr_IntExp(A_pos pos, int i);
 Tr_exp Tr_CharExp(A_pos pos, char c[3]);
 Tr_exp Tr_AddrExp(A_pos pos, int i);
 Tr_exp Tr_DerefExp(A_pos pos, T_exp addr, T_type type);
-// Tr_exp Tr_StringExp(A_pos pos, string s);
 Tr_exp Tr_RealExp(A_pos pos, double f);
 Tr_exp Tr_BoolExp(A_pos pos, bool b);
 Tr_exp Tr_CallExp(A_pos pos, T_type type, int index, string func, T_expList args);
@@ -88,7 +86,3 @@ Tr_exp Tr_SeqExp(A_pos pos, A_expList seq);
 Tr_exp Tr_AssignExp(A_pos pos, A_var var, A_exp exp);
 Tr_exp Tr_IfExp(A_pos pos, T_type type, T_exp test, T_exp then, T_exp elsee);
 Tr_exp Tr_ArrayExp(A_pos pos, T_expList list);
-
-
-// Tr_exp Tr_FunctionDec(A_pos pos, T_typeList params, T_typeList locals, T_type result, T_stm body, bool isMain, int index);
-// A_dec A_TypeDec(A_pos pos, A_nametyList type);

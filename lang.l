@@ -18,13 +18,35 @@
     void adjust(void)
     {
         EM_tokPos = charPos;
-        charPos += yyleng;
+        char *temp = String(yytext);
+        int yytextLeng = 0;
+        while(*temp != '\0'){
+            if(*temp < 0){
+                temp += 3;
+            }
+            else if(*temp > 0){
+                temp++;
+            }
+            yytextLeng++;
+        }
+        charPos += yytextLeng;
     }
 
     void charAdjust(void)
     {
         EM_tokPos = charPos;
-        charPos += yyleng;
+        char *temp = String(yytext);
+        int yytextLeng = 0;
+        while(*temp != '\0'){
+            if(*temp < 0){
+                temp += 3;
+            }
+            else if(*temp > 0){
+                temp++;
+            }
+            yytextLeng++;
+        }
+        charPos += yytextLeng;
     }
 %}
 digits [0-9]+
@@ -93,6 +115,7 @@ charAndNum [㐀-龯ぁ-んァ-ヶa-zA-Z0-9ー_]*
 真 {adjust(); return TRUEE;}
 偽 {adjust(); return FALSEE;}
 js読み込み {adjust(); return JSLOAD;}
+js書き出し {adjust(); return JSEXPORT;}
 バイト数 {adjust(); return SIZEOF;}
 クラス {adjust(); return CLASS;}
 公開 {adjust(); return PUBLIC;}

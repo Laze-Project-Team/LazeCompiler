@@ -243,7 +243,7 @@ T_module T_ImportMod(string module, string name, T_module import)
     p -> u.import.import = import;
     return p;
 }
-T_module T_ExportMod(string name, T_module export)
+T_module T_ExportMod(string name, int export)
 {
     T_module p = checked_malloc(sizeof(*p));
     p -> kind = T_export;

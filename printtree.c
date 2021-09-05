@@ -76,13 +76,7 @@ void Pr_printModule(T_module module, FILE *file)
         case T_export:
         {
             fprintf(file, "(export \"%s\" ", module -> u.export.name);
-            switch(module -> u.export.export -> kind)
-            {
-                case T_func:
-                {
-                    fprintf(file, "(func %d)", module -> u.export.export -> u.func -> index);
-                }
-            }
+            fprintf(file, "(func %d)", module -> u.export.export);
             fprintf(file, ")");
             break;
         }
@@ -437,6 +431,8 @@ void Pr_printFundec(T_fundec fundec, FILE *file)
         Pr_printType(listL -> head, file);
         fprintf(file, ")");
     }
+    if(strcmp(fundec -> name, "main") == 0)
+        fprintf(file, "(memory.fill (i32.const 0) (i32.const 0) (i32.const 1114112))");
     Pr_printStm(fundec -> body, file);
     if(fundec -> var)
     {

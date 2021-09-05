@@ -249,6 +249,7 @@ struct A_dec_
         A_objectDec,
         A_typeDec,
         A_funcImportDec,
+        A_funcExportDec,
         A_classDec,
         A_templateDec
     } kind;
@@ -272,6 +273,12 @@ struct A_dec_
             A_fieldList result;
             string mod, func;
         } funcImport;
+        struct 
+        {
+            S_symbol name;
+            string exportName;
+        } funcExport;
+        
         struct 
         {
             S_symbol name;
@@ -453,6 +460,7 @@ A_dec A_VarDec(A_pos pos, A_stm assign, A_ty typ);
 A_dec A_ObjectDec(A_pos pos, A_ty className, S_symbol varName, A_expList explist);
 A_dec A_TypeDec(A_pos pos, A_nametyList type);
 A_dec A_FuncImport(A_pos pos, S_symbol name, A_fieldList params, A_fieldList result, string mod, string func);
+A_dec A_FuncExport(A_pos pos, S_symbol name, string exportName);
 A_dec A_ClassDec(A_pos pos, S_symbol name, A_classMemberList members, S_symbolList inheritance);
 A_dec A_TemplateDec(A_pos pos, S_symbol name, A_dec dec);
 

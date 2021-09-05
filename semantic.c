@@ -104,7 +104,7 @@ T_moduleList SEM_transProg(A_decList declist)
             list->tail = NULL;
         }
     }
-    list->head = T_ExportMod("main", mainFunc);
+    list->head = T_ExportMod("main", mainFunc -> u.func -> index);
     list->tail = checked_malloc(sizeof(*list));
     list = list->tail;
     // list->head = loopFunc;
@@ -115,7 +115,7 @@ T_moduleList SEM_transProg(A_decList declist)
     list = list -> tail;
     if (hasLoop)
     {
-        list->head = T_ExportMod("loop", loopFunc);
+        list->head = T_ExportMod("loop", loopFunc -> u.func -> index);
         list->tail = checked_malloc(sizeof(*list));
         list = list->tail;
     }
@@ -2227,6 +2227,17 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                         NULL, S_name(d -> u.funcImport.name), entry->u.func.index, NULL));
         }
         return T_ImportMod(d -> u.funcImport.mod, d -> u.funcImport.func, func);
+    }
+    case A_funcExportDec:
+    {
+        printf("%s\n", S_name(d -> u.funcExport.name));
+        E_enventry funcEntry = S_look(venv, d -> u.funcExport.name);
+        if(funcEntry){
+            return T_ExportMod(d -> u.funcExport.exportName, funcEntry -> u.func.index);
+        }
+        else{
+            EM_error(d -> pos, "Function %s not found.", S_name(d -> u.funcExport.name));
+        }
     }
     case A_classDec:
     {
