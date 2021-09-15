@@ -67,6 +67,8 @@ F_accessList boolToF_access(F_frame f, U_boolList boolList, Ty_tyList types)
                 // printf("%s types -> headddddddddddddddddddddddddddddddddddddddddd\n", S_name(types -> head -> u.name.sym));
                 isParam = FALSE;
                 f -> locals++;
+                boolList -> head = TRUE;
+                // printf("%d f -> locals\n", f -> locals);
             }
             list -> head = F_allocLocal(f, boolList -> head, types -> head, FALSE, isParam);
             if(types -> head -> kind != Ty_void)
@@ -87,7 +89,7 @@ F_frame F_newFrame(Temp_label name, U_boolList list, Ty_tyList params, bool isMe
     F_frame frame = checked_malloc(sizeof(*frame));
     frame -> name = name;
     if(isMethod){
-      //printf("%s %d wasm_frame.ccccccccccccccccccc\n", S_name(frame->name), isMethod);
+    //   printf("%s %d wasm_frame.ccccccccccccccccccc\n", S_name(frame->name), isMethod);
         frame -> locals = 1;
     }
     else
@@ -112,7 +114,7 @@ F_accessList F_formals(F_frame f)
 F_access F_allocLocal(F_frame f, bool escape, Ty_ty type, bool isLocal, bool isParam)
 {
     F_access access;
-  //printf("escappeeeeeeeeeeee %d %d %d %d\n", type -> kind, escape, isParam, f -> offset);
+    // printf("escappeeeeeeeeeeee %d %d %d %s\n", type -> kind, escape, isParam, S_name(f -> name));
     if(escape == TRUE)
     {
         if(isParam && type -> kind != Ty_void)

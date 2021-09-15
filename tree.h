@@ -41,7 +41,7 @@ struct T_typeList_
 struct T_stm_
 {
     enum { T_ifStm, T_blockStm, T_loopStm, T_binOpStm, T_setLocalStm,
-             T_setGlobalStm, T_seqStm, T_storeStm, T_breakStm, T_callStm, T_returnStm, T_copyStm } kind;
+             T_setGlobalStm, T_seqStm, T_storeStm, T_breakStm, T_callStm, T_returnStm, T_copyStm, T_callIndirectStm } kind;
     union
     {
         struct { T_exp test; T_type result; T_stm then; T_stm elsee;} iff;
@@ -54,6 +54,7 @@ struct T_stm_
         struct { T_exp addr; T_exp data; } store;
         int depth;
         struct { int index; string label; T_expList args; } call;
+        struct { T_exp index; T_expList args; int typeIndex; } callIndirect;
         T_exp returnn;
         struct {T_exp dest; T_exp src; T_exp size; } copy;
     } u;
@@ -107,6 +108,9 @@ struct T_module_
         struct { string module; string name; T_module import; } import;
         struct { string name; int export; } export;
         T_moduleList seq;
+        struct { T_exp offset; T_moduleList funcs; } elem;
+        struct {int size;} table;
+        struct {T_typeList params; T_type result;} type;
     } u;
 };
 
@@ -120,6 +124,7 @@ T_stm T_SeqStm(T_stmList list);
 T_stm T_StoreStm(T_exp addr, T_exp data);
 T_stm T_BreakStm(int depth);
 T_stm T_CallStm(int index, string label, T_expList args);
+T_stm T_CallIndirectStm(T_exp index, T_expList args, int typeIndex);
 T_stm T_ReturnStm(T_exp exp);
 T_stm T_CopyStm(T_exp dest, T_exp src, T_exp size);
 
@@ -143,6 +148,9 @@ T_module T_DataMod(T_exp exp, string data);
 T_module T_ImportMod(string module, string name, T_module import);
 T_module T_ExportMod(string name, int export);
 T_module T_SeqMod(T_moduleList list);
+T_module T_ElemMod(T_exp offset, T_moduleList funcs);
+T_module T_TableMod(int size);
+T_module T_TypeMod(T_typeList params, T_type result);
 
 T_stmList T_StmList(T_stm head, T_stmList tail);
 T_expList T_ExpList(T_exp head, T_expList tail);

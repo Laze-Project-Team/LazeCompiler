@@ -370,6 +370,17 @@ A_exp A_ArrowFieldExp(A_pos pos, A_exp pointer, S_symbol member)
     return p;
 }
 
+A_exp A_FuncExp(A_pos pos, A_fieldList params, A_fieldList result, A_stm body)
+{
+    A_exp p = checked_malloc(sizeof(*p));
+    p -> kind = A_funcExp;
+    p -> pos = pos;
+    p -> u.func.params = params;
+    p -> u.func.result = result;
+    p -> u.func.body = body;
+    return p;
+}
+
 A_dec A_FunctionDec(A_pos pos, A_fundecList function)
 {
     A_dec p = checked_malloc(sizeof(*p));
@@ -505,6 +516,16 @@ A_ty A_PolyTy(A_pos pos, S_symbol name, A_ty typeParam)
     p -> pos = pos;
     p -> u.poly.name = name;
     p -> u.poly.typeParam = typeParam;
+    return p;
+}
+
+A_ty A_FuncTy(A_pos pos, A_fieldList params, A_fieldList result)
+{
+    A_ty p = checked_malloc(sizeof(*p));
+    p -> kind = A_funcTy;
+    p -> pos = pos;
+    p -> u.func.params = params;
+    p -> u.func.result = result;
     return p;
 }
 

@@ -8,6 +8,12 @@ extern int memorySize;
 extern A_decList absyn_root;
 static T_moduleList list;
 static T_moduleList result;
+static T_moduleList tableList;
+static T_moduleList resultTableList;
+static int tableIndex;
+static T_moduleList typeList;
+static T_moduleList resultTypeList;
+static int typeIndex;
 static bool hasLoop = FALSE;
 static T_module loopFunc;
 static T_moduleList resultScopeFuncs;
@@ -56,8 +62,14 @@ static S_symbol getName(A_var);
 
 T_moduleList SEM_transProg(A_decList declist)
 {
+    tableIndex = 0;
+    typeIndex = 0;
     scopeFuncs = T_ModuleList(NULL, NULL);
     resultScopeFuncs = scopeFuncs;
+    tableList = T_ModuleList(NULL, NULL);
+    resultTableList = tableList;
+    typeList = T_ModuleList(NULL, NULL);
+    resultTypeList = typeList;
     loopFunc = checked_malloc(sizeof(*loopFunc));
     loopFunc = T_FuncMod(NULL);
     loopVarsStart = checked_malloc(sizeof(*loopVarsStart));
@@ -111,6 +123,15 @@ T_moduleList SEM_transProg(A_decList declist)
     // list->tail = checked_malloc(sizeof(*list));
     // list = list->tail;
     list -> head = T_SeqMod(resultScopeFuncs);
+    list -> tail = checked_malloc(sizeof(*list));
+    list = list -> tail;
+    list -> head = T_SeqMod(resultTypeList);
+    list -> tail = checked_malloc(sizeof(*list));
+    list = list -> tail;
+    list -> head = T_ElemMod(Tr_AddrExp(0, 0) -> u.exp, resultTableList);
+    list -> tail = checked_malloc(sizeof(*list));
+    list = list -> tail;
+    list -> head = T_TableMod(tableIndex + 1);
     list -> tail = checked_malloc(sizeof(*list));
     list = list -> tail;
     if (hasLoop)
@@ -563,6 +584,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
         {
             T_expList expList = T_ExpList(NULL, NULL);
             T_expList result = expList;
+            bool isCalledInMethod = FALSE;
             //debug(stm->pos, "Call Statement");
             if(stm -> u.call.func -> kind == A_varExp || stm -> u.call.func -> kind == A_fieldExp || stm -> u.call.func -> kind == A_arrowFieldExp){
                 S_symbol name;
@@ -571,8 +593,17 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     A_var var = stm -> u.call.func -> u.var;
                     if(var -> kind == A_simpleVar){
                         name = var -> u.simple;
-                        // printf("%s func name\n", S_name(name));
                         entry = S_look(venv, name);
+                        if(entry == NULL){
+                            E_enventry classEntry;
+                            if(class -> kind == Ty_name){
+                                classEntry = S_look(tenv, class -> u.name.sym);
+                            }
+                            if(classEntry){
+                                isCalledInMethod = TRUE;
+                                entry = S_look(classEntry -> u.class.methods, var -> u.simple);
+                            }
+                        }
                     }
                     else if(var -> kind == A_fieldVar || var -> kind == A_arrowFieldVar){
                         struct expty field;
@@ -751,11 +782,10 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
 
                         if (exp != NULL && type != NULL)
                         {
-                            struct expty argType = transExp(venv, tenv, exp, level, isLoop, class);
                           //printf("argType.ty -> kind %d\n", type -> kind);
-                            if (!compType(type, argType.ty))
+                            if (!compType(type, expp.ty))
                             {
-                                expList -> head = convertAssign(type, argType, exp -> pos);
+                                expList -> head = convertAssign(type, expp, exp -> pos);
                             }
 
                         }
@@ -784,6 +814,9 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     if(stm -> u.call.func -> kind == A_varExp && stm -> u.call.func -> u.var -> kind == A_arrowFieldVar){
                         struct expty field = transVar(venv, tenv, stm -> u.call.func -> u.var->u.arrowfield.pointer, level, isLoop, FALSE, FALSE, class);
                         result = T_ExpList(field.exp -> u.exp, result);
+                    }
+                    if(isCalledInMethod){
+                        result = T_ExpList(T_GetLocalExp(T_i32, 0), result);
                     }
                     if(stm -> u.call.func -> kind == A_fieldExp)
                     {
@@ -816,6 +849,56 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     if (entry->u.func.result)
                         return expTy(Tr_CallStm(stm->pos, entry->u.func.index, S_name(entry->u.func.label), result), entry->u.func.returnType);
                     return expTy(Tr_CallStm(stm->pos, entry->u.func.index, S_name(entry->u.func.label), result), Ty_Void());
+                }
+                else if(entry != NULL && entry -> kind == E_varentry && entry -> u.var.ty -> kind == Ty_func)
+                {
+                    A_expList expArgs;
+                    Ty_tyList entryArgsTy;
+                    int i;
+                    for (i = 1, expArgs = stm->u.call.args, entryArgsTy = entry->u.var.ty -> u.func.params; expArgs != NULL && entryArgsTy != NULL;
+                        expArgs = expArgs->tail, entryArgsTy = entryArgsTy->tail, i++)
+                    {
+                        A_exp exp = expArgs->head;
+                        struct expty expp = transExp(venv, tenv, exp, level, isLoop, class);
+                        if(expp.ty -> kind == Ty_array && expp.exp -> u.exp -> kind == T_loadExp){   
+                            expList->head = expp.exp->u.exp -> u.load.addr;
+                        }
+                        else{
+                            expList->head = expp.exp->u.exp;
+                        }
+                        // printf("%d expList -> head\n", expp.ty -> kind );
+                        expList->tail = checked_malloc(sizeof(*expList));
+                        Ty_ty type = entryArgsTy->head;
+
+                        if (exp != NULL && type != NULL)
+                        {
+                            struct expty argType = transExp(venv, tenv, exp, level, isLoop, class);
+                          //printf("argType.ty -> kind %d\n", type -> kind);
+                            if (!compType(type, argType.ty))
+                            {
+                                expList -> head = convertAssign(type, argType, exp -> pos);
+                            }
+
+                        }
+                        else
+                        {
+                            if (exp == NULL && type != NULL)
+                            {
+                                EM_error(stm->pos, "There are too few arguments in the call statement.");
+                                break;
+                            }
+                            else if (exp != NULL && type == NULL)
+                            {
+                                EM_error(stm->pos, "There are too many arguments in the call statement.");
+                                break;
+                            }
+                        }
+                        expList = expList->tail;
+
+                        expList->head = NULL;
+                        expList->tail = NULL;
+                    }
+                    return expTy(Tr_CallIndirectStm(stm -> pos, Tr_VarExp(stm -> pos, T_i32, entry -> u.var.access, FALSE, FALSE) -> u.exp, result, entry -> u.var.ty -> u.func.typeIndex), entry -> u.var.ty -> u.func.result);
                 }
                 else
                 {
@@ -1162,11 +1245,12 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
     case A_derefVar:
     {
         E_enventry entry = S_look(venv, v->u.deref->u.simple);
-        int address = entry->u.var.access->level->frame->offset +
-            entry->u.var.access->access->u.offset;
-        return expTy(Tr_VarExp(EM_tokPos, T_i32, entry->u.var.access,
-            (entry->u.var.access->access->kind == inGlobal), FALSE),
-            entry->u.var.access->access->type -> u.pointer);
+        if(entry){
+            // printf("aaaaaaaaaaaa %s\n", S_name(v -> u.deref -> u.simple));
+            return expTy(Tr_VarExp(EM_tokPos, T_i32, entry->u.var.access,
+                (entry->u.var.access->access->kind == inGlobal), FALSE),
+                entry->u.var.access->access->type -> u.pointer);
+        }
     }
     }
 }
@@ -1241,6 +1325,8 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         else if (e->u.var->kind == A_derefVar)
         {
             struct expty var = transVar(venv, tenv, e->u.var, level, isLoop, FALSE, FALSE, class);
+            if(var.ty -> kind == Ty_name || var.ty -> kind == Ty_array || var.ty -> kind == Ty_poly)
+                return var;
             return expTy(Tr_DerefExp(e->pos, var.exp->u.exp, convertType(actual_ty(var.ty))), var.ty);
         }
         else if(e -> u.var -> kind == A_subscriptVar)
@@ -1289,9 +1375,39 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         return expTy(Tr_AddrExp(e->pos, address), Ty_Pointer(varEntry->u.var.ty));
         break;
     }
+    case A_funcExp:
+    {
+        char nameBuffer[8];
+        sprintf(nameBuffer, "%d", funcs);
+        A_dec funcDec = A_FunctionDec(e -> pos, A_FundecList(A_Fundec(e -> pos, S_Symbol(nameBuffer), e -> u.func.params, e -> u.func.result, e -> u.func.body), A_FundecList(NULL, NULL)));
+        Ty_tyList Ty_tyParams = makeParamTypeList(venv, tenv, e -> u.func.params, level);
+        Ty_ty Ty_tyResult = Ty_Void();
+        if(e -> u.func.result -> head)
+            Ty_tyResult = transTy(venv, tenv, e -> u.func.result -> head -> typ, level);
+        T_module dec = transDec(venv, tenv, funcDec, level, isLoop, venv, class);
+        tableList -> head = dec;
+        list -> head = dec;
+        tableList -> tail = checked_malloc(sizeof(*tableList));
+        list -> tail = checked_malloc(sizeof(*list));
+        tableList = tableList -> tail;
+        list = list -> tail;
+        tableList -> head = NULL;
+        list -> head = NULL;
+        tableList -> tail = NULL;
+        list -> tail = NULL;
+        tableIndex++;
+        typeList -> head = T_TypeMod(convertAllType(Ty_tyParams), convertType(Ty_tyResult));
+        typeList -> tail = checked_malloc(sizeof(*typeList));
+        typeList = typeList -> tail;
+        typeList -> head = NULL;
+        typeList -> tail = NULL;
+        typeIndex++;
+        return expTy(Tr_AddrExp(e -> pos, tableIndex - 1), Ty_Func(Ty_tyParams, Ty_tyResult, typeIndex - 1));
+    }
     case A_callExp:
     {
         S_symbol name;
+        bool isCalledInMethod = FALSE;
         if(e -> u.call.func -> kind == A_varExp || e -> u.call.func -> kind == A_fieldExp || e -> u.call.func -> kind == A_arrowFieldExp){
             E_enventry entry;
             if(e -> u.call.func -> kind == A_varExp)
@@ -1300,6 +1416,16 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 if(var -> kind == A_simpleVar){
                     name = var -> u.simple;
                     entry = S_look(venv, name);
+                    if(entry == NULL){
+                        E_enventry classEntry;
+                        if(class -> kind == Ty_name){
+                            classEntry = S_look(tenv, class -> u.name.sym);
+                        }
+                        if(classEntry){
+                            entry = S_look(classEntry -> u.class.methods, var -> u.simple);
+                            isCalledInMethod = TRUE;
+                        }
+                    }
                 }
                 else if(var -> kind == A_fieldVar || var -> kind == A_arrowFieldVar){
                     struct expty field;
@@ -1439,11 +1565,10 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     Ty_ty type = entryArgsTy->head;
                     if (exp != NULL && type != NULL)
                     {
-                        struct expty argType = transExp(venv, tenv, exp, level, isLoop, class);
-                        if (!compType(type, argType.ty))
+                        if (!compType(type, expp.ty))
                         {
                             // printf("%d %d flaj\n", type -> kind, argType.ty -> kind);
-                            expList -> head = convertAssign(type, argType, e -> pos);
+                            expList -> head = convertAssign(type, expp, e -> pos);
                         }
                     }
                     else
@@ -1470,6 +1595,9 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 else if(e -> u.call.func -> kind == A_varExp && e -> u.call.func-> u.var -> kind == A_arrowFieldVar){
                     struct expty field = transVar(venv, tenv, e -> u.call.func -> u.var -> u.arrowfield.pointer, level, isLoop, FALSE, FALSE, class);
                     result = T_ExpList(field.exp -> u.exp, result);
+                }
+                else if(isCalledInMethod){
+                    result = T_ExpList(T_GetLocalExp(T_i32, 0), result);
                 }
                 else if(e -> u.call.func -> kind == A_fieldExp)
                 {
@@ -2230,7 +2358,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
     }
     case A_funcExportDec:
     {
-        printf("%s\n", S_name(d -> u.funcExport.name));
+        // printf("%s\n", S_name(d -> u.funcExport.name));
         E_enventry funcEntry = S_look(venv, d -> u.funcExport.name);
         if(funcEntry){
             return T_ExportMod(d -> u.funcExport.exportName, funcEntry -> u.func.index);
@@ -2259,35 +2387,35 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
             }
         }
 
-        A_classMemberList list = d -> u.class.members;
-        list = flipClassMemberList(list);
-        for(; list -> tail; list = list -> tail)
+        A_classMemberList memberList = d -> u.class.members;
+        memberList = flipClassMemberList(memberList);
+        for(; memberList -> tail; memberList = memberList -> tail)
         {
-            // printf("debug %d\n", list -> head -> dec -> kind);
-            if(list -> head -> dec -> kind == A_varDec || list -> head -> dec -> kind == A_objectDec)
+            // printf("debug %d\n", memberList -> head -> dec -> kind);
+            if(memberList -> head -> dec -> kind == A_varDec || memberList -> head -> dec -> kind == A_objectDec)
             {
                 Ty_ty varType;
                 
                 S_symbol name;
-                if(list -> head -> dec -> kind == A_varDec){
-                    if(list -> head -> dec -> u.var.var -> kind == A_simpleVar)
-                        name = list -> head -> dec -> u.var.var -> u.simple;
-                    else if(list -> head -> dec -> u.var.var -> kind == A_subscriptVar)
-                        name = list -> head -> dec -> u.var.var -> u.subscript.name;
+                if(memberList -> head -> dec -> kind == A_varDec){
+                    if(memberList -> head -> dec -> u.var.var -> kind == A_simpleVar)
+                        name = memberList -> head -> dec -> u.var.var -> u.simple;
+                    else if(memberList -> head -> dec -> u.var.var -> kind == A_subscriptVar)
+                        name = memberList -> head -> dec -> u.var.var -> u.subscript.name;
                     else
-                        EM_error(list -> head -> dec -> pos, "Invalid declaration.");
-                    varType = transTy(venv, tenv, list -> head -> dec -> u.var.typ, level);
+                        EM_error(memberList -> head -> dec -> pos, "Invalid declaration.");
+                    varType = transTy(venv, tenv, memberList -> head -> dec -> u.var.typ, level);
                 }
-                else if(list -> head -> dec -> kind == A_objectDec){
-                    name = list -> head -> dec -> u.object.name;
-                    varType = transTy(venv, tenv, list -> head -> dec -> u.object.className, level);
+                else if(memberList -> head -> dec -> kind == A_objectDec){
+                    name = memberList -> head -> dec -> u.object.name;
+                    varType = transTy(venv, tenv, memberList -> head -> dec -> u.object.className, level);
                 }
                 
                 // printf("classSize %d\n", classSize);
                 Ty_accessSpecifier specifier = Ty_public;
-                if(list -> head -> accessSpecifier == A_public) specifier = Ty_public;
-                else if(list -> head -> accessSpecifier == A_private) specifier = Ty_private;
-                else if(list -> head -> accessSpecifier == A_protected) specifier = Ty_protected;
+                if(memberList -> head -> accessSpecifier == A_public) specifier = Ty_public;
+                else if(memberList -> head -> accessSpecifier == A_private) specifier = Ty_private;
+                else if(memberList -> head -> accessSpecifier == A_protected) specifier = Ty_protected;
                 // printf("%d classSize\n", classSize);
                 S_enter(varTypes, name, Ty_Member(classSize, varType, specifier));
                 // printf("varTYpe -> size %d\n", varType -> size);
@@ -2312,16 +2440,25 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
             S_enter(tenv, d -> u.class.name, templateEntry);
         }
         T_moduleList modlist = checked_malloc(sizeof(*modlist));
-        list = d -> u.class.members;
-        list = flipClassMemberList(list);
-        for(; list -> tail; list = list -> tail)
+        memberList= d -> u.class.members;
+        memberList= flipClassMemberList(memberList);
+        for(; memberList-> tail; memberList= memberList-> tail)
         {
-            if(list -> head -> dec -> kind == A_functionDec)
+            if(memberList-> head -> dec -> kind == A_functionDec)
             {
-                // printf("%s funcname\n", S_name(list -> head -> dec -> u.function->head->name));
+                // printf("%s funcname\n", S_name(memberList-> head -> dec -> u.function->head->name));
+
+                T_module mod = transDec(venv, tenv, memberList -> head -> dec, level, isLoop, methods, type);
+                mod -> u.func -> params = T_TypeList(T_i32, mod -> u.func -> params);
                 
-                modlist = T_ModuleList(transDec(venv, tenv, list -> head -> dec, level, isLoop, methods, type), modlist);
-                modlist -> head -> u.func -> params = T_TypeList(T_i32, modlist -> head -> u.func -> params);
+                modlist = T_ModuleList(mod, modlist);
+                list -> head = mod;
+                list -> tail = checked_malloc(sizeof(*list));
+                list = list -> tail;
+                list -> head = NULL;
+                list -> tail = NULL;
+                
+                
                 // S_enter(tenv, d -> u.class.name, E_ClassEntry(d -> u.class.name, classSize, varTypes, methods));
                 if(class -> kind != Ty_poly){
                     S_enter(tenv, d -> u.class.name, E_ClassEntry(d -> u.class.name, classSize, varTypes, methods, type));
@@ -2333,9 +2470,10 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                 }
             }
         }
+        // template declartaion is before T_SeqMod(modlist)
       //printf("-------------------------------CLASS DECLARE ENDED--------------------------------\n");
         modlist = flipModList(modlist);
-        return T_SeqMod(modlist);
+        return NULL;
     }
     case A_objectDec:
     {
@@ -2463,7 +2601,8 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
             E_enventry classEntry = TAB_search(templateEntry -> u.template.specific, typeParam);
             if(!classEntry)
             {
-                // printf("%s %s 2074444444444444444444444444444444444444444444444444444444444444444444\n", S_name(ty -> u.poly.name), S_name(typeParam -> u.name.sym));
+                if(typeParam -> kind == Ty_name)
+                    // printf("%s %s 2074444444444444444444444444444444444444444444444444444444444444444444\n", S_name(ty -> u.poly.name), S_name(typeParam -> u.name.sym));
                 //update the polymorphic type with type parameter
                 S_enter(templateEntry -> u.template.tenv, templateEntry -> u.template.name, E_PolyEntry(typeParam));
                 //translate the declaration using the type parameter
@@ -2487,6 +2626,20 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
         }
         else
             EM_error(ty -> pos, "It's not a template.");
+    }
+    case A_funcTy:
+    {
+        Ty_tyList paramTyList = makeParamTypeList(venv, tenv, ty -> u.func.params, level);
+        Ty_ty resultTy = Ty_Void();
+        if(ty -> u.func.result -> head)
+            resultTy = transTy(venv, tenv, ty -> u.func.result -> head -> typ, level);
+        typeList -> head = T_TypeMod(convertAllType(paramTyList), convertType(resultTy));
+        typeList -> tail = checked_malloc(sizeof(*typeList));
+        typeList = typeList -> tail;
+        typeList -> head = NULL;
+        typeList -> tail = NULL;
+        typeIndex++;
+        return Ty_Func(paramTyList, resultTy, typeIndex - 1);
     }
     }
 }
@@ -2635,6 +2788,7 @@ static U_boolList makeEscapeList(A_fieldList params)
         return NULL;
     for (; params; params = params->tail)
     {
+        // printf("----------------------%s %d params head name\n", S_name(params -> head -> name), params -> head -> escape);
         list->head = params->head->escape;
         list->tail = checked_malloc(sizeof(*list->tail));
         list = list->tail;
@@ -2649,6 +2803,11 @@ static T_type convertType(Ty_ty type)
     T_type result = T_i64;
     switch (type->kind)
     {
+    case Ty_func:
+    {
+        result = T_i32;
+        break;
+    }
     case Ty_record:
     {
         EM_error(0, "Records not supported right now.");

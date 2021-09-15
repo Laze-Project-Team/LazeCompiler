@@ -46,7 +46,7 @@
 
 %type <sym> id
 %type <var> lvalue
-%type <exp> exp varExp
+%type <exp> exp varExp funcExp
 %type <expList> explist
 %type <stm> stm if while assign funcCall for return loop
 %type <stmList> stmlist
@@ -126,11 +126,14 @@ exp :       INT {$$ = A_IntExp(EM_tokPos, $1);}
             | SIZEOF LPAREN lvalue RPAREN {$$ = A_SizeofExp(EM_tokPos, $3);}
             | LBRACK explist RBRACK {$$ = A_ArrayExp(EM_tokPos, $2);}
             | varExp {$$ = $1;}
+            | funcExp {$$ = $1;}
 
 varExp:     lvalue { $$ = A_VarExp(EM_tokPos, $1); }
             | exp DOT id {$$ = A_FieldExp(EM_tokPos, $1, $3);}
             | exp LBRACK exp RBRACK {$$ = A_SubscriptExp(EM_tokPos, $1, $3);}
             | exp RIGHTARROW id {$$ = A_ArrowFieldExp(EM_tokPos, $1, $3);}
+
+funcExp:    LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm {$$ = A_FuncExp(EM_tokPos, $2, $6, $8);}
 
 /* assignExp : lvalue ASSIGN exp { $$ = A_AssignExp(EM_tokPos, $1, $3);} */
 
@@ -193,6 +196,7 @@ tyfield1 :  type COLON lvalue {
                     EM_error(EM_tokPos, "Not supported.");
                 }
             }   
+            | FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN {$$ = A_FieldList(A_Field(EM_tokPos, $3, A_FuncTy(EM_tokPos, $5, $9)), NULL);}
             | type COLON lvalue COMMA tyfield1 {
                 if($3 -> kind == A_simpleVar)
                 {
@@ -216,6 +220,7 @@ tyfield1 :  type COLON lvalue {
                     EM_error(EM_tokPos, "Not supported.");
                 }
             }
+            | FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN COMMA tyfield1 {$$ = A_FieldList(A_Field(EM_tokPos, $3, A_FuncTy(EM_tokPos, $5, $9)), $12);}
 
 funcDec :   FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN stm {$$ = A_FunctionDec(EM_tokPos, A_FundecList(A_Fundec(EM_tokPos, $3, $5, $9, $11), NULL));}
 /* funcDec :   type COLON id LPAREN tyfield RPAREN stm {$$ = A_FunctionDec(EM_tokPos, A_FundecList(A_Fundec(EM_tokPos, $3, $5, $1, $7), NULL));} */
@@ -225,7 +230,7 @@ funcCall :  varExp LPAREN RPAREN {$$ = A_CallStm(EM_tokPos, $1, NULL);}
 
 jsLoad :    FUNCTION COLON id LPAREN tyfield RPAREN ARROW LPAREN tyfield RPAREN ASSIGN JSLOAD LPAREN STRING COMMA STRING RPAREN SEMICOLON {$$ = A_FuncImport(EM_tokPos, $3, $5, $9, $14, $16);}
 
-jsExport:   JSEXPORT LPAREN STRING COMMA STRING RPAREN SEMICOLON {$$ = A_FuncExport(EM_tokPos, S_Symbol($3), $5);}
+jsExport:   JSEXPORT LPAREN id COMMA STRING RPAREN SEMICOLON {$$ = A_FuncExport(EM_tokPos, $3, $5);}
 
 funcvarlist: funcAndVar {$$ = A_DecList($1, NULL);}
             | funcAndVar funcvarlist {$$ = A_DecList($1, $2);}

@@ -1,5 +1,64 @@
 関数:表示(実数:x)=>()=js読み込み("console", "log");
-関数:実行() => () {
- 表示(5.0);
+関数:メモリ確保(整数32:alloc) => (*無:return) = js読み込み("js", "alloc");
+型<T>:クラス:配列 //クラス
+{
+    *T:content;
+    整数:size;
+    関数:配列()=>()
+    {
+        size = 0;
+        allocated = 2;
+        表示(バイト数(*content)); 
+        content=メモリ確保(バイト数(*content) * allocated);
+    }
+    関数:取得(整数:index)=>(T:result)
+    {
+        終了(content[index]);
+    }
+    関数:追加(T:new)=>()
+    {
+        もし(size == allocated)ならば
+        {
+            allocated = allocated * 2;
+            *T:temp = content;
+            content = メモリ確保(バイト数( *content)*allocated);
+            (整数:i=0;)から(i==allocated)まで(i++;)
+            {
+                content[i]=temp[i];
+            }
+        }
+        content[size]=new;
+        size++;
+    }
+    関数:長さ()=>(整数:a)
+    {
+        a = size;
+    }
+    非公開:
+        整数:allocated;
 }
-js書き出し("実行", "exec");
+
+クラス:ベクトル2D
+{
+    実数:x;
+    実数:y;
+}
+
+クラス:test
+{
+    整数:a;
+    関数:aaaaa()=>()
+    {
+        配列<ベクトル2D>:points;
+        表示(6583);
+    }
+    関数:test(配列<ベクトル2D>:points, 整数:a)=>()
+    {
+        aaaaa();
+    }
+}
+
+関数:実行() => () {
+    整数:ll = 0;
+    配列<ベクトル2D>:vector;
+}

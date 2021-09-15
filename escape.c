@@ -15,6 +15,7 @@ bool ESC_checkEscapeFromType(Ty_ty type)
     bool result = FALSE;
     if(type->kind == Ty_name)
     {
+        // printf("%s nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n", S_name(type -> u.name.sym));
         if(type -> u.name.sym == S_Symbol("real") || type -> u.name.sym == S_Symbol("int") || type -> u.name.sym == S_Symbol("bool") || type -> u.name.sym == S_Symbol("char") || type -> u.name.sym == S_Symbol("short"))
         {
             result = FALSE;
@@ -24,13 +25,16 @@ bool ESC_checkEscapeFromType(Ty_ty type)
             result = TRUE;
         }
     }
-    else if(type -> kind == Ty_int || type -> kind == Ty_real || type -> kind == Ty_bool || type -> kind == Ty_char || type -> kind == Ty_short)
+    else if(type -> kind == Ty_int || type -> kind == Ty_real || type -> kind == Ty_bool || type -> kind == Ty_char || type -> kind == Ty_short || type -> kind == Ty_func)
     {
         result = FALSE;
     }
     else if(type -> kind == Ty_pointer)
     {
         result = FALSE;
+    }
+    else if(type -> kind == Ty_poly){
+        result =  TRUE;
     }
     else
     {
@@ -57,6 +61,11 @@ bool ESC_checkEscapeFromA_ty(A_ty type)
     else if(type -> kind == A_pointerTy)
     {
         result = FALSE;
+    }
+    else if(type -> kind == A_polyTy)
+    {
+        // printf("escapedddd polyyyyyyyyyyyyyyy\n");
+        result = TRUE;
     }
     else
     {

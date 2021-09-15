@@ -101,6 +101,15 @@ T_stm T_CopyStm(T_exp dest, T_exp src, T_exp size)
     p -> u.copy.size = size;
     return p;
 }
+T_stm T_CallIndirectStm(T_exp index, T_expList args, int typeIndex)
+{
+    T_stm p = checked_malloc(sizeof(*p));
+    p -> kind = T_callIndirectStm;
+    p -> u.callIndirect.index = index;
+    p -> u.callIndirect.args = args;
+    p -> u.callIndirect.typeIndex = typeIndex;
+    return p;
+}
 
 T_exp T_BinOpExp(T_type type, T_binOp oper, T_exp lhs, T_exp rhs)
 {
@@ -258,6 +267,30 @@ T_module T_SeqMod(T_moduleList list)
     p -> u.seq = list;
     return p;
 }
+T_module T_TypeMod(T_typeList params, T_type result)
+{
+    T_module p = checked_malloc(sizeof(*p));
+    p -> kind = T_typee;
+    p -> u.type.params = params;
+    p -> u.type.result = result;
+    return p;
+}
+T_module T_ElemMod(T_exp offset, T_moduleList funcs)
+{
+    T_module p = checked_malloc(sizeof(*p));
+    p -> kind = T_elem;
+    p -> u.elem.offset = offset;
+    p -> u.elem.funcs = funcs;
+    return p;
+}
+T_module T_TableMod(int size)
+{
+    T_module p = checked_malloc(sizeof(*p));
+    p -> kind = T_table;
+    p -> u.table.size = size;
+    return p;
+}
+
 T_stmList T_StmList(T_stm head, T_stmList tail)
 {
     T_stmList p = checked_malloc(sizeof(*p));

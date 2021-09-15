@@ -18,7 +18,7 @@
     void adjust(void)
     {
         EM_tokPos = charPos;
-        char *temp = String(yytext);
+        string temp = String(yytext);
         int yytextLeng = 0;
         while(*temp != '\0'){
             if(*temp < 0){

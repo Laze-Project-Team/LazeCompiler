@@ -221,13 +221,21 @@ Tr_exp Tr_NoStm(A_pos pos)
     p -> u.stm = NULL;
     return p;
 }
+Tr_exp Tr_CallIndirectStm(A_pos pos, T_exp index, T_expList args, int typeIndex)
+{
+    Tr_exp p = checked_malloc(sizeof(*p));
+    p -> kind = Tr_t_stm;
+    p -> u.stm = T_CallIndirectStm(index, args, typeIndex);
+    return p;
+}
+
 Tr_exp Tr_VarExp(A_pos pos, T_type type, Tr_access access, bool isGlobal, bool isArray)
 {
     Tr_exp p = checked_malloc(sizeof(*p));
     p -> kind = Tr_t_exp;
     if(access -> access -> kind == inLocal)
     {
-      //printf("bro ur local\n");
+    //   printf("bro ur local\n");
         p -> u.exp = T_GetLocalExp(type, access -> access -> u.index);
     }
     else if(isGlobal)

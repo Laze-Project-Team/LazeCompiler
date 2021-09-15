@@ -15,7 +15,7 @@ typedef struct Ty_member_ *Ty_member;
 typedef struct Ty_memberList_ *Ty_memberList;
 
 struct Ty_ty_ {enum {Ty_record, Ty_nil, Ty_int, Ty_short, Ty_string, Ty_array,
-		       Ty_name, Ty_void, Ty_real, Ty_bool, Ty_char, Ty_pointer, Ty_poly} kind;
+		       Ty_name, Ty_void, Ty_real, Ty_bool, Ty_char, Ty_pointer, Ty_poly, Ty_func} kind;
 			int size;
 	       	union 
 			{
@@ -26,6 +26,7 @@ struct Ty_ty_ {enum {Ty_record, Ty_nil, Ty_int, Ty_short, Ty_string, Ty_array,
 				//The type the pointer points to.
 			  	Ty_ty pointer;
 				struct {S_symbol name; Ty_ty typeParam;} poly;
+				struct {Ty_tyList params; Ty_ty result; int typeIndex;} func;
 		    } u;
 	     };
 
@@ -52,6 +53,7 @@ Ty_ty Ty_Array(Ty_ty ty, int size);
 Ty_ty Ty_Name(S_symbol sym, int classSize);
 Ty_ty Ty_Pointer(Ty_ty ty);
 Ty_ty Ty_Poly(S_symbol name, Ty_ty ty, int size);
+Ty_ty Ty_Func(Ty_tyList params, Ty_ty result, int funcIndex);
 
 Ty_tyList Ty_TyList(Ty_ty head, Ty_tyList tail);
 Ty_field Ty_Field(S_symbol name, Ty_ty ty);

@@ -79,6 +79,17 @@ Ty_ty Ty_Poly(S_symbol name, Ty_ty typeParam, int size)
   return p;
 }
 
+Ty_ty Ty_Func(Ty_tyList params, Ty_ty result, int typeIndex)
+{
+  Ty_ty p = checked_malloc(sizeof(*p));
+  p -> kind = Ty_func;
+  p -> size = 4;
+  p -> u.func.params = params;
+  p -> u.func.result = result;
+  p -> u.func.typeIndex = typeIndex;
+  return p;
+}
+
 Ty_tyList Ty_TyList(Ty_ty head, Ty_tyList tail)
 {Ty_tyList p = checked_malloc(sizeof(*p));
  p->head=head;

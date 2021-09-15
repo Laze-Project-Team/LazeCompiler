@@ -68,6 +68,7 @@ Tr_exp Tr_CallStm(A_pos pos, int index, string func, T_expList args);
 Tr_exp Tr_ReturnStm(A_pos pos, T_exp exp);
 Tr_exp Tr_LoopStm(A_pos pos);
 Tr_exp Tr_MemCopyStm(A_pos pos, T_exp dest, T_exp src, int size);
+Tr_exp Tr_CallIndirectStm(A_pos pos, T_exp index, T_expList args, int typeIndex);
 Tr_exp Tr_NoStm(A_pos pos);
 
 Tr_exp Tr_NoExp(A_pos pos);

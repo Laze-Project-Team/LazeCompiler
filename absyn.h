@@ -165,7 +165,8 @@ struct A_exp_
         A_sizeofExp,
         A_subscriptExp,
         A_fieldExp,
-        A_arrowFieldExp
+        A_arrowFieldExp,
+        A_funcExp
     } kind;
     A_pos pos;
     union
@@ -236,7 +237,12 @@ struct A_exp_
             A_exp pointer;
             S_symbol member;
         } arrowfield;
-        
+        struct
+        {
+            A_fieldList params;
+            A_fieldList result;
+            A_stm body;
+        } func;
     } u;
 };
 
@@ -319,16 +325,15 @@ struct A_ty_
         //The A_ty type is the type the pointer points to.
         A_ty pointer;
         struct
-        {
-            A_fieldList formals;
-            A_var result;
-        } func;
-        struct
         {       
             S_symbol name;
             A_ty typeParam;
         } poly;
-        
+        struct
+        {
+            A_fieldList params;
+            A_fieldList result;
+        } func;
     } u;
 };
 
@@ -447,6 +452,7 @@ A_exp A_SizeofExp(A_pos pos, A_var sizeOf);
 A_exp A_FieldExp(A_pos pos, A_exp field, S_symbol member);
 A_exp A_SubscriptExp(A_pos pos, A_exp array, A_exp index);
 A_exp A_ArrowFieldExp(A_pos pos, A_exp pointer, S_symbol member);
+A_exp A_FuncExp(A_pos pos, A_fieldList params, A_fieldList result, A_stm body);
 // A_exp A_WhileExp(A_pos pos, A_exp test, A_exp body);
 // A_exp A_ForExp(A_pos pos, S_symbol var, A_exp lo, A_exp hi, A_exp body);
 // A_exp A_BreakExp(A_pos pos);
@@ -469,6 +475,7 @@ A_ty A_RecordTy(A_pos pos, A_fieldList record);
 A_ty A_ArrayTy(A_pos pos, A_ty array, int size);
 A_ty A_PointerTy(A_pos pos, A_ty type);
 A_ty A_PolyTy(A_pos pos, S_symbol name, A_ty typeParam);
+A_ty A_FuncTy(A_pos pos, A_fieldList params, A_fieldList result);
 
 A_field A_Field(A_pos pos, S_symbol name, A_ty typ);
 A_fieldList A_FieldList(A_field head, A_fieldList tail);

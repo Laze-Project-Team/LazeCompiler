@@ -28,7 +28,9 @@ void Pr_printModule(T_module module, FILE *file)
     {
         case T_typee:
         {
-            EM_error(0, "Type module is not implemented yet.");
+            fprintf(file, "(type ");
+            Pr_printModPrototype(T_FuncMod(T_Fundec(module -> u.type.params, T_TypeList(T_none, NULL), module -> u.type.result, NULL, NULL, -1, NULL)), file);
+            fprintf(file, ")");
             break;
         }
         case T_func:
@@ -38,6 +40,7 @@ void Pr_printModule(T_module module, FILE *file)
         }
         case T_table:
         {
+            fprintf(file, "(table %d anyfunc)", module -> u.table.size);
             break;
         }
         case T_mem:
@@ -56,6 +59,13 @@ void Pr_printModule(T_module module, FILE *file)
         }
         case T_elem:
         {
+            fprintf(file, "(elem ");
+            Pr_printExp(module -> u.elem.offset, file);
+            for(T_moduleList funcList = module -> u.elem.funcs; funcList -> tail; funcList = funcList -> tail)
+            {
+                fprintf(file, "%d ", funcList -> head -> u.func -> index);
+            }
+            fprintf(file, ")");
             break;
         }
         case T_data:
@@ -195,6 +205,18 @@ void Pr_printStm(T_stm stm, FILE *file)
             {
                 Pr_printExp(list -> head, file);
             }
+            fprintf(file, ")");
+            break;
+        }
+        case T_callIndirectStm:
+        {
+            fprintf(file, "(call_indirect (type %d)", stm -> u.callIndirect.typeIndex);
+            T_expList list = stm -> u.callIndirect.args;
+            for(; list -> tail!= NULL; list = list -> tail)
+            {
+                Pr_printExp(list -> head, file);
+            }
+            Pr_printExp(stm -> u.callIndirect.index, file);
             fprintf(file, ")");
             break;
         }
