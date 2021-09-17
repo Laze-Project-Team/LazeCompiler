@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <uchar.h>
 #include <wchar.h>
+#include <json-c/json.h>
 #include <locale.h>
 
 struct Number
@@ -27,6 +28,7 @@ void *checked_malloc(int);
 string String(char *);
 string concat(char *, char *);
 bool copyFileContent(string, string);
+bool fileContent(string, string);
 int getFileSize(FILE *file);
 
 typedef struct U_boolList_ *U_boolList;

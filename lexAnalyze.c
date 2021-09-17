@@ -7,6 +7,7 @@
 #include "parse.h"
 #include "printtree.h"
 #include "ppsemant.h"
+#include "toJson.h"
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -94,7 +95,11 @@ int main(int argc, char **argv)
     while(!toByte(temptempFileName, tempFileName));
     fprintf(stdout, "\n");
     printf("Finished Preprocessing...\n");
-    Pr_printTree(SEM_transProg(parse(tempFileName)), resultFilename);
+    string resultJsonFile = concat(tempFileName, ".json");
+    A_decList absyn_root = parse(tempFileName);
+    jobj jsonAST = JS_toJson(absyn_root);
+    fileContent(resultJsonFile, json_object_to_json_string(jsonAST));
+    Pr_printTree(SEM_transProg(absyn_root), resultFilename);
     printf("Finshed Compiling.\n");
     //printf("%d memorysize\n", memorySize);
     return 0;

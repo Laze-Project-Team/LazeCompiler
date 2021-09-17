@@ -1,0 +1,1261 @@
+[
+    {
+        "type": "dec",
+        "kind": "funcImport",
+        "info": {
+            "funcName": "表示",
+            "params": [
+                {
+                    "type": "field",
+                    "kind": "x",
+                    "typ": {
+                        "type": "ty",
+                        "kind": "kind",
+                        "info": {
+                            "tyName": "real"
+                        }
+                    }
+                }
+            ],
+            "result": [
+                {
+                    "type": "field"
+                }
+            ],
+            "mod": "console",
+            "func": "log"
+        }
+    },
+    {
+        "type": "dec",
+        "kind": "funcImport",
+        "info": {
+            "funcName": "メモリ確保",
+            "params": [
+                {
+                    "type": "field",
+                    "kind": "alloc",
+                    "typ": {
+                        "type": "ty",
+                        "kind": "kind",
+                        "info": {
+                            "tyName": "short"
+                        }
+                    }
+                }
+            ],
+            "result": [
+                {
+                    "type": "field",
+                    "kind": "return",
+                    "typ": {
+                        "type": "ty",
+                        "kind": "pointer",
+                        "info": {
+                            "pointer": {
+                                "type": "ty",
+                                "kind": "kind",
+                                "info": {
+                                    "tyName": "void"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "mod": "js",
+            "func": "alloc"
+        }
+    },
+    {
+        "type": "dec",
+        "kind": "template",
+        "info": {
+            "dec": {
+                "type": "dec",
+                "kind": "class",
+                "info": {
+                    "className": "配列",
+                    "members": [
+                        {
+                            "type": "member",
+                            "specifier": 0,
+                            "dec": {
+                                "type": "dec",
+                                "kind": "function",
+                                "info": {
+                                    "funcName": "長さ",
+                                    "params": [
+                                        {
+                                            "type": "field"
+                                        }
+                                    ],
+                                    "result": [
+                                        {
+                                            "type": "field",
+                                            "kind": "a",
+                                            "typ": {
+                                                "type": "ty",
+                                                "kind": "kind",
+                                                "info": {
+                                                    "tyName": "int"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "body": {
+                                        "type": "stm",
+                                        "kind": "compound",
+                                        "info": {
+                                            "list": [
+                                                {
+                                                    "type": "stm",
+                                                    "kind": "assign",
+                                                    "info": {
+                                                        "var": {
+                                                            "type": "var",
+                                                            "kind": "simple",
+                                                            "info": {
+                                                                "simple": "a"
+                                                            }
+                                                        },
+                                                        "exp": {
+                                                            "type": "exp",
+                                                            "kind": "var",
+                                                            "info": {
+                                                                "var": {
+                                                                    "type": "var",
+                                                                    "kind": "simple",
+                                                                    "info": {
+                                                                        "simple": "size"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "member",
+                            "specifier": 0,
+                            "dec": {
+                                "type": "dec",
+                                "kind": "function",
+                                "info": {
+                                    "funcName": "追加",
+                                    "params": [
+                                        {
+                                            "type": "field",
+                                            "kind": "new",
+                                            "typ": {
+                                                "type": "ty",
+                                                "kind": "kind",
+                                                "info": {
+                                                    "tyName": "T"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "result": [
+                                        {
+                                            "type": "field"
+                                        }
+                                    ],
+                                    "body": {
+                                        "type": "stm",
+                                        "kind": "compound",
+                                        "info": {
+                                            "list": [
+                                                {
+                                                    "type": "stm",
+                                                    "kind": "if",
+                                                    "info": {
+                                                        "test": {
+                                                            "type": "exp",
+                                                            "kind": "op",
+                                                            "info": {
+                                                                "left": {
+                                                                    "type": "exp",
+                                                                    "kind": "var",
+                                                                    "info": {
+                                                                        "var": {
+                                                                            "type": "var",
+                                                                            "kind": "simple",
+                                                                            "info": {
+                                                                                "simple": "size"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "oper": 5,
+                                                                "right": {
+                                                                    "type": "exp",
+                                                                    "kind": "var",
+                                                                    "info": {
+                                                                        "var": {
+                                                                            "type": "var",
+                                                                            "kind": "simple",
+                                                                            "info": {
+                                                                                "simple": "allocated"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "then": {
+                                                            "type": "stm",
+                                                            "kind": "compound",
+                                                            "info": {
+                                                                "list": [
+                                                                    {
+                                                                        "type": "stm",
+                                                                        "kind": "assign",
+                                                                        "info": {
+                                                                            "var": {
+                                                                                "type": "var",
+                                                                                "kind": "simple",
+                                                                                "info": {
+                                                                                    "simple": "allocated"
+                                                                                }
+                                                                            },
+                                                                            "exp": {
+                                                                                "type": "exp",
+                                                                                "kind": "op",
+                                                                                "info": {
+                                                                                    "left": {
+                                                                                        "type": "exp",
+                                                                                        "kind": "var",
+                                                                                        "info": {
+                                                                                            "var": {
+                                                                                                "type": "var",
+                                                                                                "kind": "simple",
+                                                                                                "info": {
+                                                                                                    "simple": "allocated"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    },
+                                                                                    "oper": 2,
+                                                                                    "right": {
+                                                                                        "type": "exp",
+                                                                                        "kind": "int",
+                                                                                        "info": {
+                                                                                            "int": 2
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "stm",
+                                                                        "kind": "declaration",
+                                                                        "info": {
+                                                                            "dec": {
+                                                                                "type": "dec",
+                                                                                "kind": "var",
+                                                                                "info": {
+                                                                                    "var": {
+                                                                                        "type": "var",
+                                                                                        "kind": "simple",
+                                                                                        "info": {
+                                                                                            "simple": "temp"
+                                                                                        }
+                                                                                    },
+                                                                                    "init": {
+                                                                                        "type": "exp",
+                                                                                        "kind": "var",
+                                                                                        "info": {
+                                                                                            "var": {
+                                                                                                "type": "var",
+                                                                                                "kind": "simple",
+                                                                                                "info": {
+                                                                                                    "simple": "content"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "stm",
+                                                                        "kind": "assign",
+                                                                        "info": {
+                                                                            "var": {
+                                                                                "type": "var",
+                                                                                "kind": "simple",
+                                                                                "info": {
+                                                                                    "simple": "content"
+                                                                                }
+                                                                            },
+                                                                            "exp": {
+                                                                                "type": "exp",
+                                                                                "kind": "call",
+                                                                                "info": {
+                                                                                    "func": {
+                                                                                        "type": "exp",
+                                                                                        "kind": "var",
+                                                                                        "info": {
+                                                                                            "var": {
+                                                                                                "type": "var",
+                                                                                                "kind": "simple",
+                                                                                                "info": {
+                                                                                                    "simple": "メモリ確保"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    },
+                                                                                    "args": [
+                                                                                        {
+                                                                                            "type": "exp",
+                                                                                            "kind": "op",
+                                                                                            "info": {
+                                                                                                "left": {
+                                                                                                    "type": "exp",
+                                                                                                    "kind": "sizeOf",
+                                                                                                    "info": {
+                                                                                                        "sizeOf": {
+                                                                                                            "type": "var",
+                                                                                                            "kind": "deref",
+                                                                                                            "info": {
+                                                                                                                "deref": {
+                                                                                                                    "type": "var",
+                                                                                                                    "kind": "simple",
+                                                                                                                    "info": {
+                                                                                                                        "simple": "content"
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                },
+                                                                                                "oper": 2,
+                                                                                                "right": {
+                                                                                                    "type": "exp",
+                                                                                                    "kind": "var",
+                                                                                                    "info": {
+                                                                                                        "var": {
+                                                                                                            "type": "var",
+                                                                                                            "kind": "simple",
+                                                                                                            "info": {
+                                                                                                                "simple": "allocated"
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "stm",
+                                                                        "kind": "for",
+                                                                        "info": {
+                                                                            "assign": {
+                                                                                "type": "stm",
+                                                                                "kind": "declaration",
+                                                                                "info": {
+                                                                                    "dec": {
+                                                                                        "type": "dec",
+                                                                                        "kind": "var",
+                                                                                        "info": {
+                                                                                            "var": {
+                                                                                                "type": "var",
+                                                                                                "kind": "simple",
+                                                                                                "info": {
+                                                                                                    "simple": "i"
+                                                                                                }
+                                                                                            },
+                                                                                            "init": {
+                                                                                                "type": "exp",
+                                                                                                "kind": "int",
+                                                                                                "info": {
+                                                                                                    "int": 0
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "condition": {
+                                                                                "type": "exp",
+                                                                                "kind": "op",
+                                                                                "info": {
+                                                                                    "left": {
+                                                                                        "type": "exp",
+                                                                                        "kind": "var",
+                                                                                        "info": {
+                                                                                            "var": {
+                                                                                                "type": "var",
+                                                                                                "kind": "simple",
+                                                                                                "info": {
+                                                                                                    "simple": "i"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    },
+                                                                                    "oper": 5,
+                                                                                    "right": {
+                                                                                        "type": "exp",
+                                                                                        "kind": "var",
+                                                                                        "info": {
+                                                                                            "var": {
+                                                                                                "type": "var",
+                                                                                                "kind": "simple",
+                                                                                                "info": {
+                                                                                                    "simple": "allocated"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "increment": {
+                                                                                "type": "stm",
+                                                                                "kind": "assign",
+                                                                                "info": {
+                                                                                    "var": {
+                                                                                        "type": "var",
+                                                                                        "kind": "simple",
+                                                                                        "info": {
+                                                                                            "simple": "i"
+                                                                                        }
+                                                                                    },
+                                                                                    "exp": {
+                                                                                        "type": "exp",
+                                                                                        "kind": "op",
+                                                                                        "info": {
+                                                                                            "left": {
+                                                                                                "type": "exp",
+                                                                                                "kind": "var",
+                                                                                                "info": {
+                                                                                                    "var": {
+                                                                                                        "type": "var",
+                                                                                                        "kind": "simple",
+                                                                                                        "info": {
+                                                                                                            "simple": "i"
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "oper": 0,
+                                                                                            "right": {
+                                                                                                "type": "exp",
+                                                                                                "kind": "int",
+                                                                                                "info": {
+                                                                                                    "int": 1
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "body": {
+                                                                                "type": "stm",
+                                                                                "kind": "compound",
+                                                                                "info": {
+                                                                                    "list": [
+                                                                                        {
+                                                                                            "type": "stm",
+                                                                                            "kind": "assign",
+                                                                                            "info": {
+                                                                                                "var": {
+                                                                                                    "type": "var",
+                                                                                                    "kind": "subscript",
+                                                                                                    "info": {
+                                                                                                        "var": {
+                                                                                                            "type": "var",
+                                                                                                            "kind": "simple",
+                                                                                                            "info": {
+                                                                                                                "simple": "content"
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "exp": {
+                                                                                                            "type": "exp",
+                                                                                                            "kind": "var",
+                                                                                                            "info": {
+                                                                                                                "var": {
+                                                                                                                    "type": "var",
+                                                                                                                    "kind": "simple",
+                                                                                                                    "info": {
+                                                                                                                        "simple": "i"
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                },
+                                                                                                "exp": {
+                                                                                                    "type": "exp",
+                                                                                                    "kind": "var",
+                                                                                                    "info": {
+                                                                                                        "var": {
+                                                                                                            "type": "var",
+                                                                                                            "kind": "subscript",
+                                                                                                            "info": {
+                                                                                                                "var": {
+                                                                                                                    "type": "var",
+                                                                                                                    "kind": "simple",
+                                                                                                                    "info": {
+                                                                                                                        "simple": "temp"
+                                                                                                                    }
+                                                                                                                },
+                                                                                                                "exp": {
+                                                                                                                    "type": "exp",
+                                                                                                                    "kind": "var",
+                                                                                                                    "info": {
+                                                                                                                        "var": {
+                                                                                                                            "type": "var",
+                                                                                                                            "kind": "simple",
+                                                                                                                            "info": {
+                                                                                                                                "simple": "i"
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        },
+                                                        "else": {
+                                                            "type": "stm"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "stm",
+                                                    "kind": "assign",
+                                                    "info": {
+                                                        "var": {
+                                                            "type": "var",
+                                                            "kind": "subscript",
+                                                            "info": {
+                                                                "var": {
+                                                                    "type": "var",
+                                                                    "kind": "simple",
+                                                                    "info": {
+                                                                        "simple": "content"
+                                                                    }
+                                                                },
+                                                                "exp": {
+                                                                    "type": "exp",
+                                                                    "kind": "var",
+                                                                    "info": {
+                                                                        "var": {
+                                                                            "type": "var",
+                                                                            "kind": "simple",
+                                                                            "info": {
+                                                                                "simple": "size"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "exp": {
+                                                            "type": "exp",
+                                                            "kind": "var",
+                                                            "info": {
+                                                                "var": {
+                                                                    "type": "var",
+                                                                    "kind": "simple",
+                                                                    "info": {
+                                                                        "simple": "new"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "stm",
+                                                    "kind": "assign",
+                                                    "info": {
+                                                        "var": {
+                                                            "type": "var",
+                                                            "kind": "simple",
+                                                            "info": {
+                                                                "simple": "size"
+                                                            }
+                                                        },
+                                                        "exp": {
+                                                            "type": "exp",
+                                                            "kind": "op",
+                                                            "info": {
+                                                                "left": {
+                                                                    "type": "exp",
+                                                                    "kind": "var",
+                                                                    "info": {
+                                                                        "var": {
+                                                                            "type": "var",
+                                                                            "kind": "simple",
+                                                                            "info": {
+                                                                                "simple": "size"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "oper": 0,
+                                                                "right": {
+                                                                    "type": "exp",
+                                                                    "kind": "int",
+                                                                    "info": {
+                                                                        "int": 1
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "member",
+                            "specifier": 0,
+                            "dec": {
+                                "type": "dec",
+                                "kind": "function",
+                                "info": {
+                                    "funcName": "取得",
+                                    "params": [
+                                        {
+                                            "type": "field",
+                                            "kind": "index",
+                                            "typ": {
+                                                "type": "ty",
+                                                "kind": "kind",
+                                                "info": {
+                                                    "tyName": "int"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "result": [
+                                        {
+                                            "type": "field",
+                                            "kind": "result",
+                                            "typ": {
+                                                "type": "ty",
+                                                "kind": "kind",
+                                                "info": {
+                                                    "tyName": "T"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "body": {
+                                        "type": "stm",
+                                        "kind": "compound",
+                                        "info": {
+                                            "list": [
+                                                {
+                                                    "type": "stm",
+                                                    "kind": "return",
+                                                    "info": {}
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "member",
+                            "specifier": 0,
+                            "dec": {
+                                "type": "dec",
+                                "kind": "function",
+                                "info": {
+                                    "funcName": "配列",
+                                    "params": [
+                                        {
+                                            "type": "field"
+                                        }
+                                    ],
+                                    "result": [
+                                        {
+                                            "type": "field"
+                                        }
+                                    ],
+                                    "body": {
+                                        "type": "stm",
+                                        "kind": "compound",
+                                        "info": {
+                                            "list": [
+                                                {
+                                                    "type": "stm",
+                                                    "kind": "assign",
+                                                    "info": {
+                                                        "var": {
+                                                            "type": "var",
+                                                            "kind": "simple",
+                                                            "info": {
+                                                                "simple": "size"
+                                                            }
+                                                        },
+                                                        "exp": {
+                                                            "type": "exp",
+                                                            "kind": "int",
+                                                            "info": {
+                                                                "int": 0
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "stm",
+                                                    "kind": "assign",
+                                                    "info": {
+                                                        "var": {
+                                                            "type": "var",
+                                                            "kind": "simple",
+                                                            "info": {
+                                                                "simple": "allocated"
+                                                            }
+                                                        },
+                                                        "exp": {
+                                                            "type": "exp",
+                                                            "kind": "int",
+                                                            "info": {
+                                                                "int": 2
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "stm",
+                                                    "kind": "call",
+                                                    "info": {
+                                                        "func": {
+                                                            "type": "exp",
+                                                            "kind": "var",
+                                                            "info": {
+                                                                "var": {
+                                                                    "type": "var",
+                                                                    "kind": "simple",
+                                                                    "info": {
+                                                                        "simple": "表示"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "args": [
+                                                            {
+                                                                "type": "exp",
+                                                                "kind": "sizeOf",
+                                                                "info": {
+                                                                    "sizeOf": {
+                                                                        "type": "var",
+                                                                        "kind": "deref",
+                                                                        "info": {
+                                                                            "deref": {
+                                                                                "type": "var",
+                                                                                "kind": "simple",
+                                                                                "info": {
+                                                                                    "simple": "content"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "type": "stm",
+                                                    "kind": "assign",
+                                                    "info": {
+                                                        "var": {
+                                                            "type": "var",
+                                                            "kind": "simple",
+                                                            "info": {
+                                                                "simple": "content"
+                                                            }
+                                                        },
+                                                        "exp": {
+                                                            "type": "exp",
+                                                            "kind": "call",
+                                                            "info": {
+                                                                "func": {
+                                                                    "type": "exp",
+                                                                    "kind": "var",
+                                                                    "info": {
+                                                                        "var": {
+                                                                            "type": "var",
+                                                                            "kind": "simple",
+                                                                            "info": {
+                                                                                "simple": "メモリ確保"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "args": [
+                                                                    {
+                                                                        "type": "exp",
+                                                                        "kind": "op",
+                                                                        "info": {
+                                                                            "left": {
+                                                                                "type": "exp",
+                                                                                "kind": "sizeOf",
+                                                                                "info": {
+                                                                                    "sizeOf": {
+                                                                                        "type": "var",
+                                                                                        "kind": "deref",
+                                                                                        "info": {
+                                                                                            "deref": {
+                                                                                                "type": "var",
+                                                                                                "kind": "simple",
+                                                                                                "info": {
+                                                                                                    "simple": "content"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "oper": 2,
+                                                                            "right": {
+                                                                                "type": "exp",
+                                                                                "kind": "var",
+                                                                                "info": {
+                                                                                    "var": {
+                                                                                        "type": "var",
+                                                                                        "kind": "simple",
+                                                                                        "info": {
+                                                                                            "simple": "allocated"
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "member",
+                            "specifier": 0,
+                            "dec": {
+                                "type": "dec",
+                                "kind": "object",
+                                "info": {
+                                    "className": {
+                                        "type": "ty",
+                                        "kind": "kind",
+                                        "info": {
+                                            "tyName": "int"
+                                        }
+                                    },
+                                    "objectName": "size",
+                                    "explist": []
+                                }
+                            }
+                        },
+                        {
+                            "type": "member",
+                            "specifier": 0,
+                            "dec": {
+                                "type": "dec",
+                                "kind": "object",
+                                "info": {
+                                    "className": {
+                                        "type": "ty",
+                                        "kind": "pointer",
+                                        "info": {
+                                            "pointer": {
+                                                "type": "ty",
+                                                "kind": "kind",
+                                                "info": {
+                                                    "tyName": "T"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "objectName": "content",
+                                    "explist": []
+                                }
+                            }
+                        },
+                        {
+                            "type": "member",
+                            "specifier": 2,
+                            "dec": {
+                                "type": "dec",
+                                "kind": "object",
+                                "info": {
+                                    "className": {
+                                        "type": "ty",
+                                        "kind": "kind",
+                                        "info": {
+                                            "tyName": "int"
+                                        }
+                                    },
+                                    "objectName": "allocated",
+                                    "explist": []
+                                }
+                            }
+                        },
+                        {
+                            "type": "member"
+                        }
+                    ]
+                }
+            },
+            "templateName": "T"
+        }
+    },
+    {
+        "type": "dec",
+        "kind": "class",
+        "info": {
+            "className": "ベクトル2D",
+            "members": [
+                {
+                    "type": "member",
+                    "specifier": 0,
+                    "dec": {
+                        "type": "dec",
+                        "kind": "object",
+                        "info": {
+                            "className": {
+                                "type": "ty",
+                                "kind": "kind",
+                                "info": {
+                                    "tyName": "real"
+                                }
+                            },
+                            "objectName": "y",
+                            "explist": []
+                        }
+                    }
+                },
+                {
+                    "type": "member",
+                    "specifier": 0,
+                    "dec": {
+                        "type": "dec",
+                        "kind": "object",
+                        "info": {
+                            "className": {
+                                "type": "ty",
+                                "kind": "kind",
+                                "info": {
+                                    "tyName": "real"
+                                }
+                            },
+                            "objectName": "x",
+                            "explist": []
+                        }
+                    }
+                },
+                {
+                    "type": "member"
+                }
+            ]
+        }
+    },
+    {
+        "type": "dec",
+        "kind": "class",
+        "info": {
+            "className": "test",
+            "members": [
+                {
+                    "type": "member",
+                    "specifier": 0,
+                    "dec": {
+                        "type": "dec",
+                        "kind": "function",
+                        "info": {
+                            "funcName": "test",
+                            "params": [
+                                {
+                                    "type": "field",
+                                    "kind": "points",
+                                    "typ": {
+                                        "type": "ty",
+                                        "kind": "poly",
+                                        "info": {
+                                            "polyName": "配列",
+                                            "typeParam": {
+                                                "type": "ty",
+                                                "kind": "kind",
+                                                "info": {
+                                                    "tyName": "ベクトル2D"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "field",
+                                    "kind": "a",
+                                    "typ": {
+                                        "type": "ty",
+                                        "kind": "kind",
+                                        "info": {
+                                            "tyName": "int"
+                                        }
+                                    }
+                                }
+                            ],
+                            "result": [
+                                {
+                                    "type": "field"
+                                }
+                            ],
+                            "body": {
+                                "type": "stm",
+                                "kind": "compound",
+                                "info": {
+                                    "list": [
+                                        {
+                                            "type": "stm",
+                                            "kind": "call",
+                                            "info": {
+                                                "func": {
+                                                    "type": "exp",
+                                                    "kind": "var",
+                                                    "info": {
+                                                        "var": {
+                                                            "type": "var",
+                                                            "kind": "simple",
+                                                            "info": {
+                                                                "simple": "aaaaa"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "args": []
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "member",
+                    "specifier": 0,
+                    "dec": {
+                        "type": "dec",
+                        "kind": "function",
+                        "info": {
+                            "funcName": "aaaaa",
+                            "params": [
+                                {
+                                    "type": "field"
+                                }
+                            ],
+                            "result": [
+                                {
+                                    "type": "field"
+                                }
+                            ],
+                            "body": {
+                                "type": "stm",
+                                "kind": "compound",
+                                "info": {
+                                    "list": [
+                                        {
+                                            "type": "stm",
+                                            "kind": "declaration",
+                                            "info": {
+                                                "dec": {
+                                                    "type": "dec",
+                                                    "kind": "object",
+                                                    "info": {
+                                                        "className": {
+                                                            "type": "ty",
+                                                            "kind": "poly",
+                                                            "info": {
+                                                                "polyName": "配列",
+                                                                "typeParam": {
+                                                                    "type": "ty",
+                                                                    "kind": "kind",
+                                                                    "info": {
+                                                                        "tyName": "ベクトル2D"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "objectName": "points",
+                                                        "explist": []
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "stm",
+                                            "kind": "call",
+                                            "info": {
+                                                "func": {
+                                                    "type": "exp",
+                                                    "kind": "var",
+                                                    "info": {
+                                                        "var": {
+                                                            "type": "var",
+                                                            "kind": "simple",
+                                                            "info": {
+                                                                "simple": "表示"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "args": [
+                                                    {
+                                                        "type": "exp",
+                                                        "kind": "int",
+                                                        "info": {
+                                                            "int": 6583
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "member",
+                    "specifier": 0,
+                    "dec": {
+                        "type": "dec",
+                        "kind": "object",
+                        "info": {
+                            "className": {
+                                "type": "ty",
+                                "kind": "kind",
+                                "info": {
+                                    "tyName": "int"
+                                }
+                            },
+                            "objectName": "a",
+                            "explist": []
+                        }
+                    }
+                },
+                {
+                    "type": "member"
+                }
+            ]
+        }
+    },
+    {
+        "type": "dec",
+        "kind": "function",
+        "info": {
+            "funcName": "実行",
+            "params": [
+                {
+                    "type": "field"
+                }
+            ],
+            "result": [
+                {
+                    "type": "field"
+                }
+            ],
+            "body": {
+                "type": "stm",
+                "kind": "compound",
+                "info": {
+                    "list": [
+                        {
+                            "type": "stm",
+                            "kind": "declaration",
+                            "info": {
+                                "dec": {
+                                    "type": "dec",
+                                    "kind": "var",
+                                    "info": {
+                                        "var": {
+                                            "type": "var",
+                                            "kind": "simple",
+                                            "info": {
+                                                "simple": "ll"
+                                            }
+                                        },
+                                        "init": {
+                                            "type": "exp",
+                                            "kind": "int",
+                                            "info": {
+                                                "int": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "stm",
+                            "kind": "declaration",
+                            "info": {
+                                "dec": {
+                                    "type": "dec",
+                                    "kind": "object",
+                                    "info": {
+                                        "className": {
+                                            "type": "ty",
+                                            "kind": "poly",
+                                            "info": {
+                                                "polyName": "配列",
+                                                "typeParam": {
+                                                    "type": "ty",
+                                                    "kind": "kind",
+                                                    "info": {
+                                                        "tyName": "ベクトル2D"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "objectName": "vector",
+                                        "explist": []
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]

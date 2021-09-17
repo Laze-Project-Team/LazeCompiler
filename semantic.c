@@ -62,6 +62,7 @@ static S_symbol getName(A_var);
 
 T_moduleList SEM_transProg(A_decList declist)
 {
+    A_decList tempDecList;
     tableIndex = 0;
     typeIndex = 0;
     scopeFuncs = T_ModuleList(NULL, NULL);

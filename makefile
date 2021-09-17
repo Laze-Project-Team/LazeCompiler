@@ -1,8 +1,11 @@
-compiler: frame.o parse.o translate.o tree.o printtree.o temp.o escape.o env.o types.o y.tab.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o semantic.o lexAnalyze.o 
-	cc -o compiler -g frame.o parse.o translate.o tree.o temp.o escape.o env.o types.o y.tab.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o semantic.o printtree.o lexAnalyze.o -lm
+compiler: toJson.o frame.o parse.o translate.o tree.o printtree.o temp.o escape.o env.o types.o y.tab.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o semantic.o lexAnalyze.o 
+	cc -o compiler -g toJson.o frame.o parse.o translate.o tree.o temp.o escape.o env.o types.o y.tab.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o semantic.o printtree.o lexAnalyze.o -lm -ljson-c
 
 lexAnalyze.o: lexAnalyze.c errormsg.h util.h
 	cc -g -c lexAnalyze.c
+
+toJson.o: toJson.c toJson.h
+	cc -g -c toJson.c -ljson-c
 
 parse.o: parse.c parse.h
 	cc -g -c parse.c

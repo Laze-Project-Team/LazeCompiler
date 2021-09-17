@@ -53,6 +53,19 @@ bool copyFileContent(string file1, string file2)
     }
 }
 
+bool fileContent(string file1, string content)
+{
+    FILE *f2 = fopen(file1, "w");
+    if(f2){
+        fputs(content, f2);
+        fclose(f2);
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
 int getFileSize(FILE *file)
 {
     int length = 0;
