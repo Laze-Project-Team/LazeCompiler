@@ -1,0 +1,3640 @@
+itemSet0:
+start-> >>> declist
+additionalRules-> -------------------------------
+declist.null-> >>>
+declist.declist-> >>> declist dec
+declist.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+dec.template.func-> >>> type < id > : function : id ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.template.class-> >>> type < id > : class : id { memlist }
+dec.jsload-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.class.inherit-> >>> class <- id { memlist }
+dec.object-> >>> ty : id ( explist ) ;
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.func-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> ------------------
+
+itemSet1:
+ty.pointer-> * >>> ty
+additionalRules-> -------------------
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+
+itemSet2:
+ty.int-> inttype >>>
+additionalRules-> -------------------
+
+itemSet3:
+ty.real-> realtype >>>
+additionalRules-> -------------------
+
+itemSet4:
+dec.template.func-> type >>> < id > : function : id ( fieldlist ) => ( fieldlist ) stm
+dec.template.class-> type >>> < id > : class : id { memlist }
+additionalRules-> -------------------
+
+itemSet5:
+ty.void-> void >>>
+additionalRules-> -------------------
+
+itemSet6:
+ty.bool-> boolean >>>
+additionalRules-> -------------------
+
+itemSet7:
+ty.char-> chartype >>>
+additionalRules-> -------------------
+
+itemSet8:
+ty.short-> shorttype >>>
+additionalRules-> -------------------
+
+itemSet9:
+dec.jsload-> function >>> : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func-> function >>> : id ( fieldlist ) => ( fieldlist ) stm 
+additionalRules-> -------------------
+
+itemSet10:
+dec.class.noinherit-> class >>> : id { memlist }
+dec.class.inherit-> class >>> <- id { memlist }
+additionalRules-> -------------------
+
+itemSet11:
+dec.jsexport-> jsexport >>> ( id , string ) ;
+additionalRules-> -------------------
+
+itemSet12:
+ty.poly-> id >>> < ty >
+ty.name-> id >>>
+additionalRules-> -------------------
+
+itemSet13:
+declist.null->  >>>
+additionalRules-> -------------------
+
+itemSet14:
+declist.dec-> dec >>>
+additionalRules-> -------------------
+
+itemSet15:
+dec.var.noinit-> ty >>> : var ;
+dec.var.init-> ty >>> : var = exp ;
+dec.object-> ty >>> : id ( explist ) ;
+additionalRules-> -------------------
+
+itemSet16:
+start-> declist >>>
+declist.declist-> declist >>> dec
+additionalRules-> -------------------
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+dec.template.func-> >>> type < id > : function : id ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.template.class-> >>> type < id > : class : id { memlist }
+dec.jsload-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.class.inherit-> >>> class <- id { memlist }
+dec.object-> >>> ty : id ( explist ) ;
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.func-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+
+itemSet17:
+ty.pointer-> * ty >>>
+additionalRules-> -------------------
+
+itemSet18:
+dec.template.func-> type < >>> id > : function : id ( fieldlist ) => ( fieldlist ) stm
+dec.template.class-> type < >>> id > : class : id { memlist }
+additionalRules-> -------------------
+
+itemSet19:
+dec.jsload-> function : >>> id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func-> function : >>> id ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet20:
+dec.class.noinherit-> class : >>> id { memlist }
+additionalRules-> -------------------
+
+itemSet21:
+dec.class.inherit-> class <- >>> id { memlist }
+additionalRules-> -------------------
+
+itemSet22:
+dec.jsexport-> jsexport ( >>> id , string ) ;
+additionalRules-> -------------------
+
+itemSet23:
+ty.poly-> id < >>> ty >
+additionalRules-> -------------------
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+
+itemSet24:
+dec.var.noinit-> ty : >>> var ;
+dec.var.init-> ty : >>> var = exp ;
+dec.object-> ty : >>> id ( explist ) ;
+additionalRules-> -------------------
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+
+itemSet25:
+declist.declist-> declist dec >>>
+additionalRules-> -------------------
+
+itemSet26:
+dec.template.func-> type < id >>> > : function : id ( fieldlist ) => ( fieldlist ) stm
+dec.template.class-> type < id >>> > : class : id { memlist }
+additionalRules-> -------------------
+
+itemSet27:
+dec.jsload-> function : id >>> ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func-> function : id >>> ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet28:
+dec.class.noinherit-> class : id >>> { memlist }
+additionalRules-> -------------------
+
+itemSet29:
+dec.class.inherit-> class <- id >>> { memlist }
+additionalRules-> -------------------
+
+itemSet30:
+dec.jsexport-> jsexport ( id >>> , string ) ;
+additionalRules-> -------------------
+
+itemSet31:
+ty.poly-> id < ty >>> >
+additionalRules-> -------------------
+
+itemSet32:
+var.deref-> * >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+
+itemSet33:
+dec.object-> ty : id >>> ( explist ) ;
+var.simple-> id >>>
+additionalRules-> -------------------
+
+itemSet34:
+dec.var.noinit-> ty : var >>> ;
+dec.var.init-> ty : var >>> = exp ;
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subcript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet35:
+dec.template.func-> type < id > >>> : function : id ( fieldlist ) => ( fieldlist ) stm
+dec.template.class-> type < id > >>> : class : id { memlist }
+additionalRules-> -------------------
+
+itemSet36:
+dec.jsload-> function : id ( >>> fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func-> function : id ( >>> fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.null-> >>>
+fieldlist.fieldlist-> >>> fieldlist , field
+fieldlist.field-> >>> field
+field.noinit-> >>> ty : var
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+
+itemSet37:
+dec.class.noinherit-> class : id { >>> memlist }
+additionalRules-> -------------------
+
+itemSet38:
+dec.class.inherit-> class <- id { >>> memlist }
+additionalRules-> -------------------
+
+itemSet39:
+dec.jsexport-> jsexport ( id , >>> string ) ;
+additionalRules-> -------------------
+
+itemSet40:
+ty.poly-> id < ty > >>>
+additionalRules-> -------------------
+
+itemSet41:
+var.simple-> id >>>
+additionalRules-> -------------------
+
+itemSet42:
+var.deref-> * var >>>
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subcript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet43:
+dec.object-> ty : id ( >>> explist ) ;
+additionalRules-> -------------------
+explist.null-> >>>
+explist.exp-> >>> exp
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp ) 
+explist.explist-> >>> explist , exp
+
+itemSet44:
+dec.var.noinit-> ty : var ; >>>
+additionalRules-> -------------------
+
+itemSet45:
+var.subcript-> var [ >>> exp ]
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id 
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet46:
+var.field-> var . >>> id
+additionalRules-> -------------------
+
+itemSet47:
+var.arrowfield-> var -> >>> id
+additionalRules-> -------------------
+
+itemSet48:
+dec.var.init-> ty : var = >>> exp ;
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet49:
+dec.template.func-> type < id > : >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.template.class-> type < id > : >>> class : id { memlist }
+additionalRules-> -------------------
+
+itemSet50:
+fieldlist.null->  >>>
+additionalRules-> -------------------
+
+itemSet51:
+field.noinit-> ty >>> : var
+additionalRules-> -------------------
+
+itemSet52:
+fieldlist.field-> field >>>
+additionalRules-> -------------------
+
+itemSet53:
+dec.jsload-> function : id ( fieldlist >>> ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func-> function : id ( fieldlist >>> ) => ( fieldlist ) stm
+fieldlist.fieldlist-> fieldlist >>> , field
+additionalRules-> -------------------
+
+itemSet54:
+dec.class.noinherit-> class : id { memlist >>> }
+additionalRules-> -------------------
+
+itemSet55:
+dec.class.inherit-> class <- id { memlist >>> }
+additionalRules-> ------------------- 
+
+itemSet56:
+dec.jsexport-> jsexport ( id , string >>> ) ;
+additionalRules-> -------------------
+
+itemSet57:
+exp.char-> char >>>
+additionalRules-> -------------------
+
+itemSet58:
+exp.string-> string >>>
+additionalRules-> -------------------
+
+itemSet59:
+exp.int-> int >>>
+additionalRules-> -------------------
+
+itemSet60:
+exp.real-> real >>>
+additionalRules-> -------------------
+
+itemSet61:
+exp.func-> ( >>> fieldlist ) => ( fieldlist ) stm
+exp.paren-> ( >>> exp )
+additionalRules-> -------------------
+fieldlist.null-> >>>
+fieldlist.fieldlist-> >>> fieldlist , field
+fieldlist.field-> >>> field
+field.noinit-> >>> ty : var
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp 
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet62:
+exp.array-> [ >>> explist ]
+additionalRules-> -------------------
+explist.null-> >>>
+explist.exp-> >>> exp
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp 
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+explist.explist-> >>> explist , exp
+
+itemSet63:
+exp.minus-> - >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet64:
+exp.true-> true >>>
+additionalRules-> -------------------
+
+itemSet65:
+exp.false-> false >>>
+additionalRules-> -------------------
+
+itemSet66:
+exp.address-> & >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+
+itemSet67:
+exp.sizeof-> sizeof >>> ( var )
+additionalRules-> -------------------
+
+itemSet68:
+explist.null->  >>>
+additionalRules-> -------------------
+
+itemSet69:
+explist.exp-> exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet70:
+varExp.var-> var >>>
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subcript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet71:
+exp.call-> varExp >>> ( explist )
+exp.var-> varExp >>>
+additionalRules-> -------------------
+
+itemSet72:
+dec.object-> ty : id ( explist >>> ) ;
+explist.explist-> explist >>> , exp
+additionalRules-> -------------------
+
+itemSet73:
+var.subcript-> var [ exp >>> ]
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet74:
+var.field-> var . id >>>
+additionalRules-> -------------------
+
+itemSet75:
+var.arrowfield-> var -> id >>>
+additionalRules-> -------------------
+
+itemSet76:
+dec.var.init-> ty : var = exp >>> ;
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet77:
+dec.template.func-> type < id > : function >>> : id ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet78:
+dec.template.class-> type < id > : class >>> : id { memlist }
+additionalRules-> -------------------
+
+itemSet79:
+field.noinit-> ty : >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+
+itemSet80:
+fieldlist.fieldlist-> fieldlist , >>> field
+additionalRules-> -------------------
+field.noinit-> >>> ty : var
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+
+itemSet81:
+dec.jsload-> function : id ( fieldlist ) >>> => ( fieldlist ) = jsload ( string , string ) ;
+dec.func-> function : id ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet82:
+dec.class.noinherit-> class : id { memlist } >>>
+additionalRules-> -------------------
+
+itemSet83:
+dec.class.inherit-> class <- id { memlist } >>>
+additionalRules-> -------------------
+
+itemSet84:
+dec.jsexport-> jsexport ( id , string ) >>> ;
+additionalRules-> -------------------
+
+itemSet85:
+exp.paren-> ( exp >>> )
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp 
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet86:
+exp.func-> ( fieldlist >>> ) => ( fieldlist ) stm
+fieldlist.fieldlist-> fieldlist >>> , field
+additionalRules-> -------------------
+
+itemSet87:
+exp.array-> [ explist >>> ]
+explist.explist-> explist >>> , exp
+additionalRules-> -------------------
+
+itemSet88:
+exp.minus-> - exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet89:
+exp.address-> & var >>>
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subcript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet90:
+exp.sizeof-> sizeof ( >>> var )
+additionalRules-> -------------------
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+
+itemSet91:
+varExp.subcript-> exp [ >>> exp ]
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp 
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet92:
+varExp.field-> exp . >>> id
+additionalRules-> -------------------
+
+itemSet93:
+varExp.arrowfield-> exp -> >>> id
+additionalRules-> -------------------
+
+itemSet94:
+exp.add-> exp + >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet95:
+exp.sub-> exp - >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet96:
+exp.mul-> exp * >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet97:
+exp.div-> exp / >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int 
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet98:
+exp.eq-> exp == >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet99:
+exp.neq-> exp != >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet100:
+exp.lt-> exp < >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id 
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet101:
+exp.le-> exp <= >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet102:
+exp.ge-> exp >= >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet103:
+exp.and-> exp && >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet104:
+exp.or-> exp || >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet105:
+exp.mod-> exp % >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet106:
+exp.call-> varExp ( >>> explist )
+additionalRules-> -------------------
+explist.null-> >>>
+explist.exp-> >>> exp
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ] 
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+explist.explist-> >>> explist , exp
+
+itemSet107:
+explist.explist-> explist , >>> exp
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet108:
+dec.object-> ty : id ( explist ) >>> ;
+additionalRules-> -------------------
+
+itemSet109:
+var.subcript-> var [ exp ] >>>
+additionalRules-> -------------------
+
+itemSet110:
+dec.var.init-> ty : var = exp ; >>>
+additionalRules-> -------------------
+
+itemSet111:
+dec.template.func-> type < id > : function : >>> id ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet112:
+dec.template.class-> type < id > : class : >>> id { memlist }
+additionalRules-> -------------------
+
+itemSet113:
+field.noinit-> ty : var >>>
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subcript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet114:
+fieldlist.fieldlist-> fieldlist , field >>>
+additionalRules-> -------------------
+
+itemSet115:
+dec.jsload-> function : id ( fieldlist ) => >>> ( fieldlist ) = jsload ( string , string ) ;
+dec.func-> function : id ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet116:
+dec.jsexport-> jsexport ( id , string ) ; >>>
+additionalRules-> -------------------
+
+itemSet117:
+exp.paren-> ( exp ) >>>
+additionalRules-> -------------------
+
+itemSet118:
+exp.func-> ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet119:
+exp.array-> [ explist ] >>>
+additionalRules-> -------------------
+
+itemSet120:
+exp.sizeof-> sizeof ( var >>> )
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subcript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet121:
+varExp.subcript-> exp [ exp >>> ]
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet122:
+varExp.field-> exp . id >>>
+additionalRules-> -------------------
+
+itemSet123:
+varExp.arrowfield-> exp -> id >>>
+additionalRules-> -------------------
+
+itemSet124:
+exp.add-> exp + exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet125:
+exp.sub-> exp - exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet126:
+exp.mul-> exp * exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet127:
+exp.div-> exp / exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp 
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet128:
+exp.eq-> exp == exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet129:
+exp.neq-> exp != exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet130:
+exp.lt-> exp < exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet131:
+exp.le-> exp <= exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet132:
+exp.ge-> exp >= exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp 
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet133:
+exp.and-> exp && exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet134:
+exp.or-> exp || exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet135:
+exp.mod-> exp % exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet136:
+exp.call-> varExp ( explist >>> )
+explist.explist-> explist >>> , exp
+additionalRules-> -------------------
+
+itemSet137:
+explist.explist-> explist , exp >>>
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp 
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet138:
+dec.object-> ty : id ( explist ) ; >>>
+additionalRules-> -------------------
+
+itemSet139:
+dec.template.func-> type < id > : function : id >>> ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet140:
+dec.template.class-> type < id > : class : id >>> { memlist }
+additionalRules-> -------------------
+
+itemSet141:
+dec.jsload-> function : id ( fieldlist ) => ( >>> fieldlist ) = jsload ( string , string ) ;
+dec.func-> function : id ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.null-> >>>
+fieldlist.fieldlist-> >>> fieldlist , field
+fieldlist.field-> >>> field
+field.noinit-> >>> ty : var
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+
+itemSet142:
+exp.func-> ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet143:
+exp.sizeof-> sizeof ( var ) >>>
+additionalRules-> -------------------
+
+itemSet144:
+varExp.subcript-> exp [ exp ] >>>
+additionalRules-> -------------------
+
+itemSet145:
+exp.call-> varExp ( explist ) >>>
+additionalRules-> -------------------
+
+itemSet146:
+dec.template.func-> type < id > : function : id ( >>> fieldlist ) => ( fieldlist ) stm
+additionalRules-> ------------------- 
+fieldlist.null-> >>>
+fieldlist.fieldlist-> >>> fieldlist , field
+fieldlist.field-> >>> field
+field.noinit-> >>> ty : var
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+
+itemSet147:
+dec.template.class-> type < id > : class : id { >>> memlist }
+additionalRules-> -------------------
+
+itemSet148:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist >>> ) = jsload ( string , string ) ;
+dec.func-> function : id ( fieldlist ) => ( fieldlist >>> ) stm
+fieldlist.fieldlist-> fieldlist >>> , field
+additionalRules-> -------------------
+
+itemSet149:
+exp.func-> ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.null-> >>>
+fieldlist.fieldlist-> >>> fieldlist , field
+fieldlist.field-> >>> field
+field.noinit-> >>> ty : var
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+
+itemSet150:
+dec.template.func-> type < id > : function : id ( fieldlist >>> ) => ( fieldlist ) stm
+fieldlist.fieldlist-> fieldlist >>> , field
+additionalRules-> -------------------
+
+itemSet151:
+dec.template.class-> type < id > : class : id { memlist >>> }
+additionalRules-> -------------------
+
+itemSet152:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist ) >>> = jsload ( string , string ) ;
+dec.func-> function : id ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var ) 
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet153:
+exp.func-> ( fieldlist ) => ( fieldlist >>> ) stm
+fieldlist.fieldlist-> fieldlist >>> , field
+additionalRules-> -------------------
+
+itemSet154:
+dec.template.func-> type < id > : function : id ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet155:
+dec.template.class-> type < id > : class : id { memlist } >>>
+additionalRules-> -------------------
+
+itemSet156:
+exp.func-> ( >>> fieldlist ) => ( fieldlist ) stm
+exp.paren-> ( >>> exp )
+stm.for-> ( >>> stm ) from ( stm ) to ( exp ) stm
+additionalRules-> -------------------
+fieldlist.null-> >>>
+fieldlist.fieldlist-> >>> fieldlist , field
+fieldlist.field-> >>> field
+field.noinit-> >>> ty : var
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var 
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet157:
+stm.compound-> { >>> stmlist }
+additionalRules-> -------------------
+stmlist.null-> >>>
+stmlist.stm-> >>> stm
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+stmlist.stmlist-> >>> stmlist stm
+
+itemSet158:
+var.deref-> * >>> var
+ty.pointer-> * >>> ty
+additionalRules-> -------------------
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype 
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+
+itemSet159:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist ) = >>> jsload ( string , string ) ;
+additionalRules-> -------------------
+
+itemSet160:
+stm.if.if-> if >>> ( exp ) then stm
+stm.if.ifelse-> if >>> ( exp ) then stm else stm
+additionalRules-> -------------------
+
+itemSet161:
+stm.while-> to >>> ( exp ) stm
+additionalRules-> -------------------
+
+itemSet162:
+stm.break-> break >>> ;
+additionalRules-> -------------------
+
+itemSet163:
+stm.continue-> continue >>> ;
+additionalRules-> -------------------
+
+itemSet164:
+stm.return.noexp-> return >>> ;
+stm.return.exp-> return >>> ( exp ) ;
+additionalRules-> -------------------
+
+itemSet165:
+stm.loop-> loop >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet166:
+var.simple-> id >>>
+ty.poly-> id >>> < ty >
+ty.name-> id >>>
+additionalRules-> -------------------
+
+itemSet167:
+varExp.subcript-> exp >>> [ exp ]
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+additionalRules-> -------------------
+
+itemSet168:
+stm.assign.mul-> varExp >>> * = exp ;
+exp.call-> varExp >>> ( explist )
+exp.var-> varExp >>>
+stm.call-> varExp >>> ( explist ) ;
+stm.assign.div-> varExp >>> / = exp ;
+stm.assign.sub-> varExp >>> - = exp ;
+stm.assign.add-> varExp >>> + = exp ;
+stm.assign.increment-> varExp >>> + + ;
+stm.assign.normal-> varExp >>> = exp ;
+stm.assign.decrement-> varExp >>> - - ;
+additionalRules-> -------------------
+
+itemSet169:
+dec.func-> function : id ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet170:
+stm.dec-> ty >>> : var = exp ;
+additionalRules-> -------------------
+
+itemSet171:
+exp.func-> ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet172:
+dec.template.func-> type < id > : function : id ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet173:
+exp.call-> varExp >>> ( explist )
+exp.var-> varExp >>>
+stm.assign.mul-> varExp >>> * = exp ;
+stm.call-> varExp >>> ( explist ) ;
+stm.assign.div-> varExp >>> / = exp ;
+stm.assign.sub-> varExp >>> - = exp ;
+stm.assign.add-> varExp >>> + = exp ;
+stm.assign.increment-> varExp >>> + + ;
+stm.assign.normal-> varExp >>> = exp ;
+stm.assign.decrement-> varExp >>> - - ;
+additionalRules-> -------------------
+
+itemSet174:
+stm.for-> ( stm >>> ) from ( stm ) to ( exp ) stm
+additionalRules-> -------------------
+
+itemSet175:
+stmlist.null->  >>>
+additionalRules-> -------------------
+
+itemSet176:
+stmlist.stm-> stm >>>
+additionalRules-> -------------------
+
+itemSet177:
+stm.compound-> { stmlist >>> }
+stmlist.stmlist-> stmlist >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet178:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist ) = jsload >>> ( string , string ) ;
+additionalRules-> -------------------
+
+itemSet179:
+stm.if.if-> if ( >>> exp ) then stm
+stm.if.ifelse-> if ( >>> exp ) then stm else stm
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet180:
+stm.while-> to ( >>> exp ) stm
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet181:
+stm.break-> break ; >>>
+additionalRules-> -------------------
+
+itemSet182:
+stm.continue-> continue ; >>>
+additionalRules-> -------------------
+
+itemSet183:
+stm.return.noexp-> return ; >>>
+additionalRules-> -------------------
+
+itemSet184:
+stm.return.exp-> return ( >>> exp ) ;
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id 
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet185:
+stm.loop-> loop stm >>>
+additionalRules-> -------------------
+
+itemSet186:
+exp.call-> varExp ( >>> explist )
+stm.call-> varExp ( >>> explist ) ;
+additionalRules-> -------------------
+explist.null-> >>>
+explist.exp-> >>> exp
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+explist.explist-> >>> explist , exp
+
+itemSet187:
+stm.assign.add-> varExp + >>> = exp ;
+stm.assign.increment-> varExp + >>> + ;
+additionalRules-> -------------------
+
+itemSet188:
+stm.assign.sub-> varExp - >>> = exp ;
+stm.assign.decrement-> varExp - >>> - ;
+additionalRules-> -------------------
+
+itemSet189:
+stm.assign.mul-> varExp * >>> = exp ;
+additionalRules-> -------------------
+
+itemSet190:
+stm.assign.div-> varExp / >>> = exp ;
+additionalRules-> -------------------
+
+itemSet191:
+stm.assign.normal-> varExp = >>> exp ;
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet192:
+stm.dec-> ty : >>> var = exp ;
+additionalRules-> -------------------
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+
+itemSet193:
+exp.func-> ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet194:
+dec.template.func-> type < id > : function : id ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.null-> >>>
+fieldlist.fieldlist-> >>> fieldlist , field
+fieldlist.field-> >>> field
+field.noinit-> >>> ty : var
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+
+itemSet195:
+stm.for-> ( stm ) >>> from ( stm ) to ( exp ) stm
+additionalRules-> -------------------
+
+itemSet196:
+stm.compound-> { stmlist } >>>
+additionalRules-> -------------------
+
+itemSet197:
+stmlist.stmlist-> stmlist stm >>>
+additionalRules-> -------------------
+
+itemSet198:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( >>> string , string ) ;
+additionalRules-> -------------------
+
+itemSet199:
+stm.if.if-> if ( exp >>> ) then stm
+stm.if.ifelse-> if ( exp >>> ) then stm else stm
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet200:
+stm.while-> to ( exp >>> ) stm
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet201:
+stm.return.exp-> return ( exp >>> ) ;
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> ------------------- 
+
+itemSet202:
+exp.call-> varExp ( explist >>> )
+stm.call-> varExp ( explist >>> ) ;
+explist.explist-> explist >>> , exp
+additionalRules-> -------------------
+
+itemSet203:
+stm.assign.increment-> varExp + + >>> ;
+additionalRules-> -------------------
+
+itemSet204:
+stm.assign.add-> varExp + = >>> exp ;
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet205:
+stm.assign.decrement-> varExp - - >>> ;
+additionalRules-> -------------------
+
+itemSet206:
+stm.assign.sub-> varExp - = >>> exp ;
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ] 
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet207:
+stm.assign.mul-> varExp * = >>> exp ;
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet208:
+stm.assign.div-> varExp / = >>> exp ;
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet209:
+stm.assign.normal-> varExp = exp >>> ;
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet210:
+stm.dec-> ty : var >>> = exp ;
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subcript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet211:
+dec.template.func-> type < id > : function : id ( fieldlist ) => ( fieldlist >>> ) stm
+fieldlist.fieldlist-> fieldlist >>> , field
+additionalRules-> -------------------
+
+itemSet212:
+stm.for-> ( stm ) from >>> ( stm ) to ( exp ) stm
+additionalRules-> -------------------
+
+itemSet213:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string >>> , string ) ;
+additionalRules-> -------------------
+
+itemSet214:
+stm.if.if-> if ( exp ) >>> then stm
+stm.if.ifelse-> if ( exp ) >>> then stm else stm
+additionalRules-> -------------------
+
+itemSet215:
+stm.while-> to ( exp ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm 
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet216:
+stm.return.exp-> return ( exp ) >>> ;
+additionalRules-> -------------------
+
+itemSet217:
+exp.call-> varExp ( explist ) >>>
+stm.call-> varExp ( explist ) >>> ;
+additionalRules-> -------------------
+
+itemSet218:
+stm.assign.increment-> varExp + + ; >>>
+additionalRules-> -------------------
+
+itemSet219:
+stm.assign.add-> varExp + = exp >>> ;
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id 
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet220:
+stm.assign.decrement-> varExp - - ; >>>
+additionalRules-> -------------------
+
+itemSet221:
+stm.assign.sub-> varExp - = exp >>> ;
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet222:
+stm.assign.mul-> varExp * = exp >>> ;
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet223:
+stm.assign.div-> varExp / = exp >>> ;
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet224:
+stm.assign.normal-> varExp = exp ; >>>
+additionalRules-> -------------------
+
+itemSet225:
+stm.dec-> ty : var = >>> exp ;
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp 
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet226:
+dec.template.func-> type < id > : function : id ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ; 
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet227:
+stm.for-> ( stm ) from ( >>> stm ) to ( exp ) stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm 
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet228:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , >>> string ) ;
+additionalRules-> -------------------
+
+itemSet229:
+stm.if.if-> if ( exp ) then >>> stm
+stm.if.ifelse-> if ( exp ) then >>> stm else stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet230:
+stm.while-> to ( exp ) stm >>>
+additionalRules-> -------------------
+
+itemSet231:
+stm.return.exp-> return ( exp ) ; >>>
+additionalRules-> -------------------
+
+itemSet232:
+stm.call-> varExp ( explist ) ; >>>
+additionalRules-> -------------------
+
+itemSet233:
+stm.assign.add-> varExp + = exp ; >>>
+additionalRules-> -------------------
+
+itemSet234:
+stm.assign.sub-> varExp - = exp ; >>>
+additionalRules-> -------------------
+
+itemSet235:
+stm.assign.mul-> varExp * = exp ; >>>
+additionalRules-> -------------------
+
+itemSet236:
+stm.assign.div-> varExp / = exp ; >>>
+additionalRules-> -------------------
+
+itemSet237:
+stm.dec-> ty : var = exp >>> ;
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet238:
+dec.template.func-> type < id > : function : id ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet239:
+stm.for-> ( stm ) from ( stm >>> ) to ( exp ) stm
+additionalRules-> -------------------
+
+itemSet240:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string >>> ) ;
+additionalRules-> -------------------
+
+itemSet241:
+stm.if.if-> if ( exp ) then stm >>>
+stm.if.ifelse-> if ( exp ) then stm >>> else stm
+additionalRules-> -------------------
+
+itemSet242:
+stm.dec-> ty : var = exp ; >>>
+additionalRules-> -------------------
+
+itemSet243:
+stm.for-> ( stm ) from ( stm ) >>> to ( exp ) stm
+additionalRules-> -------------------
+
+itemSet244:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) >>> ;
+additionalRules-> -------------------
+
+itemSet245:
+stm.if.ifelse-> if ( exp ) then stm else >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ; 
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet246:
+stm.for-> ( stm ) from ( stm ) to >>> ( exp ) stm
+additionalRules-> -------------------
+
+itemSet247:
+dec.jsload-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ; >>>
+additionalRules-> -------------------
+
+itemSet248:
+stm.if.ifelse-> if ( exp ) then stm else stm >>>
+additionalRules-> -------------------
+
+itemSet249:
+stm.for-> ( stm ) from ( stm ) to ( >>> exp ) stm
+additionalRules-> -------------------
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+
+itemSet250:
+stm.for-> ( stm ) from ( stm ) to ( exp >>> ) stm
+exp.or-> exp >>> || exp
+exp.div-> exp >>> / exp
+exp.neq-> exp >>> != exp
+exp.le-> exp >>> <= exp
+varExp.subcript-> exp >>> [ exp ]
+varExp.arrowfield-> exp >>> -> id
+varExp.field-> exp >>> . id
+exp.mod-> exp >>> % exp
+exp.eq-> exp >>> == exp
+exp.ge-> exp >>> >= exp
+exp.lt-> exp >>> < exp
+exp.add-> exp >>> + exp
+exp.sub-> exp >>> - exp
+exp.and-> exp >>> && exp
+exp.mul-> exp >>> * exp
+additionalRules-> -------------------
+
+itemSet251:
+stm.for-> ( stm ) from ( stm ) to ( exp ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return ;
+stm.while-> >>> to ( exp ) stm
+stm.assign.mul-> >>> varExp * = exp ;
+varExp.var-> >>> var
+var.simple-> >>> id
+var.deref-> >>> * var
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subcript-> >>> var [ exp ]
+varExp.subcript-> >>> exp [ exp ]
+exp.true-> >>> true
+exp.real-> >>> real
+exp.string-> >>> string
+exp.char-> >>> char
+exp.or-> >>> exp || exp
+exp.div-> >>> exp / exp
+exp.neq-> >>> exp != exp
+exp.le-> >>> exp <= exp
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.call-> >>> varExp ( explist )
+exp.sizeof-> >>> sizeof ( var )
+exp.mod-> >>> exp % exp
+exp.eq-> >>> exp == exp
+exp.array-> >>> [ explist ]
+exp.ge-> >>> exp >= exp
+exp.lt-> >>> exp < exp
+exp.add-> >>> exp + exp
+exp.address-> >>> & var
+exp.false-> >>> false
+exp.minus-> >>> - exp
+exp.sub-> >>> exp - exp
+exp.var-> >>> varExp
+exp.int-> >>> int
+exp.and-> >>> exp && exp
+exp.mul-> >>> exp * exp
+exp.paren-> >>> ( exp )
+varExp.arrowfield-> >>> exp -> id
+varExp.field-> >>> exp . id
+stm.call-> >>> varExp ( explist ) ;
+stm.compound-> >>> { stmlist }
+stm.for-> >>> ( stm ) from ( stm ) to ( exp ) stm
+stm.break-> >>> break ;
+stm.assign.div-> >>> varExp / = exp ;
+stm.assign.sub-> >>> varExp - = exp ;
+stm.assign.add-> >>> varExp + = exp ;
+stm.assign.increment-> >>> varExp + + ;
+stm.dec-> >>> ty : var = exp ;
+ty.poly-> >>> id < ty >
+ty.real-> >>> realtype
+ty.void-> >>> void
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.name-> >>> id
+ty.char-> >>> chartype
+ty.pointer-> >>> * ty
+ty.int-> >>> inttype
+stm.assign.normal-> >>> varExp = exp ;
+stm.continue-> >>> continue ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.loop-> >>> loop stm
+stm.return.exp-> >>> return ( exp ) ;
+stm.assign.decrement-> >>> varExp - - ;
+
+itemSet252:
+stm.for-> ( stm ) from ( stm ) to ( exp ) stm >>>
+additionalRules-> -------------------

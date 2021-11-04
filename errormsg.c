@@ -16,7 +16,7 @@ extern FILE *prein;
 
 IntList intList(int i, IntList rest)
 {
-    IntList l = checked_malloc(sizeof *l);
+    IntList l = (IntList)checked_malloc(sizeof *l);
     l->i=i;
     l->rest = rest;
     return l;

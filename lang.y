@@ -1,4 +1,7 @@
 %{
+    #ifdef __cplusplus
+    extern "C" {
+    #endif
     #include <stdio.h>
     #include "util.h"
     #include "errormsg.h"
@@ -8,12 +11,16 @@
     #define YYDEBUG 1
 
     int yylex(void);
+    int yyparse(void);
     A_decList absyn_root;
 
     void yyerror(const char *s)
     {
         EM_error(EM_tokPos, "%s", s);
     }
+    #ifdef __cplusplus
+    }
+    #endif
 %}
 
 %union

@@ -5,6 +5,9 @@
  * Linked list types end with "..list"
  */
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "symbol.h"
 
 typedef struct Ty_ty_ *Ty_ty;
@@ -13,22 +16,23 @@ typedef struct Ty_field_ *Ty_field;
 typedef struct Ty_fieldList_ *Ty_fieldList;
 typedef struct Ty_member_ *Ty_member;
 typedef struct Ty_memberList_ *Ty_memberList;
-
-struct Ty_ty_ {enum {Ty_record, Ty_nil, Ty_int, Ty_short, Ty_string, Ty_array,
-		       Ty_name, Ty_void, Ty_real, Ty_bool, Ty_char, Ty_pointer, Ty_poly, Ty_func} kind;
-			int size;
-	       	union 
-			{
-				Ty_fieldList record;
-				//saves array size and type
-				struct {int size; Ty_ty type;} array;
-				struct {S_symbol sym;} name;
-				//The type the pointer points to.
-			  	Ty_ty pointer;
-				struct {S_symbol name; Ty_ty typeParam;} poly;
-				struct {Ty_tyList params; Ty_ty result; int typeIndex;} func;
-		    } u;
-	     };
+enum Ty_tyType {Ty_record, Ty_nil, Ty_int, Ty_short, Ty_string, Ty_array,
+		       Ty_name, Ty_void, Ty_real, Ty_bool, Ty_char, Ty_pointer, Ty_poly, Ty_func};
+struct Ty_ty_ { 
+	enum Ty_tyType kind;
+	int size;
+	union 
+	{
+		Ty_fieldList record;
+		//saves array size and type
+		struct {int size; Ty_ty type;} array;
+		struct {S_symbol sym;} name;
+		//The type the pointer points to.
+	  	Ty_ty pointer;
+		struct {S_symbol name; Ty_ty typeParam;} poly;
+		struct {Ty_tyList params; Ty_ty result; int typeIndex;} func;
+	} u;
+};
 
 struct Ty_tyList_ {Ty_ty head; Ty_tyList tail;};
 struct Ty_field_ {S_symbol name; Ty_ty ty;};
@@ -64,3 +68,6 @@ Ty_memberList Ty_MemberList(Ty_member head, Ty_memberList tail);
 
 void Ty_print(Ty_ty t);
 void TyList_print(Ty_tyList list);
+#ifdef __cplusplus
+}
+#endif

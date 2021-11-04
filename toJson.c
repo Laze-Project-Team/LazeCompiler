@@ -415,12 +415,12 @@ jobj JS_DecToJson(A_dec dec)
         case A_classDec:
         {
             name = json_object_new_string("class");
-            jobj className = json_object_new_string(S_name(dec -> u.class.name));
+            jobj className = json_object_new_string(S_name(dec -> u.classs.name));
             json_object_object_add(info, "className", className);
-            jobj members = JS_ClassMemberListToJson(dec -> u.class.members);
+            jobj members = JS_ClassMemberListToJson(dec -> u.classs.members);
             json_object_object_add(info, "members", members);
-            if(dec -> u.class.inheritance){
-                jobj inheritance = json_object_new_string(S_name(dec -> u.class.inheritance -> head));
+            if(dec -> u.classs.inheritance){
+                jobj inheritance = json_object_new_string(S_name(dec -> u.classs.inheritance -> head));
                 json_object_object_add(info, "inheritance", inheritance);
             }
             break;
@@ -428,9 +428,9 @@ jobj JS_DecToJson(A_dec dec)
         case A_templateDec:
         {
             name = json_object_new_string("template");
-            jobj d = JS_DecToJson(dec -> u.template.dec);
+            jobj d = JS_DecToJson(dec -> u.templatee.dec);
             json_object_object_add(info, "dec", d);
-            jobj templateName = json_object_new_string(S_name(dec -> u.template.name));
+            jobj templateName = json_object_new_string(S_name(dec -> u.templatee.name));
             json_object_object_add(info, "templateName", templateName);
             break;
         }
@@ -506,22 +506,23 @@ jobj JS_TyToJson(A_ty ty)
 jobj JS_FieldToJson(A_field field)
 {
     jobj result = json_object_new_object();
-    jobj type = json_object_new_string("field");
-    json_object_object_add(result, "type", type);
+    
+    // jobj type = json_object_new_string("field");
+    json_object_object_add(result, "type", json_object_new_string("field"));
 
     if(!field)
         return result;
     jobj name = json_object_new_string(S_name(field -> name));
-    json_object_object_add(result, "kind", name);
     jobj typ = JS_TyToJson(field -> typ);
+    json_object_object_add(result, "kind", name);
     json_object_object_add(result, "typ", typ);
     return result;
 }
 jobj JS_ClassMemberToJson(A_classMember member)
 {
     jobj result = json_object_new_object();
-    jobj type = json_object_new_string("member");
-    json_object_object_add(result, "type", type);
+    // jobj type = json_object_new_string("member");
+    // json_object_object_add(result, "type", type);
 
     if(!member)
         return result;

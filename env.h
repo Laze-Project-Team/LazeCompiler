@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "errormsg.h"
 #include "types.h"
 #include "symbol.h"
@@ -7,10 +10,11 @@
 
 extern int funcs;
 typedef struct E_enventry_ *E_enventry;
-
+enum E_entryType{E_varentry, E_funcentry, E_classentry, E_methodentry, E_templateentry, E_polyentry};
+enum E_templateType{E_functemplate, E_classtemplate};
 struct E_enventry_ 
 {
-    enum {E_varentry, E_funcentry, E_classentry, E_methodentry, E_templateentry, E_polyentry} kind;
+    enum E_entryType kind;
     union
     {
         struct {
@@ -21,19 +25,19 @@ struct E_enventry_
             //Table of E_funcentry
             S_table methods;
             Ty_ty type;
-        } class;
+        } classs;
         struct {Ty_ty ty; Tr_access access;} var;
         struct {Ty_tyList formals; Ty_ty returnType; Tr_access result; Tr_level level; Temp_label label; int index; } func;
         struct 
         {
-            enum {E_functemplate, E_classtemplate} kind;
+            enum E_templateType kind;
             A_dec dec;
             S_symbol name;
-            //key: type, value: E_enventry for class and func
+            //key: type, value: E_enventry for classs and func
             S_table specific;
-            //the venv and tenv when the template was declared.
+            //the venv and tenv when the templatee was declared.
             S_table venv, tenv;
-        } template;
+        } templatee;
         Ty_ty poly;
     } u;
 };
@@ -50,3 +54,7 @@ E_enventry E_UpdateTemp(E_enventry entry, Ty_ty type);
 S_table E_base_tenv(void);
 //default functions
 S_table E_base_fenv(void);
+
+#ifdef __cplusplus
+}
+#endif

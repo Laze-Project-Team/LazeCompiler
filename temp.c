@@ -54,7 +54,7 @@ Temp_map Temp_name(void) {
 }
 
 Temp_map newMap(TAB_table tab, Temp_map under) {
-  Temp_map m = checked_malloc(sizeof(*m));
+  Temp_map m = (Temp_map)checked_malloc(sizeof(*m));
   m->tab=tab;
   m->under=under;
   return m;
@@ -78,7 +78,7 @@ void Temp_enter(Temp_map m, Temp_temp t, string s) {
 string Temp_look(Temp_map m, Temp_temp t) {
   string s;
   assert(m && m->tab);
-  s = TAB_search(m->tab, t);
+  s = (string)TAB_search(m->tab, t);
   if (s) return s;
   else if (m->under) return Temp_look(m->under, t);
   else return NULL;

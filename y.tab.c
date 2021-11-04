@@ -68,6 +68,9 @@
 /* First part of user prologue.  */
 #line 1 "lang.y"
 
+    #ifdef __cplusplus
+    extern "C" {
+    #endif
     #include <stdio.h>
     #include "util.h"
     #include "errormsg.h"
@@ -77,14 +80,18 @@
     #define YYDEBUG 1
 
     int yylex(void);
+    int yyparse(void);
     A_decList absyn_root;
 
     void yyerror(const char *s)
     {
         EM_error(EM_tokPos, "%s", s);
     }
+    #ifdef __cplusplus
+    }
+    #endif
 
-#line 88 "y.tab.c"
+#line 95 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -266,7 +273,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 20 "lang.y"
+#line 27 "lang.y"
 
     int pos;
     int shortt;
@@ -288,7 +295,7 @@ union YYSTYPE
     A_decList decList;
     A_classMemberList memList;
 
-#line 292 "y.tab.c"
+#line 299 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -670,19 +677,19 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    82,    82,    84,    85,    86,    87,    88,    89,    90,
-      91,    92,    93,    95,    96,    98,    99,   100,   101,   102,
-     103,   104,   106,   107,   108,   109,   110,   112,   113,   114,
-     115,   116,   117,   118,   120,   121,   122,   123,   125,   126,
-     127,   128,   129,   131,   132,   133,   134,   136,   140,   141,
-     142,   143,   144,   145,   146,   147,   148,   149,   150,   151,
-     155,   156,   158,   159,   161,   162,   163,   164,   165,   166,
-     167,   168,   169,   171,   172,   173,   175,   199,   200,   223,
-     225,   228,   229,   231,   233,   235,   236,   238,   239,   240,
-     241,   243,   244,   246,   247,   250,   251,   253,   254,   255,
-     256,   257,   259,   260,   261,   262,   263,   265,   266,   268,
-     270,   271,   274,   276,   277,   278,   280,   282,   283,   284,
-     285,   286
+       0,    89,    89,    91,    92,    93,    94,    95,    96,    97,
+      98,    99,   100,   102,   103,   105,   106,   107,   108,   109,
+     110,   111,   113,   114,   115,   116,   117,   119,   120,   121,
+     122,   123,   124,   125,   127,   128,   129,   130,   132,   133,
+     134,   135,   136,   138,   139,   140,   141,   143,   147,   148,
+     149,   150,   151,   152,   153,   154,   155,   156,   157,   158,
+     162,   163,   165,   166,   168,   169,   170,   171,   172,   173,
+     174,   175,   176,   178,   179,   180,   182,   206,   207,   230,
+     232,   235,   236,   238,   240,   242,   243,   245,   246,   247,
+     248,   250,   251,   253,   254,   257,   258,   260,   261,   262,
+     263,   264,   266,   267,   268,   269,   270,   272,   273,   275,
+     277,   278,   281,   283,   284,   285,   287,   289,   290,   291,
+     292,   293
 };
 #endif
 
@@ -1834,445 +1841,445 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 82 "lang.y"
+#line 89 "lang.y"
               {absyn_root = (yyvsp[0].decList);}
-#line 1840 "y.tab.c"
+#line 1847 "y.tab.c"
     break;
 
   case 3:
-#line 84 "lang.y"
+#line 91 "lang.y"
                        {(yyval.decList) = A_DecList((yyvsp[0].dec), NULL);}
-#line 1846 "y.tab.c"
+#line 1853 "y.tab.c"
     break;
 
   case 4:
-#line 85 "lang.y"
+#line 92 "lang.y"
                      {(yyval.decList) = A_DecList((yyvsp[0].dec), NULL);}
-#line 1852 "y.tab.c"
+#line 1859 "y.tab.c"
     break;
 
   case 5:
-#line 86 "lang.y"
+#line 93 "lang.y"
                        {(yyval.decList) = A_DecList((yyvsp[0].dec), NULL);}
-#line 1858 "y.tab.c"
+#line 1865 "y.tab.c"
     break;
 
   case 6:
-#line 87 "lang.y"
+#line 94 "lang.y"
                           {(yyval.decList) = A_DecList((yyvsp[0].dec), NULL);}
-#line 1864 "y.tab.c"
+#line 1871 "y.tab.c"
     break;
 
   case 7:
-#line 88 "lang.y"
+#line 95 "lang.y"
                        {(yyval.decList) = A_DecList((yyvsp[0].dec), NULL);}
-#line 1870 "y.tab.c"
+#line 1877 "y.tab.c"
     break;
 
   case 8:
-#line 89 "lang.y"
+#line 96 "lang.y"
                                {(yyval.decList) = A_DecList((yyvsp[-1].dec), (yyvsp[0].decList));}
-#line 1876 "y.tab.c"
+#line 1883 "y.tab.c"
     break;
 
   case 9:
-#line 90 "lang.y"
+#line 97 "lang.y"
                             {(yyval.decList) = A_DecList((yyvsp[-1].dec), (yyvsp[0].decList));}
-#line 1882 "y.tab.c"
+#line 1889 "y.tab.c"
     break;
 
   case 10:
-#line 91 "lang.y"
+#line 98 "lang.y"
                           {(yyval.decList) = A_DecList((yyvsp[-1].dec), (yyvsp[0].decList));}
-#line 1888 "y.tab.c"
+#line 1895 "y.tab.c"
     break;
 
   case 11:
-#line 92 "lang.y"
+#line 99 "lang.y"
                               {(yyval.decList) = A_DecList((yyvsp[-1].dec), (yyvsp[0].decList));}
-#line 1894 "y.tab.c"
+#line 1901 "y.tab.c"
     break;
 
   case 12:
-#line 93 "lang.y"
+#line 100 "lang.y"
                             {(yyval.decList) = A_DecList((yyvsp[-1].dec), (yyvsp[0].decList));}
-#line 1900 "y.tab.c"
+#line 1907 "y.tab.c"
     break;
 
   case 13:
-#line 95 "lang.y"
+#line 102 "lang.y"
                     {(yyval.dec) = (yyvsp[0].dec);}
-#line 1906 "y.tab.c"
+#line 1913 "y.tab.c"
     break;
 
   case 14:
-#line 96 "lang.y"
+#line 103 "lang.y"
                       {(yyval.dec) = (yyvsp[0].dec);}
-#line 1912 "y.tab.c"
+#line 1919 "y.tab.c"
     break;
 
   case 15:
-#line 98 "lang.y"
+#line 105 "lang.y"
                 {(yyval.exp) = A_IntExp(EM_tokPos, (yyvsp[0].ival));}
-#line 1918 "y.tab.c"
+#line 1925 "y.tab.c"
     break;
 
   case 16:
-#line 99 "lang.y"
+#line 106 "lang.y"
                      { (yyval.exp) = A_StringExp(EM_tokPos, (yyvsp[0].sval));}
-#line 1924 "y.tab.c"
+#line 1931 "y.tab.c"
     break;
 
   case 17:
-#line 100 "lang.y"
+#line 107 "lang.y"
                    { (yyval.exp) = A_RealExp(EM_tokPos, (yyvsp[0].fval));}
-#line 1930 "y.tab.c"
+#line 1937 "y.tab.c"
     break;
 
   case 18:
-#line 101 "lang.y"
+#line 108 "lang.y"
                   {(yyval.exp) = A_NilExp(EM_tokPos);}
-#line 1936 "y.tab.c"
+#line 1943 "y.tab.c"
     break;
 
   case 19:
-#line 102 "lang.y"
+#line 109 "lang.y"
                    {(yyval.exp) = A_CharExp(EM_tokPos, (yyvsp[0].cval));}
-#line 1942 "y.tab.c"
+#line 1949 "y.tab.c"
     break;
 
   case 20:
-#line 103 "lang.y"
+#line 110 "lang.y"
                     {(yyval.exp) = A_BoolExp(EM_tokPos, TRUE);}
-#line 1948 "y.tab.c"
+#line 1955 "y.tab.c"
     break;
 
   case 21:
-#line 104 "lang.y"
+#line 111 "lang.y"
                      {(yyval.exp) = A_BoolExp(EM_tokPos, FALSE);}
-#line 1954 "y.tab.c"
+#line 1961 "y.tab.c"
     break;
 
   case 22:
-#line 106 "lang.y"
+#line 113 "lang.y"
                            {(yyval.exp) = A_OpExp(EM_tokPos, A_plusOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 1960 "y.tab.c"
+#line 1967 "y.tab.c"
     break;
 
   case 23:
-#line 107 "lang.y"
+#line 114 "lang.y"
                             {(yyval.exp) = A_OpExp(EM_tokPos, A_minusOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 1966 "y.tab.c"
+#line 1973 "y.tab.c"
     break;
 
   case 24:
-#line 108 "lang.y"
+#line 115 "lang.y"
                             {(yyval.exp) = A_OpExp(EM_tokPos, A_timesOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 1972 "y.tab.c"
+#line 1979 "y.tab.c"
     break;
 
   case 25:
-#line 109 "lang.y"
+#line 116 "lang.y"
                              {(yyval.exp) = A_OpExp(EM_tokPos, A_divideOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 1978 "y.tab.c"
+#line 1985 "y.tab.c"
     break;
 
   case 26:
-#line 110 "lang.y"
+#line 117 "lang.y"
                           {(yyval.exp) = A_OpExp(EM_tokPos, A_modOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 1984 "y.tab.c"
+#line 1991 "y.tab.c"
     break;
 
   case 27:
-#line 112 "lang.y"
+#line 119 "lang.y"
                                      {(yyval.exp) = A_OpExp(EM_tokPos, A_minusOp, A_IntExp(0, 0), (yyvsp[0].exp));}
-#line 1990 "y.tab.c"
+#line 1997 "y.tab.c"
     break;
 
   case 28:
-#line 113 "lang.y"
+#line 120 "lang.y"
                          {(yyval.exp) = A_OpExp(EM_tokPos, A_eqOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 1996 "y.tab.c"
+#line 2003 "y.tab.c"
     break;
 
   case 29:
-#line 114 "lang.y"
+#line 121 "lang.y"
                           {(yyval.exp) = A_OpExp(EM_tokPos, A_neqOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 2002 "y.tab.c"
+#line 2009 "y.tab.c"
     break;
 
   case 30:
-#line 115 "lang.y"
+#line 122 "lang.y"
                          {(yyval.exp) = A_OpExp(EM_tokPos, A_geOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 2008 "y.tab.c"
+#line 2015 "y.tab.c"
     break;
 
   case 31:
-#line 116 "lang.y"
+#line 123 "lang.y"
                          {(yyval.exp) = A_OpExp(EM_tokPos, A_gtOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 2014 "y.tab.c"
+#line 2021 "y.tab.c"
     break;
 
   case 32:
-#line 117 "lang.y"
+#line 124 "lang.y"
                          {(yyval.exp) = A_OpExp(EM_tokPos, A_leOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 2020 "y.tab.c"
+#line 2027 "y.tab.c"
     break;
 
   case 33:
-#line 118 "lang.y"
+#line 125 "lang.y"
                          {(yyval.exp) = A_OpExp(EM_tokPos, A_ltOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 2026 "y.tab.c"
+#line 2033 "y.tab.c"
     break;
 
   case 34:
-#line 120 "lang.y"
+#line 127 "lang.y"
                                            {(yyval.exp) = A_CallExp(EM_tokPos, (yyvsp[-3].exp), (yyvsp[-1].expList));}
-#line 2032 "y.tab.c"
+#line 2039 "y.tab.c"
     break;
 
   case 35:
-#line 121 "lang.y"
+#line 128 "lang.y"
                                 {(yyval.exp) = (yyvsp[-1].exp);}
-#line 2038 "y.tab.c"
+#line 2045 "y.tab.c"
     break;
 
   case 36:
-#line 122 "lang.y"
+#line 129 "lang.y"
                           {(yyval.exp) = A_OpExp(EM_tokPos, A_andOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 2044 "y.tab.c"
+#line 2051 "y.tab.c"
     break;
 
   case 37:
-#line 123 "lang.y"
+#line 130 "lang.y"
                          {(yyval.exp) = A_OpExp(EM_tokPos, A_orOp, (yyvsp[-2].exp), (yyvsp[0].exp));}
-#line 2050 "y.tab.c"
+#line 2057 "y.tab.c"
     break;
 
   case 38:
-#line 125 "lang.y"
+#line 132 "lang.y"
                                {(yyval.exp) = A_AddressExp(EM_tokPos, (yyvsp[0].var));}
-#line 2056 "y.tab.c"
+#line 2063 "y.tab.c"
     break;
 
   case 39:
-#line 126 "lang.y"
+#line 133 "lang.y"
                                           {(yyval.exp) = A_SizeofExp(EM_tokPos, (yyvsp[-1].var));}
-#line 2062 "y.tab.c"
+#line 2069 "y.tab.c"
     break;
 
   case 40:
-#line 127 "lang.y"
+#line 134 "lang.y"
                                     {(yyval.exp) = A_ArrayExp(EM_tokPos, (yyvsp[-1].expList));}
-#line 2068 "y.tab.c"
+#line 2075 "y.tab.c"
     break;
 
   case 41:
-#line 128 "lang.y"
+#line 135 "lang.y"
                      {(yyval.exp) = (yyvsp[0].exp);}
-#line 2074 "y.tab.c"
+#line 2081 "y.tab.c"
     break;
 
   case 42:
-#line 129 "lang.y"
+#line 136 "lang.y"
                       {(yyval.exp) = (yyvsp[0].exp);}
-#line 2080 "y.tab.c"
+#line 2087 "y.tab.c"
     break;
 
   case 43:
-#line 131 "lang.y"
+#line 138 "lang.y"
                    { (yyval.exp) = A_VarExp(EM_tokPos, (yyvsp[0].var)); }
-#line 2086 "y.tab.c"
+#line 2093 "y.tab.c"
     break;
 
   case 44:
-#line 132 "lang.y"
+#line 139 "lang.y"
                          {(yyval.exp) = A_FieldExp(EM_tokPos, (yyvsp[-2].exp), (yyvsp[0].sym));}
-#line 2092 "y.tab.c"
+#line 2099 "y.tab.c"
     break;
 
   case 45:
-#line 133 "lang.y"
+#line 140 "lang.y"
                                     {(yyval.exp) = A_SubscriptExp(EM_tokPos, (yyvsp[-3].exp), (yyvsp[-1].exp));}
-#line 2098 "y.tab.c"
+#line 2105 "y.tab.c"
     break;
 
   case 46:
-#line 134 "lang.y"
+#line 141 "lang.y"
                                 {(yyval.exp) = A_ArrowFieldExp(EM_tokPos, (yyvsp[-2].exp), (yyvsp[0].sym));}
-#line 2104 "y.tab.c"
+#line 2111 "y.tab.c"
     break;
 
   case 47:
-#line 136 "lang.y"
+#line 143 "lang.y"
                                                                   {(yyval.exp) = A_FuncExp(EM_tokPos, (yyvsp[-6].fieldList), (yyvsp[-2].fieldList), (yyvsp[0].stm));}
-#line 2110 "y.tab.c"
+#line 2117 "y.tab.c"
     break;
 
   case 48:
-#line 140 "lang.y"
+#line 147 "lang.y"
                     {(yyval.stm) = A_DeclarationStm(EM_tokPos, (yyvsp[0].dec));}
-#line 2116 "y.tab.c"
+#line 2123 "y.tab.c"
     break;
 
   case 50:
-#line 142 "lang.y"
+#line 149 "lang.y"
                                {(yyval.stm) = (yyvsp[-1].stm);}
-#line 2122 "y.tab.c"
+#line 2129 "y.tab.c"
     break;
 
   case 51:
-#line 143 "lang.y"
+#line 150 "lang.y"
                       {(yyval.stm) = A_DeclarationStm(EM_tokPos, (yyvsp[0].dec));}
-#line 2128 "y.tab.c"
+#line 2135 "y.tab.c"
     break;
 
   case 52:
-#line 144 "lang.y"
+#line 151 "lang.y"
                  {(yyval.stm) = (yyvsp[0].stm);}
-#line 2134 "y.tab.c"
+#line 2141 "y.tab.c"
     break;
 
   case 53:
-#line 145 "lang.y"
+#line 152 "lang.y"
                     {(yyval.stm) = (yyvsp[0].stm);}
-#line 2140 "y.tab.c"
+#line 2147 "y.tab.c"
     break;
 
   case 54:
-#line 146 "lang.y"
+#line 153 "lang.y"
                   {(yyval.stm) = (yyvsp[0].stm);}
-#line 2146 "y.tab.c"
+#line 2153 "y.tab.c"
     break;
 
   case 55:
-#line 147 "lang.y"
+#line 154 "lang.y"
                               {(yyval.stm) = (yyvsp[-1].stm);}
-#line 2152 "y.tab.c"
+#line 2159 "y.tab.c"
     break;
 
   case 56:
-#line 148 "lang.y"
+#line 155 "lang.y"
                    {(yyval.stm) = A_DeclarationStm(EM_tokPos, A_FunctionDec(EM_tokPos, A_FundecList(A_Fundec(EM_tokPos, S_Symbol("loop"), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), (yyvsp[0].stm) -> u.loop.body), NULL)));}
-#line 2158 "y.tab.c"
+#line 2165 "y.tab.c"
     break;
 
   case 57:
-#line 149 "lang.y"
+#line 156 "lang.y"
                               {(yyval.stm) = A_BreakStm(EM_tokPos);}
-#line 2164 "y.tab.c"
+#line 2171 "y.tab.c"
     break;
 
   case 58:
-#line 150 "lang.y"
+#line 157 "lang.y"
                                  {(yyval.stm) = A_ContinueStm(EM_tokPos);}
-#line 2170 "y.tab.c"
+#line 2177 "y.tab.c"
     break;
 
   case 59:
-#line 151 "lang.y"
+#line 158 "lang.y"
                                     {(yyval.stm) = A_CompoundStm(EM_tokPos, (yyvsp[-1].stmList));}
-#line 2176 "y.tab.c"
+#line 2183 "y.tab.c"
     break;
 
   case 60:
-#line 155 "lang.y"
+#line 162 "lang.y"
                 {(yyval.stmList) = A_StmList((yyvsp[0].stm), NULL);}
-#line 2182 "y.tab.c"
+#line 2189 "y.tab.c"
     break;
 
   case 61:
-#line 156 "lang.y"
+#line 163 "lang.y"
                         {(yyval.stmList) = A_StmList((yyvsp[-1].stm), (yyvsp[0].stmList)); }
-#line 2188 "y.tab.c"
+#line 2195 "y.tab.c"
     break;
 
   case 62:
-#line 158 "lang.y"
+#line 165 "lang.y"
                    {(yyval.stm) = A_ReturnStm(EM_tokPos, NULL);}
-#line 2194 "y.tab.c"
+#line 2201 "y.tab.c"
     break;
 
   case 63:
-#line 159 "lang.y"
+#line 166 "lang.y"
                                        {(yyval.stm) = A_ReturnStm(EM_tokPos, (yyvsp[-1].exp));}
-#line 2200 "y.tab.c"
+#line 2207 "y.tab.c"
     break;
 
   case 64:
-#line 161 "lang.y"
+#line 168 "lang.y"
                {(yyval.type) = A_NameTy(EM_tokPos, (yyvsp[0].sym));}
-#line 2206 "y.tab.c"
+#line 2213 "y.tab.c"
     break;
 
   case 65:
-#line 162 "lang.y"
+#line 169 "lang.y"
                    {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("void"));}
-#line 2212 "y.tab.c"
+#line 2219 "y.tab.c"
     break;
 
   case 66:
-#line 163 "lang.y"
+#line 170 "lang.y"
                       {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("int"));}
-#line 2218 "y.tab.c"
+#line 2225 "y.tab.c"
     break;
 
   case 67:
-#line 164 "lang.y"
+#line 171 "lang.y"
                        {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("real"));}
-#line 2224 "y.tab.c"
+#line 2231 "y.tab.c"
     break;
 
   case 68:
-#line 165 "lang.y"
+#line 172 "lang.y"
                       {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("int"));}
-#line 2230 "y.tab.c"
+#line 2237 "y.tab.c"
     break;
 
   case 69:
-#line 166 "lang.y"
+#line 173 "lang.y"
                        {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("char"));}
-#line 2236 "y.tab.c"
+#line 2243 "y.tab.c"
     break;
 
   case 70:
-#line 167 "lang.y"
+#line 174 "lang.y"
                         {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("short"));}
-#line 2242 "y.tab.c"
+#line 2249 "y.tab.c"
     break;
 
   case 71:
-#line 168 "lang.y"
+#line 175 "lang.y"
                          {(yyval.type) = A_PointerTy(EM_tokPos, (yyvsp[0].type));}
-#line 2248 "y.tab.c"
+#line 2255 "y.tab.c"
     break;
 
   case 72:
-#line 169 "lang.y"
+#line 176 "lang.y"
                             {(yyval.type) = A_PolyTy(EM_tokPos, (yyvsp[-3].sym), (yyvsp[-1].type));}
-#line 2254 "y.tab.c"
+#line 2261 "y.tab.c"
     break;
 
   case 73:
-#line 171 "lang.y"
+#line 178 "lang.y"
                         {(yyval.fieldList) = A_FieldList(NULL, NULL);}
-#line 2260 "y.tab.c"
+#line 2267 "y.tab.c"
     break;
 
   case 74:
-#line 172 "lang.y"
+#line 179 "lang.y"
                    {(yyval.fieldList) = A_FieldList(NULL, NULL);}
-#line 2266 "y.tab.c"
+#line 2273 "y.tab.c"
     break;
 
   case 75:
-#line 173 "lang.y"
+#line 180 "lang.y"
                        {(yyval.fieldList) = (yyvsp[0].fieldList);}
-#line 2272 "y.tab.c"
+#line 2279 "y.tab.c"
     break;
 
   case 76:
-#line 175 "lang.y"
+#line 182 "lang.y"
                               {
                 if((yyvsp[0].var) -> kind == A_simpleVar)
                 {
@@ -2297,17 +2304,17 @@ yyreduce:
                     EM_error(EM_tokPos, "Not supported.");
                 }
             }
-#line 2301 "y.tab.c"
+#line 2308 "y.tab.c"
     break;
 
   case 77:
-#line 199 "lang.y"
+#line 206 "lang.y"
                                                                                   {(yyval.fieldList) = A_FieldList(A_Field(EM_tokPos, (yyvsp[-7].sym), A_FuncTy(EM_tokPos, (yyvsp[-5].fieldList), (yyvsp[-1].fieldList))), NULL);}
-#line 2307 "y.tab.c"
+#line 2314 "y.tab.c"
     break;
 
   case 78:
-#line 200 "lang.y"
+#line 207 "lang.y"
                                                {
                 if((yyvsp[-2].var) -> kind == A_simpleVar)
                 {
@@ -2331,269 +2338,269 @@ yyreduce:
                     EM_error(EM_tokPos, "Not supported.");
                 }
             }
-#line 2335 "y.tab.c"
+#line 2342 "y.tab.c"
     break;
 
   case 79:
-#line 223 "lang.y"
+#line 230 "lang.y"
                                                                                                  {(yyval.fieldList) = A_FieldList(A_Field(EM_tokPos, (yyvsp[-9].sym), A_FuncTy(EM_tokPos, (yyvsp[-7].fieldList), (yyvsp[-3].fieldList))), (yyvsp[0].fieldList));}
-#line 2341 "y.tab.c"
+#line 2348 "y.tab.c"
     break;
 
   case 80:
-#line 225 "lang.y"
+#line 232 "lang.y"
                                                                                     {(yyval.dec) = A_FunctionDec(EM_tokPos, A_FundecList(A_Fundec(EM_tokPos, (yyvsp[-8].sym), (yyvsp[-6].fieldList), (yyvsp[-2].fieldList), (yyvsp[0].stm)), NULL));}
-#line 2347 "y.tab.c"
+#line 2354 "y.tab.c"
     break;
 
   case 81:
-#line 228 "lang.y"
+#line 235 "lang.y"
                                  {(yyval.stm) = A_CallStm(EM_tokPos, (yyvsp[-2].exp), NULL);}
-#line 2353 "y.tab.c"
+#line 2360 "y.tab.c"
     break;
 
   case 82:
-#line 229 "lang.y"
+#line 236 "lang.y"
                                            {(yyval.stm) = A_CallStm(EM_tokPos, (yyvsp[-3].exp), (yyvsp[-1].expList));}
-#line 2359 "y.tab.c"
+#line 2366 "y.tab.c"
     break;
 
   case 83:
-#line 231 "lang.y"
+#line 238 "lang.y"
                                                                                                                                           {(yyval.dec) = A_FuncImport(EM_tokPos, (yyvsp[-15].sym), (yyvsp[-13].fieldList), (yyvsp[-9].fieldList), (yyvsp[-4].sval), (yyvsp[-2].sval));}
-#line 2365 "y.tab.c"
+#line 2372 "y.tab.c"
     break;
 
   case 84:
-#line 233 "lang.y"
+#line 240 "lang.y"
                                                              {(yyval.dec) = A_FuncExport(EM_tokPos, (yyvsp[-4].sym), (yyvsp[-2].sval));}
-#line 2371 "y.tab.c"
+#line 2378 "y.tab.c"
     break;
 
   case 85:
-#line 235 "lang.y"
+#line 242 "lang.y"
                         {(yyval.decList) = A_DecList((yyvsp[0].dec), NULL);}
-#line 2377 "y.tab.c"
+#line 2384 "y.tab.c"
     break;
 
   case 86:
-#line 236 "lang.y"
+#line 243 "lang.y"
                                      {(yyval.decList) = A_DecList((yyvsp[-1].dec), (yyvsp[0].decList));}
-#line 2383 "y.tab.c"
+#line 2390 "y.tab.c"
     break;
 
   case 87:
-#line 238 "lang.y"
+#line 245 "lang.y"
                         {(yyval.memList) = A_ClassMemFromDecList((yyvsp[0].decList), A_public);}
-#line 2389 "y.tab.c"
+#line 2396 "y.tab.c"
     break;
 
   case 88:
-#line 239 "lang.y"
+#line 246 "lang.y"
                                        {(yyval.memList) = A_ClassMemFromDecList((yyvsp[0].decList), A_public);}
-#line 2395 "y.tab.c"
+#line 2402 "y.tab.c"
     break;
 
   case 89:
-#line 240 "lang.y"
+#line 247 "lang.y"
                                           {(yyval.memList) = A_ClassMemFromDecList((yyvsp[0].decList), A_protected);}
-#line 2401 "y.tab.c"
+#line 2408 "y.tab.c"
     break;
 
   case 90:
-#line 241 "lang.y"
+#line 248 "lang.y"
                                         {(yyval.memList) = A_ClassMemFromDecList((yyvsp[0].decList), A_private);}
-#line 2407 "y.tab.c"
+#line 2414 "y.tab.c"
     break;
 
   case 91:
-#line 243 "lang.y"
+#line 250 "lang.y"
                     {(yyval.memList) = A_ClassMemFromTwoList((yyvsp[0].memList), NULL);}
-#line 2413 "y.tab.c"
+#line 2420 "y.tab.c"
     break;
 
   case 92:
-#line 244 "lang.y"
+#line 251 "lang.y"
                            {(yyval.memList) = A_ClassMemFromTwoList((yyvsp[-1].memList), (yyvsp[0].memList));}
-#line 2419 "y.tab.c"
+#line 2426 "y.tab.c"
     break;
 
   case 93:
-#line 246 "lang.y"
+#line 253 "lang.y"
                                               {(yyval.dec) = A_ClassDec(EM_tokPos, (yyvsp[-3].sym), (yyvsp[-1].memList), NULL);}
-#line 2425 "y.tab.c"
+#line 2432 "y.tab.c"
     break;
 
   case 94:
-#line 247 "lang.y"
+#line 254 "lang.y"
                                                              {(yyval.dec) = A_ClassDec(EM_tokPos, (yyvsp[-5].sym), (yyvsp[-1].memList), S_SymbolList((yyvsp[-3].sym), NULL));}
-#line 2431 "y.tab.c"
+#line 2438 "y.tab.c"
     break;
 
   case 95:
-#line 250 "lang.y"
+#line 257 "lang.y"
                                         {(yyval.dec) = A_TemplateDec(EM_tokPos, (yyvsp[-3].sym), (yyvsp[0].dec));}
-#line 2437 "y.tab.c"
+#line 2444 "y.tab.c"
     break;
 
   case 96:
-#line 251 "lang.y"
+#line 258 "lang.y"
                                            {(yyval.dec) = A_TemplateDec(EM_tokPos, (yyvsp[-3].sym), (yyvsp[0].dec));}
-#line 2443 "y.tab.c"
+#line 2450 "y.tab.c"
     break;
 
   case 97:
-#line 253 "lang.y"
+#line 260 "lang.y"
                               {(yyval.stm) = A_AssignStm(EM_tokPos, (yyvsp[-2].var), (yyvsp[0].exp), FALSE);}
-#line 2449 "y.tab.c"
+#line 2456 "y.tab.c"
     break;
 
   case 98:
-#line 254 "lang.y"
+#line 261 "lang.y"
                                {(yyval.stm) = A_AssignStm(EM_tokPos, (yyvsp[-2].var), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, (yyvsp[-2].var)), A_IntExp(EM_tokPos, 1)), FALSE);}
-#line 2455 "y.tab.c"
+#line 2462 "y.tab.c"
     break;
 
   case 99:
-#line 255 "lang.y"
+#line 262 "lang.y"
                                  {(yyval.stm) = A_AssignStm(EM_tokPos, (yyvsp[-2].var), A_OpExp(EM_tokPos, A_minusOp, A_VarExp(EM_tokPos, (yyvsp[-2].var)), A_IntExp(EM_tokPos, 1)), FALSE);}
-#line 2461 "y.tab.c"
+#line 2468 "y.tab.c"
     break;
 
   case 100:
-#line 256 "lang.y"
+#line 263 "lang.y"
                                      {(yyval.stm) = A_AssignStm(EM_tokPos, (yyvsp[-3].var), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, (yyvsp[-3].var)), (yyvsp[0].exp)), FALSE);}
-#line 2467 "y.tab.c"
+#line 2474 "y.tab.c"
     break;
 
   case 101:
-#line 257 "lang.y"
+#line 264 "lang.y"
                                       {(yyval.stm) = A_AssignStm(EM_tokPos, (yyvsp[-3].var), A_OpExp(EM_tokPos, A_minusOp, A_VarExp(EM_tokPos, (yyvsp[-3].var)), (yyvsp[0].exp)), FALSE);}
-#line 2473 "y.tab.c"
+#line 2480 "y.tab.c"
     break;
 
   case 102:
-#line 259 "lang.y"
+#line 266 "lang.y"
                                         {(yyval.dec) = A_VarDec(EM_tokPos, (yyvsp[-1].stm), (yyvsp[-3].type));}
-#line 2479 "y.tab.c"
+#line 2486 "y.tab.c"
     break;
 
   case 103:
-#line 260 "lang.y"
+#line 267 "lang.y"
                                          {(yyval.dec) = A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, (yyvsp[-1].var), NULL, TRUE), (yyvsp[-3].type));}
-#line 2485 "y.tab.c"
+#line 2492 "y.tab.c"
     break;
 
   case 104:
-#line 261 "lang.y"
+#line 268 "lang.y"
                                                         {(yyval.dec) = A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, (yyvsp[-3].var), NULL, TRUE), (yyvsp[-5].type));}
-#line 2491 "y.tab.c"
+#line 2498 "y.tab.c"
     break;
 
   case 105:
-#line 262 "lang.y"
+#line 269 "lang.y"
                                                             {(yyval.dec) = A_ObjectDec(EM_tokPos, (yyvsp[-6].type), (yyvsp[-4].sym), (yyvsp[-2].expList));}
-#line 2497 "y.tab.c"
+#line 2504 "y.tab.c"
     break;
 
   case 106:
-#line 263 "lang.y"
+#line 270 "lang.y"
                                       {(yyval.dec) = A_ObjectDec(EM_tokPos, (yyvsp[-3].type), (yyvsp[-1].sym), NULL);}
-#line 2503 "y.tab.c"
+#line 2510 "y.tab.c"
     break;
 
   case 107:
-#line 265 "lang.y"
+#line 272 "lang.y"
                                                                  {(yyval.stm) = A_IfStm(EM_tokPos, (yyvsp[-3].exp), (yyvsp[0].stm), NULL);}
-#line 2509 "y.tab.c"
+#line 2516 "y.tab.c"
     break;
 
   case 108:
-#line 266 "lang.y"
+#line 273 "lang.y"
                                                      {(yyval.stm) = A_IfStm(EM_tokPos, (yyvsp[-5].exp), (yyvsp[-2].stm), (yyvsp[0].stm));}
-#line 2515 "y.tab.c"
+#line 2522 "y.tab.c"
     break;
 
   case 109:
-#line 268 "lang.y"
+#line 275 "lang.y"
                                      {(yyval.stm) = A_WhileStm(EM_tokPos, (yyvsp[-3].exp), (yyvsp[0].stm));}
-#line 2521 "y.tab.c"
+#line 2528 "y.tab.c"
     break;
 
   case 110:
-#line 270 "lang.y"
+#line 277 "lang.y"
                                                                               {(yyval.stm) = A_ForStm(EM_tokPos, (yyvsp[-10].stm), (yyvsp[-6].exp), (yyvsp[-2].stm), (yyvsp[0].stm));}
-#line 2527 "y.tab.c"
+#line 2534 "y.tab.c"
     break;
 
   case 111:
-#line 271 "lang.y"
+#line 278 "lang.y"
                                            {(yyval.stm) = A_ForStm(EM_tokPos, A_DeclarationStm(EM_tokPos, A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_IntExp(EM_tokPos, 0), TRUE), A_NameTy(EM_tokPos, S_Symbol("int")))), A_OpExp(EM_tokPos, A_eqOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), (yyvsp[-3].exp)), A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), A_IntExp(EM_tokPos, 1)), FALSE), (yyvsp[0].stm));}
-#line 2533 "y.tab.c"
+#line 2540 "y.tab.c"
     break;
 
   case 112:
-#line 274 "lang.y"
+#line 281 "lang.y"
                      {(yyval.stm) = A_LoopStm(EM_tokPos, (yyvsp[0].stm)); }
-#line 2539 "y.tab.c"
+#line 2546 "y.tab.c"
     break;
 
   case 113:
-#line 276 "lang.y"
+#line 283 "lang.y"
                               {(yyval.expList) = A_ExpList((yyvsp[-2].exp), (yyvsp[0].expList));}
-#line 2545 "y.tab.c"
+#line 2552 "y.tab.c"
     break;
 
   case 114:
-#line 277 "lang.y"
+#line 284 "lang.y"
                   { (yyval.expList) = A_ExpList((yyvsp[0].exp), 0); }
-#line 2551 "y.tab.c"
+#line 2558 "y.tab.c"
     break;
 
   case 115:
-#line 278 "lang.y"
+#line 285 "lang.y"
               {(yyval.expList) = NULL;}
-#line 2557 "y.tab.c"
+#line 2564 "y.tab.c"
     break;
 
   case 116:
-#line 280 "lang.y"
+#line 287 "lang.y"
                { (yyval.sym) = S_Symbol((yyvsp[0].sval)); }
-#line 2563 "y.tab.c"
+#line 2570 "y.tab.c"
     break;
 
   case 117:
-#line 282 "lang.y"
+#line 289 "lang.y"
                {(yyval.var) = A_SimpleVar(EM_tokPos, (yyvsp[0].sym));}
-#line 2569 "y.tab.c"
+#line 2576 "y.tab.c"
     break;
 
   case 118:
-#line 283 "lang.y"
+#line 290 "lang.y"
                             {(yyval.var) = A_FieldVar(EM_tokPos, (yyvsp[-2].var), (yyvsp[0].sym));}
-#line 2575 "y.tab.c"
+#line 2582 "y.tab.c"
     break;
 
   case 119:
-#line 284 "lang.y"
+#line 291 "lang.y"
                            {(yyval.var) = A_DerefVar(EM_tokPos, (yyvsp[0].var));}
-#line 2581 "y.tab.c"
+#line 2588 "y.tab.c"
     break;
 
   case 120:
-#line 285 "lang.y"
+#line 292 "lang.y"
                                        { (yyval.var) = A_SubscriptVar(EM_tokPos, (yyvsp[-3].var), (yyvsp[-1].exp)); }
-#line 2587 "y.tab.c"
+#line 2594 "y.tab.c"
     break;
 
   case 121:
-#line 286 "lang.y"
+#line 293 "lang.y"
                                    {(yyval.var) = A_ArrowFieldVar(EM_tokPos, (yyvsp[-2].var), (yyvsp[0].sym));}
-#line 2593 "y.tab.c"
+#line 2600 "y.tab.c"
     break;
 
 
-#line 2597 "y.tab.c"
+#line 2604 "y.tab.c"
 
       default: break;
     }

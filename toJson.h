@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "env.h"
 
 typedef json_object *jobj;
@@ -18,3 +21,6 @@ jobj JS_ExpListToJson(A_expList list);
 jobj JS_DecListToJson(A_decList list);
 jobj JS_FieldListToJson(A_fieldList fieldList);
 jobj JS_ClassMemberListToJson(A_classMemberList memberList);
+#ifdef __cplusplus
+}
+#endif

@@ -1,4 +1,7 @@
 %{
+    #ifdef __cplusplus
+    extern "C" {
+    #endif
     #include <stdlib.h>
     #include <stdio.h>
     #include "util.h"
@@ -8,6 +11,8 @@
     #include "errormsg.h"
 
     int charPos = 1;
+    int yylex(void);
+    int yyparse(void);
 
     int yywrap(void)
     {
@@ -48,6 +53,9 @@
         }
         charPos += yytextLeng;
     }
+    #ifdef __cplusplus
+    }
+    #endif
 %}
 digits [0-9]+
 char [㐀-龯ぁ-んァ-ヶa-zA-Z_]

@@ -7,6 +7,9 @@
  *  well-typed arguments and call the TAB_ functions.
  */
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct TAB_table_ *TAB_table;
 
@@ -31,3 +34,6 @@ void *TAB_pop(TAB_table t);
 void TAB_foreach(TAB_table t, void (*show)(void *key, void *value));
 
 
+#ifdef __cplusplus
+}
+#endif

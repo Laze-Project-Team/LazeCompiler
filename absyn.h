@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "symbol.h"
 
 typedef int A_pos;
@@ -41,22 +44,23 @@ typedef enum
     A_orOp
 } A_oper;
 
+enum stmType
+{
+    A_compoundStm,
+    A_assignStm,
+    A_declarationStm,
+    A_ifStm,
+    A_whileStm,
+    A_forStm,
+    A_breakStm,
+    A_continueStm,
+    A_callStm,
+    A_returnStm,
+    A_loopStm
+};
 struct A_stm_
 {
-    enum
-    {
-        A_compoundStm,
-        A_assignStm,
-        A_declarationStm,
-        A_ifStm,
-        A_whileStm,
-        A_forStm,
-        A_breakStm,
-        A_continueStm,
-        A_callStm,
-        A_returnStm,
-        A_loopStm
-    } kind;
+    enum stmType kind;
     A_pos pos;
     union
     {
@@ -105,17 +109,17 @@ struct A_stm_
         
     } u;
 };
-
+enum varType
+{
+    A_simpleVar,
+    A_fieldVar,
+    A_subscriptVar,
+    A_derefVar,
+    A_arrowFieldVar
+};
 struct A_var_
 {
-    enum
-    {
-        A_simpleVar,
-        A_fieldVar,
-        A_subscriptVar,
-        A_derefVar,
-        A_arrowFieldVar
-    } kind;
+    enum varType kind;
     A_pos pos;
     bool lvalue;
     union
@@ -141,33 +145,33 @@ struct A_var_
         } arrowfield;
     } u;
 };
-
+enum expType
+{
+    A_varExp,
+    A_nilExp,
+    A_intExp,
+    A_stringExp,
+    A_callExp,
+    A_opExp,
+    A_recordExp,
+    A_seqExp,
+    A_assignExp,
+    A_ifExp,
+    A_arrayExp,
+    A_realExp,
+    A_boolExp,
+    A_charExp,
+    A_derefExp,
+    A_addressExp,
+    A_sizeofExp,
+    A_subscriptExp,
+    A_fieldExp,
+    A_arrowFieldExp,
+    A_funcExp
+};
 struct A_exp_
 {
-    enum
-    {
-        A_varExp,
-        A_nilExp,
-        A_intExp,
-        A_stringExp,
-        A_callExp,
-        A_opExp,
-        A_recordExp,
-        A_seqExp,
-        A_assignExp,
-        A_ifExp,
-        A_arrayExp,
-        A_realExp,
-        A_boolExp,
-        A_charExp,
-        A_derefExp,
-        A_addressExp,
-        A_sizeofExp,
-        A_subscriptExp,
-        A_fieldExp,
-        A_arrowFieldExp,
-        A_funcExp
-    } kind;
+    enum expType kind;
     A_pos pos;
     union
     {
@@ -245,20 +249,20 @@ struct A_exp_
         } func;
     } u;
 };
-
+enum decType
+{
+    A_functionDec,
+    A_varDec,
+    A_objectDec,
+    A_typeDec,
+    A_funcImportDec,
+    A_funcExportDec,
+    A_classDec,
+    A_templateDec
+};
 struct A_dec_
 {
-    enum
-    {
-        A_functionDec,
-        A_varDec,
-        A_objectDec,
-        A_typeDec,
-        A_funcImportDec,
-        A_funcExportDec,
-        A_classDec,
-        A_templateDec
-    } kind;
+    enum decType kind;
     A_pos pos;
     union
     {
@@ -290,7 +294,7 @@ struct A_dec_
             S_symbol name;
             A_classMemberList members;
             S_symbolList inheritance;
-        } class;
+        } classs;
         struct
         {
             A_ty className;
@@ -301,21 +305,21 @@ struct A_dec_
         {
             A_dec dec;
             S_symbol name;
-        } template;
+        } templatee;
     } u;
 };
-
+enum tyType
+{
+    A_nameTy,
+    A_recordTy,
+    A_arrayTy,
+    A_pointerTy,
+    A_funcTy,
+    A_polyTy
+};
 struct A_ty_
 {
-    enum
-    {
-        A_nameTy,
-        A_recordTy,
-        A_arrayTy,
-        A_pointerTy,
-        A_funcTy,
-        A_polyTy
-    } kind;
+    enum tyType kind;
     A_pos pos;
     union
     {
@@ -493,3 +497,6 @@ A_classMember A_ClassMember(A_classMemberSpecifier specifier, A_dec dec);
 A_classMemberList A_ClassMemberList(A_classMember head, A_classMemberList tail);
 A_classMemberList A_ClassMemFromDecList(A_decList decs, A_classMemberSpecifier specifier);
 A_classMemberList A_ClassMemFromTwoList(A_classMemberList list1, A_classMemberList list2);
+#ifdef __cplusplus
+}
+#endif

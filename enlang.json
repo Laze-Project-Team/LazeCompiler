@@ -1,0 +1,125 @@
+{
+    "tokens":{
+        "keywords":
+        {
+            "if":"if",
+            "then":"then",
+            "else":"else",
+            "from":"from",
+            "to":"to",
+            "break":"break",
+            "continue":"continue",
+            "function":"function",
+            "loop":"loop",
+            "inttype":"int",
+            "shorttype":"short",
+            "realtype":"double",
+            "chartype":"char",
+            "return":"return",
+            "type":"type",
+            "void":"void",
+            "nul":"nul",
+            "boolean":"boolean",
+            "true":"true",
+            "false":"false",
+            "jsload":"jsload",
+            "jsexport":"jsexport",
+            "sizeof":"sizeof",
+            "class":"class",
+            "public":"public",
+            "private":"private",
+            "protected":"protected",
+            "repeat":"repeat"
+        },
+        "int":"[0-9]",
+        "hex":"0x[0-9A-F]",
+        "char":"[㐀-龯ぁ-んァ-ヶa-zA-Z_ー]",
+        "comment":"\/\/.$",
+        "string":"\"((?:[^\\\\\"]|\\.)*)\""
+    },
+    "grammar":{
+        "exp":{
+            "add":"exp(1) + exp(2)",
+            "sub":"exp(1) - exp(2)",
+            "mul":"exp(1) * exp(2)",
+            "div":"exp(1) / exp(2)",
+            "mod":"exp(1) % exp(2)",
+            "eq":"exp(1) == exp(2)",
+            "neq":"exp(1) != exp(2)",
+            "ge":"exp(1) >= exp(2)",
+            "le":"exp(1) <= exp(2)",
+            "lt":"exp(1) < exp(2)",
+            "and":"exp(1) && exp(2)",
+            "or":"exp(1) || exp(2)",
+            "minus":"- exp",
+            "paren": "( exp )",
+            "call":"varExp ( explist )",
+            "address":"& var",
+            "sizeof":"sizeof ( var )",
+            "array":"[ explist ]",
+            "func": "( fieldlist(param) ) => ( fieldlist(result) ) stm",
+            "var": "varExp"
+        },
+        "stm":{
+            "assign":{
+                "normal":"varExp = exp ;",
+                "add":"varExp + = exp ;",
+                "sub":"varExp - = exp ;",
+                "mul":"varExp * = exp ;",
+                "div":"varExp / = exp ;",
+                "increment":"varExp + + ;",
+                "decrement":"varExp - - ;"
+            },
+            "if":{
+                "if":"if ( exp ) then stm",
+                "ifelse":"if ( exp ) then stm(then) else stm(else)"
+            },
+            "while":"( exp ) to stm",
+            "dec":"ty : var = exp ;",
+            "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
+            "return":{
+                "noexp":"return ;",
+                "exp":"return ( exp ) ;"
+            },
+            "call":"varExp ( explist ) ;",
+            "loop":"loop stm",
+            "break":"break ;",
+            "continue":"continue ;",
+            "compound":"{ stmlist }"
+        },
+        "dec":{
+            "var": {
+                "init":"ty : var = exp ;",
+                "noinit":"ty : var ;"
+            },
+            "object": "ty : id ( explist ) ;",
+            "class": {
+                "noinherit":"class : id { memlist }",
+                "inherit":"class <- id { memlist }"
+            },
+            "func": "function : id ( fieldlist(param) ) => ( fieldlist(result) ) stm",
+            "jsload": "function : id ( fieldlist(param) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) ;",
+            "jsexport": "jsexport ( id , string ) ;",
+            "template": {
+                "func":"type < id > : function : id ( fieldlist(param) ) => ( fieldlist(result) ) stm",
+                "class":"type < id > : class : id { memlist }"
+            }
+        },
+        "var": {
+            "simple":"id",
+            "field":"var . id",
+            "deref":"* var",
+            "subcript":"var [ exp ]",
+            "arrowfield":"var -> id"
+        },
+        "varExp": {
+            "var":"var",
+            "field":"exp . id",
+            "subcript":"exp(arrayname) [ exp(index) ]",
+            "arrowfield":"exp -> id"
+        },
+        "field": {
+            "noinit":"ty : var"
+        }
+    }
+}

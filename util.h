@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <assert.h>
 #include <stdio.h>
 #include <stddef.h>
@@ -6,6 +9,8 @@
 #include <wchar.h>
 #include <json-c/json.h>
 #include <locale.h>
+#include <regex.h>
+#include <string.h>
 
 struct Number
 {
@@ -19,7 +24,6 @@ struct Number
 typedef struct Number num;
 typedef char32_t *jpstring;
 typedef char *string;
-typedef int bool;
 
 #define TRUE 1
 #define FALSE 0
@@ -35,3 +39,6 @@ typedef struct U_boolList_ *U_boolList;
 struct U_boolList_ {bool head; U_boolList tail;};
 U_boolList U_BoolList(bool head, U_boolList tail);
 bool toByte(string fname, string tempFileName);
+#ifdef __cplusplus
+}
+#endif

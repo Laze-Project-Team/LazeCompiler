@@ -16,14 +16,14 @@ void *checked_malloc(int len)
 
 string String(char *s)
 {
-    string p = checked_malloc(strlen(s) + 1);
+    string p = (string)checked_malloc(strlen(s) + 1);
     strcpy(p, s);
     return p;
 }
 
 string concat(char *str1, char *str2)
 {
-    string result = checked_malloc((strlen(str1) + strlen(str2) + 1) * sizeof(char));
+    string result = (string)checked_malloc((strlen(str1) + strlen(str2) + 1) * sizeof(char));
     strcpy(result, str1);
     strcat(result, str2);
     result[strlen(str1) + strlen(str2)] = '\0';
@@ -37,7 +37,7 @@ bool copyFileContent(string file1, string file2)
     if(f1)
     {
         int size = getFileSize(f1);
-        content = checked_malloc(size + 1);
+        content = (string)checked_malloc(size + 1);
         fread(content, 1, size + 1, f1);
         content[size]='\0';
         FILE *f2 = fopen(file2, "w");
@@ -77,7 +77,7 @@ int getFileSize(FILE *file)
 
 U_boolList U_BoolList(bool head, U_boolList tail)
 {
-    U_boolList list = checked_malloc(sizeof(*list));
+    U_boolList list = (U_boolList)checked_malloc(sizeof(*list));
     list->head = head;
     list->tail = tail;
     return list;

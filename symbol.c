@@ -6,7 +6,7 @@
 struct S_symbol_ {string name; S_symbol next;};
 
 static S_symbol mksymbol(string name, S_symbol next)
-{S_symbol s=checked_malloc(sizeof(*s));
+{S_symbol s=(S_symbol)checked_malloc(sizeof(*s));
  s->name=name; s->next=next;
  return s;
 }
@@ -38,7 +38,7 @@ S_symbol S_Symbol(string name)
 }
 S_symbolList S_SymbolList(S_symbol head, S_symbolList tail)
 {
-  S_symbolList p = checked_malloc(sizeof(*p));
+  S_symbolList p = (S_symbolList)checked_malloc(sizeof(*p));
   p -> head = head;
   p -> tail = tail;
   return p;
@@ -70,7 +70,7 @@ void S_beginScope(S_table t)
 
 void S_endScope(S_table t)
 {S_symbol s;
-  do s=TAB_pop(t);
+  do s=(S_symbol)TAB_pop(t);
   while (s != &marksym);
 }
 

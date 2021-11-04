@@ -3,6 +3,9 @@
  *
  */
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "util.h"
 #include "table.h"
 
@@ -42,3 +45,6 @@ void S_beginScope(S_table t);
 void S_endScope(S_table t);
 
 void S_dump(S_table t, void (*show)(S_symbol sym, void *binding));
+#ifdef __cplusplus
+}
+#endif

@@ -24,7 +24,7 @@ void includeFile(string includeStr, string file)
     if(include)
     {
         length = getFileSize(include);
-        buffer = checked_malloc(length + 1);
+        buffer = (string)checked_malloc(length + 1);
         fread(buffer, 1, length + 1, include);
         buffer[length] = '\0';
         // printf("%d %d", length, strlen(buffer));
@@ -34,8 +34,8 @@ void includeFile(string includeStr, string file)
         if(mainFile)
         {
             mainLength = getFileSize(mainFile);
-            result = checked_malloc(length + mainLength + 1);
-            mainStr = checked_malloc(mainLength);
+            result = (string)checked_malloc(length + mainLength + 1);
+            mainStr = (string)checked_malloc(mainLength);
             fread(mainStr, 1, mainLength + 2, mainFile);
             mainStr[mainLength] = '\0';
             // printf("\n\n%s\n", mainStr);

@@ -4,7 +4,7 @@ int funcs;
 
 E_enventry E_VarEntry(Tr_access access, Ty_ty ty)
 {
-    E_enventry p = checked_malloc(sizeof(*p));
+    E_enventry p = (E_enventry)checked_malloc(sizeof(*p));
     p -> kind = E_varentry;
     p -> u.var.ty = ty;
     p -> u.var.access = access;
@@ -12,7 +12,7 @@ E_enventry E_VarEntry(Tr_access access, Ty_ty ty)
 }
 E_enventry E_FuncEntry(Tr_level level, Temp_label label, Ty_tyList params, Tr_access result, Ty_ty returnType)
 {
-    E_enventry p = checked_malloc(sizeof(*p));
+    E_enventry p = (E_enventry)checked_malloc(sizeof(*p));
     p -> kind = E_funcentry;
     p -> u.func.formals = params;
     p -> u.func.result = result;
@@ -25,37 +25,37 @@ E_enventry E_FuncEntry(Tr_level level, Temp_label label, Ty_tyList params, Tr_ac
 }
 E_enventry E_ClassEntry(S_symbol name, int size, S_table varTypes, S_table methods, Ty_ty type)
 {
-    E_enventry p = checked_malloc(sizeof(*p));
+    E_enventry p = (E_enventry)checked_malloc(sizeof(*p));
     p -> kind = E_classentry;
-    p -> u.class.name = name;
-    p -> u.class.size = size;
-    p -> u.class.varTypes = varTypes;
-    p -> u.class.methods = methods;
-    p -> u.class.type = type;
+    p -> u.classs.name = name;
+    p -> u.classs.size = size;
+    p -> u.classs.varTypes = varTypes;
+    p -> u.classs.methods = methods;
+    p -> u.classs.type = type;
     return p;
 }
 E_enventry E_TemplateEntry(S_symbol name, A_dec dec)
 {
-    E_enventry p = checked_malloc(sizeof(*p));
+    E_enventry p = (E_enventry)checked_malloc(sizeof(*p));
     p -> kind = E_templateentry;
-    p -> u.template.dec = dec;
+    p -> u.templatee.dec = dec;
     if(dec -> kind == A_functionDec)
     {
-        p -> u.template.kind = E_functemplate;
+        p -> u.templatee.kind = E_functemplate;
     }
     else if(dec -> kind == A_classDec)
     {
-        p -> u.template.kind == E_classtemplate;
+        p -> u.templatee.kind == E_classtemplate;
     }
-    p -> u.template.name = name;
-    p -> u.template.specific = S_empty();
-    p -> u.template.venv = S_empty();
-    p -> u.template.tenv = S_empty();
+    p -> u.templatee.name = name;
+    p -> u.templatee.specific = S_empty();
+    p -> u.templatee.venv = S_empty();
+    p -> u.templatee.tenv = S_empty();
     return p;
 }
 E_enventry E_PolyEntry(Ty_ty type)
 {
-    E_enventry p = checked_malloc(sizeof(*p));
+    E_enventry p = (E_enventry)checked_malloc(sizeof(*p));
     p -> kind = E_polyentry;
     p -> u.poly = type;
     return p;

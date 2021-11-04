@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "util.h"
 typedef struct intList { int i; struct intList *rest; } *IntList;
 IntList intList(int i, IntList rest);
@@ -13,3 +16,6 @@ void debug(int, string, ...);
 void EM_impossible(string, ...);
 void EM_reset(string filename);
 void EM_prereset(string filename);
+#ifdef __cplusplus
+}
+#endif

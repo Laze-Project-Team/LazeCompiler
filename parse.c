@@ -9,7 +9,7 @@
 #include "errormsg.h"
 #include "parse.h"
 
-extern int yyparse(void);
+extern "C" int yyparse(void);
 extern int preparse(void);
 extern A_decList absyn_root;
 extern Pre_preprocessorList ppListRoot;

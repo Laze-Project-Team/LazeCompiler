@@ -35,7 +35,7 @@ static struct Ty_ty_ tychar = {Ty_char, 4};
 Ty_ty Ty_Char(void) {return &tychar;}
 
 Ty_ty Ty_Record(Ty_fieldList fields)
-{Ty_ty p = checked_malloc(sizeof(*p));
+{Ty_ty p = (Ty_ty)checked_malloc(sizeof(*p));
  p->kind=Ty_record;
  p->u.record=fields;
  return p;
@@ -43,7 +43,7 @@ Ty_ty Ty_Record(Ty_fieldList fields)
 
 Ty_ty Ty_Array(Ty_ty ty, int size)
 {
-  Ty_ty p = checked_malloc(sizeof(*p));
+  Ty_ty p = (Ty_ty)checked_malloc(sizeof(*p));
   p->kind=Ty_array;
   p -> size = ty -> size * (size);
   // printf("%d size array\n", p -> size);
@@ -53,7 +53,7 @@ Ty_ty Ty_Array(Ty_ty ty, int size)
 }
 
 Ty_ty Ty_Name(S_symbol sym, int classSize)
-{Ty_ty p = checked_malloc(sizeof(*p));
+{Ty_ty p = (Ty_ty)checked_malloc(sizeof(*p));
  p->kind=Ty_name;
  p -> size = classSize;
  p->u.name.sym=sym;
@@ -62,7 +62,7 @@ Ty_ty Ty_Name(S_symbol sym, int classSize)
 
 Ty_ty Ty_Pointer(Ty_ty ty)
 {
-  Ty_ty p = checked_malloc(sizeof(*p));
+  Ty_ty p = (Ty_ty)checked_malloc(sizeof(*p));
   p -> kind = Ty_pointer;
   p -> size = 4;
   p -> u.pointer = ty;
@@ -71,7 +71,7 @@ Ty_ty Ty_Pointer(Ty_ty ty)
 
 Ty_ty Ty_Poly(S_symbol name, Ty_ty typeParam, int size)
 {
-  Ty_ty p = checked_malloc(sizeof(*p));
+  Ty_ty p = (Ty_ty)checked_malloc(sizeof(*p));
   p -> kind = Ty_poly;
   p -> size = size;
   p -> u.poly.name = name;
@@ -81,7 +81,7 @@ Ty_ty Ty_Poly(S_symbol name, Ty_ty typeParam, int size)
 
 Ty_ty Ty_Func(Ty_tyList params, Ty_ty result, int typeIndex)
 {
-  Ty_ty p = checked_malloc(sizeof(*p));
+  Ty_ty p = (Ty_ty)checked_malloc(sizeof(*p));
   p -> kind = Ty_func;
   p -> size = 4;
   p -> u.func.params = params;
@@ -91,21 +91,21 @@ Ty_ty Ty_Func(Ty_tyList params, Ty_ty result, int typeIndex)
 }
 
 Ty_tyList Ty_TyList(Ty_ty head, Ty_tyList tail)
-{Ty_tyList p = checked_malloc(sizeof(*p));
+{Ty_tyList p = (Ty_tyList)checked_malloc(sizeof(*p));
  p->head=head;
  p->tail=tail;
  return p;
 }
 
 Ty_field Ty_Field(S_symbol name, Ty_ty ty)
-{Ty_field p = checked_malloc(sizeof(*p));
+{Ty_field p = (Ty_field)checked_malloc(sizeof(*p));
  p->name=name;
  p->ty=ty;
  return p;
 }
 
 Ty_fieldList Ty_FieldList(Ty_field head, Ty_fieldList tail)
-{Ty_fieldList p = checked_malloc(sizeof(*p));
+{Ty_fieldList p = (Ty_fieldList)checked_malloc(sizeof(*p));
  p->head=head;
  p->tail=tail;
  return p;
@@ -113,7 +113,7 @@ Ty_fieldList Ty_FieldList(Ty_field head, Ty_fieldList tail)
 
 Ty_member Ty_Member(int offset, Ty_ty ty, Ty_accessSpecifier specifier)
 {
-  Ty_member p = checked_malloc(sizeof(*p));
+  Ty_member p = (Ty_member)checked_malloc(sizeof(*p));
   p -> offset = offset;
   p -> ty = ty;
   p -> accessSpecifier = specifier;
@@ -122,7 +122,7 @@ Ty_member Ty_Member(int offset, Ty_ty ty, Ty_accessSpecifier specifier)
 
 Ty_memberList Ty_MemberList(Ty_member head, Ty_memberList tail)
 {
-  Ty_memberList p = checked_malloc(sizeof(*p));
+  Ty_memberList p = (Ty_memberList)checked_malloc(sizeof(*p));
   p -> head = head;
   p -> tail = tail;
   return p;

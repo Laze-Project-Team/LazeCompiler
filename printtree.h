@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "semantic.h"
 
 void Pr_printTree(T_moduleList list, string fileName);//
@@ -12,3 +15,6 @@ void Pr_printBiOp(T_binOp oper, T_type type, FILE *file);//
 void Pr_printUniOp(T_uniOp oper, FILE *file);//
 void Pr_printAExp(A_exp exp, FILE *file);//
 void Pr_printModPrototype(T_module module, FILE *file);
+#ifdef __cplusplus
+}
+#endif

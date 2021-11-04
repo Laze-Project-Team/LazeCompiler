@@ -7,7 +7,7 @@ int memorySize;
 
 static F_access InFrame(int offset, Ty_ty type, bool isParam)
 {
-    F_access p = checked_malloc(sizeof(*p));
+    F_access p = (F_access)checked_malloc(sizeof(*p));
     p -> kind = inFrame;
     p -> type = type;
     if(isParam)
@@ -20,7 +20,7 @@ static F_access InFrame(int offset, Ty_ty type, bool isParam)
 }
 static F_access InLocal(int index, Ty_ty type, bool isParam)
 {
-    F_access p = checked_malloc(sizeof(*p));
+    F_access p = (F_access)checked_malloc(sizeof(*p));
     p -> kind = inLocal;
     p -> u.index = index;
     p -> type = type;
@@ -29,7 +29,7 @@ static F_access InLocal(int index, Ty_ty type, bool isParam)
 }
 static F_access InGlobal(int index)
 {
-    F_access p = checked_malloc(sizeof(*p));
+    F_access p = (F_access)checked_malloc(sizeof(*p));
     p -> kind = inGlobal;
     p -> u.index = index;
     p -> isParam = FALSE;
@@ -52,7 +52,7 @@ void toInFrame(F_access access, F_frame frame)
 F_accessList boolToF_access(F_frame f, U_boolList boolList, Ty_tyList types)
 {
     // f -> locals = 0;
-    F_accessList list = checked_malloc(sizeof(*list));
+    F_accessList list = (F_accessList)checked_malloc(sizeof(*list));
     F_accessList retValue = list;
     list -> head =  NULL;
     list -> tail = NULL;
@@ -76,7 +76,7 @@ F_accessList boolToF_access(F_frame f, U_boolList boolList, Ty_tyList types)
                 list -> head -> paramIndex = i;
                 i++;
             }
-            list -> tail = checked_malloc(sizeof(*list));
+            list -> tail = (F_accessList)checked_malloc(sizeof(*list));
             list = list -> tail;
             list -> head = NULL;
             list -> tail = NULL;
@@ -86,7 +86,7 @@ F_accessList boolToF_access(F_frame f, U_boolList boolList, Ty_tyList types)
 }
 F_frame F_newFrame(Temp_label name, U_boolList list, Ty_tyList params, bool isMethod)
 {
-    F_frame frame = checked_malloc(sizeof(*frame));
+    F_frame frame = (F_frame)checked_malloc(sizeof(*frame));
     frame -> name = name;
     if(isMethod){
     //   printf("%s %d wasm_frame.ccccccccccccccccccc\n", S_name(frame->name), isMethod);
@@ -96,7 +96,7 @@ F_frame F_newFrame(Temp_label name, U_boolList list, Ty_tyList params, bool isMe
         frame -> locals = 0;
     frame -> offset = memorySize;
     frame -> frameSize = 0;
-    frame -> localsTypeTemp = checked_malloc(sizeof(*(frame -> localsTypeTemp)));
+    frame -> localsTypeTemp = (Ty_tyList)checked_malloc(sizeof(*(frame -> localsTypeTemp)));
     frame -> localsTypeTemp -> head = NULL;
     frame -> localsTypeTemp -> tail = NULL;
     frame -> localsType = frame -> localsTypeTemp;
@@ -143,7 +143,7 @@ F_access F_allocLocal(F_frame f, bool escape, Ty_ty type, bool isLocal, bool isP
         if(isLocal)
         {
             f -> localsTypeTemp -> head = access -> type;
-            f -> localsTypeTemp -> tail = checked_malloc(sizeof(*(f -> localsTypeTemp)));
+            f -> localsTypeTemp -> tail = (Ty_tyList)checked_malloc(sizeof(*(f -> localsTypeTemp)));
             f -> localsTypeTemp = f -> localsTypeTemp -> tail;
             f -> localsTypeTemp -> head = NULL;
             f -> localsTypeTemp -> tail = NULL;

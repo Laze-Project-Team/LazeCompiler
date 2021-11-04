@@ -3,6 +3,9 @@
  *
  */
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "symbol.h"
 #include "table.h"
 
@@ -30,4 +33,6 @@ string Temp_look(Temp_map m, Temp_temp t);
 void Temp_dumpMap(FILE *out, Temp_map m);
 
 Temp_map Temp_name(void);
-
+#ifdef __cplusplus
+}
+#endif

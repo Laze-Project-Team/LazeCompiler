@@ -85,8 +85,8 @@ void Pr_printModule(T_module module, FILE *file)
         }
         case T_export:
         {
-            fprintf(file, "(export \"%s\" ", module -> u.export.name);
-            fprintf(file, "(func %d)", module -> u.export.export);
+            fprintf(file, "(export \"%s\" ", module -> u.exportt.name);
+            fprintf(file, "(func %d)", module -> u.exportt.exportt);
             fprintf(file, ")");
             break;
         }

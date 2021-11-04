@@ -1,0 +1,87 @@
+0 fieldlist.null:  
+1 stmlist.null:
+2 explist.null:
+3 exp.true: true
+4 stmlist.stm: stm
+5 exp.real: real
+6 exp.string: string
+7 exp.char: char
+8 ty.poly: id < ty >
+9 ty.real: realtype
+10 fieldlist.fieldlist: fieldlist , field
+11 ty.void: void
+12 varExp.var: var
+13 exp.or: exp || exp
+14 declist.null:
+15 exp.div: exp / exp
+16 var.simple: id
+17 exp.neq: exp != exp
+18 exp.le: exp <= exp
+19 exp.func: ( fieldlist ) => ( fieldlist ) stm
+20 var.deref: * var
+21 exp.call: varExp ( explist )
+22 stm.return.noexp: return ;
+23 ty.bool: boolean
+24 exp.sizeof: sizeof ( var )
+25 exp.mod: exp % exp
+26 exp.eq: exp == exp
+27 exp.array: [ explist ]
+28 var.field: var . id
+29 ty.short: shorttype
+30 stm.while: ( exp ) to stm
+31 exp.ge: exp >= exp
+32 start: declist
+33 dec.class.noinherit: class : id { memlist }
+34 dec.var.noinit: ty : var ;
+35 stmlist.stmlist: stmlist stm
+36 exp.lt: exp < exp
+37 stm.assign.mul: varExp * = exp ;
+38 dec.template.func: type < id > : function : id ( fieldlist ) => ( fieldlist ) stm
+39 stm.call: varExp ( explist ) ;
+40 fieldlist.field: field
+41 varExp.subcript: exp [ exp ]
+42 stm.compound: { stmlist }
+43 dec.var.init: ty : var = exp ;
+44 ty.name: id
+45 dec.template.class: type < id > : class : id { memlist }
+46 dec.jsload: function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+47 dec.class.inherit: class <- id { memlist }
+48 dec.object: ty : id ( explist ) ;
+49 declist.declist: declist dec
+50 ty.char: chartype
+51 exp.add: exp + exp
+52 stm.for: ( stm ) from ( exp ) to ( stm ) stm
+53 stm.break: break ;
+54 exp.address: & var
+55 explist.exp: exp
+56 exp.false: false
+57 exp.minus: - exp
+58 exp.sub: exp - exp
+59 exp.var: varExp
+60 stm.assign.div: varExp / = exp ;
+61 ty.pointer: * ty
+62 stm.assign.sub: varExp - = exp ;
+63 declist.dec: dec
+64 stm.assign.add: varExp + = exp ;
+65 stm.assign.increment: varExp + + ;
+66 stm.dec: ty : var = exp ;
+67 stm.assign.normal: varExp = exp ;
+68 ty.int: inttype
+69 stm.continue: continue ;
+70 explist.explist: explist , exp
+71 exp.int: int
+72 stm.if.if: if ( exp ) then stm
+73 varExp.arrowfield: exp -> id
+74 stm.if.ifelse: if ( exp ) then stm else stm
+75 stm.loop: loop stm
+76 exp.and: exp && exp
+77 exp.mul: exp * exp
+78 stm.return.exp: return ( exp ) ;
+79 dec.jsexport: jsexport ( id , string ) ;
+80 var.arrowfield: var -> id
+81 stm.assign.decrement: varExp - - ;
+82 dec.func: function : id ( fieldlist ) => ( fieldlist ) stm
+83 field.noinit: ty : var
+84 var.subcript: var [ exp ]
+85 exp.paren: ( exp )
+86 varExp.field: exp . id

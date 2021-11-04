@@ -715,9 +715,9 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
     {
         struct expty varExpty = transVar(venv, tenv, v -> u.field.var, level, isLoop, reverse, FALSE);
         if(varExpty.ty -> kind != Ty_name)
-            EM_error(v -> pos, "Cannot access a member of a non-class object.");
+            EM_error(v -> pos, "Cannot access a member of a non-classs object.");
         E_enventry classEntry = S_look(tenv, varExpty.ty -> u.name.sym);
-        Ty_member varEntry = S_look(classEntry -> u.class.varTypes, v -> u.field.sym);
+        Ty_member varEntry = S_look(classEntry -> u.classs.varTypes, v -> u.field.sym);
         return expTy(Tr_DerefExp(v -> pos, Tr_OpExp(v -> pos, T_i32, T_add, varExpty.exp -> u.exp, Tr_AddrExp(v -> pos, varEntry -> offset)->u.exp) -> u.exp, T_i32), varEntry -> ty);
     }
     case A_subscriptVar:
@@ -1506,7 +1506,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         S_table varTypes = S_empty();
         S_table methods = S_empty();
         int classSize = 0;
-        for(A_classMemberList list = d -> u.class.members; list -> tail; list = list -> tail)
+        for(A_classMemberList list = d -> u.classs.members; list -> tail; list = list -> tail)
         {
             // printf("debug\n");
             if(list -> head -> dec -> kind == A_varDec)
@@ -1523,9 +1523,9 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                 classSize += varType -> size;
             }
         }
-        S_enter(tenv, d -> u.class.name, E_ClassEntry(d -> u.class.name, classSize, varTypes, methods));
+        S_enter(tenv, d -> u.classs.name, E_ClassEntry(d -> u.classs.name, classSize, varTypes, methods));
         T_moduleList modlist = checked_malloc(sizeof(*modlist));
-        for(A_classMemberList list = d -> u.class.members; list -> tail; list = list -> tail)
+        for(A_classMemberList list = d -> u.classs.members; list -> tail; list = list -> tail)
         {
             if(list -> head -> dec -> kind == A_functionDec)
             {

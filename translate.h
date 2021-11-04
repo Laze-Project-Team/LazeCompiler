@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "util.h"
 #include "frame.h"
 #include "wasm_frame.h"
@@ -48,11 +51,11 @@ struct Tr_level_
     F_frame frame;
     Tr_accessList formals;
     bool isMethod;
-    Ty_ty class;
+    Ty_ty classs;
 };
 
 Tr_level Tr_outermost(void);
-Tr_level Tr_newLevel(Tr_level parent, Temp_label name, U_boolList formals, Ty_tyList params, bool isMethod, Ty_ty class);
+Tr_level Tr_newLevel(Tr_level parent, Temp_label name, U_boolList formals, Ty_tyList params, bool isMethod, Ty_ty classs);
 Tr_accessList Tr_formals(Tr_level level);
 Tr_access Tr_allocLocal(Tr_level level, bool escape, Ty_ty type);
 
@@ -87,3 +90,6 @@ Tr_exp Tr_SeqExp(A_pos pos, A_expList seq);
 Tr_exp Tr_AssignExp(A_pos pos, A_var var, A_exp exp);
 Tr_exp Tr_IfExp(A_pos pos, T_type type, T_exp test, T_exp then, T_exp elsee);
 Tr_exp Tr_ArrayExp(A_pos pos, T_expList list);
+#ifdef __cplusplus
+}
+#endif

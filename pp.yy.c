@@ -736,7 +736,7 @@ char *yytext;
     #include "preprocessor.h"
     #include "preprocessor.tab.h"
 
-    int prewrap(void)
+    extern "C" int prewrap(void)
     {
         return 1;
     }

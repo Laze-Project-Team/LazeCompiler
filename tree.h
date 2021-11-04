@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "absyn.h"
 #include "util.h"
 
@@ -37,11 +40,11 @@ struct T_typeList_
     T_type head;
     T_typeList tail;
 };
-
+enum T_stmType { T_ifStm, T_blockStm, T_loopStm, T_binOpStm, T_setLocalStm,
+             T_setGlobalStm, T_seqStm, T_storeStm, T_breakStm, T_callStm, T_returnStm, T_copyStm, T_callIndirectStm };
 struct T_stm_
 {
-    enum { T_ifStm, T_blockStm, T_loopStm, T_binOpStm, T_setLocalStm,
-             T_setGlobalStm, T_seqStm, T_storeStm, T_breakStm, T_callStm, T_returnStm, T_copyStm, T_callIndirectStm } kind;
+    enum T_stmType kind;
     union
     {
         struct { T_exp test; T_type result; T_stm then; T_stm elsee;} iff;
@@ -59,12 +62,12 @@ struct T_stm_
         struct {T_exp dest; T_exp src; T_exp size; } copy;
     } u;
 };
-
+enum T_expType { T_binOpExp, T_uniOpExp, T_constExp,
+         T_getLocalExp, T_getGlobalExp, T_callExp, 
+         T_ifExp, T_convertExp, T_loadExp, T_seqExp };
 struct T_exp_
 {
-    enum { T_binOpExp, T_uniOpExp, T_constExp,
-         T_getLocalExp, T_getGlobalExp, T_callExp, 
-         T_ifExp, T_convertExp, T_loadExp, T_seqExp } kind;
+    enum T_expType kind;
     T_type type;
     union
     {
@@ -91,11 +94,11 @@ struct T_fundec_
     string name;
     T_exp var;
 };
-
+enum T_modType { T_typee, T_func, T_table, T_mem, T_global, T_elem, T_data,
+             T_start, T_import, T_export, T_seqMod };
 struct T_module_
 {
-    enum { T_typee, T_func, T_table, T_mem, T_global, T_elem, T_data,
-             T_start, T_import, T_export, T_seqMod } kind;
+    enum T_modType kind;
     union
     {
         T_fundec func;
@@ -106,7 +109,7 @@ struct T_module_
         struct { T_exp exp; string data; } data;
 
         struct { string module; string name; T_module import; } import;
-        struct { string name; int export; } export;
+        struct { string name; int exportt; } exportt;
         T_moduleList seq;
         struct { T_exp offset; T_moduleList funcs; } elem;
         struct {int size;} table;
@@ -146,7 +149,7 @@ T_module T_GlobalMod(T_type type, T_exp exp);
 T_module T_MemMod(int pageSize);
 T_module T_DataMod(T_exp exp, string data);
 T_module T_ImportMod(string module, string name, T_module import);
-T_module T_ExportMod(string name, int export);
+T_module T_ExportMod(string name, int exportt);
 T_module T_SeqMod(T_moduleList list);
 T_module T_ElemMod(T_exp offset, T_moduleList funcs);
 T_module T_TableMod(int size);
@@ -156,3 +159,6 @@ T_stmList T_StmList(T_stm head, T_stmList tail);
 T_expList T_ExpList(T_exp head, T_expList tail);
 T_moduleList T_ModuleList(T_module head, T_moduleList tail);
 T_typeList T_TypeList(T_type head, T_typeList tail);
+#ifdef __cplusplus
+}
+#endif
