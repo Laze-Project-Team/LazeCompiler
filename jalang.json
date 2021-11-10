@@ -39,18 +39,7 @@
     },
     "grammar":{
         "exp":{
-            "add":"exp(1) + exp(2)",
-            "sub":"exp(1) - exp(2)",
-            "mul":"exp(1) * exp(2)",
-            "div":"exp(1) / exp(2)",
-            "mod":"exp(1) % exp(2)",
-            "eq":"exp(1) == exp(2)",
-            "neq":"exp(1) != exp(2)",
-            "ge":"exp(1) >= exp(2)",
-            "le":"exp(1) <= exp(2)",
-            "lt":"exp(1) < exp(2)",
-            "and":"exp(1) && exp(2)",
-            "or":"exp(1) || exp(2)",
+            "op":"exp(1) oper exp(2)",
             "minus":"- exp",
             "paren": "( exp )",
             "call":"varExp ( explist )",
@@ -58,7 +47,28 @@
             "sizeof":"sizeof ( var )",
             "array":"[ explist ]",
             "func": "( fieldlist(param) ) => ( fieldlist(result) ) stm",
-            "var": "varExp"
+            "var": "varExp",
+            "int": "int",
+            "char": "char",
+            "string": "string",
+            "real": "real",
+            "true": "true",
+            "false": "false"
+        },
+        "oper": {
+            "add":"+",
+            "sub":"-",
+            "mul":"*",
+            "div":"/",
+            "mod":"%",
+            "eq":"==",
+            "neq":"!=",
+            "ge":">=",
+            "gt":">",
+            "le":"<=",
+            "lt":"<",
+            "and":"&&",
+            "or":"||"
         },
         "stm":{
             "assign":{
@@ -118,8 +128,51 @@
             "subcript":"exp(arrayname) [ exp(index) ]",
             "arrowfield":"exp -> id"
         },
+        "ty": {
+            "name" : "id",
+            "void" : "void",
+            "int" : "inttype",
+            "real" : "realtype",
+            "bool" : "boolean",
+            "char" : "chartype",
+            "short" : "shorttype",
+            "pointer" : "* ty",
+            "poly" : "id < ty >",
+            "array": "ty [ int ]",
+            "func": "function : ( fieldlist(params) ) => ( fieldlist(result) )"
+        },
+        "mems":{
+            "funcAndVarList": "declist",
+            "public": "public : declist",
+            "private": "private : declist",
+            "protected": "protected : declist"
+        },
+        "memlist":{
+            "mems": "mems",
+            "memlist": "memlist mems"
+        },
         "field": {
             "noinit":"ty : var"
+        },
+        "explist":{
+            "null":"",
+            "exp":"exp",
+            "explist":"explist , exp"
+        },
+        "stmlist":{
+            "null":"",
+            "stm":"stm",
+            "stmlist":"stmlist stm"
+        },
+        "declist":{
+            "null":"",
+            "dec":"dec",
+            "declist":"declist dec"
+        },
+        "fieldlist":{
+            "null":"",
+            "field":"field",
+            "fieldlist":"fieldlist , field"
         }
     }
 }

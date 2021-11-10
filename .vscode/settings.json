@@ -69,6 +69,8 @@
         "iomanip": "cpp",
         "mutex": "cpp",
         "thread": "cpp",
-        "cfenv": "cpp"
+        "cfenv": "cpp",
+        "tojson.h": "c",
+        "charconv": "cpp"
     }
 }

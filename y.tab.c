@@ -781,13 +781,13 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,   116,     0,    66,    67,     0,    65,    68,    69,    70,
+       0,   116,     0,    65,    66,     0,    64,    67,    68,    69,
        0,     0,     0,     0,     2,     3,     0,    14,     4,     7,
-       5,     6,    13,    64,    71,     0,     0,     0,     0,     1,
+       5,     6,    13,    70,    71,     0,     0,     0,     0,     1,
       11,     0,    10,    12,     9,     8,     0,     0,     0,     0,
        0,     0,     0,   117,     0,     0,     0,    73,     0,     0,
        0,   117,   119,   102,   106,   115,   103,     0,     0,     0,
-       0,     0,     0,    72,     0,    65,     0,     0,     0,    75,
+       0,     0,     0,    72,     0,    64,     0,     0,     0,    75,
        0,     0,     0,     0,    85,    87,    91,     0,     0,     0,
        0,    19,    16,    15,    17,    73,   115,     0,    18,    20,
       21,     0,     0,   114,    41,    42,     0,    43,     0,     0,
@@ -838,7 +838,7 @@ static const yytype_int16 yytable[] =
 {
       23,    42,    23,   125,   185,   194,   260,   117,     1,    80,
       24,    70,    68,    58,    48,    23,    11,    25,    23,    23,
-      23,    23,    17,   -64,    41,    37,    38,    39,    40,   190,
+      23,    23,    17,   -70,    41,    37,    38,    39,    40,   190,
       80,    43,    26,   261,    58,    27,    23,    17,    36,   101,
       17,    17,    17,    17,    45,    28,   165,    23,    23,    78,
      159,   102,    54,    55,   103,    67,    49,    62,   100,    29,
@@ -2208,43 +2208,43 @@ yyreduce:
 
   case 64:
 #line 168 "lang.y"
-               {(yyval.type) = A_NameTy(EM_tokPos, (yyvsp[0].sym));}
+                 {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("void"));}
 #line 2213 "y.tab.c"
     break;
 
   case 65:
 #line 169 "lang.y"
-                   {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("void"));}
+                      {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("int"));}
 #line 2219 "y.tab.c"
     break;
 
   case 66:
 #line 170 "lang.y"
-                      {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("int"));}
+                       {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("real"));}
 #line 2225 "y.tab.c"
     break;
 
   case 67:
 #line 171 "lang.y"
-                       {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("real"));}
+                      {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("int"));}
 #line 2231 "y.tab.c"
     break;
 
   case 68:
 #line 172 "lang.y"
-                      {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("int"));}
+                       {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("char"));}
 #line 2237 "y.tab.c"
     break;
 
   case 69:
 #line 173 "lang.y"
-                       {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("char"));}
+                        {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("short"));}
 #line 2243 "y.tab.c"
     break;
 
   case 70:
 #line 174 "lang.y"
-                        {(yyval.type) = A_NameTy(EM_tokPos, S_Symbol("short"));}
+                 {(yyval.type) = A_NameTy(EM_tokPos, (yyvsp[0].sym));}
 #line 2249 "y.tab.c"
     break;
 

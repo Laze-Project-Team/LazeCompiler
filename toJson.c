@@ -25,7 +25,7 @@ jobj JS_StmToJson(A_stm stm)
         {
             name = json_object_new_string("compound");
             jobj list = JS_StmListToJson(stm -> u.compound);
-            json_object_object_add(info, "list", list);
+            json_object_object_add(info, "stmlist", list);
             break;
         }
         case A_assignStm:
@@ -39,7 +39,7 @@ jobj JS_StmToJson(A_stm stm)
         }
         case A_declarationStm:
         {
-            name = json_object_new_string("declaration");
+            name = json_object_new_string("dec");
             jobj dec = JS_DecToJson(stm -> u.declaration.dec);
             json_object_object_add(info, "dec", dec);
             break;
@@ -48,33 +48,38 @@ jobj JS_StmToJson(A_stm stm)
         {
             name = json_object_new_string("if");
             jobj test = JS_ExpToJson(stm -> u.iff.test);
-            json_object_object_add(info, "test", test);
+            json_object_object_add(info, "exp", test);
             jobj then = JS_StmToJson(stm -> u.iff.then);
-            json_object_object_add(info, "then", then);
-            jobj elsee = JS_StmToJson(stm -> u.iff.elsee);
-            json_object_object_add(info, "else", elsee);
+            json_object_object_add(info, "stm(then)", then);
+            jobj specificType = json_object_new_string("if");
+            if(stm -> u.iff.elsee){
+                specificType = json_object_new_string("ifelse");
+                jobj elsee = JS_StmToJson(stm -> u.iff.elsee);
+                json_object_object_add(info, "stm(else)", elsee);
+            }
+            json_object_object_add(info, "specificType", specificType);
             break;
         }
         case A_whileStm:
         {
             name = json_object_new_string("while");
             jobj test = JS_ExpToJson(stm -> u.whilee.test);
-            json_object_object_add(info, "test", test);
+            json_object_object_add(info, "exp", test);
             jobj body = JS_StmToJson(stm -> u.whilee.body);
-            json_object_object_add(info, "body", body);
+            json_object_object_add(info, "stm", body);
             break;
         }
         case A_forStm:
         {
             name = json_object_new_string("for");
             jobj assign = JS_StmToJson(stm -> u.forr.assign);
-            json_object_object_add(info, "assign", assign);
+            json_object_object_add(info, "stm(init)", assign);
             jobj condition = JS_ExpToJson(stm -> u.forr.condition);
-            json_object_object_add(info, "condition", condition);
+            json_object_object_add(info, "exp", condition);
             jobj increment = JS_StmToJson(stm -> u.forr.increment);
-            json_object_object_add(info, "increment", increment);
+            json_object_object_add(info, "stm(incr)", increment);
             jobj body = JS_StmToJson(stm -> u.forr.body);
-            json_object_object_add(info, "body", body);
+            json_object_object_add(info, "stm(body)", body);
             break;
         }
         case A_breakStm:
@@ -91,21 +96,28 @@ jobj JS_StmToJson(A_stm stm)
         {
             name = json_object_new_string("call");
             jobj func = JS_ExpToJson(stm -> u.call.func);
-            json_object_object_add(info, "func", func);
+            json_object_object_add(info, "varExp", func);
             jobj args = JS_ExpListToJson(stm -> u.call.args);
-            json_object_object_add(info, "args", args);
+            json_object_object_add(info, "explist", args);
             break;
         }
         case A_returnStm:
         {
             name = json_object_new_string("return");
+            jobj specificType = json_object_new_string("noexp");
+            if(stm -> u.returnn.ret){
+                jobj specificType = json_object_new_string("exp");
+                jobj returnExp = JS_ExpToJson(stm -> u.returnn.ret);
+                json_object_object_add(info, "exp", returnExp);
+            }
+            json_object_object_add(info, "specificType", specificType);
             break;
         }
         case A_loopStm:
         {
             name = json_object_new_string("loop");
             jobj body = JS_StmToJson(stm -> u.loop.body);
-            json_object_object_add(info, "body", body);
+            json_object_object_add(info, "stm", body);
             break;
         }
     } 
@@ -155,20 +167,20 @@ jobj JS_ExpToJson(A_exp exp)
         {
             name = json_object_new_string("call");
             jobj func = JS_ExpToJson(exp -> u.call.func);
-            json_object_object_add(info, "func", func);
+            json_object_object_add(info, "varExp", func);
             jobj args = JS_ExpListToJson(exp -> u.call.args);
-            json_object_object_add(info, "args", args);
+            json_object_object_add(info, "explist", args);
             break;
         }
         case A_opExp:
         {
             name = json_object_new_string("op");
             jobj left = JS_ExpToJson(exp -> u.op.left);
-            json_object_object_add(info, "left", left);
+            json_object_object_add(info, "exp(1)", left);
             jobj oper = json_object_new_int(exp -> u.op.oper);
             json_object_object_add(info, "oper", oper);
             jobj right = JS_ExpToJson(exp -> u.op.right);
-            json_object_object_add(info, "right", right);
+            json_object_object_add(info, "exp(2)", right);
             break;
         }
         //case A_recordExp:
@@ -179,7 +191,7 @@ jobj JS_ExpToJson(A_exp exp)
         {
             name = json_object_new_string("seq");
             jobj list = JS_ExpListToJson(exp -> u.seq);
-            json_object_object_add(info, "list", list);
+            json_object_object_add(info, "explist", list);
             break;
         }
         case A_ifExp:
@@ -197,7 +209,7 @@ jobj JS_ExpToJson(A_exp exp)
         {
             name = json_object_new_string("array");
             jobj list = JS_ExpListToJson(exp -> u.array.list);
-            json_object_object_add(info, "list", list);
+            json_object_object_add(info, "explist", list);
             break;
         }
         case A_realExp:
@@ -232,7 +244,7 @@ jobj JS_ExpToJson(A_exp exp)
         {
             name = json_object_new_string("address");
             jobj address = JS_VarToJson(exp -> u.address);
-            json_object_object_add(info, "address", address);
+            json_object_object_add(info, "var", address);
             break;
         }
         case A_sizeofExp:
@@ -273,11 +285,11 @@ jobj JS_ExpToJson(A_exp exp)
         {
             name = json_object_new_string("func");
             jobj params = JS_FieldListToJson(exp -> u.func.params);
-            json_object_object_add(info, "params", params);
+            json_object_object_add(info, "fieldlist(params)", params);
             jobj result = JS_FieldListToJson(exp -> u.func.result);
-            json_object_object_add(info, "result", result);
+            json_object_object_add(info, "fieldlist(result)", result);
             jobj body = JS_StmToJson(exp -> u.func.body);
-            json_object_object_add(info, "body", body);
+            json_object_object_add(info, "stm", body);
             break;
         }
     }
@@ -301,7 +313,7 @@ jobj JS_VarToJson(A_var var)
         {
             name = json_object_new_string("simple");
             jobj simple = json_object_new_string(S_name(var -> u.simple));
-            json_object_object_add(info, "simple", simple);
+            json_object_object_add(info, "id", simple);
             break;
         }
         case A_fieldVar:
@@ -310,7 +322,7 @@ jobj JS_VarToJson(A_var var)
             jobj v = JS_VarToJson(var -> u.field.var);
             json_object_object_add(info, "var", v);
             jobj sym = json_object_new_string(S_name(var -> u.field.sym));
-            json_object_object_add(info, "sym", sym);
+            json_object_object_add(info, "id", sym);
             break;
         }
         case A_subscriptVar:
@@ -326,16 +338,16 @@ jobj JS_VarToJson(A_var var)
         {
             name = json_object_new_string("deref");
             jobj deref = JS_VarToJson(var -> u.deref);
-            json_object_object_add(info, "deref", deref);
+            json_object_object_add(info, "var", deref);
             break;
         }
         case A_arrowFieldVar:
         {
             name = json_object_new_string("arrowfield");
             jobj pointer = JS_VarToJson(var -> u.arrowfield.pointer);
-            json_object_object_add(info, "pointer", pointer);
+            json_object_object_add(info, "var", pointer);
             jobj member = json_object_new_string(S_name(var -> u.arrowfield.member));
-            json_object_object_add(info, "member", member);
+            json_object_object_add(info, "id", member);
             break;
         }
     }
@@ -357,15 +369,15 @@ jobj JS_DecToJson(A_dec dec)
     {
         case A_functionDec:
         {
-            name = json_object_new_string("function");
+            name = json_object_new_string("func");
             jobj funcName = json_object_new_string(S_name(dec -> u.function -> head -> name));
-            json_object_object_add(info, "funcName", funcName);
+            json_object_object_add(info, "id", funcName);
             jobj params = JS_FieldListToJson(dec -> u.function -> head -> params);
-            json_object_object_add(info, "params", params);
+            json_object_object_add(info, "fieldlist(params)", params);
             jobj result = JS_FieldListToJson(dec -> u.function -> head -> result);
-            json_object_object_add(info, "result", result);
+            json_object_object_add(info, "fieldlist(result)", result);
             jobj body = JS_StmToJson(dec -> u.function -> head -> body);
-            json_object_object_add(info, "body", body);
+            json_object_object_add(info, "stm", body);
             break;
         }
         case A_varDec:
@@ -373,56 +385,66 @@ jobj JS_DecToJson(A_dec dec)
             name = json_object_new_string("var");
             jobj v = JS_VarToJson(dec -> u.var.var);
             json_object_object_add(info, "var", v);
-            jobj init = JS_ExpToJson(dec -> u.var.init);
-            json_object_object_add(info, "init", init);
+            jobj typ = JS_TyToJson(dec -> u.var.typ);
+            json_object_object_add(info, "ty", typ);
+            jobj specificType = json_object_new_string("noinit");
+            if(dec -> u.var.init){
+                specificType = json_object_new_string("init");
+                jobj init = JS_ExpToJson(dec -> u.var.init);
+                json_object_object_add(info, "exp", init);
+            }
+            json_object_object_add(info, "specificType", specificType);
             break;
         }
         case A_objectDec:
         {
             name = json_object_new_string("object");
             jobj className = JS_TyToJson(dec -> u.object.className);
-            json_object_object_add(info, "className", className);
+            json_object_object_add(info, "ty", className);
             jobj objectName = json_object_new_string(S_name(dec -> u.object.name));
-            json_object_object_add(info, "objectName", objectName);
+            json_object_object_add(info, "id", objectName);
             jobj expList = JS_ExpListToJson(dec -> u.object.explist);
             json_object_object_add(info, "explist", expList);
             break;
         }
         case A_funcImportDec:
         {
-            name = json_object_new_string("funcImport");
+            name = json_object_new_string("jsload");
             jobj funcName = json_object_new_string(S_name(dec -> u.funcImport.name));
-            json_object_object_add(info, "funcName", funcName);
+            json_object_object_add(info, "id", funcName);
             jobj params = JS_FieldListToJson(dec -> u.funcImport.params);
-            json_object_object_add(info, "params", params);
+            json_object_object_add(info, "fieldlist(params)", params);
             jobj result = JS_FieldListToJson(dec -> u.funcImport.result);
-            json_object_object_add(info, "result", result);
+            json_object_object_add(info, "fieldlist(result)", result);
             jobj mod = json_object_new_string(dec -> u.funcImport.mod);
-            json_object_object_add(info, "mod", mod);
+            json_object_object_add(info, "string(module)", mod);
             jobj func = json_object_new_string(dec -> u.funcImport.func);
-            json_object_object_add(info, "func", func);
+            json_object_object_add(info, "string(func)", func);
             break;
         }
         case A_funcExportDec:
         {
-            name = json_object_new_string("funcExport");
+            name = json_object_new_string("jsexport");
             jobj funcName = json_object_new_string(S_name(dec -> u.funcExport.name));
-            json_object_object_add(info, "funcName", funcName);
+            json_object_object_add(info, "id", funcName);
             jobj exportName = json_object_new_string(dec -> u.funcExport.exportName);
-            json_object_object_add(info, "exportName", exportName);
+            json_object_object_add(info, "string", exportName);
             break;
         }
         case A_classDec:
         {
             name = json_object_new_string("class");
             jobj className = json_object_new_string(S_name(dec -> u.classs.name));
-            json_object_object_add(info, "className", className);
+            json_object_object_add(info, "id", className);
             jobj members = JS_ClassMemberListToJson(dec -> u.classs.members);
-            json_object_object_add(info, "members", members);
+            json_object_object_add(info, "memlist", members);
+            jobj specificType = json_object_new_string("noinherit");
             if(dec -> u.classs.inheritance){
+                jobj specificType = json_object_new_string("inherit");
                 jobj inheritance = json_object_new_string(S_name(dec -> u.classs.inheritance -> head));
-                json_object_object_add(info, "inheritance", inheritance);
+                json_object_object_add(info, "id(inheritance)", inheritance);
             }
+            json_object_object_add(info, "specificType", specificType);
             break;
         }
         case A_templateDec:
@@ -453,9 +475,9 @@ jobj JS_TyToJson(A_ty ty)
     {
         case A_nameTy:
         {
-            name = json_object_new_string("kind");
+            name = json_object_new_string("name");
             jobj tyName = json_object_new_string(S_name(ty -> u.name));
-            json_object_object_add(info, "tyName", tyName);
+            json_object_object_add(info, "id", tyName);
             break;
         }
         //case A_recordTy:
@@ -470,32 +492,32 @@ jobj JS_TyToJson(A_ty ty)
             jobj type = JS_TyToJson(ty -> u.array.type);
             json_object_object_add(info, "type", type);
             jobj size = json_object_new_int(ty -> u.array.size);
-            json_object_object_add(info, "size", size);
+            json_object_object_add(info, "int", size);
             break;
         }
         case A_pointerTy:
         {
             name = json_object_new_string("pointer");
             jobj pointer = JS_TyToJson(ty -> u.pointer);
-            json_object_object_add(info, "pointer", pointer);
+            json_object_object_add(info, "ty", pointer);
             break;
         }
         case A_funcTy:
         {
             name = json_object_new_string("func");
             jobj params = JS_FieldListToJson(ty -> u.func.params);
-            json_object_object_add(info, "params", params);
+            json_object_object_add(info, "fieldlist(params)", params);
             jobj result = JS_FieldListToJson(ty -> u.func.result);
-            json_object_object_add(info, "result", result);
+            json_object_object_add(info, "fieldlist(result)", result);
             break;
         }
         case A_polyTy:
         {
             name = json_object_new_string("poly");
             jobj polyName = json_object_new_string(S_name(ty -> u.poly.name));
-            json_object_object_add(info, "polyName", polyName);
+            json_object_object_add(info, "id", polyName);
             jobj typeParam = JS_TyToJson(ty -> u.poly.typeParam);
-            json_object_object_add(info, "typeParam", typeParam);
+            json_object_object_add(info, "ty", typeParam);
             break;
         }
     }
@@ -505,17 +527,20 @@ jobj JS_TyToJson(A_ty ty)
 }
 jobj JS_FieldToJson(A_field field)
 {
+    if(!field)
+        return NULL;
     jobj result = json_object_new_object();
     
     // jobj type = json_object_new_string("field");
     json_object_object_add(result, "type", json_object_new_string("field"));
 
-    if(!field)
-        return result;
+    
+    jobj info = json_object_new_object();
     jobj name = json_object_new_string(S_name(field -> name));
     jobj typ = JS_TyToJson(field -> typ);
-    json_object_object_add(result, "kind", name);
-    json_object_object_add(result, "typ", typ);
+    json_object_object_add(info, "var", name);
+    json_object_object_add(info, "ty", typ);
+    json_object_object_add(result, "info", info);
     return result;
 }
 jobj JS_ClassMemberToJson(A_classMember member)
@@ -578,7 +603,9 @@ jobj JS_FieldListToJson(A_fieldList list)
     }
     for(;fieldList; fieldList = fieldList -> tail){
         jobj field = JS_FieldToJson(fieldList -> head);
-        json_object_array_add(fieldArray, field);
+        if(field){
+            json_object_array_add(fieldArray, field);
+        }
     }
     return fieldArray;
 }

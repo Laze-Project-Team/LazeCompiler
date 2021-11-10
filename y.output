@@ -97,13 +97,13 @@ Grammar
    61 return: RETURN
    62       | RETURN LPAREN exp RPAREN
 
-   63 type: id
-   64     | VOID
-   65     | INTTYPE
-   66     | REALTYPE
-   67     | BOOLEAN
-   68     | CHARTYPE
-   69     | SHORTTYPE
+   63 type: VOID
+   64     | INTTYPE
+   65     | REALTYPE
+   66     | BOOLEAN
+   67     | CHARTYPE
+   68     | SHORTTYPE
+   69     | id
    70     | TIMES type
    71     | id LT type GT
 
@@ -215,20 +215,20 @@ Terminals, with rules where they appear
     FROM (289) 109
     TO (290) 108 109
     BREAK (291) 56
-    INTTYPE (292) 65
-    REALTYPE (293) 66
+    INTTYPE (292) 64
+    REALTYPE (293) 65
     CONTINUE (294) 57
     RETURN (295) 61 62
     TYPE (296) 94 95
-    VOID (297) 64 73
+    VOID (297) 63 73
     NUL (298) 17
     TRUEE (299) 19
     FALSEE (300) 20
-    BOOLEAN (301) 67
-    CHARTYPE (302) 68
+    BOOLEAN (301) 66
+    CHARTYPE (302) 67
     MOD (303) 25
     AMPERSAND (304) 37
-    SHORTTYPE (305) 69
+    SHORTTYPE (305) 68
     FUNCTION (306) 76 78 79 82
     ARROW (307) 46 76 78 79 82
     LOOP (308) 111
@@ -336,7 +336,7 @@ Nonterminals, with rules where they appear
         on right: 33 39 81 104 112
     id <sym> (95)
         on left: 115
-        on right: 43 45 63 71 76 78 79 82 83 92 93 94 95 104 105 116 117 120
+        on right: 43 45 69 71 76 78 79 82 83 92 93 94 95 104 105 116 117 120
     lvalue <var> (96)
         on left: 116 117 118 119 120
         on right: 37 38 42 75 77 96 97 98 99 100 102 103 117 118 119 120
@@ -398,16 +398,16 @@ State 2
 
 State 3
 
-   65 type: INTTYPE .
+   64 type: INTTYPE .
 
-    $default  reduce using rule 65 (type)
+    $default  reduce using rule 64 (type)
 
 
 State 4
 
-   66 type: REALTYPE .
+   65 type: REALTYPE .
 
-    $default  reduce using rule 66 (type)
+    $default  reduce using rule 65 (type)
 
 
 State 5
@@ -420,30 +420,30 @@ State 5
 
 State 6
 
-   64 type: VOID .
+   63 type: VOID .
 
-    $default  reduce using rule 64 (type)
+    $default  reduce using rule 63 (type)
 
 
 State 7
 
-   67 type: BOOLEAN .
+   66 type: BOOLEAN .
 
-    $default  reduce using rule 67 (type)
+    $default  reduce using rule 66 (type)
 
 
 State 8
 
-   68 type: CHARTYPE .
+   67 type: CHARTYPE .
 
-    $default  reduce using rule 68 (type)
+    $default  reduce using rule 67 (type)
 
 
 State 9
 
-   69 type: SHORTTYPE .
+   68 type: SHORTTYPE .
 
-    $default  reduce using rule 69 (type)
+    $default  reduce using rule 68 (type)
 
 
 State 10
@@ -670,12 +670,12 @@ State 22
 
 State 23
 
-   63 type: id .
+   69 type: id .
    71     | id . LT type GT
 
     LT  shift, and go to state 36
 
-    $default  reduce using rule 63 (type)
+    $default  reduce using rule 69 (type)
 
 
 State 24
@@ -1150,11 +1150,11 @@ State 64
 
 State 65
 
-   64 type: VOID .
+   63 type: VOID .
    73 tyfield: VOID .
 
     RPAREN    reduce using rule 73 (tyfield)
-    $default  reduce using rule 64 (type)
+    $default  reduce using rule 63 (type)
 
 
 State 66
@@ -1985,13 +1985,13 @@ State 123
 
 State 124
 
-   63 type: id .
+   69 type: id .
    71     | id . LT type GT
   116 lvalue: id .
 
     LT  shift, and go to state 36
 
-    COLON     reduce using rule 63 (type)
+    COLON     reduce using rule 69 (type)
     LT        [reduce using rule 116 (lvalue)]
     $default  reduce using rule 116 (lvalue)
 

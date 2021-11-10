@@ -9,7 +9,7 @@
 
 using json = nlohmann::json;
 
-static std::string tokenNames[] = {"char","string","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<","<=",">",">=","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else"};
+static std::string tokenNames[] = {"char","string","real","int",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else"};
 static std::string operators = 
 "{ \
     \",\":\"^(,|、)\", \
@@ -73,7 +73,8 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             regexMap.push_back(std::make_pair(tokenName, std::regex("^((" + intRegex + "+|" + hexRegex + "))")));
         }
         else if(tokenName == "real"){
-            regexMap.push_back(std::make_pair(tokenName, std::regex("^((" + intRegex + "." + intRegex + "f?))")));
+            regexMap.push_back(std::make_pair(tokenName, std::regex("^((" + intRegex + "+\\." + intRegex + "+f?))")));
+            std::cout << "^((" + intRegex + "+\\." + intRegex + "+f?))" << std::endl;
         }
         else if(tokenName == "string"){
             std::string stringRegex = "^(" + j["tokens"]["string"].get<std::string>() + ")";
@@ -122,6 +123,7 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
                         std::strcpy(token -> u.charr, match[2].str().c_str());
                     }
                     else if(regex.first == "int"){
+                        // std::cout << match[2].str() << std::endl;
                         token -> u.intt = std::stoll(match[2].str());
                     }
                     else if(regex.first == "real"){

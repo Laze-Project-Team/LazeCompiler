@@ -165,13 +165,13 @@ stmlist :   stm {$$ = A_StmList($1, NULL);}
 return :    RETURN {$$ = A_ReturnStm(EM_tokPos, NULL);}
             | RETURN LPAREN exp RPAREN {$$ = A_ReturnStm(EM_tokPos, $3);}
 
-type :      id {$$ = A_NameTy(EM_tokPos, $1);}
-            | VOID {$$ = A_NameTy(EM_tokPos, S_Symbol("void"));}
+type :      VOID {$$ = A_NameTy(EM_tokPos, S_Symbol("void"));}
             | INTTYPE {$$ = A_NameTy(EM_tokPos, S_Symbol("int"));}
             | REALTYPE {$$ = A_NameTy(EM_tokPos, S_Symbol("real"));}
             | BOOLEAN {$$ = A_NameTy(EM_tokPos, S_Symbol("int"));}
             | CHARTYPE {$$ = A_NameTy(EM_tokPos, S_Symbol("char"));}
             | SHORTTYPE {$$ = A_NameTy(EM_tokPos, S_Symbol("short"));}
+            | id {$$ = A_NameTy(EM_tokPos, $1);}
             | TIMES type {$$ = A_PointerTy(EM_tokPos, $2);}
             | id LT type GT {$$ = A_PolyTy(EM_tokPos, $1, $3);}
 

@@ -13,8 +13,8 @@
 #include <sstream>
 #include <cstring>
 
-static std::string tokenNames[] = {"char","string","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<","<=",">",">=","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
-static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist"};
+static std::string tokenNames[] = {"char","string","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
+static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist", "oper", "funcAndVar", "funcAndVarList", "mems"};
 
 using grammarListTy = std::unordered_map<std::string, std::deque<std::string>>;
 using grammarTy = std::deque<std::string>;
@@ -300,6 +300,9 @@ static firstSetTy generateFollowSet(const itemSetTy &extended, firstSetTy FIRSTs
     }
     for(auto &item: FOLLOWset){
         for(const auto &token: item.second){
+            if(token.size() == 0){
+                continue;
+            }
             if(std::isdigit(token.at(0))){
                 if(FOLLOWset.find(token) != FOLLOWset.end()){
                     tokensTy toMerge = FOLLOWset.at(token);
@@ -432,9 +435,12 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
                 tokenToRead = "";
             }
             else{
-                std::cerr << "Unexpected " << list.front() -> kind << std::endl;
+                std::cerr << "Unexpected " << list.front() -> kind << " " << list.front() -> start << std::endl;
                 exit(0);
             }
+        }
+        if(action.size() > 1){
+            std::cout << "conflict found!!!!!!!!!" << std::endl;
         }
         if(action.at(0) == ' '){
             action = action.substr(1, action.size() - 1);
@@ -442,7 +448,7 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
         action = action.substr(0, action.find(" "));
         if(action.at(0) == 's'){
             int stackNum = std::stoi(action.substr(1, action.size() - 1));
-            std::cout << "stackNum " << stackNum << std::endl;
+            std::cout << "stackNum " << stackNum << " " << list.front() -> kind << std::endl;
             stack.push_back(stackNum);
             if(tokenToRead == list.front() -> kind){
                 list.pop_front();
@@ -470,6 +476,53 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
     std::cout << "finished" << std::endl;
 }
 
+static grammarTy createGrammarList(std::string ruleStr, std::string ruleNameStr, grammarListTy &grammarList, json input){
+    std::string tok;
+    std::regex tokenWithName("([a-zA-Z0-9]+)\\(([a-zA-Z0-9]+)\\)");
+    std::regex tokenWithPeriod("([a-zA-Z0-9]+)\\.([a-zA-Z0-9]+)");
+    std::smatch match;
+    std::deque<std::string> tokens;
+    std::stringstream rule(ruleStr);
+    while(rule >> tok){
+        if(std::find(std::begin(tokenNames), std::end(tokenNames), tok) == std::end(tokenNames)){
+            if(std::regex_search(tok, match, tokenWithName)){
+                tokens.push_back(match[1]);
+                continue;
+            }
+            if(std::regex_search(tok, match, tokenWithPeriod)){
+                std::cout << match[0] << std::endl;
+                std::string tempRuleStr = ruleStr;
+                if(input[match[1]][match[2]].is_string()){
+                    tempRuleStr = std::regex_replace(tempRuleStr, std::regex(tok), input[match[1]][match[2]].get<std::string>());
+                    grammarList[ruleNameStr + "." + tok] = createGrammarList(tempRuleStr, ruleNameStr, grammarList, input);
+                }
+                if(input[match[1]][match[2]].is_object()){
+                    for(const auto &item: input[match[1]][match[2]].items()){
+                        tempRuleStr = ruleStr;
+                        tempRuleStr = std::regex_replace(tempRuleStr, std::regex(tok), item.value().get<std::string>());
+                        grammarList[ruleNameStr + "." + tok + "." + item.key()] = createGrammarList(tempRuleStr, ruleNameStr, grammarList, input);
+                    }
+                    return tokens;
+                }
+                continue;
+            }
+            if(std::find(std::begin(nonTerminal), std::end(nonTerminal), tok) != std::end(nonTerminal)){
+                tokens.push_back(tok);
+                continue;
+            }
+            if(grammarList.count(tok)){
+                tokens.push_back(tok);
+            }
+            std::cerr << "Illegal token in grammar " << ruleNameStr << ": " << tok << std::endl;
+        }
+        tokens.push_back(tok);
+    }
+    if(tokens.size() == 0){
+        tokens.push_back("");
+    }
+    return tokens;
+}
+
 A_decList P_parse(L_tokenList list, const char *filename1){
     std::ifstream jInput(filename1);
     json j;
@@ -482,86 +535,20 @@ A_decList P_parse(L_tokenList list, const char *filename1){
     for(const auto &item2: j["grammar"].items()){
         for(const auto &item: item2.value().items()){
             if(item.value().is_string()){
-                std::deque<std::string> tokens;
-                std::stringstream rule(item.value().get<std::string>());
-                while(rule >> tok){
-                    if(std::find(std::begin(tokenNames), std::end(tokenNames), tok) == std::end(tokenNames)){
-                        if(std::regex_search(tok, match, tokenWithName)){
-                            tokens.push_back(match[1]);
-                            continue;
-                        }
-                        if(std::find(std::begin(nonTerminal), std::end(nonTerminal), tok) != std::end(nonTerminal)){
-                            tokens.push_back(tok);
-                            continue;
-                        }
-                        if(grammarList.count(tok)){
-                            tokens.push_back(tok);
-                        }
-                        std::cerr << "Illegal token in grammar " << item2.key() + "." + item.key() << ": " << tok << std::endl;
-                    }
-                    tokens.push_back(tok);
+                grammarTy temp = createGrammarList(item.value().get<std::string>(), item2.key() + "." + item.key(), grammarList, j["grammar"]);
+                if(temp.size() != 0){
+                    grammarList[item2.key() + "." + item.key()] = temp;
                 }
-                grammarList[item2.key() + "." + item.key()] = tokens;
             }
             else if(item.value().is_object()){
                 for(const auto &i: item.value().items()){
-                    std::deque<std::string> tokens;
-                    std::stringstream rule(i.value().get<std::string>());
-                    while(rule >> tok){
-                        if(std::find(std::begin(tokenNames), std::end(tokenNames), tok) == std::end(tokenNames)){
-                            if(std::regex_search(tok, match, tokenWithName)){
-                                tokens.push_back(match[1]);
-                                continue;
-                            }
-                            if(std::find(std::begin(nonTerminal), std::end(nonTerminal), tok) != std::end(nonTerminal)){
-                                tokens.push_back(tok);
-                                continue;
-                            }
-                            if(grammarList.count(tok)){
-                                tokens.push_back(tok);
-                            }
-                            std::cerr << "Illegal token: " << tok << std::endl;
-                        }
-                        tokens.push_back(tok);
+                    grammarTy temp = createGrammarList(i.value().get<std::string>(), item2.key() + "." + item.key() + "." + i.key(), grammarList, j["grammar"]);
+                    if(temp.size() != 0){
+                        grammarList[item2.key() + "." + item.key() + "." + i.key()] = temp;
                     }
-                    grammarList[item2.key() + "." + item.key() + "." + i.key()] = tokens;
                 }
             }
         }
-    }
-    {
-        grammarList["ty.name"] = std::deque<std::string>({"id"});
-        grammarList["ty.void"] = std::deque<std::string>({"void"});
-        grammarList["ty.int"] = std::deque<std::string>({"inttype"});
-        grammarList["ty.real"] = std::deque<std::string>({"realtype"});
-        grammarList["ty.bool"] = std::deque<std::string>({"boolean"});
-        grammarList["ty.char"] = std::deque<std::string>({"chartype"});
-        grammarList["ty.short"] = std::deque<std::string>({"shorttype"});
-        grammarList["ty.pointer"] = std::deque<std::string>({"*", "ty"});
-        grammarList["ty.poly"] = std::deque<std::string>({"id", "<", "ty", ">"});
-
-        grammarList["exp.int"] = std::deque<std::string>({"int"});
-        grammarList["exp.char"] = std::deque<std::string>({"char"});
-        grammarList["exp.string"] = std::deque<std::string>({"string"});
-        grammarList["exp.real"] = std::deque<std::string>({"real"});
-        grammarList["exp.true"] = std::deque<std::string>({"true"});
-        grammarList["exp.false"] = std::deque<std::string>({"false"});
-
-        grammarList["explist.null"] = std::deque<std::string>({""});
-        grammarList["explist.exp"] = std::deque<std::string>({"exp"});
-        grammarList["explist.explist"] = std::deque<std::string>({"explist", ",", "exp"});
-
-        grammarList["stmlist.null"] = std::deque<std::string>({""});
-        grammarList["stmlist.stm"] = std::deque<std::string>({"stm"});
-        grammarList["stmlist.stmlist"] = std::deque<std::string>({"stmlist", "stm"});
-
-        grammarList["declist.null"] = std::deque<std::string>({""});
-        grammarList["declist.dec"] = std::deque<std::string>({"dec"});
-        grammarList["declist.declist"] = std::deque<std::string>({"declist", "dec"});
-
-        grammarList["fieldlist.null"] = std::deque<std::string>({""});
-        grammarList["fieldlist.field"] = std::deque<std::string>({"field"});
-        grammarList["fieldlist.fieldlist"] = std::deque<std::string>({"fieldlist", ",", "field"});
     }
     transitionTable.push_back(std::unordered_map<std::string, int>());
     std::vector<itemSetTy> itemSets = toItem0(grammarList);
@@ -572,7 +559,7 @@ A_decList P_parse(L_tokenList list, const char *filename1){
     firstSetTy FIRSTset = generateFirstSet(extended);
     firstSetTy FOLLOWset = generateFollowSet(extended, FIRSTset);
     tableTy actionGotoTable = generateActionGotoTable(itemSets, extended, FIRSTset, FOLLOWset, grammarList);
-    A_decList result = parseWithTable(list, actionGotoTable, grammarList);
+    // A_decList result = parseWithTable(list, actionGotoTable, grammarList);
     // debug grammarList
     // int a = 0;
     // for(const auto &s: grammarList){

@@ -1,8 +1,11 @@
-compiler: parser.o lexer.o toJson.o frame.o parse.o translate.o tree.o printtree.o temp.o escape.o env.o types.o y.tab.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o semantic.o lexAnalyze.o 
-	g++ -o compiler -g parser.o lexer.o toJson.o frame.o parse.o translate.o tree.o temp.o escape.o env.o types.o y.tab.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o semantic.o printtree.o lexAnalyze.o -lm -ljson-c
+compiler: converter.o parser.o lexer.o toJson.o frame.o parse.o translate.o tree.o printtree.o temp.o escape.o env.o types.o y.tab.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o semantic.o lexAnalyze.o 
+	g++ -o compiler -g converter.o parser.o lexer.o toJson.o frame.o parse.o translate.o tree.o temp.o escape.o env.o types.o y.tab.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o semantic.o printtree.o lexAnalyze.o -lm -ljson-c
 
 lexAnalyze.o: lexAnalyze.cpp errormsg.h util.h
 	g++ -g -c lexAnalyze.cpp
+
+converter.o: converter.cpp
+	g++ -g -c converter.cpp -lnlohmann_json -std=c++17
 
 parser.o: parser.cpp
 	g++ -g -c parser.cpp -lnlohmann_json -std=c++17
@@ -95,4 +98,4 @@ util.o: util.c util.h
 	g++ -g -c util.c
 
 clean: 
-	rm -f compiler lexer.o parser.o lexAnalyze.o parse.o semantic.o translate.o tree.o printtree.o frame.o temp.o escape.o env.o types.o y.tab.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o preprocessor.o preprocessor.tab.o ppsemant.o
+	rm -f compiler converter.o lexer.o parser.o lexAnalyze.o parse.o semantic.o translate.o tree.o printtree.o frame.o temp.o escape.o env.o types.o y.tab.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o preprocessor.o preprocessor.tab.o ppsemant.o

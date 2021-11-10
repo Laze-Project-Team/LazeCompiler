@@ -87,8 +87,6 @@
  実数:PI=3.14159265358979323846264338;
  実数:sqRad=rad*rad;
     結果=sin(rad)/cos(rad);
- //結果=rad+(rad*sqRad)/3+(rad*sqRad*sqRad)*(2.0/15.0)+(rad*sqRad*sqRad*sqRad)*(17.0/315.0)+(rad*sqRad*sqRad*sqRad*sqRad)*(62.0/2835.0)+
-    //(rad*sqRad*sqRad*sqRad*sqRad*sqRad)*(1382.0/155925.0);
 }
 
 型<T>:関数:abs(T:a) => (T:b)
