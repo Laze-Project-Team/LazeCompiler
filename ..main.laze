@@ -1,7 +1,0 @@
-関数:表示(実数:x)=>()=js読み込み("console", "log");
-関数:viewport(整数:x, 整数:y)=>()=js読み込み("webgl", "viewport");
-
-関数:helloWorld()=>()
-{
-    表示（1);
-}

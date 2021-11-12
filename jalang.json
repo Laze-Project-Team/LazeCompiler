@@ -32,9 +32,9 @@
             "repeat":"回繰り返す"
         },
         "int":"[0-9]",
-        "hex":"0x[0-9A-F]",
+        "hex":"0x[0-9A-F]+",
         "char":"[㐀-龯ぁ-んァ-ヶa-zA-Z_ー]",
-        "comment":"\/\/.$",
+        "comment":"(^(\\s*\/\/.*)$|^(\\s*#.*)$)",
         "string":"\"((?:[^\\\\\"]|\\.)*)\""
     },
     "grammar":{
@@ -85,7 +85,10 @@
                 "ifelse":"if ( exp ) then stm(then) else stm(else)"
             },
             "while":"( exp ) to stm",
-            "dec":"ty : var = exp ;",
+            "dec": {
+                "var":"ty : var = exp ;",
+                "object":"ty : var ( explist ) ;"
+            },
             "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
             "return":{
                 "noexp":"return ;",
@@ -95,7 +98,8 @@
             "loop":"loop stm",
             "break":"break ;",
             "continue":"continue ;",
-            "compound":"{ stmlist }"
+            "compound":"{ stmlist }",
+            "repeat":"( exp ) repeat stm"
         },
         "dec":{
             "var": {
@@ -138,7 +142,6 @@
             "short" : "shorttype",
             "pointer" : "* ty",
             "poly" : "id < ty >",
-            "array": "ty [ int ]",
             "func": "function : ( fieldlist(params) ) => ( fieldlist(result) )"
         },
         "mems":{

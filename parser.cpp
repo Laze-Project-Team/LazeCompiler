@@ -13,7 +13,7 @@
 #include <sstream>
 #include <cstring>
 
-static std::string tokenNames[] = {"char","string","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
+static std::string tokenNames[] = {"char","string","hex","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
 static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist", "oper", "funcAndVar", "funcAndVarList", "mems"};
 
 using grammarListTy = std::unordered_map<std::string, std::deque<std::string>>;
@@ -94,7 +94,7 @@ static itemSetTy toNonTerminalDef(itemSetTy itemSetParam, const grammarListTy &g
     return result;
 }
 
-// takes itemSet and returns all itemSets that took one input
+// takes itemSet and returns all itemSets that was able to take an input
 static std::vector<itemSetTy> toItemSets(itemSetTy itemSetParam, const grammarListTy &grammarList){
     std::vector<itemSetTy> result;
     unsigned tokenNum = 0;
@@ -121,11 +121,18 @@ static std::vector<itemSetTy> toItemSets(itemSetTy itemSetParam, const grammarLi
 }
 
 // takes multiple itemSets and returns all itemSets that took one input
+/*
+ * @param itemSets the itemSets you want to process (itemSets already exist in nowSets)
+ * @param nowSets the itemSets that exists now
+ * @param grammarList the grammar rules
+ */
 static std::vector<itemSetTy> toItemSets_multi(std::vector<itemSetTy> itemSets, std::vector<itemSetTy> nowSets, const grammarListTy &grammarList){
     std::vector<itemSetTy> result;
     unsigned setNum = 0;
+    // the total number of nowSets excluding itemSets
     unsigned ii = nowSets.size() - itemSets.size();
     // std::cout << itemSets.size() << "toItemSets_multi start sets" << std::endl;
+    // insert empty lines the size of itemSets
     for(int i = 0; i < itemSets.size(); i++){
         transitionTable.push_back(std::unordered_map<std::string, int>());
     }
@@ -137,7 +144,7 @@ static std::vector<itemSetTy> toItemSets_multi(std::vector<itemSetTy> itemSets, 
             std::iota(acceptableItemSets.begin(), acceptableItemSets.end(), 0);
             int thisIncludes = -1;
             for(auto it = acceptableItemSets.begin(); it != acceptableItemSets.end(); it++){
-                if(std::includes(outputSet.begin(), outputSet.end(), nowSets.at(*it).begin(), nowSets.at(*it).end())){
+                if(nowSets.at(*it) == outputSet){
                     thisIncludes = *it;
                     break;
                 }
@@ -145,7 +152,6 @@ static std::vector<itemSetTy> toItemSets_multi(std::vector<itemSetTy> itemSets, 
 
             auto pointerIt = std::find(outputSet.front().second.begin(), outputSet.front().second.end(), ">>>");
             if(thisIncludes >= 0){
-                // std::cout << *(pointerIt - 1) << std::endl;
                 transitionTable.at(ii)[*(pointerIt - 1)] = thisIncludes;
             }
             else if(thisIncludes == -1){
@@ -254,7 +260,9 @@ static firstSetTy generateFollowSet(const itemSetTy &extended, firstSetTy FIRSTs
     firstSetTy FOLLOWset;
     FOLLOWset["0 start eof"] = tokensTy({"eof"});
     for(const auto &rule: extended){
+        // iterate through every token in the extended rule
         for(int i = 0; i < rule.second.size(); i++){
+            // get the next token
             std::string nextExtendedToken = rule.second.at(i);
             std::stringstream tokStream(nextExtendedToken);
             std::string nextToken;
@@ -267,13 +275,8 @@ static firstSetTy generateFollowSet(const itemSetTy &extended, firstSetTy FIRSTs
             else if(std::find(std::begin(nonTerminal), std::end(nonTerminal), nextSimpleToken) != std::end(nonTerminal)){
                 if(i == rule.second.size() - 1){
                     if(rule.second.at(i) != rule.first){
-                        // std::cout << rule.first << std::endl;
                         tokensTy toMerge = FOLLOWset[rule.first];
                         FOLLOWset[nextExtendedToken].merge(toMerge);
-                        // for(const auto &s: FOLLOWset[nextExtendedToken]){
-                        //     std::cout << s;
-                        // }
-                        // std::cout << std::endl;
                     }
                 }
                 else{
@@ -289,13 +292,23 @@ static firstSetTy generateFollowSet(const itemSetTy &extended, firstSetTy FIRSTs
                         FOLLOWset[nextExtendedToken].insert(nextNextSimpleToken);
                     }
                     else if(std::find(std::begin(nonTerminal), std::end(nonTerminal), nextNextSimpleToken)){
-                        // std::cout << rule.first << std::endl;
-                        // std::cout << startItemSet + " " + nextNextToken + " " + endItemSet << std::endl;
                         tokensTy toMerge = FIRSTset.at(startItemSet + " " + nextNextSimpleToken + " " + endItemSet);
                         FOLLOWset[nextExtendedToken].merge(toMerge);
                     }
                 }
             }
+        }
+    }
+    for(const auto &rule: extended){
+        std::string lastTokenInRule = rule.second.back();
+        std::string ruleName = rule.first;
+        std::stringstream tokStream(lastTokenInRule);
+        std::string lastToken;
+        tokStream >> lastToken >> lastToken;
+        std::string lastSimpleToken = lastToken.substr(0, lastToken.find('.'));
+        if(std::find(std::begin(nonTerminal), std::end(nonTerminal), lastSimpleToken) != std::end(nonTerminal)){
+            tokensTy toMerge = FOLLOWset[rule.first];
+            FOLLOWset[lastTokenInRule].merge(toMerge);
         }
     }
     for(auto &item: FOLLOWset){
@@ -376,17 +389,9 @@ static tableTy generateActionGotoTable(const std::vector<itemSetTy> &itemSets, c
         else{
             lastSet = std::stoi(lastS);
         }
-        int originalRuleNum = 0;
-        for(const auto &r: grammarList){
-            if(originalRule.first == r.first){
-                break;
-            }
-            originalRuleNum++;
-        }
         for(const auto &s: std::get<2>(rule)){
             result[s].at(lastSet) += " r" + originalRule.first;
         }
-        // actionTable.push_back(std::make_tuple(originalRule.first, originalRule.second, std::get<2>(rule)));
         for(auto checkIt = it + 1; checkIt != FOLLOWandExtended.end(); checkIt++){
             auto rule2 = *checkIt;
             auto originalRule2 = getOriginalRule(std::get<0>(rule2), std::get<1>(rule2), grammarList);
@@ -403,6 +408,7 @@ static tableTy generateActionGotoTable(const std::vector<itemSetTy> &itemSets, c
             if(originalRule2.second == originalRule.second && lastSet == lastSet2){
                 for(const auto &s: std::get<2>(rule2)){
                     result[s].at(lastSet) += " r" + originalRule2.first;
+                    result[s].at(lastSet2) += " r" + originalRule2.first;
                 }
                 checkIt = FOLLOWandExtended.erase(checkIt);
                 checkIt --;
@@ -423,32 +429,37 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
     std::string action;
     do{
         std::string tokenToRead = list.front() -> kind;
+        // std::cout << list.front() -> kind << std::endl;
         action = table.at(list.front() -> kind).at(stack.back());
-        std::cout << "Stack now: ";
-        for(const auto &j: stack){
-            std::cout << j << " ";
-        }
-        std::cout << std::endl;
+        // std::cout << "Stack now: ";
+        // for(const auto &j: stack){
+        //     std::cout << j << " ";
+        // }
+        // std::cout << std::endl;
         if(action.size() == 0){
             if(table.at("").at(stack.back()).size() > 0){
                 action = table.at("").at(stack.back());
                 tokenToRead = "";
             }
             else{
-                std::cerr << "Unexpected " << list.front() -> kind << " " << list.front() -> start << std::endl;
+                L_errorPos errorPos = L_getErrorPos(list.front() -> start);
+                std::cerr << "Unexpected " << list.front() -> kind << " " << errorPos.lineNum << std::endl;
                 exit(0);
             }
-        }
-        if(action.size() > 1){
-            std::cout << "conflict found!!!!!!!!!" << std::endl;
         }
         if(action.at(0) == ' '){
             action = action.substr(1, action.size() - 1);
         }
+        if(std::count(action.begin(), action.end(), 's') > 0){
+            // std::cout << "conflict found " << action << std::endl;
+        }
         action = action.substr(0, action.find(" "));
+        if(list.front() -> kind == "id"){
+            // std::cout << list.front() -> u.id << " ";
+        }
         if(action.at(0) == 's'){
             int stackNum = std::stoi(action.substr(1, action.size() - 1));
-            std::cout << "stackNum " << stackNum << " " << list.front() -> kind << std::endl;
+            // std::cout << "stackNum " << stackNum << " " << list.front() -> kind << std::endl;
             stack.push_back(stackNum);
             if(tokenToRead == list.front() -> kind){
                 list.pop_front();
@@ -457,12 +468,12 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
         else if(action.at(0) == 'r'){
             std::string reduceRule = action.substr(1, action.size() - 1);
             int ruleSize = grammarList.at(reduceRule).size();
-            std::cout << "reduceRule " + reduceRule + " "<< ruleSize << std::endl;
+            // std::cout << "reduceRule " + reduceRule + " "<< ruleSize << std::endl;
             for(int ii = 0; ii < ruleSize; ii++){
                 stack.pop_back();
             }
             reduceRule = reduceRule.substr(0, reduceRule.find("."));
-            std::cout << reduceRule << " " << stack.back() << " " << table.at(reduceRule).at(stack.back()) << std::endl;
+            // std::cout << reduceRule << " " << stack.back() << " " << table.at(reduceRule).at(stack.back()) << std::endl;
             stack.push_back(std::stoi(table.at(reduceRule).at(stack.back())));
         }
         else if(action == "accepted"){
@@ -559,7 +570,7 @@ A_decList P_parse(L_tokenList list, const char *filename1){
     firstSetTy FIRSTset = generateFirstSet(extended);
     firstSetTy FOLLOWset = generateFollowSet(extended, FIRSTset);
     tableTy actionGotoTable = generateActionGotoTable(itemSets, extended, FIRSTset, FOLLOWset, grammarList);
-    // A_decList result = parseWithTable(list, actionGotoTable, grammarList);
+    A_decList result = parseWithTable(list, actionGotoTable, grammarList);
     // debug grammarList
     // int a = 0;
     // for(const auto &s: grammarList){

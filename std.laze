@@ -752,7 +752,7 @@
              [size/2, -size/2, size/2, 0.0, -1.0, 0.0],
              [-size/2, -size/2, -size/2, 0.0, -1.0, 0.0],
              [size/2, -size/2, -size/2, 0.0, -1.0, 0.0]
-         ],
+         ]
      ];
         *モデル:cube = メモリ確保(バイト数(*cube)); 
         cube -> モデル(&vertices, 36, color, pos, 0);
@@ -828,7 +828,7 @@
              [size/2, -size/2, size/2, 0.0, -1.0, 0.0],
              [-size/2, -size/2, -size/2, 0.0, -1.0, 0.0],
              [size/2, -size/2, -size/2, 0.0, -1.0, 0.0]
-         ],
+         ]
      ];
         *モデル:light = メモリ確保(バイト数(*light));
         light -> モデル(&vertices, 36, color, pos, 1);

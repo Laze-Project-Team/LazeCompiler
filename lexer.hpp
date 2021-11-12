@@ -5,6 +5,7 @@
 #include <memory>
 #include <deque>
 #include "absyn.h"
+#include "ppsemant.hpp"
 using json = nlohmann::json;
 
 using L_token = std::shared_ptr<struct L_token_>;
@@ -117,6 +118,13 @@ struct L_token_
     L_tokenVal u;
 };
 
+typedef struct L_errorPos
+{
+    int lineNum;
+    int columnNum;
+};
+
 L_token L_delimToken(delimDataTy data);
 
 L_tokenList L_Lexer(const char* filename1, const char *filename2);
+L_errorPos L_getErrorPos(int cursorPos);
