@@ -51,7 +51,7 @@ L_errorPos L_getErrorPos(int cursorPos){
                 cursorPos -= lettersInLines.at(i).at(j);
             }
             else{
-                result.lineNum = j;
+                result.lineNum = j + 1;
                 result.columnNum = cursorPos;
                 return result;
                 break;

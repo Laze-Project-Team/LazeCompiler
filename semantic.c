@@ -2,6 +2,7 @@
 #include <string.h>
 #include "semantic.h"
 
+
 extern int funcs;
 extern int memorySize;
 
@@ -2574,6 +2575,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
     }
     case A_objectDec:
     {
+        // printf("line %d column %d", L_getErrorPos(d -> pos).lineNum, L_getErrorPos(d -> pos).columnNum);
         transDec(venv, tenv, A_VarDec(d -> pos, A_AssignStm(d -> pos, A_SimpleVar(d -> pos, d -> u.object.name), NULL, TRUE), d -> u.object.className), level, isLoop, table, classs);
         return NULL;
         break;

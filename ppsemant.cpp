@@ -47,7 +47,7 @@ void includeFile(char* includeStr, char* file)
     std::ofstream outputFile(file, std::ofstream::out);
     outputFile << inputStr << "\n" << originalStr;
     int lines = std::count(inputStr.begin(), inputStr.end(), '\n') + 1;
-    std::cout << lines << std::endl;
+    // std::cout << lines << std::endl;
     linesInFile.push_back(lines);
     outputFile.close();
     originalFile.close();

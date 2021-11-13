@@ -81,12 +81,14 @@ enum tokenType
 };
 union L_tokenVal
 {
+    void *none;
     char charr[3];
     char* id;
     char* stringg;
     long long intt;
     double real;
     bool booll;
+    A_oper oper;
     A_var var;
     A_exp exp;
     S_symbol sym;
@@ -97,11 +99,13 @@ union L_tokenVal
     A_ty type;
     A_dec dec;
     A_fundec funcdec;
+    A_field field;
     A_fieldList fieldList;
     A_decList decList;
     A_classMemberList memList;
 
     L_tokenVal(){
+        none = nullptr;
         id = nullptr;
         stringg = nullptr;
     };

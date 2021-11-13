@@ -423,8 +423,385 @@ static tableTy generateActionGotoTable(const std::vector<itemSetTy> &itemSets, c
     return result;
 }
 
-static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarListTy &grammarList){
+static L_token reduce(L_tokenList &list, std::string ruleName, const grammarListTy &grammarList, const grammarListTy &originalGrammarList){
+    int ruleSize = grammarList.at(ruleName).size() - std::count(grammarList.at(ruleName).begin(), grammarList.at(ruleName).end(), "");
+    // if the reduce rule is longer the current list
+    if(ruleSize > list.size()){
+        std::cout << ruleSize << "????" << list.size() << std::endl;
+        exit(0);
+    }
+    //take out the part of the tokenlist that corresponds with the grammar rule.
+    L_tokenList reduceList(list.end() - ruleSize, list.end());
+    // std::cout << ruleName << ": ";
+    L_token result = std::make_shared<L_token_>();
+    result -> kind = ruleName;
+    result -> start = list.front() -> start;
+    result -> end = list.front() -> end;
+    std::map<std::string, L_tokenVal> tokenData;
+    for(int i = 0; i < reduceList.size(); i++){
+        tokenData[originalGrammarList.at(ruleName).at(i)] = reduceList.at(i) -> u;
+        // std::cout << originalGrammarList.at(ruleName).at(i) << " <-> " << reduceList.at(i) -> kind << " ";
+    }
+    //exp
+    {
+        if(ruleName == "exp.op"){
+            result -> u.exp = A_OpExp(result -> start, tokenData.at("oper").oper, tokenData.at("exp(1)").exp, tokenData.at("exp(2)").exp);
+        }
+        else if(ruleName == "exp.minus"){
+            result -> u.exp = A_OpExp(result -> start, A_minusOp, A_IntExp(0, 0), tokenData.at("exp").exp);
+        }
+        else if(ruleName == "exp.paren"){
+            result -> u.exp = tokenData.at("exp").exp;
+        }
+        else if(ruleName == "exp.call"){
+            result -> u.exp = A_CallExp(result -> start, tokenData.at("varExp").exp, tokenData.at("explist").expList);
+        }
+        else if(ruleName == "exp.address"){
+            result -> u.exp = A_AddressExp(result -> start, tokenData.at("var").var);
+        }
+        else if(ruleName == "exp.sizeof"){
+            result -> u.exp = A_SizeofExp(result -> start, tokenData.at("var").var);
+        }
+        else if(ruleName == "exp.array"){
+            result -> u.exp = A_ArrayExp(result -> start, tokenData.at("explist").expList);
+        }
+        else if(ruleName == "exp.func"){
+            result -> u.exp = A_FuncExp(result -> start, tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm);
+        }
+        else if(ruleName == "exp.var"){
+            result -> u.exp = tokenData.at("varExp").exp;
+        }
+        else if(ruleName == "exp.int"){
+            result -> u.exp = A_IntExp(result -> start, tokenData.at("int").intt);
+        }
+        else if(ruleName == "exp.char"){
+            result -> u.exp = A_CharExp(result -> start, tokenData.at("char").charr);
+        }
+        else if(ruleName == "exp.string"){
+            result -> u.exp = A_StringExp(result -> start, tokenData.at("string").stringg);
+        }
+        else if(ruleName == "exp.real"){
+            result -> u.exp = A_RealExp(result -> start, tokenData.at("real").real);
+        }
+        else if(ruleName == "exp.true"){
+            result -> u.exp = A_BoolExp(EM_tokPos, TRUE);
+        }
+        else if(ruleName == "exp.false"){
+            result -> u.exp = A_BoolExp(EM_tokPos, FALSE);
+        }
+    }
+    //oper
+    {
+        if(ruleName == "op.add"){
+            result -> u.oper = A_plusOp;
+        }
+        else if(ruleName == "op.sub"){
+            result -> u.oper = A_minusOp;
+        }
+        else if(ruleName == "op.mul"){
+            result -> u.oper = A_timesOp;
+        }
+        else if(ruleName == "op.div"){
+            result -> u.oper = A_divideOp;
+        }
+        else if(ruleName == "op.mod"){
+            result -> u.oper = A_modOp;
+        }
+        else if(ruleName == "op.eq"){
+            result -> u.oper = A_eqOp;
+        }
+        else if(ruleName == "op.neq"){
+            result -> u.oper = A_neqOp;
+        }
+        else if(ruleName == "op.ge"){
+            result -> u.oper = A_geOp;
+        }
+        else if(ruleName == "op.gt"){
+            result -> u.oper = A_gtOp;
+        }
+        else if(ruleName == "op.le"){
+            result -> u.oper = A_leOp;
+        }
+        else if(ruleName == "op.lt"){
+            result -> u.oper = A_ltOp;
+        }
+        else if(ruleName == "op.and"){
+            result -> u.oper = A_andOp;
+        }
+        else if(ruleName == "op.or"){
+            result -> u.oper = A_orOp;
+        }
+    }
+    //stm
+    {
+        if(ruleName == "stm.assign.normal"){
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, tokenData.at("exp").exp, FALSE);
+        }
+        else if(ruleName == "stm.assign.add"){
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_plusOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
+        }
+        else if(ruleName == "stm.assign.sub"){
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_minusOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
+        }
+        else if(ruleName == "stm.assign.mul"){
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_timesOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
+        }
+        else if(ruleName == "stm.assign.div"){
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_divideOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
+        }
+        else if(ruleName == "stm.assign.increment"){
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_plusOp, A_VarExp(result -> start, tokenData.at("var").var), A_IntExp(result -> start, 1)), FALSE);
+        }
+        else if(ruleName == "stm.assign.decrement"){
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_minusOp, A_VarExp(result -> start, tokenData.at("var").var), A_IntExp(result -> start, 1)), FALSE);
+        }
+        else if(ruleName == "stm.if.if"){
+            result -> u.stm = A_IfStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm, NULL);
+        }
+        else if(ruleName == "stm.if.ifelse"){
+            result -> u.stm = A_IfStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm(then)").stm, tokenData.at("stm(else)").stm);
+        }
+        else if(ruleName == "stm.while"){
+            result -> u.stm = A_WhileStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm);
+        }
+        else if(ruleName == "stm.dec.var"){
+            result -> u.stm = A_DeclarationStm(result -> start, A_VarDec(result -> start, A_AssignStm(result -> start, tokenData.at("var").var, tokenData.at("exp").exp, TRUE), tokenData.at("ty").type));
+        }
+        else if(ruleName == "stm.dec.object"){
+            result -> u.stm = A_DeclarationStm(result -> start, A_ObjectDec(result -> start, tokenData.at("ty").type, S_Symbol(tokenData.at("id").id), tokenData.at("explist").expList));
+        }
+        else if(ruleName == "stm.for"){
+            result -> u.stm = A_ForStm(result -> start, tokenData.at("stm(init)").stm, tokenData.at("exp").exp, tokenData.at("stm(incr)").stm, tokenData.at("stm").stm);
+        }
+        else if(ruleName == "stm.return.noexp"){
+            result -> u.stm = A_ReturnStm(result -> start, NULL);
+        }
+        else if(ruleName == "stm.return.exp"){
+            result -> u.stm = A_ReturnStm(result -> start, tokenData.at("exp").exp);
+        }
+        else if(ruleName == "stm.call"){
+            result -> u.stm = A_CallStm(result -> start, tokenData.at("varExp").exp, tokenData.at("explist").expList);
+        }
+        else if(ruleName == "stm.loop"){
+            result -> u.stm = A_LoopStm(result -> start, tokenData.at("stm").stm);
+        }
+        else if(ruleName == "stm.break"){
+            result -> u.stm = A_BreakStm(result -> start);
+        }
+        else if(ruleName == "stm.compound"){
+            result ->u.stm = A_CompoundStm(result -> start, tokenData.at("stmlist").stmList);
+        }
+        else if(ruleName == "stm.continue"){
+            result -> u.stm = A_ContinueStm(result -> start);
+        }
+        else if(ruleName == "stm.repeat"){
+            result -> u.stm = A_ForStm(EM_tokPos, A_DeclarationStm(EM_tokPos, A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_IntExp(EM_tokPos, 0), TRUE), A_NameTy(EM_tokPos, S_Symbol("int")))), A_OpExp(EM_tokPos, A_eqOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), tokenData.at("exp").exp), A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), A_IntExp(EM_tokPos, 1)), FALSE), tokenData.at("stm").stm);
+        }
+    }
+    //dec
+    {
+        if(ruleName == "dec.var.init"){
+            result -> u.dec = A_VarDec(result -> start, A_AssignStm(result -> start, tokenData.at("var").var, tokenData.at("exp").exp, TRUE), tokenData.at("ty").type);
+        }
+        else if(ruleName == "dec.var.noinit"){
+            result -> u.dec = A_VarDec(result -> start, A_AssignStm(result -> start, tokenData.at("var").var, NULL, TRUE), tokenData.at("ty").type);
+        }
+        else if(ruleName == "dec.object"){
+            result -> u.dec = A_ObjectDec(result -> start, tokenData.at("ty").type, S_Symbol(tokenData.at("id").id), tokenData.at("explist").expList);
+        }
+        else if(ruleName == "dec.class.noinherit"){
+            result -> u.dec = A_ClassDec(result -> start, S_Symbol(tokenData.at("id(name)").id), tokenData.at("memlist").memList, NULL);
+        }
+        else if(ruleName == "dec.class.inherit"){
+            result -> u.dec = A_ClassDec(result -> start, S_Symbol(tokenData.at("id(name)").id), tokenData.at("memlist").memList, S_SymbolList(S_Symbol(tokenData.at("id(inherit)").id), NULL));
+        }
+        else if(ruleName == "dec.func"){
+            result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
+        }
+        else if(ruleName == "dec.jsload"){
+            result -> u.dec = A_FuncImport(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("string(module)").stringg, tokenData.at("string(func)").stringg);
+        }
+        else if(ruleName == "dec.jsexport"){
+            result -> u.dec = A_FuncExport(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("string").stringg);
+        }
+        else if(ruleName == "dec.template.func"){
+            result -> u.dec = A_TemplateDec(result -> start, S_Symbol(tokenData.at("id(type)").id), A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(tokenData.at("id(name)").id), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL)));
+        }
+        else if(ruleName == "dec.template.class"){
+            result -> u.dec = A_TemplateDec(result -> start, S_Symbol(tokenData.at("id(type)").id), A_ClassDec(result -> start, S_Symbol(tokenData.at("id(name)").id), tokenData.at("memlist").memList, NULL));
+        }
+    }
+    //var
+    {
+        if(ruleName == "var.simple"){
+            result -> u.var = A_SimpleVar(result -> start, S_Symbol(tokenData.at("id").id));
+        }
+        else if(ruleName == "var.field"){
+            result -> u.var = A_FieldVar(result -> start, tokenData.at("var").var, S_Symbol(tokenData.at("id").id));
+        }
+        else if(ruleName == "var.deref"){
+            result -> u.var = A_DerefVar(result -> start, tokenData.at("var").var);
+        }
+        else if(ruleName == "var.subscript"){
+            result -> u.var = A_SubscriptVar(result -> start, tokenData.at("var").var, tokenData.at("exp").exp);
+        }
+        else if(ruleName == "var.arrowfield"){
+            result -> u.var = A_ArrowFieldVar(result -> start, tokenData.at("var").var, S_Symbol(tokenData.at("id").id)); 
+        }
+    }
+    //varExp
+    {
+        if(ruleName == "varExp.var"){
+            result -> u.exp = A_VarExp(result -> start, tokenData.at("var").var);
+        }
+        else if(ruleName == "varExp.field"){
+            result -> u.exp = A_FieldExp(result -> start, tokenData.at("exp").exp, S_Symbol(tokenData.at("id").id));
+        }
+        else if(ruleName == "varExp.subscript"){
+            result -> u.exp = A_SubscriptExp(result -> start, tokenData.at("exp(arrayname)").exp, tokenData.at("exp(index)").exp);
+        }
+        else if(ruleName == "varExp.arrowField"){
+            result -> u.exp = A_ArrowFieldExp(result -> start, tokenData.at("exp").exp, S_Symbol(tokenData.at("id").id));
+        }
+    }
+    //ty
+    {
+        if(ruleName == "ty.name"){
+            result -> u.type = A_NameTy(result -> start, S_Symbol(tokenData.at("id").id));
+        }
+        else if(ruleName == "ty.void"){
+            result -> u.type = A_NameTy(result -> start, S_Symbol("void"));
+        }
+        else if(ruleName == "ty.int"){
+            result -> u.type = A_NameTy(result -> start, S_Symbol("int"));
+        }
+        else if(ruleName == "ty.real"){
+            result -> u.type = A_NameTy(result -> start, S_Symbol("real"));
+        }
+        else if(ruleName == "ty.bool"){
+            result -> u.type = A_NameTy(result -> start, S_Symbol("bool"));
+        }
+        else if(ruleName == "ty.char"){
+            result -> u.type = A_NameTy(result -> start, S_Symbol("char"));
+        }
+        else if(ruleName == "ty.short"){
+            result -> u.type = A_NameTy(result -> start, S_Symbol("short"));
+        }
+        else if(ruleName == "ty.pointer"){
+            result -> u.type = A_PointerTy(result -> start, tokenData.at("ty").type);
+        }
+        else if(ruleName == "ty.poly"){
+            result -> u.type = A_PolyTy(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("ty").type);
+        }
+        else if(ruleName == "ty.func"){
+            result -> u.type = A_FuncTy(result -> start, tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList);
+        }
+    }
+    //mems
+    {
+        if(ruleName == "mems.nospecifier"){
+            result -> u.memList = A_ClassMemFromDecList(tokenData.at("declist").decList, A_public);
+        }
+        else if(ruleName == "mems.public"){
+            result -> u.memList = A_ClassMemFromDecList(tokenData.at("declist").decList, A_public);
+        }
+        else if(ruleName == "mems.private"){
+            result -> u.memList = A_ClassMemFromDecList(tokenData.at("declist").decList, A_private);
+        }
+        else if(ruleName == "mems.protected"){
+            result -> u.memList = A_ClassMemFromDecList(tokenData.at("declist").decList, A_protected);
+        }
+    }
+    //memlist
+    {
+        if(ruleName == "memlist.mems"){
+            result -> u.memList = tokenData.at("mems").memList;
+        }
+        else if(ruleName == "memlist.memlist"){
+            result -> u.memList = A_ClassMemFromTwoList(tokenData.at("memlist").memList, tokenData.at("mems").memList);
+        }
+    }
+    //field
+    {
+        if(ruleName == "field.noinit"){
+            A_var var = tokenData.at("var").var;
+            A_ty type = tokenData.at("ty").type;
+            if(var -> kind == A_simpleVar){
+                result -> u.field = A_Field(result -> start, var -> u.simple, type);
+            }
+            else if(var -> kind == A_subscriptVar){
+                for(; var -> kind == A_subscriptVar; var = var -> u.subscript.var)
+                {
+                    if(var -> u.subscript.exp -> kind!= A_intExp)
+                    {
+                        EM_error(EM_tokPos, "Cannot declare array with an unfixed size.");
+                    }
+                    type = A_ArrayTy(EM_tokPos, type, var -> u.subscript.exp -> u.intt);
+                }
+                result -> u.field = A_Field(EM_tokPos, var -> u.subscript.name, type), NULL;
+            }
+            else{
+                std::cerr << "Unknown field value." << std::endl;
+            }
+        }
+    }
+    //explist
+    {
+        if(ruleName == "explist.null"){
+            result -> u.expList = A_ExpList(NULL, NULL);
+        }
+        else if(ruleName == "explist.exp"){
+            result -> u.expList = A_ExpList(tokenData.at("exp").exp, NULL);
+        }
+        else if(ruleName == "explist.explist"){
+            result -> u.expList = A_ExpList(tokenData.at("exp").exp, tokenData.at("explist").expList);
+        }
+    }
+    //stmlist
+    {
+        if(ruleName == "stmlist.null"){
+            result -> u.stmList = A_StmList(NULL, NULL);
+        }
+        else if(ruleName == "stmlist.stm"){
+            result -> u.stmList = A_StmList(tokenData.at("stm").stm, NULL);
+        }
+        else if(ruleName == "stmlist.stmlist"){
+            result -> u.stmList = A_StmList(tokenData.at("stm").stm, tokenData.at("stmlist").stmList);
+        }
+    }
+    //declist
+    {
+        if(ruleName == "declist.null"){
+            result -> u.decList = A_DecList(NULL, NULL);
+        }
+        else if(ruleName == "declist.dec"){
+            result -> u.decList = A_DecList(tokenData.at("dec").dec, NULL);
+        }
+        else if(ruleName == "declist.declist"){
+            result -> u.decList = A_DecList(tokenData.at("dec").dec, tokenData.at("declist").decList);
+        }
+    }
+    //fieldlist
+    {
+        if(ruleName == "fieldlist.null"){
+            result -> u.fieldList = A_FieldList(NULL, NULL);
+        }
+        else if(ruleName == "fieldlist.field"){
+            result -> u.fieldList = A_FieldList(tokenData.at("field").field, NULL);
+        }
+        else if(ruleName == "fieldlist.fieldlist"){
+            result -> u.fieldList = A_FieldList(tokenData.at("field").field, tokenData.at("fieldlist").fieldList);
+        }
+    }
+    for(int i = 0; i < ruleSize; i++){
+        list.pop_back();
+    }
+    return result;
+}
+
+static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarListTy &grammarList, const grammarListTy &originalGrammarList){
     std::vector<int> stack;
+    L_tokenList resultList;
     stack.push_back(0);
     std::string action;
     do{
@@ -443,7 +820,7 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
             }
             else{
                 L_errorPos errorPos = L_getErrorPos(list.front() -> start);
-                std::cerr << "Unexpected " << list.front() -> kind << " " << errorPos.lineNum << std::endl;
+                std::cerr << "Unexpected " << list.front() -> kind << " on line " << errorPos.lineNum << " and column " << errorPos.columnNum << std::endl;
                 exit(0);
             }
         }
@@ -462,6 +839,7 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
             // std::cout << "stackNum " << stackNum << " " << list.front() -> kind << std::endl;
             stack.push_back(stackNum);
             if(tokenToRead == list.front() -> kind){
+                resultList.push_back(list.front());
                 list.pop_front();
             }
         }
@@ -469,22 +847,25 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
             std::string reduceRule = action.substr(1, action.size() - 1);
             int ruleSize = grammarList.at(reduceRule).size();
             // std::cout << "reduceRule " + reduceRule + " "<< ruleSize << std::endl;
+            L_token resultToken = reduce(resultList, reduceRule, grammarList, originalGrammarList);
             for(int ii = 0; ii < ruleSize; ii++){
                 stack.pop_back();
             }
+            resultList.push_back(resultToken);
             reduceRule = reduceRule.substr(0, reduceRule.find("."));
             // std::cout << reduceRule << " " << stack.back() << " " << table.at(reduceRule).at(stack.back()) << std::endl;
             stack.push_back(std::stoi(table.at(reduceRule).at(stack.back())));
         }
         else if(action == "accepted"){
-            std::cout << "parsing finished." << std::endl;
+            std::cout << "Parsing finished." << std::endl;
+            return resultList.back() -> u.decList;
             break;
         }
         else{
             std::cout << action << " undefined" << std::endl;
         }
     } while(list.size() != 0);
-    std::cout << "finished" << std::endl;
+    return NULL;
 }
 
 static grammarTy createGrammarList(std::string ruleStr, std::string ruleNameStr, grammarListTy &grammarList, json input){
@@ -534,33 +915,87 @@ static grammarTy createGrammarList(std::string ruleStr, std::string ruleNameStr,
     return tokens;
 }
 
+static grammarTy createOriginalGrammarList(std::string ruleStr, std::string ruleNameStr, grammarListTy &grammarList, json input){
+    std::string tok;
+    std::regex tokenWithName("([a-zA-Z0-9]+)\\(([a-zA-Z0-9]+)\\)");
+    std::regex tokenWithPeriod("([a-zA-Z0-9]+)\\.([a-zA-Z0-9]+)");
+    std::smatch match;
+    std::deque<std::string> tokens;
+    std::stringstream rule(ruleStr);
+    while(rule >> tok){
+        if(std::find(std::begin(tokenNames), std::end(tokenNames), tok) == std::end(tokenNames)){
+            if(std::regex_search(tok, match, tokenWithName)){
+                tokens.push_back(match[0]);
+                continue;
+            }
+            if(std::regex_search(tok, match, tokenWithPeriod)){
+                std::cout << match[0] << std::endl;
+                std::string tempRuleStr = ruleStr;
+                if(input[match[1]][match[2]].is_string()){
+                    tempRuleStr = std::regex_replace(tempRuleStr, std::regex(tok), input[match[1]][match[2]].get<std::string>());
+                    grammarList[ruleNameStr + "." + tok] = createGrammarList(tempRuleStr, ruleNameStr, grammarList, input);
+                }
+                if(input[match[1]][match[2]].is_object()){
+                    for(const auto &item: input[match[1]][match[2]].items()){
+                        tempRuleStr = ruleStr;
+                        tempRuleStr = std::regex_replace(tempRuleStr, std::regex(tok), item.value().get<std::string>());
+                        grammarList[ruleNameStr + "." + tok + "." + item.key()] = createGrammarList(tempRuleStr, ruleNameStr, grammarList, input);
+                    }
+                    return tokens;
+                }
+                continue;
+            }
+            if(std::find(std::begin(nonTerminal), std::end(nonTerminal), tok) != std::end(nonTerminal)){
+                tokens.push_back(tok);
+                continue;
+            }
+            if(grammarList.count(tok)){
+                tokens.push_back(tok);
+            }
+            std::cerr << "Illegal token in grammar " << ruleNameStr << ": " << tok << std::endl;
+        }
+        tokens.push_back(tok);
+    }
+    if(tokens.size() == 0){
+        tokens.push_back("");
+    }
+    return tokens;
+}
+
 A_decList P_parse(L_tokenList list, const char *filename1){
     std::ifstream jInput(filename1);
     json j;
     jInput >> j;
     grammarListTy grammarList;
+    grammarListTy originalGrammarList;
     std::string tok;
     std::regex tokenWithName("([a-zA-Z0-9]+)\\(([a-zA-Z0-9]+)\\)");
     std::smatch match;
     grammarList["start"] = std::deque<std::string>({"declist"});
+    originalGrammarList["start"] = std::deque<std::string>({"declist"});
     for(const auto &item2: j["grammar"].items()){
         for(const auto &item: item2.value().items()){
             if(item.value().is_string()){
                 grammarTy temp = createGrammarList(item.value().get<std::string>(), item2.key() + "." + item.key(), grammarList, j["grammar"]);
+                grammarTy temp2 = createOriginalGrammarList(item.value().get<std::string>(), item2.key() + "." + item.key(), originalGrammarList, j["grammar"]);
                 if(temp.size() != 0){
                     grammarList[item2.key() + "." + item.key()] = temp;
+                    originalGrammarList[item2.key() + "." + item.key()] = temp2;
                 }
             }
             else if(item.value().is_object()){
                 for(const auto &i: item.value().items()){
                     grammarTy temp = createGrammarList(i.value().get<std::string>(), item2.key() + "." + item.key() + "." + i.key(), grammarList, j["grammar"]);
+                    grammarTy temp2 = createOriginalGrammarList(i.value().get<std::string>(), item2.key() + "." + item.key() + "." + i.key(), originalGrammarList, j["grammar"]);
                     if(temp.size() != 0){
                         grammarList[item2.key() + "." + item.key() + "." + i.key()] = temp;
+                        originalGrammarList[item2.key() + "." + item.key() + "." + i.key()] = temp2;
                     }
                 }
             }
         }
     }
+
     transitionTable.push_back(std::unordered_map<std::string, int>());
     std::vector<itemSetTy> itemSets = toItem0(grammarList);
     itemSets.front().push_back(std::make_pair("additionalRules", std::deque<std::string>({"------------------"})));
@@ -570,7 +1005,7 @@ A_decList P_parse(L_tokenList list, const char *filename1){
     firstSetTy FIRSTset = generateFirstSet(extended);
     firstSetTy FOLLOWset = generateFollowSet(extended, FIRSTset);
     tableTy actionGotoTable = generateActionGotoTable(itemSets, extended, FIRSTset, FOLLOWset, grammarList);
-    A_decList result = parseWithTable(list, actionGotoTable, grammarList);
+    A_decList result = parseWithTable(list, actionGotoTable, grammarList, originalGrammarList);
     // debug grammarList
     // int a = 0;
     // for(const auto &s: grammarList){

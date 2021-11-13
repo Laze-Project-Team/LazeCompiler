@@ -46,7 +46,7 @@
             "address":"& var",
             "sizeof":"sizeof ( var )",
             "array":"[ explist ]",
-            "func": "( fieldlist(param) ) => ( fieldlist(result) ) stm",
+            "func": "( fieldlist(params) ) => ( fieldlist(result) ) stm",
             "var": "varExp",
             "int": "int",
             "char": "char",
@@ -72,13 +72,13 @@
         },
         "stm":{
             "assign":{
-                "normal":"varExp = exp ;",
-                "add":"varExp + = exp ;",
-                "sub":"varExp - = exp ;",
-                "mul":"varExp * = exp ;",
-                "div":"varExp / = exp ;",
-                "increment":"varExp + + ;",
-                "decrement":"varExp - - ;"
+                "normal":"var = exp ;",
+                "add":"var + = exp ;",
+                "sub":"var - = exp ;",
+                "mul":"var * = exp ;",
+                "div":"var / = exp ;",
+                "increment":"var + + ;",
+                "decrement":"var - - ;"
             },
             "if":{
                 "if":"if ( exp ) then stm",
@@ -87,7 +87,7 @@
             "while":"( exp ) to stm",
             "dec": {
                 "var":"ty : var = exp ;",
-                "object":"ty : var ( explist ) ;"
+                "object":"ty : id ( explist ) ;"
             },
             "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
             "return":{
@@ -108,28 +108,28 @@
             },
             "object": "ty : id ( explist ) ;",
             "class": {
-                "noinherit":"class : id { memlist }",
-                "inherit":"class <- id { memlist }"
+                "noinherit":"class : id(name) { memlist }",
+                "inherit":"class : id(name) <- id(inherit) { memlist }"
             },
-            "func": "function : id ( fieldlist(param) ) => ( fieldlist(result) ) stm",
-            "jsload": "function : id ( fieldlist(param) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) ;",
+            "func": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+            "jsload": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) ;",
             "jsexport": "jsexport ( id , string ) ;",
             "template": {
-                "func":"type < id > : function : id ( fieldlist(param) ) => ( fieldlist(result) ) stm",
-                "class":"type < id > : class : id { memlist }"
+                "func":"type < id(type) > : function : id(name) ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+                "class":"type < id(type) > : class : id(name) { memlist }"
             }
         },
         "var": {
             "simple":"id",
             "field":"var . id",
             "deref":"* var",
-            "subcript":"var [ exp ]",
+            "subscript":"var [ exp ]",
             "arrowfield":"var -> id"
         },
         "varExp": {
             "var":"var",
             "field":"exp . id",
-            "subcript":"exp(arrayname) [ exp(index) ]",
+            "subscript":"exp(arrayname) [ exp(index) ]",
             "arrowfield":"exp -> id"
         },
         "ty": {
@@ -145,7 +145,7 @@
             "func": "function : ( fieldlist(params) ) => ( fieldlist(result) )"
         },
         "mems":{
-            "funcAndVarList": "declist",
+            "nospecifier": "declist",
             "public": "public : declist",
             "private": "private : declist",
             "protected": "protected : declist"

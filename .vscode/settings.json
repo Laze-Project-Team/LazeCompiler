@@ -71,6 +71,7 @@
         "thread": "cpp",
         "cfenv": "cpp",
         "tojson.h": "c",
-        "charconv": "cpp"
+        "charconv": "cpp",
+        "env.h": "c"
     }
 }

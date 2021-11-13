@@ -96,7 +96,7 @@ int main(int argc, char **argv)
     jobj jsonAST = JS_toJson(absyn_root);
     fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));
     // CON_convert(resultJsonFile, "enlang.json");
-    Pr_printTree(SEM_transProg(absyn_root), resultFilename);
+    Pr_printTree(SEM_transProg(l), resultFilename);
     printf("Finshed Compiling.\n");
     //printf("%d memorysize\n", memorySize);
     return 0;

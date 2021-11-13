@@ -1,3 +1,4 @@
+#pragma once
 #include "errormsg.h"
 #include "preprocessor.h"
 #include <vector>
