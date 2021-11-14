@@ -1035,7 +1035,7 @@
             アニメーション情報:info = animations.取得(カウンタ);
             //表示(info.startTime);
             もし((info.startTime <= 時間計測()) && ((info.startTime + info.duration) >= 時間計測()))ならば{
-                もし(info.id == 0)ならば{ 
+                もし(info.id == 0)ならば{
                     実数:elapsedTime = 時間計測() - info.startTime;  
                     回転(info.info.x * elapsedTime); 
                 } 

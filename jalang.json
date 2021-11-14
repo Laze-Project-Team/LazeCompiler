@@ -47,7 +47,10 @@
             "sizeof":"sizeof ( var )",
             "array":"[ explist ]",
             "func": "( fieldlist(params) ) => ( fieldlist(result) ) stm",
-            "var": "varExp",
+            "var":"var",
+            "field":"exp . id",
+            "subscript":"exp(arrayname) [ exp(index) ]",
+            "arrowfield":"exp -> id",
             "int": "int",
             "char": "char",
             "string": "string",
@@ -81,14 +84,11 @@
                 "decrement":"var - - ;"
             },
             "if":{
-                "if":"if ( exp ) then stm",
+                "if":"if ( exp ) then stm(then)",
                 "ifelse":"if ( exp ) then stm(then) else stm(else)"
             },
             "while":"( exp ) to stm",
-            "dec": {
-                "var":"ty : var = exp ;",
-                "object":"ty : id ( explist ) ;"
-            },
+            "dec": "dec",
             "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
             "return":{
                 "noexp":"return ;",

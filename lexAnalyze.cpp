@@ -29,19 +29,6 @@ int prelex(void);
 // extern "C" int yyparse(void);
 extern "C" int preparse(void);
 
-// void parseTest(string fname)
-// {
-//     EM_reset(fname);
-//     if(yyparse() == 0)
-//     {
-//         fprintf(stderr, "Parsing Successful\n");
-//     }
-//     else
-//     {
-//         fprintf(stderr, "Parsing Failed\n");
-//     }
-// }
-
 int main(int argc, char **argv)
 {
     // yydebug = 1;
@@ -60,6 +47,8 @@ int main(int argc, char **argv)
     string tempFileName = concat(".", fname);
     string temptempFileName = concat("..", fname);
     string resultFilename = concat(tempFileName, ".wat");
+    string parseJsonName = "";
+    string convertJsonName = "";
     char *linkFile = NULL;
     for(int i = 2; i < argc; i++){
         if(argv[i][0] == '-'){
@@ -68,10 +57,18 @@ int main(int argc, char **argv)
                 chdir(argv[i]);
                 strcpy(directory, argv[i]);
             }
-            if(strcmp(argv[i], "-link") == 0){
+            if(strcmp(argv[i], "--link") == 0){
                 i++;
 
                 linkFile = argv[i];
+            }
+            if(strcmp(argv[i], "--parse-json") == 0){
+                i++;
+                parseJsonName = argv[i];
+            }
+            if(strcmp(argv[i], "--convert-json") == 0){
+                i++;
+                convertJsonName = argv[i];
             }
         }
     }
@@ -88,14 +85,13 @@ int main(int argc, char **argv)
     while(!toByte(temptempFileName, tempFileName));
     fprintf(stdout, "\n");
     printf("Finished Preprocessing...\n");
-    L_tokenList list = L_Lexer(tempFileName, "jalang.json");
-    A_decList absyn_root = P_parse(list, "jalang.json");
+    L_tokenList list = L_Lexer(tempFileName, parseJsonName);
+    A_decList absyn_root = P_parse(list, parseJsonName);
     std::cout << "Finished Parsing..." << std::endl;
     string resultJsonFile = concat(tempFileName, ".json");
-    // A_decList absyn_root = parse(tempFileName);
     jobj jsonAST = JS_toJson(absyn_root);
     fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));
-    CON_convert(resultJsonFile, "enlang.json");
+    CON_convert(resultJsonFile, convertJsonName);
     Pr_printTree(SEM_transProg(absyn_root), resultFilename);
     printf("Finshed Compiling.\n");
     //printf("%d memorysize\n", memorySize);

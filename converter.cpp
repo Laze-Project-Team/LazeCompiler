@@ -48,7 +48,7 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
         }
         json info  = target["info"];
         std::string ruleString;
-        std::cout << type + "/" + kind << std::endl;
+        // std::cout << type + "/" + kind << std::endl;
         if(type == "ty" && kind == "array"){
             
         }
@@ -56,8 +56,8 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
             ruleString = rule[type][kind].get<std::string>();
         }
         else if(rule[type][kind].is_object()){
-
             std::string specificType = info["specificType"].get<std::string>();
+            std::cout << specificType << std::endl;
             ruleString = rule[type][kind][specificType].get<std::string>();
             // std::cerr << "!!!!!is not rule!!!!!" << std::endl;
         }

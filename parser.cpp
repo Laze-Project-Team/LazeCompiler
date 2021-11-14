@@ -469,7 +469,16 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.exp = A_FuncExp(result -> start, tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm);
         }
         else if(ruleName == "exp.var"){
-            result -> u.exp = tokenData.at("varExp").exp;
+            result -> u.exp = A_VarExp(result -> start, tokenData.at("var").var);
+        }
+        else if(ruleName == "exp.field"){
+            result -> u.exp = A_FieldExp(result -> start, tokenData.at("exp").exp, S_Symbol(tokenData.at("id").id));
+        }
+        else if(ruleName == "exp.subscript"){
+            result -> u.exp = A_SubscriptExp(result -> start, tokenData.at("exp(arrayname)").exp, tokenData.at("exp(index)").exp);
+        }
+        else if(ruleName == "exp.arrowfield"){
+            result -> u.exp = A_ArrowFieldExp(result -> start, tokenData.at("exp").exp, S_Symbol(tokenData.at("id").id));
         }
         else if(ruleName == "exp.int"){
             result -> u.exp = A_IntExp(result -> start, tokenData.at("int").intt);
@@ -556,7 +565,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_minusOp, A_VarExp(result -> start, tokenData.at("var").var), A_IntExp(result -> start, 1)), FALSE);
         }
         else if(ruleName == "stm.if.if"){
-            result -> u.stm = A_IfStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm, NULL);
+            result -> u.stm = A_IfStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm(then)").stm, NULL);
         }
         else if(ruleName == "stm.if.ifelse"){
             result -> u.stm = A_IfStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm(then)").stm, tokenData.at("stm(else)").stm);
@@ -564,11 +573,8 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "stm.while"){
             result -> u.stm = A_WhileStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm);
         }
-        else if(ruleName == "stm.dec.var"){
-            result -> u.stm = A_DeclarationStm(result -> start, A_VarDec(result -> start, A_AssignStm(result -> start, tokenData.at("var").var, tokenData.at("exp").exp, TRUE), tokenData.at("ty").type));
-        }
-        else if(ruleName == "stm.dec.object"){
-            result -> u.stm = A_DeclarationStm(result -> start, A_ObjectDec(result -> start, tokenData.at("ty").type, S_Symbol(tokenData.at("id").id), tokenData.at("explist").expList));
+        else if(ruleName == "stm.dec"){
+            result -> u.stm = A_DeclarationStm(result -> start, tokenData.at("dec").dec);
         }
         else if(ruleName == "stm.for"){
             result -> u.stm = A_ForStm(result -> start, tokenData.at("stm(init)").stm, tokenData.at("exp").exp, tokenData.at("stm(incr)").stm, tokenData.at("stm").stm);
@@ -583,7 +589,8 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.stm = A_CallStm(result -> start, tokenData.at("varExp").exp, tokenData.at("explist").expList);
         }
         else if(ruleName == "stm.loop"){
-            result -> u.stm = A_LoopStm(result -> start, tokenData.at("stm").stm);
+            // std::cout << "looooooooooooooop" << std::endl;
+            result -> u.stm = A_DeclarationStm(result -> start, A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol("loop"), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), tokenData.at("stm").stm), NULL)));
         }
         else if(ruleName == "stm.break"){
             result -> u.stm = A_BreakStm(result -> start);

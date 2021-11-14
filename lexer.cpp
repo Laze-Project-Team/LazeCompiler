@@ -148,8 +148,13 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
                         std::strcpy(token -> u.charr, match[2].str().c_str());
                     }
                     else if(regex.first == "int"){
-                        // std::cout << match[2].str() << std::endl;
-                        token -> u.intt = std::stoll(match[2].str());
+                        if(std::stoll(match[2].str()) == 0 && match[2].str() != "0"){
+                            token -> u.intt = std::stoul(match[2].str(), nullptr, 16);
+                        }
+                        else{
+                            token -> u.intt = std::stoll(match[2].str());
+                        }
+                        // std::cout << match[2].str() << ": " << token -> u.intt << std::endl;
                     }
                     else if(regex.first == "real"){
                         token -> u.real = std::stod(match[2].str());
