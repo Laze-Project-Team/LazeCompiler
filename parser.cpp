@@ -492,43 +492,43 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
     }
     //oper
     {
-        if(ruleName == "op.add"){
+        if(ruleName == "oper.add"){
             result -> u.oper = A_plusOp;
         }
-        else if(ruleName == "op.sub"){
+        else if(ruleName == "oper.sub"){
             result -> u.oper = A_minusOp;
         }
-        else if(ruleName == "op.mul"){
+        else if(ruleName == "oper.mul"){
             result -> u.oper = A_timesOp;
         }
-        else if(ruleName == "op.div"){
+        else if(ruleName == "oper.div"){
             result -> u.oper = A_divideOp;
         }
-        else if(ruleName == "op.mod"){
+        else if(ruleName == "oper.mod"){
             result -> u.oper = A_modOp;
         }
-        else if(ruleName == "op.eq"){
+        else if(ruleName == "oper.eq"){
             result -> u.oper = A_eqOp;
         }
-        else if(ruleName == "op.neq"){
+        else if(ruleName == "oper.neq"){
             result -> u.oper = A_neqOp;
         }
-        else if(ruleName == "op.ge"){
+        else if(ruleName == "oper.ge"){
             result -> u.oper = A_geOp;
         }
-        else if(ruleName == "op.gt"){
+        else if(ruleName == "oper.gt"){
             result -> u.oper = A_gtOp;
         }
-        else if(ruleName == "op.le"){
+        else if(ruleName == "oper.le"){
             result -> u.oper = A_leOp;
         }
-        else if(ruleName == "op.lt"){
+        else if(ruleName == "oper.lt"){
             result -> u.oper = A_ltOp;
         }
-        else if(ruleName == "op.and"){
+        else if(ruleName == "oper.and"){
             result -> u.oper = A_andOp;
         }
-        else if(ruleName == "op.or"){
+        else if(ruleName == "oper.or"){
             result -> u.oper = A_orOp;
         }
     }
@@ -660,7 +660,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "varExp.subscript"){
             result -> u.exp = A_SubscriptExp(result -> start, tokenData.at("exp(arrayname)").exp, tokenData.at("exp(index)").exp);
         }
-        else if(ruleName == "varExp.arrowField"){
+        else if(ruleName == "varExp.arrowfield"){
             result -> u.exp = A_ArrowFieldExp(result -> start, tokenData.at("exp").exp, S_Symbol(tokenData.at("id").id));
         }
     }
@@ -734,11 +734,12 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
                 {
                     if(var -> u.subscript.exp -> kind!= A_intExp)
                     {
-                        EM_error(EM_tokPos, "Cannot declare array with an unfixed size.");
+                        EM_error(result -> start, "Cannot declare array with an unfixed size.");
                     }
-                    type = A_ArrayTy(EM_tokPos, type, var -> u.subscript.exp -> u.intt);
+                    type = A_ArrayTy(result -> start, type, var -> u.subscript.exp -> u.intt);
                 }
-                result -> u.field = A_Field(EM_tokPos, var -> u.subscript.name, type), NULL;
+                // std::cout << S_name(var -> u.subscript.name) << std::endl;
+                result -> u.field = A_Field(result -> start, tokenData.at("var").var -> u.subscript.name, type);
             }
             else{
                 std::cerr << "Unknown field value." << std::endl;
@@ -1006,6 +1007,7 @@ A_decList P_parse(L_tokenList list, const char *filename1){
     firstSetTy FOLLOWset = generateFollowSet(extended, FIRSTset);
     tableTy actionGotoTable = generateActionGotoTable(itemSets, extended, FIRSTset, FOLLOWset, grammarList);
     A_decList result = parseWithTable(list, actionGotoTable, grammarList, originalGrammarList);
+    return result;
     // debug grammarList
     // int a = 0;
     // for(const auto &s: grammarList){

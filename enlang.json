@@ -47,16 +47,13 @@
             "sizeof":"sizeof ( var )",
             "array":"[ explist ]",
             "func": "( fieldlist(params) ) => ( fieldlist(result) ) stm",
-            "var": "var",
-            "deref": "* var",
-            "field":"exp . id",
-            "subcript":"exp(arrayname) [ exp(index) ]",
-            "arrowfield":"exp -> id",
+            "var": "varExp",
             "int": "int",
+            "char": "char",
             "string": "string",
             "real": "real",
-            "char": "char",
-            "seq": "explist"
+            "true": "true",
+            "false": "false"
         },
         "oper": {
             "add":"+",
@@ -74,8 +71,7 @@
             "or":"||"
         },
         "stm":{
-            "assign": "var = exp ;",
-            "assigna":{
+            "assign":{
                 "normal":"var = exp ;",
                 "add":"var + = exp ;",
                 "sub":"var - = exp ;",
@@ -85,12 +81,15 @@
                 "decrement":"var - - ;"
             },
             "if":{
-                "if":"if ( exp ) stm(then)",
-                "ifelse":"if ( exp ) stm(then) else stm(else)"
+                "if":"if ( exp ) then stm",
+                "ifelse":"if ( exp ) then stm(then) else stm(else)"
             },
             "while":"( exp ) to stm",
-            "dec":"dec",
-            "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm(body)",
+            "dec": {
+                "var":"ty : var = exp ;",
+                "object":"ty : id ( explist ) ;"
+            },
+            "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
             "return":{
                 "noexp":"return ;",
                 "exp":"return ( exp ) ;"
@@ -100,7 +99,7 @@
             "break":"break ;",
             "continue":"continue ;",
             "compound":"{ stmlist }",
-            "declartion": "dec"
+            "repeat":"( exp ) repeat stm"
         },
         "dec":{
             "var": {
@@ -109,28 +108,28 @@
             },
             "object": "ty : id ( explist ) ;",
             "class": {
-                "noinherit":"class : id { memlist }",
-                "inherit":"class : id <- id(inheritance) { memlist }"
+                "noinherit":"class : id(name) { memlist }",
+                "inherit":"class : id(name) <- id(inherit) { memlist }"
             },
             "func": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
             "jsload": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) ;",
             "jsexport": "jsexport ( id , string ) ;",
             "template": {
-                "func":"type < id > : function : id ( fieldlist(param) ) => ( fieldlist(result) ) stm",
-                "class":"type < id > : class : id { memlist }"
+                "func":"type < id(type) > : function : id(name) ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+                "class":"type < id(type) > : class : id(name) { memlist }"
             }
         },
         "var": {
             "simple":"id",
             "field":"var . id",
             "deref":"* var",
-            "subcript":"var [ exp ]",
+            "subscript":"var [ exp ]",
             "arrowfield":"var -> id"
         },
         "varExp": {
             "var":"var",
             "field":"exp . id",
-            "subcript":"exp(arrayname) [ exp(index) ]",
+            "subscript":"exp(arrayname) [ exp(index) ]",
             "arrowfield":"exp -> id"
         },
         "ty": {
@@ -143,8 +142,17 @@
             "short" : "shorttype",
             "pointer" : "* ty",
             "poly" : "id < ty >",
-            "array": "ty [ int ]",
             "func": "function : ( fieldlist(params) ) => ( fieldlist(result) )"
+        },
+        "mems":{
+            "nospecifier": "declist",
+            "public": "public : declist",
+            "private": "private : declist",
+            "protected": "protected : declist"
+        },
+        "memlist":{
+            "mems": "mems",
+            "memlist": "memlist mems"
         },
         "field": {
             "noinit":"ty : var"
@@ -152,22 +160,22 @@
         "explist":{
             "null":"",
             "exp":"exp",
-            "explist":"explist , exp"
+            "explist":"exp , explist"
         },
         "stmlist":{
             "null":"",
             "stm":"stm",
-            "stmlist":"stmlist stm"
+            "stmlist":"stm stmlist"
         },
         "declist":{
             "null":"",
             "dec":"dec",
-            "declist":"declist dec"
+            "declist":"dec declist"
         },
         "fieldlist":{
             "null":"",
             "field":"field",
-            "fieldlist":"fieldlist , field"
+            "fieldlist":"field , fieldlist"
         }
     }
 }

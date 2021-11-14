@@ -97,6 +97,7 @@ T_moduleList SEM_transProg(A_decList declist)
         {
             continue;
         }
+        // printf("dec kind %d\n", dec -> kind);
         T_module decMod = transDec(venv, tenv, dec, Tr_outermost(), FALSE, venv, Ty_Void());
         if (decMod)
         {
@@ -2188,7 +2189,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         {
             if (left.ty->kind != Ty_bool)
             {
-                EM_error(e->pos, "Left operand does not a bool type.");
+                EM_error(e->pos, "Left operand does not a bool type. %d", left.ty -> kind);
             }
             if (right.ty->kind != Ty_bool)
             {
@@ -2575,6 +2576,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
     }
     case A_objectDec:
     {
+        // printf("cursor pos %d", d -> pos);
         // printf("line %d column %d", L_getErrorPos(d -> pos).lineNum, L_getErrorPos(d -> pos).columnNum);
         transDec(venv, tenv, A_VarDec(d -> pos, A_AssignStm(d -> pos, A_SimpleVar(d -> pos, d -> u.object.name), NULL, TRUE), d -> u.object.className), level, isLoop, table, classs);
         return NULL;

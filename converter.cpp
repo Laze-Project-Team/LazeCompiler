@@ -48,7 +48,10 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
         }
         json info  = target["info"];
         std::string ruleString;
-        // std::cout << type + "/" + kind << std::endl;
+        std::cout << type + "/" + kind << std::endl;
+        if(type == "ty" && kind == "array"){
+            
+        }
         if(rule[type][kind].is_string()){
             ruleString = rule[type][kind].get<std::string>();
         }

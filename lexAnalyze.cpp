@@ -89,14 +89,14 @@ int main(int argc, char **argv)
     fprintf(stdout, "\n");
     printf("Finished Preprocessing...\n");
     L_tokenList list = L_Lexer(tempFileName, "jalang.json");
-    A_decList l = P_parse(list, "jalang.json");
+    A_decList absyn_root = P_parse(list, "jalang.json");
     std::cout << "Finished Parsing..." << std::endl;
     string resultJsonFile = concat(tempFileName, ".json");
-    A_decList absyn_root = parse(tempFileName);
+    // A_decList absyn_root = parse(tempFileName);
     jobj jsonAST = JS_toJson(absyn_root);
     fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));
-    // CON_convert(resultJsonFile, "enlang.json");
-    Pr_printTree(SEM_transProg(l), resultFilename);
+    CON_convert(resultJsonFile, "enlang.json");
+    Pr_printTree(SEM_transProg(absyn_root), resultFilename);
     printf("Finshed Compiling.\n");
     //printf("%d memorysize\n", memorySize);
     return 0;

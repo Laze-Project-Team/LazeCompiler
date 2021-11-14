@@ -160,22 +160,22 @@
         "explist":{
             "null":"",
             "exp":"exp",
-            "explist":"explist , exp"
+            "explist":"exp , explist"
         },
         "stmlist":{
             "null":"",
             "stm":"stm",
-            "stmlist":"stmlist stm"
+            "stmlist":"stm stmlist"
         },
         "declist":{
             "null":"",
             "dec":"dec",
-            "declist":"declist dec"
+            "declist":"dec declist"
         },
         "fieldlist":{
             "null":"",
             "field":"field",
-            "fieldlist":"fieldlist , field"
+            "fieldlist":"field , fieldlist"
         }
     }
 }

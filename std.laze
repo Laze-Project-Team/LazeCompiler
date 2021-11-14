@@ -1084,7 +1084,7 @@
             glBindBuffer(0x8893, elementBuffer);   
             glDrawElements(0x0004, vertexNum, 0x1403, 0); 
         }
-        もし(vertexNum == 0 && shaderID == 4)ならば{
+        もし((vertexNum == 0) && (shaderID == 4))ならば{
             glBindBuffer(0x8892, buffer);
             glDrawArrays(0x0005, 0, pointNum);
         }
