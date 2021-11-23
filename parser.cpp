@@ -13,8 +13,10 @@
 #include <sstream>
 #include <cstring>
 
-static std::string tokenNames[] = {"char","string","hex","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
+// static std::string tokenNames[] = {"char","string","hex","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
 static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist", "oper", "funcAndVar", "funcAndVarList", "mems"};
+
+static std::deque<std::string> tokenNames;
 
 using grammarListTy = std::unordered_map<std::string, std::deque<std::string>>;
 using grammarTy = std::deque<std::string>;
@@ -435,8 +437,14 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
     // std::cout << ruleName << ": ";
     L_token result = std::make_shared<L_token_>();
     result -> kind = ruleName;
-    result -> start = list.front() -> start;
-    result -> end = list.front() -> end;
+    if(reduceList.size() > 0){
+        result -> start = reduceList.front() -> start;
+        result -> end = reduceList.front() -> end;
+    }
+    else{
+        result -> start = list.back() -> start;
+        result -> end = list.back() -> end;
+    }
     std::map<std::string, L_tokenVal> tokenData;
     for(int i = 0; i < reduceList.size(); i++){
         tokenData[originalGrammarList.at(ruleName).at(i)] = reduceList.at(i) -> u;
@@ -979,6 +987,7 @@ A_decList P_parse(L_tokenList list, const char *filename1){
     std::string tok;
     std::regex tokenWithName("([a-zA-Z0-9]+)\\(([a-zA-Z0-9]+)\\)");
     std::smatch match;
+    tokenNames = L_getTokenNames();
     grammarList["start"] = std::deque<std::string>({"declist"});
     originalGrammarList["start"] = std::deque<std::string>({"declist"});
     for(const auto &item2: j["grammar"].items()){

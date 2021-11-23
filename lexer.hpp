@@ -13,72 +13,6 @@ using L_tokenList = std::deque<L_token>;
 using delimDataTy = std::vector<std::pair<std::string, std::string>>;
 // typedef struct L_token_ *L_token;
 
-enum tokenType
-{
-    CHAR,
-    ID,
-    STRING,
-    INT,
-    REAL,
-    COMMA,
-    COLON,
-    SEMICOLON,
-    LPAREN,
-    RPAREN,
-    LBRACK,
-    RBRACK,
-    LBRACE,
-    RBRACE,
-    DOT,
-    PLUS,
-    MINUS,
-    TIMES,
-    DIVIDE,
-    EQ,
-    NEQ,
-    LT,
-    LE,
-    GT,
-    GE,
-    AND,
-    OR,
-    ASSIGN,
-    IF,
-    THEN,
-    ELSE,
-    FROM,
-    TO,
-    BREAK,
-    INTTYPE,
-    REALTYPE,
-    CONTINUE,
-    RETURN,
-    TYPE,
-    VOID,
-    NUL,
-    TRUEE,
-    FALSEE,
-    BOOLEAN,
-    CHARTYPE,
-    MOD,
-    AMPERSAND,
-    SHORTTYPE,
-    FUNCTION,
-    ARROW,
-    LOOP,
-    JSLOAD,
-    SIZEOF,
-    CLASS,
-    LEFTARROW,
-    PRIVATE,
-    PUBLIC,
-    PROTECTED,
-    RIGHTARROW,
-    REPEAT,
-    JSEXPORT,
-    UMINUS,
-    LOWER_THAN_ELSE 
-};
 union L_tokenVal
 {
     void *none;
@@ -124,11 +58,14 @@ struct L_token_
 
 typedef struct L_errorPos
 {
-    int lineNum;
-    int columnNum;
+    std::string fileName = "";
+    int fileNum = 0;
+    int lineNum = 0;
+    int columnNum = 0;
 };
 
 L_token L_delimToken(delimDataTy data);
 
 L_tokenList L_Lexer(const char* filename1, const char *filename2);
 L_errorPos L_getErrorPos(int cursorPos);
+std::deque<std::string> L_getTokenNames();

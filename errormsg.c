@@ -29,7 +29,7 @@ void EM_newLine(void)
     lineNum++;
     linePos = intList(EM_tokPos, linePos);
 }
-void EM_error(int pos, char *message, ...)
+void EM_error(int pos, const char *message, ...)
 {
     va_list ap;
     IntList lines = linePos;
@@ -50,7 +50,7 @@ void EM_error(int pos, char *message, ...)
     exit(0);
 }
 
-void debug(int pos, char *message, ...)
+void debug(int pos, const char *message, ...)
 {
     va_list ap;
     IntList lines = linePos;
@@ -70,13 +70,13 @@ void debug(int pos, char *message, ...)
     fprintf(stdout, "\n");
 }
 
-void EM_reset(string fname)
+void EM_reset(const string fname)
 {
     anyErrors = FALSE;
     fileName = fname;
     lineNum = 1;
     linePos = intList(0, NULL);
-    yyin = fopen(fname, "r, ccs = UTF16LE");
+    FILE *yyin = fopen(fname, "r, ccs = UTF16LE");
     if(!yyin)
     {
         EM_error(0, "cannot open");
@@ -84,7 +84,7 @@ void EM_reset(string fname)
     }
 }
 
-void EM_prereset(string fname)
+void EM_prereset(const string fname)
 {
     anyErrors = FALSE;
     fileName = fname;

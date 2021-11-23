@@ -1,10 +1,10 @@
 %{
+    #include "errormsg.hpp"
     #ifdef __cplusplus
     extern "C" {
     #endif
     #include <stdio.h>
     #include "util.h"
-    #include "errormsg.h"
     #include "symbol.h"
     #include "absyn.h"
     #include "y.tab.h"

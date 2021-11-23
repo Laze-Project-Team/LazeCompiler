@@ -4,13 +4,13 @@
 #include <iostream>
 #include <unordered_map>
 #include "util.h"
-#include "errormsg.h"
+#include "errormsg.hpp"
 #include "symbol.h"
 #include "absyn.h"
 #include "parse.h"
-#include "printtree.h"
+#include "printtree.hpp"
 #include "ppsemant.hpp"
-#include "toJson.h"
+#include "toJson.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
 #include "converter.hpp"
@@ -23,7 +23,7 @@ extern int yydebug;
 extern int funcs;
 extern int memorySize;
 
-extern "C" int yylex(void);
+// extern "C" int yylex(void);
 int prelex(void);
 
 // extern "C" int yyparse(void);
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
         includeFile(linkFile, temptempFileName);
     }
     transPPList(preprocess(temptempFileName), temptempFileName);
-    EM_reset(tempFileName);
+    // EM_reset(tempFileName);
     while(!toByte(temptempFileName, tempFileName));
     fprintf(stdout, "\n");
     printf("Finished Preprocessing...\n");

@@ -688,7 +688,7 @@ static const flex_int16_t yy_nxt[99] =
     {   0,
         4,    5,    6,    7,    8,    4,    4,    9,   10,   11,
        11,   11,   11,   12,   11,   11,   11,   13,   14,   15,
-       16,    8,    4,   13,   17,   18,   19,   19,   19,   19,
+       16,    8,   13,   13,   17,   18,   19,   19,   19,   19,
        20,   19,   19,   19,   26,   24,   26,   26,   26,   26,
        30,   26,   26,   30,   30,   30,   30,   30,   30,   30,
        30,   22,   43,   22,   26,   42,   26,   28,   41,   28,
@@ -732,7 +732,7 @@ char *yytext;
 #line 2 "preprocessor.l"
     #include <stdio.h>
     #include <string.h>
-    #include "errormsg.h"    
+    #include "errormsg.hpp"    
     #include "preprocessor.h"
     #include "preprocessor.tab.h"
 

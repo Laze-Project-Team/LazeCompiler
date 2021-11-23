@@ -76,7 +76,7 @@
 #line 1 "preprocessor.y"
 
     #include "preprocessor.h"
-    #include "errormsg.h"
+    #include "errormsg.hpp"
     Pre_preprocessorList ppListRoot;
 
     int prelex(void);

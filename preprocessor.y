@@ -1,6 +1,6 @@
 %{
     #include "preprocessor.h"
-    #include "errormsg.h"
+    #include "errormsg.hpp"
     Pre_preprocessorList ppListRoot;
 
     int prelex(void);

@@ -1,7 +1,7 @@
 %{
     #include <stdio.h>
     #include <string.h>
-    #include "errormsg.h"    
+    #include "errormsg.hpp"    
     #include "preprocessor.h"
     #include "preprocessor.tab.h"
 
@@ -15,7 +15,7 @@ char [㐀-龯ぁ-んァ-ヶa-zA-Z]
 charAndNum [㐀-龯ぁ-んァ-ヶa-zA-Z0-9]*
 
 %%
-^[^(#)].* {}
+^(?:[^(#)]|[\(\)]).* {}
 
 \n {}
 " " {}

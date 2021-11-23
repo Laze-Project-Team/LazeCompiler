@@ -5,22 +5,6 @@
 
 static std::string symbols[] = {",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<","<=",">",">=","&&","||","=", "%","&"};
 static std::string convertOperToString(int oper);
-typedef enum
-{
-    A_plusOp,
-    A_minusOp,
-    A_timesOp,
-    A_divideOp,
-    A_modOp,
-    A_eqOp,
-    A_neqOp,
-    A_ltOp,
-    A_leOp,
-    A_gtOp,
-    A_geOp,
-    A_andOp,
-    A_orOp
-} A_oper;
 
 void CON_convert(char *ast, char *targetLang){
     std::ifstream ASTinput(ast);
@@ -56,8 +40,8 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
             ruleString = rule[type][kind].get<std::string>();
         }
         else if(rule[type][kind].is_object()){
+            std::cout << type << kind << std::endl;
             std::string specificType = info["specificType"].get<std::string>();
-            std::cout << specificType << std::endl;
             ruleString = rule[type][kind][specificType].get<std::string>();
             // std::cerr << "!!!!!is not rule!!!!!" << std::endl;
         }

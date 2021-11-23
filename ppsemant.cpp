@@ -5,6 +5,7 @@
 #include <sstream>
 #include <algorithm>
 
+std::deque<std::string> fileNames;
 std::vector<int> linesInFile;
 
 PP_cursor PP_getLinesInFile(int linePos){
@@ -14,18 +15,25 @@ PP_cursor PP_getLinesInFile(int linePos){
             linePos -= linesInFile.at(i);
         }
         else{
-            result.fileNum = i;
+            result.fileName = fileNames.at(i);
             result.lineNum = linePos;
+            result.fileNum = i;
             return result;
         }
     }
-    result.fileNum = linesInFile.size();
+    result.fileName = fileNames.back();
     result.lineNum = linePos;
+    result.fileNum = linesInFile.size();
     return result;
 }
 
-void transPPList(Pre_preprocessorList ppList, char* file)
+const char * PP_getFilename(int index){
+    return fileNames.at(index).c_str();
+}
+
+void transPPList(Pre_preprocessorList ppList, const char* file)
 {
+    fileNames.push_front(std::string(file));
     if(!ppList) {
         return;
     }
@@ -35,8 +43,9 @@ void transPPList(Pre_preprocessorList ppList, char* file)
     return;
 }
 
-void includeFile(char* includeStr, char* file)
+void includeFile(const char* includeStr, const char* file)
 {
+    fileNames.push_front(includeStr);
     std::ifstream originalFile(file, std::ifstream::in);
     std::ifstream inputFile(includeStr, std::ifstream::in);
     std::stringstream originalStrStr, inputStrStr;
@@ -53,7 +62,7 @@ void includeFile(char* includeStr, char* file)
     originalFile.close();
     outputFile.close();
 }
-void transPP(Pre_preprocessor pp, char* file)
+void transPP(Pre_preprocessor pp, const char* file)
 {
     if(pp)
     {

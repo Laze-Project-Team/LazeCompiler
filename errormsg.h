@@ -11,11 +11,11 @@ void EM_newLine(void);
 
 extern int EM_tokPos;
 
-void EM_error(int, string, ...);
-void debug(int, string, ...);
-void EM_impossible(string, ...);
-void EM_reset(string filename);
-void EM_prereset(string filename);
+void EM_error(int, const char *, ...);
+void debug(int, const char *, ...);
+void EM_impossible(const char *, ...);
+void EM_reset(const char * filename);
+void EM_prereset(const char * filename);
 #ifdef __cplusplus
 }
 #endif

@@ -1,0 +1,15 @@
+function: print(real: x) => () = jsload("console", "log");
+function: main() => (){
+    int: a = 5;
+    real: b = 10.0;
+    if(a == 5){
+        print(6583);
+        int: c = a * b;
+        print(c);
+    }
+    else{
+        print(0);
+        int: c = a / b;
+        print(c);
+    }
+}

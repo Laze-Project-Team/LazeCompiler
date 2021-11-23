@@ -6,53 +6,62 @@
 #include <regex>
 #include <sstream>
 #include <cstring>
+#include <vector>
 
 using json = nlohmann::json;
 
-static std::string tokenNames[] = {"char","string","real","hex","int",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else"};
+static std::deque<std::string> tokenNames;
+std::deque<std::string> L_getTokenNames(){
+    return tokenNames;
+}
+// static std::string tokenNames[] = {"char","string","real","hex","int",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else"};
 static std::string operators = 
 "{ \
-    \",\":\"^(,|、)\", \
-    \":\":\"^(:|：)\", \
-    \";\":\"^(;|；)\", \
-    \"(\":\"^(\\\\(|（)\", \
-    \")\":\"^(\\\\)|）)\", \
-    \"[\":\"^(\\\\[)\", \
-    \"]\":\"^(\\\\])\", \
-    \"{\":\"^(\\\\{|｛)\", \
-    \"}\":\"^(\\\\}|｝)\", \
-    \".\":\"^(\\\\.)\", \
-    \"+\":\"^(\\\\+|＋)\", \
-    \"-\":\"^(\\\\-)\", \
-    \"*\":\"^(\\\\*|＊)\", \
-    \"/\":\"^(\\\\/|／)\", \
-    \"&\":\"^(&|＆)\", \
-    \"%\":\"^(%|％)\", \
-    \"=>\":\"^(=\\\\>|＝＞)\", \
-    \"<-\":\"^(\\\\<\\\\-)\", \
-    \"->\":\"^(\\\\-\\\\>)\", \
-    \"==\":\"^(==|＝＝)\", \
-    \"!=\":\"^(!=|！＝)\", \
-    \"<=\":\"^(\\\\<=|＜＝)\", \
-    \">=\":\"^(\\\\>=|＞＝)\", \
-    \"<\":\"^(\\\\<|＜)\", \
-    \">\":\"^(\\\\>|＞)\", \
-    \"&&\":\"^(&&|＆＆)\", \
-    \"||\":\"^(\\\\|\\\\||｜)\", \
-    \"=\":\"^(=|＝)\" \
+    \",\" : \"^(,|、)\", \
+    \":\" : \"^(:|：)\", \
+    \";\" : \"^(;|；)\", \
+    \"(\" : \"^(\\\\(|（)\", \
+    \")\" : \"^(\\\\)|）)\", \
+    \"[\" : \"^(\\\\[)\", \
+    \"]\" : \"^(\\\\])\", \
+    \"{\" : \"^(\\\\{|｛)\", \
+    \"}\" : \"^(\\\\}|｝)\", \
+    \".\" : \"^(\\\\.)\", \
+    \"+\" : \"^(\\\\+|＋)\", \
+    \"-\" : \"^(\\\\-)\", \
+    \"*\" : \"^(\\\\*|＊)\", \
+    \"/\" : \"^(\\\\/|／)\", \
+    \"&\" : \"^(&|＆)\", \
+    \"%\" : \"^(%|％)\", \
+    \"=>\" : \"^(=\\\\>|＝＞)\", \
+    \"<-\" : \"^(\\\\<\\\\-)\", \
+    \"->\" : \"^(\\\\-\\\\>)\", \
+    \"==\" : \"^(==|＝＝)\", \
+    \"!=\" : \"^(!=|！＝)\", \
+    \"<=\" : \"^(\\\\<=|＜＝)\", \
+    \">=\" : \"^(\\\\>=|＞＝)\", \
+    \"<\" : \"^(\\\\<|＜)\", \
+    \">\" : \"^(\\\\>|＞)\", \
+    \"&&\" : \"^(&&|＆＆)\", \
+    \"||\" : \"^(\\\\|\\\\||｜)\", \
+    \"=\" : \"^(=|＝)\" \
 }";
 std::vector<std::vector<int>> lettersInLines;
 
 L_errorPos L_getErrorPos(int cursorPos){
     L_errorPos result;
+    std::cout << cursorPos << std::endl;
     for(int i = 0; i < lettersInLines.size(); i++){
         for(int j = 0; j < lettersInLines.at(i).size(); j++){
             if(cursorPos - lettersInLines.at(i).at(j) > 0){
                 cursorPos -= lettersInLines.at(i).at(j);
             }
             else{
-                result.lineNum = j + 1;
-                result.columnNum = cursorPos;
+                result.fileNum = i;
+                result.fileName = PP_getFilename(i);
+                std::cout << i << " line55"<< std::endl;
+                result.lineNum = PP_getLinesInFile(j + 1).lineNum;
+                result.columnNum = cursorPos + 1;
                 return result;
                 break;
             }
@@ -67,44 +76,77 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
     json j;
     input >> j;
     json keywords = j["tokens"]["keywords"];
-    json ops = json::parse(operators);
+    json ops = j["tokens"]["ops"];
     std::string charRegex = j["tokens"]["char"].get<std::string>();
     std::string intRegex = j["tokens"]["int"].get<std::string>();
     std::string separatorRegex = "[^" + charRegex.substr(1, charRegex.size() - 2) + intRegex.substr(1, intRegex.size() - 2) + "]";
     std::vector<std::pair<std::string, std::regex>> regexMap;
     regexMap.push_back(std::make_pair("comment", std::regex(j["tokens"]["comment"].get<std::string>())));
-    
-    
-    for(const auto &tokenName:tokenNames){
-        json obj;
-        if((obj = keywords[tokenName])!=nullptr){
-            std::string reg = obj.get<std::string>();
-            regexMap.push_back(std::make_pair(tokenName, std::regex("^("+reg+")(?:$|"+separatorRegex+")")));
-        }
-        else if((obj = ops[tokenName])!=nullptr){
-            std::string reg = obj.get<std::string>();
-            regexMap.push_back(std::make_pair(tokenName, std::regex(reg)));
-        }
-        else if(tokenName == "char"){
-            regexMap.push_back(std::make_pair(tokenName, std::regex("^('(...|..|.)')")));
-        }
-        else if(tokenName == "int"){
-            std::string hexRegex = j["tokens"]["hex"].get<std::string>();
-            regexMap.push_back(std::make_pair(tokenName, std::regex("^((" + hexRegex + "|" + intRegex + "+))")));
-        }
-        else if(tokenName == "real"){
-            regexMap.push_back(std::make_pair(tokenName, std::regex("^((" + intRegex + "+\\." + intRegex + "+f?))")));
-            // std::cout << "^((" + intRegex + "+\\." + intRegex + "+f?))" << std::endl;
-        }
-        else if(tokenName == "string"){
-            std::string stringRegex = "^(" + j["tokens"]["string"].get<std::string>() + ")";
-            regexMap.push_back(std::make_pair(tokenName, std::regex(stringRegex)));
-        }
-        else if(tokenName == "id"){
-            std::string idRegex = "^((" + charRegex + "[" + charRegex.substr(1, charRegex.size() - 2) + intRegex.substr(1, intRegex.size() - 2) + "]*))";
-            regexMap.push_back(std::make_pair(tokenName, std::regex(idRegex)));
-        }
+    for(const auto &item: keywords.items()){
+        std::string reg = item.value().get<std::string>();
+        regexMap.push_back(std::make_pair(item.key(), std::regex("^("+reg+")(?:$|"+separatorRegex+")")));
+        tokenNames.push_back(item.key());
     }
+    for(const auto &item: ops.items()){
+        std::string reg = item.value()["regex"];
+        std::cout << reg << std::endl;
+        regexMap.push_back(std::make_pair(item.value()["name"], std::regex(reg)));
+        tokenNames.push_back(item.value()["name"]);
+    }
+    // token hardcode
+    {
+        regexMap.push_back(std::make_pair("char", std::regex("^('(...|..|.)')")));
+        tokenNames.push_back("char");
+
+        regexMap.push_back(std::make_pair("real", std::regex("^((" + intRegex + "+\\." + intRegex + "+f?))")));
+        tokenNames.push_back("real");
+
+        std::string stringRegex = "^(" + j["tokens"]["string"].get<std::string>() + ")";
+        regexMap.push_back(std::make_pair("string", std::regex(stringRegex)));
+        tokenNames.push_back("string");
+
+        std::string hexRegex = j["tokens"]["hex"].get<std::string>();
+        regexMap.push_back(std::make_pair("int", std::regex("^((" + hexRegex + "|" + intRegex + "+))")));
+        tokenNames.push_back("int");
+
+        std::string idRegex = "^((" + charRegex + "[" + charRegex.substr(1, charRegex.size() - 2) + intRegex.substr(1, intRegex.size() - 2) + "]*))";
+        regexMap.push_back(std::make_pair("id", std::regex(idRegex)));
+        tokenNames.push_back("id");
+
+        tokenNames.push_back("eof");
+        tokenNames.push_back("");
+    }
+
+    // for(const auto &tokenName:tokenNames){
+    //     json obj;
+    //     if((obj = keywords[tokenName])!=nullptr){
+    //         std::string reg = obj.get<std::string>();
+    //         regexMap.push_back(std::make_pair(tokenName, std::regex("^("+reg+")(?:$|"+separatorRegex+")")));
+    //     }
+    //     else if((obj = ops[tokenName])!=nullptr){
+    //         std::string reg = obj.get<std::string>();
+    //         regexMap.push_back(std::make_pair(tokenName, std::regex(reg)));
+    //     }
+    //     else if(tokenName == "char"){
+    //         regexMap.push_back(std::make_pair(tokenName, std::regex("^('(...|..|.)')")));
+    //     }
+    //     else if(tokenName == "int"){
+    //         std::string hexRegex = j["tokens"]["hex"].get<std::string>();
+    //         regexMap.push_back(std::make_pair(tokenName, std::regex("^((" + hexRegex + "|" + intRegex + "+))")));
+    //     }
+    //     else if(tokenName == "real"){
+    //         regexMap.push_back(std::make_pair(tokenName, std::regex("^((" + intRegex + "+\\." + intRegex + "+f?))")));
+    //         // std::cout << "^((" + intRegex + "+\\." + intRegex + "+f?))" << std::endl;
+    //     }
+    //     else if(tokenName == "string"){
+    //         std::string stringRegex = "^(" + j["tokens"]["string"].get<std::string>() + ")";
+    //         regexMap.push_back(std::make_pair(tokenName, std::regex(stringRegex)));
+    //     }
+    //     else if(tokenName == "id"){
+    //         std::string idRegex = "^((" + charRegex + "[" + charRegex.substr(1, charRegex.size() - 2) + intRegex.substr(1, intRegex.size() - 2) + "]*))";
+    //         regexMap.push_back(std::make_pair(tokenName, std::regex(idRegex)));
+    //     }
+    // }
     std::ifstream programFile(filename1);
     std::string programLine;
     std::regex space("^((?: |   )+)");
@@ -115,7 +157,8 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
         linePos += 1;
         std::size_t cursorBefore = cursor;
         while(programLine.size() > 0){
-            std::size_t size;
+            std::size_t size = 0;
+            // std::cout << programLine << std::endl;
             if(std::regex_search(programLine, match, space)){
                 size = match[1].length();
                 cursor += size;
@@ -125,7 +168,7 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             for(const auto &regex: regexMap){
                 if(std::regex_search(programLine, match, regex.second)){
                     const char *matchCstr = match[1].str().c_str();
-                    // std::cout << regex.first << " ";
+                    std::cout << regex.first << " ";
                     std::size_t length = 0;
                     while(*matchCstr != '\0'){
                         if(*matchCstr < 0){
@@ -171,18 +214,22 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
                         tokenList.push_back(token);
                     }
                     break;
-                } 
+                }
             }
             programLine = programLine.substr(size);
         }
+            std::cout << std::endl;
         if(PP_getLinesInFile(linePos).fileNum == lettersInLines.size()){
             lettersInLines.push_back(std::vector<int>());
         }
+        // std::cout << "newline" << PP_getLinesInFile(linePos).fileNum << std::endl;
         lettersInLines.at(PP_getLinesInFile(linePos).fileNum).push_back(cursor - cursorBefore);
     }
     std::cout << tokenList.size() << std::endl;
     L_token eof = std::make_shared<L_token_>();
     eof -> kind = "eof";
+    eof -> start = cursor;
+    eof -> end = cursor;
     tokenList.push_back(eof);
     return tokenList;
 }
