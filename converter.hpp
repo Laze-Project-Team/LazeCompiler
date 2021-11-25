@@ -4,5 +4,5 @@
 
 using json = nlohmann::json;
 
-void CON_convert(char *ast, char *targetLang);
+void CON_convert(std::string ast, std::string targetLang, std::string fname);
 std::string jsonToString(json target, const json &rule, const json &keywords);

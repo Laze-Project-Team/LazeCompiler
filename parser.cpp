@@ -739,26 +739,28 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
     //field
     {
         if(ruleName == "field.noinit"){
-            A_var var = tokenData.at("var").var;
-            A_ty type = tokenData.at("ty").type;
-            if(var -> kind == A_simpleVar){
-                result -> u.field = A_Field(result -> start, var -> u.simple, type);
-            }
-            else if(var -> kind == A_subscriptVar){
-                for(; var -> kind == A_subscriptVar; var = var -> u.subscript.var)
-                {
-                    if(var -> u.subscript.exp -> kind!= A_intExp)
-                    {
-                        EM_error(result -> start, "Cannot declare array with an unfixed size.");
-                    }
-                    type = A_ArrayTy(result -> start, type, var -> u.subscript.exp -> u.intt);
-                }
-                // std::cout << S_name(var -> u.subscript.name) << std::endl;
-                result -> u.field = A_Field(result -> start, tokenData.at("var").var -> u.subscript.name, type);
-            }
-            else{
-                std::cerr << "Unknown field value." << std::endl;
-            }
+            // Code when A_field was A_ty and S_symbol
+            // A_var var = tokenData.at("var").var;
+            // A_ty type = tokenData.at("ty").type;
+            // if(var -> kind == A_simpleVar){
+            //     result -> u.field = A_Field(result -> start, var -> u.simple, type);
+            // }
+            // else if(var -> kind == A_subscriptVar){
+            //     for(; var -> kind == A_subscriptVar; var = var -> u.subscript.var)
+            //     {
+            //         if(var -> u.subscript.exp -> kind!= A_intExp)
+            //         {
+            //             EM_error(result -> start, "Cannot declare array with an unfixed size.");
+            //         }
+            //         type = A_ArrayTy(result -> start, type, var -> u.subscript.exp -> u.intt);
+            //     }
+            //     // std::cout << S_name(var -> u.subscript.name) << std::endl;
+            //     result -> u.field = A_Field(result -> start, tokenData.at("var").var -> u.subscript.name, type);
+            // }
+            // else{
+            //     std::cerr << "Unknown field value." << std::endl;
+            // }
+            result -> u.field = A_Field(result -> start, tokenData.at("var").var, tokenData.at("ty").type);
         }
     }
     //explist

@@ -6,7 +6,7 @@
 static std::string symbols[] = {",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<","<=",">",">=","&&","||","=", "%","&"};
 static std::string convertOperToString(int oper);
 
-void CON_convert(char *ast, char *targetLang){
+void CON_convert(std::string ast, std::string targetLang, std::string fname){
     std::ifstream ASTinput(ast);
     json inputAST;
     ASTinput >> inputAST;
@@ -16,7 +16,9 @@ void CON_convert(char *ast, char *targetLang){
     json keywords = rules["tokens"]["keywords"];
     json grammar = rules["grammar"];
     std::stringstream outputStream;
-    std::cout << jsonToString(inputAST, grammar, keywords) << std::endl;
+    std::ofstream output(fname);
+    output << jsonToString(inputAST, grammar, keywords);
+    output.close();
 }
 
 std::string jsonToString(json target, const json &rule, const json &keywords){
@@ -34,13 +36,13 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
         std::string ruleString;
         // std::cout << type + "/" + kind << std::endl;
         if(type == "ty" && kind == "array"){
-            
+            exit(0);
         }
         if(rule[type][kind].is_string()){
             ruleString = rule[type][kind].get<std::string>();
         }
         else if(rule[type][kind].is_object()){
-            std::cout << type << kind << std::endl;
+            // std::cout << type << kind << std::endl;
             std::string specificType = info["specificType"].get<std::string>();
             ruleString = rule[type][kind][specificType].get<std::string>();
             // std::cerr << "!!!!!is not rule!!!!!" << std::endl;
@@ -114,6 +116,7 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
                 }
             }
         }
+        // std::cout << outputStream.str() << std::endl << std::endl;
         return outputStream.str();
     }
     else if(target.is_string()){
@@ -122,7 +125,7 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
     else if(target.is_array()){
         std::stringstream outputStream;
         for(const auto &element: target){
-            if(element != target.front() && element["type"] == "exp" && element["type"] == "field"){
+            if(element != target.front() && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
                 outputStream << ", ";
             }
             outputStream << jsonToString(element, rule, keywords);

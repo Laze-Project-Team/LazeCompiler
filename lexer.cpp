@@ -117,36 +117,6 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
         tokenNames.push_back("");
     }
 
-    // for(const auto &tokenName:tokenNames){
-    //     json obj;
-    //     if((obj = keywords[tokenName])!=nullptr){
-    //         std::string reg = obj.get<std::string>();
-    //         regexMap.push_back(std::make_pair(tokenName, std::regex("^("+reg+")(?:$|"+separatorRegex+")")));
-    //     }
-    //     else if((obj = ops[tokenName])!=nullptr){
-    //         std::string reg = obj.get<std::string>();
-    //         regexMap.push_back(std::make_pair(tokenName, std::regex(reg)));
-    //     }
-    //     else if(tokenName == "char"){
-    //         regexMap.push_back(std::make_pair(tokenName, std::regex("^('(...|..|.)')")));
-    //     }
-    //     else if(tokenName == "int"){
-    //         std::string hexRegex = j["tokens"]["hex"].get<std::string>();
-    //         regexMap.push_back(std::make_pair(tokenName, std::regex("^((" + hexRegex + "|" + intRegex + "+))")));
-    //     }
-    //     else if(tokenName == "real"){
-    //         regexMap.push_back(std::make_pair(tokenName, std::regex("^((" + intRegex + "+\\." + intRegex + "+f?))")));
-    //         // std::cout << "^((" + intRegex + "+\\." + intRegex + "+f?))" << std::endl;
-    //     }
-    //     else if(tokenName == "string"){
-    //         std::string stringRegex = "^(" + j["tokens"]["string"].get<std::string>() + ")";
-    //         regexMap.push_back(std::make_pair(tokenName, std::regex(stringRegex)));
-    //     }
-    //     else if(tokenName == "id"){
-    //         std::string idRegex = "^((" + charRegex + "[" + charRegex.substr(1, charRegex.size() - 2) + intRegex.substr(1, intRegex.size() - 2) + "]*))";
-    //         regexMap.push_back(std::make_pair(tokenName, std::regex(idRegex)));
-    //     }
-    // }
     std::ifstream programFile(filename1);
     std::string programLine;
     std::regex space("^((?: |   )+)");
@@ -168,7 +138,7 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             for(const auto &regex: regexMap){
                 if(std::regex_search(programLine, match, regex.second)){
                     const char *matchCstr = match[1].str().c_str();
-                    std::cout << regex.first << " ";
+                    // std::cout << regex.first << " ";
                     std::size_t length = 0;
                     while(*matchCstr != '\0'){
                         if(*matchCstr < 0){
@@ -218,7 +188,7 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             }
             programLine = programLine.substr(size);
         }
-            std::cout << std::endl;
+            // std::cout << std::endl;
         if(PP_getLinesInFile(linePos).fileNum == lettersInLines.size()){
             lettersInLines.push_back(std::vector<int>());
         }

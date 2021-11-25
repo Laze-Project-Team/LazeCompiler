@@ -21,6 +21,7 @@ jobj JS_ExpListToJson(A_expList list);
 jobj JS_DecListToJson(A_decList list);
 jobj JS_FieldListToJson(A_fieldList fieldList);
 jobj JS_ClassMemberListToJson(A_classMemberList memberList);
+jobj JS_MemsToJson(A_classMemberList list);
 #ifdef __cplusplus
 }
 #endif

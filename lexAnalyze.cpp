@@ -49,6 +49,8 @@ int main(int argc, char **argv)
     string resultFilename = concat(tempFileName, ".wat");
     string parseJsonName = "";
     string convertJsonName = "";
+    string mode = "compile";
+    string convertOutput = "";
     char *linkFile = NULL;
     for(int i = 2; i < argc; i++){
         if(argv[i][0] == '-'){
@@ -70,6 +72,14 @@ int main(int argc, char **argv)
                 i++;
                 convertJsonName = argv[i];
             }
+            if(strcmp(argv[i], "--convert-output") == 0){
+                i++;
+                convertOutput = argv[i];
+            }
+            if(strcmp(argv[i], "--mode") == 0){
+                i++;
+                mode = argv[i];
+            }
         }
     }
     FILE *temp = fopen(tempFileName, "w");
@@ -88,12 +98,16 @@ int main(int argc, char **argv)
     L_tokenList list = L_Lexer(tempFileName, parseJsonName);
     A_decList absyn_root = P_parse(list, parseJsonName);
     std::cout << "Finished Parsing..." << std::endl;
-    string resultJsonFile = concat(tempFileName, ".json");
-    jobj jsonAST = JS_toJson(absyn_root);
-    fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));
-    CON_convert(resultJsonFile, convertJsonName);
-    Pr_printTree(SEM_transProg(absyn_root), resultFilename);
-    printf("Finshed Compiling.\n");
-    //printf("%d memorysize\n", memorySize);
+    if(strcmp(mode, "convert") == 0){
+        string resultJsonFile = concat(tempFileName, ".json");
+        jobj jsonAST = JS_toJson(absyn_root);
+        fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));
+        CON_convert(resultJsonFile, convertJsonName, convertOutput);
+        std::cout << "Finished Converting." << std::endl;
+    }
+    else if(strcmp(mode, "compiler") == 0){
+        Pr_printTree(SEM_transProg(absyn_root), resultFilename);
+        printf("Finshed Compiling.\n");
+    }
     return 0;
 }

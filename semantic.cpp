@@ -216,9 +216,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         A_exp expp;
                         for(int i = 0; i < assignVal.ty -> u.array.size; i++)
                         {
-                            // printf("arrayexpppppppppp %d kind\n", stm -> u.assign.exp -> u.array.list);
                             expp = stm -> u.assign.exp -> u.array.list -> head;
-                            // printf("%d %d size\n", assignVal.ty -> u.array.type -> size, assignVal.ty -> u.array.size);
                             A_var assignVar;
                             A_stm assign;
                             if(!stm -> u.assign.isDec)
@@ -281,21 +279,13 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     }
                     if(!compType(varExp.ty, assignExpty.ty))
                     {
-                      //printf("24666666666666666666666666666\n");
                         return expTy(Tr_AddrAssignStm(stm -> pos, varExp.exp -> u.exp, convertAssign(varExp.ty, assignExpty, stm -> pos)), Ty_Void());
                     }
-                    // printf("239999999999999999999999 %d\n", var -> u.subscript.var -> kind);
                     return expTy(Tr_AddrAssignStm(stm->pos, varExp.exp->u.exp, assignExpty.exp->u.exp), Ty_Void());
                 }
                 else
                     return transVar(venv, tenv, var, level, isLoop, FALSE, stm -> u.assign.isDec, classs);
             }
-            // else if(var -> kind == A_fieldVar)
-            // {
-            //   //printf("%s field name\n", S_name(var -> u.field.sym));
-            //     struct expty exp = transExp(venv, tenv, stm -> u.assign.exp, level, isLoop, classs);
-            //     return expTy(Tr_AddrAssignStm(stm -> pos, varExpty.exp -> u.exp -> u.load.addr, exp.exp -> u.exp), varExpty.ty);
-            // }
             else if(var -> kind == A_simpleVar || var -> kind == A_fieldVar || var -> kind == A_arrowFieldVar)
             {
                 E_enventry varType = (E_enventry)S_look(venv, var->u.simple);
@@ -313,13 +303,8 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             }
                     }
                     struct expty assignVal = transExp(venv, tenv, exp, level, isLoop, classs);
-                    // if (varType == NULL)
-                    // {
-                    //     EM_error(stm->pos, "%s is undefined.", S_name(var->u.simple));
-                    // }
                     if (exp->kind == A_addressExp)
                     {
-                        // printf("%d aa\n", addrVar->u.var.access->access->kind);
                         if(varType){
                             if(wasLocal){
                                 return expTy(Tr_CompoundStm(stm->pos, T_StmList(Tr_AssignStm(stm->pos, addrVar->u.var.access,
@@ -349,7 +334,6 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             varType -> u.var.access -> level -> frame -> offset;
                         }
                         T_expList list = assignVal.exp -> u.exp -> u.seq.list;
-                      //printf("%d size 276\n", assignVal.ty -> u.array.size);
                         for(int i = 0; i < assignVal.ty -> u.array.size; i++)
                         {
                             int elementAddr = arrayAddr + i * assignVal.ty -> u.array.type -> size;
@@ -374,20 +358,14 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     {
                         T_stmList assignList = T_StmList(NULL, NULL);
                         T_stmList result = assignList;
-                        // int arrayAddr = varType->u.var.access->access->u.offset +
-                        // varType->u.var.access->level->frame->offset;
                         T_expList list;
                         A_expList explist = exp -> u.array.list;
-                        // printf("%d assignVal.ty -> kind\n", assignVal.ty -> kind);
                         if(assignVal.exp -> u.exp)
                         {
                             list = assignVal.exp -> u.exp -> u.seq.list;
-                            // printf("%d size 299\n", assignVal.ty -> u.array.size);
                             for(int i = 0; i < assignVal.ty -> u.array.size; i++)
                             {
                                 A_exp expp = explist -> head;
-                                // printf("arraayyy %d %d %d size\n", assignVal.ty -> u.array.type -> size, assignVal.ty -> u.array.size, i);
-                                // int elementAddr = arrayAddr + i * assignVal.ty -> u.array.type -> size;
                                 A_var var;
                                 if(varType){
                                     var = stm -> u.assign.var;
@@ -430,7 +408,6 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         }
                         if (!compType(varExpty.ty, assignVal.ty))
                         {
-                            // printf("%d %d flaj\n", varType -> u.var.ty -> kind, assignVal.ty -> kind);
                             if(varType){
                                 return expTy(Tr_AssignStm(stm -> pos, varType -> u.var.access, convertAssign(varType -> u.var.ty, assignVal, exp -> pos)), Ty_Void());
                             }
@@ -449,12 +426,10 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             return expTy(Tr_MemCopyStm(stm -> pos, varExpty.exp -> u.exp, assignVal.exp -> u.exp, varExpty.ty -> size), Ty_Void());
                         }
                         if(varType){
-                          //printf("3799999999999999999999 %s\n", S_name(var -> u.simple));
                             return expTy(Tr_AssignStm(stm->pos, varType->u.var.access, assignVal.exp->u.exp), Ty_Void());
                         }
                         else
                         {
-                          //printf("371111111111111111111111111111111111\n");
                             if(varExpty.exp -> u.exp -> kind == T_loadExp)
                                 return expTy(Tr_AddrAssignStm(stm -> pos, varExpty.exp->u.exp->u.load.addr, assignVal.exp -> u.exp), Ty_Void());
                             return expTy(Tr_AddrAssignStm(stm -> pos, varExpty.exp->u.exp, assignVal.exp -> u.exp), Ty_Void());
@@ -958,29 +933,18 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                 return expTy(Tr_AddrExp(v -> pos, arrayAddr), x -> u.var.ty);
                 // return expTy(Tr_VarExp(v->pos, convertType(x -> u.var.ty), x -> u.var.access, FALSE, TRUE), x->u.var.ty);
             }
-            // else if(x -> u.var.ty -> kind == Ty_name)
-            // {
-            //     return expTy(Tr_AddrExp(v -> pos, arrayAddr), x -> u.var.ty);
-            // }
             else
             {
                 if (!isLoop)
                 {
-                    // printf("%s var name 578\n", S_name(v -> u.simple));
                     if(classs != Ty_Void()){
                         if(v -> u.simple == S_Symbol("this")){
                             Tr_exp exp = (Tr_exp)checked_malloc(sizeof(*exp));
                             exp->kind = Tr_t_exp;
                             exp->u.exp = T_GetLocalExp(T_i32, 0);
-                            // E_enventry classEntry = S_look(tenv, classs->u.name.sym);
                             return expTy(exp, Ty_Pointer(classs));
                         }
                     }
-                    // if(x -> u.var.ty -> kind == Ty_pointer){
-                    //     if(x -> u.var.ty -> u.pointer -> kind == Ty_pointer){
-                    //         printf("%d aaaaaaaaaaaaaaaaaaaaaa", x -> u.var.ty -> u.pointer -> u.pointer -> kind);
-                    //     }
-                    // }
                     if (x->u.var.access->level->parent)
                         return expTy(Tr_VarExp(v->pos, convertType(x->u.var.ty), x->u.var.access, FALSE, FALSE), x->u.var.ty);
                     else
@@ -988,8 +952,6 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                 }
                 else
                 {
-                  //printf("[[[[[[[[[[[[[[[[[\n");
-                    //debug(v -> pos, "%s", S_name(x -> u.var.access -> level -> label));
                     if(strcmp(S_name(x -> u.var.access -> level -> label), "loop") != 0)
                     {
                         if(x -> u.var.access -> access -> kind != inFrame)
@@ -1383,7 +1345,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
     }
     case A_funcExp:
     {
-        char nameBuffer[8];
+        char nameBuffer[8] = "";
         sprintf(nameBuffer, "%d", funcs);
         A_dec funcDec = A_FunctionDec(e -> pos, A_FundecList(A_Fundec(e -> pos, S_Symbol(nameBuffer), e -> u.func.params, e -> u.func.result, e -> u.func.body), A_FundecList(NULL, NULL)));
         Ty_tyList Ty_tyParams = makeParamTypeList(venv, tenv, e -> u.func.params, level);
@@ -2244,6 +2206,14 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
     case A_varDec:
     {
         struct expty exp;
+        if(d -> u.var.var -> kind == A_subscriptVar)
+        {
+            for(A_var var = d -> u.var.var; var -> kind == A_subscriptVar; var = var -> u.subscript.var)
+            {
+                d -> u.var.typ = A_ArrayTy(d -> pos, d -> u.var.typ, var -> u.subscript.exp -> u.intt);
+            }
+            // printf("dasfdas\n");
+        }
         E_enventry varEntry = (E_enventry)S_look(venv, d->u.var.var->u.simple);
         E_enventry typeEntry = (E_enventry)S_look(tenv, d->u.var.var->u.simple);
         S_symbol sym;
@@ -2270,7 +2240,6 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         }
         else if (d->u.var.init == NULL)
         {
-            //debug(d->pos, "Variable declared.");
             if (d->u.var.var->kind == A_simpleVar){
                 Ty_ty type = transTy(venv, tenv, d->u.var.typ, level);
                 // printf("%d memorySize\n", memorySize);
@@ -2279,9 +2248,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
             else if (d->u.var.var->kind == A_subscriptVar)
             {
                 assert(d->u.var.var->u.subscript.name);
-                // printf("arraaaaaaaaaay %s\n", S_name(d->u.var.var->u.subscript.name));
                 Ty_ty type = transTy(venv, tenv, d -> u.var.typ, level);
-                // printf("%d kind 1256\n", type -> u.array.size);
                 S_enter(venv, d->u.var.var->u.subscript.name, E_VarEntry(Tr_allocLocal(level, TRUE, type), type));
             }
         }
@@ -2312,9 +2279,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         A_field resultVar = NULL;
         if (returnList->head)
         {
-            // printf("there is head\n");
             resultVar = returnList->head;
-            // printf("%s 1473333333333333333333\n", S_name(returnList -> head -> typ -> u.name));
             Ty_ty type = transTy(venv, tenv, resultVar -> typ, level);
             entry = E_FuncEntry(level, func->name, paramTypes, Tr_allocLocal(newLevel, resultVar->escape, type), type);
         }
@@ -2325,16 +2290,13 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
 
         S_beginScope(venv);
         {
-            // printf("return var type %d\n", entry -> u.func.result -> access -> type -> kind);
-
             if (resultVar){
-              //printf("%s result->name\n", S_name(resultVar->name)); 
-                S_enter(venv, resultVar->name, E_VarEntry(entry->u.func.result, entry->u.func.returnType));
+                S_enter(venv, getName(resultVar->var), E_VarEntry(entry->u.func.result, entry->u.func.returnType));
             }
 
-            A_fieldList list;
-            Ty_tyList typeList;
-            Tr_accessList accessList;
+            A_fieldList list = NULL;
+            Ty_tyList typeList = NULL;
+            Tr_accessList accessList = NULL;
             T_stmList assignList = T_StmList(NULL, NULL);
             T_stmList resultAssignList = assignList;
             for (accessList = newLevel->formals->tail, list = func->params, typeList = paramTypes; list != NULL && typeList != NULL &&
@@ -2348,8 +2310,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                 newTypeList->tail = NULL;
                 list->head->escape = ESC_checkEscapeFromType(typeList->head);
                 if (typeList->head != NULL)
-                    S_enter(venv, list->head->name, E_VarEntry(accessList->head, typeList->head));
-              //printf("%d param index\n", accessList -> head -> access -> paramIndex);
+                    S_enter(venv, getName(list->head->var), E_VarEntry(accessList->head, typeList->head));
                 if(typeList -> head -> kind == Ty_name){
                     int addr = accessList -> head -> access -> u.offset + accessList -> head -> level -> frame -> offset;
                     T_stm assign = T_CopyStm(Tr_AddrExp(d -> pos, addr)->u.exp, T_GetLocalExp(T_i32, accessList -> head -> access -> paramIndex), Tr_AddrExp(d -> pos, accessList -> head -> access -> type -> size)->u.exp);
@@ -2493,13 +2454,22 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                 
                 S_symbol name;
                 if(memberList -> head -> dec -> kind == A_varDec){
-                    if(memberList -> head -> dec -> u.var.var -> kind == A_simpleVar)
+                    A_ty type = memberList -> head -> dec -> u.var.typ; 
+                    if(memberList -> head -> dec -> u.var.var -> kind == A_simpleVar){
                         name = memberList -> head -> dec -> u.var.var -> u.simple;
-                    else if(memberList -> head -> dec -> u.var.var -> kind == A_subscriptVar)
+                    }
+                    else if(memberList -> head -> dec -> u.var.var -> kind == A_subscriptVar){
+                        for(A_var var = memberList -> head -> dec -> u.var.var; var -> kind == A_subscriptVar; var = var -> u.subscript.var)
+                        {
+                            type = A_ArrayTy(memberList -> head -> dec -> pos, type, var -> u.subscript.exp -> u.intt);
+                        }
+                        // printf("dasfdas\n");
                         name = memberList -> head -> dec -> u.var.var -> u.subscript.name;
+                    }
                     else
                         EM_error(memberList -> head -> dec -> pos, "Invalid declaration.");
-                    varType = transTy(venv, tenv, memberList -> head -> dec -> u.var.typ, level);
+                        
+                    varType = transTy(venv, tenv, type, level);
                 }
                 else if(memberList -> head -> dec -> kind == A_objectDec){
                     name = memberList -> head -> dec -> u.object.name;
@@ -2761,20 +2731,38 @@ static Ty_ty actual_ty(Ty_ty ty)
 
 static Ty_tyList makeParamTypeList(S_table venv, S_table tenv, A_fieldList params, Tr_level level)
 {
-    if (params == NULL)
-    {
+    if (params == NULL){
         return NULL;
     }
     Ty_tyList typeList = Ty_TyList(NULL, NULL);
     //make typeList_head point to typeList
     Ty_tyList typeList_head = typeList;
     A_ty type;
+    A_var var;
     Ty_ty ty;
     if (!params->head)
         return NULL;
     for (; params != NULL; params = params->tail)
     {
+        var = params -> head -> var;
         type = params->head->typ;
+        if(var -> kind == A_simpleVar){
+
+        }
+        else if(var -> kind == A_subscriptVar){
+            for(; var -> kind == A_subscriptVar; var = var -> u.subscript.var)
+            {
+                if(var -> u.subscript.exp -> kind!= A_intExp)
+                {
+                    EM_error(params -> head -> pos, "Cannot declare array with an unfixed size.\n");
+                }
+                type = A_ArrayTy(params -> head -> pos, type, var -> u.subscript.exp -> u.intt);
+            }
+        }
+        else{
+            EM_error(params -> head -> pos, "Undefined field type.");
+        }
+
         if (ty = transTy(venv, tenv, type, level))
         {
           //printf("%d ty\n", ty -> kind);
@@ -2897,7 +2885,6 @@ static U_boolList makeEscapeList(A_fieldList params)
         list->tail = NULL;
         list->head = T_none;
     }
-
     return retValue;
 }
 static T_type convertType(Ty_ty type)

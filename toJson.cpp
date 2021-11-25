@@ -1,5 +1,25 @@
 #include "toJson.hpp"
 
+static S_symbol getName(A_var var)
+{
+    if(var -> kind == A_subscriptVar)
+    {
+        return var -> u.subscript.name;
+    }
+    else if(var -> kind == A_fieldVar)
+    {
+        return var -> u.field.sym;
+    }
+    else if(var -> kind == A_derefVar)
+    {
+        return getName(var -> u.deref);
+    }
+    else if(var -> kind == A_simpleVar)
+    {
+        return var -> u.simple;
+    }
+}
+
 jobj JS_toJson(A_decList dl)
 {
     A_decList decList = dl;
@@ -251,9 +271,9 @@ jobj JS_ExpToJson(A_exp exp)
         }
         case A_sizeofExp:
         {
-            name = json_object_new_string("sizeOf");
+            name = json_object_new_string("sizeof");
             jobj sizeOf = JS_VarToJson(exp -> u.sizeOf);
-            json_object_object_add(info, "sizeOf", sizeOf);
+            json_object_object_add(info, "var", sizeOf);
             break;
         }
         case A_subscriptExp:
@@ -437,14 +457,14 @@ jobj JS_DecToJson(A_dec dec)
         {
             name = json_object_new_string("class");
             jobj className = json_object_new_string(S_name(dec -> u.classs.name));
-            json_object_object_add(info, "id", className);
+            json_object_object_add(info, "id(name)", className);
             jobj members = JS_ClassMemberListToJson(dec -> u.classs.members);
             json_object_object_add(info, "memlist", members);
             jobj specificType = json_object_new_string("noinherit");
             if(dec -> u.classs.inheritance){
-                jobj specificType = json_object_new_string("inherit");
+                specificType = json_object_new_string("inherit");
                 jobj inheritance = json_object_new_string(S_name(dec -> u.classs.inheritance -> head));
-                json_object_object_add(info, "id(inheritance)", inheritance);
+                json_object_object_add(info, "id(inherit)", inheritance);
             }
             json_object_object_add(info, "specificType", specificType);
             break;
@@ -456,6 +476,14 @@ jobj JS_DecToJson(A_dec dec)
             json_object_object_add(info, "dec", d);
             jobj templateName = json_object_new_string(S_name(dec -> u.templatee.name));
             json_object_object_add(info, "templateName", templateName);
+            jobj specificType;
+            if(dec -> u.templatee.dec -> kind == A_functionDec){
+                specificType = json_object_new_string("func");
+            }
+            else if(dec -> u.templatee.dec -> kind == A_classDec){
+                specificType = json_object_new_string("class");
+            }
+            json_object_object_add(info, "specificType", specificType);
             break;
         }
     }
@@ -538,9 +566,9 @@ jobj JS_FieldToJson(A_field field)
 
     
     jobj info = json_object_new_object();
-    jobj name = json_object_new_string(S_name(field -> name));
+    jobj var = JS_VarToJson(field -> var);
     jobj typ = JS_TyToJson(field -> typ);
-    json_object_object_add(info, "var", name);
+    json_object_object_add(info, "var", var);
     json_object_object_add(info, "ty", typ);
     json_object_object_add(result, "info", info);
     return result;
@@ -567,8 +595,10 @@ jobj JS_StmListToJson(A_stmList list)
     if(!list)
         return stmArray;
     for(;stmList; stmList = stmList -> tail){
-        jobj stm = JS_StmToJson(stmList -> head);
-        json_object_array_add(stmArray, stm);
+        if(stmList -> head){
+            jobj stm = JS_StmToJson(stmList -> head);
+            json_object_array_add(stmArray, stm);
+        }
     }
     return stmArray;
 }
@@ -579,8 +609,10 @@ jobj JS_ExpListToJson(A_expList list)
     if(!list)
         return expArray;
     for(;expList; expList = expList -> tail){
-        jobj exp = JS_ExpToJson(expList -> head);
-        json_object_array_add(expArray, exp);
+        if(expList -> head){
+            jobj exp = JS_ExpToJson(expList -> head);
+            json_object_array_add(expArray, exp);
+        }
     }
     return expArray;
 }
@@ -591,8 +623,10 @@ jobj JS_DecListToJson(A_decList list)
         return decArray;
     A_decList decList = list;
     for(;decList; decList = decList -> tail){
-        jobj dec = JS_DecToJson(decList -> head);
-        json_object_array_add(decArray, dec);
+        if(decList -> head){
+            jobj dec = JS_DecToJson(decList -> head);
+            json_object_array_add(decArray, dec);
+        }
     }
     return decArray;
 }
@@ -611,15 +645,82 @@ jobj JS_FieldListToJson(A_fieldList list)
     }
     return fieldArray;
 }
+
 jobj JS_ClassMemberListToJson(A_classMemberList list)
 {
     A_classMemberList classMemberList = list;
-    jobj memberArray = json_object_new_array();
+    jobj memsArray = json_object_new_array();
     if(!list)
-        return memberArray;
-    for(;classMemberList; classMemberList = classMemberList -> tail){
-        jobj field = JS_ClassMemberToJson(classMemberList -> head);
-        json_object_array_add(memberArray, field);
+        return memsArray;
+    A_classMemberList memsTemp;
+    A_classMemberSpecifier specifierBefore;
+    jobj memsJson;
+    for(specifierBefore = classMemberList -> head -> accessSpecifier, memsJson = json_object_new_array();classMemberList; classMemberList = classMemberList -> tail){
+        if(classMemberList -> head){
+            if(specifierBefore != classMemberList -> head -> accessSpecifier){
+                jobj mems = json_object_new_object();
+                jobj kind;
+                switch(specifierBefore){
+                    case A_public:{
+                        kind = json_object_new_string("public");
+                        break;
+                    }
+                    case A_private:{
+                        kind = json_object_new_string("private");
+                        break;
+                    }
+                    case A_protected:{
+                        kind = json_object_new_string("protected");
+                        break;
+                    }
+                    default:{
+                        kind = json_object_new_string("public");
+                        break;
+                    }
+                }
+                jobj type = json_object_new_string("mems");
+                json_object_object_add(mems, "type", type);
+                json_object_object_add(mems, "kind", kind);
+                // json_object_array_add(memsArray, memsJson);
+                jobj info = json_object_new_object();
+                json_object_object_add(info, "declist", memsJson);
+                json_object_object_add(mems, "info", info);
+                json_object_array_add(memsArray, mems);
+                memsJson = json_object_new_array();
+            }
+            json_object_array_add(memsJson, JS_DecToJson(classMemberList -> head -> dec));
+            specifierBefore = classMemberList -> head -> accessSpecifier;
+        }
     }
-    return memberArray;
+    {
+        jobj mems = json_object_new_object();
+        jobj kind;
+        switch(specifierBefore){
+            case A_public:{
+                kind = json_object_new_string("public");
+                break;
+            }
+            case A_private:{
+                kind = json_object_new_string("private");
+                break;
+            }
+            case A_protected:{
+                kind = json_object_new_string("protected");
+                break;
+            }
+            default:{
+                kind = json_object_new_string("public");
+                break;
+            }
+        }
+        jobj type = json_object_new_string("mems");
+        json_object_object_add(mems, "type", type);
+        json_object_object_add(mems, "kind", kind);
+        // json_object_array_add(memsArray, memsJson);
+        jobj info = json_object_new_object();
+        json_object_object_add(info, "declist", memsJson);
+        json_object_object_add(mems, "info", info);
+        json_object_array_add(memsArray, mems);
+    }
+    return memsArray;
 }

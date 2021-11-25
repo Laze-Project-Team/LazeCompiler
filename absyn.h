@@ -345,7 +345,8 @@ struct A_ty_
 
 struct A_field_
 {
-    S_symbol name;
+    
+    A_var var;
     A_ty typ;
     A_pos pos;
     bool escape;
@@ -481,7 +482,7 @@ A_ty A_PointerTy(A_pos pos, A_ty type);
 A_ty A_PolyTy(A_pos pos, S_symbol name, A_ty typeParam);
 A_ty A_FuncTy(A_pos pos, A_fieldList params, A_fieldList result);
 
-A_field A_Field(A_pos pos, S_symbol name, A_ty typ);
+A_field A_Field(A_pos pos, A_var var, A_ty typ);
 A_fieldList A_FieldList(A_field head, A_fieldList tail);
 A_expList A_ExpList(A_exp head, A_expList tail);
 A_stmList A_StmList(A_stm head, A_stmList tail);

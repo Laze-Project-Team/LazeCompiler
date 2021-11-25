@@ -396,15 +396,6 @@ A_dec A_VarDec(A_pos pos, A_stm assign, A_ty typ)
     p->kind=A_varDec;
     p->pos=pos;
     p->u.var.var=assign->u.assign.var;
-    if(assign -> u.assign.var -> kind == A_subscriptVar)
-    {
-        for(A_var var = assign -> u.assign.var; var -> kind == A_subscriptVar; var = var -> u.subscript.var)
-        {
-            // printf("test\n");
-            typ = A_ArrayTy(pos, typ, var -> u.subscript.exp -> u.intt);
-        }
-        // printf("dasfdas\n");
-    }
     p->u.var.typ=typ;
     p->u.var.init=assign->u.assign.exp;
     p->u.var.escape=TRUE;
@@ -529,13 +520,13 @@ A_ty A_FuncTy(A_pos pos, A_fieldList params, A_fieldList result)
     return p;
 }
 
-A_field A_Field(A_pos pos, S_symbol name, A_ty typ)
+A_field A_Field(A_pos pos, A_var var, A_ty type)
 {
     A_field p = (A_field)checked_malloc(sizeof(*p));
     p->pos=pos;
-    p->name=name;
-    p->typ=typ;
-    p -> escape = ESC_checkEscapeFromA_ty(typ);
+    p->var=var;
+    p->typ=type;
+    p -> escape = ESC_checkEscapeFromA_ty(type);
     return p;
 }
 

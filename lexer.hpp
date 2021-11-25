@@ -56,7 +56,7 @@ struct L_token_
     L_tokenVal u;
 };
 
-typedef struct L_errorPos
+struct L_errorPos
 {
     std::string fileName = "";
     int fileNum = 0;
