@@ -639,11 +639,8 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "dec.jsexport"){
             result -> u.dec = A_FuncExport(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("string").stringg);
         }
-        else if(ruleName == "dec.template.func"){
-            result -> u.dec = A_TemplateDec(result -> start, S_Symbol(tokenData.at("id(type)").id), A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(tokenData.at("id(name)").id), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL)));
-        }
-        else if(ruleName == "dec.template.class"){
-            result -> u.dec = A_TemplateDec(result -> start, S_Symbol(tokenData.at("id(type)").id), A_ClassDec(result -> start, S_Symbol(tokenData.at("id(name)").id), tokenData.at("memlist").memList, NULL));
+        else if(ruleName == "dec.template"){
+            result -> u.dec = A_TemplateDec(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("dec").dec);
         }
     }
     //var

@@ -144,10 +144,7 @@
             "func": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
             "jsload": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) ;",
             "jsexport": "jsexport ( id , string ) ;",
-            "template": {
-                "func":"type < id(type) > : function : id(name) ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-                "class":"type < id(type) > : class : id(name) { memlist }"
-            }
+            "template": "type < id > : dec"
         },
         "var": {
             "simple":"id",

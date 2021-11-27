@@ -78,7 +78,15 @@ function: tan(real: rad) => (real: 結果){
 	real: sqRad = rad * rad;
 	結果 = sin(rad) / cos(rad);
 }
-type<>: function: () => ()function: toRad(real: deg) => (real: rad){
+template<T>: function: abs(T: a) => (T: b){
+	if(a >= 0){
+		b = a;
+	}
+	else{
+		b = 0 - a;
+	}
+}
+function: toRad(real: deg) => (real: rad){
 	real: PI = 3.141593;
 	rad = deg / 180 * PI;
 }
@@ -86,7 +94,10 @@ function: root(real: x) => (real: y){
 	y = 5;
 	(int: i = 0;
 	)from(i == 20)to(i = i + 1;
+	){
+		y = 0.500000 * y + x / y;
 	}
+}
 function: length3d(real: x, real: y, real: z) => (real: length){
 	length = root(x * x + y * y + z * z);
 }
@@ -122,7 +133,38 @@ function: vecAdd(real: output[3], real: vec1[3], real: vec2[3]) => (){
 	output[1] = vec1[1] + vec2[1];
 	output[2] = vec1[2] + vec2[2];
 }
-type<>: class: {
+template<T>: class: 配列{
+	public: function: ポップ() => (){
+		size = size - 1;
+	}
+	function: 長さ() => (int: a){
+		a = size;
+	}
+	function: 追加(T: new) => (){
+		if(size == allocated){
+			allocated = allocated * 2;
+			*T: temp = content;
+			content = メモリ確保(sizeof(*content) * allocated);
+			(int: i = 0;
+			)from(i == allocated)to(i = i + 1;
+			){
+				content[i] = temp[i];
+			}
+		}
+		content[size] = new;
+		size = size + 1;
+	}
+	function: 取得(int: index) => (T: result){
+		return;
+	}
+	function: 配列() => (){
+		size = 0;
+		allocated = 2;
+		content = メモリ確保(sizeof(*content) * allocated);
+	}
+	int: size;
+	*T: content;
+	private: int: allocated;
 }
 class: 文字列{
 	public: *char: content;
@@ -500,7 +542,10 @@ class: シーン{
 		viewMat = 目.アップデート(xOffset, yOffset, elapsedTime);
 		(int: i = 0;
 		)from(i == スプライト.size)to(i = i + 1;
+		){
+			->(projMat, viewMat, 目.座標);
 		}
+	}
 	function: シーン() => (){
 		last = 時間計測() / 1000.000000;
 		now = 0.000000;
@@ -592,7 +637,24 @@ class: スプライト{
 		real: PI = 3.141593;
 		(int: カウンタ = 0;
 		)from(カウンタ == animations.size)to(カウンタ = カウンタ + 1;
-		)ベクトル3D: pos3d(pos.x, pos.y, 0 - zIndex * 0.001000);
+		){
+			アニメーション情報: info = animations.取得(カウンタ);
+			if(info.startTime <= 時間計測() && info.startTime + info.duration >= 時間計測()){
+				if(info.id == 0){
+					real: elapsedTime = 時間計測() - info.startTime;
+					回転(info.info.x * elapsedTime);
+				}
+				if(info.id == 1){
+					拡大縮小(info.info.x, info.info.y);
+				}
+				if(info.id == 2){
+					real: elapsedTime = 時間計測() - info.startTime;
+					ベクトル2D: offset(info.info.x * elapsedTime, info.info.y * elapsedTime);
+					移動(offset);
+				}
+			}
+		}
+		ベクトル3D: pos3d(pos.x, pos.y, 0 - zIndex * 0.001000);
 		transMat.初期化();
 		transMat.移動(pos3d);
 		scaleMat.初期化();
@@ -757,7 +819,18 @@ class: シーン2D{
 		int: 頂点数 = 60;
 		(int: i = 0;
 		)from(i == 頂点数)to(i = i + 1;
-		)id = 多角形追加(points.content, points.size, pos, color, zIndex);
+		){
+			real: theta = 0;
+			if(i % 2 == 0){
+				theta = 0.500000 * PI + PI * i / 頂点数;
+			}
+			if(i % 2 == 1){
+				theta = 0.500000 * PI - PI * 1.000000 + i / 頂点数;
+			}
+			ベクトル3D: temp(r * cos(theta), r * sin(theta), 0 - zIndex * 0.001000);
+			points.追加(temp);
+		}
+		id = 多角形追加(points.content, points.size, pos, color, zIndex);
 	}
 	function: 多角形追加(*void: points, int: size, ベクトル2D: pos, ベクトル3D: color, real: zIndex) => (int: id){
 		*スプライト: sprite = メモリ確保(sizeof(*sprite));
@@ -816,7 +889,10 @@ class: シーン2D{
 		glClear(16640);
 		(int: i = 0;
 		)from(i == スプライト配列.size)to(i = i + 1;
+		){
+			->(projMat);
 		}
+	}
 	function: 背景透明度設定(real: a) => (){
 		背景透明度 = a;
 	}

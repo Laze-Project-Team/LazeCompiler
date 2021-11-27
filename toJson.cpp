@@ -101,7 +101,7 @@ jobj JS_StmToJson(A_stm stm)
             jobj increment = JS_StmToJson(stm -> u.forr.increment);
             json_object_object_add(info, "stm(incr)", increment);
             jobj body = JS_StmToJson(stm -> u.forr.body);
-            json_object_object_add(info, "stm(body)", body);
+            json_object_object_add(info, "stm", body);
             break;
         }
         case A_breakStm:
@@ -475,15 +475,8 @@ jobj JS_DecToJson(A_dec dec)
             jobj d = JS_DecToJson(dec -> u.templatee.dec);
             json_object_object_add(info, "dec", d);
             jobj templateName = json_object_new_string(S_name(dec -> u.templatee.name));
-            json_object_object_add(info, "templateName", templateName);
-            jobj specificType;
-            if(dec -> u.templatee.dec -> kind == A_functionDec){
-                specificType = json_object_new_string("func");
-            }
-            else if(dec -> u.templatee.dec -> kind == A_classDec){
-                specificType = json_object_new_string("class");
-            }
-            json_object_object_add(info, "specificType", specificType);
+            printf("%s", S_name(dec -> u.templatee.name));
+            json_object_object_add(info, "id", templateName);
             break;
         }
     }
@@ -563,7 +556,7 @@ jobj JS_FieldToJson(A_field field)
     
     // jobj type = json_object_new_string("field");
     json_object_object_add(result, "type", json_object_new_string("field"));
-
+    json_object_object_add(result, "kind", json_object_new_string("noinit"));
     
     jobj info = json_object_new_object();
     jobj var = JS_VarToJson(field -> var);

@@ -16,7 +16,7 @@
             "realtype":"double",
             "chartype":"char",
             "return":"return",
-            "type":"type",
+            "type":"template",
             "void":"void",
             "nul":"nul",
             "boolean":"boolean",
@@ -32,10 +32,40 @@
             "repeat":"repeat"
         },
         "int":"[0-9]",
-        "hex":"0x[0-9A-F]",
+        "hex":"0x[0-9A-F]+",
         "char":"[㐀-龯ぁ-んァ-ヶa-zA-Z_ー]",
-        "comment":"\/\/.$",
-        "string":"\"((?:[^\\\\\"]|\\.)*)\""
+        "comment":"(^(\\s*\/\/.*)$|^(\\s*#.*)$)",
+        "string":"\"((?:[^\\\\\"]|\\.)*)\"",
+        "ops":[
+            {"name":",", "regex": "^(,|、)"},
+            {"name":":", "regex": "^(:|：)"},
+            {"name":";", "regex": "^(;|；)"},
+            {"name":"(", "regex": "^(\\(|（)"},
+            {"name":")", "regex": "^(\\)|）)"},
+            {"name":"[", "regex": "^(\\[)"},
+            {"name":"]", "regex": "^(\\])"},
+            {"name":"{", "regex": "^(\\{|｛)"},
+            {"name":"}", "regex": "^(\\}|｝)"},
+            {"name":".", "regex": "^(\\.)"},
+            {"name":"+", "regex": "^(\\+|＋)"},
+            {"name":"*", "regex": "^(\\*|＊)"},
+            {"name":"/", "regex": "^(\\/|／)"},
+            {"name":"%", "regex": "^(%|％)"},
+            {"name":"=>", "regex": "^(=\\>|＝＞)"},
+            {"name":"<-", "regex": "^(\\<\\-)"},
+            {"name":"->", "regex": "^(\\-\\>)"},
+            {"name":"==", "regex": "^(==|＝＝)"},
+            {"name":"!=", "regex": "^(!=|！＝)"},
+            {"name":"<=", "regex": "^(\\<=|＜＝)"},
+            {"name":">=", "regex": "^(\\>=|＞＝)"},
+            {"name":"<", "regex": "^(\\<|＜)"},
+            {"name":">", "regex": "^(\\>|＞)"},
+            {"name":"&&", "regex": "^(&&|＆＆)"},
+            {"name":"&", "regex": "^(&|＆)"},
+            {"name":"||", "regex": "^(\\|\\||｜)"},
+            {"name":"-", "regex": "^(\\-)"},
+            {"name":"=", "regex": "^(=|＝)"}
+        ]
     },
     "grammar":{
         "exp":{
@@ -114,10 +144,7 @@
             "func": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
             "jsload": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) ;",
             "jsexport": "jsexport ( id , string ) ;",
-            "template": {
-                "func":"type < id(type) > : function : id(name) ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-                "class":"type < id(type) > : class : id(name) { memlist }"
-            }
+            "template": "type < id > : dec"
         },
         "var": {
             "simple":"id",

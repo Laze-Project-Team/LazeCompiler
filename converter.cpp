@@ -17,11 +17,11 @@ void CON_convert(std::string ast, std::string targetLang, std::string fname){
     json grammar = rules["grammar"];
     std::stringstream outputStream;
     std::ofstream output(fname);
-    output << jsonToString(inputAST, grammar, keywords);
+    output << jsonToString(inputAST, "declist", grammar, keywords);
     output.close();
 }
 
-std::string jsonToString(json target, const json &rule, const json &keywords){
+std::string jsonToString(json target, std::string parentRule, const json &rule, const json &keywords){
     static unsigned int indentTabs;
     if(target.is_object()){
         std::string type = target["type"].get<std::string>();
@@ -38,13 +38,16 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
         if(type == "ty" && kind == "array"){
             exit(0);
         }
+        std::string ruleName = "";
         if(rule[type][kind].is_string()){
             ruleString = rule[type][kind].get<std::string>();
+            ruleName = type + "." + kind;
         }
         else if(rule[type][kind].is_object()){
             // std::cout << type << kind << std::endl;
             std::string specificType = info["specificType"].get<std::string>();
             ruleString = rule[type][kind][specificType].get<std::string>();
+            ruleName = type + "." + kind + "." + specificType;
             // std::cerr << "!!!!!is not rule!!!!!" << std::endl;
         }
 
@@ -62,13 +65,13 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
             }
             else if(info.find(token) != info.end()){
                 if(token.substr(0, 6) == "string"){
-                    outputStream << "\"" << jsonToString(info[token], rule, keywords) << "\"";
+                    outputStream << "\"" << jsonToString(info[token], token, rule, keywords) << "\"";
                 }
                 else if(token == "oper"){
                     outputStream << " " << convertOperToString(info[token]) << " ";
                 }
                 else{
-                    outputStream << jsonToString(info[token], rule, keywords);
+                    outputStream << jsonToString(info[token], token, rule, keywords);
                 }
             }
             else if(std::find(std::begin(symbols), std::end(symbols), token) != std::end(symbols)){
@@ -128,8 +131,24 @@ std::string jsonToString(json target, const json &rule, const json &keywords){
             if(element != target.front() && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
                 outputStream << ", ";
             }
-            outputStream << jsonToString(element, rule, keywords);
-            // std::cout << jsonToString(element, rule, keywords) << std::endl;
+            std::string ruleName;
+            std::string type = element["type"].get<std::string>();
+            std::string kind;
+            if(element["kind"].is_string()){
+                kind = element["kind"].get<std::string>();
+            }
+            else{
+                kind = "noinit";
+            }
+
+            if(rule[type][kind].is_string()){
+                ruleName = type + "." + kind;
+            }
+            else if(rule[type][kind].is_object()){
+                std::string specificType = element["info"]["specificType"].get<std::string>();
+                ruleName = type + "." + kind + "." + specificType;
+            }
+            outputStream << jsonToString(element, type, rule, keywords);
         }
         return outputStream.str();
     }
