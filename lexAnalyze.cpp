@@ -105,7 +105,7 @@ int main(int argc, char **argv)
         CON_convert(resultJsonFile, convertJsonName, convertOutput);
         std::cout << "Finished Converting." << std::endl;
     }
-    else if(strcmp(mode, "compiler") == 0){
+    else if(strcmp(mode, "compile") == 0){
         Pr_printTree(SEM_transProg(absyn_root), resultFilename);
         printf("Finshed Compiling.\n");
     }

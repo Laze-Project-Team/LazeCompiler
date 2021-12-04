@@ -167,7 +167,8 @@ enum expType
     A_subscriptExp,
     A_fieldExp,
     A_arrowFieldExp,
-    A_funcExp
+    A_funcExp,
+    A_parenExp
 };
 struct A_exp_
 {
@@ -247,6 +248,10 @@ struct A_exp_
             A_fieldList result;
             A_stm body;
         } func;
+        struct
+        {
+            A_exp paren;
+        } paren;
     } u;
 };
 enum decType
@@ -465,6 +470,7 @@ A_exp A_FuncExp(A_pos pos, A_fieldList params, A_fieldList result, A_stm body);
 A_exp A_ArrayExp(A_pos pos, A_expList list);
 A_exp A_DerefExp(A_pos pos, A_var deref);
 A_exp A_AddressExp(A_pos pos, A_var address);
+A_exp A_ParenExp(A_pos pos, A_exp paren);
 
 A_dec A_FunctionDec(A_pos pos, A_fundecList function);
 A_dec A_VarDec(A_pos pos, A_stm assign, A_ty typ);

@@ -13,6 +13,8 @@
 #include <sstream>
 #include <cstring>
 
+std::string _mainFuncName = "";
+
 // static std::string tokenNames[] = {"char","string","hex","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
 static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist", "oper", "funcAndVar", "funcAndVarList", "mems"};
 
@@ -459,7 +461,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.exp = A_OpExp(result -> start, A_minusOp, A_IntExp(0, 0), tokenData.at("exp").exp);
         }
         else if(ruleName == "exp.paren"){
-            result -> u.exp = tokenData.at("exp").exp;
+            result -> u.exp = A_ParenExp(result -> start, tokenData.at("exp").exp);
         }
         else if(ruleName == "exp.call"){
             result -> u.exp = A_CallExp(result -> start, tokenData.at("varExp").exp, tokenData.at("explist").expList);
@@ -582,7 +584,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.stm = A_WhileStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm);
         }
         else if(ruleName == "stm.dec"){
-            result -> u.stm = A_DeclarationStm(result -> start, tokenData.at("dec").dec);
+            result -> u.stm = A_DeclarationStm(result -> start, tokenData.at("dec(stm)").dec);
         }
         else if(ruleName == "stm.for"){
             result -> u.stm = A_ForStm(result -> start, tokenData.at("stm(init)").stm, tokenData.at("exp").exp, tokenData.at("stm(incr)").stm, tokenData.at("stm").stm);
@@ -594,7 +596,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.stm = A_ReturnStm(result -> start, tokenData.at("exp").exp);
         }
         else if(ruleName == "stm.call"){
-            result -> u.stm = A_CallStm(result -> start, tokenData.at("varExp").exp, tokenData.at("explist").expList);
+            result -> u.stm = A_CallStm(result -> start, tokenData.at("exp").exp, tokenData.at("explist").expList);
         }
         else if(ruleName == "stm.loop"){
             // std::cout << "looooooooooooooop" << std::endl;
@@ -868,7 +870,7 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
             }
             resultList.push_back(resultToken);
             reduceRule = reduceRule.substr(0, reduceRule.find("."));
-            // std::cout << reduceRule << " " << stack.back() << " " << table.at(reduceRule).at(stack.back()) << std::endl;
+            std::cout << reduceRule << " " << stack.back() << " " << table.at(reduceRule).at(stack.back()) << std::endl;
             stack.push_back(std::stoi(table.at(reduceRule).at(stack.back())));
         }
         else if(action == "accepted"){
@@ -981,6 +983,7 @@ A_decList P_parse(L_tokenList list, const char *filename1){
     std::ifstream jInput(filename1);
     json j;
     jInput >> j;
+    _mainFuncName = j["tokens"]["main"].get<std::string>();
     grammarListTy grammarList;
     grammarListTy originalGrammarList;
     std::string tok;

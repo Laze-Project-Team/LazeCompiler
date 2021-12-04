@@ -138,7 +138,7 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             for(const auto &regex: regexMap){
                 if(std::regex_search(programLine, match, regex.second)){
                     const char *matchCstr = match[1].str().c_str();
-                    // std::cout << regex.first << " ";
+                    std::cout << regex.first << " ";
                     std::size_t length = 0;
                     while(*matchCstr != '\0'){
                         if(*matchCstr < 0){
@@ -188,7 +188,7 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             }
             programLine = programLine.substr(size);
         }
-            // std::cout << std::endl;
+            std::cout << std::endl;
         if(PP_getLinesInFile(linePos).fileNum == lettersInLines.size()){
             lettersInLines.push_back(std::vector<int>());
         }

@@ -63,7 +63,7 @@ jobj JS_StmToJson(A_stm stm)
         {
             name = json_object_new_string("dec");
             jobj dec = JS_DecToJson(stm -> u.declaration.dec);
-            json_object_object_add(info, "dec", dec);
+            json_object_object_add(info, "dec(stm)", dec);
             break;
         }
         case A_ifStm:
@@ -118,7 +118,7 @@ jobj JS_StmToJson(A_stm stm)
         {
             name = json_object_new_string("call");
             jobj func = JS_ExpToJson(stm -> u.call.func);
-            json_object_object_add(info, "varExp", func);
+            json_object_object_add(info, "exp", func);
             jobj args = JS_ExpListToJson(stm -> u.call.args);
             json_object_object_add(info, "explist", args);
             break;
@@ -128,7 +128,7 @@ jobj JS_StmToJson(A_stm stm)
             name = json_object_new_string("return");
             jobj specificType = json_object_new_string("noexp");
             if(stm -> u.returnn.ret){
-                jobj specificType = json_object_new_string("exp");
+                specificType = json_object_new_string("exp");
                 jobj returnExp = JS_ExpToJson(stm -> u.returnn.ret);
                 json_object_object_add(info, "exp", returnExp);
             }
@@ -280,27 +280,27 @@ jobj JS_ExpToJson(A_exp exp)
         {
             name = json_object_new_string("subscript");
             jobj array = JS_ExpToJson(exp -> u.subscript.array);
-            json_object_object_add(info, "array", array);
+            json_object_object_add(info, "exp(arrayname)", array);
             jobj index = JS_ExpToJson(exp -> u.subscript.index);
-            json_object_object_add(info, "index", index);
+            json_object_object_add(info, "exp(index)", index);
             break;
         }
         case A_fieldExp:
         {
             name = json_object_new_string("field");
             jobj field = JS_ExpToJson(exp -> u.field.field);
-            json_object_object_add(info, "field", field);
+            json_object_object_add(info, "exp", field);
             jobj member = json_object_new_string(S_name(exp -> u.field.member));
-            json_object_object_add(info, "member", member);
+            json_object_object_add(info, "id", member);
             break;
         }
         case A_arrowFieldExp:
         {
             name = json_object_new_string("arrowfield");
             jobj pointer = JS_ExpToJson(exp -> u.arrowfield.pointer);
-            json_object_object_add(info, "pointer", pointer);
+            json_object_object_add(info, "exp", pointer);
             jobj member = json_object_new_string(S_name(exp -> u.arrowfield.member));
-            json_object_object_add(info, "member", member);
+            json_object_object_add(info, "id", member);
             break;
         }
         case A_funcExp:
@@ -312,6 +312,13 @@ jobj JS_ExpToJson(A_exp exp)
             json_object_object_add(info, "fieldlist(result)", result);
             jobj body = JS_StmToJson(exp -> u.func.body);
             json_object_object_add(info, "stm", body);
+            break;
+        }
+        case A_parenExp:
+        {
+            name = json_object_new_string("paren");
+            jobj paren = JS_ExpToJson(exp -> u.paren.paren);
+            json_object_object_add(info, "exp", paren);
             break;
         }
     }

@@ -3,8 +3,10 @@
 #include <sstream>
 #include <iostream>
 
+extern std::string _mainFuncName;
+
 static std::string symbols[] = {",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<","<=",">",">=","&&","||","=", "%","&"};
-static std::string convertOperToString(int oper);
+static std::string convertOperToString(int oper, const json &rule);
 
 void CON_convert(std::string ast, std::string targetLang, std::string fname){
     std::ifstream ASTinput(ast);
@@ -13,15 +15,18 @@ void CON_convert(std::string ast, std::string targetLang, std::string fname){
     std::ifstream targetLangRules(targetLang);
     json rules;
     targetLangRules >> rules;
-    json keywords = rules["tokens"]["keywords"];
+    json config = rules["config"];
+    json tokens = rules["tokens"];
     json grammar = rules["grammar"];
+    std::cout << config["type"].get<std::string>() << std::endl;
     std::stringstream outputStream;
     std::ofstream output(fname);
-    output << jsonToString(inputAST, "declist", grammar, keywords);
+    output << jsonToString(inputAST, "declist", grammar, tokens, config);
     output.close();
+
 }
 
-std::string jsonToString(json target, std::string parentRule, const json &rule, const json &keywords){
+std::string jsonToString(json target, std::string parentRule, const json &rule, const json &tokens, const json &config){
     static unsigned int indentTabs;
     if(target.is_object()){
         std::string type = target["type"].get<std::string>();
@@ -50,76 +55,98 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
             ruleName = type + "." + kind + "." + specificType;
             // std::cerr << "!!!!!is not rule!!!!!" << std::endl;
         }
-
+        const json &keywords = tokens["keywords"];
         std::stringstream ruleStringStream(ruleString);
         std::stringstream outputStream;
         std::string token;
         while(ruleStringStream >> token){
+            // std::cout << token << std::endl;
             if(keywords.find(token) != keywords.end()){
                 if(token == "string"){
                     outputStream << "\"" << keywords[token].get<std::string>() << "\"";
                 }
                 else{
                     outputStream << keywords[token].get<std::string>();
+                    if(config["type"].get<std::string>() == "natural"){
+                        outputStream << " ";
+                    }
                 }
             }
             else if(info.find(token) != info.end()){
                 if(token.substr(0, 6) == "string"){
-                    outputStream << "\"" << jsonToString(info[token], token, rule, keywords) << "\"";
+                    outputStream << "\"" << jsonToString(info[token], type, rule, tokens, config) << "\"";
                 }
                 else if(token == "oper"){
-                    outputStream << " " << convertOperToString(info[token]) << " ";
+                    outputStream << " " << convertOperToString(info[token], rule) << " ";
+                }
+                else if(token == "int" || token == "char" || token == "real"){
+                    outputStream << jsonToString(info[token], type, rule, tokens, config);
+                    if(config["type"].get<std::string>() == "natural"){
+                        outputStream << " ";
+                    }
+                }
+                else if(token == "id"){
+                    std::string id = jsonToString(info[token], type, rule, tokens, config);
+                    if(ruleName == "dec.func"){
+                        if(id == _mainFuncName){
+                            id = tokens["main"];
+                        }
+                    }
+                    outputStream << id;
+                    if(config["type"].get<std::string>() == "natural"){
+                        outputStream << " ";
+                    }
                 }
                 else{
-                    outputStream << jsonToString(info[token], token, rule, keywords);
+                    outputStream << jsonToString(info[token], type, rule, tokens, config);
                 }
             }
             else if(std::find(std::begin(symbols), std::end(symbols), token) != std::end(symbols)){
                 if(token == "}"){
-                    outputStream.seekp(-1, outputStream.cur);
+                    indentTabs -= 1;
+                    // outputStream.seekp(-1, outputStream.cur);
+                    for(int i = 0; i < indentTabs; i++){
+                        outputStream << "\t";
+                    }
                 }
-                else if(token == "="){
-                    outputStream << " ";
-                }
-                else if(token == "=>"){
-                    outputStream << " ";
+                if(config["type"].get<std::string>() == "programming"){
+                    if(token == "="){
+                        outputStream << " ";
+                    }
+                    else if(token == "=>"){
+                        outputStream << " ";
+                    }
                 }
                 outputStream << token;
-                if(token == "{"){
-                    outputStream << "\n";
-                    indentTabs += 1;
-                    for(int i = 0; i < indentTabs; i++){
-                        outputStream << "\t";
+                if(config["type"].get<std::string>() == "programming"){
+                    if(token == "{"){
+                        outputStream << "\n";
+                        indentTabs += 1;
+                    }
+                    else if(token == "="){
+                        outputStream << " ";
+                    }
+                    else if(token == ":"){
+                        outputStream << " ";
+                    }
+                    else if(token == ","){
+                        outputStream << " ";
+                    }
+                    else if(token == "=>"){
+                        outputStream << " ";
                     }
                 }
-                else if(token == ";"){
-                    outputStream << "\n";
-                    for(int i = 0; i < indentTabs; i++){
-                        outputStream << "\t";
+                else if(config["type"].get<std::string>() == "natural"){
+                    if(token == "{"){
+                        outputStream << "\n";
+                        indentTabs += 1;
                     }
-                }
-                else if(token == "}"){
-                    indentTabs -= 1;
-                    outputStream << "\n";
-                    for(int i = 0; i < indentTabs; i++){
-                        outputStream << "\t";
+                    else{
+                        outputStream << " ";
                     }
-                }
-                else if(token == "="){
-                    outputStream << " ";
-                }
-                else if(token == ":"){
-                    outputStream << " ";
-                }
-                else if(token == ","){
-                    outputStream << " ";
-                }
-                else if(token == "=>"){
-                    outputStream << " ";
                 }
             }
         }
-        // std::cout << outputStream.str() << std::endl << std::endl;
         return outputStream.str();
     }
     else if(target.is_string()){
@@ -127,9 +154,12 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
     }
     else if(target.is_array()){
         std::stringstream outputStream;
+        int i = 0;
+        std::string output = "";
         for(const auto &element: target){
-            if(element != target.front() && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
-                outputStream << ", ";
+            std::string eachOutput = "";
+            if(i != 0 && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
+                eachOutput += ", ";
             }
             std::string ruleName;
             std::string type = element["type"].get<std::string>();
@@ -148,8 +178,25 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                 std::string specificType = element["info"]["specificType"].get<std::string>();
                 ruleName = type + "." + kind + "." + specificType;
             }
-            outputStream << jsonToString(element, type, rule, keywords);
+            if(type == "dec" || type == "stm"){
+                for(int i = 0; i < indentTabs; i++){
+                    eachOutput += "\t";
+                }
+            }
+            eachOutput += jsonToString(element, type, rule, tokens, config);
+            if(type == "dec" || type == "stm"){
+                eachOutput += "\n";
+            }
+            i += 1;
+            if(parentRule == "mems"){
+                output = eachOutput + output;
+            }
+            else{
+                output += eachOutput;
+            }
+
         }
+        outputStream << output;
         return outputStream.str();
     }
     else if(target.is_number_integer()){
@@ -161,46 +208,46 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
     std::cerr << "what is this json object." << std::endl;
 }
 
-static std::string convertOperToString(int oper){
+static std::string convertOperToString(int oper, const json &rule){
     switch(oper){
         case A_plusOp:
-            return "+";
+            return rule["oper"]["add"].get<std::string>();
             break;
         case A_minusOp:
-            return "-";
+            return rule["oper"]["sub"].get<std::string>();
             break;
         case A_timesOp:
-            return "*";
+            return rule["oper"]["mul"].get<std::string>();
             break;
         case A_divideOp:
-            return "/";
+            return rule["oper"]["div"].get<std::string>();
             break;
         case A_modOp:
-            return "%";
+            return rule["oper"]["mod"].get<std::string>();
             break;
         case A_eqOp:
-            return "==";
+            return rule["oper"]["eq"].get<std::string>();
             break;
         case A_neqOp:
-            return "!=";
+            return rule["oper"]["neq"].get<std::string>();
             break;
         case A_ltOp:
-            return "<";
+            return rule["oper"]["lt"].get<std::string>();
             break;
         case A_leOp:
-            return "<=";
+            return rule["oper"]["le"].get<std::string>();
             break;
         case A_gtOp:
-            return ">";
+            return rule["oper"]["gt"].get<std::string>();
             break;
         case A_geOp:
-            return ">=";
+            return rule["oper"]["ge"].get<std::string>();
             break;
         case A_andOp:
-            return "&&";
+            return rule["oper"]["and"].get<std::string>();
             break;
         case A_orOp:
-            return "||";
+            return rule["oper"]["or"].get<std::string>();
             break;
     }
 }

@@ -1,5 +1,5 @@
 function: print(real: x) => () = jsload("console", "log");
-function: main() => (){
+function: 実行() => (){
     int: a = 5;
     real: b = 10.0;
     if(a == 5){

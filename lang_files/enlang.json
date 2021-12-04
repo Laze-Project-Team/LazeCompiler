@@ -1,4 +1,8 @@
 {
+    "config":{
+        "name":"en",
+        "type":"programming"
+    },
     "tokens":{
         "keywords":
         {
@@ -29,7 +33,8 @@
             "public":"public",
             "private":"private",
             "protected":"protected",
-            "repeat":"repeat"
+            "repeat":"repeat",
+            "lineend": ";"
         },
         "int":"[0-9]",
         "hex":"0x[0-9A-F]+",
@@ -65,7 +70,8 @@
             {"name":"||", "regex": "^(\\|\\||｜)"},
             {"name":"-", "regex": "^(\\-)"},
             {"name":"=", "regex": "^(=|＝)"}
-        ]
+        ],
+        "main":"main"
     },
     "grammar":{
         "exp":{
@@ -105,45 +111,45 @@
         },
         "stm":{
             "assign":{
-                "normal":"var = exp ;",
-                "add":"var + = exp ;",
-                "sub":"var - = exp ;",
-                "mul":"var * = exp ;",
-                "div":"var / = exp ;",
-                "increment":"var + + ;",
-                "decrement":"var - - ;"
+                "normal":"var = exp lineend",
+                "add":"var + = exp lineend",
+                "sub":"var - = exp lineend",
+                "mul":"var * = exp lineend",
+                "div":"var / = exp lineend",
+                "increment":"var + + lineend",
+                "decrement":"var - - lineend"
             },
             "if":{
                 "if":"if ( exp ) stm(then)",
                 "ifelse":"if ( exp ) stm(then) else stm(else)"
             },
             "while":"( exp ) to stm",
-            "dec": "dec",
+            "dec": "dec(stm)",
             "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
             "return":{
-                "noexp":"return ;",
-                "exp":"return ( exp ) ;"
+                "noexp":"return lineend",
+                "exp":"return ( exp ) lineend"
             },
-            "call":"varExp ( explist ) ;",
+            "call":"varExp ( explist ) lineend",
             "loop":"loop stm",
-            "break":"break ;",
-            "continue":"continue ;",
+            "break":"break lineend",
+            "continue":"continue lineend",
             "compound":"{ stmlist }",
             "repeat":"( exp ) repeat stm"
         },
         "dec":{
             "var": {
-                "init":"ty : var = exp ;",
-                "noinit":"ty : var ;"
+                "init":"ty : var = exp lineend",
+                "noinit":"ty : var lineend"
             },
-            "object": "ty : id ( explist ) ;",
+            "object": "ty : id ( explist ) lineend",
             "class": {
                 "noinherit":"class : id(name) { memlist }",
                 "inherit":"class : id(name) <- id(inherit) { memlist }"
             },
             "func": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-            "jsload": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) ;",
-            "jsexport": "jsexport ( id , string ) ;",
+            "jsload": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) lineend",
+            "jsexport": "jsexport ( id , string ) lineend",
             "template": "type < id > : dec"
         },
         "var": {

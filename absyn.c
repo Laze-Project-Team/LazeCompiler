@@ -381,6 +381,14 @@ A_exp A_FuncExp(A_pos pos, A_fieldList params, A_fieldList result, A_stm body)
     return p;
 }
 
+A_exp A_ParenExp(A_pos pos, A_exp paren){
+    A_exp p = (A_exp)checked_malloc(sizeof(*p));
+    p -> kind = A_parenExp;
+    p -> pos = pos;
+    p -> u.paren.paren = paren;
+    return p;
+}
+
 A_dec A_FunctionDec(A_pos pos, A_fundecList function)
 {
     A_dec p = (A_dec)checked_malloc(sizeof(*p));

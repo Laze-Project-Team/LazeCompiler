@@ -1,4 +1,8 @@
 {
+    "config":{
+        "name":"natja",
+        "type":"natural"
+    },
     "tokens":{
         "keywords":
         {
@@ -30,7 +34,7 @@
             "private":"非公開",
             "protected":"保護",
             "repeat":"回繰り返す",
-            "ha": "は",
+            "は": "は",
             "wo": "を",
             "ni": "に",
             "de": "で",
@@ -44,7 +48,8 @@
             "tori": "とり",
             "ika": "以下",
             "motsu": "持つ",
-            "execute": "実行する" 
+            "execute": "実行する" ,
+            "lineend": "。"
         },
         "int":"[0-9]",
         "hex":"0x[0-9A-F]+",
@@ -81,7 +86,8 @@
             {"name":"-", "regex": "^(\\-)"},
             {"name":"=", "regex": "^(=|＝)"},
             {"name":"。", "regex": "^(。)"}
-        ]
+        ],
+        "main": "実行"
     },
     "grammar":{
         "exp":{
@@ -110,7 +116,7 @@
             "mul":"*",
             "div":"/",
             "mod":"%",
-            "eq":"ha",
+            "eq":"は",
             "neq":"!=",
             "ge":">=",
             "gt":">",
@@ -121,45 +127,45 @@
         },
         "stm":{
             "assign":{
-                "normal":"var ni exp assign 。",
-                "add":"var + = exp ;",
-                "sub":"var - = exp ;",
-                "mul":"var * = exp ;",
-                "div":"var / = exp ;",
-                "increment":"var + + ;",
-                "decrement":"var - - ;"
+                "normal":"var ni exp assign lineend",
+                "add":"var + = exp lineend",
+                "sub":"var - = exp lineend",
+                "mul":"var * = exp lineend",
+                "div":"var / = exp lineend",
+                "increment":"var + + lineend",
+                "decrement":"var - - lineend"
             },
             "if":{
                 "if":"if exp then stm(then)",
                 "ifelse":"if ( exp ) then stm(then) else stm(else)"
             },
             "while":"( exp ) to stm",
-            "dec": "dec",
+            "dec": "dec(stm)",
             "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
             "return":{
-                "noexp":"return ;",
-                "exp":"return ( exp ) ;"
+                "noexp":"return lineend",
+                "exp":"return ( exp ) lineend"
             },
-            "call":"explist varExp 。",
+            "call":"explist exp lineend",
             "loop":"loop stm",
-            "break":"break ;",
-            "continue":"continue ;",
+            "break":"break lineend",
+            "continue":"continue lineend",
             "compound":"{ stmlist }",
             "repeat":"( exp ) repeat stm"
         },
         "dec":{
             "var": {
-                "init":"exp wo motsu var toiu ty wo declare 。",
-                "noinit":"var toiu ty wo declare 。"
+                "init":"exp wo motsu var toiu ty wo declare lineend",
+                "noinit":"var toiu ty wo declare lineend"
             },
-            "object": "ty : id ( explist ) ;",
+            "object": "ty : id ( explist ) lineend",
             "class": {
                 "noinherit":"class : id(name) { memlist }",
                 "inherit":"class : id(name) <- id(inherit) { memlist }"
             },
-            "func": "( fieldlist(params) ) wo tori ( fieldlist(result) ) wo kaesu id toiu function wo declare 。 stm",
-            "jsload": "( fieldlist(params) ) wo tori ( fieldlist(result) ) wo kaesu id toiu function wo ( string(module) , string(func) ) from yomikomu 。",
-            "jsexport": "jsexport ( id , string ) ;",
+            "func": "( fieldlist(params) ) wo tori ( fieldlist(result) ) wo kaesu id toiu function wo declare lineend stm",
+            "jsload": "( fieldlist(params) ) wo tori ( fieldlist(result) ) wo kaesu id toiu function wo ( string(module) , string(func) ) from yomikomu lineend",
+            "jsexport": "jsexport ( id , string ) lineend",
             "template": {
                 "func":"type < id(type) > : function : id(name) ( fieldlist(params) ) => ( fieldlist(result) ) stm",
                 "class":"type < id(type) > : class : id(name) { memlist }"

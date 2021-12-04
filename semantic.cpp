@@ -4,6 +4,7 @@
 
 extern int funcs;
 extern int memorySize;
+extern std::string _mainFuncName;
 
 extern A_decList absyn_root;
 static T_moduleList list;
@@ -74,7 +75,7 @@ T_moduleList SEM_transProg(A_decList declist)
     loopVarsEnd = loopVarsStart;
     list = T_ModuleList(NULL, NULL);
     result = list;
-    T_module mainFunc;
+    T_module mainFunc = NULL;
     S_table venv = E_base_fenv(), tenv = E_base_tenv();
     if (declist == NULL)
     {
@@ -114,6 +115,9 @@ T_moduleList SEM_transProg(A_decList declist)
             list->head = NULL;
             list->tail = NULL;
         }
+    }
+    if(!mainFunc){
+        EM_error(0, "There is no main function.");
     }
     list->head = T_ExportMod("main", mainFunc -> u.func -> index);
     list->tail = T_ModuleList(NULL, NULL);
@@ -900,8 +904,10 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             }
             else
             {
+                assert(level);
                 Temp_label label = level->label;
                 E_enventry func = (E_enventry)S_look(venv, label);
+                printf("%s\n", S_name(label));
                 if (func->kind == E_funcentry)
                     if (func->u.func.result)
                         return expTy(Tr_ReturnStm(stm->pos, Tr_VarExp(stm->pos, convertType(func->u.func.result->access->type), func->u.func.result, FALSE, FALSE)->u.exp), Ty_Void());
@@ -1371,6 +1377,10 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         typeList -> tail = NULL;
         typeIndex++;
         return expTy(Tr_AddrExp(e -> pos, tableIndex - 1), Ty_Func(Ty_tyParams, Ty_tyResult, typeIndex - 1));
+    }
+    case A_parenExp:
+    {
+        return transExp(venv, tenv, e -> u.paren.paren, level, isLoop, classs);
     }
     case A_callExp:
     {
@@ -2334,7 +2344,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
 
             T_typeList typeListt = convertAllType(newLevel->frame->localsType);
             string name = "";
-            if (strcmp(S_name(d->u.function->head->name), "実行") == 0)
+            if (strcmp(S_name(d->u.function->head->name), _mainFuncName.c_str()) == 0)
             {
                 name = "main";
             }
