@@ -1,12 +1,4 @@
 #include "lexer.hpp"
-#include <nlohmann/json.hpp>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <regex>
-#include <sstream>
-#include <cstring>
-#include <vector>
 
 using json = nlohmann::json;
 
@@ -15,37 +7,11 @@ std::deque<std::string> L_getTokenNames(){
     return tokenNames;
 }
 // static std::string tokenNames[] = {"char","string","real","hex","int",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else"};
-static std::string operators = 
-"{ \
-    \",\" : \"^(,|、)\", \
-    \":\" : \"^(:|：)\", \
-    \";\" : \"^(;|；)\", \
-    \"(\" : \"^(\\\\(|（)\", \
-    \")\" : \"^(\\\\)|）)\", \
-    \"[\" : \"^(\\\\[)\", \
-    \"]\" : \"^(\\\\])\", \
-    \"{\" : \"^(\\\\{|｛)\", \
-    \"}\" : \"^(\\\\}|｝)\", \
-    \".\" : \"^(\\\\.)\", \
-    \"+\" : \"^(\\\\+|＋)\", \
-    \"-\" : \"^(\\\\-)\", \
-    \"*\" : \"^(\\\\*|＊)\", \
-    \"/\" : \"^(\\\\/|／)\", \
-    \"&\" : \"^(&|＆)\", \
-    \"%\" : \"^(%|％)\", \
-    \"=>\" : \"^(=\\\\>|＝＞)\", \
-    \"<-\" : \"^(\\\\<\\\\-)\", \
-    \"->\" : \"^(\\\\-\\\\>)\", \
-    \"==\" : \"^(==|＝＝)\", \
-    \"!=\" : \"^(!=|！＝)\", \
-    \"<=\" : \"^(\\\\<=|＜＝)\", \
-    \">=\" : \"^(\\\\>=|＞＝)\", \
-    \"<\" : \"^(\\\\<|＜)\", \
-    \">\" : \"^(\\\\>|＞)\", \
-    \"&&\" : \"^(&&|＆＆)\", \
-    \"||\" : \"^(\\\\|\\\\||｜)\", \
-    \"=\" : \"^(=|＝)\" \
-}";
+static std::map<std::string, unsigned> operatorsPrecedence;
+std::map<std::string, unsigned> L_getOperators(){
+    return operatorsPrecedence;
+}
+
 std::vector<std::vector<int>> lettersInLines;
 
 L_errorPos L_getErrorPos(int cursorPos){
@@ -59,7 +25,7 @@ L_errorPos L_getErrorPos(int cursorPos){
             else{
                 result.fileNum = i;
                 result.fileName = PP_getFilename(i);
-                std::cout << i << " line55"<< std::endl;
+                // std::cout << i << " line55"<< std::endl;
                 result.lineNum = PP_getLinesInFile(j + 1).lineNum;
                 result.columnNum = cursorPos + 1;
                 return result;
@@ -69,10 +35,8 @@ L_errorPos L_getErrorPos(int cursorPos){
     }
 }
 
-L_tokenList L_Lexer(const char* filename1, const char* filename2)
-{
-    L_tokenList tokenList;
-    std::ifstream input(filename2);
+std::vector<std::pair<std::string, std::regex>> L_genTokenNames(const std::string &inputFname){
+    std::ifstream input(inputFname);
     json j;
     input >> j;
     json keywords = j["tokens"]["keywords"];
@@ -89,9 +53,10 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
     }
     for(const auto &item: ops.items()){
         std::string reg = item.value()["regex"];
-        std::cout << reg << std::endl;
+        // std::cout << reg << std::endl;
         regexMap.push_back(std::make_pair(item.value()["name"], std::regex(reg)));
         tokenNames.push_back(item.value()["name"]);
+        operatorsPrecedence[item.value()["name"]] = item.value()["precedence"];
     }
     // token hardcode
     {
@@ -116,6 +81,13 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
         tokenNames.push_back("eof");
         tokenNames.push_back("");
     }
+    return regexMap;
+}
+
+L_tokenList L_Lexer(const char* filename1, const char* filename2)
+{
+    L_tokenList tokenList;
+    std::vector<std::pair<std::string, std::regex>> regexMap = L_genTokenNames(filename2);
 
     std::ifstream programFile(filename1);
     std::string programLine;
@@ -138,7 +110,6 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             for(const auto &regex: regexMap){
                 if(std::regex_search(programLine, match, regex.second)){
                     const char *matchCstr = match[1].str().c_str();
-                    std::cout << regex.first << " ";
                     std::size_t length = 0;
                     while(*matchCstr != '\0'){
                         if(*matchCstr < 0){
@@ -188,14 +159,13 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             }
             programLine = programLine.substr(size);
         }
-            std::cout << std::endl;
         if(PP_getLinesInFile(linePos).fileNum == lettersInLines.size()){
             lettersInLines.push_back(std::vector<int>());
         }
         // std::cout << "newline" << PP_getLinesInFile(linePos).fileNum << std::endl;
         lettersInLines.at(PP_getLinesInFile(linePos).fileNum).push_back(cursor - cursorBefore);
     }
-    std::cout << tokenList.size() << std::endl;
+    // std::cout << tokenList.size() << std::endl;
     L_token eof = std::make_shared<L_token_>();
     eof -> kind = "eof";
     eof -> start = cursor;

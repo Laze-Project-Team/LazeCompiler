@@ -1,17 +1,4 @@
 #include "parser.hpp"
-#include <nlohmann/json.hpp>
-#include <unordered_map>
-#include <deque>
-#include <set>
-#include <vector>
-#include <list>
-#include <fstream>
-#include <iostream>
-#include <algorithm>
-#include <string>
-#include <regex> 
-#include <sstream>
-#include <cstring>
 
 std::string _mainFuncName = "";
 
@@ -19,13 +6,7 @@ std::string _mainFuncName = "";
 static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist", "oper", "funcAndVar", "funcAndVarList", "mems"};
 
 static std::deque<std::string> tokenNames;
-
-using grammarListTy = std::unordered_map<std::string, std::deque<std::string>>;
-using grammarTy = std::deque<std::string>;
-using itemSetTy = std::vector<std::pair<std::string, std::deque<std::string>>>;
-using firstSetTy = std::map<std::string, std::set<std::string>>;
-using tokensTy = std::set<std::string>;
-using tableTy = std::map<std::string, std::vector<std::string>>;
+static std::map<std::string, unsigned> operators;
 
 static unsigned int itemSetNumber = 0; 
 static std::vector<std::unordered_map<std::string, int>> transitionTable;
@@ -394,7 +375,9 @@ static tableTy generateActionGotoTable(const std::vector<itemSetTy> &itemSets, c
             lastSet = std::stoi(lastS);
         }
         for(const auto &s: std::get<2>(rule)){
-            result[s].at(lastSet) += " r" + originalRule.first;
+            if(result[s].at(lastSet).find("r" + originalRule.first + " ") == std::string::npos){
+                result[s].at(lastSet) += " r" + originalRule.first + " ";
+            }
         }
         for(auto checkIt = it + 1; checkIt != FOLLOWandExtended.end(); checkIt++){
             auto rule2 = *checkIt;
@@ -411,8 +394,12 @@ static tableTy generateActionGotoTable(const std::vector<itemSetTy> &itemSets, c
             }
             if(originalRule2.second == originalRule.second && lastSet == lastSet2){
                 for(const auto &s: std::get<2>(rule2)){
-                    result[s].at(lastSet) += " r" + originalRule2.first;
-                    result[s].at(lastSet2) += " r" + originalRule2.first;
+                    if(result[s].at(lastSet).find("r" + originalRule2.first + " ") == std::string::npos){
+                        result[s].at(lastSet) += " r" + originalRule2.first + " ";
+                    }
+                    if(result[s].at(lastSet2).find("r" + originalRule2.first + " ") == std::string::npos){
+                        result[s].at(lastSet2) += " r" + originalRule2.first + " ";
+                    }
                 }
                 checkIt = FOLLOWandExtended.erase(checkIt);
                 checkIt --;
@@ -464,7 +451,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.exp = A_ParenExp(result -> start, tokenData.at("exp").exp);
         }
         else if(ruleName == "exp.call"){
-            result -> u.exp = A_CallExp(result -> start, tokenData.at("varExp").exp, tokenData.at("explist").expList);
+            result -> u.exp = A_CallExp(result -> start, tokenData.at("exp").exp, tokenData.at("explist").expList);
         }
         else if(ruleName == "exp.address"){
             result -> u.exp = A_AddressExp(result -> start, tokenData.at("var").var);
@@ -847,10 +834,35 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
         if(std::count(action.begin(), action.end(), 's') > 0){
             // std::cout << "conflict found " << action << std::endl;
         }
-        action = action.substr(0, action.find(" "));
+        
+        std::vector<std::string> actions;
+        std::string order = "";
+        std::stringstream actionStream(action);
+        while(actionStream >> order){
+            actions.push_back(order);
+        }
+        action = actions.at(0);
+        if(actions.size() > 1){
+            if(operators[tokenToRead] && actions.at(1) == "rexp.op"){
+                if(resultList.size() > 1){
+                    // std::cout << operators[grammarList.at(resultList.at(resultList.size() - 2) -> kind).at(0)] << " ";
+                    // std::cout << operators[tokenToRead] << " " << action << std::endl;
+                    if(operators[grammarList.at(resultList.at(resultList.size() - 2) -> kind).at(0)] < operators[tokenToRead]){
+                        action = actions.at(1);
+                    }
+                    else if(operators[grammarList.at(resultList.at(resultList.size() - 2) -> kind).at(0)] == operators[tokenToRead]){
+                        action = actions.at(1);
+                    }
+                }
+            }
+        }
+        // else{
+        //     action = action.substr(0, action.find(" "));
+        // }
         if(list.front() -> kind == "id"){
             // std::cout << list.front() -> u.id << " ";
         }
+        
         if(action.at(0) == 's'){
             int stackNum = std::stoi(action.substr(1, action.size() - 1));
             // std::cout << "stackNum " << stackNum << " " << list.front() -> kind << std::endl;
@@ -870,7 +882,7 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
             }
             resultList.push_back(resultToken);
             reduceRule = reduceRule.substr(0, reduceRule.find("."));
-            std::cout << reduceRule << " " << stack.back() << " " << table.at(reduceRule).at(stack.back()) << std::endl;
+            // std::cout << reduceRule << " " << stack.back() << " " << table.at(reduceRule).at(stack.back()) << std::endl;
             stack.push_back(std::stoi(table.at(reduceRule).at(stack.back())));
         }
         else if(action == "accepted"){
@@ -979,13 +991,23 @@ static grammarTy createOriginalGrammarList(std::string ruleStr, std::string rule
     return tokens;
 }
 
-A_decList P_parse(L_tokenList list, const char *filename1){
-    std::ifstream jInput(filename1);
+tableTy P_generateParseTable(const grammarListTy &grammarList){
+    transitionTable.push_back(std::unordered_map<std::string, int>());
+    std::vector<itemSetTy> itemSets = toItem0(grammarList);
+    itemSets.front().push_back(std::make_pair("additionalRules", std::deque<std::string>({"------------------"})));
+    itemSets = createAllItemSets(itemSets, grammarList);
+    itemSetTy extended = toExtendedGrammar(itemSets);
+    // std::cout << itemSets.size() << std::endl;
+    firstSetTy FIRSTset = generateFirstSet(extended);
+    firstSetTy FOLLOWset = generateFollowSet(extended, FIRSTset);
+    return generateActionGotoTable(itemSets, extended, FIRSTset, FOLLOWset, grammarList);
+}
+
+void P_generateGrammarList(const std::string inputFname, grammarListTy &grammarList, grammarListTy &originalGrammarList){
+    std::ifstream jInput(inputFname);
     json j;
     jInput >> j;
     _mainFuncName = j["tokens"]["main"].get<std::string>();
-    grammarListTy grammarList;
-    grammarListTy originalGrammarList;
     std::string tok;
     std::regex tokenWithName("([a-zA-Z0-9]+)\\(([a-zA-Z0-9]+)\\)");
     std::smatch match;
@@ -1014,18 +1036,58 @@ A_decList P_parse(L_tokenList list, const char *filename1){
             }
         }
     }
+}
 
-    transitionTable.push_back(std::unordered_map<std::string, int>());
-    std::vector<itemSetTy> itemSets = toItem0(grammarList);
-    itemSets.front().push_back(std::make_pair("additionalRules", std::deque<std::string>({"------------------"})));
-    itemSets = createAllItemSets(itemSets, grammarList);
-    itemSetTy extended = toExtendedGrammar(itemSets);
-    std::cout << itemSets.size() << std::endl;
-    firstSetTy FIRSTset = generateFirstSet(extended);
-    firstSetTy FOLLOWset = generateFollowSet(extended, FIRSTset);
-    tableTy actionGotoTable = generateActionGotoTable(itemSets, extended, FIRSTset, FOLLOWset, grammarList);
+void P_generateParseFile(const std::string inputFname, const std::string outputFname){
+    grammarListTy grammarList;
+    grammarListTy originalGrammarList;
+
+    P_generateGrammarList(inputFname, grammarList, originalGrammarList);
+    tableTy actionGotoTable = P_generateParseTable(grammarList);
+
+    std::ofstream parseFile(outputFname);
+    for(const auto &i: actionGotoTable){
+        parseFile << i.first << " : ";
+        int a = 0;
+        for(const auto &j: i.second){
+            parseFile << j << ":";
+            // parseFile << a << "(" << j << ") ";
+            a++;
+        }
+        parseFile << std::endl;
+    }
+}
+
+static tableTy parseTableFromFile(const std::string parserFile){
+    tableTy actionGotoTable;
+    std::ifstream inputFile(parserFile);
+    std::string line = "";
+    while(std::getline(inputFile, line)){
+        std::string tokenName = line.substr(0, line.find(' '));
+        line = line.substr(line.find(' ') + 3);
+
+        actionGotoTable[tokenName] = std::vector<std::string>();
+        std::stringstream lineStream(line);
+        std::string command = "";
+        unsigned int tokNum = 0;
+        while(std::getline(lineStream, command, ':')){
+            actionGotoTable[tokenName].push_back(command);
+        }
+    }
+    return actionGotoTable;
+}
+
+A_decList P_parse(L_tokenList list, const char *filename1){
+    operators = L_getOperators();
+    grammarListTy grammarList;
+    grammarListTy originalGrammarList;
+
+    P_generateGrammarList(filename1, grammarList, originalGrammarList);
+    tableTy actionGotoTable = P_generateParseTable(grammarList);
     A_decList result = parseWithTable(list, actionGotoTable, grammarList, originalGrammarList);
     return result;
+    {
+
     // debug grammarList
     // int a = 0;
     // for(const auto &s: grammarList){
@@ -1114,4 +1176,16 @@ A_decList P_parse(L_tokenList list, const char *filename1){
     //     std::cout << std::endl;
     // }
     // return NULL;
+    }
+}
+
+A_decList P_parseWithFile(L_tokenList list, const std::string filename1, const std::string parserFile){
+    operators = L_getOperators();
+    grammarListTy grammarList;
+    grammarListTy originalGrammarList;
+
+    P_generateGrammarList(filename1, grammarList, originalGrammarList);
+    tableTy actionGotoTable = parseTableFromFile(parserFile);
+    A_decList result = parseWithTable(list, actionGotoTable, grammarList, originalGrammarList);
+    return result;
 }

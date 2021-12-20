@@ -4,6 +4,11 @@
 #include <cstring>
 #include <memory>
 #include <deque>
+#include <fstream>
+#include <iostream>
+#include <regex>
+#include <sstream>
+#include <vector>
 #include "absyn.h"
 #include "ppsemant.hpp"
 using json = nlohmann::json;
@@ -67,5 +72,7 @@ struct L_errorPos
 L_token L_delimToken(delimDataTy data);
 
 L_tokenList L_Lexer(const char* filename1, const char *filename2);
+std::vector<std::pair<std::string, std::regex>> L_genTokenNames(const std::string &inputFname);
 L_errorPos L_getErrorPos(int cursorPos);
+std::map<std::string, unsigned> L_getOperators();
 std::deque<std::string> L_getTokenNames();

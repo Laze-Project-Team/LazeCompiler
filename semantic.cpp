@@ -455,6 +455,14 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
 
             if (stm->u.declaration.dec->kind == A_varDec)
             {
+                Ty_ty varDecType = transTy(venv, tenv, stm -> u.declaration.dec -> u.var.typ, level);
+                if((varDecType -> kind == Ty_name || varDecType -> kind == Ty_poly) && stm -> u.declaration.dec -> u.var.var -> kind == A_simpleVar && !(stm -> u.declaration.dec -> u.var.init)){
+                    std::cout << S_name(stm -> u.declaration.dec -> u.var.var -> u.simple) << std::endl;
+                    A_stm newStm = A_DeclarationStm(stm -> pos, A_ObjectDec(stm -> pos, stm -> u.declaration.dec -> u.var.typ, 
+                    stm -> u.declaration.dec -> u.var.var -> u.simple, A_ExpList(NULL, NULL)));
+                    exp = transStm(venv, tenv, newStm, level, isLoop, classs);
+                    return exp;
+                }
                 T_module dec = transDec(venv, tenv, stm->u.declaration.dec, level, isLoop, venv, Ty_Void());
                 if(stm -> u.declaration.dec -> u.var.init)
                     exp = transStm(venv, tenv, A_AssignStm(stm->pos, stm->u.declaration.dec->u.var.var, stm->u.declaration.dec->u.var.init, TRUE), level, FALSE, classs);
@@ -2807,10 +2815,10 @@ static Ty_ty checkSymType(S_symbol sym)
     {
         return Ty_Int();
     }
-    else if (sym == S_Symbol("string"))
-    {
-        return Ty_String();
-    }
+    // else if (sym == S_Symbol("string"))
+    // {
+    //     return Ty_String();
+    // }
     else if (sym == S_Symbol("real"))
     {
         return Ty_Real();

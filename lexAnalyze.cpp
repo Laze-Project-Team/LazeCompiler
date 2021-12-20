@@ -42,17 +42,15 @@ int main(int argc, char **argv)
         fprintf(stderr, "usage: ./a.out filename\n      ./a.out filename directory\nargument count: %d\n", argc);
         exit(1);
     }
-    fname = argv[1];
     getcwd(directory, 256);
-    string tempFileName = concat(".", fname);
-    string temptempFileName = concat("..", fname);
-    string resultFilename = concat(tempFileName, ".wat");
     string parseJsonName = "";
     string convertJsonName = "";
     string mode = "compile";
     string convertOutput = "";
+    string parserOutput = "";
+    string parserFileName = NULL;
     char *linkFile = NULL;
-    for(int i = 2; i < argc; i++){
+    for(int i = 1; i < argc; i++){
         if(argv[i][0] == '-'){
             if(argv[i][1] == 'c'){
                 i++;
@@ -76,12 +74,30 @@ int main(int argc, char **argv)
                 i++;
                 convertOutput = argv[i];
             }
+            if(strcmp(argv[i], "--parser-output") == 0){
+                i++;
+                parserOutput = argv[i];
+            }
             if(strcmp(argv[i], "--mode") == 0){
                 i++;
                 mode = argv[i];
             }
+            if(strcmp(argv[i], "--parser-opt") == 0){
+                i++;
+                parserFileName = argv[i];
+            }
         }
     }
+    if(strcmp(mode, "parserload") == 0){
+        std::vector<std::pair<std::string, std::regex>> regexMap = L_genTokenNames(parseJsonName);
+        P_generateParseFile(parseJsonName, parserOutput);
+        std::cout << "Finished Generating Parser." << std::endl;
+        return 0;
+    }
+    fname = argv[1];
+    string tempFileName = concat(".", fname);
+    string temptempFileName = concat("..", fname);
+    string resultFilename = concat(tempFileName, ".wat");
     FILE *temp = fopen(tempFileName, "w");
     fclose(temp);
     temp = fopen(temptempFileName, "w");
@@ -96,7 +112,13 @@ int main(int argc, char **argv)
     fprintf(stdout, "\n");
     printf("Finished Preprocessing...\n");
     L_tokenList list = L_Lexer(tempFileName, parseJsonName);
-    A_decList absyn_root = P_parse(list, parseJsonName);
+    std::cout << "Finished Lexing..." << std::endl;
+    A_decList absyn_root = NULL;
+    if(parserFileName){
+        absyn_root = P_parseWithFile(list, parseJsonName, parserFileName);
+    }else{
+        absyn_root = P_parse(list, parseJsonName);
+    }
     std::cout << "Finished Parsing..." << std::endl;
     if(strcmp(mode, "convert") == 0){
         string resultJsonFile = concat(tempFileName, ".json");
@@ -107,7 +129,7 @@ int main(int argc, char **argv)
     }
     else if(strcmp(mode, "compile") == 0){
         Pr_printTree(SEM_transProg(absyn_root), resultFilename);
-        printf("Finshed Compiling.\n");
+        printf("Finished Compiling.\n");
     }
     return 0;
 }

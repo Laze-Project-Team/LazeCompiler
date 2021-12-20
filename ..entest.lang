@@ -1,7 +1,7 @@
-( real の x ) を とり ( ) を 返す 表示 という 関数 を ( "console", "log") から 読み込む 。 
-( ) を とり ( ) を 返す 実行 という 関数 を おく 。 {
-	5 を 持つ a という int を おく 。 
-	もし a  は 5 ならば {
-		6583 表示 。 
-	} 
-} 
+function: 表示(real: x) => () = jsload("console", "log");
+function: main() => (){
+	int: a = 5;
+	if(a == 5){
+		表示(6583);
+	}
+}

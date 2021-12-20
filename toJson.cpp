@@ -189,7 +189,7 @@ jobj JS_ExpToJson(A_exp exp)
         {
             name = json_object_new_string("call");
             jobj func = JS_ExpToJson(exp -> u.call.func);
-            json_object_object_add(info, "varExp", func);
+            json_object_object_add(info, "exp", func);
             jobj args = JS_ExpListToJson(exp -> u.call.args);
             json_object_object_add(info, "explist", args);
             break;
