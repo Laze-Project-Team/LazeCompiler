@@ -182,7 +182,8 @@
             "memlist": "memlist mems"
         },
         "field": {
-            "noinit":"ty : var"
+            "noinit":"ty : var",
+            "func":"function : id ( fieldlist(params) ) => ( fieldlist(result) )"
         },
         "explist":{
             "null":"",
@@ -206,6 +207,45 @@
         }
     },
     "errors":{
-        
+        "code":{
+            "none":"プログラムがありません。",
+            "nomain":"実行関数がありません。"
+        },
+        "type":{
+            "nomatch":"型が合いません。",
+            "notclass":"$1の型がクラスではありません。",
+            "notobject":"$1はオブジェクトではありません。",
+            "notarray":"$1は配列ではありません。",
+            "notpointer":"$1はポインターではありません。"
+        },
+        "if":{
+            "boolean":"もし文の条件が真偽型ではありません。"
+        },
+        "while":{
+            "boolean":"まで文の条件が真偽型ではありません。"
+        },
+        "for":{
+            "boolean":"からまで文の条件が真偽型ではありません。"
+        },
+        "operator":{
+            "arrow":"この変数はポインターではないため、->演算子は使えません。"
+        },
+        "noexist":{
+            "class":"$1というクラスは存在しません。",
+            "template":"$1というテンプレートは存在しません。",
+            "member":"$1というメンバーは存在しません。",
+            "func":"$1という関数は存在しません。",
+            "var":"$1という変数は存在しません。"
+        },
+        "func":{
+            "few":"関数の引数が少ないです。",
+            "many":"関数の引数が多いです。",
+            "cannotcall":"この関数は呼べません。"
+        },
+        "class":{
+            "private":"$1は非公開メンバーです。",
+            "protected":"$1は保護メンバーです。",
+            "nomember":"$1に$2というメンバーはありません。"
+        }
     }
 }

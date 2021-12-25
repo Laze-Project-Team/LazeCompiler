@@ -79,7 +79,7 @@ T_moduleList SEM_transProg(A_decList declist)
     S_table venv = E_base_fenv(), tenv = E_base_tenv();
     if (declist == NULL)
     {
-        EM_error(0, "No code.");
+        EM_error(0, "code.none");
     }
     A_decList decList = declist;
     list->head = T_ImportMod("js", "mem", T_MemMod(100));
@@ -117,7 +117,7 @@ T_moduleList SEM_transProg(A_decList declist)
         }
     }
     if(!mainFunc){
-        EM_error(0, "There is no main function.");
+        EM_error(0, "code.nomain");
     }
     list->head = T_ExportMod("main", mainFunc -> u.func -> index);
     list->tail = T_ModuleList(NULL, NULL);
@@ -278,7 +278,21 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         }
                         else
                         {
-                            EM_error(stm -> pos, "Types do not match.");
+                            S_symbol varExpName = NULL;
+                            S_symbol assignExpName = NULL;
+                            if(varExp.ty -> kind == Ty_name){
+                                varExpName = varExp.ty -> u.name.sym;
+                            }
+                            else if(varExp.ty -> kind == Ty_poly){
+                                varExpName = varExp.ty -> u.poly.name;
+                            }
+                            if(assignExpty.ty -> kind == Ty_name){
+                                assignExpName = assignExpty.ty -> u.name.sym;
+                            }
+                            else if(assignExpty.ty -> kind == Ty_poly){
+                                assignExpName = assignExpty.ty -> u.poly.name;
+                            }
+                            EM_error(stm -> pos, "type.nomatch %s %s", S_name(varExpName), S_name(assignExpName));
                         }
                     }
                     if(!compType(varExp.ty, assignExpty.ty))
@@ -407,7 +421,21 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             }
                             else
                             {
-                                EM_error(stm -> pos, "Types do not match.");
+                                S_symbol varExpName = NULL;
+                                S_symbol assignExpName = NULL;
+                                if(varExpty.ty -> kind == Ty_name){
+                                    varExpName = varExpty.ty -> u.name.sym;
+                                }
+                                else if(varExpty.ty -> kind == Ty_poly){
+                                    varExpName = varExpty.ty -> u.poly.name;
+                                }
+                                if(assignVal.ty -> kind == Ty_name){
+                                    assignExpName = assignVal.ty -> u.name.sym;
+                                }
+                                else if(assignVal.ty -> kind == Ty_poly){
+                                    assignExpName = assignVal.ty -> u.poly.name;
+                                }
+                                EM_error(stm -> pos, "type.nomatch %s %s", S_name(varExpName), S_name(assignExpName));
                             }
                         }
                         if (!compType(varExpty.ty, assignVal.ty))
@@ -506,7 +534,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             //debug(stm->pos, "If Statement");
             if (transExp(venv, tenv, stm->u.iff.test, level, isLoop, classs).ty != Ty_Bool())
             {
-                EM_error(stm->pos, "If statement test expression must have a type of boolean.");
+                EM_error(stm->pos, "if.boolean");
             }
             struct expty then = transStm(venv, tenv, stm->u.iff.then, level, isLoop, classs);
             struct expty elsee = expTy(NULL, Ty_Void());
@@ -527,7 +555,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             struct expty body;
             if (transExp(venv, tenv, stm->u.whilee.test, level, isLoop, classs).ty != Ty_Bool())
             {
-                EM_error(stm->pos, "While statement test expression must have a type of boolean.");
+                EM_error(stm->pos, "while.boolean");
             }
             body = transStm(venv, tenv, stm->u.whilee.body, level, isLoop, classs);
             return expTy(Tr_WhileStm(stm->pos, transExp(venv, tenv, stm->u.whilee.test, level, isLoop, classs).exp->u.exp,
@@ -542,7 +570,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             struct expty condition = transExp(venv, tenv, stm->u.forr.condition, level, isLoop, classs);
             if (condition.ty != Ty_Bool())
             {
-                EM_error(stm->pos, "For statement condition expression must have a type of boolean.");
+                EM_error(stm->pos, "for.boolean");
             }
             struct expty increment = transStm(venv, tenv, stm->u.forr.increment, level, isLoop, classs);
             struct expty body = transStm(venv, tenv, stm->u.forr.body, level, isLoop, classs);
@@ -601,7 +629,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         else if(var -> kind == A_arrowFieldVar){
                             field = transVar(venv, tenv, var->u.arrowfield.pointer, level, isLoop, FALSE, FALSE, classs);
                             if(field.ty -> kind != Ty_pointer){
-                                EM_error(var -> pos, "Cannot use arrow operator on non pointer variable.");
+                                EM_error(var -> pos, "operator.arrow");
                             }
                             type = field.ty -> u.pointer;
                             name = var -> u.arrowfield.member;
@@ -622,12 +650,8 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                                 }
                                 else
                                 {
-                                    EM_error(stm -> pos, "%s is not a templatee type.", S_name(type -> u.poly.name));
+                                    EM_error(stm -> pos, "noexist.template %s", S_name(type -> u.poly.name));
                                 }
-                            }
-                            else
-                            {
-                                EM_error(stm -> pos, "Function is not a member.");
                             }
                             
                             if(classEntry && classEntry -> kind == E_classentry){
@@ -641,20 +665,20 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                                     if(classEntry && classEntry -> kind == E_classentry)
                                         entry = (E_enventry)S_look(classEntry -> u.classs.methods, var -> u.field.sym);
                                     else
-                                        EM_error(stm -> pos, "Class %s does not exist.", S_name(type -> u.name.sym));
+                                        EM_error(stm -> pos, "noexist.class %s", S_name(type -> u.name.sym));
                                 }
                                 else
                                 {
-                                    EM_error(stm -> pos, "%s does not have a classs type.", S_name(type -> u.name.sym));
+                                    EM_error(stm -> pos, "type.notclass %s", S_name(type -> u.name.sym));
                                 }
                             }
                             else{
-                                EM_error(stm -> pos, "Class %s does not exist.", S_name(type -> u.name.sym));
+                                EM_error(stm -> pos, "noexist.class %s", S_name(type -> u.name.sym));
                             }
                         }
                         else
                         {
-                            EM_error(stm -> pos, "Non classs objects cannot be field variables. %d %s", type -> kind, S_name(name));
+                            EM_error(stm -> pos, "type.notclass %s", S_name(name));
                         }
                     }
                 }
@@ -672,7 +696,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         if(fieldExpty.ty -> kind != Ty_pointer){
                                 printf("aaaaaaaaaaaaaaaaaaa %s\n", S_name(fieldExpty.ty -> u.name.sym));
 
-                            EM_error(stm -> pos, "Cannot use arrow operator on non pointer variable.");
+                            EM_error(stm -> pos, "operator.arrow");
                         }
                         type = fieldExpty.ty -> u.pointer;
                     }
@@ -693,7 +717,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             }
                             else
                             {
-                                EM_error(stm -> pos, "%s is not a templatee type.", S_name(type -> u.poly.name));
+                                EM_error(stm -> pos, "noexist.template %s", S_name(type -> u.poly.name));
                             }
                         }
                         if(classEntry && classEntry -> kind == E_classentry){
@@ -703,12 +727,12 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                                 entry = (E_enventry)S_look(classEntry -> u.classs.methods, name);
                         }
                         else{
-                            EM_error(stm -> pos, "Class %s does not exist.", S_name(type -> u.name.sym));
+                            EM_error(stm -> pos, "noexist.class %s", S_name(type -> u.name.sym));
                         }
                     }
                     else
                     {
-                        EM_error(stm -> pos, "Cannot get a member of a non classs object.");
+                        EM_error(stm -> pos, "notexist.member %s", S_name(name));
                     }
                 }
                 if (entry != NULL && (entry->kind == E_funcentry || (entry->kind == E_templateentry && entry -> u.templatee.dec -> kind == A_functionDec)))
@@ -780,12 +804,12 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         {
                             if (exp == NULL && type != NULL)
                             {
-                                EM_error(stm->pos, "There are too few arguments in the call statement.");
+                                EM_error(stm->pos, "arguments.few");
                                 break;
                             }
                             else if (exp != NULL && type == NULL)
                             {
-                                EM_error(stm->pos, "There are too many arguments in the call statement.");
+                                EM_error(stm->pos, "arguments.many");
                                 break;
                             }
                         }
@@ -819,14 +843,14 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     {
                         if (entryArgsTy->head != NULL)
                         {
-                            EM_error(stm->pos, "There are too few arguments in the call statement.");
+                            EM_error(stm->pos, "arguments.few");
                         }
                     }
                     else if (expArgs != NULL && entryArgsTy == NULL)
                     {
                         if (expArgs->head != NULL)
                         {
-                            EM_error(stm->pos, "There are too many arguments in the call statement.");
+                            EM_error(stm->pos, "arguments.many");
                         }
                     }
                     if(templateTemp)
@@ -871,12 +895,12 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         {
                             if (exp == NULL && type != NULL)
                             {
-                                EM_error(stm->pos, "There are too few arguments in the call statement.");
+                                EM_error(stm->pos, "arguments.few");
                                 break;
                             }
                             else if (exp != NULL && type == NULL)
                             {
-                                EM_error(stm->pos, "There are too many arguments in the call statement.");
+                                EM_error(stm->pos, "arguments.many");
                                 break;
                             }
                         }
@@ -890,11 +914,11 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                 else
                 {
                     // printf("%d entry -> kind", entry -> kind);
-                    EM_error(stm->pos, "Undefined function \'%s\'.", S_name(name));
+                    EM_error(stm->pos, "noexist.function %s", S_name(name));
                 }
             }
             else
-                EM_error(stm -> pos, "Cannot call function.");
+                EM_error(stm -> pos, "func.cannotcall");
         }
         case A_returnStm:
         {
@@ -996,7 +1020,7 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
         {
             if(classs == Ty_Void())
             {
-                EM_error(v->pos, "%s doesn't exist", S_name(v -> u.simple));
+                EM_error(v->pos, "noexist.var %s", S_name(v -> u.simple));
             }
             if(classs -> kind == Ty_name || classs -> kind == Ty_poly){
 
@@ -1013,7 +1037,7 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                     else
                     {
                         // printf("aaaaaaaaaaaaaaaaaa %d\n", templateEntry -> kind);
-                        EM_error(v -> pos, "%s is not a templatee type.", S_name(classs -> u.poly.name));
+                        EM_error(v -> pos, "noexist.template %s", S_name(classs -> u.poly.name));
                     }
                 }
                 // printf("%d classs name\n", classs -> kind);
@@ -1033,16 +1057,16 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                         return transVar(venv, tenv, v, level, isLoop, FALSE, FALSE, classs);
                     }
                 }
-                EM_error(v->pos, "%s doesn't exist.", S_name(v -> u.simple));
+                EM_error(v->pos, "noexist.var %s", S_name(v -> u.simple));
             }
         }
         else if (x->kind != E_varentry)
         {
-            EM_error(v->pos, "It is not a variable. %s", S_name(v -> u.simple));
+            EM_error(v->pos, "noexist.var %s", S_name(v -> u.simple));
         }
         else
         {
-            EM_error(v->pos, "undefined variable %s", S_name(v->u.simple));
+            EM_error(v->pos, "noexist.var %s", S_name(v->u.simple));
             return expTy(NULL, Ty_Int());
         }
         break;
@@ -1057,7 +1081,7 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                 if(classEntry -> kind == E_polyentry)
                 {
                     if(classEntry -> u.poly -> kind != Ty_name)
-                        EM_error(v -> pos, "Cannot access a member of a non-classs object.");
+                        EM_error(v -> pos, "type.notclass %s", S_name(getName(v)));
                     else
                         classEntry = (E_enventry)S_look(tenv, varExpty.ty -> u.name.sym);
                 }
@@ -1070,19 +1094,19 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                 }
                 else
                 {
-                    EM_error(v -> pos, "%s is not a templatee type.", S_name(varExpty.ty -> u.poly.name));
+                    EM_error(v -> pos, "noexist.template %s", S_name(varExpty.ty -> u.poly.name));
                 }
             }
         }
         else
-            EM_error(v -> pos, "Cannot access a member of a non-classs object.");
+            EM_error(v -> pos, "type.notclass %s", S_name(getName(v)));
         Ty_member varEntry = (Ty_member)S_look(classEntry -> u.classs.varTypes, v -> u.field.sym);
         if(varEntry){
             if(varEntry -> accessSpecifier == Ty_private){
-                EM_error(v -> pos, "Cannot access a private member of a classs outside of the classs declaration.");
+                EM_error(v -> pos, "class.private %s", S_name(v -> u.field.sym));
             }
             else if(varEntry -> accessSpecifier == Ty_protected){
-                EM_error(v -> pos, "Cannot access a protected member of a classs outside of the classs declaration.");
+                EM_error(v -> pos, "class.protected %s", S_name(v -> u.field.sym));
             }
             // printf("8633333333333333333333333333333333333 %d\n", varExpty.exp -> u.exp -> kind);
             // if(varExpty.ty ->)
@@ -1091,7 +1115,7 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
             return expTy(Tr_DerefExp(v -> pos, Tr_OpExp(v -> pos, T_i32, T_add, varExpty.exp -> u.exp, Tr_AddrExp(v -> pos, varEntry -> offset)->u.exp)->u.exp, convertType(varEntry -> ty)), varEntry -> ty);
         }
         else{
-            EM_error(v -> pos, "%s is not a member of %s.", S_name(varExpty.ty -> u.name.sym), S_name(v -> u.field.sym));
+            EM_error(v -> pos, "class.nomember %s %s", S_name(varExpty.ty -> u.name.sym), S_name(v -> u.field.sym));
         }
     }
     case A_arrowFieldVar:
@@ -1105,7 +1129,7 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                     if(classEntry -> kind == E_polyentry)
                     {
                         if(classEntry -> u.poly -> kind != Ty_name)
-                            EM_error(v -> pos, "Cannot access a member of a non-classs object.");
+                            EM_error(v -> pos, "type.notclass %s", S_name(getName(v -> u.arrowfield.pointer)));
                         else
                             classEntry = (E_enventry)S_look(tenv, varExpty.ty -> u.pointer -> u.name.sym);
                     }
@@ -1118,20 +1142,20 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                     }
                     else
                     {
-                        EM_error(v -> pos, "%s is not a templatee type.", S_name(varExpty.ty -> u.pointer -> u.poly.name));
+                        EM_error(v -> pos, "noexist.template %s", S_name(varExpty.ty -> u.pointer -> u.poly.name));
                     }
                 }
             }
             else{
-                EM_error(v -> pos, "Cannot access a member of a non-class object.");
+                EM_error(v -> pos, "type.notclass %s", S_name(getName(v -> u.arrowfield.pointer)));
             }
             Ty_member varEntry = (Ty_member)S_look(classEntry -> u.classs.varTypes, v -> u.field.sym);
             if(varEntry){
                 if(varEntry -> accessSpecifier == Ty_private){
-                    EM_error(v -> pos, "Cannot access a private member of a classs outside of the classs declaration.");
+                    EM_error(v -> pos, "class.private %s", S_name(v -> u.field.sym));
                 }
                 else if(varEntry -> accessSpecifier == Ty_protected){
-                    EM_error(v -> pos, "Cannot access a protected member of a classs outside of the classs declaration.");
+                    EM_error(v -> pos, "class.protected %s", S_name(v -> u.field.sym));
                 }
                 // printf("8633333333333333333333333333333333333 %d %s\n", varEntry -> ty -> kind, S_name(v -> u.field.sym));
                 if(varEntry -> ty -> kind == Ty_array || varEntry -> ty -> kind == Ty_name || varEntry -> ty -> kind == Ty_poly)
@@ -1139,12 +1163,12 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                 return expTy(Tr_DerefExp(v -> pos, Tr_OpExp(v -> pos, T_i32, T_add, varExpty.exp -> u.exp, Tr_AddrExp(v -> pos, varEntry -> offset)->u.exp)->u.exp, convertType(varEntry -> ty)), varEntry -> ty);
             }
             else{
-                EM_error(v -> pos, "%s is not a member of %s.", S_name(varExpty.ty -> u.pointer -> u.name.sym), S_name(v -> u.field.sym));
+                EM_error(v -> pos, "class.nomember %s %s", S_name(varExpty.ty -> u.pointer -> u.name.sym), S_name(v -> u.field.sym));
             }
         }
         else
         {
-            EM_error(v -> pos, "Cannot use the arrow operator on non pointer variables.");
+            EM_error(v -> pos, "operator.arrow");
         }
     }
     case A_subscriptVar:
@@ -1216,12 +1240,12 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
             else
             {
                 // printf("632 %d\n", entry -> u.var.ty -> kind);
-                EM_error(v->pos, "It's not an array!");
+                EM_error(v->pos, "type.notarray %s", S_name(getName(v)));
             }
         }
         else
         {
-            EM_error(v->pos, "%s does not exist.", S_name(v->u.subscript.name));
+            EM_error(v->pos, "noexist.var %s", S_name(v->u.subscript.name));
         }
     }
     case A_derefVar:
@@ -1345,7 +1369,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             else if((e -> u.address -> kind == A_fieldVar || e -> u.address -> kind == A_simpleVar) && varExpty.exp -> u.exp -> kind != T_loadExp){
                 return expTy(varExpty.exp, Ty_Pointer(varExpty.ty));
             }
-            EM_error(e->pos, "Variable does not exist.");
+            EM_error(e->pos, "noexist.var %s", S_name(getName(e -> u.address)));
         }
         else
         {
@@ -1426,7 +1450,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     else if(var -> kind == A_arrowFieldVar){
                         field = transVar(venv, tenv, var->u.arrowfield.pointer, level, isLoop, FALSE, FALSE, classs);
                         if(field.ty -> kind != Ty_pointer){
-                            EM_error(var -> pos, "Type is not pointer: %s.", S_name(getName(var -> u.arrowfield.pointer)));
+                            EM_error(var -> pos, "type.notpointer %s", S_name(getName(var -> u.arrowfield.pointer)));
                         }
                         type = field.ty -> u.pointer;
                         // printf("%d typeeee arrowField\n", field.ty -> kind);
@@ -1448,18 +1472,18 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                         }
                         else
                         {
-                            EM_error(e -> pos, "%s is not a templatee type.", S_name(type -> u.poly.name));
+                            EM_error(e -> pos, "noexist.template %s", S_name(type -> u.poly.name));
                         }
                     }
                     else
                     {
-                        EM_error(e -> pos, "Type is not class or template, but is type %d.", type -> kind);
+                        EM_error(e -> pos, "type.notobject %s", S_name(getName(var)));
                     }
                     if(classEntry){
                         entry = (E_enventry)S_look(classEntry -> u.classs.methods, name);
                     }
                     else{
-                        EM_error(e -> pos, "Class %s does not exist.", S_name(type -> u.name.sym));
+                        EM_error(e -> pos, "type.noclass %s", S_name(type -> u.name.sym));
                     }
                 }
             }
@@ -1494,19 +1518,19 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                         }
                         else
                         {
-                            EM_error(e -> pos, "%s is not a templatee type.", S_name(type -> u.poly.name));
+                            EM_error(e -> pos, "noexist.template %s", S_name(type -> u.poly.name));
                         }
                     }
                     if(classEntry && classEntry -> kind == E_classentry){
                         entry = (E_enventry)S_look(classEntry -> u.classs.methods, name);
                     }
                     else{
-                        EM_error(e -> pos, "Class %s does not exist.", S_name(type -> u.name.sym));
+                        EM_error(e -> pos, "noexist.class %s", S_name(type -> u.name.sym));
                     }
                 }
                 else
                 {
-                    EM_error(e -> pos, "Cannot get a member of a non classs object.");
+                    EM_error(e -> pos, "noexist.member %s", S_name(name));
                 }
             }
             T_expList expList = T_ExpList(NULL, NULL);
@@ -1575,12 +1599,12 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     {
                         if (exp == NULL && type != NULL)
                         {
-                            EM_error(e->pos, "There are too few arguments in the call expression.");
+                            EM_error(e->pos, "func.few");
                             break;
                         }
                         else if (exp != NULL && type == NULL)
                         {
-                            EM_error(e->pos, "There are too many arguments in the call expression.");
+                            EM_error(e->pos, "func.many");
                             break;
                         }
                     }
@@ -1613,14 +1637,14 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 {
                     if (entryArgsTy->head != NULL)
                     {
-                        EM_error(e->pos, "There are too many arguments in the call expression.");
+                        EM_error(e->pos, "func.few");
                     }
                 }
                 else if (expArgs != NULL && entryArgsTy == NULL)
                 {
                     if (expArgs->head != NULL)
                     {
-                        EM_error(e->pos, "There are too few arguments in the call expression.");
+                        EM_error(e->pos, "func.many");
                     }
                 }
                 if(templateTemp)
@@ -1634,42 +1658,15 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             }
             else
             {
-                EM_error(e->pos, "Undefined function \'%s\'", S_name(name));
+                EM_error(e->pos, "noexist.func %s", S_name(name));
             }
         }
         else
-            EM_error(e -> pos, "Cannot call function.");
+            EM_error(e -> pos, "func.cannotcall");
     }
     case A_recordExp:
     {
         return expTy(NULL, (Ty_ty)S_look(tenv, e->u.record.typ));
-    }
-    case A_assignExp:
-    {
-        A_var var = e->u.assign.var;
-        A_exp exp = e->u.assign.exp;
-        E_enventry varType = (E_enventry)S_look(venv, var->u.simple);
-        struct expty expp = transExp(venv, tenv, exp, level, isLoop, classs);
-        if (varType->u.var.ty != expp.ty)
-        {
-            EM_error(e->pos, "Cannot assign %s to %s.", S_name(expp.ty->u.name.sym), returnSymFromType(varType->u.var.ty));
-        }
-        return expTy(expp.exp, transExp(venv, tenv, exp, level, isLoop, classs).ty);
-    }
-    case A_ifExp:
-    {
-        struct expty test = transExp(venv, tenv, e->u.iff.test, level, isLoop, classs);
-        struct expty then = transExp(venv, tenv, e->u.iff.then, level, isLoop, classs);
-        struct expty elsee = transExp(venv, tenv, e->u.iff.elsee, level, isLoop, classs);
-        if (then.ty != Ty_Bool())
-        {
-            EM_error(e->pos, "Test expression needs to be a bool type.");
-        }
-        if (then.ty != elsee.ty)
-        {
-            EM_error(e->pos, "Then expression and else expression must be of the same type.");
-        }
-        return expTy(Tr_IfExp(e->pos, convertType(then.ty), test.exp->u.exp, then.exp->u.exp, elsee.exp->u.exp), actual_ty(transExp(venv, tenv, e->u.iff.then, level, isLoop, classs).ty));
     }
     case A_sizeofExp:
     {
@@ -1716,8 +1713,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 arrayType = expp.ty;
             else if(!arrayType)
                 arrayType = expp.ty;
-            else if(arrayType && arrayType != expp.ty)
-            {
+            else if(arrayType && arrayType != expp.ty){
                 // printf("%d %d types\n", arrayType -> kind, expp.ty -> kind);
                 EM_error(e -> pos, "Element %d does not match the other types.", i);
             }
@@ -1993,7 +1989,10 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     return expTy(Tr_OpExp(e->pos, convertType(right.ty), T_eq, T_ConvertExp(T_f64, left.exp->u.exp), right.exp->u.exp), Ty_Bool());
                 if (left.ty->kind == Ty_real && right.ty->kind == Ty_real)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_eq, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
-                EM_error(e->u.op.left->pos, "The two operands cannot be compared.");
+                if(left.ty -> kind == right.ty -> kind){
+                    return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_eq, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
+                }
+                EM_error(e->u.op.left->pos, "The two operands cannot be compared. %d %d", left.ty -> kind, right.ty -> kind);
                 return expTy(NULL, NULL);
             }
             else
@@ -2024,6 +2023,9 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     return expTy(Tr_OpExp(e->pos, convertType(right.ty), T_ne, T_ConvertExp(T_f64, left.exp->u.exp), right.exp->u.exp), Ty_Bool());
                 if (left.ty->kind == Ty_real && right.ty->kind == Ty_real)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_ne, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
+                if(left.ty -> kind == right.ty -> kind){
+                    return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_ne, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
+                }
                 EM_error(e->u.op.left->pos, "The two operands cannot be compared.");
                 return expTy(NULL, NULL);
             }
