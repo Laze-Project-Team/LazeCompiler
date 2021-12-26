@@ -749,6 +749,10 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         entryArgsTy = makeParamTypeList(venv, tenv, fundec -> params, level);
                         for(A_expList argList = stm -> u.call.args; entryArgsTy && argList; entryArgsTy = entryArgsTy -> tail, argList = argList -> tail)
                         {
+                            if(argList -> head -> kind == A_stringExp){
+                                std::cout << "stringexp" << std::endl;
+                                exit(0);
+                            }
                             if(entryArgsTy -> head -> kind == Ty_name)
                             {
                               //printf("%s templatee.name\n", S_name(entry -> u.templatee.name));
@@ -781,8 +785,9 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     {
                         A_exp exp = expArgs->head;
                         struct expty expp = transExp(venv, tenv, exp, level, isLoop, classs);
-                        if(expp.ty -> kind == Ty_array && expp.exp -> u.exp -> kind == T_loadExp){   
-                            expList->head = expp.exp->u.exp -> u.load.addr;
+                        T_exp translatedAddrExp = expp.exp->u.exp -> u.load.addr;
+                        if(expp.ty -> kind == Ty_array && expp.exp -> u.exp -> kind == T_loadExp){
+                            expList->head = translatedAddrExp;
                         }
                         else{
                             expList->head = expp.exp->u.exp;
@@ -1549,6 +1554,10 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     entryArgsTy = makeParamTypeList(venv, tenv, fundec -> params, level);
                     for(A_expList argList = e -> u.call.args; entryArgsTy && argList; entryArgsTy = entryArgsTy -> tail, argList = argList -> tail)
                     {
+                        if(argList -> head -> kind == A_stringExp){
+                            std::cout << "stringexp" << std::endl;
+                            exit(0);
+                        }
                         if(entryArgsTy -> head -> kind == Ty_name)
                         {
                           //printf("%s templatee.name\n", S_name(entry -> u.templatee.name));
