@@ -60,6 +60,7 @@ static A_classMemberList flipClassMemberList(A_classMemberList list);
 static T_moduleList flipModList(T_moduleList list);
 static S_symbol actual_name(A_var);
 static S_symbol getName(A_var);
+static S_symbol operToSym(A_oper oper);
 
 T_moduleList SEM_transProg(A_decList declist)
 {
@@ -1847,6 +1848,22 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         A_oper oper = e->u.op.oper;
         struct expty left = transExp(venv, tenv, e->u.op.left, level, isLoop, classs);
         struct expty right = transExp(venv, tenv, e->u.op.right, level, isLoop, classs);
+        if(left.ty -> kind == Ty_name){
+            S_symbol opSym = operToSym(oper);
+            E_enventry classEntry = (E_enventry)S_look(tenv, left.ty -> u.name.sym);
+            if(classEntry){
+                E_enventry funcEntry = (E_enventry)S_look(classEntry -> u.classs.methods, opSym);
+                if(funcEntry){
+                    return transExp(venv, tenv, A_CallExp(e -> pos, A_FieldExp(e -> pos, e -> u.op.left, opSym), A_ExpList(e -> u.op.right, NULL)), level, isLoop, classs);
+                }
+                else{
+                    EM_error(e -> pos, "noexist.func %s", S_name(opSym));
+                }
+            }
+            else{
+                EM_error(e -> pos, "noexist.class %s", S_name(left.ty -> u.name.sym));
+            }
+        }
         if (oper == A_plusOp)
         {
             // printf("%d size\n", left.ty->kind);
@@ -2563,6 +2580,10 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                     S_enter(tenv, d -> u.classs.name, templateEntry);
                 }
             }
+            else if(memberList -> head -> dec -> kind == A_operatorDec){
+                T_module mod = transDec(venv, tenv, memberList -> head -> dec, level, isLoop, methods, type);
+                mod -> u.func -> params = T_TypeList(T_i32, mod -> u.func -> params);
+            }
         }
         // templatee declartaion is before T_SeqMod(modlist)
       //printf("-------------------------------CLASS DECLARE ENDED--------------------------------\n");
@@ -3187,4 +3208,49 @@ static S_symbol getName(A_var var)
     {
         return var -> u.simple;
     }
+}
+static S_symbol operToSym(A_oper oper){
+    string opId = "";
+    switch(oper){
+        case A_plusOp:
+            opId = "+";
+            break;
+        case A_minusOp:
+            opId = "-";
+            break;
+        case A_timesOp:
+            opId = "*";
+            break;
+        case A_divideOp:
+            opId = "/";
+            break;
+        case A_modOp:
+            opId = "%";
+            break;
+        case A_eqOp:
+            opId = "==";
+            break;
+        case A_neqOp:
+            opId = "!=";
+            break;
+        case A_ltOp:
+            opId = "<";
+            break;
+        case A_leOp:
+            opId = "<=";
+            break;
+        case A_gtOp:
+            opId = ">";
+            break;
+        case A_geOp:
+            opId = ">=";
+            break;
+        case A_andOp:
+            opId = "&&";
+            break;
+        case A_orOp:
+            opId = "||";
+            break;
+    }
+    return S_Symbol(opId);
 }

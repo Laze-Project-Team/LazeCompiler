@@ -471,6 +471,16 @@ A_dec A_TemplateDec(A_pos pos, S_symbol name, A_dec dec)
     return p;
 }
 
+A_dec A_OperatorDec(A_pos pos, A_oper oper, A_fieldList params, A_fieldList result, A_stm body){
+    A_dec p = (A_dec)checked_malloc(sizeof(*p));
+    p -> kind = A_operatorDec;
+    p -> u.op.oper = oper;
+    p -> u.op.params = params;
+    p -> u.op.result = result;
+    p -> u.op.body = body;
+    return p;
+}
+
 A_ty A_NameTy(A_pos pos, S_symbol name)
 {
     A_ty p = (A_ty)checked_malloc(sizeof(*p));

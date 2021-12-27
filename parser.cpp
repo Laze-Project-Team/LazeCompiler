@@ -631,6 +631,51 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "dec.template"){
             result -> u.dec = A_TemplateDec(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("dec").dec);
         }
+        else if(ruleName == "dec.operator"){
+            string opId = "";
+            switch(tokenData.at("oper").oper){
+                case A_plusOp:
+                    opId = "+";
+                    break;
+                case A_minusOp:
+                    opId = "-";
+                    break;
+                case A_timesOp:
+                    opId = "*";
+                    break;
+                case A_divideOp:
+                    opId = "/";
+                    break;
+                case A_modOp:
+                    opId = "%";
+                    break;
+                case A_eqOp:
+                    opId = "==";
+                    break;
+                case A_neqOp:
+                    opId = "!=";
+                    break;
+                case A_ltOp:
+                    opId = "<";
+                    break;
+                case A_leOp:
+                    opId = "<=";
+                    break;
+                case A_gtOp:
+                    opId = ">";
+                    break;
+                case A_geOp:
+                    opId = ">=";
+                    break;
+                case A_andOp:
+                    opId = "&&";
+                    break;
+                case A_orOp:
+                    opId = "||";
+                    break;
+            }
+            result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(opId), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
+        }
     }
     //var
     {

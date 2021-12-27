@@ -34,7 +34,8 @@
             "private":"非公開",
             "protected":"保護",
             "repeat":"回繰り返す",
-            "lineend": ";"
+            "lineend": ";",
+            "operator":"演算子"
         },
         "int":"[0-9]",
         "hex":"0x[0-9A-F]+",
@@ -150,6 +151,7 @@
             "func": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
             "jsload": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) lineend",
             "jsexport": "jsexport ( id , string ) lineend",
+            "operator": "function : operator oper ( fieldlist(params) ) => ( fieldlist(result) ) stm",
             "template": "type < id > : dec"
         },
         "var": {
