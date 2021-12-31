@@ -5,22 +5,25 @@
 extern int funcs;
 extern int memorySize;
 extern std::string _mainFuncName;
+extern std::string _stringClassName;
 
-extern A_decList absyn_root;
-static T_moduleList list;
-static T_moduleList result;
-static T_moduleList tableList;
-static T_moduleList resultTableList;
+extern A_decList absyn_root = NULL;
+static T_moduleList list = NULL;
+static T_moduleList result = NULL;
+static T_moduleList tableList = NULL;
+static T_moduleList resultTableList = NULL;
 static int tableIndex = 0;
-static T_moduleList typeList;
-static T_moduleList resultTypeList;
+static T_moduleList typeList = NULL;
+static T_moduleList resultTypeList = NULL;
 static int typeIndex = 0;
 static bool hasLoop = FALSE;
-static T_module loopFunc;
-static T_moduleList resultScopeFuncs;
-static T_moduleList scopeFuncs;
-static T_stmList loopVarsStart;
-static T_stmList loopVarsEnd;
+static T_module loopFunc = NULL;
+static T_moduleList resultScopeFuncs = NULL;
+static T_moduleList scopeFuncs = NULL;
+static T_stmList loopVarsStart = NULL;
+static T_stmList loopVarsEnd = NULL;
+static T_stmList stringLiterals = NULL;
+static T_stmList stringLiteralsResult = NULL;
 
 struct expty expTy(Tr_exp exp, Ty_ty ty)
 {
@@ -64,6 +67,8 @@ static S_symbol operToSym(A_oper oper);
 
 T_moduleList SEM_transProg(A_decList declist)
 {
+    stringLiterals = T_StmList(NULL, NULL);
+    stringLiteralsResult = stringLiterals;
     scopeFuncs = T_ModuleList(NULL, NULL);
     resultScopeFuncs = scopeFuncs;
     tableList = T_ModuleList(NULL, NULL);
@@ -132,6 +137,13 @@ T_moduleList SEM_transProg(A_decList declist)
     list -> head = T_SeqMod(resultTypeList);
     list -> tail = T_ModuleList(NULL, NULL);
     list = list -> tail;
+    list -> head = T_FuncMod(T_Fundec(T_TypeList(T_none, NULL), T_TypeList(T_none, NULL), T_none, T_SeqStm(stringLiteralsResult), "__stringLiterals", funcs, NULL));
+    funcs+=1;
+    list -> tail = T_ModuleList(NULL, NULL);
+    list = list -> tail;
+    list -> head = T_ExportMod("__stringLiterals", --funcs);
+    list -> tail = T_ModuleList(NULL, NULL);
+    list = list -> tail;
     list -> head = T_ElemMod(Tr_AddrExp(0, 0) -> u.exp, resultTableList);
     list -> tail = T_ModuleList(NULL, NULL);
     list = list -> tail;
@@ -196,6 +208,48 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             A_var var = stm->u.assign.var;
             struct expty varExpty = transVar(venv, tenv, var, level, isLoop, FALSE, stm -> u.assign.isDec, classs);
             S_symbol varName;
+            if(varExpty.ty -> kind == Ty_name){
+                E_enventry classEntry = (E_enventry)S_look(tenv, varExpty.ty -> u.name.sym);
+                if(classEntry){
+                    E_enventry funcEntry = (E_enventry)S_look(classEntry -> u.classs.methods, S_Symbol("="));
+                    if(funcEntry){
+                        if(funcEntry -> u.func.formals -> head){
+                            Ty_ty lhs = funcEntry -> u.func.formals -> head;
+                            struct expty assignExpty = transExp(venv, tenv, stm -> u.assign.exp, level, isLoop, classs);
+                            if(compType(lhs, assignExpty.ty)){
+                                if(stm -> u.assign.exp -> kind == A_stringExp){
+                                    T_stmList assignList = T_StmList(NULL, NULL);
+                                    T_stmList result = assignList;
+                                    int arrayAddr = memorySize;
+                                    T_expList list = assignExpty.exp -> u.exp -> u.seq.list;
+                                    for(int i = 0; i < assignExpty.ty -> u.pointer -> u.array.size; i++)
+                                    {
+                                        int elementAddr = arrayAddr + i * assignExpty.ty -> u.pointer -> u.array.type -> size;
+                                        memorySize += assignExpty.ty -> u.pointer -> u.array.type -> size;
+                                        level -> frame -> frameSize += assignExpty.ty -> u.pointer -> u.array.type -> size;
+                                        T_exp addrExp = Tr_AddrExp(stm -> pos, elementAddr)->u.exp;
+                                        assignList -> head = Tr_AddrAssignStm(stm -> pos, addrExp, list -> head)->u.stm;
+                                        assignList -> tail = T_StmList(NULL, NULL);
+                                        assignList = assignList -> tail;
+                                        assignList -> head = NULL;
+                                        assignList -> tail = NULL;
+                                        list = list -> tail;
+                                    }
+                                    struct expty callStm = transStm(venv, tenv, A_CallStm(stm -> pos, A_VarExp(stm -> pos, A_FieldVar(stm -> pos, var, S_Symbol("="))), A_ExpList(A_AddrExp(stm -> u.assign.exp -> pos, arrayAddr), A_ExpList(A_IntExp(stm -> u.assign.exp -> pos, assignExpty.ty -> u.pointer -> u.array.size), NULL))), level, isLoop, classs);
+                                    assignList -> head = callStm.exp -> u.stm;
+                                    assignList -> tail = T_StmList(NULL, NULL);
+                                    assignList = assignList -> tail;
+                                    assignList -> head = NULL;
+                                    assignList -> tail = NULL;
+                                    return expTy(Tr_CompoundStm(stm -> pos, result), Ty_Void());
+                                }
+                                return transStm(venv, tenv, A_CallStm(stm -> pos, A_VarExp(stm -> pos, A_FieldVar(stm -> pos, var, S_Symbol("="))), A_ExpList(stm -> u.assign.exp, NULL)), level, isLoop, classs);
+                            }
+                        }
+                        
+                    }
+                }
+            }
             if (var->kind == A_derefVar)
             {
                 E_enventry varType = (E_enventry)S_look(venv, var->u.deref->u.simple);
@@ -254,9 +308,9 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         }
                         T_expList list = assignVal.exp -> u.exp -> u.seq.list;
                       //printf("%d size 276\n", assignVal.ty -> u.array.size);
-                        for(int i = 0; i < assignVal.ty -> u.array.size; i++)
+                        for(int i = 0; i < assignVal.ty -> u.pointer -> u.array.size; i++)
                         {
-                            int offset = i * assignVal.ty -> u.array.type -> size;
+                            int offset = i * assignVal.ty -> u.pointer -> u.array.type -> size;
                             assignList -> head = Tr_AddrAssignStm(stm -> pos, Tr_OpExp(stm -> pos, T_i32, T_add, addrExp->u.exp, Tr_AddrExp(stm -> pos, offset)->u.exp)->u.exp, list -> head)->u.stm;
                             assignList -> tail = T_StmList(NULL, NULL);
                             assignList = assignList -> tail;
@@ -353,16 +407,16 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             varType -> u.var.access -> level -> frame -> offset;
                         }
                         T_expList list = assignVal.exp -> u.exp -> u.seq.list;
-                        for(int i = 0; i < assignVal.ty -> u.array.size; i++)
+                        for(int i = 0; i < assignVal.ty -> u.pointer -> u.array.size; i++)
                         {
-                            int elementAddr = arrayAddr + i * assignVal.ty -> u.array.type -> size;
+                            int elementAddr = arrayAddr + i * assignVal.ty -> u.pointer -> u.array.type -> size;
                             T_exp addrExp;
                             if(varType){
                                 addrExp = Tr_AddrExp(stm -> pos, elementAddr)->u.exp;
                             }
                             else{
                                 addrExp = transVar(venv, tenv, var, level, isLoop, TRUE, FALSE, classs).exp -> u.exp -> u.load.addr;
-                                addrExp = Tr_OpExp(stm -> pos, T_i32, T_add, addrExp, Tr_AddrExp(stm -> pos, i * assignVal.ty -> u.array.type -> size)->u.exp)->u.exp;
+                                addrExp = Tr_OpExp(stm -> pos, T_i32, T_add, addrExp, Tr_AddrExp(stm -> pos, i * assignVal.ty -> u.pointer -> u.array.type -> size)->u.exp)->u.exp;
                             }
                             assignList -> head = Tr_AddrAssignStm(stm -> pos, addrExp, list -> head)->u.stm;
                             assignList -> tail = T_StmList(NULL, NULL);
@@ -600,6 +654,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             T_expList result = expList;
             bool isCalledInMethod = FALSE;
             //debug(stm->pos, "Call Statement");
+            
             if(stm -> u.call.func -> kind == A_varExp || stm -> u.call.func -> kind == A_fieldExp || stm -> u.call.func -> kind == A_arrowFieldExp){
                 S_symbol name;
                 E_enventry entry;
@@ -695,7 +750,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         name = stm -> u.call.func -> u.arrowfield.member;
                         fieldExpty = transExp(venv, tenv, stm -> u.call.func -> u.arrowfield.pointer, level, isLoop, classs);
                         if(fieldExpty.ty -> kind != Ty_pointer){
-                                printf("aaaaaaaaaaaaaaaaaaa %s\n", S_name(fieldExpty.ty -> u.name.sym));
+                                // printf("aaaaaaaaaaaaaaaaaaa %s\n", S_name(fieldExpty.ty -> u.name.sym));
 
                             EM_error(stm -> pos, "operator.arrow");
                         }
@@ -733,7 +788,48 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     }
                     else
                     {
-                        EM_error(stm -> pos, "notexist.member %s", S_name(name));
+                        EM_error(stm -> pos, "noexist.member %s", S_name(name));
+                    }
+                }
+                if(entry != NULL && entry -> kind == E_listEntry && entry -> u.list -> size() > 0){
+                    for(const auto &entries: *(entry -> u.list)){
+                        if(entries -> kind == E_funcentry){
+                            Ty_tyList paramType = entries -> u.func.formals;
+                            A_expList args = stm -> u.call.args;
+                            bool functionOk = true;
+                            for(;args && paramType; paramType = paramType -> tail, args = args -> tail){
+                                if (args -> head == NULL && paramType -> head != NULL)
+                                {
+                                    EM_error(stm->pos, "func.few");
+                                    break;
+                                }
+                                else if (args -> head != NULL && paramType -> head == NULL)
+                                {
+                                    EM_error(stm->pos, "func.many");
+                                    break;
+                                }
+                                Ty_ty argType = transExp(venv, tenv, args -> head, level, isLoop, classs).ty;
+                                if(compType(paramType -> head, argType)){
+                                    continue;
+                                }
+                                else if(args -> head -> kind == A_stringExp && paramType -> head -> kind == Ty_name){
+                                    if(strcmp(_stringClassName.c_str(), S_name(paramType -> head -> u.name.sym)) == 0){
+                                        continue;
+                                    }
+                                }
+                                else{
+                                    functionOk = false;
+                                    break;
+                                }
+                            }
+                            if(functionOk){
+                                entry = entries;
+                                break;
+                            }
+                            else{
+                                entry = NULL;
+                            }
+                        }
                     }
                 }
                 if (entry != NULL && (entry->kind == E_funcentry || (entry->kind == E_templateentry && entry -> u.templatee.dec -> kind == A_functionDec)))
@@ -750,9 +846,15 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         entryArgsTy = makeParamTypeList(venv, tenv, fundec -> params, level);
                         for(A_expList argList = stm -> u.call.args; entryArgsTy && argList; entryArgsTy = entryArgsTy -> tail, argList = argList -> tail)
                         {
-                            if(argList -> head -> kind == A_stringExp){
-                                std::cout << "stringexp" << std::endl;
-                                exit(0);
+                            if (argList -> head == NULL && entryArgsTy -> head != NULL)
+                            {
+                                EM_error(stm->pos, "func.few");
+                                break;
+                            }
+                            else if (argList -> head != NULL && entryArgsTy -> head == NULL)
+                            {
+                                EM_error(stm->pos, "func.many");
+                                break;
                             }
                             if(entryArgsTy -> head -> kind == Ty_name)
                             {
@@ -785,8 +887,33 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         expArgs = expArgs->tail, entryArgsTy = entryArgsTy->tail, i++)
                     {
                         A_exp exp = expArgs->head;
+                        Ty_ty type = entryArgsTy->head;
+
+                        if (exp == NULL && type != NULL)
+                        {
+                            EM_error(stm->pos, "func.few");
+                            break;
+                        }
+                        else if (exp != NULL && type == NULL)
+                        {
+                            EM_error(stm->pos, "func.many");
+                            break;
+                        }
+
                         struct expty expp = transExp(venv, tenv, exp, level, isLoop, classs);
                         T_exp translatedAddrExp = expp.exp->u.exp -> u.load.addr;
+                        
+                        if(exp -> kind == A_stringExp && type -> kind == Ty_name ){
+                            if(type -> kind == Ty_name){
+                                stringLiterals -> head = transStm(venv, tenv, A_DeclarationStm(exp -> pos, A_VarDec(exp -> pos, A_AssignStm(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__string_literal")), exp, TRUE), A_NameTy(exp -> pos, type -> u.name.sym))), level, isLoop, classs).exp -> u.stm;
+                                stringLiterals -> tail = T_StmList(NULL, NULL);
+                                stringLiterals = stringLiterals -> tail;
+                                stringLiterals -> head = NULL;
+                                stringLiterals -> tail = NULL;
+                            }
+                            exp = A_VarExp(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__string_literal")));
+                            expp = transExp(venv, tenv, exp, level, isLoop, classs);
+                        }
                         if(expp.ty -> kind == Ty_array && expp.exp -> u.exp -> kind == T_loadExp){
                             expList->head = translatedAddrExp;
                         }
@@ -795,7 +922,6 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         }
                         // printf("%d expList -> head\n", expp.ty -> kind );
                         expList->tail = T_ExpList(NULL, NULL);
-                        Ty_ty type = entryArgsTy->head;
 
                         if (exp != NULL && type != NULL)
                         {
@@ -803,20 +929,6 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             if (!compType(type, expp.ty))
                             {
                                 expList -> head = convertAssign(type, expp, exp -> pos);
-                            }
-
-                        }
-                        else
-                        {
-                            if (exp == NULL && type != NULL)
-                            {
-                                EM_error(stm->pos, "arguments.few");
-                                break;
-                            }
-                            else if (exp != NULL && type == NULL)
-                            {
-                                EM_error(stm->pos, "arguments.many");
-                                break;
                             }
                         }
                         expList = expList->tail;
@@ -849,14 +961,14 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     {
                         if (entryArgsTy->head != NULL)
                         {
-                            EM_error(stm->pos, "arguments.few");
+                            EM_error(stm->pos, "func.few");
                         }
                     }
                     else if (expArgs != NULL && entryArgsTy == NULL)
                     {
                         if (expArgs->head != NULL)
                         {
-                            EM_error(stm->pos, "arguments.many");
+                            EM_error(stm->pos, "func.many");
                         }
                     }
                     if(templateTemp)
@@ -901,12 +1013,12 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         {
                             if (exp == NULL && type != NULL)
                             {
-                                EM_error(stm->pos, "arguments.few");
+                                EM_error(stm->pos, "func.few");
                                 break;
                             }
                             else if (exp != NULL && type == NULL)
                             {
-                                EM_error(stm->pos, "arguments.many");
+                                EM_error(stm->pos, "func.many");
                                 break;
                             }
                         }
@@ -945,7 +1057,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                 assert(level);
                 Temp_label label = level->label;
                 E_enventry func = (E_enventry)S_look(venv, label);
-                printf("%s\n", S_name(label));
+                // printf("%s\n", S_name(label));
                 if (func->kind == E_funcentry)
                     if (func->u.func.result)
                         return expTy(Tr_ReturnStm(stm->pos, Tr_VarExp(stm->pos, convertType(func->u.func.result->access->type), func->u.func.result, FALSE, FALSE)->u.exp), Ty_Void());
@@ -1272,6 +1384,17 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
     // assert(e);
     switch (e->kind)
     {
+    case A_typeEqExp:
+    {
+        Ty_ty type1 = transTy(venv, tenv, e -> u.typeeq.type1, level);
+        Ty_ty type2 = transTy(venv, tenv, e -> u.typeeq.type2, level);
+        return expTy(Tr_BoolExp(e -> pos, compType(type1, type2)), Ty_Bool());
+    }
+    case A_addrExp:
+    {
+        return expTy(Tr_AddrExp(e -> pos, e -> u.addr), Ty_Pointer(Ty_Void()));
+        break;
+    }
     case A_intExp:
     {
         return expTy(Tr_IntExp(e->pos, e->u.intt), Ty_Int());
@@ -1308,7 +1431,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             size++;
         }
         // printf("%d size string\n", size);
-        return expTy(Tr_ArrayExp(e -> pos, result), Ty_Array(Ty_Char(), size));
+        return expTy(Tr_ArrayExp(e -> pos, result), Ty_Pointer(Ty_Array(Ty_Char(), size)));
         break;
     }
     case A_realExp:
@@ -1464,7 +1587,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     }
                     else
                     {
-                        printf("y tho\n");
+                        // printf("y tho\n");
                     }
                     E_enventry classEntry;
                     if(type -> kind == Ty_name)
@@ -1541,6 +1664,47 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             }
             T_expList expList = T_ExpList(NULL, NULL);
             T_expList result = expList;
+            if(entry != NULL && entry -> kind == E_listEntry && entry -> u.list -> size() > 0){
+                for(const auto &entries: *(entry -> u.list)){
+                    if(entries -> kind == E_funcentry){
+                        Ty_tyList paramType = entries -> u.func.formals;
+                        A_expList args = e -> u.call.args;
+                        bool functionOk = true;
+                        for(;args && paramType; paramType = paramType -> tail, args = args -> tail){
+                            if (args -> head == NULL && paramType -> head != NULL)
+                            {
+                                EM_error(e->pos, "func.few");
+                                break;
+                            }
+                            else if (args -> head != NULL && paramType -> head == NULL)
+                            {
+                                EM_error(e->pos, "func.many");
+                                break;
+                            }
+                            Ty_ty argType = transExp(venv, tenv, args -> head, level, isLoop, classs).ty;
+                            if(compType(paramType -> head, argType)){
+                                continue;
+                            }
+                            else if(args -> head -> kind == A_stringExp && paramType -> head -> kind == Ty_name){
+                                if(strcmp(_stringClassName.c_str(), S_name(paramType -> head -> u.name.sym)) == 0){
+                                    continue;
+                                }
+                            }
+                            else{
+                                functionOk = false;
+                                break;
+                            }
+                        }
+                        if(functionOk){
+                            entry = entries;
+                            break;
+                        }
+                        else{
+                            entry = NULL;
+                        }
+                    }
+                }
+            }
             if (entry != NULL && (entry->kind == E_funcentry || (entry->kind == E_templateentry && entry -> u.templatee.dec -> kind == A_functionDec)))
             {
                 E_enventry templateTemp = (E_enventry)checked_malloc(sizeof(*templateTemp));
@@ -1555,9 +1719,15 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     entryArgsTy = makeParamTypeList(venv, tenv, fundec -> params, level);
                     for(A_expList argList = e -> u.call.args; entryArgsTy && argList; entryArgsTy = entryArgsTy -> tail, argList = argList -> tail)
                     {
-                        if(argList -> head -> kind == A_stringExp){
-                            std::cout << "stringexp" << std::endl;
-                            exit(0);
+                        if (argList -> head == NULL && entryArgsTy -> head != NULL)
+                        {
+                            EM_error(e->pos, "func.few");
+                            break;
+                        }
+                        else if (argList -> head != NULL && entryArgsTy -> head == NULL)
+                        {
+                            EM_error(e->pos, "func.many");
+                            break;
                         }
                         if(entryArgsTy -> head -> kind == Ty_name)
                         {
@@ -1590,32 +1760,41 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     expArgs = expArgs->tail, entryArgsTy = entryArgsTy->tail, i++)
                 {
                     A_exp exp = expArgs->head;
+                    Ty_ty type = entryArgsTy->head;
+
+                    if (exp == NULL && type != NULL)
+                    {
+                        EM_error(e->pos, "func.few");
+                        break;
+                    }
+                    else if (exp != NULL && type == NULL)
+                    {
+                        EM_error(e->pos, "func.many");
+                        break;
+                    }
                     struct expty expp = transExp(venv, tenv, exp, level, isLoop, classs);
+                    if(exp -> kind == A_stringExp && type -> kind == Ty_name ){
+                        if(type -> kind == Ty_name){
+                            stringLiterals -> head = transStm(venv, tenv, A_DeclarationStm(exp -> pos, A_VarDec(exp -> pos, A_AssignStm(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__string_literal")), exp, TRUE), A_NameTy(exp -> pos, type -> u.name.sym))), level, isLoop, classs).exp -> u.stm;
+                            stringLiterals -> tail = T_StmList(NULL, NULL);
+                            stringLiterals = stringLiterals -> tail;
+                            stringLiterals -> head = NULL;
+                            stringLiterals -> tail = NULL;
+                        }
+                        exp = A_VarExp(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__string_literal")));
+                        expp = transExp(venv, tenv, exp, level, isLoop, classs);
+                    }
                     if(expp.ty -> kind == Ty_array && expp.exp -> u.exp -> kind == T_loadExp)
                         expList->head = expp.exp->u.exp -> u.load.addr;
                     else
                         expList->head = expp.exp->u.exp;
                     expList->tail = T_ExpList(NULL, NULL);
-                    Ty_ty type = entryArgsTy->head;
                     if (exp != NULL && type != NULL)
                     {
                         if (!compType(type, expp.ty))
                         {
                             // printf("%d %d flaj\n", type -> kind, argType.ty -> kind);
                             expList -> head = convertAssign(type, expp, e -> pos);
-                        }
-                    }
-                    else
-                    {
-                        if (exp == NULL && type != NULL)
-                        {
-                            EM_error(e->pos, "func.few");
-                            break;
-                        }
-                        else if (exp != NULL && type == NULL)
-                        {
-                            EM_error(e->pos, "func.many");
-                            break;
                         }
                     }
                     expList = expList->tail;
@@ -1699,7 +1878,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             return expTy(Tr_AddrExp(e -> pos, transVar(venv, tenv, e -> u.sizeOf -> u.deref, level, isLoop, FALSE, FALSE, classs).ty -> u.pointer -> size), Ty_Short());
         }
         else
-            EM_error(e -> pos, "The sizeof operator is only applicable on simple variables.");
+            EM_error(e -> pos, "sizeof.var");
         
     }
     case A_arrayExp:
@@ -1725,7 +1904,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 arrayType = expp.ty;
             else if(arrayType && arrayType != expp.ty){
                 // printf("%d %d types\n", arrayType -> kind, expp.ty -> kind);
-                EM_error(e -> pos, "Element %d does not match the other types.", i);
+                EM_error(e -> pos, "type.element %d", i);
             }
             list -> tail = T_ExpList(NULL, NULL);
             list = list -> tail;
@@ -1750,7 +1929,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         }
         else
         {
-            EM_error(e -> pos, "Cannot subscript an expression that is not type array or pointer.");
+            EM_error(e -> pos, "operator.subscript");
         }
         return expTy(Tr_DerefExp(e -> pos, Tr_OpExp(e -> pos, T_i32, T_add, arrayExpty.exp -> u.exp, offset)->u.exp, convertType(arrayExpty.ty -> u.array.type)), arrayExpty.ty -> u.array.type);
     }
@@ -1773,11 +1952,11 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 }
                 else
                 {
-                    EM_error(e -> pos, "%s is not a templatee type.", S_name(fieldExpty.ty -> u.poly.name));
+                    EM_error(e -> pos, "noexist.template %s", S_name(fieldExpty.ty -> u.poly.name));
                 }
             }
             if(classEntry -> kind != E_classentry)
-                EM_error(e -> pos, "%s is not a classs.", S_name(fieldExpty.ty -> u.name.sym));
+                EM_error(e -> pos, "noexist.class %s", S_name(fieldExpty.ty -> u.name.sym));
             Ty_member member = (Ty_member)S_look(classEntry -> u.classs.varTypes, e -> u.field.member);
             if(member)
             {
@@ -1786,12 +1965,12 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             }
             else
             {
-                EM_error(e -> pos, "%s is not a member of %s.", S_name(e -> u.field.member), S_name(fieldExpty.ty -> u.name.sym));
+                EM_error(e -> pos, "class.nomember %s %s", S_name(e -> u.field.member), S_name(fieldExpty.ty -> u.name.sym));
             }
         }
         else
         {
-            EM_error(e -> pos, "Cannot get a member of a non-classs object.");
+            EM_error(e -> pos, "operator.field");
         }
     }
     case A_arrowFieldExp:
@@ -1814,11 +1993,11 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     }
                     else
                     {
-                        EM_error(e -> pos, "%s is not a templatee type.", S_name(fieldExpty.ty -> u.pointer -> u.poly.name));
+                        EM_error(e -> pos, "noexist.template %s", S_name(fieldExpty.ty -> u.pointer -> u.poly.name));
                     }
                 }
                 if(classEntry -> kind != E_classentry)
-                    EM_error(e -> pos, "%s is not a classs.", S_name(fieldExpty.ty -> u.pointer -> u.name.sym));
+                    EM_error(e -> pos, "noexist.class %s", S_name(fieldExpty.ty -> u.pointer -> u.name.sym));
                 Ty_member member = (Ty_member)S_look(classEntry -> u.classs.varTypes, e -> u.field.member);
                 if(member)
                 {
@@ -1830,17 +2009,17 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 }
                 else
                 {
-                    EM_error(e -> pos, "%s is not a member of %s.", S_name(e -> u.field.member), S_name(fieldExpty.ty -> u.pointer -> u.name.sym));
+                    EM_error(e -> pos, "class.nomember %s %s", S_name(e -> u.field.member), S_name(fieldExpty.ty -> u.pointer -> u.name.sym));
                 }
             }
             else
             {
-                EM_error(e -> pos, "Cannot get a member of a non-classs object.");
+                EM_error(e -> pos, "operator.field");
             }
         }
         else
         {
-            EM_error(e -> pos, "Cannot use the arrow operator on a non pointer variable.");
+            EM_error(e -> pos, "operator.arrow");
         }
     }
     case A_opExp:
@@ -1886,16 +2065,16 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 if (left.ty->kind == Ty_string && right.ty->kind == Ty_string)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_add, left.exp->u.exp, right.exp->u.exp), Ty_String());
                 else
-                    EM_error(e->u.op.left->pos, "The two operands cannot be added.");
+                    EM_error(e->u.op.left->pos, "type.add");
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_minusOp)
@@ -1919,16 +2098,16 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 if (left.ty->kind == Ty_string && right.ty->kind == Ty_string)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_sub, left.exp->u.exp, right.exp->u.exp), Ty_String());
                 else
-                    EM_error(e->u.op.left->pos, "The two operands cannot be subtracted.");
+                    EM_error(e->u.op.left->pos, "type.sub");
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_timesOp)
@@ -1952,16 +2131,16 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 if (left.ty->kind == Ty_string && right.ty->kind == Ty_string)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_mul, left.exp->u.exp, right.exp->u.exp), Ty_String());
                 else
-                    EM_error(e->u.op.left->pos, "The two operands cannot be multiplied.");
+                    EM_error(e->u.op.left->pos, "type.mul");
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_divideOp)
@@ -1984,17 +2163,17 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_div_s, left.exp->u.exp, right.exp->u.exp), Ty_Real());
                 if (left.ty->kind == Ty_string && right.ty->kind == Ty_string)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_div_s, left.exp->u.exp, right.exp->u.exp), Ty_String());
-                EM_error(e->u.op.left->pos, "The two operands cannot be divided.");
+                EM_error(e->u.op.left->pos, "type.div");
                 return expTy(NULL, NULL);
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_eqOp)
@@ -2018,17 +2197,17 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 if(left.ty -> kind == right.ty -> kind){
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_eq, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
                 }
-                EM_error(e->u.op.left->pos, "The two operands cannot be compared. %d %d", left.ty -> kind, right.ty -> kind);
+                EM_error(e->u.op.left->pos, "type.comp");
                 return expTy(NULL, NULL);
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_neqOp)
@@ -2052,17 +2231,17 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 if(left.ty -> kind == right.ty -> kind){
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_ne, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
                 }
-                EM_error(e->u.op.left->pos, "The two operands cannot be compared.");
+                EM_error(e->u.op.left->pos, "type.comp");
                 return expTy(NULL, NULL);
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_leOp)
@@ -2083,17 +2262,17 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     return expTy(Tr_OpExp(e->pos, convertType(right.ty), T_le_s, T_ConvertExp(T_f64, left.exp->u.exp), right.exp->u.exp), Ty_Bool());
                 if (left.ty->kind == Ty_real && right.ty->kind == Ty_real)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_le_s, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
-                EM_error(e->u.op.left->pos, "The two operands cannot be compared.");
+                EM_error(e->u.op.left->pos, "type.comp");
                 return expTy(NULL, NULL);
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_ltOp)
@@ -2114,17 +2293,17 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     return expTy(Tr_OpExp(e->pos, convertType(right.ty), T_lt_s, T_ConvertExp(T_f64, left.exp->u.exp), right.exp->u.exp), Ty_Bool());
                 if (left.ty->kind == Ty_real && right.ty->kind == Ty_real)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_lt_s, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
-                EM_error(e->u.op.left->pos, "The two operands cannot be compared.");
+                EM_error(e->u.op.left->pos, "type.comp");
                 return expTy(NULL, NULL);
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_geOp)
@@ -2145,17 +2324,17 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     return expTy(Tr_OpExp(e->pos, convertType(right.ty), T_ge_s, T_ConvertExp(T_f64, left.exp->u.exp), right.exp->u.exp), Ty_Bool());
                 if (left.ty->kind == Ty_real && right.ty->kind == Ty_real)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_ge_s, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
-                EM_error(e->u.op.left->pos, "The two operands cannot be compared.");
+                EM_error(e->u.op.left->pos, "type.comp");
                 return expTy(NULL, NULL);
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_gtOp)
@@ -2176,28 +2355,28 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     return expTy(Tr_OpExp(e->pos, convertType(right.ty), T_gt_s, T_ConvertExp(T_f64, left.exp->u.exp), right.exp->u.exp), Ty_Bool());
                 if (left.ty->kind == Ty_real && right.ty->kind == Ty_real)
                     return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_gt_s, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
-                EM_error(e->u.op.left->pos, "The two operands cannot be compared.");
+                EM_error(e->u.op.left->pos, "type.comp");
                 return expTy(NULL, NULL);
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         if (oper == A_andOp)
         {
             if (left.ty->kind != Ty_bool)
             {
-                EM_error(e->pos, "Left operand does not a bool type. %d", left.ty -> kind);
+                EM_error(e->pos, "type.lhsnotbool");
             }
             if (right.ty->kind != Ty_bool)
             {
-                EM_error(e->pos, "Right operand does not a bool type.");
+                EM_error(e->pos, "type.rhsnotbool");
             }
             return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_and, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
         }
@@ -2205,11 +2384,11 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         {
             if (left.ty->kind != Ty_bool)
             {
-                EM_error(e->pos, "Left operand does not a bool type.");
+                EM_error(e->pos, "type.lhsnotbool");
             }
             if (right.ty->kind != Ty_bool)
             {
-                EM_error(e->pos, "Right operand does not a bool type.");
+                EM_error(e->pos, "type.rhsnotbool");
             }
             return expTy(Tr_OpExp(e->pos, convertType(left.ty), T_or, left.exp->u.exp, right.exp->u.exp), Ty_Bool());
         }
@@ -2225,18 +2404,18 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     return expTy(Tr_OpExp(e->pos, convertType(right.ty), T_rem_s, T_ConvertExp(T_i64, left.exp->u.exp), right.exp->u.exp), Ty_Int());
                 else
                 {
-                    EM_error(e->u.op.left->pos, "The two operands cannot be divided.");
+                    EM_error(e->u.op.left->pos, "type.mod");
                     return expTy(NULL, NULL);
                 }
             }
             else
             {
                 if (left.ty == NULL && right.ty != NULL)
-                    EM_error(e->pos, "Left operand does not have a type.");
+                    EM_error(e->pos, "type.lhs");
                 else if (left.ty != NULL && right.ty == NULL)
-                    EM_error(e->pos, "Right operand does not have a type.");
+                    EM_error(e->pos, "type.rhs");
                 if (left.ty == NULL && right.ty == NULL)
-                    EM_error(e->pos, "Both operand do not have a type.");
+                    EM_error(e->pos, "type.bhs");
             }
         }
         break;
@@ -2269,7 +2448,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         }
         if (typeEntry != NULL)
         {
-            EM_error(d->pos, "Type of name %s is already declared.", S_name(d->u.var.var->u.simple));
+            EM_error(d->pos, "type.alreadyexists %s", S_name(d->u.var.var->u.simple));
         }
         if (d->u.var.init != NULL)
         {
@@ -2318,7 +2497,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         }
         A_fieldList returnList = func->result;
         if (returnList->tail)
-            EM_error(d->pos, "Laze is not supporting multiple returning functions right now.\n");
+            EM_error(d->pos, "notsupport.multiplereturn");
         T_typeList newTypeList = T_TypeList(T_none, NULL);
         T_typeList result = newTypeList;
         E_enventry entry = NULL;
@@ -2332,7 +2511,18 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         else
             entry = E_FuncEntry(level, func->name, paramTypes, Tr_allocLocal(newLevel, FALSE, Ty_Void()), Ty_Void());
         funcs--;
-        S_enter(table, func->name, entry);
+        E_enventry funcEntry = NULL;
+        if(!(funcEntry = (E_enventry)S_look(venv, func -> name))){
+            S_enter(table, func->name, entry);
+        }
+        else if(funcEntry -> kind == E_funcentry){
+            E_enventry newEntry = E_ListEntry(funcEntry);
+            newEntry -> u.list -> push_back(entry);
+            S_enter(table, func -> name, newEntry);
+        }
+        else if(funcEntry -> kind == E_listEntry){
+            funcEntry -> u.list -> push_back(entry);
+        }
 
         S_beginScope(venv);
         {
@@ -2425,12 +2615,12 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
     {
         Ty_tyList paramTypes = makeParamTypeList(venv, tenv, d -> u.funcImport.params, level);
         if(venv != table){
-            EM_error(d -> pos, "Cannot declare a import function in a classs.");
+            EM_error(d -> pos, "notsupport.importinclass");
         }
         Tr_level newLevel = Tr_newLevel(level, d -> u.funcImport.name, makeEscapeList(d -> u.funcImport.params), paramTypes, FALSE, Ty_Void());
         A_fieldList returnList = d -> u.funcImport.result;
         if (returnList->tail)
-            EM_error(d->pos, "Laze is not supporting multiple returning functions right now.\n");
+            EM_error(d->pos, "notsupport.multiplereturn");
         E_enventry entry = NULL;
         A_field resultVar = NULL;
         // printf("%s func->name\n", S_name(d -> u.funcImport.name));
@@ -2466,7 +2656,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
             return T_ExportMod(d -> u.funcExport.exportName, funcEntry -> u.func.index);
         }
         else{
-            EM_error(d -> pos, "Function %s not found.", S_name(d -> u.funcExport.name));
+            EM_error(d -> pos, "noexist.func %s", S_name(d -> u.funcExport.name));
         }
     }
     case A_classDec:
@@ -2513,7 +2703,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                         name = memberList -> head -> dec -> u.var.var -> u.subscript.name;
                     }
                     else
-                        EM_error(memberList -> head -> dec -> pos, "Invalid declaration.");
+                        EM_error(memberList -> head -> dec -> pos, "code.declaredoesntwork");
                         
                     varType = transTy(venv, tenv, type, level);
                 }
@@ -2625,7 +2815,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         }
         else
         {
-            EM_error(d -> pos, "Unknown templatee type.");
+            EM_error(d -> pos, "code.templatenotsupport");
         }
         return NULL;
     }
@@ -2660,7 +2850,7 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
                 }
             }
             else{
-                EM_error(ty -> pos, "%s is not a type.", ty -> u.name);
+                EM_error(ty -> pos, "noexist.type %s", S_name(ty -> u.name));
             }
         }
     }
@@ -2706,7 +2896,7 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
             type = (Ty_ty)S_look(tenv, ty->u.name);
             if (!type)
             {
-                EM_error(ty->pos, "Type does not exist.\n");
+                EM_error(ty->pos, "noexist.type %s", S_name(ty -> u.name));
             }
             return Ty_Array(type, ty->u.array.size);
         }
@@ -2716,7 +2906,7 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
         Ty_ty typeParam = transTy(venv, tenv, ty -> u.poly.typeParam, level);
         E_enventry templateEntry = (E_enventry)S_look(tenv, ty -> u.poly.name);
         if(!templateEntry){
-            EM_error(ty -> pos, "Template not found.");
+            EM_error(ty -> pos, "noexist.template %s", S_name(ty -> u.poly.name));
         }
         if(templateEntry -> kind == E_templateentry)
         {
@@ -2747,7 +2937,7 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
             return Ty_Poly(ty -> u.poly.name, typeParam, classEntry -> u.classs.size);
         }
         else
-            EM_error(ty -> pos, "It's not a templatee.");
+            EM_error(ty -> pos, "noexist.template %s", ty -> u.poly.name);
     }
     case A_funcTy:
     {
@@ -2804,13 +2994,13 @@ static Ty_tyList makeParamTypeList(S_table venv, S_table tenv, A_fieldList param
             {
                 if(var -> u.subscript.exp -> kind!= A_intExp)
                 {
-                    EM_error(params -> head -> pos, "Cannot declare array with an unfixed size.\n");
+                    EM_error(params -> head -> pos, "array.invalidsize");
                 }
                 type = A_ArrayTy(params -> head -> pos, type, var -> u.subscript.exp -> u.intt);
             }
         }
         else{
-            EM_error(params -> head -> pos, "Undefined field type.");
+            EM_error(params -> head -> pos, "func.unknownfield");
         }
 
         if (ty = transTy(venv, tenv, type, level))
@@ -2828,7 +3018,7 @@ static Ty_tyList makeParamTypeList(S_table venv, S_table tenv, A_fieldList param
             }
             else
             {
-                EM_error(params->head->pos, "Undefined Type: %s", S_name(sym));
+                EM_error(params->head->pos, "noexist.type %s", S_name(sym));
             }
         }
         typeList->tail = Ty_TyList(NULL, NULL);
@@ -2947,10 +3137,10 @@ static T_type convertType(Ty_ty type)
         result = T_i32;
         break;
     }
-    case Ty_record:
-    {
-        EM_error(0, "Records not supported right now.");
-    }
+    // case Ty_record:
+    // {
+    //     EM_error(0, "Records not supported right now.");
+    // }
     case Ty_nil:
     {
         result = T_i32;
@@ -2965,10 +3155,6 @@ static T_type convertType(Ty_ty type)
     {
         result = T_i32;
         break;
-    }
-    case Ty_string:
-    {
-        EM_error(0, "Strings not supported right now.");
     }
     case Ty_array:
     {
@@ -3103,7 +3289,7 @@ static T_exp convertAssign(Ty_ty type, struct expty exp, int pos)
     else if (type->kind == Ty_short && exp.ty->kind == Ty_real)
         result = T_ConvertExp(T_i32, exp.exp -> u.exp);
     else
-        EM_error(pos, "Type %s %d does not match with type \'%s %d\'.", S_name(returnSymFromType(actual_ty(exp.ty))), exp.ty -> kind, S_name(returnSymFromType(actual_ty(type))), type -> kind);
+        EM_error(pos, "type.nomatch %s %s", S_name(returnSymFromType(actual_ty(exp.ty))), S_name(returnSymFromType(actual_ty(type))));
     return result;
 }
 
@@ -3111,7 +3297,7 @@ static A_ty reverseArrayTy(A_ty type)
 {
     if(type -> kind != A_arrayTy)
     {
-        EM_error(0, "This type cannot be reversed.");
+        EM_error(type -> pos, "type.notarray %s", "この変数");
     }
     A_ty result;
     A_ty temp, base;

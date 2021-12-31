@@ -33,7 +33,7 @@ const char * PP_getFilename(int index){
 
 void transPPList(Pre_preprocessorList ppList, const char* file)
 {
-    fileNames.push_front(std::string(file));
+    fileNames.push_back(std::string(file));
     if(!ppList) {
         return;
     }

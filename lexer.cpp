@@ -16,7 +16,7 @@ std::vector<std::vector<int>> lettersInLines;
 
 L_errorPos L_getErrorPos(int cursorPos){
     L_errorPos result;
-    std::cout << cursorPos << std::endl;
+    // std::cout << cursorPos << std::endl;
     for(int i = 0; i < lettersInLines.size(); i++){
         for(int j = 0; j < lettersInLines.at(i).size(); j++){
             if(cursorPos - lettersInLines.at(i).at(j) > 0){
@@ -111,16 +111,24 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
                 if(std::regex_search(programLine, match, regex.second)){
                     const char *matchCstr = match[1].str().c_str();
                     std::size_t length = 0;
-                    while(*matchCstr != '\0'){
-                        if(*matchCstr < 0){
-                            matchCstr += 3;
+                    // while((int)*matchCstr != 0){
+                    //     if((int)*matchCstr < 0){
+                    //         matchCstr += 3;
+                    //     }
+                    //     else if((int)*matchCstr > 0){
+                    //         matchCstr++;
+                    //     }
+                    //     length++;
+                    // }
+                    for(int i = 0; i < match[1].str().size();){
+                        if((int)match[1].str()[i] < 0){
+                            i += 3;
                         }
-                        else if(*matchCstr > 0){
-                            matchCstr++;
+                        else if((int)match[1].str()[i] >= 0){
+                            i++;
                         }
                         length++;
                     }
-                    // std::cout << length << std::endl;
                     L_token token = std::make_shared<L_token_>();
                     token -> start = cursor;
                     cursor += length;

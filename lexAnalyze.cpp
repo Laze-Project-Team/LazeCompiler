@@ -103,33 +103,33 @@ int main(int argc, char **argv)
     temp = fopen(temptempFileName, "w");
     fclose(temp);
     copyFileContent(fname, temptempFileName);
+    EM_setErrorJson(parseJsonName);
     if(linkFile){
         includeFile(linkFile, temptempFileName);
     }
     transPPList(preprocess(temptempFileName), temptempFileName);
     // EM_reset(tempFileName);
     while(!toByte(temptempFileName, tempFileName));
-    fprintf(stdout, "\n");
-    printf("Finished Preprocessing...\n");
+    // printf("Finished Preprocessing...\n");
     L_tokenList list = L_Lexer(tempFileName, parseJsonName);
-    std::cout << "Finished Lexing..." << std::endl;
+    // std::cout << "Finished Lexing..." << std::endl;
     A_decList absyn_root = NULL;
     if(parserFileName){
         absyn_root = P_parseWithFile(list, parseJsonName, parserFileName);
     }else{
         absyn_root = P_parse(list, parseJsonName);
     }
-    std::cout << "Finished Parsing..." << std::endl;
+    // std::cout << "Finished Parsing..." << std::endl;
     if(strcmp(mode, "convert") == 0){
         string resultJsonFile = concat(tempFileName, ".json");
         jobj jsonAST = JS_toJson(absyn_root);
         fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));
         CON_convert(resultJsonFile, convertJsonName, convertOutput);
-        std::cout << "Finished Converting." << std::endl;
+        // std::cout << "Finished Converting." << std::endl;
     }
     else if(strcmp(mode, "compile") == 0){
         Pr_printTree(SEM_transProg(absyn_root), resultFilename);
-        printf("Finished Compiling.\n");
+        // printf("Finished Compiling.\n");
     }
     return 0;
 }

@@ -10,8 +10,9 @@ extern "C" {
 
 extern int funcs;
 typedef struct E_enventry_ *E_enventry;
-enum E_entryType{E_varentry, E_funcentry, E_classentry, E_methodentry, E_templateentry, E_polyentry};
+enum E_entryType{E_varentry, E_funcentry, E_classentry, E_methodentry, E_templateentry, E_polyentry, E_listEntry};
 enum E_templateType{E_functemplate, E_classtemplate};
+
 struct E_enventry_ 
 {
     enum E_entryType kind;
@@ -39,6 +40,7 @@ struct E_enventry_
             S_table venv, tenv;
         } templatee;
         Ty_ty poly;
+        std::vector<E_enventry> *list;
     } u;
 };
 
@@ -47,6 +49,7 @@ E_enventry E_FuncEntry(Tr_level level, Temp_label label, Ty_tyList params, Tr_ac
 E_enventry E_ClassEntry(S_symbol name, int size, S_table varTypes, S_table methods, Ty_ty type);
 E_enventry E_TemplateEntry(S_symbol name, A_dec dec);
 E_enventry E_PolyEntry(Ty_ty type);
+E_enventry E_ListEntry(E_enventry firstEntry);
 
 E_enventry E_UpdateTemp(E_enventry entry, Ty_ty type);
 

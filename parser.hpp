@@ -1,6 +1,7 @@
 #pragma once
 #include "absyn.h"
 #include "lexer.hpp"
+#include "parser.hpp"
 #include <unordered_map>
 #include <nlohmann/json.hpp>
 #include <deque>

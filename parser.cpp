@@ -1,6 +1,7 @@
 #include "parser.hpp"
 
 std::string _mainFuncName = "";
+std::string _stringClassName = "";
 
 // static std::string tokenNames[] = {"char","string","hex","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
 static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist", "oper", "funcAndVar", "funcAndVarList", "mems"};
@@ -495,6 +496,9 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "exp.false"){
             result -> u.exp = A_BoolExp(EM_tokPos, FALSE);
         }
+        else if(ruleName == "exp.typeeq"){
+            result -> u.exp = A_TypeEqExp(EM_tokPos, tokenData.at("ty(1)").type, tokenData.at("ty(2)").type);
+        }
     }
     //oper
     {
@@ -631,7 +635,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "dec.template"){
             result -> u.dec = A_TemplateDec(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("dec").dec);
         }
-        else if(ruleName == "dec.operator"){
+        else if(ruleName == "dec.operator.normal"){
             string opId = "";
             switch(tokenData.at("oper").oper){
                 case A_plusOp:
@@ -675,6 +679,9 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
                     break;
             }
             result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(opId), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
+        }
+        else if(ruleName == "dec.operator.assign"){
+            result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol("="), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
         }
     }
     //var
@@ -850,8 +857,25 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
                 tokenToRead = "";
             }
             else{
-                L_errorPos errorPos = L_getErrorPos(list.front() -> start);
-                std::cerr << "Unexpected " << list.front() -> kind << " on line " << errorPos.lineNum << " and column " << errorPos.columnNum << std::endl;
+                // L_errorPos errorPos = L_getErrorPos(list.front() -> start);
+                std::string token = list.front() -> kind;
+                if(token == "id"){
+                    token = list.front() -> u.id;
+                }
+                else if(token == "char"){
+                    token = "\'" + std::string(list.front() -> u.charr) + "\'";
+                }
+                else if(token == "string"){
+                    token = "\"" + std::string(list.front() -> u.stringg) + "\"";
+                }
+                else if(token == "real"){
+                    token = std::to_string(list.front() -> u.real);
+                }
+                else if(token == "int"){
+                    token = std::to_string(list.front() -> u.intt);
+                }
+                // std::cerr << "Unexpected " << list.front() -> kind << " on line " << errorPos.lineNum << " and column " << errorPos.columnNum << std::endl;
+                EM_error(list.front() -> start, "parser.unexpectedtoken %s", token.c_str());
                 exit(0);
             }
         }
@@ -913,7 +937,6 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
             stack.push_back(std::stoi(table.at(reduceRule).at(stack.back())));
         }
         else if(action == "accepted"){
-            std::cout << "Parsing finished." << std::endl;
             return resultList.back() -> u.decList;
             break;
         }
@@ -1035,6 +1058,8 @@ void P_generateGrammarList(const std::string inputFname, grammarListTy &grammarL
     json j;
     jInput >> j;
     _mainFuncName = j["tokens"]["main"].get<std::string>();
+    _stringClassName = j["tokens"]["stringClass"].get<std::string>();
+    
     std::string tok;
     std::regex tokenWithName("([a-zA-Z0-9]+)\\(([a-zA-Z0-9]+)\\)");
     std::smatch match;

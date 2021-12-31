@@ -14,6 +14,7 @@ void Pr_printTree(T_moduleList list, string fileName)
         Pr_printModule(modList -> head, file);
     }
     fprintf(file, "(func $memorySize (result i32) (return (i32.const %d))) (export \"memorySize\"(func $memorySize))", memorySize);
+    fprintf(file, "(func (export \"clearMemory\") (memory.fill (i32.const 0) (i32.const 0) (i32.const 1114112)))");
     fprintf(file, ")");
     fclose(file);
 }
@@ -453,8 +454,8 @@ void Pr_printFundec(T_fundec fundec, FILE *file)
         Pr_printType(listL -> head, file);
         fprintf(file, ")");
     }
-    if(strcmp(fundec -> name, "main") == 0)
-        fprintf(file, "(memory.fill (i32.const 0) (i32.const 0) (i32.const 1114112))");
+    // if(strcmp(fundec -> name, "main") == 0)
+    //     fprintf(file, "(memory.fill (i32.const 0) (i32.const 0) (i32.const 1114112))");
     Pr_printStm(fundec -> body, file);
     if(fundec -> var)
     {

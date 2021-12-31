@@ -389,6 +389,23 @@ A_exp A_ParenExp(A_pos pos, A_exp paren){
     return p;
 }
 
+A_exp A_AddrExp(A_pos pos, int addr){
+    A_exp p = (A_exp)checked_malloc(sizeof(*p));
+    p -> kind = A_addrExp;
+    p -> pos = pos;
+    p -> u.addr = addr;
+    return p;
+}
+
+A_exp A_TypeEqExp(A_pos pos, A_ty type1, A_ty type2){
+    A_exp p = (A_exp)checked_malloc(sizeof(*p));
+    p -> kind = A_typeEqExp;
+    p -> pos = pos;
+    p -> u.typeeq.type1 = type1;
+    p -> u.typeeq.type2 = type2;
+    return p;
+}
+
 A_dec A_FunctionDec(A_pos pos, A_fundecList function)
 {
     A_dec p = (A_dec)checked_malloc(sizeof(*p));

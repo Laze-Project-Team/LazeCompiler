@@ -60,6 +60,13 @@ E_enventry E_PolyEntry(Ty_ty type)
     p -> u.poly = type;
     return p;
 }
+E_enventry E_ListEntry(E_enventry firstEntry){
+    E_enventry p = (E_enventry)checked_malloc(sizeof(*p));
+    p -> kind = E_listEntry;
+    p -> u.list = new std::vector<E_enventry>();
+    p -> u.list -> push_back(firstEntry);
+    return p;
+}
 
 //default types
 S_table E_base_tenv(void)

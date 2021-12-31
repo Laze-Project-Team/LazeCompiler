@@ -168,7 +168,9 @@ enum expType
     A_fieldExp,
     A_arrowFieldExp,
     A_funcExp,
-    A_parenExp
+    A_parenExp,
+    A_addrExp,
+    A_typeEqExp
 };
 struct A_exp_
 {
@@ -179,6 +181,7 @@ struct A_exp_
         A_var var;
         /* nil; - needs only the pos */
         char charr[3];
+        int addr;
         long long intt;
         string stringg;
         double real;
@@ -252,6 +255,12 @@ struct A_exp_
         {
             A_exp paren;
         } paren;
+        struct
+        {
+            A_ty type1;
+            A_ty type2;
+        } typeeq;
+        
     } u;
 };
 enum decType
@@ -479,6 +488,8 @@ A_exp A_ArrayExp(A_pos pos, A_expList list);
 A_exp A_DerefExp(A_pos pos, A_var deref);
 A_exp A_AddressExp(A_pos pos, A_var address);
 A_exp A_ParenExp(A_pos pos, A_exp paren);
+A_exp A_AddrExp(A_pos pos, int addr);
+A_exp A_TypeEqExp(A_pos pos, A_ty type1, A_ty type2);
 
 A_dec A_FunctionDec(A_pos pos, A_fundecList function);
 A_dec A_VarDec(A_pos pos, A_stm assign, A_ty typ);
