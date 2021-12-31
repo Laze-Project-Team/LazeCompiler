@@ -1,7 +1,0 @@
-function: print(real: x) => () = jsload("console", "log");
-function: main() => (){
-    int: a = 5;
-    if(a == 5){
-        print(6583);
-    }
-}
