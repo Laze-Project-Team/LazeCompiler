@@ -1,4 +1,9 @@
-function: 表示(real: x) => () = jsload("console", "log");
+function: 実数表示(real: x) => () = jsload("console", "log");
+function: Arduino設定(int: vendorId, function: () => (): c) => () = jsload("arduino", "setUp");
+function: Arduinoコマンド送信(char: コマンド, short: data) => () = jsload("arduino", "sendCommand");
+function: Arduinoデータ受信() => () = jsload("arduino", "checkInput");
+function: Arduinoアナログ入力(int: ピン番号) => (short: データ) = jsload("arduino", "analogRead");
+function: Arduinoデジタル入力(int: ピン番号) => (short: データ) = jsload("arduino", "digitalRead");
 function: 行列表示(real: offset[4][4]) => () = jsload("console", "logMatrix");
 function: アドレス表示(*void: x) => () = jsload("console", "log");
 function: _文字列表示(*char: x, int: 長さ) => () = jsload("console", "logstring");
@@ -57,21 +62,64 @@ function: sin(real: input) => (real: 結果){
 	real: PI = 3.141593;
 	int: temp = input / (2.000000 * PI);
 	real: rad = input - (2.000000 * PI * temp);
-	if(rad > PI){
-		rad = rad - 2 * PI;
+	real: plusminus = 1.000000;
+	if(rad < 0.000000){
+		rad = rad + (2.000000 * PI);
 	}
-	real: doubleRad = rad * rad;
-	結果 = rad - (rad * doubleRad) / 6.000000 + (rad * doubleRad * doubleRad) / 120.000000 - (rad * doubleRad * doubleRad * doubleRad) / 5040.000000 + (rad * doubleRad * doubleRad * doubleRad * doubleRad) / 362880.000000 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 39916800.000000 + (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 6227020800.000000 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 1307674368000.000000;
+	if(rad > PI){
+		plusminus = 0 - 1.000000;
+		if(rad > 1.500000 * PI){
+			rad = (2.000000 * PI) - rad;
+		}else{
+			rad = rad - PI;
+		}
+	}else{
+		if(rad > 0.500000 * PI){
+			rad = PI - rad;
+		}
+	}
+	if(rad > 0.250000 * PI){
+		rad = (0.500000 * PI) - rad;
+		real: doubleRad = rad * rad;
+		結果 = 1.000000 - (doubleRad) / 2.000000 + (doubleRad * doubleRad) / 24.000000 - (doubleRad * doubleRad * doubleRad) / 720.000000 + (doubleRad * doubleRad * doubleRad * doubleRad) / 40320.000000 - (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 3628800.000000 + (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 479001600.000000;
+		結果 = 結果 * plusminus;
+	}else{
+		real: doubleRad = rad * rad;
+		結果 = rad - (rad * doubleRad) / 6.000000 + (rad * doubleRad * doubleRad) / 120.000000 - (rad * doubleRad * doubleRad * doubleRad) / 5040.000000 + (rad * doubleRad * doubleRad * doubleRad * doubleRad) / 362880.000000 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 39916800.000000 + (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 6227020800.000000 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 1307674368000.000000;
+		結果 = 結果 * plusminus;
+	}
 }
 function: cos(real: input) => (real: 結果){
 	real: PI = 3.141593;
 	int: temp = input / (2 * PI);
 	real: rad = input - (2 * PI * temp);
-	if(rad > PI){
-		rad = rad - 2 * PI;
+	real: plusminus = 1.000000;
+	if(rad < 0.000000){
+		rad = rad + (2.000000 * PI);
 	}
-	real: doubleRad = rad * rad;
-	結果 = 1.000000 - (doubleRad) / 2 + (doubleRad * doubleRad) / 24 - (doubleRad * doubleRad * doubleRad) / 720 + (doubleRad * doubleRad * doubleRad * doubleRad) / 40320 - (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 3628800 + (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 479001600;
+	if(rad > PI){
+		if(rad > 1.500000 * PI){
+			rad = (2.000000 * PI) - rad;
+		}else{
+			plusminus = 0 - 1.000000;
+			rad = rad - PI;
+		}
+	}else{
+		if(rad > 0.500000 * PI){
+			plusminus = 0 - 1.000000;
+			rad = PI - rad;
+		}
+	}
+	if(rad < 0.250000 * PI){
+		real: doubleRad = rad * rad;
+		結果 = 1.000000 - (doubleRad) / 2.000000 + (doubleRad * doubleRad) / 24.000000 - (doubleRad * doubleRad * doubleRad) / 720.000000 + (doubleRad * doubleRad * doubleRad * doubleRad) / 40320.000000 - (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 3628800.000000 + (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 479001600.000000;
+		結果 = 結果 * plusminus;
+	}else{
+		rad = (0.500000 * PI) - rad;
+		real: doubleRad = rad * rad;
+		結果 = rad - (rad * doubleRad) / 6.000000 + (rad * doubleRad * doubleRad) / 120.000000 - (rad * doubleRad * doubleRad * doubleRad) / 5040.000000 + (rad * doubleRad * doubleRad * doubleRad * doubleRad) / 362880.000000 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 39916800.000000 + (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 6227020800.000000 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 1307674368000.000000;
+		結果 = 結果 * plusminus;
+	}
 }
 function: tan(real: rad) => (real: 結果){
 	real: PI = 3.141593;
@@ -87,7 +135,7 @@ template<T>: function: abs(T: a) => (T: b){
 }
 function: toRad(real: deg) => (real: rad){
 	real: PI = 3.141593;
-	rad = deg / 180 * PI;
+	rad = (deg / 180) * PI;
 }
 function: root(real: x) => (real: y){
 	y = 5;
@@ -162,7 +210,11 @@ public: 	*T: content;
 private: 	int: allocated;
 }
 class: 文字列{
-public: 	function: 代入(*char: offset, int: l) => (){
+public: 	function: =(*char: offset, int: l) => (){
+		content = offset;
+		length = l;
+	}
+	function: 代入(*char: offset, int: l) => (){
 		content = offset;
 		length = l;
 	}
@@ -176,12 +228,26 @@ public: 	function: 代入(*char: offset, int: l) => (){
 function: 文字列表示(文字列: a) => (){
 	_文字列表示(a.content, a.length);
 }
+function: 表示(real: x) => (){
+	実数表示(x);
+}
+function: 表示(int: n) => (){
+	実数表示(n);
+}
+function: 表示(文字列: a) => (){
+	文字列表示(a);
+}
 function: glGetUniformLocation(short: i, 文字列: a) => (short: loc){
 	loc = _glGetUniformLocation(i, a.content, a.length);
 }
 class: ベクトル3D{
-public: 	function: 正規化() => (){
-		real: l = root(x * x + y * y + z * z);
+public: 	function: +(ベクトル3D: a) => (ベクトル3D: b){
+		b.x = a.x + x;
+		b.y = a.y + y;
+		b.z = a.z + z;
+	}
+	function: 正規化() => (){
+		real: l = root((x * x) + (y * y) + (z * z));
 		x = x / l;
 		y = y / l;
 		z = z / l;
@@ -209,12 +275,12 @@ function: ベクトル3Dの差(ベクトル3D: a, ベクトル3D: b) => (ベク�
 	result.z = a.z - b.z;
 }
 function: ベクトル3Dの内積(ベクトル3D: a, ベクトル3D: b) => (real: x){
-	x = a.x * b.x + a.y * b.y + a.z * b.z;
+	x = (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }
 function: ベクトル3Dの外積(ベクトル3D: a, ベクトル3D: b) => (ベクトル3D: result){
-	result.x = a.y * b.z - a.z * b.y;
-	result.y = a.z * b.x - a.x * b.z;
-	result.z = a.x * b.y - a.y * b.x;
+	result.x = (a.y * b.z) - (a.z * b.y);
+	result.y = (a.z * b.x) - (a.x * b.z);
+	result.z = (a.x * b.y) - (a.y * b.x);
 }
 function: ベクトル3D拡大(ベクトル3D: a, real: x) => (ベクトル3D: result){
 	result.x = a.x * x;
@@ -516,7 +582,7 @@ public: 	配列<*モデル>: スプライト;
 		lastY = マウス絶対座標Y();
 		projMat.初期化();
 		viewMat.初期化();
-		projMat = 視点行列3D(projMat, 90.000000, 512.000000, 512.000000, 0.100000, 100.000000);
+		projMat = 視点行列3D(projMat, 90.000000, 720.000000, 1280.000000, 0.100000, 100.000000);
 		ベクトル3D: temp(0.000000, 0.000000, 0 - 4.000000);
 		目.カメラ(temp);
 		スプライト.配列();
@@ -525,7 +591,7 @@ public: 	配列<*モデル>: スプライト;
 		now = 時間計測() / 1000.000000;
 		elapsedTime = now - last;
 		last = now;
-		glClearColor(0.000000, 0.000000, 0.500000, 1.000000);
+		glClearColor(0.000000, 0.000000, 0.000000, 1.000000);
 		glClearDepth(1.000000);
 		glEnable(2929);
 		glDepthFunc(515);
@@ -562,16 +628,366 @@ private: 	real: lastY;
 	行列4x4: viewMat;
 	行列4x4: projMat;
 }
-function: main() => (){
-	シーン: ワールド();
-	ベクトル3D: 光源座標(5.000000, 5.000000, 5.000000);
-	ベクトル3D: 回転軸(0.000000, 1.000000, 0.000000);
-	ベクトル3D: 色(0.200000, 0.500000, 0.700000);
-	ベクトル3D: 位置(0.000000, 0.000000, 0.000000);
-	int: キューブID = ワールド.キューブ追加(2.000000, 色, 位置);
-	int: 光源ID = ワールド.ライト追加(1.000000, 色, 光源座標);
-	function: loop() => (){
-		ワールド.スプライト.取得(キューブID)->回転(回転軸, 時間計測() / 1000.000000);
-		ワールド.描画();
+class: ベクトル2D{
+public: 	function: 正規化() => (){
+		real: l = root(x * x + y * y);
+		x = x / l;
+		y = y / l;
 	}
+	function: 長さ() => (real: l){
+		l = root(x * x + y * y);
+	}
+	function: ベクトル2D(real: a, real: b) => (){
+		x = a;
+		y = b;
+	}
+	real: y;
+	real: x;
+}
+function: ベクトル2Dの和(ベクトル2D: a, ベクトル2D: b) => (ベクトル2D: result){
+	result.x = a.x + b.x;
+	result.y = a.y + b.y;
+}
+function: ベクトル2Dの差(ベクトル2D: a, ベクトル2D: b) => (ベクトル2D: result){
+	result.x = a.x - b.x;
+	result.y = a.y - b.y;
+}
+function: ベクトル2Dの内積(ベクトル2D: a, ベクトル2D: b) => (real: x){
+	x = a.x * b.x + a.y * b.y;
+}
+function: ベクトル2D拡大(ベクトル2D: a, real: x) => (ベクトル2D: result){
+	result.x = a.x * x;
+	result.y = a.y * x;
+}
+function: ベクトル2D縮小(ベクトル2D: a, real: x) => (ベクトル2D: result){
+	if(x == 0.000000){
+		表示(10000000);
+	}
+	result.x = a.x / x;
+	result.y = a.y / x;
+}
+class: アニメーション情報{
+public: 	function: アニメーション情報(int: a, real: start, real: d, real: x, real: y) => (){
+		id = a;
+		startTime = start;
+		duration = d;
+		info.x = x;
+		info.y = y;
+	}
+	ベクトル2D: info;
+	real: duration;
+	real: startTime;
+	int: id;
+}
+class: スプライト{
+public: 	ベクトル3D: color;
+	ベクトル2D: pos;
+	real: 透明度;
+	real: scaleX;
+	real: scaleY;
+	real: theta;
+	function: スプライト(*real: data, int: pnum, *short: indicesData, int: vnum, ベクトル3D: c, ベクトル2D: p, int: s, real: zI) => (){
+		vertices = data;
+		pointNum = pnum;
+		indices = indicesData;
+		vertexNum = vnum;
+		zIndex = zI;
+		透明度 = 1.000000;
+		color = c;
+		pos = p;
+		scaleX = 1.000000;
+		scaleY = 1.000000;
+		theta = 0.000000;
+		shaderID = s;
+		animations.配列();
+		modelMat.初期化();
+		transMat.初期化();
+		scaleMat.初期化();
+		rotateMat.初期化();
+		char: _objectColorUniform[11] = "objectColor";
+		char: _projUniform[10] = "projection";
+		char: _modelUniform[5] = "model";
+		char: _samplerUniform[8] = "uSampler";
+		char: _transparencyUniform[12] = "transparency";
+		文字列: objectColorUniform(&_objectColorUniform, 11);
+		文字列: projUniform(&_projUniform, 10);
+		文字列: modelUniform(&_modelUniform, 5);
+		文字列: samplerUniform(&_samplerUniform, 8);
+		文字列: transparencyUniform(&_transparencyUniform, 12);
+		projMatUniformLoc = glGetUniformLocation(shaderID, projUniform);
+		modelMatUniformLoc = glGetUniformLocation(shaderID, modelUniform);
+		if(shaderID == 4){
+			transparencyUniLoc = glGetUniformLocation(shaderID, transparencyUniform);
+			objectColorUniLoc = glGetUniformLocation(shaderID, objectColorUniform);
+		}
+		if(shaderID == 3){
+			samplerUniformLoc = glGetUniformLocation(shaderID, samplerUniform);
+		}
+		buffer = glCreateBuffer();
+		glBindBuffer(34962, buffer);
+		glBufferData(34962, vertices, pnum * 3, 35044);
+		if(vnum > 0){
+			elementBuffer = glCreateBuffer();
+			glBindBuffer(34963, elementBuffer);
+			glElementBufferData(34963, indices, vnum, 35044);
+		}
+	}
+	function: テクスチャ設定(*real: tex, 文字列: url) => (){
+		shaderID = 0;
+		texCoords = tex;
+		texture = _loadTexture(url.content, url.length);
+		_文字列表示(url.content, url.length);
+		texCoordBuffer = glCreateBuffer();
+		glBindBuffer(34962, texCoordBuffer);
+		glBufferData(34962, tex, vertexNum * 2, 35044);
+	}
+	function: リピートテクスチャ設定(*real: tex, short: テクスチャ) => (){
+		shaderID = 0;
+		texCoords = tex;
+		texture = テクスチャ;
+		texCoordBuffer = glCreateBuffer();
+		glBindBuffer(34962, texCoordBuffer);
+		glBufferData(34962, tex, vertexNum * 2, 35044);
+	}
+	function: 座標設定(ベクトル2D: coord) => (){
+		pos = coord;
+	}
+	function: 移動(ベクトル2D: offset) => (){
+		pos = ベクトル2Dの和(pos, offset);
+	}
+	function: 拡大縮小(real: x, real: y) => (){
+		scaleX = scaleX * x;
+		scaleY = scaleY * y;
+	}
+	function: 回転(real: t) => (){
+		theta = theta + t;
+	}
+	function: 角度設定(real: t) => (){
+		theta = t;
+	}
+	function: zIndex設定(real: x) => (){
+		zIndex = x;
+	}
+	function: 透明度設定(real: x) => (){
+		透明度 = x;
+	}
+	function: 色設定(ベクトル3D: 色) => (){
+		color = 色;
+	}
+	function: 描画(行列4x4: projMat) => (){
+		real: PI = 3.141593;
+		(int: カウンタ = 0;)from(カウンタ == animations.size)to(カウンタ = カウンタ + 1;){
+			アニメーション情報: info = animations.取得(カウンタ);
+			if((info.startTime <= 時間計測()) && ((info.startTime + info.duration) >= 時間計測())){
+				if(info.id == 0){
+					real: elapsedTime = 時間計測() - info.startTime;
+					回転(info.info.x * elapsedTime);
+				}
+				if(info.id == 1){
+					拡大縮小(info.info.x, info.info.y);
+				}
+				if(info.id == 2){
+					real: elapsedTime = 時間計測() - info.startTime;
+					ベクトル2D: offset(info.info.x * elapsedTime, info.info.y * elapsedTime);
+					移動(offset);
+				}
+			}
+		}
+		ベクトル3D: pos3d(pos.x, pos.y, 0 - zIndex * 0.001000);
+		transMat.初期化();
+		transMat.移動(pos3d);
+		scaleMat.初期化();
+		scaleMat.拡大縮小(scaleX, scaleY, 1.000000);
+		ベクトル3D: 回転軸(0.000000, 0.000000, 1.000000);
+		rotateMat.初期化();
+		rotateMat.回転(回転軸, theta);
+		modelMat.初期化();
+		modelMat = 行列4x4の積(scaleMat, modelMat);
+		modelMat = 行列4x4の積(rotateMat, modelMat);
+		modelMat = 行列4x4の積(transMat, modelMat);
+		glUseProgram(shaderID);
+		glBindBuffer(34962, buffer);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, 5126, 0, 0, 0);
+		if(shaderID == 4){
+			glUniform1f(transparencyUniLoc, 透明度);
+			glUniform3f(objectColorUniLoc, color.x, color.y, color.z);
+		}
+		if(shaderID == 3){
+			glBindBuffer(34962, texCoordBuffer);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 2, 5126, 0, 0, 0);
+			glActiveTexture(texture + 33984);
+			glBindTexture(3553, texture);
+			glUniform1i(samplerUniformLoc, texture);
+		}
+		glUniformMatrix4fv(projMatUniformLoc, 0, projMat.matrix);
+		glUniformMatrix4fv(modelMatUniformLoc, 0, modelMat.matrix);
+		if(vertexNum > 0){
+			glBindBuffer(34963, elementBuffer);
+			glDrawElements(4, vertexNum, 5123, 0);
+		}
+		if((vertexNum == 0) && (shaderID == 4)){
+			glBindBuffer(34962, buffer);
+			glDrawArrays(5, 0, pointNum);
+		}
+		rotateMat.初期化();
+		transMat.初期化();
+		scaleMat.初期化();
+	}
+	function: 回転アニメーション(real: theta, real: start, real: duration) => (){
+		アニメーション情報: temp(0, start, duration, theta, 0.000000);
+		animations.追加(temp);
+	}
+	function: 拡大縮小アニメーション(real: x, real: y, real: start, real: duration) => (){
+		アニメーション情報: temp(1, start, duration, x, y);
+		animations.追加(temp);
+	}
+	function: 移動アニメーション(ベクトル2D: offset, real: start, real: duration) => (){
+		アニメーション情報: temp(0, start, duration, offset.x, offset.y);
+		animations.追加(temp);
+	}
+private: 	配列<アニメーション情報>: animations;
+	short: samplerUniformLoc;
+	short: modelMatUniformLoc;
+	short: projMatUniformLoc;
+	short: transparencyUniLoc;
+	short: objectColorUniLoc;
+	int: shaderID;
+	real: zIndex;
+	行列4x4: rotateMat;
+	行列4x4: scaleMat;
+	行列4x4: transMat;
+	行列4x4: modelMat;
+	short: texture;
+	short: elementBuffer;
+	short: texCoordBuffer;
+	short: buffer;
+	int: pointNum;
+	int: vertexNum;
+	*real: texCoords;
+	*short: indices;
+	*real: vertices;
+}
+class: シーン2D{
+public: 	配列<*スプライト>: スプライト配列;
+	ベクトル3D: 背景色;
+	real: 背景透明度;
+	function: シーン2D(real: 高さ, ベクトル3D: color) => (){
+		last = 時間計測() / 1000.000000;
+		now = 0.000000;
+		elapsedTime = 0.000000;
+		projMat.初期化();
+		projMat = 視点行列2D(projMat, 0 - 高さ / 2.000000 * 16.000000 / 9.000000, 高さ / 2.000000 * 16.000000 / 9.000000, 0 - 高さ / 2, 高さ / 2, 0 - 5.000000, 5.000000);
+		スプライト配列.配列();
+		背景色 = color;
+		背景透明度 = 1.000000;
+	}
+	function: 背景透明度設定(real: a) => (){
+		背景透明度 = a;
+	}
+	function: 描画() => (){
+		now = 時間計測() / 1000.000000;
+		elapsedTime = now - last;
+		last = now;
+		glClearColor(背景色.x, 背景色.y, 背景色.z, 背景透明度);
+		glClearDepth(1.000000);
+		glEnable(2929);
+		glDepthFunc(515);
+		glEnable(3042);
+		glBlendFunc(770, 771);
+		glClear(16640);
+		(int: i = 0;)from(i == スプライト配列.size)to(i = i + 1;){
+			スプライト配列.取得(i)->描画(projMat);
+		}
+	}
+	function: 正方形追加(real: size, ベクトル2D: pos, ベクトル3D: color, real: zIndex) => (int: id){
+		real: vertices[4][3] = [[size / 2, size / 2, 0 - zIndex * 0.001000], [size / 2, 0 - size / 2, 0 - zIndex * 0.001000], [0 - size / 2, 0 - size / 2, 0 - zIndex * 0.001000], [0 - size / 2, size / 2, 0 - zIndex * 0.001000]];
+		real: texCoords[4][2] = [[1.000000, 0.000000], [1.000000, 1.000000], [0.000000, 1.000000], [0.000000, 0.000000]];
+		short: indices[6] = [0, 1, 3, 1, 2, 3];
+		*スプライト: sprite = メモリ確保(sizeof(*sprite));
+		sprite->スプライト(&vertices, 4, &indices, 6, color, pos, 4, zIndex);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	function: スプライト追加(real: width, real: height, ベクトル2D: pos, 文字列: url, real: zIndex) => (int: id){
+		real: vertices[4][3] = [[width / 2, height / 2, 0 - zIndex * 0.001000], [width / 2, 0 - height / 2, 0 - zIndex * 0.001000], [0 - width / 2, 0 - height / 2, 0 - zIndex * 0.001000], [0 - width / 2, height / 2, 0 - zIndex * 0.001000]];
+		real: texCoords[4][2] = [[1.000000, 0.000000], [1.000000, 1.000000], [0.000000, 1.000000], [0.000000, 0.000000]];
+		short: indices[6] = [0, 1, 3, 1, 2, 3];
+		ベクトル3D: color(0.000000, 0.000000, 0.000000);
+		*スプライト: sprite = メモリ確保(sizeof(*sprite));
+		sprite->スプライト(&vertices, 4, &indices, 6, color, pos, 3, zIndex);
+		sprite->テクスチャ設定(&texCoords, url);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	function: リピートスプライト追加(real: width, real: height, ベクトル2D: pos, short: texture, real: zIndex) => (int: id){
+		real: vertices[4][3] = [[width / 2, height / 2, 0 - zIndex * 0.001000], [width / 2, 0 - height / 2, 0 - zIndex * 0.001000], [0 - width / 2, 0 - height / 2, 0 - zIndex * 0.001000], [0 - width / 2, height / 2, 0 - zIndex * 0.001000]];
+		real: texCoords[4][2] = [[1.000000, 0.000000], [1.000000, 1.000000], [0.000000, 1.000000], [0.000000, 0.000000]];
+		short: indices[6] = [0, 1, 3, 1, 2, 3];
+		ベクトル3D: color(0.000000, 0.000000, 0.000000);
+		*スプライト: sprite = メモリ確保(sizeof(*sprite));
+		sprite->スプライト(&vertices, 4, &indices, 6, color, pos, 3, zIndex);
+		sprite->リピートテクスチャ設定(&texCoords, texture);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	function: 四角形追加(real: width, real: height, ベクトル2D: pos, ベクトル3D: color, real: zIndex) => (int: id){
+		real: vertices[4][3] = [[width / 2, height / 2, 0 - zIndex * 0.001000], [0 - width / 2, height / 2, 0 - zIndex * 0.001000], [width / 2, 0 - height / 2, 0 - zIndex * 0.001000], [0 - width / 2, 0 - height / 2, 0 - zIndex * 0.001000]];
+		*スプライト: sprite = メモリ確保(sizeof(*sprite));
+		sprite->スプライト(&vertices, 4, メモリ確保(0), 0, color, pos, 4, zIndex);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	function: 多角形追加(*void: points, int: size, ベクトル2D: pos, ベクトル3D: color, real: zIndex) => (int: id){
+		*スプライト: sprite = メモリ確保(sizeof(*sprite));
+		sprite->スプライト(points, size, メモリ確保(0), 0, color, pos, 4, zIndex);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	function: 円追加(real: r, ベクトル2D: pos, ベクトル3D: color, real: zIndex) => (int: id){
+		real: PI = 3.141593;
+		配列<ベクトル3D>: points();
+		int: 頂点数 = 60;
+		(int: i = 0;)from(i == 頂点数)to(i = i + 1;){
+			real: theta = 0;
+			if((i % 2) == 0){
+				theta = 0.500000 * PI + ((PI * i) / 頂点数);
+			}
+			if((i % 2) == 1){
+				theta = 0.500000 * PI - ((PI * (1.000000 + i)) / 頂点数);
+			}
+			ベクトル3D: temp(r * cos(theta), r * sin(theta), 0 - zIndex * 0.001000);
+			points.追加(temp);
+		}
+		id = 多角形追加(points.content, points.size, pos, color, zIndex);
+	}
+private: 	real: elapsedTime;
+	real: now;
+	real: last;
+	行列4x4: projMat;
+}
+function: 引数なしjsリスナー呼び出し(function: () => (): callback) => (){
+	callback();
+}
+jsexport(引数なしjsリスナー呼び出し, "jsCallListenerNoParam");
+function: Arduino5V送る(int: ピン番号) => (){
+	Arduinoコマンド送信(H, ピン番号);
+}
+function: Arduino0V送る(int: ピン番号) => (){
+	Arduinoコマンド送信(L, ピン番号);
+}
+function: Arduinoピン入出力設定(int: ピン番号, char: 入出力) => (){
+	if(入出力 == 入){
+		Arduinoコマンド送信(I, ピン番号);
+	}
+	if(入出力 == 出){
+		Arduinoコマンド送信(O, ピン番号);
+	}
+}
+function: Arduinoアナログ入力ピン設定(int: ピン番号) => (){
+	Arduinoコマンド送信(A, ピン番号);
+}
+function: main() => (){
+	実数表示();
 }

@@ -1,92 +1,92 @@
-compiler: converter.o parser.o lexer.o toJson.o frame.o parse.o translate.o tree.o printtree.o temp.o escape.o env.o types.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o errormsg.o util.o semantic.o lexAnalyze.o 
-	g++ -o compiler -g converter.o parser.o lexer.o toJson.o frame.o parse.o translate.o tree.o temp.o escape.o env.o types.o preprocessor.o preprocessor.tab.o pp.yy.o ppsemant.o absyn.o symbol.o table.o errormsg.o util.o semantic.o printtree.o lexAnalyze.o -lm -ljson-c
+compiler: ./dist/converter.o ./dist/parser.o ./dist/lexer.o ./dist/toJson.o ./dist/frame.o ./dist/parse.o ./dist/translate.o ./dist/tree.o ./dist/printtree.o ./dist/temp.o ./dist/escape.o ./dist/env.o ./dist/types.o ./dist/preprocessor.o ./dist/preprocessor.tab.o ./dist/pp.yy.o ./dist/ppsemant.o ./dist/absyn.o ./dist/symbol.o ./dist/table.o ./dist/errormsg.o ./dist/util.o ./dist/semantic.o ./dist/lexAnalyze.o 
+	g++ -o compiler -g ./dist/converter.o ./dist/parser.o ./dist/lexer.o ./dist/toJson.o ./dist/frame.o ./dist/parse.o ./dist/translate.o ./dist/tree.o ./dist/temp.o ./dist/escape.o ./dist/env.o ./dist/types.o ./dist/preprocessor.o ./dist/preprocessor.tab.o ./dist/pp.yy.o ./dist/ppsemant.o ./dist/absyn.o ./dist/symbol.o ./dist/table.o ./dist/errormsg.o ./dist/util.o ./dist/semantic.o ./dist/printtree.o ./dist/lexAnalyze.o -lm -ljson-c
 
-lexAnalyze.o: lexAnalyze.cpp errormsg.hpp util.h
-	g++ -g -c lexAnalyze.cpp
+./dist/lexAnalyze.o: ./src/lexAnalyze.cpp ./src/errormsg.hpp ./src/util.h
+	g++ -g -c ./src/lexAnalyze.cpp -o ./dist/lexAnalyze.o
 
-converter.o: converter.cpp
-	g++ -g -c converter.cpp -lnlohmann_json -std=c++17
+./dist/converter.o: ./src/converter.cpp
+	g++ -g -c ./src/converter.cpp -lnlohmann_json -std=c++17 -o ./dist/converter.o
 
-parser.o: parser.cpp
-	g++ -g -c parser.cpp -lnlohmann_json -std=c++17
+./dist/parser.o: ./src/parser.cpp
+	g++ -g -c ./src/parser.cpp -lnlohmann_json -std=c++17 -o ./dist/parser.o
 
-lexer.o: lexer.cpp
-	g++ -g -c lexer.cpp -lnlohmann_json
+./dist/lexer.o: ./src/lexer.cpp
+	g++ -g -c ./src/lexer.cpp -lnlohmann_json -o ./dist/lexer.o
 
-toJson.o: toJson.cpp toJson.hpp
-	g++ -g -c toJson.cpp -ljson-c
+./dist/toJson.o: ./src/toJson.cpp ./src/toJson.hpp
+	g++ -g -c ./src/toJson.cpp -ljson-c -o ./dist/toJson.o
 
-parse.o: parse.cpp parse.h
-	g++ -g -c parse.cpp
+./dist/parse.o: ./src/parse.cpp ./src/parse.h
+	g++ -g -c ./src/parse.cpp -o ./dist/parse.o
 
-semantic.o: semantic.cpp semantic.hpp wasm_frame.c
-	g++ -g -c semantic.cpp wasm_frame.c
+./dist/semantic.o: ./src/semantic.cpp ./src/semantic.hpp ./src/wasm_frame.c
+	g++ -g -c ./src/semantic.cpp -o ./dist/semantic.o 
 
-translate.o: translate.c translate.h
-	g++ -g -c translate.c -lm
+./dist/translate.o: ./src/translate.c ./src/translate.h
+	g++ -g -c ./src/translate.c -lm -o ./dist/translate.o
 
-tree.o: tree.c tree.h
-	g++ -g -c tree.c
+./dist/tree.o: ./src/tree.c ./src/tree.h
+	g++ -g -c ./src/tree.c -o ./dist/tree.o
 
-printtree.o: printtree.cpp printtree.hpp
-	g++ -g -c printtree.cpp
+./dist/printtree.o: ./src/printtree.cpp ./src/printtree.hpp
+	g++ -g -c ./src/printtree.cpp -o ./dist/printtree.o
 
-frame.o: wasm_frame.c wasm_frame.h frame.h 
-	g++ -o frame.o -g -c wasm_frame.c
+./dist/frame.o: ./src/wasm_frame.c ./src/wasm_frame.h ./src/frame.h 
+	g++ -g -c ./src/wasm_frame.c -o ./dist/frame.o
 
-temp.o: temp.c temp.h
-	g++ -g -c temp.c
+./dist/temp.o: ./src/temp.c ./src/temp.h
+	g++ -g -c ./src/temp.c -o ./dist/temp.o
 
-escape.o: escape.c escape.h
-	g++ -g -c escape.c
+./dist/escape.o: ./src/escape.c ./src/escape.h
+	g++ -g -c ./src/escape.c -o ./dist/escape.o
 
-env.o: env.cpp env.hpp
-	g++ -g -c env.cpp
+./dist/env.o: ./src/env.cpp ./src/env.hpp
+	g++ -g -c ./src/env.cpp -o ./dist/env.o
 
-types.o: types.c types.h
-	g++ -g -c types.c
+./dist/types.o: ./src/types.c ./src/types.h
+	g++ -g -c ./src/types.c -o ./dist/types.o
 	
-preprocessor.tab.o: preprocessor.tab.c preprocessor.c
-	g++ -g -c -DYYERROR_VERBOSE -DYYDEBUG=1 preprocessor.tab.c preprocessor.c
+./dist/preprocessor.tab.o: ./src/preprocessor.tab.c ./src/preprocessor.c
+	g++ -g -c -DYYERROR_VERBOSE -DYYDEBUG=1 ./src/preprocessor.tab.c -o ./dist/preprocessor.tab.o
 
-preprocessor.tab.c: preprocessor.y
-	yacc --name-prefix=pre -dv -v preprocessor.y -o preprocessor.tab.c 
+./src/preprocessor.tab.c: ./src/preprocessor.y
+	yacc --name-prefix=pre -dv -v ./src/preprocessor.y -o ./src/preprocessor.tab.c 
 
-preprocessor.tab.h: preprocessor.tab.c
+./src/preprocessor.tab.h: ./src/preprocessor.tab.c
 	echo "created preprocessor.tab.h"
 
-absyn.o: absyn.c absyn.h
-	g++ -g -c absyn.c
+./dist/absyn.o: ./src/absyn.c ./src/absyn.h
+	g++ -g -c ./src/absyn.c -o ./dist/absyn.o
 
-table.o: table.c table.h
-	g++ -g -c table.c -fpermissive
+./dist/table.o: ./src/table.c ./src/table.h
+	g++ -g -c ./src/table.c -fpermissive -o ./dist/table.o
 
-symbol.o: symbol.c symbol.h table.h
-	g++ -g -c symbol.c
+./dist/symbol.o: ./src/symbol.c ./src/symbol.h ./src/table.h
+	g++ -g -c ./src/symbol.c -o ./dist/symbol.o
 
-errormsg.o: errormsg.cpp errormsg.hpp util.h
-	g++ -g -c errormsg.cpp
+./dist/errormsg.o: ./src/errormsg.cpp ./src/errormsg.hpp ./src/util.h
+	g++ -g -c ./src/errormsg.cpp -o ./dist/errormsg.o
 
-# lex.yy.o: lex.yy.c errormsg.hpp util.h
-# 	g++ -g -c lex.yy.c
+# lex.yy.o: lex../src/yy.c ./src/errormsg.hpp ./src/util.h
+# 	g++ -g -c lex../src/yy.c
 
-# lex.yy.c: lang.l
+# lex../src/yy.c: lang.l
 # 	lex -w lang.l
 
-pp.yy.o: pp.yy.c errormsg.hpp
-	g++ -g -c pp.yy.c
+./dist/pp.yy.o: ./src/pp.yy.c ./src/errormsg.hpp
+	g++ -g -c ./src/pp.yy.c -o ./dist/pp.yy.o
 
-pp.yy.c: preprocessor.l
-	lex --prefix="pre" -o pp.yy.c -w preprocessor.l 
+./src/pp.yy.c: ./src/preprocessor.l
+	lex --prefix="pre" -o ./src/pp.yy.c -w ./src/preprocessor.l 
 
-preprocessor.o: preprocessor.c preprocessor.h
-	g++ -g -c preprocessor.c
+./dist/preprocessor.o: ./src/preprocessor.c ./src/preprocessor.h
+	g++ -g -c ./src/preprocessor.c -o ./dist/preprocessor.o
 
-ppsemant.o: ppsemant.cpp ppsemant.hpp
-	g++ -g -c ppsemant.cpp
+./dist/ppsemant.o: ./src/ppsemant.cpp ./src/ppsemant.hpp
+	g++ -g -c ./src/ppsemant.cpp -o ./dist/ppsemant.o
 
-util.o: util.c util.h
-	g++ -g -c util.c
+./dist/util.o: ./src/util.c ./src/util.h
+	g++ -g -c ./src/util.c -o ./dist/util.o
 
 clean: 
-	rm -f compiler converter.o lexer.o parser.o lexAnalyze.o parse.o semantic.o translate.o tree.o printtree.o frame.o temp.o escape.o env.o types.o y.tab.o absyn.o symbol.o table.o lex.yy.o errormsg.o util.o preprocessor.o preprocessor.tab.o ppsemant.o
+	rm -f compiler ./dist/converter.o ./dist/lexer.o ./dist/parser.o ./dist/lexAnalyze.o ./dist/parse.o ./dist/semantic.o ./dist/translate.o ./dist/tree.o ./dist/printtree.o ./dist/frame.o ./dist/temp.o ./dist/escape.o ./dist/env.o ./dist/types.o ./dist/y.tab.o ./dist/absyn.o ./dist/symbol.o ./dist/table.o ./dist/lex.yy.o ./dist/errormsg.o ./dist/util.o ./dist/preprocessor.o ./dist/preprocessor.tab.o ./dist/ppsemant.o
