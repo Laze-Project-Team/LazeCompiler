@@ -121,6 +121,8 @@ jobj JS_StmToJson(A_stm stm)
             json_object_object_add(info, "exp", func);
             jobj args = JS_ExpListToJson(stm -> u.call.args);
             json_object_object_add(info, "explist", args);
+            jobj specificType = json_object_new_string("normal");
+            json_object_object_add(info, "specificType", specificType);
             break;
         }
         case A_returnStm:
@@ -321,6 +323,15 @@ jobj JS_ExpToJson(A_exp exp)
             json_object_object_add(info, "exp", paren);
             break;
         }
+        case A_typeEqExp:
+        {
+            name = json_object_new_string("typeeq");
+            jobj ty1 = JS_TyToJson(exp -> u.typeeq.type1);
+            json_object_object_add(info, "ty(1)", ty1);
+            jobj ty2 = JS_TyToJson(exp -> u.typeeq.type2);
+            json_object_object_add(info, "ty(2)", ty2);
+            break;
+        }
     }
     json_object_object_add(result, "kind", name);
     json_object_object_add(result, "info", info);
@@ -430,8 +441,8 @@ jobj JS_DecToJson(A_dec dec)
             name = json_object_new_string("object");
             jobj className = JS_TyToJson(dec -> u.object.className);
             json_object_object_add(info, "ty", className);
-            jobj objectName = json_object_new_string(S_name(dec -> u.object.name));
-            json_object_object_add(info, "id", objectName);
+            jobj objectName = JS_VarToJson(A_SimpleVar(dec -> pos, dec -> u.object.name));
+            json_object_object_add(info, "var", objectName);
             jobj expList = JS_ExpListToJson(dec -> u.object.explist);
             json_object_object_add(info, "explist", expList);
             break;
@@ -484,6 +495,25 @@ jobj JS_DecToJson(A_dec dec)
             jobj templateName = json_object_new_string(S_name(dec -> u.templatee.name));
             printf("%s", S_name(dec -> u.templatee.name));
             json_object_object_add(info, "id", templateName);
+            break;
+        }
+        case A_operatorDec:
+        {
+            name = json_object_new_string("operator");
+            jobj params = JS_FieldListToJson(dec -> u.op.params);
+            json_object_object_add(info, "fieldlist(params)", params);
+            jobj result = JS_FieldListToJson(dec -> u.op.result);
+            json_object_object_add(info, "fieldlist(result)", result);
+            jobj stm = JS_StmToJson(dec -> u.op.body);
+            json_object_object_add(info, "stm", stm);
+            jobj oper = json_object_new_int(A_assignOp);
+            jobj specificType = json_object_new_string("assign");
+            if(dec -> u.op.oper != A_assignOp){
+                oper = json_object_new_int(dec -> u.op.oper);
+                specificType = json_object_new_string("normal");
+            }
+            json_object_object_add(info, "oper", oper);
+            json_object_object_add(info, "specificType", specificType);
             break;
         }
     }

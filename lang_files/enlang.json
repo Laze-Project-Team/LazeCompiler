@@ -1,7 +1,8 @@
 {
     "config":{
         "name":"en",
-        "type":"programming"
+        "type":"programming",
+        "tabsensitive": false
     },
     "tokens":{
         "keywords":
@@ -34,7 +35,9 @@
             "private":"private",
             "protected":"protected",
             "repeat":"repeat",
-            "lineend": ";"
+            "lineend": ";",
+            "operator":"operator",
+            "typeComp":"typeComp"
         },
         "int":"[0-9]",
         "hex":"0x[0-9A-F]+",
@@ -71,7 +74,8 @@
             {"name":"||", "regex": "^(\\|\\||｜)", "precedence": 8},
             {"name":",", "regex": "^(,|、)", "precedence": 20}
         ],
-        "main":"main"
+        "main":"main",
+        "stringClass":"文字列"
     },
     "grammar":{
         "exp":{
@@ -92,7 +96,8 @@
             "string": "string",
             "real": "real",
             "true": "true",
-            "false": "false"
+            "false": "false",
+            "typeeq": "typeComp ( ty(1) , ty(2) )"
         },
         "oper": {
             "add":"+",
@@ -150,6 +155,10 @@
             "func": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
             "jsload": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) lineend",
             "jsexport": "jsexport ( id , string ) lineend",
+            "operator": {
+                "normal":"function : operator oper ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+                "assign":"function : operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm"
+            },
             "template": "type < id > : dec"
         },
         "var": {
@@ -209,6 +218,84 @@
             "null":"",
             "field":"field",
             "fieldlist":"field , fieldlist"
+        }
+    },
+    "errors":{
+        "keywords":{
+            "lineNum":"行目",
+            "charNum":"文字目"
+        },
+        "parser":{
+            "unexpectedtoken":"「$1」の前の単語、もしくは文字が抜けています。"
+        },
+        "code":{
+            "none":"プログラムがありません。",
+            "nomain":"実行関数がありません。",
+            "declaredoesntwork":"この宣言をすることはできません。",
+            "templatedoesntwork":"関数とクラス以外のテンプレートを宣言することはできません。"
+        },
+        "notsupport":{
+            "multiplereturn":"複数変数を返す関数を宣言することはできません。",
+            "importinclass":"クラス宣言内で関数をJavaScriptから読み込むことはできません。"
+        },
+        "type":{
+            "nomatch":"$1と$2の型が合いません。",
+            "notclass":"$1の型がクラスではありません。",
+            "notobject":"$1はオブジェクトではありません。",
+            "notarray":"$1は配列ではありません。",
+            "notpointer":"$1はポインターではありません。",
+            "element":"$1番目の要素が他の要素の型と合いません。",
+            "add":"この二つの項を足すことはできません。",
+            "sub":"この二つの項を引くことはできません。",
+            "mul":"この二つの項を掛けることはできません。",
+            "div":"この二つの項を割ることはできません。",
+            "mod":"左辺を右辺で割ったときの余りを出すことができません。",
+            "comp":"この二つの項を比べることができません。",
+            "lhs":"左辺が型を持ちません。",
+            "rhs":"右辺が型を持ちません。",
+            "bhs":"両辺が型を持ちません。",
+            "lhsnotbool":"左辺が真偽型ではありません。",
+            "rhsnotbool":"左辺が真偽型ではありません。",
+            "alreadyexists":"$1という名前の型が既にあります。"
+        },
+        "if":{
+            "boolean":"もし文の条件が真偽型ではありません。"
+        },
+        "while":{
+            "boolean":"まで文の条件が真偽型ではありません。"
+        },
+        "for":{
+            "boolean":"からまで文の条件が真偽型ではありません。"
+        },
+        "sizeof":{
+            "var":"この変数のバイト数はわかりません。"
+        },
+        "array":{
+            "invalidsize":"配列の大きさは定数でなければいけません。"
+        },
+        "operator":{
+            "arrow":"この変数はポインターではないため、->演算子を使うことはできません。",
+            "subscript":"配列でもポインターでもないため、要素をアクセスすることはできません。",
+            "field":"この変数はオブジェクトでないため、メンバーをアクセスすることはできません。"
+        },
+        "noexist":{
+            "class":"$1というクラスは存在しません。",
+            "template":"$1というテンプレートは存在しません。",
+            "member":"$1というメンバーは存在しません。",
+            "func":"$1という関数は存在しません。",
+            "var":"$1という変数は存在しません。",
+            "type":"$1という型は存在しません。"
+        },
+        "func":{
+            "few":"関数の引数が足りません。",
+            "many":"関数の引数が多いです。",
+            "cannotcall":"この関数は呼べません。",
+            "unknownfield":"この引数は変数か配列の形に直してください。"
+        },
+        "class":{
+            "private":"$1は非公開メンバーなので、クラス外からアクセスできません。",
+            "protected":"$1は保護メンバーなので、クラス外からアクセスできません。",
+            "nomember":"$1に$2というメンバーはありません。"
         }
     }
 }

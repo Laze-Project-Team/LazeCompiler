@@ -1,4 +1,5 @@
 #include "lexer.hpp"
+#include <chrono>
 
 using json = nlohmann::json;
 
@@ -13,6 +14,7 @@ std::map<std::string, unsigned> L_getOperators(){
 }
 
 std::vector<std::vector<int>> lettersInLines;
+static bool tabSensitive = false;
 
 L_errorPos L_getErrorPos(int cursorPos){
     L_errorPos result;
@@ -41,6 +43,7 @@ std::vector<std::pair<std::string, std::regex>> L_genTokenNames(const std::strin
     input >> j;
     json keywords = j["tokens"]["keywords"];
     json ops = j["tokens"]["ops"];
+    tabSensitive = j["config"]["tabsensitive"].get<bool>();
     std::string charRegex = j["tokens"]["char"].get<std::string>();
     std::string intRegex = j["tokens"]["int"].get<std::string>();
     std::string separatorRegex = "[^" + charRegex.substr(1, charRegex.size() - 2) + intRegex.substr(1, intRegex.size() - 2) + "]";
@@ -80,6 +83,8 @@ std::vector<std::pair<std::string, std::regex>> L_genTokenNames(const std::strin
 
         tokenNames.push_back("eof");
         tokenNames.push_back("");
+        tokenNames.push_back("tabup");
+        tokenNames.push_back("tabdown");
     }
     return regexMap;
 }
@@ -91,13 +96,37 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
 
     std::ifstream programFile(filename1);
     std::string programLine;
-    std::regex space("^((?: |   )+)");
+    std::regex space("^((?:\\s)+)");
     std::smatch match;
     std::size_t cursor = 0;
     std::size_t linePos = 0;
+    int indentSize = 0;
     while(std::getline(programFile, programLine)){
         linePos += 1;
         std::size_t cursorBefore = cursor;
+        if(tabSensitive && std::regex_search(programLine, match, space)){
+            // std::cout << match[1].length() << std::endl;
+            if(indentSize < match[1].length()){
+                L_token token = std::make_shared<L_token_>();
+                token -> start = cursor;
+                token -> end = cursor;
+                token -> kind = "tabup";
+                tokenList.push_back(token);
+            }
+            else if(indentSize > match[1].length()){
+                L_token token = std::make_shared<L_token_>();
+                token -> start = cursor;
+                token -> end = cursor;
+                token -> kind = "tabdown";
+                tokenList.push_back(token);
+            }
+            indentSize = match[1].length();
+            cursor += match[1].length();
+            programLine = programLine.substr(match[1].length());
+        }
+        else{
+            indentSize = 0;
+        }
         while(programLine.size() > 0){
             std::size_t size = 0;
             // std::cout << programLine << std::endl;
@@ -111,15 +140,6 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
                 if(std::regex_search(programLine, match, regex.second)){
                     const char *matchCstr = match[1].str().c_str();
                     std::size_t length = 0;
-                    // while((int)*matchCstr != 0){
-                    //     if((int)*matchCstr < 0){
-                    //         matchCstr += 3;
-                    //     }
-                    //     else if((int)*matchCstr > 0){
-                    //         matchCstr++;
-                    //     }
-                    //     length++;
-                    // }
                     for(int i = 0; i < match[1].str().size();){
                         if((int)match[1].str()[i] < 0){
                             i += 3;
@@ -132,7 +152,7 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
                     L_token token = std::make_shared<L_token_>();
                     token -> start = cursor;
                     cursor += length;
-                    // std::cout << cursor << std::endl;
+                    // std::cout << length << std::endl;
                     token -> end = cursor;
                     token -> kind = regex.first;
                     size = match[1].length();

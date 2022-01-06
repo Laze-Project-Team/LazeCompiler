@@ -1,0 +1,1143 @@
+( x という 実数 ) を とり ( ) を 返す 実数表示 という 関数 を ( "console", "log") から 読み込む 。 
+( vendorId という 整数 , c という 関数 : ( ) => ( ) ) を とり ( ) を 返す Arduino設定 という 関数 を ( "arduino", "setUp") から 読み込む 。 
+( コマンド という 文字 , data という 整数32 ) を とり ( ) を 返す Arduinoコマンド送信 という 関数 を ( "arduino", "sendCommand") から 読み込む 。 
+( ) を とり ( ) を 返す Arduinoデータ受信 という 関数 を ( "arduino", "checkInput") から 読み込む 。 
+( ピン番号 という 整数 ) を とり ( データ という 整数32 ) を 返す Arduinoアナログ入力 という 関数 を ( "arduino", "analogRead") から 読み込む 。 
+( ピン番号 という 整数 ) を とり ( データ という 整数32 ) を 返す Arduinoデジタル入力 という 関数 を ( "arduino", "digitalRead") から 読み込む 。 
+( offset [ 4 ] [ 4 ] という 実数 ) を とり ( ) を 返す 行列表示 という 関数 を ( "console", "logMatrix") から 読み込む 。 
+( x という * 無 ) を とり ( ) を 返す アドレス表示 という 関数 を ( "console", "log") から 読み込む 。 
+( x という * 文字 , 長さ という 整数 ) を とり ( ) を 返す _文字列表示 という 関数 を ( "console", "logstring") から 読み込む 。 
+( ) を とり ( 時間 という 実数 ) を 返す 時間計測 という 関数 を ( "performance", "now") から 読み込む 。 
+( i という 整数32 ) を とり ( ) を 返す glClearDepth という 関数 を ( "webgl", "clearDepth") から 読み込む 。 
+( i という 整数32 ) を とり ( ) を 返す glDepthFunc という 関数 を ( "webgl", "depthFunc") から 読み込む 。 
+( i という 整数32 ) を とり ( ) を 返す glEnable という 関数 を ( "webgl", "enable") から 読み込む 。 
+( i という 整数32 ) を とり ( ) を 返す glDisable という 関数 を ( "webgl", "disable") から 読み込む 。 
+( ) を とり ( prog という 整数32 ) を 返す glCreateProgram という 関数 を ( "webgl", "createProgram") から 読み込む 。 
+( ) を とり ( buffer という 整数32 ) を 返す glCreateBuffer という 関数 を ( "webgl", "createBuffer") から 読み込む 。 
+( i という 整数32 , j という 整数32 ) を とり ( ) を 返す glBindBuffer という 関数 を ( "webgl", "bindBuffer") から 読み込む 。 
+( i という 整数32 , offset という * 実数 , size という 整数32 , j という 整数32 ) を とり ( ) を 返す glBufferData という 関数 を ( "webgl", "bufferData") から 読み込む 。 
+( i という 整数32 , offset という * 整数32 , size という 整数32 , j という 整数32 ) を とり ( ) を 返す glElementBufferData という 関数 を ( "webgl", "elementBufferData") から 読み込む 。 
+( i という 整数32 ) を とり ( ) を 返す glUseProgram という 関数 を ( "webgl", "useProgram") から 読み込む 。 
+( i という 整数32 , offset という * 文字 , size という 整数32 ) を とり ( loc という 整数32 ) を 返す glGetAttribLocation という 関数 を ( "webgl", "getAttribLocation") から 読み込む 。 
+( index という 整数32 , size という 整数32 , type という 整数32 , normalized という 整数32 , stride という 整数32 , offset という 整数32 ) を とり ( ) を 返す glVertexAttribPointer という 関数 を ( "webgl", "vertexAttribPointer") から 読み込む 。 
+( index という 整数32 ) を とり ( ) を 返す glEnableVertexAttribArray という 関数 を ( "webgl", "enableVertexAttribArray") から 読み込む 。 
+( i という 整数32 , first という 整数32 , count という 整数32 ) を とり ( ) を 返す glDrawArrays という 関数 を ( "webgl", "drawArrays") から 読み込む 。 
+( i という 整数32 , offset という * 文字 , size という 整数32 ) を とり ( loc という 整数32 ) を 返す _glGetUniformLocation という 関数 を ( "webgl", "getUniformLocation") から 読み込む 。 
+( loc という 整数32 , trans という 整数32 , offset という * 実数 ) を とり ( ) を 返す glUniformMatrix2fv という 関数 を ( "webgl", "uniformMatrix2fv") から 読み込む 。 
+( loc という 整数32 , trans という 整数32 , offset という * 実数 ) を とり ( ) を 返す glUniformMatrix3fv という 関数 を ( "webgl", "uniformMatrix3fv") から 読み込む 。 
+( loc という 整数32 , trans という 整数32 , offset [ 16 ] という 実数 ) を とり ( ) を 返す glUniformMatrix4fv という 関数 を ( "webgl", "uniformMatrix4fv") から 読み込む 。 
+( loc という 整数32 , v0 という 実数 ) を とり ( ) を 返す glUniform1f という 関数 を ( "webgl", "uniform1f") から 読み込む 。 
+( loc という 整数32 , v0 という 実数 ) を とり ( ) を 返す glUniform1fv という 関数 を ( "webgl", "uniform1fv") から 読み込む 。 
+( loc という 整数32 , v0 という 整数32 ) を とり ( ) を 返す glUniform1i という 関数 を ( "webgl", "uniform1i") から 読み込む 。 
+( loc という 整数32 , v0 という 整数32 ) を とり ( ) を 返す glUniform1iv という 関数 を ( "webgl", "uniform1iv") から 読み込む 。 
+( loc という 整数32 , v0 という 実数 , v1 という 実数 ) を とり ( ) を 返す glUniform2f という 関数 を ( "webgl", "uniform2f") から 読み込む 。 
+( loc という 整数32 , v0 という 実数 , v1 という 実数 ) を とり ( ) を 返す glUniform2fv という 関数 を ( "webgl", "uniform2fv") から 読み込む 。 
+( loc という 整数32 , v0 という 整数32 , v1 という 整数32 ) を とり ( ) を 返す glUniform2i という 関数 を ( "webgl", "uniform2i") から 読み込む 。 
+( loc という 整数32 , v0 という 整数32 , v1 という 整数32 ) を とり ( ) を 返す glUniform2iv という 関数 を ( "webgl", "uniform2iv") から 読み込む 。 
+( loc という 整数32 , v0 という 実数 , v1 という 実数 , v2 という 実数 ) を とり ( ) を 返す glUniform3f という 関数 を ( "webgl", "uniform3f") から 読み込む 。 
+( loc という 整数32 , v0 という 実数 , v1 という 実数 , v2 という 実数 ) を とり ( ) を 返す glUniform3fv という 関数 を ( "webgl", "uniform3fv") から 読み込む 。 
+( loc という 整数32 , v0 という 整数32 , v1 という 整数32 , v2 という 整数32 ) を とり ( ) を 返す glUniform3i という 関数 を ( "webgl", "uniform3i") から 読み込む 。 
+( loc という 整数32 , v0 という 整数32 , v1 という 整数32 , v2 という 整数32 ) を とり ( ) を 返す glUniform3iv という 関数 を ( "webgl", "uniform3iv") から 読み込む 。 
+( loc という 整数32 , v0 という 実数 , v1 という 実数 , v2 という 実数 , v3 という 実数 ) を とり ( ) を 返す glUniform4f という 関数 を ( "webgl", "uniform4f") から 読み込む 。 
+( loc という 整数32 , v0 という 実数 , v1 という 実数 , v2 という 実数 , v3 という 実数 ) を とり ( ) を 返す glUniform4fv という 関数 を ( "webgl", "uniform4fv") から 読み込む 。 
+( loc という 整数32 , v0 という 整数32 , v1 という 整数32 , v2 という 整数32 , v3 という 整数32 ) を とり ( ) を 返す glUniform4i という 関数 を ( "webgl", "uniform4i") から 読み込む 。 
+( loc という 整数32 , v0 という 整数32 , v1 という 整数32 , v2 という 整数32 , v3 という 整数32 ) を とり ( ) を 返す glUniform4iv という 関数 を ( "webgl", "uniform4iv") から 読み込む 。 
+( r という 実数 , g という 実数 , b という 実数 , a という 実数 ) を とり ( ) を 返す glClearColor という 関数 を ( "webgl", "clearColor") から 読み込む 。 
+( color という 整数32 ) を とり ( ) を 返す glClear という 関数 を ( "webgl", "clear") から 読み込む 。 
+( i という 整数32 , count という 整数32 , type という 整数32 , offset という 整数32 ) を とり ( ) を 返す glDrawElements という 関数 を ( "webgl", "drawElements") から 読み込む 。 
+( i という 整数32 , j という 整数32 ) を とり ( ) を 返す glBlendFunc という 関数 を ( "webgl", "blendFunc") から 読み込む 。 
+( keyCode という 整数32 ) を とり ( pressed という 整数 ) を 返す キーチェック という 関数 を ( "js", "checkKeyPress") から 読み込む 。 
+( ) を とり ( pressed という 整数 ) を 返す マウスチェック という 関数 を ( "js", "checkMousePress") から 読み込む 。 
+( ) を とり ( x という 実数 ) を 返す マウス相対座標X という 関数 を ( "js", "checkRelativeMouseX") から 読み込む 。 
+( ) を とり ( x という 実数 ) を 返す マウス相対座標Y という 関数 を ( "js", "checkRelativeMouseY") から 読み込む 。 
+( ) を とり ( x という 実数 ) を 返す マウス絶対座標X という 関数 を ( "js", "checkAbsoluteMouseX") から 読み込む 。 
+( ) を とり ( x という 実数 ) を 返す マウス絶対座標Y という 関数 を ( "js", "checkAbsoluteMouseY") から 読み込む 。 
+( ) を とり ( x という 実数 ) を 返す jsRand という 関数 を ( "js", "rand") から 読み込む 。 
+( size という 整数32 ) を とり ( p という * 無 ) を 返す メモリ確保 という 関数 を ( "js", "alloc") から 読み込む 。 
+( offset という * 文字 , length という 整数32 ) を とり ( a という 整数32 ) を 返す _loadTexture という 関数 を ( "webgl", "loadTexture") から 読み込む 。 
+( i という 整数32 ) を とり ( ) を 返す glActiveTexture という 関数 を ( "webgl", "activeTexture") から 読み込む 。 
+( i という 整数32 , j という 整数32 ) を とり ( ) を 返す glBindTexture という 関数 を ( "webgl", "bindTexture") から 読み込む 。 
+( ) を とり ( ) を 返す クリックしたら消える という 関数 を ( "js", "lockPointer") から 読み込む 。 
+( input という 実数 ) を とり ( 結果 という 実数 ) を 返す sin という 関数 を おく 。 ここから
+	PI という 実数 を 3.14159265358979312 で 初期化 。 
+	temp という 整数 を input  / ( 2.0  * PI ) で 初期化 。 
+	rad という 実数 を input  - ( 2.0  * PI  * temp ) で 初期化 。 
+	plusminus という 実数 を 1.0 で 初期化 。 
+	もし rad  < 0.0 ならば ここから
+		rad に rad  + ( 2.0  * PI ) を 代入する 。 
+	ここまで実行
+
+	もし rad  > PI ならば ここから
+		plusminus に 0  - 1.0 を 代入する 。 
+		もし rad  > 1.5  * PI ならば ここから
+			rad に ( 2.0  * PI )  - rad を 代入する 。 
+		ここまで実行
+でなければ ここから
+			rad に rad  - PI を 代入する 。 
+		ここまで実行
+
+	ここまで実行
+でなければ ここから
+		もし rad  > 0.5  * PI ならば ここから
+			rad に PI  - rad を 代入する 。 
+		ここまで実行
+
+	ここまで実行
+
+	もし rad  > 0.25  * PI ならば ここから
+		rad に ( 0.5  * PI )  - rad を 代入する 。 
+		doubleRad という 実数 を rad  * rad で 初期化 。 
+		結果 に 1.0  - ( doubleRad )  / 2.0  + ( doubleRad  * doubleRad )  / 24.0  - ( doubleRad  * doubleRad  * doubleRad )  / 720.0  + ( doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 40320.0  - ( doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 3628800.0  + ( doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 479001600.0 を 代入する 。 
+		結果 に 結果  * plusminus を 代入する 。 
+	ここまで実行
+でなければ ここから
+		doubleRad という 実数 を rad  * rad で 初期化 。 
+		結果 に rad  - ( rad  * doubleRad )  / 6.0  + ( rad  * doubleRad  * doubleRad )  / 120.0  - ( rad  * doubleRad  * doubleRad  * doubleRad )  / 5040.0  + ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 362880.0  - ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 39916800.0  + ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 6227020800.0  - ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 1307674368000.0 を 代入する 。 
+		結果 に 結果  * plusminus を 代入する 。 
+	ここまで実行
+
+ここまで実行
+
+( input という 実数 ) を とり ( 結果 という 実数 ) を 返す cos という 関数 を おく 。 ここから
+	PI という 実数 を 3.14159265358979312 で 初期化 。 
+	temp という 整数 を input  / ( 2  * PI ) で 初期化 。 
+	rad という 実数 を input  - ( 2  * PI  * temp ) で 初期化 。 
+	plusminus という 実数 を 1.0 で 初期化 。 
+	もし rad  < 0.0 ならば ここから
+		rad に rad  + ( 2.0  * PI ) を 代入する 。 
+	ここまで実行
+
+	もし rad  > PI ならば ここから
+		もし rad  > 1.5  * PI ならば ここから
+			rad に ( 2.0  * PI )  - rad を 代入する 。 
+		ここまで実行
+でなければ ここから
+			plusminus に 0  - 1.0 を 代入する 。 
+			rad に rad  - PI を 代入する 。 
+		ここまで実行
+
+	ここまで実行
+でなければ ここから
+		もし rad  > 0.5  * PI ならば ここから
+			plusminus に 0  - 1.0 を 代入する 。 
+			rad に PI  - rad を 代入する 。 
+		ここまで実行
+
+	ここまで実行
+
+	もし rad  < 0.25  * PI ならば ここから
+		doubleRad という 実数 を rad  * rad で 初期化 。 
+		結果 に 1.0  - ( doubleRad )  / 2.0  + ( doubleRad  * doubleRad )  / 24.0  - ( doubleRad  * doubleRad  * doubleRad )  / 720.0  + ( doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 40320.0  - ( doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 3628800.0  + ( doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 479001600.0 を 代入する 。 
+		結果 に 結果  * plusminus を 代入する 。 
+	ここまで実行
+でなければ ここから
+		rad に ( 0.5  * PI )  - rad を 代入する 。 
+		doubleRad という 実数 を rad  * rad で 初期化 。 
+		結果 に rad  - ( rad  * doubleRad )  / 6.0  + ( rad  * doubleRad  * doubleRad )  / 120.0  - ( rad  * doubleRad  * doubleRad  * doubleRad )  / 5040.0  + ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 362880.0  - ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 39916800.0  + ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 6227020800.0  - ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 1307674368000.0 を 代入する 。 
+		結果 に 結果  * plusminus を 代入する 。 
+	ここまで実行
+
+ここまで実行
+
+( rad という 実数 ) を とり ( 結果 という 実数 ) を 返す tan という 関数 を おく 。 ここから
+	PI という 実数 を 3.14159265358979312 で 初期化 。 
+	sqRad という 実数 を rad  * rad で 初期化 。 
+	結果 に sin ( rad )  / cos ( rad ) を 代入する 。 
+ここまで実行
+
+型 < T > : ( a という T ) を とり ( b という T ) を 返す abs という 関数 を おく 。 ここから
+	もし a  >= 0 ならば ここから
+		b に a を 代入する 。 
+	ここまで実行
+でなければ ここから
+		b に 0  - a を 代入する 。 
+	ここまで実行
+
+ここまで実行
+
+( deg という 実数 ) を とり ( rad という 実数 ) を 返す toRad という 関数 を おく 。 ここから
+	PI という 実数 を 3.14159265358979312 で 初期化 。 
+	rad に ( deg  / 180 )  * PI を 代入する 。 
+ここまで実行
+
+( x という 実数 ) を とり ( y という 実数 ) を 返す root という 関数 を おく 。 ここから
+	y に 5 を 代入する 。 
+	( i という 整数 を 0 で 初期化 。 ) から ( i  は 20 ) まで ( i に i  + 1 を 代入する 。 ) 繰り返し ここから
+		y に 0.5  * ( y  + ( x  / y ) ) を 代入する 。 
+	ここまで実行
+
+ここまで実行
+
+( x という 実数 , y という 実数 , z という 実数 ) を とり ( length という 実数 ) を 返す length3d という 関数 を おく 。 ここから
+	length に root ( x  * x  + y  * y  + z  * z ) を 代入する 。 
+ここまで実行
+
+( vector [ 3 ] という 実数 ) を とり ( ) を 返す normalize という 関数 を おく 。 ここから
+	length という 実数 を length3d ( vector [ 0 ] , vector [ 1 ] , vector [ 2 ] ) で 初期化 。 
+	もし length  は 0.0 ならば ここから
+		終了 。 
+	ここまで実行
+
+	vector [ 0 ] に vector [ 0 ]  / length を 代入する 。 
+	vector [ 1 ] に vector [ 1 ]  / length を 代入する 。 
+	vector [ 2 ] に vector [ 2 ]  / length を 代入する 。 
+ここまで実行
+
+( vec1 [ 3 ] という 実数 , vec2 [ 3 ] という 実数 ) を とり ( 結果 という 実数 ) を 返す dot という 関数 を おく 。 ここから
+	結果 に vec1 [ 0 ]  * vec2 [ 0 ]  + vec1 [ 1 ]  * vec2 [ 1 ]  + vec1 [ 2 ]  * vec2 [ 2 ] を 代入する 。 
+ここまで実行
+
+( output [ 3 ] という 実数 , vec1 [ 3 ] という 実数 , vec2 [ 3 ] という 実数 ) を とり ( ) を 返す cross という 関数 を おく 。 ここから
+	output [ 0 ] に vec1 [ 1 ]  * vec2 [ 2 ]  - vec1 [ 2 ]  * vec2 [ 1 ] を 代入する 。 
+	output [ 1 ] に vec1 [ 2 ]  * vec2 [ 0 ]  - vec1 [ 0 ]  * vec2 [ 2 ] を 代入する 。 
+	output [ 2 ] に vec1 [ 0 ]  * vec2 [ 1 ]  - vec1 [ 1 ]  * vec2 [ 0 ] を 代入する 。 
+ここまで実行
+
+( output [ 3 ] という 実数 , vec [ 3 ] という 実数 , x という 実数 ) を とり ( ) を 返す vecMultiply という 関数 を おく 。 ここから
+	output [ 0 ] に vec [ 0 ]  * x を 代入する 。 
+	output [ 1 ] に vec [ 1 ]  * x を 代入する 。 
+	output [ 2 ] に vec [ 2 ]  * x を 代入する 。 
+ここまで実行
+
+( output [ 3 ] という 実数 , vec1 [ 3 ] という 実数 , vec2 [ 3 ] という 実数 ) を とり ( ) を 返す vecSub という 関数 を おく 。 ここから
+	output [ 0 ] に vec1 [ 0 ]  - vec2 [ 0 ] を 代入する 。 
+	output [ 1 ] に vec1 [ 1 ]  - vec2 [ 1 ] を 代入する 。 
+	output [ 2 ] に vec1 [ 2 ]  - vec2 [ 2 ] を 代入する 。 
+ここまで実行
+
+( output [ 3 ] という 実数 , vec1 [ 3 ] という 実数 , vec2 [ 3 ] という 実数 ) を とり ( ) を 返す vecAdd という 関数 を おく 。 ここから
+	output [ 0 ] に vec1 [ 0 ]  + vec2 [ 0 ] を 代入する 。 
+	output [ 1 ] に vec1 [ 1 ]  + vec2 [ 1 ] を 代入する 。 
+	output [ 2 ] に vec1 [ 2 ]  + vec2 [ 2 ] を 代入する 。 
+ここまで実行
+
+型 < T > : クラス : 配列{
+公開 : 	content という * T を おく 。 
+	size という 整数 を おく 。 
+	( ) を とり ( ) を 返す 配列 という 関数 を おく 。 ここから
+		size に 0 を 代入する 。 
+		allocated に 2 を 代入する 。 
+		content に メモリ確保 ( バイト数 ( content に ある オブジェクト )  * allocated ) を 代入する 。 
+	ここまで実行
+
+	( index という 整数 ) を とり ( result という T ) を 返す 取得 という 関数 を おく 。 ここから
+		content [ index ] を 終了 。 
+	ここまで実行
+
+	( new という T ) を とり ( ) を 返す 追加 という 関数 を おく 。 ここから
+		もし size  は allocated ならば ここから
+			allocated に allocated  * 2 を 代入する 。 
+			temp という * T を content で 初期化 。 
+			content に メモリ確保 ( バイト数 ( content に ある オブジェクト )  * allocated ) を 代入する 。 
+			( i という 整数 を 0 で 初期化 。 ) から ( i  は allocated ) まで ( i に i  + 1 を 代入する 。 ) 繰り返し ここから
+				content [ i ] に temp [ i ] を 代入する 。 
+			ここまで実行
+
+		ここまで実行
+
+		content [ size ] に new を 代入する 。 
+		size に size  + 1 を 代入する 。 
+	ここまで実行
+
+	( ) を とり ( a という 整数 ) を 返す 長さ という 関数 を おく 。 ここから
+		a に size を 代入する 。 
+	ここまで実行
+
+	( ) を とり ( ) を 返す ポップ という 関数 を おく 。 ここから
+		size に size  - 1 を 代入する 。 
+	ここまで実行
+
+非公開 : 	allocated という 整数 を おく 。 
+} 
+クラス : 文字列{
+公開 : 	関数 : 演算子 = ( offset という * 文字 , l という 整数 ) => ( ) ここから
+		content に offset を 代入する 。 
+		length に l を 代入する 。 
+	ここまで実行
+
+	( offset という * 文字 , l という 整数 ) を とり ( ) を 返す 代入 という 関数 を おく 。 ここから
+		content に offset を 代入する 。 
+		length に l を 代入する 。 
+	ここまで実行
+
+	( offset という * 文字 , l という 整数 ) を とり ( ) を 返す 文字列 という 関数 を おく 。 ここから
+		content に offset を 代入する 。 
+		length に l を 代入する 。 
+	ここまで実行
+
+	length という 整数 を おく 。 
+	content という * 文字 を おく 。 
+} 
+( a という 文字列 ) を とり ( ) を 返す 文字列表示 という 関数 を おく 。 ここから
+	a の content , a の length _文字列表示 する 。 
+ここまで実行
+
+( x という 実数 ) を とり ( ) を 返す 表示 という 関数 を おく 。 ここから
+	x 実数表示 する 。 
+ここまで実行
+
+( n という 整数 ) を とり ( ) を 返す 表示 という 関数 を おく 。 ここから
+	n 実数表示 する 。 
+ここまで実行
+
+( a という 文字列 ) を とり ( ) を 返す 表示 という 関数 を おく 。 ここから
+	a 文字列表示 する 。 
+ここまで実行
+
+( i という 整数32 , a という 文字列 ) を とり ( loc という 整数32 ) を 返す glGetUniformLocation という 関数 を おく 。 ここから
+	loc に _glGetUniformLocation ( i , a の content , a の length ) を 代入する 。 
+ここまで実行
+
+クラス : ベクトル3D{
+公開 : 	関数 : 演算子  + ( a という ベクトル3D ) => ( b という ベクトル3D ) ここから
+		b の x に a の x  + x を 代入する 。 
+		b の y に a の y  + y を 代入する 。 
+		b の z に a の z  + z を 代入する 。 
+	ここまで実行
+
+	( ) を とり ( ) を 返す 正規化 という 関数 を おく 。 ここから
+		l という 実数 を root ( ( x  * x )  + ( y  * y )  + ( z  * z ) ) で 初期化 。 
+		x に x  / l を 代入する 。 
+		y に y  / l を 代入する 。 
+		z に z  / l を 代入する 。 
+	ここまで実行
+
+	( ) を とり ( l という 実数 ) を 返す 長さ という 関数 を おく 。 ここから
+		l に root ( x  * x  + y  * y  + z  * z ) を 代入する 。 
+	ここまで実行
+
+	( a という 実数 , b という 実数 , c という 実数 ) を とり ( ) を 返す ベクトル3D という 関数 を おく 。 ここから
+		x に a を 代入する 。 
+		y に b を 代入する 。 
+		z に c を 代入する 。 
+	ここまで実行
+
+	z という 実数 を おく 。 
+	y という 実数 を おく 。 
+	x という 実数 を おく 。 
+} 
+( a という ベクトル3D , b という ベクトル3D ) を とり ( result という ベクトル3D ) を 返す ベクトル3Dの和 という 関数 を おく 。 ここから
+	result の x に a の x  + b の x を 代入する 。 
+	result の y に a の y  + b の y を 代入する 。 
+	result の z に a の z  + b の z を 代入する 。 
+ここまで実行
+
+( a という ベクトル3D , b という ベクトル3D ) を とり ( result という ベクトル3D ) を 返す ベクトル3Dの差 という 関数 を おく 。 ここから
+	result の x に a の x  - b の x を 代入する 。 
+	result の y に a の y  - b の y を 代入する 。 
+	result の z に a の z  - b の z を 代入する 。 
+ここまで実行
+
+( a という ベクトル3D , b という ベクトル3D ) を とり ( x という 実数 ) を 返す ベクトル3Dの内積 という 関数 を おく 。 ここから
+	x に ( a の x  * b の x )  + ( a の y  * b の y )  + ( a の z  * b の z ) を 代入する 。 
+ここまで実行
+
+( a という ベクトル3D , b という ベクトル3D ) を とり ( result という ベクトル3D ) を 返す ベクトル3Dの外積 という 関数 を おく 。 ここから
+	result の x に ( a の y  * b の z )  - ( a の z  * b の y ) を 代入する 。 
+	result の y に ( a の z  * b の x )  - ( a の x  * b の z ) を 代入する 。 
+	result の z に ( a の x  * b の y )  - ( a の y  * b の x ) を 代入する 。 
+ここまで実行
+
+( a という ベクトル3D , x という 実数 ) を とり ( result という ベクトル3D ) を 返す ベクトル3D拡大 という 関数 を おく 。 ここから
+	result の x に a の x  * x を 代入する 。 
+	result の y に a の y  * x を 代入する 。 
+	result の z に a の z  * x を 代入する 。 
+ここまで実行
+
+( a という ベクトル3D , x という 実数 ) を とり ( result という ベクトル3D ) を 返す ベクトル3D縮小 という 関数 を おく 。 ここから
+	もし x  は 0.0 ならば ここから
+		10000000 表示 する 。 
+	ここまで実行
+
+	result の x に a の x  / x を 代入する 。 
+	result の y に a の y  / x を 代入する 。 
+	result の z に a の z  / x を 代入する 。 
+ここまで実行
+
+クラス : 行列4x4{
+公開 : 	( x という 実数 , y という 実数 , z という 実数 ) を とり ( ) を 返す 拡大縮小 という 関数 を おく 。 ここから
+		matrix [ 0 ] に matrix [ 0 ]  * x を 代入する 。 
+		matrix [ 1 ] に matrix [ 1 ]  * x を 代入する 。 
+		matrix [ 2 ] に matrix [ 2 ]  * x を 代入する 。 
+		matrix [ 3 ] に matrix [ 3 ]  * x を 代入する 。 
+		matrix [ 4 ] に matrix [ 4 ]  * y を 代入する 。 
+		matrix [ 5 ] に matrix [ 5 ]  * y を 代入する 。 
+		matrix [ 6 ] に matrix [ 6 ]  * y を 代入する 。 
+		matrix [ 7 ] に matrix [ 7 ]  * y を 代入する 。 
+		matrix [ 8 ] に matrix [ 8 ]  * z を 代入する 。 
+		matrix [ 9 ] に matrix [ 9 ]  * z を 代入する 。 
+		matrix [ 10 ] に matrix [ 10 ]  * z を 代入する 。 
+		matrix [ 11 ] に matrix [ 11 ]  * z を 代入する 。 
+	ここまで実行
+
+	( axis という ベクトル3D , theta という 実数 ) を とり ( ) を 返す 回転 という 関数 を おく 。 ここから
+		axis の 正規化 する 。 
+		s という 実数 を sin ( theta ) で 初期化 。 
+		c という 実数 を cos ( theta ) で 初期化 。 
+		t という 実数 を 1.0  - c で 初期化 。 
+		a00 という 実数 を matrix [ 0 ] で 初期化 。 
+		a01 という 実数 を matrix [ 1 ] で 初期化 。 
+		a02 という 実数 を matrix [ 2 ] で 初期化 。 
+		a03 という 実数 を matrix [ 3 ] で 初期化 。 
+		a10 という 実数 を matrix [ 4 ] で 初期化 。 
+		a11 という 実数 を matrix [ 5 ] で 初期化 。 
+		a12 という 実数 を matrix [ 6 ] で 初期化 。 
+		a13 という 実数 を matrix [ 7 ] で 初期化 。 
+		a20 という 実数 を matrix [ 8 ] で 初期化 。 
+		a21 という 実数 を matrix [ 9 ] で 初期化 。 
+		a22 という 実数 を matrix [ 10 ] で 初期化 。 
+		a23 という 実数 を matrix [ 11 ] で 初期化 。 
+		b00 という 実数 を axis の x  * axis の x  * t  + c で 初期化 。 
+		b01 という 実数 を axis の y  * axis の x  * t  + axis の z  * s で 初期化 。 
+		b02 という 実数 を axis の z  * axis の x  * t  - axis の y  * s で 初期化 。 
+		b10 という 実数 を axis の x  * axis の y  * t  - axis の z  * s で 初期化 。 
+		b11 という 実数 を axis の y  * axis の y  * t  + c で 初期化 。 
+		b12 という 実数 を axis の z  * axis の y  * t  + axis の x  * s で 初期化 。 
+		b20 という 実数 を axis の x  * axis の z  * t  + axis の y  * s で 初期化 。 
+		b21 という 実数 を axis の y  * axis の z  * t  - axis の x  * s で 初期化 。 
+		b22 という 実数 を axis の z  * axis の z  * t  + c で 初期化 。 
+		matrix [ 0 ] に a00  * b00  + a10  * b01  + a20  * b02 を 代入する 。 
+		matrix [ 1 ] に a01  * b00  + a11  * b01  + a21  * b02 を 代入する 。 
+		matrix [ 2 ] に a02  * b00  + a12  * b01  + a22  * b02 を 代入する 。 
+		matrix [ 3 ] に a03  * b00  + a13  * b01  + a23  * b02 を 代入する 。 
+		matrix [ 4 ] に a00  * b10  + a10  * b11  + a20  * b12 を 代入する 。 
+		matrix [ 5 ] に a01  * b10  + a11  * b11  + a21  * b12 を 代入する 。 
+		matrix [ 6 ] に a02  * b10  + a12  * b11  + a22  * b12 を 代入する 。 
+		matrix [ 7 ] に a03  * b10  + a13  * b11  + a23  * b12 を 代入する 。 
+		matrix [ 8 ] に a00  * b20  + a10  * b21  + a20  * b22 を 代入する 。 
+		matrix [ 9 ] に a01  * b20  + a11  * b21  + a21  * b22 を 代入する 。 
+		matrix [ 10 ] に a02  * b20  + a12  * b21  + a22  * b22 を 代入する 。 
+		matrix [ 11 ] に a03  * b20  + a13  * b21  + a23  * b22 を 代入する 。 
+	ここまで実行
+
+	( offset という ベクトル3D ) を とり ( ) を 返す 移動 という 関数 を おく 。 ここから
+		mat12 という 実数 を matrix [ 12 ] で 初期化 。 
+		mat13 という 実数 を matrix [ 13 ] で 初期化 。 
+		mat14 という 実数 を matrix [ 14 ] で 初期化 。 
+		mat15 という 実数 を matrix [ 15 ] で 初期化 。 
+		matrix [ 12 ] に matrix [ 0 ]  * offset の x  + matrix [ 4 ]  * offset の y  + matrix [ 8 ]  * offset の z  + mat12 を 代入する 。 
+		matrix [ 13 ] に matrix [ 1 ]  * offset の x  + matrix [ 5 ]  * offset の y  + matrix [ 9 ]  * offset の z  + mat13 を 代入する 。 
+		matrix [ 14 ] に matrix [ 2 ]  * offset の x  + matrix [ 6 ]  * offset の y  + matrix [ 10 ]  * offset の z  + mat13 を 代入する 。 
+		matrix [ 15 ] に matrix [ 3 ]  * offset の x  + matrix [ 7 ]  * offset の y  + matrix [ 11 ]  * offset の z  + mat15 を 代入する 。 
+	ここまで実行
+
+	( ) を とり ( ) を 返す 単位化 という 関数 を おく 。 ここから
+		matrix に [ 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 ] を 代入する 。 
+	ここまで実行
+
+	( ) を とり ( ) を 返す 行列4x4 という 関数 を おく 。 ここから
+		matrix に [ 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 ] を 代入する 。 
+	ここまで実行
+
+	matrix [ 16 ] という 実数 を おく 。 
+} 
+( m という 行列4x4 , pos という ベクトル3D , lookAt という ベクトル3D , up という ベクトル3D ) を とり ( res という 行列4x4 ) を 返す カメラ行列 という 関数 を おく 。 ここから
+	newForward という ベクトル3D の オブジェクト を lookAt の x  - pos の x , lookAt の y  - pos の y , lookAt の z  - pos の z で 初期化 。 
+	a という ベクトル3D の オブジェクト を 0.0 , 0.0 , 0.0 で 初期化 。 
+	a に ベクトル3D拡大 ( newForward , ベクトル3Dの内積 ( up , newForward ) ) を 代入する 。 
+	newUp という ベクトル3D の オブジェクト を up の x  - a の x , up の y  - a の y , up の z  - a の z で 初期化 。 
+	newUp の 正規化 する 。 
+	newRight という ベクトル3D の オブジェクト を 0 , 0 , 0 で 初期化 。 
+	newRight に ベクトル3Dの外積 ( newUp , newForward ) を 代入する 。 
+	m の matrix に [ newRight の x , newUp の x , newForward の x , 0.0 , newRight の y , newUp の y , newForward の y , 0.0 , newRight の z , newUp の z , newForward の z , 0.0 , 0  - ベクトル3Dの内積 ( newRight , pos ) , 0  - ベクトル3Dの内積 ( newUp , pos ) , 0  - ベクトル3Dの内積 ( newForward , pos ) , 1.0 ] を 代入する 。 
+	m を 終了 。 
+ここまで実行
+
+( m という 行列4x4 , fov という 実数 , width という 実数 , height という 実数 , zN という 実数 , zF という 実数 ) を とり ( result という 行列4x4 ) を 返す 視点行列3D という 関数 を おく 。 ここから
+	PI という 実数 を 3.14159265358979312 で 初期化 。 
+	fov という 実数 を 1.0  / tan ( ( 90.0  / 360.0 )  * PI ) で 初期化 。 
+	aspectRatio という 実数 を width  / height で 初期化 。 
+	zNear という 実数 を zN で 初期化 。 
+	zFar という 実数 を zF で 初期化 。 
+	zQ という 実数 を zF  / ( zF  - zN ) で 初期化 。 
+	m の matrix に [ aspectRatio  * fov , 0.0 , 0.0 , 0.0 , 0.0 , fov , 0.0 , 0.0 , 0.0 , 0.0 , zQ , 1.0 , 0.0 , 0.0 , ( 0  - zFar  * zNear )  / ( zFar  - zNear ) , 0.0 ] を 代入する 。 
+	m を 終了 。 
+ここまで実行
+
+( m という 行列4x4 , left という 実数 , right という 実数 , bottom という 実数 , top という 実数 , near という 実数 , far という 実数 ) を とり ( result という 行列4x4 ) を 返す 視点行列2D という 関数 を おく 。 ここから
+	m の matrix に [ 2.0  / ( right  - left ) , 0.0 , 0.0 , 0.0 , 0.0 , 2.0  / ( top  - bottom ) , 0.0 , 0.0 , 0.0 , 0.0 , 0  - 2.0  / ( near  - far ) , 0.0 , 0  - ( right  + left )  / ( right  - left ) , 0  - ( top  + bottom )  / ( top  - bottom ) , 0  - ( far  + near )  / ( far  - near ) , 1.0 ] を 代入する 。 
+	m を 終了 。 
+ここまで実行
+
+( a という 行列4x4 , b という 行列4x4 ) を とり ( out という 行列4x4 ) を 返す 行列4x4の積 という 関数 を おく 。 ここから
+	out の matrix [ 0 ] に b の matrix [ 0 ]  * a の matrix [ 0 ]  + b の matrix [ 1 ]  * a の matrix [ 4 ]  + b の matrix [ 2 ]  * a の matrix [ 8 ]  + b の matrix [ 3 ]  * a の matrix [ 12 ] を 代入する 。 
+	out の matrix [ 1 ] に b の matrix [ 0 ]  * a の matrix [ 1 ]  + b の matrix [ 1 ]  * a の matrix [ 5 ]  + b の matrix [ 2 ]  * a の matrix [ 9 ]  + b の matrix [ 3 ]  * a の matrix [ 13 ] を 代入する 。 
+	out の matrix [ 2 ] に b の matrix [ 0 ]  * a の matrix [ 2 ]  + b の matrix [ 1 ]  * a の matrix [ 6 ]  + b の matrix [ 2 ]  * a の matrix [ 10 ]  + b の matrix [ 3 ]  * a の matrix [ 14 ] を 代入する 。 
+	out の matrix [ 3 ] に b の matrix [ 0 ]  * a の matrix [ 3 ]  + b の matrix [ 1 ]  * a の matrix [ 7 ]  + b の matrix [ 2 ]  * a の matrix [ 11 ]  + b の matrix [ 3 ]  * a の matrix [ 15 ] を 代入する 。 
+	out の matrix [ 4 ] に b の matrix [ 4 ]  * a の matrix [ 0 ]  + b の matrix [ 5 ]  * a の matrix [ 4 ]  + b の matrix [ 6 ]  * a の matrix [ 8 ]  + b の matrix [ 7 ]  * a の matrix [ 12 ] を 代入する 。 
+	out の matrix [ 5 ] に b の matrix [ 4 ]  * a の matrix [ 1 ]  + b の matrix [ 5 ]  * a の matrix [ 5 ]  + b の matrix [ 6 ]  * a の matrix [ 9 ]  + b の matrix [ 7 ]  * a の matrix [ 13 ] を 代入する 。 
+	out の matrix [ 6 ] に b の matrix [ 4 ]  * a の matrix [ 2 ]  + b の matrix [ 5 ]  * a の matrix [ 6 ]  + b の matrix [ 6 ]  * a の matrix [ 10 ]  + b の matrix [ 7 ]  * a の matrix [ 14 ] を 代入する 。 
+	out の matrix [ 7 ] に b の matrix [ 4 ]  * a の matrix [ 3 ]  + b の matrix [ 5 ]  * a の matrix [ 7 ]  + b の matrix [ 6 ]  * a の matrix [ 11 ]  + b の matrix [ 7 ]  * a の matrix [ 15 ] を 代入する 。 
+	out の matrix [ 8 ] に b の matrix [ 8 ]  * a の matrix [ 0 ]  + b の matrix [ 9 ]  * a の matrix [ 4 ]  + b の matrix [ 10 ]  * a の matrix [ 8 ]  + b の matrix [ 11 ]  * a の matrix [ 12 ] を 代入する 。 
+	out の matrix [ 9 ] に b の matrix [ 8 ]  * a の matrix [ 1 ]  + b の matrix [ 9 ]  * a の matrix [ 5 ]  + b の matrix [ 10 ]  * a の matrix [ 9 ]  + b の matrix [ 11 ]  * a の matrix [ 13 ] を 代入する 。 
+	out の matrix [ 10 ] に b の matrix [ 8 ]  * a の matrix [ 2 ]  + b の matrix [ 9 ]  * a の matrix [ 6 ]  + b の matrix [ 10 ]  * a の matrix [ 10 ]  + b の matrix [ 11 ]  * a の matrix [ 14 ] を 代入する 。 
+	out の matrix [ 11 ] に b の matrix [ 8 ]  * a の matrix [ 3 ]  + b の matrix [ 9 ]  * a の matrix [ 7 ]  + b の matrix [ 10 ]  * a の matrix [ 11 ]  + b の matrix [ 11 ]  * a の matrix [ 15 ] を 代入する 。 
+	out の matrix [ 12 ] に b の matrix [ 12 ]  * a の matrix [ 0 ]  + b の matrix [ 13 ]  * a の matrix [ 4 ]  + b の matrix [ 14 ]  * a の matrix [ 8 ]  + b の matrix [ 15 ]  * a の matrix [ 12 ] を 代入する 。 
+	out の matrix [ 13 ] に b の matrix [ 12 ]  * a の matrix [ 1 ]  + b の matrix [ 13 ]  * a の matrix [ 5 ]  + b の matrix [ 14 ]  * a の matrix [ 9 ]  + b の matrix [ 15 ]  * a の matrix [ 13 ] を 代入する 。 
+	out の matrix [ 14 ] に b の matrix [ 12 ]  * a の matrix [ 2 ]  + b の matrix [ 13 ]  * a の matrix [ 6 ]  + b の matrix [ 14 ]  * a の matrix [ 10 ]  + b の matrix [ 15 ]  * a の matrix [ 14 ] を 代入する 。 
+	out の matrix [ 15 ] に b の matrix [ 12 ]  * a の matrix [ 3 ]  + b の matrix [ 13 ]  * a の matrix [ 7 ]  + b の matrix [ 14 ]  * a の matrix [ 11 ]  + b の matrix [ 15 ]  * a の matrix [ 15 ] を 代入する 。 
+ここまで実行
+
+クラス : モデル{
+公開 : 	color という ベクトル3D を おく 。 
+	pos という ベクトル3D を おく 。 
+	( data という * 実数 , num という 整数 , c という ベクトル3D , p という ベクトル3D , s という 整数 ) を とり ( ) を 返す モデル という 関数 を おく 。 ここから
+		vertices に data を 代入する 。 
+		vertexNum に num を 代入する 。 
+		color に c を 代入する 。 
+		pos に p を 代入する 。 
+		shaderID に s を 代入する 。 
+		modelMat の 単位化 する 。 
+		transMat の 単位化 する 。 
+		scaleMat の 単位化 する 。 
+		rotateMat の 単位化 する 。 
+		_lightPosUniform [ 8 ] という 文字 を "lightPos"で 初期化 。 
+		_viewPosUniform [ 8 ] という 文字 を "viewPos"で 初期化 。 
+		_lightColorUniform [ 10 ] という 文字 を "lightColor"で 初期化 。 
+		_objectColorUniform [ 11 ] という 文字 を "objectColor"で 初期化 。 
+		_projUniform [ 8 ] という 文字 を "uProjMat"で 初期化 。 
+		_viewUniform [ 8 ] という 文字 を "uViewMat"で 初期化 。 
+		_modelUniform [ 9 ] という 文字 を "uModelMat"で 初期化 。 
+		lightPosUniform という 文字列 の オブジェクト を & _lightPosUniform , 8 で 初期化 。 
+		viewPosUniform という 文字列 の オブジェクト を & _viewPosUniform , 7 で 初期化 。 
+		lightColorUniform という 文字列 の オブジェクト を & _lightColorUniform , 10 で 初期化 。 
+		objectColorUniform という 文字列 の オブジェクト を & _objectColorUniform , 11 で 初期化 。 
+		projUniform という 文字列 の オブジェクト を & _projUniform , 8 で 初期化 。 
+		viewUniform という 文字列 の オブジェクト を & _viewUniform , 8 で 初期化 。 
+		modelUniform という 文字列 の オブジェクト を & _modelUniform , 9 で 初期化 。 
+		もし shaderID  は 0 ならば ここから
+			viewPosUniLoc に glGetUniformLocation ( 0 , viewPosUniform ) を 代入する 。 
+			lightPosUniLoc に glGetUniformLocation ( 0 , lightPosUniform ) を 代入する 。 
+			lightColorUniLoc に glGetUniformLocation ( 0 , lightColorUniform ) を 代入する 。 
+			objectColorUniLoc に glGetUniformLocation ( 0 , objectColorUniform ) を 代入する 。 
+		ここまで実行
+
+		projMatUniformLoc に glGetUniformLocation ( shaderID , projUniform ) を 代入する 。 
+		viewMatUniformLoc に glGetUniformLocation ( shaderID , viewUniform ) を 代入する 。 
+		modelMatUniformLoc に glGetUniformLocation ( shaderID , modelUniform ) を 代入する 。 
+		buffer に glCreateBuffer ( ) を 代入する 。 
+		34962 , buffer glBindBuffer する 。 
+		34962 , vertices , num  * 6 , 35044 glBufferData する 。 
+	ここまで実行
+
+	( coord という ベクトル3D ) を とり ( ) を 返す 座標設定 という 関数 を おく 。 ここから
+		pos に coord を 代入する 。 
+	ここまで実行
+
+	( offset という ベクトル3D ) を とり ( ) を 返す 移動 という 関数 を おく 。 ここから
+		pos に ベクトル3Dの和 ( pos , offset ) を 代入する 。 
+	ここまで実行
+
+	( x という 実数 , y という 実数 , z という 実数 ) を とり ( ) を 返す 拡大縮小 という 関数 を おく 。 ここから
+		temp という 行列4x4 の オブジェクト を で 初期化 。 
+		temp の 単位化 する 。 
+		x , y , z temp の 拡大縮小 する 。 
+		scaleMat に 行列4x4の積 ( temp , scaleMat ) を 代入する 。 
+	ここまで実行
+
+	( axis という ベクトル3D , t という 実数 ) を とり ( ) を 返す 回転 という 関数 を おく 。 ここから
+		temp という 行列4x4 の オブジェクト を で 初期化 。 
+		temp の 単位化 する 。 
+		axis , t temp の 回転 する 。 
+		rotateMat に 行列4x4の積 ( temp , rotateMat ) を 代入する 。 
+	ここまで実行
+
+	( projMat という 行列4x4 , viewMat という 行列4x4 , camera という ベクトル3D ) を とり ( ) を 返す 描画 という 関数 を おく 。 ここから
+		PI という 実数 を 3.14159265358979312 で 初期化 。 
+		pos transMat の 移動 する 。 
+		modelMat の 単位化 する 。 
+		modelMat に 行列4x4の積 ( scaleMat , modelMat ) を 代入する 。 
+		modelMat に 行列4x4の積 ( rotateMat , modelMat ) を 代入する 。 
+		modelMat に 行列4x4の積 ( transMat , modelMat ) を 代入する 。 
+		34962 , buffer glBindBuffer する 。 
+		0 glEnableVertexAttribArray する 。 
+		0 , 3 , 5126 , 0 , 6  * 4 , 0 glVertexAttribPointer する 。 
+		1 glEnableVertexAttribArray する 。 
+		1 , 3 , 5126 , 0 , 6  * 4 , 3  * 4 glVertexAttribPointer する 。 
+		shaderID glUseProgram する 。 
+		もし shaderID  は 0 ならば ここから
+			lightPosUniLoc , 5.0 , 5.0 , 5.0 glUniform3f する 。 
+			lightColorUniLoc , 1.0 , 1.0 , 1.0 glUniform3f する 。 
+			objectColorUniLoc , color の x , color の y , color の z glUniform3f する 。 
+			viewPosUniLoc , camera の x , camera の y , camera の z glUniform3f する 。 
+		ここまで実行
+
+		projMatUniformLoc , 0 , projMat の matrix glUniformMatrix4fv する 。 
+		viewMatUniformLoc , 0 , viewMat の matrix glUniformMatrix4fv する 。 
+		modelMatUniformLoc , 0 , modelMat の matrix glUniformMatrix4fv する 。 
+		4 , 0 , 36 glDrawArrays する 。 
+		rotateMat の 単位化 する 。 
+		transMat の 単位化 する 。 
+		scaleMat の 単位化 する 。 
+	ここまで実行
+
+非公開 : 	modelMatUniformLoc という 整数32 を おく 。 
+	viewMatUniformLoc という 整数32 を おく 。 
+	projMatUniformLoc という 整数32 を おく 。 
+	objectColorUniLoc という 整数32 を おく 。 
+	lightColorUniLoc という 整数32 を おく 。 
+	lightPosUniLoc という 整数32 を おく 。 
+	viewPosUniLoc という 整数32 を おく 。 
+	shaderID という 整数 を おく 。 
+	rotateMat という 行列4x4 を おく 。 
+	scaleMat という 行列4x4 を おく 。 
+	transMat という 行列4x4 を おく 。 
+	modelMat という 行列4x4 を おく 。 
+	buffer という 整数32 を おく 。 
+	vertexNum という 整数 を おく 。 
+	vertices という * 実数 を おく 。 
+} 
+クラス : カメラ{
+公開 : 	座標 という ベクトル3D を おく 。 
+	感度 という 実数 を おく 。 
+	( p という ベクトル3D ) を とり ( ) を 返す カメラ という 関数 を おく 。 ここから
+		座標 に p を 代入する 。 
+		0.0 , 0.0 , 1.0 view の ベクトル3D する 。 
+		0.0 , 0.0 , 1.0 lookDir の ベクトル3D する 。 
+		0.0 , 1.0 , 0.0 up の ベクトル3D する 。 
+		yaw に 90.0 を 代入する 。 
+		pitch に 0.0 を 代入する 。 
+		感度 に 0.100000000000000006 を 代入する 。 
+	ここまで実行
+
+	( s という 実数 ) を とり ( ) を 返す 感度設定 という 関数 を おく 。 ここから
+		感度 に s を 代入する 。 
+	ここまで実行
+
+	( xOffset という 実数 , yOffset という 実数 , elapsedTime という 実数 ) を とり ( result という 行列4x4 ) を 返す アップデート という 関数 を おく 。 ここから
+		もし キーチェック ( 32 )  は 1 ならば ここから
+			座標 の y に 座標 の y  + elapsedTime  * 5.0 を 代入する 。 
+		ここまで実行
+
+		もし キーチェック ( 16 )  は 1 ならば ここから
+			座標 の y に 座標 の y  - elapsedTime  * 5.0 を 代入する 。 
+		ここまで実行
+
+		もし キーチェック ( 65 )  は 1 ならば ここから
+			座標 の z に 座標 の z  - elapsedTime  * sin ( toRad ( yaw  - 90 ) )  * 5.0 を 代入する 。 
+			座標 の x に 座標 の x  - elapsedTime  * cos ( toRad ( yaw  - 90 ) )  * 5.0 を 代入する 。 
+		ここまで実行
+
+		もし キーチェック ( 68 )  は 1 ならば ここから
+			座標 の z に 座標 の z  + elapsedTime  * sin ( toRad ( yaw  - 90 ) )  * 5.0 を 代入する 。 
+			座標 の x に 座標 の x  + elapsedTime  * cos ( toRad ( yaw  - 90 ) )  * 5.0 を 代入する 。 
+		ここまで実行
+
+		もし キーチェック ( 87 )  は 1 ならば ここから
+			座標 の z に 座標 の z  + elapsedTime  * sin ( toRad ( yaw ) )  * 5.0 を 代入する 。 
+			座標 の x に 座標 の x  + elapsedTime  * cos ( toRad ( yaw ) )  * 5.0 を 代入する 。 
+		ここまで実行
+
+		もし キーチェック ( 83 )  は 1 ならば ここから
+			座標 の z に 座標 の z  - elapsedTime  * sin ( toRad ( yaw ) )  * 5.0 を 代入する 。 
+			座標 の x に 座標 の x  - elapsedTime  * cos ( toRad ( yaw ) )  * 5.0 を 代入する 。 
+		ここまで実行
+
+		yaw に yaw  - xOffset  * 感度 を 代入する 。 
+		pitch に pitch  - yOffset  * 感度 を 代入する 。 
+		もし pitch  < 0  - 89.0 ならば ここから
+			pitch に 0  - 89.0 を 代入する 。 
+		ここまで実行
+
+		もし pitch  > 89.0 ならば ここから
+			pitch に 89.0 を 代入する 。 
+		ここまで実行
+
+		lookDir の x に cos ( toRad ( yaw ) )  * cos ( toRad ( pitch ) ) を 代入する 。 
+		lookDir の y に sin ( toRad ( pitch ) ) を 代入する 。 
+		lookDir の z に sin ( toRad ( yaw ) )  * cos ( toRad ( pitch ) ) を 代入する 。 
+		lookDir の 正規化 する 。 
+		result の 単位化 する 。 
+		view に ベクトル3Dの和 ( lookDir , 座標 ) を 代入する 。 
+		result に カメラ行列 ( result , 座標 , view , up ) を 代入する 。 
+	ここまで実行
+
+非公開 : 	pitch という 実数 を おく 。 
+	yaw という 実数 を おく 。 
+	up という ベクトル3D を おく 。 
+	lookDir という ベクトル3D を おく 。 
+	view という ベクトル3D を おく 。 
+} 
+クラス : シーン{
+公開 : 	スプライト という 配列 < * モデル > を おく 。 
+	目 という カメラ を おく 。 
+	( ) を とり ( ) を 返す シーン という 関数 を おく 。 ここから
+		last に 時間計測 ( )  / 1000.0 を 代入する 。 
+		now に 0.0 を 代入する 。 
+		elapsedTime に 0.0 を 代入する 。 
+		lastX に マウス絶対座標X ( ) を 代入する 。 
+		lastY に マウス絶対座標Y ( ) を 代入する 。 
+		projMat の 単位化 する 。 
+		viewMat の 単位化 する 。 
+		projMat に 視点行列3D ( projMat , 90.0 , 720.0 , 1280.0 , 0.100000000000000006 , 100.0 ) を 代入する 。 
+		temp という ベクトル3D の オブジェクト を 0.0 , 0.0 , 0  - 4.0 で 初期化 。 
+		temp 目 の カメラ する 。 
+		スプライト の 配列 する 。 
+	ここまで実行
+
+	( ) を とり ( ) を 返す 描画 という 関数 を おく 。 ここから
+		now に 時間計測 ( )  / 1000.0 を 代入する 。 
+		elapsedTime に now  - last を 代入する 。 
+		last に now を 代入する 。 
+		0.0 , 0.0 , 0.0 , 1.0 glClearColor する 。 
+		1.0 glClearDepth する 。 
+		2929 glEnable する 。 
+		515 glDepthFunc する 。 
+		16640 glClear する 。 
+		xOffset という 実数 を マウス絶対座標X ( )  - lastX で 初期化 。 
+		yOffset という 実数 を マウス絶対座標Y ( )  - lastY で 初期化 。 
+		lastX に マウス絶対座標X ( ) を 代入する 。 
+		lastY に マウス絶対座標Y ( ) を 代入する 。 
+		viewMat の 単位化 する 。 
+		viewMat に 目 の アップデート ( xOffset , yOffset , elapsedTime ) を 代入する 。 
+		( i という 整数 を 0 で 初期化 。 ) から ( i  は スプライト の size ) まで ( i に i  + 1 を 代入する 。 ) 繰り返し ここから
+			projMat , viewMat , 目 の 座標 スプライト の 取得 ( i ) -> 描画 する 。 
+		ここまで実行
+
+	ここまで実行
+
+	( size という 実数 , color という ベクトル3D , pos という ベクトル3D ) を とり ( id という 整数 ) を 返す キューブ追加 という 関数 を おく 。 ここから
+		vertices [ 12 ] [ 3 ] [ 6 ] という 実数 を [ [ [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , 0  - size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] ] , [ [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] ] , [ [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] ] ] で 初期化 。 
+		cube という * モデル を メモリ確保 ( バイト数 ( cube に ある オブジェクト ) ) で 初期化 。 
+		& vertices , 36 , color , pos , 0 cube -> モデル する 。 
+		cube スプライト の 追加 する 。 
+		id に スプライト の 長さ ( )  - 1 を 代入する 。 
+	ここまで実行
+
+	( size という 実数 , color という ベクトル3D , pos という ベクトル3D ) を とり ( id という 整数 ) を 返す ライト追加 という 関数 を おく 。 ここから
+		vertices [ 12 ] [ 3 ] [ 6 ] という 実数 を [ [ [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , 0  - size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] ] , [ [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] ] , [ [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] ] ] で 初期化 。 
+		light という * モデル を メモリ確保 ( バイト数 ( light に ある オブジェクト ) ) で 初期化 。 
+		& vertices , 36 , color , pos , 1 light -> モデル する 。 
+		light スプライト の 追加 する 。 
+		id に スプライト の 長さ ( )  - 1 を 代入する 。 
+	ここまで実行
+
+非公開 : 	lastY という 実数 を おく 。 
+	lastX という 実数 を おく 。 
+	elapsedTime という 実数 を おく 。 
+	now という 実数 を おく 。 
+	last という 実数 を おく 。 
+	viewMat という 行列4x4 を おく 。 
+	projMat という 行列4x4 を おく 。 
+} 
+クラス : ベクトル2D{
+公開 : 	( ) を とり ( ) を 返す 正規化 という 関数 を おく 。 ここから
+		l という 実数 を root ( x  * x  + y  * y ) で 初期化 。 
+		x に x  / l を 代入する 。 
+		y に y  / l を 代入する 。 
+	ここまで実行
+
+	( ) を とり ( l という 実数 ) を 返す 長さ という 関数 を おく 。 ここから
+		l に root ( x  * x  + y  * y ) を 代入する 。 
+	ここまで実行
+
+	( a という 実数 , b という 実数 ) を とり ( ) を 返す ベクトル2D という 関数 を おく 。 ここから
+		x に a を 代入する 。 
+		y に b を 代入する 。 
+	ここまで実行
+
+	y という 実数 を おく 。 
+	x という 実数 を おく 。 
+} 
+( a という ベクトル2D , b という ベクトル2D ) を とり ( result という ベクトル2D ) を 返す ベクトル2Dの和 という 関数 を おく 。 ここから
+	result の x に a の x  + b の x を 代入する 。 
+	result の y に a の y  + b の y を 代入する 。 
+ここまで実行
+
+( a という ベクトル2D , b という ベクトル2D ) を とり ( result という ベクトル2D ) を 返す ベクトル2Dの差 という 関数 を おく 。 ここから
+	result の x に a の x  - b の x を 代入する 。 
+	result の y に a の y  - b の y を 代入する 。 
+ここまで実行
+
+( a という ベクトル2D , b という ベクトル2D ) を とり ( x という 実数 ) を 返す ベクトル2Dの内積 という 関数 を おく 。 ここから
+	x に a の x  * b の x  + a の y  * b の y を 代入する 。 
+ここまで実行
+
+( a という ベクトル2D , x という 実数 ) を とり ( result という ベクトル2D ) を 返す ベクトル2D拡大 という 関数 を おく 。 ここから
+	result の x に a の x  * x を 代入する 。 
+	result の y に a の y  * x を 代入する 。 
+ここまで実行
+
+( a という ベクトル2D , x という 実数 ) を とり ( result という ベクトル2D ) を 返す ベクトル2D縮小 という 関数 を おく 。 ここから
+	もし x  は 0.0 ならば ここから
+		10000000 表示 する 。 
+	ここまで実行
+
+	result の x に a の x  / x を 代入する 。 
+	result の y に a の y  / x を 代入する 。 
+ここまで実行
+
+クラス : アニメーション情報{
+公開 : 	( a という 整数 , start という 実数 , d という 実数 , x という 実数 , y という 実数 ) を とり ( ) を 返す アニメーション情報 という 関数 を おく 。 ここから
+		id に a を 代入する 。 
+		startTime に start を 代入する 。 
+		duration に d を 代入する 。 
+		info の x に x を 代入する 。 
+		info の y に y を 代入する 。 
+	ここまで実行
+
+	info という ベクトル2D を おく 。 
+	duration という 実数 を おく 。 
+	startTime という 実数 を おく 。 
+	id という 整数 を おく 。 
+} 
+クラス : スプライト{
+公開 : 	color という ベクトル3D を おく 。 
+	pos という ベクトル2D を おく 。 
+	透明度 という 実数 を おく 。 
+	scaleX という 実数 を おく 。 
+	scaleY という 実数 を おく 。 
+	theta という 実数 を おく 。 
+	( data という * 実数 , pnum という 整数 , indicesData という * 整数32 , vnum という 整数 , c という ベクトル3D , p という ベクトル2D , s という 整数 , zI という 実数 ) を とり ( ) を 返す スプライト という 関数 を おく 。 ここから
+		vertices に data を 代入する 。 
+		pointNum に pnum を 代入する 。 
+		indices に indicesData を 代入する 。 
+		vertexNum に vnum を 代入する 。 
+		zIndex に zI を 代入する 。 
+		透明度 に 1.0 を 代入する 。 
+		color に c を 代入する 。 
+		pos に p を 代入する 。 
+		scaleX に 1.0 を 代入する 。 
+		scaleY に 1.0 を 代入する 。 
+		theta に 0.0 を 代入する 。 
+		shaderID に s を 代入する 。 
+		animations の 配列 する 。 
+		modelMat の 単位化 する 。 
+		transMat の 単位化 する 。 
+		scaleMat の 単位化 する 。 
+		rotateMat の 単位化 する 。 
+		_objectColorUniform [ 11 ] という 文字 を "objectColor"で 初期化 。 
+		_projUniform [ 10 ] という 文字 を "projection"で 初期化 。 
+		_modelUniform [ 5 ] という 文字 を "model"で 初期化 。 
+		_samplerUniform [ 8 ] という 文字 を "uSampler"で 初期化 。 
+		_transparencyUniform [ 12 ] という 文字 を "transparency"で 初期化 。 
+		objectColorUniform という 文字列 の オブジェクト を & _objectColorUniform , 11 で 初期化 。 
+		projUniform という 文字列 の オブジェクト を & _projUniform , 10 で 初期化 。 
+		modelUniform という 文字列 の オブジェクト を & _modelUniform , 5 で 初期化 。 
+		samplerUniform という 文字列 の オブジェクト を & _samplerUniform , 8 で 初期化 。 
+		transparencyUniform という 文字列 の オブジェクト を & _transparencyUniform , 12 で 初期化 。 
+		projMatUniformLoc に glGetUniformLocation ( shaderID , projUniform ) を 代入する 。 
+		modelMatUniformLoc に glGetUniformLocation ( shaderID , modelUniform ) を 代入する 。 
+		もし shaderID  は 4 ならば ここから
+			transparencyUniLoc に glGetUniformLocation ( shaderID , transparencyUniform ) を 代入する 。 
+			objectColorUniLoc に glGetUniformLocation ( shaderID , objectColorUniform ) を 代入する 。 
+		ここまで実行
+
+		もし shaderID  は 3 ならば ここから
+			samplerUniformLoc に glGetUniformLocation ( shaderID , samplerUniform ) を 代入する 。 
+		ここまで実行
+
+		buffer に glCreateBuffer ( ) を 代入する 。 
+		34962 , buffer glBindBuffer する 。 
+		34962 , vertices , pnum  * 3 , 35044 glBufferData する 。 
+		もし vnum  > 0 ならば ここから
+			elementBuffer に glCreateBuffer ( ) を 代入する 。 
+			34963 , elementBuffer glBindBuffer する 。 
+			34963 , indices , vnum , 35044 glElementBufferData する 。 
+		ここまで実行
+
+	ここまで実行
+
+	( tex という * 実数 , url という 文字列 ) を とり ( ) を 返す テクスチャ設定 という 関数 を おく 。 ここから
+		shaderID に 0 を 代入する 。 
+		texCoords に tex を 代入する 。 
+		texture に _loadTexture ( url の content , url の length ) を 代入する 。 
+		url の content , url の length _文字列表示 する 。 
+		texCoordBuffer に glCreateBuffer ( ) を 代入する 。 
+		34962 , texCoordBuffer glBindBuffer する 。 
+		34962 , tex , vertexNum  * 2 , 35044 glBufferData する 。 
+	ここまで実行
+
+	( tex という * 実数 , テクスチャ という 整数32 ) を とり ( ) を 返す リピートテクスチャ設定 という 関数 を おく 。 ここから
+		shaderID に 0 を 代入する 。 
+		texCoords に tex を 代入する 。 
+		texture に テクスチャ を 代入する 。 
+		texCoordBuffer に glCreateBuffer ( ) を 代入する 。 
+		34962 , texCoordBuffer glBindBuffer する 。 
+		34962 , tex , vertexNum  * 2 , 35044 glBufferData する 。 
+	ここまで実行
+
+	( coord という ベクトル2D ) を とり ( ) を 返す 座標設定 という 関数 を おく 。 ここから
+		pos に coord を 代入する 。 
+	ここまで実行
+
+	( offset という ベクトル2D ) を とり ( ) を 返す 移動 という 関数 を おく 。 ここから
+		pos に ベクトル2Dの和 ( pos , offset ) を 代入する 。 
+	ここまで実行
+
+	( x という 実数 , y という 実数 ) を とり ( ) を 返す 拡大縮小 という 関数 を おく 。 ここから
+		scaleX に scaleX  * x を 代入する 。 
+		scaleY に scaleY  * y を 代入する 。 
+	ここまで実行
+
+	( t という 実数 ) を とり ( ) を 返す 回転 という 関数 を おく 。 ここから
+		theta に theta  + t を 代入する 。 
+	ここまで実行
+
+	( t という 実数 ) を とり ( ) を 返す 角度設定 という 関数 を おく 。 ここから
+		theta に t を 代入する 。 
+	ここまで実行
+
+	( x という 実数 ) を とり ( ) を 返す zIndex設定 という 関数 を おく 。 ここから
+		zIndex に x を 代入する 。 
+	ここまで実行
+
+	( x という 実数 ) を とり ( ) を 返す 透明度設定 という 関数 を おく 。 ここから
+		透明度 に x を 代入する 。 
+	ここまで実行
+
+	( 色 という ベクトル3D ) を とり ( ) を 返す 色設定 という 関数 を おく 。 ここから
+		color に 色 を 代入する 。 
+	ここまで実行
+
+	( projMat という 行列4x4 ) を とり ( ) を 返す 描画 という 関数 を おく 。 ここから
+		PI という 実数 を 3.14159265358979312 で 初期化 。 
+		( カウンタ という 整数 を 0 で 初期化 。 ) から ( カウンタ  は animations の size ) まで ( カウンタ に カウンタ  + 1 を 代入する 。 ) 繰り返し ここから
+			info という アニメーション情報 を animations の 取得 ( カウンタ ) で 初期化 。 
+			もし ( info の startTime  <= 時間計測 ( ) )  && ( ( info の startTime  + info の duration )  >= 時間計測 ( ) ) ならば ここから
+				もし info の id  は 0 ならば ここから
+					elapsedTime という 実数 を 時間計測 ( )  - info の startTime で 初期化 。 
+					info の info の x  * elapsedTime 回転 する 。 
+				ここまで実行
+
+				もし info の id  は 1 ならば ここから
+					info の info の x , info の info の y 拡大縮小 する 。 
+				ここまで実行
+
+				もし info の id  は 2 ならば ここから
+					elapsedTime という 実数 を 時間計測 ( )  - info の startTime で 初期化 。 
+					offset という ベクトル2D の オブジェクト を info の info の x  * elapsedTime , info の info の y  * elapsedTime で 初期化 。 
+					offset 移動 する 。 
+				ここまで実行
+
+			ここまで実行
+
+		ここまで実行
+
+		pos3d という ベクトル3D の オブジェクト を pos の x , pos の y , 0  - zIndex  * 0.00100000000000000002 で 初期化 。 
+		transMat の 単位化 する 。 
+		pos3d transMat の 移動 する 。 
+		scaleMat の 単位化 する 。 
+		scaleX , scaleY , 1.0 scaleMat の 拡大縮小 する 。 
+		回転軸 という ベクトル3D の オブジェクト を 0.0 , 0.0 , 1.0 で 初期化 。 
+		rotateMat の 単位化 する 。 
+		回転軸 , theta rotateMat の 回転 する 。 
+		modelMat の 単位化 する 。 
+		modelMat に 行列4x4の積 ( scaleMat , modelMat ) を 代入する 。 
+		modelMat に 行列4x4の積 ( rotateMat , modelMat ) を 代入する 。 
+		modelMat に 行列4x4の積 ( transMat , modelMat ) を 代入する 。 
+		shaderID glUseProgram する 。 
+		34962 , buffer glBindBuffer する 。 
+		0 glEnableVertexAttribArray する 。 
+		0 , 3 , 5126 , 0 , 0 , 0 glVertexAttribPointer する 。 
+		もし shaderID  は 4 ならば ここから
+			transparencyUniLoc , 透明度 glUniform1f する 。 
+			objectColorUniLoc , color の x , color の y , color の z glUniform3f する 。 
+		ここまで実行
+
+		もし shaderID  は 3 ならば ここから
+			34962 , texCoordBuffer glBindBuffer する 。 
+			1 glEnableVertexAttribArray する 。 
+			1 , 2 , 5126 , 0 , 0 , 0 glVertexAttribPointer する 。 
+			texture  + 33984 glActiveTexture する 。 
+			3553 , texture glBindTexture する 。 
+			samplerUniformLoc , texture glUniform1i する 。 
+		ここまで実行
+
+		projMatUniformLoc , 0 , projMat の matrix glUniformMatrix4fv する 。 
+		modelMatUniformLoc , 0 , modelMat の matrix glUniformMatrix4fv する 。 
+		もし vertexNum  > 0 ならば ここから
+			34963 , elementBuffer glBindBuffer する 。 
+			4 , vertexNum , 5123 , 0 glDrawElements する 。 
+		ここまで実行
+
+		もし ( vertexNum  は 0 )  && ( shaderID  は 4 ) ならば ここから
+			34962 , buffer glBindBuffer する 。 
+			5 , 0 , pointNum glDrawArrays する 。 
+		ここまで実行
+
+		rotateMat の 単位化 する 。 
+		transMat の 単位化 する 。 
+		scaleMat の 単位化 する 。 
+	ここまで実行
+
+	( theta という 実数 , start という 実数 , duration という 実数 ) を とり ( ) を 返す 回転アニメーション という 関数 を おく 。 ここから
+		temp という アニメーション情報 の オブジェクト を 0 , start , duration , theta , 0.0 で 初期化 。 
+		temp animations の 追加 する 。 
+	ここまで実行
+
+	( x という 実数 , y という 実数 , start という 実数 , duration という 実数 ) を とり ( ) を 返す 拡大縮小アニメーション という 関数 を おく 。 ここから
+		temp という アニメーション情報 の オブジェクト を 1 , start , duration , x , y で 初期化 。 
+		temp animations の 追加 する 。 
+	ここまで実行
+
+	( offset という ベクトル2D , start という 実数 , duration という 実数 ) を とり ( ) を 返す 移動アニメーション という 関数 を おく 。 ここから
+		temp という アニメーション情報 の オブジェクト を 0 , start , duration , offset の x , offset の y で 初期化 。 
+		temp animations の 追加 する 。 
+	ここまで実行
+
+非公開 : 	animations という 配列 < アニメーション情報 > を おく 。 
+	samplerUniformLoc という 整数32 を おく 。 
+	modelMatUniformLoc という 整数32 を おく 。 
+	projMatUniformLoc という 整数32 を おく 。 
+	transparencyUniLoc という 整数32 を おく 。 
+	objectColorUniLoc という 整数32 を おく 。 
+	shaderID という 整数 を おく 。 
+	zIndex という 実数 を おく 。 
+	rotateMat という 行列4x4 を おく 。 
+	scaleMat という 行列4x4 を おく 。 
+	transMat という 行列4x4 を おく 。 
+	modelMat という 行列4x4 を おく 。 
+	texture という 整数32 を おく 。 
+	elementBuffer という 整数32 を おく 。 
+	texCoordBuffer という 整数32 を おく 。 
+	buffer という 整数32 を おく 。 
+	pointNum という 整数 を おく 。 
+	vertexNum という 整数 を おく 。 
+	texCoords という * 実数 を おく 。 
+	indices という * 整数32 を おく 。 
+	vertices という * 実数 を おく 。 
+} 
+クラス : シーン2D{
+公開 : 	スプライト配列 という 配列 < * スプライト > を おく 。 
+	背景色 という ベクトル3D を おく 。 
+	背景透明度 という 実数 を おく 。 
+	( 高さ という 実数 , color という ベクトル3D ) を とり ( ) を 返す シーン2D という 関数 を おく 。 ここから
+		last に 時間計測 ( )  / 1000.0 を 代入する 。 
+		now に 0.0 を 代入する 。 
+		elapsedTime に 0.0 を 代入する 。 
+		projMat の 単位化 する 。 
+		projMat に 視点行列2D ( projMat , 0  - 高さ  / 2.0  * 16.0  / 9.0 , 高さ  / 2.0  * 16.0  / 9.0 , 0  - 高さ  / 2 , 高さ  / 2 , 0  - 5.0 , 5.0 ) を 代入する 。 
+		スプライト配列 の 配列 する 。 
+		背景色 に color を 代入する 。 
+		背景透明度 に 1.0 を 代入する 。 
+	ここまで実行
+
+	( a という 実数 ) を とり ( ) を 返す 背景透明度設定 という 関数 を おく 。 ここから
+		背景透明度 に a を 代入する 。 
+	ここまで実行
+
+	( ) を とり ( ) を 返す 描画 という 関数 を おく 。 ここから
+		now に 時間計測 ( )  / 1000.0 を 代入する 。 
+		elapsedTime に now  - last を 代入する 。 
+		last に now を 代入する 。 
+		背景色 の x , 背景色 の y , 背景色 の z , 背景透明度 glClearColor する 。 
+		1.0 glClearDepth する 。 
+		2929 glEnable する 。 
+		515 glDepthFunc する 。 
+		3042 glEnable する 。 
+		770 , 771 glBlendFunc する 。 
+		16640 glClear する 。 
+		( i という 整数 を 0 で 初期化 。 ) から ( i  は スプライト配列 の size ) まで ( i に i  + 1 を 代入する 。 ) 繰り返し ここから
+			projMat スプライト配列 の 取得 ( i ) -> 描画 する 。 
+		ここまで実行
+
+	ここまで実行
+
+	( size という 実数 , pos という ベクトル2D , color という ベクトル3D , zIndex という 実数 ) を とり ( id という 整数 ) を 返す 正方形追加 という 関数 を おく 。 ここから
+		vertices [ 4 ] [ 3 ] という 実数 を [ [ size  / 2 , size  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ size  / 2 , 0  - size  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - size  / 2 , size  / 2 , 0  - zIndex  * 0.00100000000000000002 ] ] で 初期化 。 
+		texCoords [ 4 ] [ 2 ] という 実数 を [ [ 1.0 , 0.0 ] , [ 1.0 , 1.0 ] , [ 0.0 , 1.0 ] , [ 0.0 , 0.0 ] ] で 初期化 。 
+		indices [ 6 ] という 整数32 を [ 0 , 1 , 3 , 1 , 2 , 3 ] で 初期化 。 
+		sprite という * スプライト を メモリ確保 ( バイト数 ( sprite に ある オブジェクト ) ) で 初期化 。 
+		& vertices , 4 , & indices , 6 , color , pos , 4 , zIndex sprite -> スプライト する 。 
+		sprite スプライト配列 の 追加 する 。 
+		id に スプライト配列 の 長さ ( )  - 1 を 代入する 。 
+	ここまで実行
+
+	( width という 実数 , height という 実数 , pos という ベクトル2D , url という 文字列 , zIndex という 実数 ) を とり ( id という 整数 ) を 返す スプライト追加 という 関数 を おく 。 ここから
+		vertices [ 4 ] [ 3 ] という 実数 を [ [ width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] ] で 初期化 。 
+		texCoords [ 4 ] [ 2 ] という 実数 を [ [ 1.0 , 0.0 ] , [ 1.0 , 1.0 ] , [ 0.0 , 1.0 ] , [ 0.0 , 0.0 ] ] で 初期化 。 
+		indices [ 6 ] という 整数32 を [ 0 , 1 , 3 , 1 , 2 , 3 ] で 初期化 。 
+		color という ベクトル3D の オブジェクト を 0.0 , 0.0 , 0.0 で 初期化 。 
+		sprite という * スプライト を メモリ確保 ( バイト数 ( sprite に ある オブジェクト ) ) で 初期化 。 
+		& vertices , 4 , & indices , 6 , color , pos , 3 , zIndex sprite -> スプライト する 。 
+		& texCoords , url sprite -> テクスチャ設定 する 。 
+		sprite スプライト配列 の 追加 する 。 
+		id に スプライト配列 の 長さ ( )  - 1 を 代入する 。 
+	ここまで実行
+
+	( width という 実数 , height という 実数 , pos という ベクトル2D , texture という 整数32 , zIndex という 実数 ) を とり ( id という 整数 ) を 返す リピートスプライト追加 という 関数 を おく 。 ここから
+		vertices [ 4 ] [ 3 ] という 実数 を [ [ width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] ] で 初期化 。 
+		texCoords [ 4 ] [ 2 ] という 実数 を [ [ 1.0 , 0.0 ] , [ 1.0 , 1.0 ] , [ 0.0 , 1.0 ] , [ 0.0 , 0.0 ] ] で 初期化 。 
+		indices [ 6 ] という 整数32 を [ 0 , 1 , 3 , 1 , 2 , 3 ] で 初期化 。 
+		color という ベクトル3D の オブジェクト を 0.0 , 0.0 , 0.0 で 初期化 。 
+		sprite という * スプライト を メモリ確保 ( バイト数 ( sprite に ある オブジェクト ) ) で 初期化 。 
+		& vertices , 4 , & indices , 6 , color , pos , 3 , zIndex sprite -> スプライト する 。 
+		& texCoords , texture sprite -> リピートテクスチャ設定 する 。 
+		sprite スプライト配列 の 追加 する 。 
+		id に スプライト配列 の 長さ ( )  - 1 を 代入する 。 
+	ここまで実行
+
+	( width という 実数 , height という 実数 , pos という ベクトル2D , color という ベクトル3D , zIndex という 実数 ) を とり ( id という 整数 ) を 返す 四角形追加 という 関数 を おく 。 ここから
+		vertices [ 4 ] [ 3 ] という 実数 を [ [ width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] ] で 初期化 。 
+		sprite という * スプライト を メモリ確保 ( バイト数 ( sprite に ある オブジェクト ) ) で 初期化 。 
+		& vertices , 4 , メモリ確保 ( 0 ) , 0 , color , pos , 4 , zIndex sprite -> スプライト する 。 
+		sprite スプライト配列 の 追加 する 。 
+		id に スプライト配列 の 長さ ( )  - 1 を 代入する 。 
+	ここまで実行
+
+	( points という * 無 , size という 整数 , pos という ベクトル2D , color という ベクトル3D , zIndex という 実数 ) を とり ( id という 整数 ) を 返す 多角形追加 という 関数 を おく 。 ここから
+		sprite という * スプライト を メモリ確保 ( バイト数 ( sprite に ある オブジェクト ) ) で 初期化 。 
+		points , size , メモリ確保 ( 0 ) , 0 , color , pos , 4 , zIndex sprite -> スプライト する 。 
+		sprite スプライト配列 の 追加 する 。 
+		id に スプライト配列 の 長さ ( )  - 1 を 代入する 。 
+	ここまで実行
+
+	( r という 実数 , pos という ベクトル2D , color という ベクトル3D , zIndex という 実数 ) を とり ( id という 整数 ) を 返す 円追加 という 関数 を おく 。 ここから
+		PI という 実数 を 3.14159265358979312 で 初期化 。 
+		points という 配列 < ベクトル3D > の オブジェクト を で 初期化 。 
+		頂点数 という 整数 を 60 で 初期化 。 
+		( i という 整数 を 0 で 初期化 。 ) から ( i  は 頂点数 ) まで ( i に i  + 1 を 代入する 。 ) 繰り返し ここから
+			theta という 実数 を 0 で 初期化 。 
+			もし ( i  % 2 )  は 0 ならば ここから
+				theta に 0.5  * PI  + ( ( PI  * i )  / 頂点数 ) を 代入する 。 
+			ここまで実行
+
+			もし ( i  % 2 )  は 1 ならば ここから
+				theta に 0.5  * PI  - ( ( PI  * ( 1.0  + i ) )  / 頂点数 ) を 代入する 。 
+			ここまで実行
+
+			temp という ベクトル3D の オブジェクト を r  * cos ( theta ) , r  * sin ( theta ) , 0  - zIndex  * 0.00100000000000000002 で 初期化 。 
+			temp points の 追加 する 。 
+		ここまで実行
+
+		id に 多角形追加 ( points の content , points の size , pos , color , zIndex ) を 代入する 。 
+	ここまで実行
+
+非公開 : 	elapsedTime という 実数 を おく 。 
+	now という 実数 を おく 。 
+	last という 実数 を おく 。 
+	projMat という 行列4x4 を おく 。 
+} 
+( callback という 関数 : ( ) => ( ) ) を とり ( ) を 返す 引数なしjsリスナー呼び出し という 関数 を おく 。 ここから
+	callback する 。 
+ここまで実行
+
+js書き出し ( 引数なしjsリスナー呼び出し , "jsCallListenerNoParam") 。 
+( ピン番号 という 整数 ) を とり ( ) を 返す Arduino5V送る という 関数 を おく 。 ここから
+	'H', ピン番号 Arduinoコマンド送信 する 。 
+ここまで実行
+
+( ピン番号 という 整数 ) を とり ( ) を 返す Arduino0V送る という 関数 を おく 。 ここから
+	'L', ピン番号 Arduinoコマンド送信 する 。 
+ここまで実行
+
+( ピン番号 という 整数 , 入出力 という 文字 ) を とり ( ) を 返す Arduinoピン入出力設定 という 関数 を おく 。 ここから
+	もし 入出力  は '入'ならば ここから
+		'I', ピン番号 Arduinoコマンド送信 する 。 
+	ここまで実行
+
+	もし 入出力  は '出'ならば ここから
+		'O', ピン番号 Arduinoコマンド送信 する 。 
+	ここまで実行
+
+ここまで実行
+
+( ピン番号 という 整数 ) を とり ( ) を 返す Arduinoアナログ入力ピン設定 という 関数 を おく 。 ここから
+	'A', ピン番号 Arduinoコマンド送信 する 。 
+ここまで実行
+
+( ) を とり ( ) を 返す 実行 という 関数 を おく 。 ここから
+	5.0 実数表示 する 。 
+ここまで実行
+

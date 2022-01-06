@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <iomanip>
 
 extern std::string _mainFuncName;
 
@@ -43,6 +44,15 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
         if(type == "ty" && kind == "array"){
             exit(0);
         }
+        if(type == "ty" && kind == "name"){
+            std::string typeName = info["id"];
+            if(typeName == "void") kind = "void";
+            else if(typeName == "int") kind = "int";
+            else if(typeName == "real") kind = "real";
+            else if(typeName == "bool") kind = "bool";
+            else if(typeName == "char") kind = "char";
+            else if(typeName == "short") kind = "short";
+        }
         std::string ruleName = "";
         if(rule[type][kind].is_string()){
             ruleString = rule[type][kind].get<std::string>();
@@ -65,6 +75,20 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                 if(token == "string"){
                     outputStream << "\"" << keywords[token].get<std::string>() << "\"";
                 }
+                else if(token == tokens["stmliststart"].get<std::string>()){
+                    outputStream << token;
+                    indentTabs += 1;
+                    outputStream << "\n";
+                }
+                else if(token == tokens["stmlistend"].get<std::string>()){
+                    indentTabs -= 1;
+                    // outputStream.seekp(-1, outputStream.cur);
+                    for(int i = 0; i < indentTabs; i++){
+                        outputStream << "\t";
+                    }
+                    outputStream << token;
+                    outputStream << "\n";
+                }
                 else{
                     outputStream << keywords[token].get<std::string>();
                     if(config["type"].get<std::string>() == "natural"){
@@ -76,11 +100,30 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                 if(token.substr(0, 6) == "string"){
                     outputStream << "\"" << jsonToString(info[token], type, rule, tokens, config) << "\"";
                 }
+                else if(token == "char"){
+                    outputStream << "\'" << jsonToString(info[token], type, rule, tokens, config) << "\'";
+                }
                 else if(token == "oper"){
                     outputStream << " " << convertOperToString(info[token], rule) << " ";
                 }
-                else if(token == "int" || token == "char" || token == "real"){
-                    outputStream << jsonToString(info[token], type, rule, tokens, config);
+                // else if(token == "int" || token == "real"){
+                //     outputStream << jsonToString(info[token], type, rule, tokens, config);
+                //     if(config["type"].get<std::string>() == "natural"){
+                //         outputStream << " ";
+                //     }
+                // }
+                else if(token == "int"){
+                    outputStream << std::setprecision(18) << std::noshowpoint << info[token].get<int>();
+                    if(config["type"].get<std::string>() == "natural"){
+                        outputStream << " ";
+                    }
+                }
+                else if(token == "real"){
+                    outputStream << std::setprecision(18) << std::noshowpoint << info[token].get<double>();
+                    float f = 0.0;
+                    if(std::modf(info[token].get<double>(), &f) == 0.0){
+                        outputStream << ".0";
+                    }
                     if(config["type"].get<std::string>() == "natural"){
                         outputStream << " ";
                     }
@@ -248,6 +291,9 @@ static std::string convertOperToString(int oper, const json &rule){
             break;
         case A_orOp:
             return rule["oper"]["or"].get<std::string>();
+            break;
+        case A_assignOp:
+            return "=";
             break;
     }
 }

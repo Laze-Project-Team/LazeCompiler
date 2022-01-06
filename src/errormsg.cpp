@@ -54,7 +54,10 @@ void EM_error(int pos, const char *message, ...)
     }
     std::string parent = errorCode.substr(0, errorCode.find('.'));
     std::string child = errorCode.substr(errorCode.find('.') + 1);
-    std::string errorOutput = errorJson[parent][child];
+    std::string errorOutput = errorCode;
+    if(errorJson[parent][child].is_string()){
+        errorOutput = errorJson[parent][child].get<std::string>();
+    }
     for(int i = 0; i < errorArgs.size(); i++){
         errorOutput = std::regex_replace(errorOutput, std::regex("\\$" + std::to_string(i + 1)), errorArgs.at(i));
     }

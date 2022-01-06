@@ -1,0 +1,3276 @@
+itemSet0:
+start-> >>> declist
+additionalRules-> -------------------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+declist.null-> >>>
+declist.dec-> >>> dec
+additionalRules-> ------------------
+
+itemSet1:
+dec.class.noinherit-> class >>> : id { memlist }
+dec.class.inherit-> class >>> : id <- id { memlist }
+additionalRules-> -------------------
+
+itemSet2:
+dec.operator.normal-> function >>> : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assign-> function >>> : operator = ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet3:
+dec.jsexport-> jsexport >>> ( id , string ) 。
+additionalRules-> -------------------
+
+itemSet4:
+dec.template-> type >>> < id > : dec
+additionalRules-> -------------------
+
+itemSet5:
+dec.jsload-> ( >>> fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( >>> fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet6:
+var.simple-> id >>>
+additionalRules-> -------------------
+
+itemSet7:
+declist.null->  >>>
+additionalRules-> -------------------
+
+itemSet8:
+dec.var.noinit-> var >>> という ty を おく 。
+var.field-> var >>> の id
+var.arrowfield-> var >>> -> id 
+var.subscript-> var >>> [ exp ]
+var.deref-> var >>> に ある オブジェクト
+dec.var.init-> var >>> という ty を exp で 初期化 。
+dec.object-> var >>> という ty の オブジェクト を explist で 初期化 。
+additionalRules-> -------------------
+
+itemSet9:
+declist.declist-> dec >>> declist
+declist.dec-> dec >>>
+additionalRules-> -------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+declist.null-> >>>
+declist.dec-> >>> dec
+
+itemSet10:
+start-> declist >>>
+additionalRules-> -------------------
+
+itemSet11:
+dec.class.noinherit-> class : >>> id { memlist }
+dec.class.inherit-> class : >>> id <- id { memlist }
+additionalRules-> -------------------
+
+itemSet12:
+dec.operator.normal-> function : >>> operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assign-> function : >>> operator = ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet13:
+dec.jsexport-> jsexport ( >>> id , string ) 。
+additionalRules-> -------------------
+
+itemSet14:
+dec.template-> type < >>> id > : dec
+additionalRules-> -------------------
+
+itemSet15:
+ty.bool-> boolean >>>
+additionalRules-> -------------------
+
+itemSet16:
+ty.char-> chartype >>>
+additionalRules-> -------------------
+
+itemSet17:
+field.func-> function >>> : id ( fieldlist ) => ( fieldlist )
+ty.func-> function >>> : ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet18:
+ty.int-> inttype >>>
+additionalRules-> -------------------
+
+itemSet19:
+ty.real-> realtype >>>
+additionalRules-> -------------------
+
+itemSet20:
+ty.short-> shorttype >>>
+additionalRules-> -------------------
+
+itemSet21:
+ty.void-> void >>>
+additionalRules-> -------------------
+
+itemSet22:
+ty.poly-> id >>> < ty >
+ty.name-> id >>>
+additionalRules-> -------------------
+
+itemSet23:
+fieldlist.null->  >>>
+additionalRules-> -------------------
+
+itemSet24:
+field.noinit-> ty >>> の var
+ty.pointer-> ty >>> の ポインタ 
+additionalRules-> -------------------
+
+itemSet25:
+fieldlist.fieldlist-> field >>> , fieldlist
+fieldlist.field-> field >>>
+additionalRules-> -------------------
+
+itemSet26:
+dec.jsload-> ( fieldlist >>> ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist >>> ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet27:
+dec.var.noinit-> var という >>> ty を おく 。
+dec.var.init-> var という >>> ty を exp で 初期化 。
+dec.object-> var という >>> ty の オブジェクト を explist で 初期化 。
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+
+itemSet28:
+var.deref-> var に >>> ある オブジェクト
+additionalRules-> -------------------
+
+itemSet29:
+var.field-> var の >>> id
+additionalRules-> -------------------
+
+itemSet30:
+var.subscript-> var [ >>> exp ]
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet31:
+var.arrowfield-> var -> >>> id
+additionalRules-> -------------------
+
+itemSet32:
+declist.declist-> dec declist >>>
+additionalRules-> -------------------
+
+itemSet33:
+dec.class.noinherit-> class : id >>> { memlist }
+dec.class.inherit-> class : id >>> <- id { memlist }
+additionalRules-> -------------------
+
+itemSet34:
+dec.operator.normal-> function : operator >>> oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assign-> function : operator >>> = ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> / 
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet35:
+dec.jsexport-> jsexport ( id >>> , string ) 。
+additionalRules-> -------------------
+
+itemSet36:
+dec.template-> type < id >>> > : dec
+additionalRules-> -------------------
+
+itemSet37:
+field.func-> function : >>> id ( fieldlist ) => ( fieldlist )
+ty.func-> function : >>> ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet38:
+ty.poly-> id < >>> ty >
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+
+itemSet39:
+field.noinit-> ty の >>> var
+ty.pointer-> ty の >>> ポインタ
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+
+itemSet40:
+fieldlist.fieldlist-> field , >>> fieldlist
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet41:
+dec.jsload-> ( fieldlist ) >>> を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) >>> を とり ( fieldlist ) を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet42:
+ty.func-> function >>> : ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet43:
+dec.var.noinit-> var という ty >>> を おく 。
+dec.var.init-> var という ty >>> を exp で 初期化 。
+dec.object-> var という ty >>> の オブジェクト を explist で 初期化 。
+ty.pointer-> ty >>> の ポインタ
+additionalRules-> -------------------
+
+itemSet44:
+var.deref-> var に ある >>> オブジェクト
+additionalRules-> -------------------
+
+itemSet45:
+var.field-> var の id >>>
+additionalRules-> -------------------
+
+itemSet46:
+exp.false-> false >>>
+additionalRules-> -------------------
+
+itemSet47:
+exp.sizeof-> sizeof >>> ( var )
+additionalRules-> -------------------
+
+itemSet48:
+exp.true-> true >>>
+additionalRules-> -------------------
+
+itemSet49:
+exp.typeeq-> typeComp >>> ( ty , ty )
+additionalRules-> -------------------
+
+itemSet50:
+exp.func-> ( >>> fieldlist ) => ( fieldlist ) stm
+exp.paren-> ( >>> exp )
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet51:
+exp.array-> [ >>> explist ]
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト 
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet52:
+exp.minus-> - >>> exp
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet53:
+exp.address-> & >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+
+itemSet54:
+exp.char-> char >>>
+additionalRules-> -------------------
+
+itemSet55:
+exp.real-> real >>>
+additionalRules-> -------------------
+
+itemSet56:
+exp.string-> string >>>
+additionalRules-> -------------------
+
+itemSet57:
+exp.int-> int >>>
+additionalRules-> -------------------
+
+itemSet58:
+var.subscript-> var [ exp >>> ]
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet59:
+exp.var-> var >>>
+var.field-> var >>> の id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+var.deref-> var >>> に ある オブジェクト
+additionalRules-> -------------------
+
+itemSet60:
+var.arrowfield-> var -> id >>>
+additionalRules-> -------------------
+
+itemSet61:
+dec.class.noinherit-> class : id { >>> memlist }
+additionalRules-> -------------------
+memlist.memlist-> >>> memlist mems 
+memlist.mems-> >>> mems
+mems.nospecifier-> >>> declist
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+declist.null-> >>>
+declist.dec-> >>> dec
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+mems.public-> >>> public : declist
+
+itemSet62:
+dec.class.inherit-> class : id <- >>> id { memlist }
+additionalRules-> -------------------
+
+itemSet63:
+oper.eq-> は >>>
+additionalRules-> -------------------
+
+itemSet64:
+oper.mul-> * >>>
+additionalRules-> -------------------
+
+itemSet65:
+oper.div-> / >>>
+additionalRules-> -------------------
+
+itemSet66:
+oper.mod-> % >>>
+additionalRules-> -------------------
+
+itemSet67:
+oper.add-> + >>>
+additionalRules-> -------------------
+
+itemSet68:
+oper.sub-> - >>>
+additionalRules-> -------------------
+
+itemSet69:
+oper.neq-> != >>>
+additionalRules-> -------------------
+
+itemSet70:
+oper.le-> <= >>>
+additionalRules-> -------------------
+
+itemSet71:
+oper.ge-> >= >>>
+additionalRules-> -------------------
+
+itemSet72:
+oper.lt-> < >>>
+additionalRules-> -------------------
+
+itemSet73:
+oper.gt-> > >>>
+additionalRules-> -------------------
+
+itemSet74:
+dec.operator.assign-> function : operator = >>> ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet75:
+oper.and-> && >>>
+additionalRules-> -------------------
+
+itemSet76:
+oper.or-> || >>>
+additionalRules-> -------------------
+
+itemSet77:
+dec.operator.normal-> function : operator oper >>> ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet78:
+dec.jsexport-> jsexport ( id , >>> string ) 。
+additionalRules-> -------------------
+
+itemSet79:
+dec.template-> type < id > >>> : dec
+additionalRules-> -------------------
+
+itemSet80:
+ty.func-> function : ( >>> fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet81:
+field.func-> function : id >>> ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet82:
+ty.poly-> id < ty >>> >
+ty.pointer-> ty >>> の ポインタ
+additionalRules-> -------------------
+
+itemSet83:
+ty.pointer-> ty の ポインタ >>>
+additionalRules-> -------------------
+
+itemSet84:
+field.noinit-> ty の var >>>
+var.field-> var >>> の id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+var.deref-> var >>> に ある オブジェクト
+additionalRules-> -------------------
+
+itemSet85:
+fieldlist.fieldlist-> field , fieldlist >>>
+additionalRules-> -------------------
+
+itemSet86:
+dec.jsload-> ( fieldlist ) を >>> とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) を >>> とり ( fieldlist ) を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet87:
+ty.func-> function : >>> ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet88:
+dec.object-> var という ty の >>> オブジェクト を explist で 初期化 。
+ty.pointer-> ty の >>> ポインタ
+additionalRules-> -------------------
+
+itemSet89:
+dec.var.noinit-> var という ty を >>> おく 。
+dec.var.init-> var という ty を >>> exp で 初期化 。
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet90:
+var.deref-> var に ある オブジェクト >>>
+additionalRules-> -------------------
+
+itemSet91:
+exp.sizeof-> sizeof ( >>> var )
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+
+itemSet92:
+exp.typeeq-> typeComp ( >>> ty , ty )
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+
+itemSet93:
+ty.poly-> id >>> < ty >
+ty.name-> id >>>
+var.simple-> id >>>
+additionalRules-> -------------------
+
+itemSet94:
+exp.paren-> ( exp >>> )
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet95:
+exp.func-> ( fieldlist >>> ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet96:
+explist.null->  >>>
+additionalRules-> -------------------
+
+itemSet97:
+explist.explist-> exp >>> , explist
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+explist.exp-> exp >>>
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> && 
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet98:
+exp.array-> [ explist >>> ]
+additionalRules-> -------------------
+
+itemSet99:
+exp.minus-> - exp >>>
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet100:
+exp.address-> & var >>>
+var.field-> var >>> の id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+var.deref-> var >>> に ある オブジェクト
+additionalRules-> -------------------
+
+itemSet101:
+exp.field-> exp の >>> id
+additionalRules-> -------------------
+
+itemSet102:
+exp.call-> exp ( >>> explist )
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet103:
+exp.subscript-> exp [ >>> exp ]
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real 
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet104:
+var.subscript-> var [ exp ] >>>
+additionalRules-> -------------------
+
+itemSet105:
+exp.arrowfield-> exp -> >>> id
+additionalRules-> -------------------
+
+itemSet106:
+exp.op-> exp oper >>> exp
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet107:
+mems.private-> private >>> : declist
+additionalRules-> -------------------
+
+itemSet108:
+mems.protected-> protected >>> : declist
+additionalRules-> -------------------
+
+itemSet109:
+mems.public-> public >>> : declist
+additionalRules-> -------------------
+
+itemSet110:
+mems.nospecifier-> declist >>>
+additionalRules-> -------------------
+
+itemSet111:
+dec.class.noinherit-> class : id { memlist >>> }
+memlist.memlist-> memlist >>> mems
+additionalRules-> -------------------
+mems.nospecifier-> >>> declist
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm 
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+declist.null-> >>>
+declist.dec-> >>> dec
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+mems.public-> >>> public : declist
+
+itemSet112:
+memlist.mems-> mems >>>
+additionalRules-> -------------------
+
+itemSet113:
+dec.class.inherit-> class : id <- id >>> { memlist }
+additionalRules-> -------------------
+
+itemSet114:
+dec.operator.assign-> function : operator = ( >>> fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet115:
+dec.operator.normal-> function : operator oper ( >>> fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist ) 
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet116:
+dec.jsexport-> jsexport ( id , string >>> ) 。
+additionalRules-> -------------------
+
+itemSet117:
+dec.template-> type < id > : >>> dec
+additionalRules-> -------------------
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+
+itemSet118:
+ty.func-> function : ( fieldlist >>> ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet119:
+field.func-> function : id ( >>> fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet120:
+ty.pointer-> ty の >>> ポインタ
+additionalRules-> -------------------
+
+itemSet121:
+ty.poly-> id < ty > >>>
+additionalRules-> -------------------
+
+itemSet122:
+dec.jsload-> ( fieldlist ) を とり >>> ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) を とり >>> ( fieldlist ) を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet123:
+dec.object-> var という ty の オブジェクト >>> を explist で 初期化 。
+additionalRules-> -------------------
+
+itemSet124:
+dec.var.noinit-> var という ty を おく >>> 。
+additionalRules-> -------------------
+
+itemSet125:
+dec.var.init-> var という ty を exp >>> で 初期化 。
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> != 
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet126:
+exp.sizeof-> sizeof ( var >>> )
+var.field-> var >>> の id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+var.deref-> var >>> に ある オブジェクト
+additionalRules-> -------------------
+
+itemSet127:
+exp.typeeq-> typeComp ( ty >>> , ty )
+ty.pointer-> ty >>> の ポインタ
+additionalRules-> -------------------
+
+itemSet128:
+exp.paren-> ( exp ) >>>
+additionalRules-> -------------------
+
+itemSet129:
+exp.func-> ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet130:
+explist.explist-> exp , >>> explist
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet131:
+exp.array-> [ explist ] >>>
+additionalRules-> -------------------
+
+itemSet132:
+exp.field-> exp の id >>>
+additionalRules-> -------------------
+
+itemSet133:
+exp.call-> exp ( explist >>> )
+additionalRules-> -------------------
+
+itemSet134:
+exp.subscript-> exp [ exp >>> ]
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> && 
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet135:
+exp.arrowfield-> exp -> id >>>
+additionalRules-> -------------------
+
+itemSet136:
+exp.op-> exp oper exp >>>
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet137:
+mems.private-> private : >>> declist
+additionalRules-> -------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+declist.null-> >>>
+declist.dec-> >>> dec
+
+itemSet138:
+mems.protected-> protected : >>> declist
+additionalRules-> -------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+declist.null-> >>>
+declist.dec-> >>> dec
+
+itemSet139:
+mems.public-> public : >>> declist
+additionalRules-> -------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+declist.null-> >>>
+declist.dec-> >>> dec
+
+itemSet140:
+dec.class.noinherit-> class : id { memlist } >>>
+additionalRules-> ------------------- 
+
+itemSet141:
+memlist.memlist-> memlist mems >>>
+additionalRules-> -------------------
+
+itemSet142:
+dec.class.inherit-> class : id <- id { >>> memlist }
+additionalRules-> -------------------
+memlist.memlist-> >>> memlist mems
+memlist.mems-> >>> mems
+mems.nospecifier-> >>> declist
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+declist.null-> >>>
+declist.dec-> >>> dec
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+mems.public-> >>> public : declist
+
+itemSet143:
+dec.operator.assign-> function : operator = ( fieldlist >>> ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet144:
+dec.operator.normal-> function : operator oper ( fieldlist >>> ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet145:
+dec.jsexport-> jsexport ( id , string ) >>> 。
+additionalRules-> -------------------
+
+itemSet146:
+dec.template-> type < id > : dec >>>
+additionalRules-> -------------------
+
+itemSet147:
+ty.func-> function : ( fieldlist ) >>> => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet148:
+field.func-> function : id ( fieldlist >>> ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet149:
+dec.jsload-> ( fieldlist ) を とり ( >>> fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) を とり ( >>> fieldlist ) を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet150:
+dec.object-> var という ty の オブジェクト を >>> explist で 初期化 。
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ] 
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet151:
+dec.var.noinit-> var という ty を おく 。 >>>
+additionalRules-> -------------------
+
+itemSet152:
+dec.var.init-> var という ty を exp で >>> 初期化 。
+additionalRules-> -------------------
+
+itemSet153:
+exp.sizeof-> sizeof ( var ) >>>
+additionalRules-> -------------------
+
+itemSet154:
+exp.typeeq-> typeComp ( ty , >>> ty )
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+
+itemSet155:
+exp.func-> ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet156:
+explist.explist-> exp , explist >>>
+additionalRules-> -------------------
+
+itemSet157:
+exp.call-> exp ( explist ) >>>
+additionalRules-> -------------------
+
+itemSet158:
+exp.subscript-> exp [ exp ] >>>
+additionalRules-> -------------------
+
+itemSet159:
+mems.private-> private : declist >>>
+additionalRules-> -------------------
+
+itemSet160:
+mems.protected-> protected : declist >>>
+additionalRules-> -------------------
+
+itemSet161:
+mems.public-> public : declist >>>
+additionalRules-> -------------------
+
+itemSet162:
+dec.class.inherit-> class : id <- id { memlist >>> }
+memlist.memlist-> memlist >>> mems
+additionalRules-> -------------------
+mems.nospecifier-> >>> declist
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+declist.null-> >>>
+declist.dec-> >>> dec
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+mems.public-> >>> public : declist
+
+itemSet163:
+dec.operator.assign-> function : operator = ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet164:
+dec.operator.normal-> function : operator oper ( fieldlist ) >>> => ( fieldlist ) stm 
+additionalRules-> -------------------
+
+itemSet165:
+dec.jsexport-> jsexport ( id , string ) 。 >>>
+additionalRules-> -------------------
+
+itemSet166:
+ty.func-> function : ( fieldlist ) => >>> ( fieldlist )
+additionalRules-> -------------------
+
+itemSet167:
+field.func-> function : id ( fieldlist ) >>> => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet168:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist >>> ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) を とり ( fieldlist >>> ) を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet169:
+dec.object-> var という ty の オブジェクト を explist >>> で 初期化 。
+additionalRules-> -------------------
+
+itemSet170:
+dec.var.init-> var という ty を exp で 初期化 >>> 。
+additionalRules-> -------------------
+
+itemSet171:
+exp.typeeq-> typeComp ( ty , ty >>> )
+ty.pointer-> ty >>> の ポインタ
+additionalRules-> -------------------
+
+itemSet172:
+exp.func-> ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet173:
+dec.class.inherit-> class : id <- id { memlist } >>>
+additionalRules-> -------------------
+
+itemSet174:
+dec.operator.assign-> function : operator = ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet175:
+dec.operator.normal-> function : operator oper ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet176:
+ty.func-> function : ( fieldlist ) => ( >>> fieldlist )
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet177:
+field.func-> function : id ( fieldlist ) => >>> ( fieldlist )
+additionalRules-> -------------------
+
+itemSet178:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) >>> を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) を とり ( fieldlist ) >>> を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet179:
+dec.object-> var という ty の オブジェクト を explist で >>> 初期化 。
+additionalRules-> -------------------
+
+itemSet180:
+dec.var.init-> var という ty を exp で 初期化 。 >>>
+additionalRules-> -------------------
+
+itemSet181:
+exp.typeeq-> typeComp ( ty , ty ) >>>
+additionalRules-> -------------------
+
+itemSet182:
+exp.func-> ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet183:
+dec.operator.assign-> function : operator = ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet184:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet185:
+ty.func-> function : ( fieldlist ) => ( fieldlist >>> )
+additionalRules-> -------------------
+
+itemSet186:
+field.func-> function : id ( fieldlist ) => ( >>> fieldlist )
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+
+itemSet187:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を >>> 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) を とり ( fieldlist ) を >>> 返す id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet188:
+dec.object-> var という ty の オブジェクト を explist で 初期化 >>> 。
+additionalRules-> -------------------
+
+itemSet189:
+exp.func-> ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト 
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet190:
+dec.operator.assign-> function : operator = ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet191:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet192:
+ty.func-> function : ( fieldlist ) => ( fieldlist ) >>>
+additionalRules-> -------------------
+
+itemSet193:
+field.func-> function : id ( fieldlist ) => ( fieldlist >>> )
+additionalRules-> -------------------
+
+itemSet194:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す >>> id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) を とり ( fieldlist ) を 返す >>> id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet195:
+dec.object-> var という ty の オブジェクト を explist で 初期化 。 >>>
+additionalRules-> -------------------
+
+itemSet196:
+stm.break-> break >>> 。
+additionalRules-> -------------------
+
+itemSet197:
+stm.continue-> continue >>> 。
+additionalRules-> -------------------
+
+itemSet198:
+stm.if.ifelse-> if >>> exp then stm else stm
+stm.if.if-> if >>> exp then stm
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char 
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet199:
+stm.loop-> loop >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm 
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet200:
+stm.return.noexp-> return >>> 。
+additionalRules-> -------------------
+
+itemSet201:
+stm.compound-> ここから >>> stmlist ここまで実行
+additionalRules-> -------------------
+stmlist.stmlist-> >>> stm stmlist
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+stmlist.stm-> >>> stm
+stmlist.null-> >>>
+
+itemSet202:
+exp.func-> ( >>> fieldlist ) => ( fieldlist ) stm
+exp.paren-> ( >>> exp )
+dec.jsload-> ( >>> fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( >>> fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+stm.for-> ( >>> stm ) から ( exp ) まで ( stm ) 繰り返し stm
+additionalRules-> -------------------
+fieldlist.fieldlist-> >>> field , fieldlist
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty の var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty > 
+ty.name-> >>> id
+ty.func-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.pointer-> >>> ty の ポインタ
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.int-> >>> inttype
+ty.void-> >>> void
+fieldlist.null-> >>>
+fieldlist.field-> >>> field
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.return.var-> >>> var を return 。
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet203:
+stm.return.exp-> exp >>> を return 。
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+explist.explist-> exp >>> , explist
+explist.exp-> exp >>>
+stm.call.noexp-> exp >>> する 。
+stm.repeat-> exp >>> repeat stm
+stm.while-> exp >>> まで stm
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> > 
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet204:
+stm.return.var-> var >>> を return 。
+var.field-> var >>> の id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+var.deref-> var >>> に ある オブジェクト
+exp.var-> var >>>
+dec.var.noinit-> var >>> という ty を おく 。
+dec.var.init-> var >>> という ty を exp で 初期化 。
+dec.object-> var >>> という ty の オブジェクト を explist で 初期化 。
+stm.assign.sub-> var >>> から exp を 引く 。
+stm.assign.normal-> var >>> に exp を 代入する 。
+stm.assign.mul-> var >>> に exp を かける 。
+stm.assign.div-> var >>> を exp で 割る 。
+stm.assign.add-> var >>> に exp を 足す 。
+additionalRules-> -------------------
+
+itemSet205:
+stm.dec-> dec >>>
+additionalRules-> -------------------
+
+itemSet206:
+exp.func-> ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet207:
+stm.call.normal-> explist >>> exp する 。
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet208:
+dec.operator.assign-> function : operator = ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。 
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet209:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet210:
+field.func-> function : id ( fieldlist ) => ( fieldlist ) >>>
+additionalRules-> -------------------
+
+itemSet211:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id >>> という function を ( string , string ) から 読み込む 。 
+dec.func-> ( fieldlist ) を とり ( fieldlist ) を 返す id >>> という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet212:
+stm.break-> break 。 >>>
+additionalRules-> -------------------
+
+itemSet213:
+stm.continue-> continue 。 >>>
+additionalRules-> -------------------
+
+itemSet214:
+stm.if.ifelse-> if exp >>> then stm else stm
+stm.if.if-> if exp >>> then stm
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet215:
+stm.loop-> loop stm >>>
+additionalRules-> -------------------
+
+itemSet216:
+stm.return.noexp-> return 。 >>>
+additionalRules-> -------------------
+
+itemSet217:
+explist.null->  >>>
+stmlist.null->  >>>
+additionalRules-> -------------------
+
+itemSet218:
+stmlist.stmlist-> stm >>> stmlist
+stmlist.stm-> stm >>>
+additionalRules-> -------------------
+stmlist.stmlist-> >>> stm stmlist
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm 
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+stmlist.stm-> >>> stm
+stmlist.null-> >>>
+
+itemSet219:
+stm.compound-> ここから stmlist >>> ここまで実行
+additionalRules-> -------------------
+
+itemSet220:
+field.func-> function >>> : id ( fieldlist ) => ( fieldlist )
+ty.func-> function >>> : ( fieldlist ) => ( fieldlist )
+dec.operator.normal-> function >>> : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assign-> function >>> : operator = ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet221:
+fieldlist.null->  >>>
+explist.null->  >>>
+additionalRules-> -------------------
+
+itemSet222:
+exp.paren-> ( exp >>> )
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+stm.return.exp-> exp >>> を return 。
+explist.explist-> exp >>> , explist
+explist.exp-> exp >>>
+stm.call.noexp-> exp >>> する 。
+stm.repeat-> exp >>> repeat stm
+stm.while-> exp >>> まで stm
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet223:
+exp.var-> var >>>
+var.field-> var >>> の id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+var.deref-> var >>> に ある オブジェクト
+stm.return.var-> var >>> を return 。
+dec.var.noinit-> var >>> という ty を おく 。
+dec.var.init-> var >>> という ty を exp で 初期化 。
+dec.object-> var >>> という ty の オブジェクト を explist で 初期化 。
+stm.assign.sub-> var >>> から exp を 引く 。
+stm.assign.normal-> var >>> に exp を 代入する 。
+stm.assign.mul-> var >>> に exp を かける 。
+stm.assign.div-> var >>> を exp で 割る 。
+stm.assign.add-> var >>> に exp を 足す 。
+additionalRules-> -------------------
+
+itemSet224:
+stm.for-> ( stm >>> ) から ( exp ) まで ( stm ) 繰り返し stm
+additionalRules-> -------------------
+
+itemSet225:
+exp.func-> ( fieldlist >>> ) => ( fieldlist ) stm
+dec.jsload-> ( fieldlist >>> ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist >>> ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet226:
+stm.repeat-> exp repeat >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet227:
+stm.call.noexp-> exp する >>> 。
+additionalRules-> -------------------
+
+itemSet228:
+stm.while-> exp まで >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm 
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet229:
+stm.return.exp-> exp を >>> return 。
+additionalRules-> -------------------
+
+itemSet230:
+stm.assign.sub-> var から >>> exp を 引く 。
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id 
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet231:
+var.deref-> var に >>> ある オブジェクト
+stm.assign.normal-> var に >>> exp を 代入する 。
+stm.assign.mul-> var に >>> exp を かける 。
+stm.assign.add-> var に >>> exp を 足す 。
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet232:
+stm.return.var-> var を >>> return 。
+stm.assign.div-> var を >>> exp で 割る 。
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet233:
+stm.call.normal-> explist exp >>> する 。
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet234:
+dec.operator.assign-> function : operator = ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet235:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet236:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という >>> function を ( string , string ) から 読み込む 。 
+dec.func-> ( fieldlist ) を とり ( fieldlist ) を 返す id という >>> function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet237:
+stm.if.ifelse-> if exp then >>> stm else stm
+stm.if.if-> if exp then >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet238:
+stmlist.stmlist-> stm stmlist >>>
+additionalRules-> -------------------
+
+itemSet239:
+stm.compound-> ここから stmlist ここまで実行 >>>
+additionalRules-> -------------------
+
+itemSet240:
+field.func-> function : >>> id ( fieldlist ) => ( fieldlist )
+ty.func-> function : >>> ( fieldlist ) => ( fieldlist )
+dec.operator.normal-> function : >>> operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assign-> function : >>> operator = ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet241:
+stm.for-> ( stm ) >>> から ( exp ) まで ( stm ) 繰り返し stm
+additionalRules-> -------------------
+
+itemSet242:
+exp.func-> ( fieldlist ) >>> => ( fieldlist ) stm
+dec.jsload-> ( fieldlist ) >>> を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。 
+dec.func-> ( fieldlist ) >>> を とり ( fieldlist ) を 返す id という function を おく 。 stm
+additionalRules-> -------------------
+
+itemSet243:
+stm.repeat-> exp repeat stm >>>
+additionalRules-> -------------------
+
+itemSet244:
+stm.call.noexp-> exp する 。 >>>
+additionalRules-> -------------------
+
+itemSet245:
+stm.while-> exp まで stm >>>
+additionalRules-> -------------------
+
+itemSet246:
+stm.return.exp-> exp を return >>> 。
+additionalRules-> -------------------
+
+itemSet247:
+stm.assign.sub-> var から exp >>> を 引く 。
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet248:
+stm.assign.normal-> var に exp >>> を 代入する 。
+stm.assign.mul-> var に exp >>> を かける 。
+stm.assign.add-> var に exp >>> を 足す 。
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet249:
+stm.return.var-> var を return >>> 。
+additionalRules-> -------------------
+
+itemSet250:
+stm.assign.div-> var を exp >>> で 割る 。
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> % 
+
+itemSet251:
+stm.call.normal-> explist exp する >>> 。
+additionalRules-> -------------------
+
+itemSet252:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function >>> を ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function >>> を おく 。 stm
+additionalRules-> -------------------
+
+itemSet253:
+stm.if.ifelse-> if exp then stm >>> else stm
+stm.if.if-> if exp then stm >>>
+additionalRules-> -------------------
+
+itemSet254:
+stm.for-> ( stm ) から >>> ( exp ) まで ( stm ) 繰り返し stm
+additionalRules-> -------------------
+
+itemSet255:
+stm.return.exp-> exp を return 。 >>>
+additionalRules-> -------------------
+
+itemSet256:
+stm.assign.sub-> var から exp を >>> 引く 。
+additionalRules-> -------------------
+
+itemSet257:
+stm.assign.normal-> var に exp を >>> 代入する 。
+stm.assign.mul-> var に exp を >>> かける 。
+stm.assign.add-> var に exp を >>> 足す 。
+additionalRules-> -------------------
+
+itemSet258:
+stm.return.var-> var を return 。 >>>
+additionalRules-> -------------------
+
+itemSet259:
+stm.assign.div-> var を exp で >>> 割る 。
+additionalRules-> -------------------
+
+itemSet260:
+stm.call.normal-> explist exp する 。 >>>
+additionalRules-> -------------------
+
+itemSet261:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を >>> ( string , string ) から 読み込む 。
+dec.func-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を >>> おく 。 stm
+additionalRules-> -------------------
+
+itemSet262:
+stm.if.ifelse-> if exp then stm else >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist 
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet263:
+stm.for-> ( stm ) から ( >>> exp ) まで ( stm ) 繰り返し stm
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet264:
+stm.assign.sub-> var から exp を 引く >>> 。
+additionalRules-> -------------------
+
+itemSet265:
+stm.assign.mul-> var に exp を かける >>> 。
+additionalRules-> -------------------
+
+itemSet266:
+stm.assign.normal-> var に exp を 代入する >>> 。
+additionalRules-> -------------------
+
+itemSet267:
+stm.assign.add-> var に exp を 足す >>> 。
+additionalRules-> -------------------
+
+itemSet268:
+stm.assign.div-> var を exp で 割る >>> 。
+additionalRules-> -------------------
+
+itemSet269:
+dec.func-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく >>> 。 stm
+additionalRules-> -------------------
+
+itemSet270:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( >>> string , string ) から 読み込む 。
+additionalRules-> -------------------
+
+itemSet271:
+stm.if.ifelse-> if exp then stm else stm >>>
+additionalRules-> -------------------
+
+itemSet272:
+stm.for-> ( stm ) から ( exp >>> ) まで ( stm ) 繰り返し stm
+exp.call-> exp >>> ( explist )
+exp.arrowfield-> exp >>> -> id
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> の id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mul-> >>> *
+oper.eq-> >>> は
+oper.lt-> >>> <
+oper.div-> >>> /
+oper.add-> >>> +
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+oper.mod-> >>> %
+
+itemSet273:
+stm.assign.sub-> var から exp を 引く 。 >>>
+additionalRules-> ------------------- 
+
+itemSet274:
+stm.assign.mul-> var に exp を かける 。 >>>
+additionalRules-> -------------------
+
+itemSet275:
+stm.assign.normal-> var に exp を 代入する 。 >>>
+additionalRules-> -------------------
+
+itemSet276:
+stm.assign.add-> var に exp を 足す 。 >>>
+additionalRules-> -------------------
+
+itemSet277:
+stm.assign.div-> var を exp で 割る 。 >>>
+additionalRules-> -------------------
+
+itemSet278:
+dec.func-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet279:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string >>> , string ) から 読み込む 。
+additionalRules-> -------------------
+
+itemSet280:
+stm.for-> ( stm ) から ( exp ) >>> まで ( stm ) 繰り返し stm
+additionalRules-> -------------------
+
+itemSet281:
+dec.func-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm >>>
+additionalRules-> -------------------
+
+itemSet282:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , >>> string ) から 読み込む 。
+additionalRules-> -------------------
+
+itemSet283:
+stm.for-> ( stm ) から ( exp ) まで >>> ( stm ) 繰り返し stm
+additionalRules-> -------------------
+
+itemSet284:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string >>> ) から 読み込む 。
+additionalRules-> -------------------
+
+itemSet285:
+stm.for-> ( stm ) から ( exp ) まで ( >>> stm ) 繰り返し stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet286:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) >>> から 読み込む 。
+additionalRules-> -------------------
+
+itemSet287:
+stm.for-> ( stm ) から ( exp ) まで ( stm >>> ) 繰り返し stm
+additionalRules-> -------------------
+
+itemSet288:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から >>> 読み込む 。
+additionalRules-> -------------------
+
+itemSet289:
+stm.for-> ( stm ) から ( exp ) まで ( stm ) >>> 繰り返し stm
+additionalRules-> -------------------
+
+itemSet290:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む >>> 。
+additionalRules-> -------------------
+
+itemSet291:
+stm.for-> ( stm ) から ( exp ) まで ( stm ) 繰り返し >>> stm
+additionalRules-> -------------------
+stm.return.var-> >>> var を return 。
+var.simple-> >>> id
+var.field-> >>> var の id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ] 
+var.deref-> >>> var に ある オブジェクト
+stm.return.noexp-> >>> return 。
+stm.return.exp-> >>> exp を return 。
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.call-> >>> exp ( explist )
+exp.true-> >>> true
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.arrowfield-> >>> exp -> id
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.paren-> >>> ( exp )
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+exp.int-> >>> int
+exp.field-> >>> exp の id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.if.ifelse-> >>> if exp then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.template-> >>> type < id > : dec
+dec.var.noinit-> >>> var という ty を おく 。
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> var という ty を exp で 初期化 。
+dec.jsexport-> >>> jsexport ( id , string ) 。
+dec.jsload-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> var という ty の オブジェクト を explist で 初期化 。
+dec.func-> >>> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を おく 。 stm
+dec.operator.assign-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> explist exp する 。
+explist.explist-> >>> exp , explist
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.call.noexp-> >>> exp する 。
+stm.assign.sub-> >>> var から exp を 引く 。
+stm.assign.normal-> >>> var に exp を 代入する 。
+stm.assign.mul-> >>> var に exp を かける 。
+stm.assign.div-> >>> var を exp で 割る 。
+stm.repeat-> >>> exp repeat stm
+stm.for-> >>> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm
+stm.break-> >>> break 。
+stm.while-> >>> exp まで stm
+stm.loop-> >>> loop stm
+stm.compound-> >>> ここから stmlist ここまで実行
+stm.continue-> >>> continue 。
+stm.assign.add-> >>> var に exp を 足す 。
+stm.if.if-> >>> if exp then stm
+
+itemSet292:
+dec.jsload-> ( fieldlist ) を とり ( fieldlist ) を 返す id という function を ( string , string ) から 読み込む 。 >>>
+additionalRules-> -------------------
+
+itemSet293:
+stm.for-> ( stm ) から ( exp ) まで ( stm ) 繰り返し stm >>>
+additionalRules-> -------------------

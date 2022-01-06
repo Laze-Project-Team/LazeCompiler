@@ -1,233 +1,332 @@
 {
-    "config":{
-        "name":"natja",
-        "type":"natural"
+  "config": {
+    "name": "natja",
+    "type": "natural",
+    "tabsensitive": false
+  },
+  "tokens": {
+    "keywords": {
+      "if": "もし",
+      "then": "ならば",
+      "else": "でなければ",
+      "から": "から",
+      "まで": "まで",
+      "break": "抜ける",
+      "continue": "次へ",
+      "function": "関数",
+      "loop": "無限ループ",
+      "inttype": "整数",
+      "shorttype": "整数32",
+      "realtype": "実数",
+      "chartype": "文字",
+      "return": "終了",
+      "type": "型",
+      "void": "無",
+      "nul": "空",
+      "boolean": "真偽",
+      "true": "真",
+      "false": "偽",
+      "jsload": "js読み込み",
+      "jsexport": "js書き出し",
+      "sizeof": "バイト数",
+      "class": "クラス",
+      "public": "公開",
+      "private": "非公開",
+      "protected": "保護",
+      "repeat": "回繰り返す",
+      "。": "。",
+      "operator":"演算子",
+      "typeComp": "型比較",
+      "は": "は",
+      "を": "を",
+      "に": "に",
+      "で": "で",
+      "の": "の",
+      "読み込む": "読み込む",
+      "という": "という",
+      "おく": "おく",
+      "代入する": "代入する",
+      "足す": "足す",
+      "引く": "引く",
+      "かける": "かける",
+      "返す": "返す",
+      "割る": "割る",
+      "とる": "とる",
+      "とり": "とり",
+      "以下": "以下",
+      "持つ": "持つ",
+      "する": "する",
+      "ある": "ある",
+      "実行する": "実行する",
+      "繰り返し": "繰り返し",
+      "初期化": "初期化",
+      "ここから":"ここから",
+      "ここまで実行":"ここまで実行",
+      "オブジェクト":"オブジェクト",
+      "ポインタ":"ポインタ"
     },
-    "tokens":{
-        "keywords":
-        {
-            "if":"もし",
-            "then":"ならば",
-            "else":"でなければ",
-            "from":"から",
-            "to":"まで",
-            "break":"抜ける",
-            "continue":"次へ",
-            "function":"関数",
-            "loop":"無限ループ",
-            "inttype":"整数",
-            "shorttype":"整数32",
-            "realtype":"実数",
-            "chartype":"文字",
-            "return":"終了",
-            "type":"型",
-            "void":"無",
-            "nul":"空",
-            "boolean":"真偽",
-            "true":"真",
-            "false":"偽",
-            "jsload":"js読み込み",
-            "jsexport":"js書き出し",
-            "sizeof":"バイト数",
-            "class":"クラス",
-            "public":"公開",
-            "private":"非公開",
-            "protected":"保護",
-            "repeat":"回繰り返す",
-            "は": "は",
-            "wo": "を",
-            "ni": "に",
-            "de": "で",
-            "no": "の",
-            "yomikomu": "読み込む",
-            "toiu": "という",
-            "declare": "おく",
-            "assign": "代入する",
-            "kaesu": "返す",
-            "toru": "とる",
-            "tori": "とり",
-            "ika": "以下",
-            "motsu": "持つ",
-            "execute": "実行する" ,
-            "lineend": "。"
-        },
-        "int":"[0-9]",
-        "hex":"0x[0-9A-F]+",
-        "char":"[㐀-龯ぁ-んァ-ヶa-zA-Z_ー]",
-        "comment":"(^(\\s*\/\/.*)$|^(\\s*#.*)$)",
-        "string":"\"((?:[^\\\\\"]|\\.)*)\"",
-        "ops":[
-            {"name":":", "regex": "^(:|：)", "precedence": 20},
-            {"name":";", "regex": "^(;|；)", "precedence": 20},
-            {"name":"(", "regex": "^(\\(|（)", "precedence":3},
-            {"name":")", "regex": "^(\\)|）)", "precedence":3},
-            {"name":"[", "regex": "^(\\[)", "precedence": 20},
-            {"name":"]", "regex": "^(\\])", "precedence": 20},
-            {"name":"{", "regex": "^(\\{|｛)", "precedence": 20},
-            {"name":"}", "regex": "^(\\}|｝)", "precedence": 20},
-            {"name":"<-", "regex": "^(\\<\\-)", "precedence": 20},
-            {"name":"=>", "regex": "^(=\\>|＝＞)", "precedence": 20},
-            {"name":".", "regex": "^(\\.)", "precedence": 1},
-            {"name":"->", "regex": "^(\\-\\>)", "precedence": 1},
-            {"name":"*", "regex": "^(\\*|＊)", "precedence": 4},
-            {"name":"/", "regex": "^(\\/|／)", "precedence": 4},
-            {"name":"%", "regex": "^(%|％)", "precedence": 4},
-            {"name":"+", "regex": "^(\\+|＋)", "precedence": 5},
-            {"name":"-", "regex": "^(\\-)", "precedence": 5},
-            {"name":"==", "regex": "^(==|＝＝)", "precedence": 7},
-            {"name":"!=", "regex": "^(!=|！＝)", "precedence": 7},
-            {"name":"<=", "regex": "^(\\<=|＜＝)", "precedence": 6},
-            {"name":">=", "regex": "^(\\>=|＞＝)", "precedence": 6},
-            {"name":"<", "regex": "^(\\<|＜)", "precedence": 6},
-            {"name":">", "regex": "^(\\>|＞)", "precedence": 6},
-            {"name":"=", "regex": "^(=|＝)", "precedence": 20},
-            {"name":"&&", "regex": "^(&&|＆＆)", "precedence": 8},
-            {"name":"&", "regex": "^(&|＆)", "precedence": 2},
-            {"name":"||", "regex": "^(\\|\\||｜)", "precedence": 8},
-            {"name":",", "regex": "^(,|、)", "precedence": 20},
-            {"name":"。", "regex": "^(。)", "precedence": 20}
-        ],
-        "main": "実行"
+    "int": "[0-9]",
+    "hex": "0x[0-9A-F]+",
+    "char": "[㐀-龯ぁ-んァ-ヶa-zA-Z_ー]",
+    "comment": "(^(\\s*//.*)$|^(\\s*#.*)$)",
+    "string": "\"((?:[^\\\\\"]|\\.)*)\"",
+    "ops":[
+      {"name":":", "regex": "^(:|：)", "precedence": 20},
+      {"name":";", "regex": "^(;|；)", "precedence": 20},
+      {"name":"(", "regex": "^(\\(|（)", "precedence":3},
+      {"name":")", "regex": "^(\\)|）)", "precedence":3},
+      {"name":"[", "regex": "^(\\[)", "precedence": 20},
+      {"name":"]", "regex": "^(\\])", "precedence": 20},
+      {"name":"{", "regex": "^(\\{|｛)", "precedence": 20},
+      {"name":"}", "regex": "^(\\}|｝)", "precedence": 20},
+      {"name":"<-", "regex": "^(\\<\\-)", "precedence": 20},
+      {"name":"=>", "regex": "^(=\\>|＝＞)", "precedence": 20},
+      {"name":".", "regex": "^(\\.)", "precedence": 1},
+      {"name":"->", "regex": "^(\\-\\>)", "precedence": 1},
+      {"name":"*", "regex": "^(\\*|＊)", "precedence": 4},
+      {"name":"/", "regex": "^(\\/|／)", "precedence": 4},
+      {"name":"%", "regex": "^(%|％)", "precedence": 4},
+      {"name":"+", "regex": "^(\\+|＋)", "precedence": 5},
+      {"name":"-", "regex": "^(\\-)", "precedence": 5},
+      {"name":"==", "regex": "^(==|＝＝)", "precedence": 7},
+      {"name":"!=", "regex": "^(!=|！＝)", "precedence": 7},
+      {"name":"<=", "regex": "^(\\<=|＜＝)", "precedence": 6},
+      {"name":">=", "regex": "^(\\>=|＞＝)", "precedence": 6},
+      {"name":"<", "regex": "^(\\<|＜)", "precedence": 6},
+      {"name":">", "regex": "^(\\>|＞)", "precedence": 6},
+      {"name":"=", "regex": "^(=|＝)", "precedence": 20},
+      {"name":"&&", "regex": "^(&&|＆＆)", "precedence": 8},
+      {"name":"&", "regex": "^(&|＆)", "precedence": 2},
+      {"name":"||", "regex": "^(\\|\\||｜)", "precedence": 8},
+      {"name":",", "regex": "^(,|、)", "precedence": 20}
+    ],
+    "main": "実行",
+    "stringClass": "文字列",
+    "stmliststart": "ここから",
+    "stmlistend":"ここまで実行"
+  },
+  "grammar": {
+    "exp": {
+      "op": "exp(1) oper exp(2)",
+      "minus": "- exp",
+      "paren": "( exp )",
+      "call": "exp ( explist )",
+      "address": "& var",
+      "sizeof": "sizeof ( var )",
+      "array": "[ explist ]",
+      "func": "( fieldlist(params) ) => ( fieldlist(result) ) stm",
+      "var": "var",
+      "field": "exp の id",
+      "subscript": "exp(arrayname) [ exp(index) ]",
+      "arrowfield": "exp -> id",
+      "int": "int",
+      "char": "char",
+      "string": "string",
+      "real": "real",
+      "true": "true",
+      "false": "false",
+      "typeeq": "typeComp ( ty(1) , ty(2) )"
     },
-    "grammar":{
-        "exp":{
-            "op":"exp(1) oper exp(2)",
-            "minus":"- exp",
-            "paren": "( exp )",
-            "call":"varExp ( explist )",
-            "address":"& var",
-            "sizeof":"sizeof ( var )",
-            "array":"[ explist ]",
-            "func": "( fieldlist(params) ) => ( fieldlist(result) ) stm",
-            "var":"var",
-            "field":"exp . id",
-            "subscript":"exp(arrayname) [ exp(index) ]",
-            "arrowfield":"exp -> id",
-            "int": "int",
-            "char": "char",
-            "string": "string",
-            "real": "real",
-            "true": "true",
-            "false": "false"
-        },
-        "oper": {
-            "add":"+",
-            "sub":"-",
-            "mul":"*",
-            "div":"/",
-            "mod":"%",
-            "eq":"は",
-            "neq":"!=",
-            "ge":">=",
-            "gt":">",
-            "le":"<=",
-            "lt":"<",
-            "and":"&&",
-            "or":"||"
-        },
-        "stm":{
-            "assign":{
-                "normal":"var ni exp assign lineend",
-                "add":"var + = exp lineend",
-                "sub":"var - = exp lineend",
-                "mul":"var * = exp lineend",
-                "div":"var / = exp lineend",
-                "increment":"var + + lineend",
-                "decrement":"var - - lineend"
-            },
-            "if":{
-                "if":"if exp then stm(then)",
-                "ifelse":"if ( exp ) then stm(then) else stm(else)"
-            },
-            "while":"( exp ) to stm",
-            "dec": "dec(stm)",
-            "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
-            "return":{
-                "noexp":"return lineend",
-                "exp":"return ( exp ) lineend"
-            },
-            "call":"explist exp lineend",
-            "loop":"loop stm",
-            "break":"break lineend",
-            "continue":"continue lineend",
-            "compound":"{ stmlist }",
-            "repeat":"( exp ) repeat stm"
-        },
-        "dec":{
-            "var": {
-                "init":"exp wo motsu var toiu ty wo declare lineend",
-                "noinit":"var toiu ty wo declare lineend"
-            },
-            "object": "ty : id ( explist ) lineend",
-            "class": {
-                "noinherit":"class : id(name) { memlist }",
-                "inherit":"class : id(name) <- id(inherit) { memlist }"
-            },
-            "func": "( fieldlist(params) ) wo tori ( fieldlist(result) ) wo kaesu id toiu function wo declare lineend stm",
-            "jsload": "( fieldlist(params) ) wo tori ( fieldlist(result) ) wo kaesu id toiu function wo ( string(module) , string(func) ) from yomikomu lineend",
-            "jsexport": "jsexport ( id , string ) lineend",
-            "template": {
-                "func":"type < id(type) > : function : id(name) ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-                "class":"type < id(type) > : class : id(name) { memlist }"
-            }
-        },
-        "var": {
-            "simple":"id",
-            "field":"var . id",
-            "deref":"* var",
-            "subscript":"var [ exp ]",
-            "arrowfield":"var -> id"
-        },
-        "varExp": {
-            "var":"var",
-            "field":"exp . id",
-            "subscript":"exp(arrayname) [ exp(index) ]",
-            "arrowfield":"exp -> id"
-        },
-        "ty": {
-            "name" : "id",
-            "void" : "void",
-            "int" : "inttype",
-            "real" : "realtype",
-            "bool" : "boolean",
-            "char" : "chartype",
-            "short" : "shorttype",
-            "pointer" : "* ty",
-            "poly" : "id < ty >",
-            "func": "function : ( fieldlist(params) ) => ( fieldlist(result) )"
-        },
-        "mems":{
-            "nospecifier": "declist",
-            "public": "public : declist",
-            "private": "private : declist",
-            "protected": "protected : declist"
-        },
-        "memlist":{
-            "mems": "mems",
-            "memlist": "memlist mems"
-        },
-        "field": {
-            "noinit":"ty no var"
-        },
-        "explist":{
-            "null":"",
-            "exp":"exp",
-            "explist":"exp , explist"
-        },
-        "stmlist":{
-            "null":"",
-            "stm":"stm",
-            "stmlist":"stm stmlist"
-        },
-        "declist":{
-            "null":"",
-            "dec":"dec",
-            "declist":"dec declist"
-        },
-        "fieldlist":{
-            "null":"",
-            "field":"field",
-            "fieldlist":"field , fieldlist"
-        }
+    "oper": {
+      "add": "+",
+      "sub": "-",
+      "mul": "*",
+      "div": "/",
+      "mod": "%",
+      "eq": "は",
+      "neq": "!=",
+      "ge": ">=",
+      "gt": ">",
+      "le": "<=",
+      "lt": "<",
+      "and": "&&",
+      "or": "||"
+    },
+    "stm": {
+      "assign": {
+        "normal": "var に exp を 代入する 。",
+        "add": "var に exp を 足す 。",
+        "sub": "var から exp を 引く 。",
+        "mul": "var に exp を かける 。",
+        "div": "var を exp で 割る 。"
+      },
+      "if": {
+        "if": "if exp then stm(then)",
+        "ifelse": "if exp then stm(then) else stm(else)"
+      },
+      "while": "exp まで stm",
+      "dec": "dec(stm)",
+      "for": "( stm(init) ) から ( exp ) まで ( stm(incr) ) 繰り返し stm",
+      "return": {
+        "noexp": "return 。",
+        "exp": "exp を return 。",
+        "var": "var を return 。"
+      },
+      "call": {
+        "normal":"explist exp する 。",
+        "noexp": "exp する 。"
+      },
+      "loop": "loop stm",
+      "break": "break 。",
+      "continue": "continue 。",
+      "compound": "ここから stmlist ここまで実行",
+      "repeat": "exp repeat stm"
+    },
+    "dec": {
+      "var": {
+        "init": "var という ty を exp で 初期化 。",
+        "noinit": "var という ty を おく 。"
+      },
+      "object": "var という ty の オブジェクト を explist で 初期化 。",
+      "class": {
+        "noinherit": "class : id(name) { memlist }",
+        "inherit": "class : id(name) <- id(inherit) { memlist }"
+      },
+      "func": "( fieldlist(params) ) を とり ( fieldlist(result) ) を 返す id という function を おく 。 stm",
+      "jsload": "( fieldlist(params) ) を とり ( fieldlist(result) ) を 返す id という function を ( string(module) , string(func) ) から 読み込む 。",
+      "jsexport": "jsexport ( id , string ) 。",
+      "operator": {
+        "normal":"function : operator oper ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+        "assign":"function : operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm"
+      },
+      "template": "type < id > : dec"
+    },
+    "var": {
+      "simple": "id",
+      "field": "var の id",
+      "deref": "var に ある オブジェクト",
+      "subscript": "var [ exp ]",
+      "arrowfield": "var -> id"
+    },
+    "varExp": {
+      "var": "var",
+      "field": "exp . id",
+      "subscript": "exp(arrayname) [ exp(index) ]",
+      "arrowfield": "exp -> id"
+    },
+    "ty": {
+      "name": "id",
+      "void": "void",
+      "int": "inttype",
+      "real": "realtype",
+      "bool": "boolean",
+      "char": "chartype",
+      "short": "shorttype",
+      "pointer": "* ty",
+      "poly": "id < ty >",
+      "func": "function : ( fieldlist(params) ) => ( fieldlist(result) )"
+    },
+    "mems": {
+      "nospecifier": "declist",
+      "public": "public : declist",
+      "private": "private : declist",
+      "protected": "protected : declist"
+    },
+    "memlist": {
+      "mems": "mems",
+      "memlist": "memlist mems"
+    },
+    "field": {
+      "noinit": "var という ty",
+      "func":"function : id ( fieldlist(params) ) => ( fieldlist(result) )"
+    },
+    "explist": {
+      "null": "",
+      "exp": "exp",
+      "explist": "exp , explist"
+    },
+    "stmlist": {
+      "null": "",
+      "stm": "stm",
+      "stmlist": "stm stmlist"
+    },
+    "declist": {
+      "null": "",
+      "dec": "dec",
+      "declist": "dec declist"
+    },
+    "fieldlist": {
+      "null": "",
+      "field": "field",
+      "fieldlist": "field , fieldlist"
     }
+  },
+  "errors":{
+      "keywords":{
+          "lineNum":"行目",
+          "charNum":"文字目"
+      },
+      "parser":{
+          "unexpectedtoken":"「$1」の前の単語、もしくは文字が抜けています。"
+      },
+      "code":{
+          "none":"プログラムがありません。",
+          "nomain":"実行関数がありません。",
+          "declaredoesntwork":"この宣言をすることはできません。",
+          "templatedoesntwork":"関数とクラス以外のテンプレートを宣言することはできません。"
+      },
+      "notsupport":{
+          "multiplereturn":"複数変数を返す関数を宣言することはできません。",
+          "importinclass":"クラス宣言内で関数をJavaScriptから読み込むことはできません。"
+      },
+      "type":{
+          "nomatch":"$1と$2の型が合いません。",
+          "notclass":"$1の型がクラスではありません。",
+          "notobject":"$1はオブジェクトではありません。",
+          "notarray":"$1は配列ではありません。",
+          "notpointer":"$1はポインターではありません。",
+          "element":"$1番目の要素が他の要素の型と合いません。",
+          "add":"この二つの項を足すことはできません。",
+          "sub":"この二つの項を引くことはできません。",
+          "mul":"この二つの項を掛けることはできません。",
+          "div":"この二つの項を割ることはできません。",
+          "mod":"左辺を右辺で割ったときの余りを出すことができません。",
+          "comp":"この二つの項を比べることができません。",
+          "lhs":"左辺が型を持ちません。",
+          "rhs":"右辺が型を持ちません。",
+          "bhs":"両辺が型を持ちません。",
+          "lhsnotbool":"左辺が真偽型ではありません。",
+          "rhsnotbool":"左辺が真偽型ではありません。",
+          "alreadyexists":"$1という名前の型が既にあります。"
+      },
+      "if":{
+          "boolean":"もし文の条件が真偽型ではありません。"
+      },
+      "while":{
+          "boolean":"まで文の条件が真偽型ではありません。"
+      },
+      "for":{
+          "boolean":"からまで文の条件が真偽型ではありません。"
+      },
+      "sizeof":{
+          "var":"この変数のバイト数はわかりません。"
+      },
+      "array":{
+          "invalidsize":"配列の大きさは定数でなければいけません。"
+      },
+      "operator":{
+          "arrow":"この変数はポインターではないため、->演算子を使うことはできません。",
+          "subscript":"配列でもポインターでもないため、要素をアクセスすることはできません。",
+          "field":"この変数はオブジェクトでないため、メンバーをアクセスすることはできません。"
+      },
+      "noexist":{
+          "class":"$1というクラスは存在しません。",
+          "template":"$1というテンプレートは存在しません。",
+          "member":"$1というメンバーは存在しません。",
+          "func":"$1という関数は存在しません。",
+          "var":"$1という変数は存在しません。",
+          "type":"$1という型は存在しません。"
+      },
+      "func":{
+          "few":"関数の引数が足りません。",
+          "many":"関数の引数が多いです。",
+          "cannotcall":"この関数は呼べません。",
+          "unknownfield":"この引数は変数か配列の形に直してください。"
+      },
+      "class":{
+          "private":"$1は非公開メンバーなので、クラス外からアクセスできません。",
+          "protected":"$1は保護メンバーなので、クラス外からアクセスできません。",
+          "nomember":"$1に$2というメンバーはありません。"
+      }
+  }
 }

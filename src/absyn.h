@@ -41,7 +41,8 @@ typedef enum
     A_gtOp,
     A_geOp,
     A_andOp,
-    A_orOp
+    A_orOp,
+    A_assignOp
 } A_oper;
 
 enum stmType

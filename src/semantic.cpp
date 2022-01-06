@@ -1032,7 +1032,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                 else
                 {
                     // printf("%d entry -> kind", entry -> kind);
-                    EM_error(stm->pos, "noexist.function %s", S_name(name));
+                    EM_error(stm->pos, "noexist.func %s", S_name(name));
                 }
             }
             else
@@ -2428,6 +2428,54 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
     assert(d);
     switch (d->kind)
     {
+    case A_operatorDec:{
+        string opId = "";
+        switch(d -> u.op.oper){
+            case A_plusOp:
+                opId = "+";
+                break;
+            case A_minusOp:
+                opId = "-";
+                break;
+            case A_timesOp:
+                opId = "*";
+                break;
+            case A_divideOp:
+                opId = "/";
+                break;
+            case A_modOp:
+                opId = "%";
+                break;
+            case A_eqOp:
+                opId = "==";
+                break;
+            case A_neqOp:
+                opId = "!=";
+                break;
+            case A_ltOp:
+                opId = "<";
+                break;
+            case A_leOp:
+                opId = "<=";
+                break;
+            case A_gtOp:
+                opId = ">";
+                break;
+            case A_geOp:
+                opId = ">=";
+                break;
+            case A_andOp:
+                opId = "&&";
+                break;
+            case A_orOp:
+                opId = "||";
+                break;
+            case A_assignOp:
+                opId = "=";
+                break;
+        }
+        return transDec(venv, tenv, A_FunctionDec(d -> pos, A_FundecList(A_Fundec(d -> pos, S_Symbol(opId), d -> u.op.params, d -> u.op.result, d -> u.op.body), NULL)), level, isLoop, table, classs);
+    }
     case A_varDec:
     {
         struct expty exp;
@@ -2745,7 +2793,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         memberList= flipClassMemberList(memberList);
         for(; memberList-> tail; memberList= memberList-> tail)
         {
-            if(memberList-> head -> dec -> kind == A_functionDec)
+            if(memberList-> head -> dec -> kind == A_functionDec || memberList -> head -> dec -> kind == A_operatorDec)
             {
                 // printf("%s funcname\n", S_name(memberList-> head -> dec -> u.function->head->name));
 
@@ -2769,10 +2817,6 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                     TAB_insert(templateEntry -> u.templatee.specific, classs -> u.poly.typeParam, E_ClassEntry(d -> u.classs.name, classSize, varTypes, methods, type));
                     S_enter(tenv, d -> u.classs.name, templateEntry);
                 }
-            }
-            else if(memberList -> head -> dec -> kind == A_operatorDec){
-                T_module mod = transDec(venv, tenv, memberList -> head -> dec, level, isLoop, methods, type);
-                mod -> u.func -> params = T_TypeList(T_i32, mod -> u.func -> params);
             }
         }
         // templatee declartaion is before T_SeqMod(modlist)

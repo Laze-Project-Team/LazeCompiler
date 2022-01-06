@@ -586,8 +586,14 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "stm.return.exp"){
             result -> u.stm = A_ReturnStm(result -> start, tokenData.at("exp").exp);
         }
-        else if(ruleName == "stm.call"){
+        else if(ruleName == "stm.return.var"){
+            result -> u.stm = A_ReturnStm(result -> start, A_VarExp(result -> start, tokenData.at("var").var));
+        }
+        else if(ruleName == "stm.call.normal"){
             result -> u.stm = A_CallStm(result -> start, tokenData.at("exp").exp, tokenData.at("explist").expList);
+        }
+        else if(ruleName == "stm.call.noexp"){
+            result -> u.stm = A_CallStm(result -> start, tokenData.at("exp").exp, A_ExpList(NULL, NULL));
         }
         else if(ruleName == "stm.loop"){
             // std::cout << "looooooooooooooop" << std::endl;
@@ -615,7 +621,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.dec = A_VarDec(result -> start, A_AssignStm(result -> start, tokenData.at("var").var, NULL, TRUE), tokenData.at("ty").type);
         }
         else if(ruleName == "dec.object"){
-            result -> u.dec = A_ObjectDec(result -> start, tokenData.at("ty").type, S_Symbol(tokenData.at("id").id), tokenData.at("explist").expList);
+            result -> u.dec = A_ObjectDec(result -> start, tokenData.at("ty").type, tokenData.at("var").var -> u.simple, tokenData.at("explist").expList);
         }
         else if(ruleName == "dec.class.noinherit"){
             result -> u.dec = A_ClassDec(result -> start, S_Symbol(tokenData.at("id(name)").id), tokenData.at("memlist").memList, NULL);
@@ -636,52 +642,11 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.dec = A_TemplateDec(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("dec").dec);
         }
         else if(ruleName == "dec.operator.normal"){
-            string opId = "";
-            switch(tokenData.at("oper").oper){
-                case A_plusOp:
-                    opId = "+";
-                    break;
-                case A_minusOp:
-                    opId = "-";
-                    break;
-                case A_timesOp:
-                    opId = "*";
-                    break;
-                case A_divideOp:
-                    opId = "/";
-                    break;
-                case A_modOp:
-                    opId = "%";
-                    break;
-                case A_eqOp:
-                    opId = "==";
-                    break;
-                case A_neqOp:
-                    opId = "!=";
-                    break;
-                case A_ltOp:
-                    opId = "<";
-                    break;
-                case A_leOp:
-                    opId = "<=";
-                    break;
-                case A_gtOp:
-                    opId = ">";
-                    break;
-                case A_geOp:
-                    opId = ">=";
-                    break;
-                case A_andOp:
-                    opId = "&&";
-                    break;
-                case A_orOp:
-                    opId = "||";
-                    break;
-            }
-            result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(opId), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
+            result -> u.dec = A_OperatorDec(result -> start, tokenData.at("oper").oper, tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm);
         }
         else if(ruleName == "dec.operator.assign"){
-            result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol("="), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
+            result -> u.dec = A_OperatorDec(result -> start, A_assignOp, tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm);
+            // result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol("="), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
         }
     }
     //var
@@ -961,7 +926,7 @@ static grammarTy createGrammarList(std::string ruleStr, std::string ruleNameStr,
                 continue;
             }
             if(std::regex_search(tok, match, tokenWithPeriod)){
-                std::cout << match[0] << std::endl;
+                // std::cout << match[0] << std::endl;
                 std::string tempRuleStr = ruleStr;
                 if(input[match[1]][match[2]].is_string()){
                     tempRuleStr = std::regex_replace(tempRuleStr, std::regex(tok), input[match[1]][match[2]].get<std::string>());
@@ -1008,7 +973,7 @@ static grammarTy createOriginalGrammarList(std::string ruleStr, std::string rule
                 continue;
             }
             if(std::regex_search(tok, match, tokenWithPeriod)){
-                std::cout << match[0] << std::endl;
+                // std::cout << match[0] << std::endl;
                 std::string tempRuleStr = ruleStr;
                 if(input[match[1]][match[2]].is_string()){
                     tempRuleStr = std::regex_replace(tempRuleStr, std::regex(tok), input[match[1]][match[2]].get<std::string>());
@@ -1047,6 +1012,17 @@ tableTy P_generateParseTable(const grammarListTy &grammarList){
     itemSets.front().push_back(std::make_pair("additionalRules", std::deque<std::string>({"------------------"})));
     itemSets = createAllItemSets(itemSets, grammarList);
     itemSetTy extended = toExtendedGrammar(itemSets);
+    for(int i = 0; i < itemSets.size(); i++){
+        std::cout << "itemSet" << i << ":" << std::endl;
+        for(const auto &j: itemSets.at(i)){
+            std::cout << j.first << "-> ";
+            for(const auto &k: j.second){
+                std::cout << k << " ";
+            }
+        std::cout << std::endl;
+        }
+        std::cout << std::endl;
+    }
     // std::cout << itemSets.size() << std::endl;
     firstSetTy FIRSTset = generateFirstSet(extended);
     firstSetTy FOLLOWset = generateFollowSet(extended, FIRSTset);
@@ -1233,6 +1209,7 @@ A_decList P_parse(L_tokenList list, const char *filename1){
 
 A_decList P_parseWithFile(L_tokenList list, const std::string filename1, const std::string parserFile){
     operators = L_getOperators();
+    // std::cout << "aaaaa" << std::endl;
     grammarListTy grammarList;
     grammarListTy originalGrammarList;
 
