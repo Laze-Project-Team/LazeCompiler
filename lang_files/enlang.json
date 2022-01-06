@@ -75,7 +75,9 @@
             {"name":",", "regex": "^(,|、)", "precedence": 20}
         ],
         "main":"main",
-        "stringClass":"文字列"
+        "stringClass":"string",
+        "stmliststart": "{",
+        "stmlistend":"}"
     },
     "grammar":{
         "exp":{
@@ -135,7 +137,9 @@
                 "noexp":"return lineend",
                 "exp":"return ( exp ) lineend"
             },
-            "call":"exp ( explist ) lineend",
+            "call":{
+                "normal":"exp ( explist ) lineend"
+            },
             "loop":"loop stm",
             "break":"break lineend",
             "continue":"continue lineend",
@@ -147,7 +151,7 @@
                 "init":"ty : var = exp lineend",
                 "noinit":"ty : var lineend"
             },
-            "object": "ty : id ( explist ) lineend",
+            "object": "ty : var ( explist ) lineend",
             "class": {
                 "noinherit":"class : id(name) { memlist }",
                 "inherit":"class : id(name) <- id(inherit) { memlist }"
@@ -222,8 +226,8 @@
     },
     "errors":{
         "keywords":{
-            "lineNum":"行目",
-            "charNum":"文字目"
+            "lineNum":"Line $1",
+            "charNum":"Column $1"
         },
         "parser":{
             "unexpectedtoken":"「$1」の前の単語、もしくは文字が抜けています。"

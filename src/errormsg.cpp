@@ -37,7 +37,11 @@ void EM_error(int pos, const char *message, ...)
         fileName = errorPos.fileName.substr(errorPos.fileName.find_last_of("/") + 1);
     }
     std::fprintf(stderr, "%s:", fileName.substr(2).c_str());
-    std::fprintf(stderr,  "%d%s, %d%s:", errorPos.lineNum, errorJson["keywords"]["lineNum"].get<std::string>().c_str(), errorPos.columnNum, errorJson["keywords"]["charNum"].get<std::string>().c_str());
+    std::string lineNum = errorJson["keywords"]["lineNum"].get<std::string>();
+    std::string charNum = errorJson["keywords"]["charNum"].get<std::string>();
+    lineNum = std::regex_replace(lineNum, std::regex("\\$1"), std::to_string(errorPos.lineNum));
+    charNum = std::regex_replace(charNum, std::regex("\\$1"), std::to_string(errorPos.columnNum));
+    std::cerr << lineNum << ", " << charNum << ": ";
     char errorMes[1024] = "";
     std::stringstream errorInput(errorMes);
     va_start(ap, message);

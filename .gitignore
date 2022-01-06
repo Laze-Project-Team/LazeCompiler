@@ -25,3 +25,11 @@ jatest.laze
 natjatest.laze
 std.laze
 test.lang
+dist
+compiler
+compiler.zip
+.jatest.lang.json
+.jatest.lang.wat
+.natjatest.lang.wat
+.natjatest.lang.wasm
+natjatest.lang
