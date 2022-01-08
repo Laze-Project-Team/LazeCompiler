@@ -156,12 +156,16 @@
                 "noinherit":"class : id(name) { memlist }",
                 "inherit":"class : id(name) <- id(inherit) { memlist }"
             },
-            "func": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-            "jsload": "function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) lineend",
+            "func": {
+                "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm"
+            },
+            "jsload": {
+                "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) lineend"
+            },
             "jsexport": "jsexport ( id , string ) lineend",
             "operator": {
                 "normal":"function : operator oper ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-                "assign":"function : operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm"
+                "assignnormal":"function : operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm"
             },
             "template": "type < id > : dec"
         },
@@ -182,7 +186,7 @@
             "short" : "shorttype",
             "pointer" : "* ty",
             "poly" : "id < ty >",
-            "func": "function : ( fieldlist(params) ) => ( fieldlist(result) )"
+            "funcnormal":"function : ( fieldlist(params) ) => ( fieldlist(result) )"
         },
         "mems":{
             "nospecifier": "declist",

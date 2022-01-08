@@ -1,13 +1,13 @@
 {
     "config":{
-        "name":"en",
-        "type":"programming",
+        "name":"naten",
+        "type":"natural",
         "tabsensitive": false
     },
     "tokens":{
         "keywords":
         {
-            "if":"if",
+            "If":"If",
             "then":"then",
             "else":"else",
             "from":"from",
@@ -20,8 +20,9 @@
             "shorttype":"short",
             "realtype":"double",
             "chartype":"char",
-            "return":"return",
-            "type":"template",
+            "return":"Return",
+            "template":"template",
+            "type":"type",
             "void":"void",
             "nul":"nul",
             "boolean":"boolean",
@@ -35,9 +36,49 @@
             "private":"private",
             "protected":"protected",
             "repeat":"repeat",
-            "lineend": ";",
             "operator":"operator",
-            "typeComp":"typeComp"
+            "typeComp":"typeComp",
+            "Assign":"Assign",
+            "Add":"Add",
+            "Substract":"Substract",
+            "Multiply":"Multiply",
+            "Divide":"Divide",
+            "by":"by",
+            "is":"is",
+            "not":"not",
+            "of":"of",
+            "in":"in",
+            "Increment":"Increment",
+            "Decrement":"Decrement",
+            "Until":"Until",
+            "First":"First",
+            "Initialize":"Initialize",
+            "initialize":"initialize",
+            "Declare":"Declare",
+            "as":"as",
+            "at":"at",
+            "with":"with",
+            "variable":"variable",
+            "object":"object",
+            "value":"value",
+            "Call":"Call",
+            "element":"element",
+            "pointer":"pointer",
+            "here":"here",
+            "that":"that",
+            "takes":"takes",
+            "and":"and",
+            "returns":"returns",
+            "code":"code",
+            "times":"times",
+            "tohere":"ending here.",
+            "fromhere":"starting here",
+            "Load":"Load",
+            "Export":"Export",
+            "execute":"execute",
+            "inheriting":"inherting",
+            "members":"members",
+            "Otherwise":"Otherwise"
         },
         "int":"[0-9]",
         "hex":"0x[0-9A-F]+",
@@ -76,8 +117,8 @@
         ],
         "main":"main",
         "stringClass":"string",
-        "stmliststart": "{",
-        "stmlistend":"}"
+        "stmliststart": "fromhere",
+        "stmlistend":"tohere"
     },
     "grammar":{
         "exp":{
@@ -90,7 +131,7 @@
             "array":"[ explist ]",
             "func": "( fieldlist(params) ) => ( fieldlist(result) ) stm",
             "var":"var",
-            "field":"exp . id",
+            "field":"id of exp",
             "subscript":"exp(arrayname) [ exp(index) ]",
             "arrowfield":"exp -> id",
             "int": "int",
@@ -107,8 +148,8 @@
             "mul":"*",
             "div":"/",
             "mod":"%",
-            "eq":"==",
-            "neq":"!=",
+            "eq":"is",
+            "neq":"is not",
             "ge":">=",
             "gt":">",
             "le":"<=",
@@ -118,68 +159,81 @@
         },
         "stm":{
             "assign":{
-                "normal":"var = exp lineend",
-                "add":"var + = exp lineend",
-                "sub":"var - = exp lineend",
-                "mul":"var * = exp lineend",
-                "div":"var / = exp lineend",
-                "increment":"var + + lineend",
-                "decrement":"var - - lineend"
+                "normal":"Assign exp to var .",
+                "add":"Add exp to var .",
+                "sub":"Substract exp from var .",
+                "mul":"Multiply var by exp .",
+                "div":"Divide var by exp .",
+                "increment":"Increment var .",
+                "decrement":"Decrement var ."
             },
             "if":{
-                "if":"if ( exp ) stm(then)",
-                "ifelse":"if ( exp ) stm(then) else stm(else)"
+                "if":"If exp then execute code stm(then)",
+                "ifelse":"If exp then execute code stm(then) Otherwise execute code stm(else)"
             },
-            "while":"( exp ) to stm",
+            "while":"Until exp stm",
             "dec": "dec(stm)",
             "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
             "return":{
-                "noexp":"return lineend",
-                "exp":"return ( exp ) lineend"
+                "noexp":"return .",
+                "exp":"return value exp ."
             },
             "call":{
-                "normal":"exp ( explist ) lineend"
+                "normal":"Call exp with value explist .",
+                "noexp":"Call exp ."
             },
             "loop":"loop stm",
-            "break":"break lineend",
-            "continue":"continue lineend",
-            "compound":"{ stmlist }",
-            "repeat":"( exp ) repeat stm"
+            "break":"break .",
+            "continue":"continue .",
+            "compound":"fromhere stmlist tohere",
+            "repeat":"repeat exp times stm"
         },
         "dec":{
             "var": {
-                "init":"ty : var = exp lineend",
-                "noinit":"ty : var lineend"
+                "init":"Initialize variable var as ty with exp .",
+                "noinit":"Declare variable var as ty ."
             },
-            "object": "ty : var ( explist ) lineend",
+            "object": "Initialize object var as ty with explist .",
             "class": {
-                "noinherit":"class : id(name) { memlist }",
-                "inherit":"class : id(name) <- id(inherit) { memlist }"
+                "noinherit":"Declare class id(name) with members fromhere memlist tohere",
+                "inherit":"Declare class id(name) inheriting from id(inherit) with members fromhere memlist tohere"
             },
             "func": {
-                "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm"
+                "normal":"Declare function id that takes fieldlist(params) and returns fieldlist(result) with code stm",
+                "noparam":"Declare function id that returns fieldlist(result) with code stm",
+                "noresult":"Declare function id that takes fieldlist(params) with code stm",
+                "noparamnoresult":"Declare function id with code stm"
             },
             "jsload": {
-                "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) lineend"
+                "normal":"Load function id from string(func) of string(module) that takes fieldlist(params) and returns fieldlist(result) .",
+                "noparam":"Load function id from string(func) of string(module) that returns fieldlist(result) .",
+                "noresult":"Load function id from string(func) of string(module) that takes fieldlist(params) .",
+                "noparamnoresult":"Load function id from string(func) of string(module) ."
             },
-            "jsexport": "jsexport ( id , string ) lineend",
+            "jsexport": "Export function id to string .",
             "operator": {
                 "normal":"function : operator oper ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-                "assignnormal":"function : operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm"
+                "noparam":"function : operator oper ( ) => ( fieldlist(result) ) stm",
+                "noresult":"function : operator oper ( fieldlist(params) ) => ( ) stm",
+                "noparamnoresult":"function : operator oper ( ) => ( ) stm",
+                "assignnormal":"function operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+                "assignnoparam":"function operator = ( ) => ( fieldlist(result) ) stm",
+                "assignnoresult":"function operator = ( fieldlist(params) ) => ( ) stm",
+                "assignnoparamnoresult":"function operator = ( ) => ( ) stm"
             },
-            "template": "type < id > : dec"
+            "template": "Declare template that takes id . dec"
         },
         "var": {
             "simple":"id",
-            "field":"var . id",
-            "deref":"* var",
-            "subscript":"var [ exp ]",
+            "field":"id of var",
+            "deref":"variable at var",
+            "subscript":"element exp in var",
             "arrowfield":"var -> id"
         },
         "varExp": {
             "var":"var",
-            "field":"exp . id",
-            "subscript":"exp(arrayname) [ exp(index) ]",
+            "field":"id of exp",
+            "subscript":"element exp(index) of exp(arrayname)",
             "arrowfield":"exp -> id"
         },
         "ty": {
@@ -190,9 +244,12 @@
             "bool" : "boolean",
             "char" : "chartype",
             "short" : "shorttype",
-            "pointer" : "* ty",
+            "pointer" : "pointer of ty",
             "poly" : "id < ty >",
-            "funcnormal": "function : ( fieldlist(params) ) => ( fieldlist(result) )"
+            "funcnormal":"function : ( fieldlist(params) ) => ( fieldlist(result) )",
+            "funcnoparam":"function : ( ) => ( fieldlist(result) )",
+            "funcnoresult":"function : ( fieldlist(params) ) => ( )",
+            "funcnoparamnoresult":"function : ( ) => ( )"        
         },
         "mems":{
             "nospecifier": "declist",
@@ -205,7 +262,7 @@
             "memlist": "memlist mems"
         },
         "field": {
-            "noinit":"ty : var",
+            "noinit":"var as ty",
             "func":"function : id ( fieldlist(params) ) => ( fieldlist(result) )"
         },
         "explist":{
@@ -224,7 +281,6 @@
             "declist":"dec declist"
         },
         "fieldlist":{
-            "null":"",
             "field":"field",
             "fieldlist":"field , fieldlist"
         }

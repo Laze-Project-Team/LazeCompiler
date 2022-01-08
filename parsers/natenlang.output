@@ -1,0 +1,4269 @@
+itemSet0:
+start-> >>> declist 
+additionalRules-> -------------------------------
+declist.null-> >>>
+declist.declist-> >>> dec declist
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+declist.dec-> >>> dec
+additionalRules-> ------------------
+
+itemSet1:
+dec.var.noinit-> Declare >>> variable var as ty .
+dec.func.noresult-> Declare >>> function id that takes fieldlist with code stm
+dec.func.noparamnoresult-> Declare >>> function id with code stm
+dec.class.noinherit-> Declare >>> class id with members fromhere memlist tohere
+dec.func.noparam-> Declare >>> function id that returns fieldlist with code stm
+dec.func.normal-> Declare >>> function id that takes fieldlist and returns fieldlist with code stm
+dec.class.inherit-> Declare >>> class id inheriting from id with members fromhere memlist tohere
+dec.template-> Declare >>> template that takes id . dec
+additionalRules-> -------------------
+
+itemSet2:
+dec.jsexport-> Export >>> function id to string .
+additionalRules-> -------------------
+
+itemSet3:
+dec.var.init-> Initialize >>> variable var as ty with exp .
+dec.object-> Initialize >>> object var as ty with explist .
+additionalRules-> -------------------
+
+itemSet4:
+dec.jsload.noparamnoresult-> Load >>> function id from string of string .
+dec.jsload.normal-> Load >>> function id from string of string that takes fieldlist and returns fieldlist .
+dec.jsload.noresult-> Load >>> function id from string of string that takes fieldlist .
+dec.jsload.noparam-> Load >>> function id from string of string that returns fieldlist .
+additionalRules-> -------------------
+
+itemSet5:
+dec.operator.noparam-> function >>> : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> function >>> operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> function >>> operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> function >>> operator = ( ) => ( ) stm
+dec.operator.noparamnoresult-> function >>> : operator oper ( ) => ( ) stm
+dec.operator.normal-> function >>> : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.noresult-> function >>> : operator oper ( fieldlist ) => ( ) stm
+dec.operator.assignnoresult-> function >>> operator = ( fieldlist ) => ( ) stm
+additionalRules-> -------------------
+
+itemSet6:
+declist.null->  >>>
+additionalRules-> -------------------
+
+itemSet7:
+declist.declist-> dec >>> declist
+declist.dec-> dec >>>
+additionalRules-> -------------------
+declist.null-> >>>
+declist.declist-> >>> dec declist
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+declist.dec-> >>> dec
+
+itemSet8:
+start-> declist >>>
+additionalRules-> -------------------
+
+itemSet9:
+dec.class.noinherit-> Declare class >>> id with members fromhere memlist tohere
+dec.class.inherit-> Declare class >>> id inheriting from id with members fromhere memlist tohere
+additionalRules-> -------------------
+
+itemSet10:
+dec.func.noresult-> Declare function >>> id that takes fieldlist with code stm
+dec.func.noparamnoresult-> Declare function >>> id with code stm
+dec.func.noparam-> Declare function >>> id that returns fieldlist with code stm
+dec.func.normal-> Declare function >>> id that takes fieldlist and returns fieldlist with code stm
+additionalRules-> -------------------
+
+itemSet11:
+dec.template-> Declare template >>> that takes id . dec
+additionalRules-> -------------------
+
+itemSet12:
+dec.var.noinit-> Declare variable >>> var as ty .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet13:
+dec.jsexport-> Export function >>> id to string .
+additionalRules-> -------------------
+
+itemSet14:
+dec.object-> Initialize object >>> var as ty with explist .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet15:
+dec.var.init-> Initialize variable >>> var as ty with exp .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet16:
+dec.jsload.noparamnoresult-> Load function >>> id from string of string .
+dec.jsload.normal-> Load function >>> id from string of string that takes fieldlist and returns fieldlist .
+dec.jsload.noresult-> Load function >>> id from string of string that takes fieldlist .
+dec.jsload.noparam-> Load function >>> id from string of string that returns fieldlist .
+additionalRules-> -------------------
+
+itemSet17:
+dec.operator.assignnormal-> function operator >>> = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> function operator >>> = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> function operator >>> = ( ) => ( ) stm
+dec.operator.assignnoresult-> function operator >>> = ( fieldlist ) => ( ) stm
+additionalRules-> -------------------
+
+itemSet18:
+dec.operator.noparam-> function : >>> operator oper ( ) => ( fieldlist ) stm
+dec.operator.noparamnoresult-> function : >>> operator oper ( ) => ( ) stm
+dec.operator.normal-> function : >>> operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.noresult-> function : >>> operator oper ( fieldlist ) => ( ) stm
+additionalRules-> -------------------
+
+itemSet19:
+declist.declist-> dec declist >>>
+additionalRules-> -------------------
+
+itemSet20:
+dec.class.noinherit-> Declare class id >>> with members fromhere memlist tohere
+dec.class.inherit-> Declare class id >>> inheriting from id with members fromhere memlist tohere
+additionalRules-> -------------------
+
+itemSet21:
+dec.func.noresult-> Declare function id >>> that takes fieldlist with code stm
+dec.func.noparamnoresult-> Declare function id >>> with code stm
+dec.func.noparam-> Declare function id >>> that returns fieldlist with code stm
+dec.func.normal-> Declare function id >>> that takes fieldlist and returns fieldlist with code stm
+additionalRules-> -------------------
+
+itemSet22:
+dec.template-> Declare template that >>> takes id . dec
+additionalRules-> -------------------
+
+itemSet23:
+var.subscript-> element >>> exp in var
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet24:
+var.deref-> variable >>> at var
+additionalRules-> -------------------
+
+itemSet25:
+var.simple-> id >>>
+var.field-> id >>> of var
+additionalRules-> -------------------
+
+itemSet26:
+dec.var.noinit-> Declare variable var >>> as ty .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet27:
+dec.jsexport-> Export function id >>> to string .
+additionalRules-> -------------------
+
+itemSet28:
+dec.object-> Initialize object var >>> as ty with explist .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet29:
+dec.var.init-> Initialize variable var >>> as ty with exp .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet30:
+dec.jsload.noparamnoresult-> Load function id >>> from string of string .
+dec.jsload.normal-> Load function id >>> from string of string that takes fieldlist and returns fieldlist . 
+dec.jsload.noresult-> Load function id >>> from string of string that takes fieldlist .
+dec.jsload.noparam-> Load function id >>> from string of string that returns fieldlist .
+additionalRules-> -------------------
+
+itemSet31:
+dec.operator.assignnormal-> function operator = >>> ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> function operator = >>> ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> function operator = >>> ( ) => ( ) stm
+dec.operator.assignnoresult-> function operator = >>> ( fieldlist ) => ( ) stm
+additionalRules-> -------------------
+
+itemSet32:
+dec.operator.noparam-> function : operator >>> oper ( ) => ( fieldlist ) stm
+dec.operator.noparamnoresult-> function : operator >>> oper ( ) => ( ) stm
+dec.operator.normal-> function : operator >>> oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.noresult-> function : operator >>> oper ( fieldlist ) => ( ) stm
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet33:
+dec.class.inherit-> Declare class id inheriting >>> from id with members fromhere memlist tohere
+additionalRules-> -------------------
+
+itemSet34:
+dec.class.noinherit-> Declare class id with >>> members fromhere memlist tohere
+additionalRules-> -------------------
+
+itemSet35:
+dec.func.noresult-> Declare function id that >>> takes fieldlist with code stm
+dec.func.noparam-> Declare function id that >>> returns fieldlist with code stm
+dec.func.normal-> Declare function id that >>> takes fieldlist and returns fieldlist with code stm
+additionalRules-> -------------------
+
+itemSet36:
+dec.func.noparamnoresult-> Declare function id with >>> code stm
+additionalRules-> -------------------
+
+itemSet37:
+dec.template-> Declare template that takes >>> id . dec
+additionalRules-> -------------------
+
+itemSet38:
+exp.false-> false >>>
+additionalRules-> -------------------
+
+itemSet39:
+exp.sizeof-> sizeof >>> ( var )
+additionalRules-> -------------------
+
+itemSet40:
+exp.true-> true >>>
+additionalRules-> -------------------
+
+itemSet41:
+exp.typeeq-> typeComp >>> ( ty , ty )
+additionalRules-> -------------------
+
+itemSet42:
+exp.paren-> ( >>> exp )
+exp.func-> ( >>> fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var 
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet43:
+exp.array-> [ >>> explist ]
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet44:
+exp.minus-> - >>> exp
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet45:
+exp.address-> & >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet46:
+exp.char-> char >>>
+additionalRules-> -------------------
+
+itemSet47:
+exp.real-> real >>>
+additionalRules-> -------------------
+
+itemSet48:
+exp.string-> string >>>
+additionalRules-> -------------------
+
+itemSet49:
+exp.int-> int >>> 
+additionalRules-> -------------------
+
+itemSet50:
+exp.field-> id >>> of exp
+var.simple-> id >>>
+var.field-> id >>> of var
+additionalRules-> -------------------
+
+itemSet51:
+var.subscript-> element exp >>> in var
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet52:
+exp.var-> var >>>
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet53:
+var.deref-> variable at >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet54:
+var.field-> id of >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet55:
+dec.var.noinit-> Declare variable var as >>> ty .
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.funcnoparamnoresult-> >>> function : ( ) => ( )
+ty.funcnoparam-> >>> function : ( ) => ( fieldlist )
+ty.pointer-> >>> pointer of ty
+ty.int-> >>> inttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.char-> >>> chartype
+ty.funcnoresult-> >>> function : ( fieldlist ) => ( )
+ty.void-> >>> void
+
+itemSet56:
+var.arrowfield-> var -> >>> id
+additionalRules-> -------------------
+
+itemSet57:
+dec.jsexport-> Export function id to >>> string .
+additionalRules-> -------------------
+
+itemSet58:
+dec.object-> Initialize object var as >>> ty with explist .
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.funcnoparamnoresult-> >>> function : ( ) => ( )
+ty.funcnoparam-> >>> function : ( ) => ( fieldlist )
+ty.pointer-> >>> pointer of ty
+ty.int-> >>> inttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.char-> >>> chartype
+ty.funcnoresult-> >>> function : ( fieldlist ) => ( )
+ty.void-> >>> void
+
+itemSet59:
+dec.var.init-> Initialize variable var as >>> ty with exp .
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.funcnoparamnoresult-> >>> function : ( ) => ( )
+ty.funcnoparam-> >>> function : ( ) => ( fieldlist )
+ty.pointer-> >>> pointer of ty
+ty.int-> >>> inttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.char-> >>> chartype
+ty.funcnoresult-> >>> function : ( fieldlist ) => ( )
+ty.void-> >>> void
+
+itemSet60:
+dec.jsload.noparamnoresult-> Load function id from >>> string of string .
+dec.jsload.normal-> Load function id from >>> string of string that takes fieldlist and returns fieldlist .
+dec.jsload.noresult-> Load function id from >>> string of string that takes fieldlist .
+dec.jsload.noparam-> Load function id from >>> string of string that returns fieldlist .
+additionalRules-> -------------------
+
+itemSet61:
+dec.operator.assignnormal-> function operator = ( >>> fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> function operator = ( >>> ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> function operator = ( >>> ) => ( ) stm
+dec.operator.assignnoresult-> function operator = ( >>> fieldlist ) => ( ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet62:
+oper.eq-> is >>>
+oper.neq-> is >>> not
+additionalRules-> -------------------
+
+itemSet63:
+oper.mul-> * >>>
+additionalRules-> -------------------
+
+itemSet64:
+oper.div-> / >>>
+additionalRules-> -------------------
+
+itemSet65:
+oper.mod-> % >>>
+additionalRules-> -------------------
+
+itemSet66:
+oper.add-> + >>>
+additionalRules-> -------------------
+
+itemSet67:
+oper.sub-> - >>>
+additionalRules-> -------------------
+
+itemSet68:
+oper.le-> <= >>>
+additionalRules-> -------------------
+
+itemSet69:
+oper.ge-> >= >>>
+additionalRules-> -------------------
+
+itemSet70:
+oper.lt-> < >>>
+additionalRules-> -------------------
+
+itemSet71:
+oper.gt-> > >>>
+additionalRules-> -------------------
+
+itemSet72:
+oper.and-> && >>>
+additionalRules-> -------------------
+
+itemSet73:
+oper.or-> || >>>
+additionalRules-> -------------------
+
+itemSet74:
+dec.operator.noparam-> function : operator oper >>> ( ) => ( fieldlist ) stm
+dec.operator.noparamnoresult-> function : operator oper >>> ( ) => ( ) stm
+dec.operator.normal-> function : operator oper >>> ( fieldlist ) => ( fieldlist ) stm
+dec.operator.noresult-> function : operator oper >>> ( fieldlist ) => ( ) stm
+additionalRules-> -------------------
+
+itemSet75:
+dec.class.inherit-> Declare class id inheriting from >>> id with members fromhere memlist tohere
+additionalRules-> -------------------
+
+itemSet76:
+dec.class.noinherit-> Declare class id with members >>> fromhere memlist tohere
+additionalRules-> -------------------
+
+itemSet77:
+dec.func.noparam-> Declare function id that returns >>> fieldlist with code stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet78:
+dec.func.noresult-> Declare function id that takes >>> fieldlist with code stm
+dec.func.normal-> Declare function id that takes >>> fieldlist and returns fieldlist with code stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet79:
+dec.func.noparamnoresult-> Declare function id with code >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm 
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet80:
+dec.template-> Declare template that takes id >>> . dec
+additionalRules-> -------------------
+
+itemSet81:
+exp.sizeof-> sizeof ( >>> var )
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet82:
+exp.typeeq-> typeComp ( >>> ty , ty )
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.funcnoparamnoresult-> >>> function : ( ) => ( )
+ty.funcnoparam-> >>> function : ( ) => ( fieldlist )
+ty.pointer-> >>> pointer of ty
+ty.int-> >>> inttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.char-> >>> chartype
+ty.funcnoresult-> >>> function : ( fieldlist ) => ( )
+ty.void-> >>> void
+
+itemSet83:
+field.func-> function >>> : id ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet84:
+exp.paren-> ( exp >>> )
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet85:
+exp.var-> var >>>
+var.arrowfield-> var >>> -> id
+field.noinit-> var >>> as ty
+additionalRules-> -------------------
+
+itemSet86:
+fieldlist.field-> field >>>
+fieldlist.fieldlist-> field >>> , fieldlist
+additionalRules-> -------------------
+
+itemSet87:
+exp.func-> ( fieldlist >>> ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet88:
+explist.null->  >>>
+additionalRules-> -------------------
+
+itemSet89:
+explist.explist-> exp >>> , explist
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+explist.exp-> exp >>>
+additionalRules-> ------------------- 
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet90:
+exp.array-> [ explist >>> ]
+additionalRules-> -------------------
+
+itemSet91:
+exp.minus-> - exp >>>
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet92:
+exp.address-> & var >>>
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet93:
+exp.field-> id of >>> exp
+var.field-> id of >>> var
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet94:
+var.subscript-> element exp in >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet95:
+exp.call-> exp ( >>> explist )
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty ) 
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet96:
+exp.subscript-> exp [ >>> exp ]
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet97:
+exp.arrowfield-> exp -> >>> id
+additionalRules-> -------------------
+
+itemSet98:
+exp.op-> exp oper >>> exp
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet99:
+var.deref-> variable at var >>>
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet100:
+var.field-> id of var >>>
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet101:
+ty.bool-> boolean >>>
+additionalRules-> -------------------
+
+itemSet102:
+ty.char-> chartype >>>
+additionalRules-> -------------------
+
+itemSet103:
+ty.funcnoparamnoresult-> function >>> : ( ) => ( )
+ty.funcnoparam-> function >>> : ( ) => ( fieldlist )
+ty.funcnormal-> function >>> : ( fieldlist ) => ( fieldlist )
+ty.funcnoresult-> function >>> : ( fieldlist ) => ( )
+additionalRules-> -------------------
+
+itemSet104:
+ty.int-> inttype >>>
+additionalRules-> -------------------
+
+itemSet105:
+ty.pointer-> pointer >>> of ty
+additionalRules-> -------------------
+
+itemSet106:
+ty.real-> realtype >>>
+additionalRules-> -------------------
+
+itemSet107:
+ty.short-> shorttype >>>
+additionalRules-> -------------------
+
+itemSet108:
+ty.void-> void >>>
+additionalRules-> -------------------
+
+itemSet109:
+ty.poly-> id >>> < ty >
+ty.name-> id >>>
+additionalRules-> -------------------
+
+itemSet110:
+dec.var.noinit-> Declare variable var as ty >>> .
+additionalRules-> -------------------
+
+itemSet111:
+var.arrowfield-> var -> id >>>
+additionalRules-> -------------------
+
+itemSet112:
+dec.jsexport-> Export function id to string >>> .
+additionalRules-> -------------------
+
+itemSet113:
+dec.object-> Initialize object var as ty >>> with explist .
+additionalRules-> -------------------
+
+itemSet114:
+dec.var.init-> Initialize variable var as ty >>> with exp .
+additionalRules-> -------------------
+
+itemSet115:
+dec.jsload.noparamnoresult-> Load function id from string >>> of string .
+dec.jsload.normal-> Load function id from string >>> of string that takes fieldlist and returns fieldlist .
+dec.jsload.noresult-> Load function id from string >>> of string that takes fieldlist .
+dec.jsload.noparam-> Load function id from string >>> of string that returns fieldlist .
+additionalRules-> -------------------
+
+itemSet116:
+dec.operator.assignnoparam-> function operator = ( ) >>> => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> function operator = ( ) >>> => ( ) stm
+additionalRules-> -------------------
+
+itemSet117:
+field.noinit-> var >>> as ty
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet118:
+dec.operator.assignnormal-> function operator = ( fieldlist >>> ) => ( fieldlist ) stm
+dec.operator.assignnoresult-> function operator = ( fieldlist >>> ) => ( ) stm
+additionalRules-> -------------------
+
+itemSet119:
+oper.neq-> is not >>>
+additionalRules-> -------------------
+
+itemSet120:
+dec.operator.noparam-> function : operator oper ( >>> ) => ( fieldlist ) stm
+dec.operator.noparamnoresult-> function : operator oper ( >>> ) => ( ) stm
+dec.operator.normal-> function : operator oper ( >>> fieldlist ) => ( fieldlist ) stm
+dec.operator.noresult-> function : operator oper ( >>> fieldlist ) => ( ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet121:
+dec.class.inherit-> Declare class id inheriting from id >>> with members fromhere memlist tohere
+additionalRules-> -------------------
+
+itemSet122:
+dec.class.noinherit-> Declare class id with members fromhere >>> memlist tohere
+additionalRules-> -------------------
+memlist.memlist-> >>> memlist mems
+memlist.mems-> >>> mems
+mems.public-> >>> public : declist
+mems.nospecifier-> >>> declist
+declist.null-> >>>  
+declist.declist-> >>> dec declist
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+declist.dec-> >>> dec
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+
+itemSet123:
+dec.func.noparam-> Declare function id that returns fieldlist >>> with code stm
+additionalRules-> -------------------
+
+itemSet124:
+dec.func.noresult-> Declare function id that takes fieldlist >>> with code stm
+dec.func.normal-> Declare function id that takes fieldlist >>> and returns fieldlist with code stm
+additionalRules-> -------------------
+
+itemSet125:
+stm.assign.add-> Add >>> exp to var .
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet126:
+stm.assign.normal-> Assign >>> exp to var .
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet127:
+stm.call.normal-> Call >>> exp with value explist .
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet128:
+stm.assign.decrement-> Decrement >>> var .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet129:
+stm.assign.div-> Divide >>> var by exp .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet130:
+stm.if.ifelse-> If >>> exp then execute code stm If not execute code stm
+stm.if.if-> If >>> exp then execute code stm
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet131:
+stm.assign.increment-> Increment >>> var .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet132:
+stm.assign.mul-> Multiply >>> var by exp .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var 
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet133:
+stm.assign.sub-> Substract >>> exp from var .
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet134:
+stm.while-> Until >>> exp stm
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet135:
+stm.break-> break >>> .
+additionalRules-> -------------------
+
+itemSet136:
+stm.continue-> continue >>> .
+additionalRules-> -------------------
+
+itemSet137:
+stm.compound-> fromhere >>> stmlist tohere
+additionalRules-> -------------------
+stmlist.stmlist-> >>> stm stmlist
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist . 
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+stmlist.stm-> >>> stm
+stmlist.null-> >>>
+
+itemSet138:
+stm.loop-> loop >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet139:
+stm.repeat-> repeat >>> exp times stm
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ] 
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet140:
+stm.return.noexp-> return >>> .
+stm.return.exp-> return >>> value exp .
+additionalRules-> -------------------
+
+itemSet141:
+stm.for-> ( >>> stm ) from ( exp ) to ( stm ) stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet142:
+stm.dec-> dec >>>
+additionalRules-> -------------------
+
+itemSet143:
+dec.func.noparamnoresult-> Declare function id with code stm >>>
+additionalRules-> -------------------
+
+itemSet144:
+dec.template-> Declare template that takes id . >>> dec
+additionalRules-> -------------------
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+
+itemSet145:
+exp.sizeof-> sizeof ( var >>> )
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet146:
+exp.typeeq-> typeComp ( ty >>> , ty ) 
+additionalRules-> -------------------
+
+itemSet147:
+field.func-> function : >>> id ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet148:
+exp.paren-> ( exp ) >>>
+additionalRules-> -------------------
+
+itemSet149:
+field.noinit-> var as >>> ty
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.funcnoparamnoresult-> >>> function : ( ) => ( )
+ty.funcnoparam-> >>> function : ( ) => ( fieldlist )
+ty.pointer-> >>> pointer of ty
+ty.int-> >>> inttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.char-> >>> chartype
+ty.funcnoresult-> >>> function : ( fieldlist ) => ( )
+ty.void-> >>> void
+
+itemSet150:
+fieldlist.fieldlist-> field , >>> fieldlist
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet151:
+exp.func-> ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet152:
+explist.explist-> exp , >>> explist
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet153:
+exp.array-> [ explist ] >>>
+additionalRules-> -------------------
+
+itemSet154:
+exp.field-> id of exp >>>
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> > 
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet155:
+var.field-> id of var >>>
+exp.var-> var >>>
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet156:
+var.subscript-> element exp in var >>>
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet157:
+exp.call-> exp ( explist >>> )
+additionalRules-> -------------------
+
+itemSet158:
+exp.subscript-> exp [ exp >>> ]
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet159:
+exp.arrowfield-> exp -> id >>>
+additionalRules-> -------------------
+
+itemSet160:
+exp.op-> exp oper exp >>>
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet161:
+ty.funcnoparamnoresult-> function : >>> ( ) => ( )
+ty.funcnoparam-> function : >>> ( ) => ( fieldlist )
+ty.funcnormal-> function : >>> ( fieldlist ) => ( fieldlist )
+ty.funcnoresult-> function : >>> ( fieldlist ) => ( )
+additionalRules-> -------------------
+
+itemSet162:
+ty.pointer-> pointer of >>> ty
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.funcnoparamnoresult-> >>> function : ( ) => ( )
+ty.funcnoparam-> >>> function : ( ) => ( fieldlist )
+ty.pointer-> >>> pointer of ty
+ty.int-> >>> inttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.char-> >>> chartype
+ty.funcnoresult-> >>> function : ( fieldlist ) => ( )
+ty.void-> >>> void
+
+itemSet163:
+ty.poly-> id < >>> ty >
+additionalRules-> -------------------
+ty.real-> >>> realtype 
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.funcnoparamnoresult-> >>> function : ( ) => ( )
+ty.funcnoparam-> >>> function : ( ) => ( fieldlist )
+ty.pointer-> >>> pointer of ty
+ty.int-> >>> inttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.char-> >>> chartype
+ty.funcnoresult-> >>> function : ( fieldlist ) => ( )
+ty.void-> >>> void
+
+itemSet164:
+dec.var.noinit-> Declare variable var as ty . >>>
+additionalRules-> -------------------
+
+itemSet165:
+dec.jsexport-> Export function id to string . >>>
+additionalRules-> -------------------
+
+itemSet166:
+dec.object-> Initialize object var as ty with >>> explist .
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet167:
+dec.var.init-> Initialize variable var as ty with >>> exp .
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet168:
+dec.jsload.noparamnoresult-> Load function id from string of >>> string .
+dec.jsload.normal-> Load function id from string of >>> string that takes fieldlist and returns fieldlist .
+dec.jsload.noresult-> Load function id from string of >>> string that takes fieldlist .
+dec.jsload.noparam-> Load function id from string of >>> string that returns fieldlist .
+additionalRules-> -------------------
+
+itemSet169:
+dec.operator.assignnoparam-> function operator = ( ) => >>> ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> function operator = ( ) => >>> ( ) stm
+additionalRules-> -------------------
+
+itemSet170:
+dec.operator.assignnormal-> function operator = ( fieldlist ) >>> => ( fieldlist ) stm
+dec.operator.assignnoresult-> function operator = ( fieldlist ) >>> => ( ) stm
+additionalRules-> -------------------
+
+itemSet171:
+dec.operator.noparam-> function : operator oper ( ) >>> => ( fieldlist ) stm
+dec.operator.noparamnoresult-> function : operator oper ( ) >>> => ( ) stm
+additionalRules-> -------------------
+
+itemSet172:
+dec.operator.normal-> function : operator oper ( fieldlist >>> ) => ( fieldlist ) stm
+dec.operator.noresult-> function : operator oper ( fieldlist >>> ) => ( ) stm
+additionalRules-> -------------------
+
+itemSet173:
+dec.class.inherit-> Declare class id inheriting from id with >>> members fromhere memlist tohere
+additionalRules-> -------------------
+
+itemSet174:
+mems.private-> private >>> : declist
+additionalRules-> -------------------
+
+itemSet175:
+mems.protected-> protected >>> : declist
+additionalRules-> -------------------
+
+itemSet176:
+mems.public-> public >>> : declist
+additionalRules-> -------------------
+
+itemSet177:
+mems.nospecifier-> declist >>>
+additionalRules-> -------------------
+
+itemSet178:
+dec.class.noinherit-> Declare class id with members fromhere memlist >>> tohere
+memlist.memlist-> memlist >>> mems
+additionalRules-> -------------------
+mems.public-> >>> public : declist
+mems.nospecifier-> >>> declist
+declist.null-> >>>
+declist.declist-> >>> dec declist
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+declist.dec-> >>> dec
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+
+itemSet179:
+memlist.mems-> mems >>>
+additionalRules-> -------------------
+
+itemSet180:
+dec.func.noparam-> Declare function id that returns fieldlist with >>> code stm
+additionalRules-> -------------------
+
+itemSet181:
+dec.func.normal-> Declare function id that takes fieldlist and >>> returns fieldlist with code stm
+additionalRules-> -------------------
+
+itemSet182:
+dec.func.noresult-> Declare function id that takes fieldlist with >>> code stm
+additionalRules-> -------------------
+
+itemSet183:
+stm.assign.add-> Add exp >>> to var .
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet184:
+stm.assign.normal-> Assign exp >>> to var .
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet185:
+stm.call.normal-> Call exp >>> with value explist .
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet186:
+stm.assign.decrement-> Decrement var >>> .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet187:
+stm.assign.div-> Divide var >>> by exp .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet188:
+stm.if.ifelse-> If exp >>> then execute code stm If not execute code stm
+stm.if.if-> If exp >>> then execute code stm
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet189:
+stm.assign.increment-> Increment var >>> .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet190:
+stm.assign.mul-> Multiply var >>> by exp .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet191:
+stm.assign.sub-> Substract exp >>> from var .
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >= 
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet192:
+stm.while-> Until exp >>> stm
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet193:
+stm.break-> break . >>>
+additionalRules-> -------------------
+
+itemSet194:
+stm.continue-> continue . >>>
+additionalRules-> -------------------
+
+itemSet195:
+stmlist.null->  >>>
+additionalRules-> -------------------
+
+itemSet196:
+stmlist.stmlist-> stm >>> stmlist
+stmlist.stm-> stm >>>
+additionalRules-> -------------------
+stmlist.stmlist-> >>> stm stmlist
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+stmlist.stm-> >>> stm
+stmlist.null-> >>>
+
+itemSet197:
+stm.compound-> fromhere stmlist >>> tohere
+additionalRules-> -------------------
+
+itemSet198:
+stm.loop-> loop stm >>>
+additionalRules-> -------------------
+
+itemSet199:
+stm.repeat-> repeat exp >>> times stm
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet200:
+stm.return.exp-> return value >>> exp .
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet201:
+stm.return.noexp-> return . >>>
+additionalRules-> -------------------
+
+itemSet202:
+stm.for-> ( stm >>> ) from ( exp ) to ( stm ) stm
+additionalRules-> -------------------
+
+itemSet203:
+dec.template-> Declare template that takes id . dec >>>
+additionalRules-> -------------------
+
+itemSet204:
+exp.sizeof-> sizeof ( var ) >>>
+additionalRules-> -------------------
+
+itemSet205:
+exp.typeeq-> typeComp ( ty , >>> ty )
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.funcnoparamnoresult-> >>> function : ( ) => ( )
+ty.funcnoparam-> >>> function : ( ) => ( fieldlist )
+ty.pointer-> >>> pointer of ty
+ty.int-> >>> inttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.bool-> >>> boolean
+ty.short-> >>> shorttype
+ty.char-> >>> chartype
+ty.funcnoresult-> >>> function : ( fieldlist ) => ( )
+ty.void-> >>> void
+
+itemSet206:
+field.func-> function : id >>> ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet207:
+field.noinit-> var as ty >>>
+additionalRules-> -------------------
+
+itemSet208:
+fieldlist.fieldlist-> field , fieldlist >>> 
+additionalRules-> -------------------
+
+itemSet209:
+exp.func-> ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet210:
+explist.explist-> exp , explist >>>
+additionalRules-> -------------------
+
+itemSet211:
+exp.call-> exp ( explist ) >>>
+additionalRules-> -------------------
+
+itemSet212:
+exp.subscript-> exp [ exp ] >>>
+additionalRules-> -------------------
+
+itemSet213:
+ty.funcnoparamnoresult-> function : ( >>> ) => ( )
+ty.funcnoparam-> function : ( >>> ) => ( fieldlist )
+ty.funcnormal-> function : ( >>> fieldlist ) => ( fieldlist )
+ty.funcnoresult-> function : ( >>> fieldlist ) => ( )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet214:
+ty.pointer-> pointer of ty >>>
+additionalRules-> -------------------
+
+itemSet215:
+ty.poly-> id < ty >>> >
+additionalRules-> -------------------
+
+itemSet216:
+dec.object-> Initialize object var as ty with explist >>> .
+additionalRules-> -------------------
+
+itemSet217:
+dec.var.init-> Initialize variable var as ty with exp >>> .
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet218:
+dec.jsload.noparamnoresult-> Load function id from string of string >>> .
+dec.jsload.normal-> Load function id from string of string >>> that takes fieldlist and returns fieldlist .
+dec.jsload.noresult-> Load function id from string of string >>> that takes fieldlist .
+dec.jsload.noparam-> Load function id from string of string >>> that returns fieldlist .
+additionalRules-> -------------------
+
+itemSet219:
+dec.operator.assignnoparam-> function operator = ( ) => ( >>> fieldlist ) stm
+dec.operator.assignnoparamnoresult-> function operator = ( ) => ( >>> ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id 
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet220:
+dec.operator.assignnormal-> function operator = ( fieldlist ) => >>> ( fieldlist ) stm
+dec.operator.assignnoresult-> function operator = ( fieldlist ) => >>> ( ) stm
+additionalRules-> -------------------
+
+itemSet221:
+dec.operator.noparam-> function : operator oper ( ) => >>> ( fieldlist ) stm
+dec.operator.noparamnoresult-> function : operator oper ( ) => >>> ( ) stm
+additionalRules-> -------------------
+
+itemSet222:
+dec.operator.normal-> function : operator oper ( fieldlist ) >>> => ( fieldlist ) stm
+dec.operator.noresult-> function : operator oper ( fieldlist ) >>> => ( ) stm
+additionalRules-> -------------------
+
+itemSet223:
+dec.class.inherit-> Declare class id inheriting from id with members >>> fromhere memlist tohere
+additionalRules-> -------------------
+
+itemSet224:
+mems.private-> private : >>> declist
+additionalRules-> -------------------
+declist.null-> >>>
+declist.declist-> >>> dec declist
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+declist.dec-> >>> dec
+
+itemSet225:
+mems.protected-> protected : >>> declist
+additionalRules-> -------------------
+declist.null-> >>>
+declist.declist-> >>> dec declist
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+declist.dec-> >>> dec
+
+itemSet226:
+mems.public-> public : >>> declist
+additionalRules-> -------------------
+declist.null-> >>>
+declist.declist-> >>> dec declist
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm 
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+declist.dec-> >>> dec
+
+itemSet227:
+dec.class.noinherit-> Declare class id with members fromhere memlist tohere >>>
+additionalRules-> -------------------
+
+itemSet228:
+memlist.memlist-> memlist mems >>>
+additionalRules-> -------------------
+
+itemSet229:
+dec.func.noparam-> Declare function id that returns fieldlist with code >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet230:
+dec.func.normal-> Declare function id that takes fieldlist and returns >>> fieldlist with code stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet231:
+dec.func.noresult-> Declare function id that takes fieldlist with code >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet232:
+stm.assign.add-> Add exp to >>> var .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet233:
+stm.assign.normal-> Assign exp to >>> var .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet234:
+stm.call.normal-> Call exp with >>> value explist .
+additionalRules-> -------------------
+
+itemSet235:
+stm.assign.decrement-> Decrement var . >>>
+additionalRules-> -------------------
+
+itemSet236:
+stm.assign.div-> Divide var by >>> exp .
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ] 
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet237:
+stm.if.ifelse-> If exp then >>> execute code stm If not execute code stm
+stm.if.if-> If exp then >>> execute code stm
+additionalRules-> -------------------
+
+itemSet238:
+stm.assign.increment-> Increment var . >>>
+additionalRules-> -------------------
+
+itemSet239:
+stm.assign.mul-> Multiply var by >>> exp .
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet240:
+stm.assign.sub-> Substract exp from >>> var .
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+
+itemSet241:
+exp.call-> exp ( >>> explist )
+stm.for-> ( >>> stm ) from ( exp ) to ( stm ) stm
+additionalRules-> ------------------- 
+explist.explist-> >>> exp , explist
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+explist.null-> >>>
+explist.exp-> >>> exp
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet242:
+stm.while-> Until exp stm >>>
+additionalRules-> -------------------
+
+itemSet243:
+stmlist.stmlist-> stm stmlist >>>
+additionalRules-> -------------------
+
+itemSet244:
+stm.compound-> fromhere stmlist tohere >>>
+additionalRules-> -------------------
+
+itemSet245:
+stm.repeat-> repeat exp times >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet246:
+stm.return.exp-> return value exp >>> .
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet247:
+stm.for-> ( stm ) >>> from ( exp ) to ( stm ) stm
+additionalRules-> -------------------
+
+itemSet248:
+exp.typeeq-> typeComp ( ty , ty >>> )
+additionalRules-> -------------------
+
+itemSet249:
+field.func-> function : id ( >>> fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet250:
+exp.func-> ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet251:
+ty.funcnoparamnoresult-> function : ( ) >>> => ( )
+ty.funcnoparam-> function : ( ) >>> => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet252:
+ty.funcnormal-> function : ( fieldlist >>> ) => ( fieldlist )
+ty.funcnoresult-> function : ( fieldlist >>> ) => ( )
+additionalRules-> ------------------- 
+
+itemSet253:
+ty.poly-> id < ty > >>>
+additionalRules-> -------------------
+
+itemSet254:
+dec.object-> Initialize object var as ty with explist . >>>
+additionalRules-> -------------------
+
+itemSet255:
+dec.var.init-> Initialize variable var as ty with exp . >>>
+additionalRules-> -------------------
+
+itemSet256:
+dec.jsload.normal-> Load function id from string of string that >>> takes fieldlist and returns fieldlist .
+dec.jsload.noresult-> Load function id from string of string that >>> takes fieldlist .
+dec.jsload.noparam-> Load function id from string of string that >>> returns fieldlist .
+additionalRules-> -------------------
+
+itemSet257:
+dec.jsload.noparamnoresult-> Load function id from string of string . >>>
+additionalRules-> -------------------
+
+itemSet258:
+dec.operator.assignnoparamnoresult-> function operator = ( ) => ( ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet259:
+dec.operator.assignnoparam-> function operator = ( ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet260:
+dec.operator.assignnormal-> function operator = ( fieldlist ) => ( >>> fieldlist ) stm
+dec.operator.assignnoresult-> function operator = ( fieldlist ) => ( >>> ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet261:
+dec.operator.noparam-> function : operator oper ( ) => ( >>> fieldlist ) stm
+dec.operator.noparamnoresult-> function : operator oper ( ) => ( >>> ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet262:
+dec.operator.normal-> function : operator oper ( fieldlist ) => >>> ( fieldlist ) stm
+dec.operator.noresult-> function : operator oper ( fieldlist ) => >>> ( ) stm
+additionalRules-> -------------------
+
+itemSet263:
+dec.class.inherit-> Declare class id inheriting from id with members fromhere >>> memlist tohere
+additionalRules-> ------------------- 
+memlist.memlist-> >>> memlist mems
+memlist.mems-> >>> mems
+mems.public-> >>> public : declist
+mems.nospecifier-> >>> declist
+declist.null-> >>>
+declist.declist-> >>> dec declist
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+declist.dec-> >>> dec
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+
+itemSet264:
+mems.private-> private : declist >>>
+additionalRules-> -------------------
+
+itemSet265:
+mems.protected-> protected : declist >>>
+additionalRules-> -------------------
+
+itemSet266:
+mems.public-> public : declist >>>
+additionalRules-> -------------------
+
+itemSet267:
+dec.func.noparam-> Declare function id that returns fieldlist with code stm >>>
+additionalRules-> -------------------
+
+itemSet268:
+dec.func.normal-> Declare function id that takes fieldlist and returns fieldlist >>> with code stm
+additionalRules-> -------------------
+
+itemSet269:
+dec.func.noresult-> Declare function id that takes fieldlist with code stm >>>
+additionalRules-> -------------------
+
+itemSet270:
+stm.assign.add-> Add exp to var >>> .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet271:
+stm.assign.normal-> Assign exp to var >>> .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet272:
+stm.call.normal-> Call exp with value >>> explist .
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet273:
+stm.assign.div-> Divide var by exp >>> .
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet274:
+stm.if.ifelse-> If exp then execute >>> code stm If not execute code stm
+stm.if.if-> If exp then execute >>> code stm
+additionalRules-> -------------------
+
+itemSet275:
+stm.assign.mul-> Multiply var by exp >>> .
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet276:
+stm.assign.sub-> Substract exp from var >>> .
+var.arrowfield-> var >>> -> id
+additionalRules-> -------------------
+
+itemSet277:
+exp.paren-> ( >>> exp )
+exp.func-> ( >>> fieldlist ) => ( fieldlist ) stm
+stm.for-> ( >>> stm ) from ( exp ) to ( stm ) stm
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+fieldlist.fieldlist-> >>> field , fieldlist
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet278:
+stm.repeat-> repeat exp times stm >>>
+additionalRules-> -------------------
+
+itemSet279:
+stm.return.exp-> return value exp . >>>
+additionalRules-> ------------------- 
+
+itemSet280:
+stm.for-> ( stm ) from >>> ( exp ) to ( stm ) stm
+additionalRules-> -------------------
+
+itemSet281:
+exp.typeeq-> typeComp ( ty , ty ) >>>
+additionalRules-> -------------------
+
+itemSet282:
+field.func-> function : id ( fieldlist >>> ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet283:
+exp.func-> ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet284:
+ty.funcnoparamnoresult-> function : ( ) => >>> ( )
+ty.funcnoparam-> function : ( ) => >>> ( fieldlist )
+additionalRules-> -------------------
+
+itemSet285:
+ty.funcnormal-> function : ( fieldlist ) >>> => ( fieldlist )
+ty.funcnoresult-> function : ( fieldlist ) >>> => ( )
+additionalRules-> -------------------
+
+itemSet286:
+dec.jsload.noparam-> Load function id from string of string that returns >>> fieldlist .
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet287:
+dec.jsload.normal-> Load function id from string of string that takes >>> fieldlist and returns fieldlist .
+dec.jsload.noresult-> Load function id from string of string that takes >>> fieldlist .
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet288:
+dec.operator.assignnoparamnoresult-> function operator = ( ) => ( ) stm >>>
+additionalRules-> -------------------
+
+itemSet289:
+dec.operator.assignnoparam-> function operator = ( ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp . 
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet290:
+dec.operator.assignnoresult-> function operator = ( fieldlist ) => ( ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet291:
+dec.operator.assignnormal-> function operator = ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet292:
+dec.operator.noparamnoresult-> function : operator oper ( ) => ( ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere 
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet293:
+dec.operator.noparam-> function : operator oper ( ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet294:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( >>> fieldlist ) stm
+dec.operator.noresult-> function : operator oper ( fieldlist ) => ( >>> ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet295:
+dec.class.inherit-> Declare class id inheriting from id with members fromhere memlist >>> tohere
+memlist.memlist-> memlist >>> mems
+additionalRules-> -------------------
+mems.public-> >>> public : declist
+mems.nospecifier-> >>> declist
+declist.null-> >>>
+declist.declist-> >>> dec declist
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+declist.dec-> >>> dec
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+
+itemSet296:
+dec.func.normal-> Declare function id that takes fieldlist and returns fieldlist with >>> code stm
+additionalRules-> -------------------
+
+itemSet297:
+stm.assign.add-> Add exp to var . >>>
+additionalRules-> -------------------
+
+itemSet298:
+stm.assign.normal-> Assign exp to var . >>>
+additionalRules-> -------------------
+
+itemSet299:
+stm.call.normal-> Call exp with value explist >>> .
+additionalRules-> -------------------
+
+itemSet300:
+stm.assign.div-> Divide var by exp . >>>
+additionalRules-> -------------------
+
+itemSet301:
+stm.if.ifelse-> If exp then execute code >>> stm If not execute code stm
+stm.if.if-> If exp then execute code >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet302:
+stm.assign.mul-> Multiply var by exp . >>>
+additionalRules-> -------------------
+
+itemSet303:
+stm.assign.sub-> Substract exp from var . >>>
+additionalRules-> -------------------
+
+itemSet304:
+field.func-> function >>> : id ( fieldlist ) => ( fieldlist )
+dec.operator.noparam-> function >>> : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> function >>> operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> function >>> operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> function >>> operator = ( ) => ( ) stm
+dec.operator.noparamnoresult-> function >>> : operator oper ( ) => ( ) stm
+dec.operator.normal-> function >>> : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.noresult-> function >>> : operator oper ( fieldlist ) => ( ) stm
+dec.operator.assignnoresult-> function >>> operator = ( fieldlist ) => ( ) stm
+additionalRules-> -------------------
+
+itemSet305:
+stm.for-> ( stm ) from ( >>> exp ) to ( stm ) stm
+additionalRules-> -------------------
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.string-> >>> string
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.paren-> >>> ( exp )
+exp.arrowfield-> >>> exp -> id
+exp.true-> >>> true
+exp.call-> >>> exp ( explist )
+exp.char-> >>> char
+exp.field-> >>> id of exp
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.op-> >>> exp oper exp
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+exp.int-> >>> int
+exp.false-> >>> false
+exp.minus-> >>> - exp
+
+itemSet306:
+field.func-> function : id ( fieldlist ) >>> => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet307:
+exp.func-> ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm 
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet308:
+ty.funcnoparamnoresult-> function : ( ) => ( >>> )
+ty.funcnoparam-> function : ( ) => ( >>> fieldlist )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet309:
+ty.funcnormal-> function : ( fieldlist ) => >>> ( fieldlist )
+ty.funcnoresult-> function : ( fieldlist ) => >>> ( )
+additionalRules-> -------------------
+
+itemSet310:
+dec.jsload.noparam-> Load function id from string of string that returns fieldlist >>> .
+additionalRules-> -------------------
+
+itemSet311:
+dec.jsload.normal-> Load function id from string of string that takes fieldlist >>> and returns fieldlist .
+dec.jsload.noresult-> Load function id from string of string that takes fieldlist >>> .
+additionalRules-> -------------------
+
+itemSet312:
+dec.operator.assignnoparam-> function operator = ( ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet313:
+dec.operator.assignnoresult-> function operator = ( fieldlist ) => ( ) stm >>>
+additionalRules-> -------------------
+
+itemSet314:
+dec.operator.assignnormal-> function operator = ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere 
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet315:
+dec.operator.noparamnoresult-> function : operator oper ( ) => ( ) stm >>>
+additionalRules-> -------------------
+
+itemSet316:
+dec.operator.noparam-> function : operator oper ( ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet317:
+dec.operator.noresult-> function : operator oper ( fieldlist ) => ( ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet318:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet319:
+dec.class.inherit-> Declare class id inheriting from id with members fromhere memlist tohere >>>
+additionalRules-> -------------------
+
+itemSet320:
+dec.func.normal-> Declare function id that takes fieldlist and returns fieldlist with code >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet321:
+stm.call.normal-> Call exp with value explist . >>>
+additionalRules-> -------------------
+
+itemSet322:
+stm.if.ifelse-> If exp then execute code stm >>> If not execute code stm
+stm.if.if-> If exp then execute code stm >>>
+additionalRules-> -------------------
+
+itemSet323:
+field.func-> function : >>> id ( fieldlist ) => ( fieldlist )
+dec.operator.noparam-> function : >>> operator oper ( ) => ( fieldlist ) stm
+dec.operator.noparamnoresult-> function : >>> operator oper ( ) => ( ) stm
+dec.operator.normal-> function : >>> operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.noresult-> function : >>> operator oper ( fieldlist ) => ( ) stm
+additionalRules-> -------------------
+
+itemSet324:
+stm.for-> ( stm ) from ( exp >>> ) to ( stm ) stm
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+additionalRules-> -------------------
+oper.mul-> >>> *
+oper.lt-> >>> <
+oper.le-> >>> <=
+oper.gt-> >>> >
+oper.ge-> >>> >=
+oper.eq-> >>> is
+oper.div-> >>> /
+oper.and-> >>> &&
+oper.add-> >>> +
+oper.neq-> >>> is not
+oper.or-> >>> ||
+oper.sub-> >>> -
+oper.mod-> >>> %
+
+itemSet325:
+field.func-> function : id ( fieldlist ) => >>> ( fieldlist )
+additionalRules-> -------------------
+
+itemSet326:
+exp.func-> ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet327:
+ty.funcnoparamnoresult-> function : ( ) => ( ) >>>
+additionalRules-> -------------------
+
+itemSet328:
+ty.funcnoparam-> function : ( ) => ( fieldlist >>> )
+additionalRules-> -------------------
+
+itemSet329:
+ty.funcnormal-> function : ( fieldlist ) => ( >>> fieldlist )
+ty.funcnoresult-> function : ( fieldlist ) => ( >>> )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet330:
+dec.jsload.noparam-> Load function id from string of string that returns fieldlist . >>>
+additionalRules-> -------------------
+
+itemSet331:
+dec.jsload.normal-> Load function id from string of string that takes fieldlist and >>> returns fieldlist .
+additionalRules-> -------------------
+
+itemSet332:
+dec.jsload.noresult-> Load function id from string of string that takes fieldlist . >>>
+additionalRules-> -------------------
+
+itemSet333:
+dec.operator.assignnormal-> function operator = ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet334:
+dec.operator.noparam-> function : operator oper ( ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet335:
+dec.operator.noresult-> function : operator oper ( fieldlist ) => ( ) stm >>>
+additionalRules-> -------------------
+
+itemSet336:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet337:
+dec.func.normal-> Declare function id that takes fieldlist and returns fieldlist with code stm >>>
+additionalRules-> -------------------
+
+itemSet338:
+stm.if.ifelse-> If exp then execute code stm If >>> not execute code stm
+additionalRules-> -------------------
+
+itemSet339:
+stm.for-> ( stm ) from ( exp ) >>> to ( stm ) stm
+additionalRules-> -------------------
+
+itemSet340:
+field.func-> function : id ( fieldlist ) => ( >>> fieldlist )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet341:
+ty.funcnoparam-> function : ( ) => ( fieldlist ) >>>
+additionalRules-> -------------------
+
+itemSet342:
+ty.funcnoresult-> function : ( fieldlist ) => ( ) >>>
+additionalRules-> -------------------
+
+itemSet343:
+ty.funcnormal-> function : ( fieldlist ) => ( fieldlist >>> )
+additionalRules-> -------------------
+
+itemSet344:
+dec.jsload.normal-> Load function id from string of string that takes fieldlist and returns >>> fieldlist .
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> var as ty
+var.simple-> >>> id
+var.field-> >>> id of var
+var.deref-> >>> variable at var
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> element exp in var
+fieldlist.fieldlist-> >>> field , fieldlist
+
+itemSet345:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet346:
+stm.if.ifelse-> If exp then execute code stm If not >>> execute code stm
+additionalRules-> -------------------
+
+itemSet347:
+stm.for-> ( stm ) from ( exp ) to >>> ( stm ) stm
+additionalRules-> -------------------
+
+itemSet348:
+field.func-> function : id ( fieldlist ) => ( fieldlist >>> )
+additionalRules-> -------------------
+
+itemSet349:
+ty.funcnormal-> function : ( fieldlist ) => ( fieldlist ) >>>
+additionalRules-> -------------------
+
+itemSet350:
+dec.jsload.normal-> Load function id from string of string that takes fieldlist and returns fieldlist >>> .
+additionalRules-> -------------------
+
+itemSet351:
+stm.if.ifelse-> If exp then execute code stm If not execute >>> code stm
+additionalRules-> -------------------
+
+itemSet352:
+stm.for-> ( stm ) from ( exp ) to ( >>> stm ) stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist . 
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet353:
+field.func-> function : id ( fieldlist ) => ( fieldlist ) >>>
+additionalRules-> -------------------
+
+itemSet354:
+dec.jsload.normal-> Load function id from string of string that takes fieldlist and returns fieldlist . >>>
+additionalRules-> -------------------
+
+itemSet355:
+stm.if.ifelse-> If exp then execute code stm If not execute code >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist .
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet356:
+stm.for-> ( stm ) from ( exp ) to ( stm >>> ) stm
+additionalRules-> -------------------
+
+itemSet357:
+stm.if.ifelse-> If exp then execute code stm If not execute code stm >>>
+additionalRules-> -------------------
+
+itemSet358:
+stm.for-> ( stm ) from ( exp ) to ( stm ) >>> stm
+additionalRules-> -------------------
+stm.return.noexp-> >>> return .
+stm.return.exp-> >>> return value exp .
+stm.if.ifelse-> >>> If exp then execute code stm If not execute code stm
+stm.dec-> >>> dec
+dec.operator.noparam-> >>> function : operator oper ( ) => ( fieldlist ) stm
+dec.operator.assignnormal-> >>> function operator = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnoparam-> >>> function operator = ( ) => ( fieldlist ) stm
+dec.operator.assignnoparamnoresult-> >>> function operator = ( ) => ( ) stm
+dec.var.noinit-> >>> Declare variable var as ty .
+dec.func.noresult-> >>> Declare function id that takes fieldlist with code stm
+dec.operator.noparamnoresult-> >>> function : operator oper ( ) => ( ) stm
+dec.jsload.noparamnoresult-> >>> Load function id from string of string .
+dec.func.noparamnoresult-> >>> Declare function id with code stm
+dec.class.noinherit-> >>> Declare class id with members fromhere memlist tohere
+dec.jsload.normal-> >>> Load function id from string of string that takes fieldlist and returns fieldlist . 
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.noparam-> >>> Declare function id that returns fieldlist with code stm
+dec.func.normal-> >>> Declare function id that takes fieldlist and returns fieldlist with code stm
+dec.jsexport-> >>> Export function id to string .
+dec.var.init-> >>> Initialize variable var as ty with exp .
+dec.jsload.noresult-> >>> Load function id from string of string that takes fieldlist .
+dec.class.inherit-> >>> Declare class id inheriting from id with members fromhere memlist tohere
+dec.object-> >>> Initialize object var as ty with explist .
+dec.operator.noresult-> >>> function : operator oper ( fieldlist ) => ( ) stm
+dec.template-> >>> Declare template that takes id . dec
+dec.jsload.noparam-> >>> Load function id from string of string that returns fieldlist .
+dec.operator.assignnoresult-> >>> function operator = ( fieldlist ) => ( ) stm
+stm.call.normal-> >>> Call exp with value explist .
+stm.assign.sub-> >>> Substract exp from var .
+stm.assign.normal-> >>> Assign exp to var .
+stm.assign.mul-> >>> Multiply var by exp .
+stm.assign.increment-> >>> Increment var .
+stm.assign.div-> >>> Divide var by exp .
+stm.continue-> >>> continue .
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break .
+stm.while-> >>> Until exp stm
+stm.repeat-> >>> repeat exp times stm
+stm.assign.add-> >>> Add exp to var .
+stm.compound-> >>> fromhere stmlist tohere
+stm.loop-> >>> loop stm
+stm.if.if-> >>> If exp then execute code stm
+stm.assign.decrement-> >>> Decrement var .
+
+itemSet359:
+stm.for-> ( stm ) from ( exp ) to ( stm ) stm >>>
+additionalRules-> -------------------

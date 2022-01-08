@@ -33,3 +33,4 @@ compiler.zip
 .natjatest.lang.wat
 .natjatest.lang.wasm
 natjatest.lang
+.entest.lang.wasm

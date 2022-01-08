@@ -119,9 +119,12 @@ jobj JS_StmToJson(A_stm stm)
             name = json_object_new_string("call");
             jobj func = JS_ExpToJson(stm -> u.call.func);
             json_object_object_add(info, "exp", func);
-            jobj args = JS_ExpListToJson(stm -> u.call.args);
-            json_object_object_add(info, "explist", args);
-            jobj specificType = json_object_new_string("normal");
+            jobj specificType = json_object_new_string("noexp");
+            if(stm -> u.call.args -> head){
+                jobj args = JS_ExpListToJson(stm -> u.call.args);
+                json_object_object_add(info, "explist", args);
+                specificType = json_object_new_string("normal");
+            }
             json_object_object_add(info, "specificType", specificType);
             break;
         }
@@ -412,12 +415,28 @@ jobj JS_DecToJson(A_dec dec)
             name = json_object_new_string("func");
             jobj funcName = json_object_new_string(S_name(dec -> u.function -> head -> name));
             json_object_object_add(info, "id", funcName);
-            jobj params = JS_FieldListToJson(dec -> u.function -> head -> params);
-            json_object_object_add(info, "fieldlist(params)", params);
-            jobj result = JS_FieldListToJson(dec -> u.function -> head -> result);
-            json_object_object_add(info, "fieldlist(result)", result);
+            std::string specificTypeStr = "";
+            if(dec -> u.function -> head -> params -> head){
+                jobj params = JS_FieldListToJson(dec -> u.function -> head -> params);
+                json_object_object_add(info, "fieldlist(params)", params);
+            }
+            else{
+                specificTypeStr += "noparam";
+            }
+            if(dec -> u.function -> head -> result -> head){
+                jobj result = JS_FieldListToJson(dec -> u.function -> head -> result);
+                json_object_object_add(info, "fieldlist(result)", result);
+            }
+            else{
+                specificTypeStr += "noresult";
+            }
             jobj body = JS_StmToJson(dec -> u.function -> head -> body);
             json_object_object_add(info, "stm", body);
+            if(specificTypeStr.size() == 0){
+                specificTypeStr = "normal";
+            }
+            jobj specificType = json_object_new_string(specificTypeStr.c_str());
+            json_object_object_add(info, "specificType", specificType);
             break;
         }
         case A_varDec:
@@ -452,14 +471,29 @@ jobj JS_DecToJson(A_dec dec)
             name = json_object_new_string("jsload");
             jobj funcName = json_object_new_string(S_name(dec -> u.funcImport.name));
             json_object_object_add(info, "id", funcName);
-            jobj params = JS_FieldListToJson(dec -> u.funcImport.params);
-            json_object_object_add(info, "fieldlist(params)", params);
-            jobj result = JS_FieldListToJson(dec -> u.funcImport.result);
-            json_object_object_add(info, "fieldlist(result)", result);
+            std::string specificTypeStr = "";
+            if(dec -> u.funcImport.params -> head){
+                jobj params = JS_FieldListToJson(dec -> u.funcImport.params);
+                json_object_object_add(info, "fieldlist(params)", params);
+            }
+            else{
+                specificTypeStr += "noparam";
+            }
+            if(dec -> u.funcImport.result -> head){
+                jobj result = JS_FieldListToJson(dec -> u.funcImport.result);
+                json_object_object_add(info, "fieldlist(result)", result);
+            }
+            else{
+                specificTypeStr += "noresult";
+            }
             jobj mod = json_object_new_string(dec -> u.funcImport.mod);
             json_object_object_add(info, "string(module)", mod);
             jobj func = json_object_new_string(dec -> u.funcImport.func);
             json_object_object_add(info, "string(func)", func);
+            if(specificTypeStr.size() == 0){
+                specificTypeStr = "normal";
+            }
+            json_object_object_add(info, "specificType", json_object_new_string(specificTypeStr.c_str()));
             break;
         }
         case A_funcExportDec:
@@ -500,20 +534,35 @@ jobj JS_DecToJson(A_dec dec)
         case A_operatorDec:
         {
             name = json_object_new_string("operator");
-            jobj params = JS_FieldListToJson(dec -> u.op.params);
-            json_object_object_add(info, "fieldlist(params)", params);
-            jobj result = JS_FieldListToJson(dec -> u.op.result);
-            json_object_object_add(info, "fieldlist(result)", result);
+            std::string specificTypeStr = "";
+            if(dec -> u.op.params){
+                jobj params = JS_FieldListToJson(dec -> u.op.params);
+                json_object_object_add(info, "fieldlist(params)", params);
+            }
+            else{
+                specificTypeStr += "noparam";
+            }
+            if(dec -> u.funcImport.result){
+                jobj result = JS_FieldListToJson(dec -> u.funcImport.result);
+                json_object_object_add(info, "fieldlist(result)", result);
+            }
+            else{
+                specificTypeStr += "noresult";
+            }
+            if(specificTypeStr.size() == 0){
+                specificTypeStr = "normal";
+            }
             jobj stm = JS_StmToJson(dec -> u.op.body);
             json_object_object_add(info, "stm", stm);
             jobj oper = json_object_new_int(A_assignOp);
             jobj specificType = json_object_new_string("assign");
-            if(dec -> u.op.oper != A_assignOp){
-                oper = json_object_new_int(dec -> u.op.oper);
-                specificType = json_object_new_string("normal");
+            oper = json_object_new_int(dec -> u.op.oper);
+            if(dec -> u.op.oper == A_assignOp){
+                oper = json_object_new_int(A_assignOp);
+                specificTypeStr = "assign" + specificTypeStr;
             }
             json_object_object_add(info, "oper", oper);
-            json_object_object_add(info, "specificType", specificType);
+            json_object_object_add(info, "specificType", json_object_new_string(specificTypeStr.c_str()));
             break;
         }
     }
@@ -564,11 +613,26 @@ jobj JS_TyToJson(A_ty ty)
         }
         case A_funcTy:
         {
-            name = json_object_new_string("func");
-            jobj params = JS_FieldListToJson(ty -> u.func.params);
-            json_object_object_add(info, "fieldlist(params)", params);
-            jobj result = JS_FieldListToJson(ty -> u.func.result);
-            json_object_object_add(info, "fieldlist(result)", result);
+            std::string specificTypeStr = "";
+            if(ty -> u.func.params){
+                jobj params = JS_FieldListToJson(ty -> u.func.params);
+                json_object_object_add(info, "fieldlist(params)", params);
+            }
+            else{
+                specificTypeStr += "noparam";
+            }
+            if(ty -> u.func.result){
+                jobj result = JS_FieldListToJson(ty -> u.func.result);
+                json_object_object_add(info, "fieldlist(result)", result);
+            }
+            else{
+                specificTypeStr += "noresult";
+            }
+            if(specificTypeStr.size() == 0){
+                specificTypeStr = "normal";
+            }
+            specificTypeStr = "func" + specificTypeStr;
+            name = json_object_new_string(specificTypeStr.c_str());
             break;
         }
         case A_polyTy:

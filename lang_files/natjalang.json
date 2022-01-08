@@ -182,13 +182,29 @@
         "noinherit": "class : id(name) { memlist }",
         "inherit": "class : id(name) <- id(inherit) { memlist }"
       },
-      "func": "( fieldlist(params) ) を とり ( fieldlist(result) ) を 返す id という function を おく 。 stm",
-      "jsload": "( fieldlist(params) ) を とり ( fieldlist(result) ) を 返す id という function を ( string(module) , string(func) ) から 読み込む 。",
+      "func": {
+        "normal":"( fieldlist(params) ) を とり ( fieldlist(result) ) を 返す id という function を おく 。 stm",
+        "noparam":"( fieldlist(result) ) を 返す id という function を おく 。 stm",
+        "noresult":"( fieldlist(params) ) を とり id という function を おく 。 stm",
+        "noparamnoresult":"function id を おく 。 stm"
+      },
+      "jsload": {
+        "normal":"( fieldlist(params) ) を とり ( fieldlist(result) ) を 返す id という function を ( string(module) , string(func) ) から 読み込む 。",
+        "noparam":"( fieldlist(result) ) を 返す id という function を ( string(module) , string(func) ) から 読み込む 。",
+        "noresult":"( fieldlist(params) ) を とり id という function を ( string(module) , string(func) ) から 読み込む 。",
+        "noparamnoresult":"function id を ( string(module) , string(func) ) から 読み込む 。"
+      },
       "jsexport": "jsexport ( id , string ) 。",
       "operator": {
         "normal":"function : operator oper ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-        "assign":"function : operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm"
-      },
+        "noparam":"function : operator oper ( ) => ( fieldlist(result) ) stm",
+        "noresult":"function : operator oper ( fieldlist(params) ) => ( ) stm",
+        "noparamnoresult":"function : operator oper ( ) => ( ) stm",
+        "assignnormal":"function operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+        "assignnoparam":"function operator = ( ) => ( fieldlist(result) ) stm",
+        "assignnoresult":"function operator = ( fieldlist(params) ) => ( ) stm",
+        "assignnoparamnoresult":"function operator = ( ) => ( ) stm"
+    },
       "template": "type < id > : dec"
     },
     "var": {
@@ -214,7 +230,10 @@
       "short": "shorttype",
       "pointer": "* ty",
       "poly": "id < ty >",
-      "func": "function : ( fieldlist(params) ) => ( fieldlist(result) )"
+      "funcnormal":"function : ( fieldlist(params) ) => ( fieldlist(result) )",
+      "funcnoparam":"function : ( ) => ( fieldlist(result) )",
+      "funcnoresult":"function : ( fieldlist(params) ) => ( )",
+      "funcnoparamnoresult":"function : ( ) => ( )"
     },
     "mems": {
       "nospecifier": "declist",

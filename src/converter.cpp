@@ -54,17 +54,47 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
             else if(typeName == "short") kind = "short";
         }
         std::string ruleName = "";
-        if(rule[type][kind].is_string()){
-            ruleString = rule[type][kind].get<std::string>();
-            ruleName = type + "." + kind;
+        std::string specificType = "";
+        if(config["type"].get<std::string>() == "programming"){
+            if(type == "dec" && kind == "func"){
+                ruleName = "dec.func.normal";
+                ruleString = rule["dec"]["func"]["normal"].get<std::string>();
+            }
+            if(type == "dec" && kind == "jsload"){
+                ruleName = "dec.jsload.normal";
+                ruleString = rule["dec"]["jsload"]["normal"].get<std::string>();
+            }
+            if(type == "dec" && kind == "operator" && specificType.substr(0, 6) == "assign"){
+                ruleName = "dec.operator.assignnormal";
+                ruleString = rule["dec"]["operator"]["assignnormal"].get<std::string>();
+            }
+            else if(type == "dec" && kind == "operator"){
+                ruleName = "dec.operator.normal";
+                ruleString = rule["dec"]["operator"]["normal"].get<std::string>();
+            }
+            if(type == "ty" && kind.substr(0, 4) == "func"){
+                ruleName = "ty.funcnormal";
+                ruleString = rule["ty"]["funcnormal"].get<std::string>();
+            }
+            if(type == "stm" && kind == "call"){
+                ruleName = "stm.call.normal";
+                ruleString = rule["stm"]["call"]["normal"].get<std::string>();
+            }
         }
-        else if(rule[type][kind].is_object()){
-            // std::cout << type << kind << std::endl;
-            std::string specificType = info["specificType"].get<std::string>();
-            ruleString = rule[type][kind][specificType].get<std::string>();
-            ruleName = type + "." + kind + "." + specificType;
-            // std::cerr << "!!!!!is not rule!!!!!" << std::endl;
+        if(ruleName.size() == 0){
+            if(rule[type][kind].is_string()){
+                ruleString = rule[type][kind].get<std::string>();
+                ruleName = type + "." + kind;
+            }
+            else if(rule[type][kind].is_object()){
+                // std::cout << type << kind << std::endl;
+                specificType = info["specificType"].get<std::string>();
+                ruleString = rule[type][kind][specificType].get<std::string>();
+                ruleName = type + "." + kind + "." + specificType;
+                // std::cerr << "!!!!!is not rule!!!!!" << std::endl;
+            }
         }
+        
         const json &keywords = tokens["keywords"];
         std::stringstream ruleStringStream(ruleString);
         std::stringstream outputStream;
@@ -76,7 +106,7 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                     outputStream << "\"" << keywords[token].get<std::string>() << "\"";
                 }
                 else if(token == tokens["stmliststart"].get<std::string>()){
-                    outputStream << token;
+                    outputStream << keywords[token].get<std::string>();
                     indentTabs += 1;
                     outputStream << "\n";
                 }
@@ -86,8 +116,8 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                     for(int i = 0; i < indentTabs; i++){
                         outputStream << "\t";
                     }
-                    outputStream << token;
-                    outputStream << "\n";
+                    outputStream << keywords[token].get<std::string>();
+                    outputStream << " ";
                 }
                 else{
                     outputStream << keywords[token].get<std::string>();
@@ -128,9 +158,9 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                         outputStream << " ";
                     }
                 }
-                else if(token == "id"){
+                else if(token.substr(0, 2) == "id"){
                     std::string id = jsonToString(info[token], type, rule, tokens, config);
-                    if(ruleName == "dec.func"){
+                    if(ruleName.substr(0, 8) == "dec.func"){
                         if(id == _mainFuncName){
                             id = tokens["main"];
                         }
@@ -213,6 +243,7 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
             else{
                 kind = "noinit";
             }
+            std::cout << type << "/" << kind << std::endl;
 
             if(rule[type][kind].is_string()){
                 ruleName = type + "." + kind;

@@ -629,11 +629,29 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "dec.class.inherit"){
             result -> u.dec = A_ClassDec(result -> start, S_Symbol(tokenData.at("id(name)").id), tokenData.at("memlist").memList, S_SymbolList(S_Symbol(tokenData.at("id(inherit)").id), NULL));
         }
-        else if(ruleName == "dec.func"){
+        else if(ruleName == "dec.func.normal"){
             result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
         }
-        else if(ruleName == "dec.jsload"){
+        else if(ruleName == "dec.func.noparam"){
+            result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(tokenData.at("id").id), A_FieldList(NULL, NULL), tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
+        }
+        else if(ruleName == "dec.func.noresult"){
+            result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("fieldlist(params)").fieldList, A_FieldList(NULL, NULL), tokenData.at("stm").stm), NULL));
+        }
+        else if(ruleName == "dec.func.noparamnoresult"){
+            result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(tokenData.at("id").id), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), tokenData.at("stm").stm), NULL));
+        }
+        else if(ruleName == "dec.jsload.normal"){
             result -> u.dec = A_FuncImport(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("string(module)").stringg, tokenData.at("string(func)").stringg);
+        }
+        else if(ruleName == "dec.jsload.noparam"){
+            result -> u.dec = A_FuncImport(result -> start, S_Symbol(tokenData.at("id").id), A_FieldList(NULL, NULL), tokenData.at("fieldlist(result)").fieldList, tokenData.at("string(module)").stringg, tokenData.at("string(func)").stringg);
+        }
+        else if(ruleName == "dec.jsload.noresult"){
+            result -> u.dec = A_FuncImport(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("fieldlist(params)").fieldList, A_FieldList(NULL, NULL), tokenData.at("string(module)").stringg, tokenData.at("string(func)").stringg);
+        }
+        else if(ruleName == "dec.jsload.noparamnoresult"){
+            result -> u.dec = A_FuncImport(result -> start, S_Symbol(tokenData.at("id").id), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), tokenData.at("string(module)").stringg, tokenData.at("string(func)").stringg);
         }
         else if(ruleName == "dec.jsexport"){
             result -> u.dec = A_FuncExport(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("string").stringg);
@@ -644,9 +662,26 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "dec.operator.normal"){
             result -> u.dec = A_OperatorDec(result -> start, tokenData.at("oper").oper, tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm);
         }
-        else if(ruleName == "dec.operator.assign"){
+        else if(ruleName == "dec.operator.noparam"){
+            result -> u.dec = A_OperatorDec(result -> start, tokenData.at("oper").oper, A_FieldList(NULL, NULL), tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm);
+        }
+        else if(ruleName == "dec.operator.noresult"){
+            result -> u.dec = A_OperatorDec(result -> start, tokenData.at("oper").oper, tokenData.at("fieldlist(params)").fieldList, A_FieldList(NULL, NULL), tokenData.at("stm").stm);
+        }
+        else if(ruleName == "dec.operator.noparamnoresult"){
+            result -> u.dec = A_OperatorDec(result -> start, tokenData.at("oper").oper, A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), tokenData.at("stm").stm);
+        }
+        else if(ruleName == "dec.operator.assignnormal"){
             result -> u.dec = A_OperatorDec(result -> start, A_assignOp, tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm);
-            // result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol("="), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm), NULL));
+        }
+        else if(ruleName == "dec.operator.assignnoparam"){
+            result -> u.dec = A_OperatorDec(result -> start, A_assignOp, A_FieldList(NULL, NULL), tokenData.at("fieldlist(result)").fieldList, tokenData.at("stm").stm);
+        }
+        else if(ruleName == "dec.operator.assignnoresult"){
+            result -> u.dec = A_OperatorDec(result -> start, A_assignOp, tokenData.at("fieldlist(params)").fieldList, A_FieldList(NULL, NULL), tokenData.at("stm").stm);
+        }
+        else if(ruleName == "dec.operator.assignnoparamnoresult"){
+            result -> u.dec = A_OperatorDec(result -> start, A_assignOp, A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), tokenData.at("stm").stm);
         }
     }
     //var
@@ -711,8 +746,17 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "ty.poly"){
             result -> u.type = A_PolyTy(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("ty").type);
         }
-        else if(ruleName == "ty.func"){
+        else if(ruleName == "ty.funcnormal"){
             result -> u.type = A_FuncTy(result -> start, tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList);
+        }
+        else if(ruleName == "ty.funcnoparam"){
+            result -> u.type = A_FuncTy(result -> start, A_FieldList(NULL, NULL), tokenData.at("fieldlist(result)").fieldList);
+        }
+        else if(ruleName == "ty.funcnoresult"){
+            result -> u.type = A_FuncTy(result -> start, tokenData.at("fieldlist(params)").fieldList, A_FieldList(NULL, NULL));
+        }
+        else if(ruleName == "ty.funcnoparamnoresult"){
+            result -> u.type = A_FuncTy(result -> start, A_FieldList(NULL, NULL), A_FieldList(NULL, NULL));
         }
     }
     //mems
@@ -809,7 +853,6 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
     std::string action;
     do{
         std::string tokenToRead = list.front() -> kind;
-        // std::cout << list.front() -> kind << std::endl;
         action = table.at(list.front() -> kind).at(stack.back());
         // std::cout << "Stack now: ";
         // for(const auto &j: stack){
