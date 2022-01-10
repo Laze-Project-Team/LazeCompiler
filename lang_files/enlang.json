@@ -234,76 +234,76 @@
             "charNum":"Column $1"
         },
         "parser":{
-            "unexpectedtoken":"「$1」の前の単語、もしくは文字が抜けています。"
+            "unexpectedtoken":"A letter or a word is missing before '$1'."
         },
         "code":{
-            "none":"プログラムがありません。",
-            "nomain":"実行関数がありません。",
-            "declaredoesntwork":"この宣言をすることはできません。",
-            "templatedoesntwork":"関数とクラス以外のテンプレートを宣言することはできません。"
+            "none":"There is no program to compile.",
+            "nomain":"There is no main function.",
+            "declaredoesntwork":"This declaration is not allowed.",
+            "templatedoesntwork":"Only templates for functions and classes are allowed."
         },
         "notsupport":{
-            "multiplereturn":"複数変数を返す関数を宣言することはできません。",
-            "importinclass":"クラス宣言内で関数をJavaScriptから読み込むことはできません。"
+            "multiplereturn":"Laze does not support functions that return multiple variables.",
+            "importinclass":"Importing a function from JavaScript inside a class declaration is not allowed."
         },
         "type":{
-            "nomatch":"$1と$2の型が合いません。",
-            "notclass":"$1の型がクラスではありません。",
-            "notobject":"$1はオブジェクトではありません。",
-            "notarray":"$1は配列ではありません。",
-            "notpointer":"$1はポインターではありません。",
-            "element":"$1番目の要素が他の要素の型と合いません。",
-            "add":"この二つの項を足すことはできません。",
-            "sub":"この二つの項を引くことはできません。",
-            "mul":"この二つの項を掛けることはできません。",
-            "div":"この二つの項を割ることはできません。",
-            "mod":"左辺を右辺で割ったときの余りを出すことができません。",
-            "comp":"この二つの項を比べることができません。",
-            "lhs":"左辺が型を持ちません。",
-            "rhs":"右辺が型を持ちません。",
-            "bhs":"両辺が型を持ちません。",
-            "lhsnotbool":"左辺が真偽型ではありません。",
-            "rhsnotbool":"左辺が真偽型ではありません。",
-            "alreadyexists":"$1という名前の型が既にあります。"
+            "nomatch":"Type $1 and type $2 do not match.",
+            "notclass":"$1 is not a class type.",
+            "notobject":"$1 is not an object.",
+            "notarray":"$1 is not an array.",
+            "notpointer":"$1 is not a pointer",
+            "element":"Element $1's type does not match other elements.",
+            "add":"Adding these two expressions is not allowed.",
+            "sub":"Subtracting these two expressions is not allowed.",
+            "mul":"Multiplying these two expressions is not allowed.",
+            "div":"Dividing these two expressions is not allowed.",
+            "mod":"Dividing these two expressions is not allowed.",
+            "comp":"Comparing these two expressions is not allowed.",
+            "lhs":"The left hand side of the expression does not have a type.",
+            "rhs":"The right hand side of the expression does not have a type.",
+            "bhs":"Both sides of the expression does not have a type.",
+            "lhsnotbool":"The left hand side of the expression is not a boolean type.",
+            "rhsnotbool":"The right hand side of the expression is not a boolean type.",
+            "alreadyexists":"A type name $1 already exists."
         },
         "if":{
-            "boolean":"もし文の条件が真偽型ではありません。"
+            "boolean":"The test expression of the if statement is not a boolean type."
         },
         "while":{
-            "boolean":"まで文の条件が真偽型ではありません。"
+            "boolean":"The test expression of the while statement is not a boolean type."
         },
         "for":{
-            "boolean":"からまで文の条件が真偽型ではありません。"
+            "boolean":"The test expression of the for statement is not a boolean type."
         },
         "sizeof":{
-            "var":"この変数のバイト数はわかりません。"
+            "var":"The size of this variable cannot be identified."
         },
         "array":{
-            "invalidsize":"配列の大きさは定数でなければいけません。"
+            "invalidsize":"The size of the array must be a constant."
         },
         "operator":{
-            "arrow":"この変数はポインターではないため、->演算子を使うことはできません。",
-            "subscript":"配列でもポインターでもないため、要素をアクセスすることはできません。",
-            "field":"この変数はオブジェクトでないため、メンバーをアクセスすることはできません。"
+            "arrow":"Since this variable is not a pointer, using the -> operator is not allowed.",
+            "subscript":"Since this variable is not a pointer or an array, you cannot access its elements.",
+            "field":"Since this variable is not an object, you cannot access its members."
         },
         "noexist":{
-            "class":"$1というクラスは存在しません。",
-            "template":"$1というテンプレートは存在しません。",
-            "member":"$1というメンバーは存在しません。",
-            "func":"$1という関数は存在しません。",
-            "var":"$1という変数は存在しません。",
-            "type":"$1という型は存在しません。"
+            "class":"A class named $1 does not exist.",
+            "template":"A template named $1 does not exist.",
+            "member":"Member $1 does not exist.",
+            "func":"Function $1 does not exist.",
+            "var":"Variable $1 does not exist.",
+            "type":"Type $1 does not exist."
         },
         "func":{
-            "few":"関数の引数が足りません。",
-            "many":"関数の引数が多いです。",
-            "cannotcall":"この関数は呼べません。",
-            "unknownfield":"この引数は変数か配列の形に直してください。"
+            "few":"This function call lacks arguments.",
+            "many":"There are too many arguments in this function call.",
+            "cannotcall":"This function cannot be called.",
+            "unknownfield":"Change this argument into a variable or an array."
         },
         "class":{
-            "private":"$1は非公開メンバーなので、クラス外からアクセスできません。",
-            "protected":"$1は保護メンバーなので、クラス外からアクセスできません。",
-            "nomember":"$1に$2というメンバーはありません。"
+            "private":"Since $1 is a private member, you cannot access it outside the class.",
+            "protected":"$Since $1 is a protected member, you cannot access it outside the class.",
+            "nomember":"Member $1 does not exist in class $2."
         }
     }
 }
