@@ -296,7 +296,8 @@
             "none":"There is no program to compile.",
             "nomain":"There is no main function.",
             "declaredoesntwork":"This declaration is not allowed.",
-            "templatedoesntwork":"Only templates for functions and classes are allowed."
+            "templatedoesntwork":"Only templates for functions and classes are allowed.",
+            "import":"Function imports must be done at the start of the standard library."
         },
         "notsupport":{
             "multiplereturn":"Laze does not support functions that return multiple variables.",

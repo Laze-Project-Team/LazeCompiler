@@ -93,6 +93,7 @@ T_moduleList SEM_transProg(A_decList declist)
     list = list->tail;
     list->head = NULL;
     list->tail = NULL;
+    int importDone = 0;
     for (; decList != NULL; decList = decList->tail)
     {
         A_dec dec = decList->head;
@@ -104,6 +105,14 @@ T_moduleList SEM_transProg(A_decList declist)
         T_module decMod = transDec(venv, tenv, dec, Tr_outermost(), FALSE, venv, Ty_Void());
         if (decMod)
         {
+            if(!importDone){
+                if(decMod -> kind != T_import){
+                    importDone = 1;
+                }
+            }
+            if(importDone && decMod -> kind == T_import){
+                EM_error(dec -> pos, "code.import");
+            }
             if (decMod->kind == T_func)
             {
                 if (strcmp(decMod->u.func->name, "main") == 0)
