@@ -9,6 +9,8 @@ extern std::string _mainFuncName;
 static std::string symbols[] = {",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<","<=",">",">=","&&","||","=", "%","&"};
 static std::string convertOperToString(int oper, const json &rule);
 
+std::map<std::string, unsigned> keywordNames;
+
 void CON_convert(std::string ast, std::string targetLang, std::string fname){
     std::ifstream ASTinput(ast);
     json inputAST;
@@ -18,6 +20,12 @@ void CON_convert(std::string ast, std::string targetLang, std::string fname){
     targetLangRules >> rules;
     json config = rules["config"];
     json tokens = rules["tokens"];
+    json keywords = tokens["keywords"];
+    int keywordIndex = 0;
+    for(const auto &item: keywords){
+        keywordNames[item["name"]] = keywordIndex;
+        keywordIndex += 1;
+    }
     json grammar = rules["grammar"];
     std::cout << config["type"].get<std::string>() << std::endl;
     std::stringstream outputStream;
@@ -96,7 +104,6 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
         }
         
         const json &keywords = tokens["keywords"];
-        std::map<std::string, unsigned> keywordNames = L_getKeywords();
         std::stringstream ruleStringStream(ruleString);
         std::stringstream outputStream;
         std::string token;
@@ -122,6 +129,7 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                 }
                 else{
                     outputStream << keywords[keywordNames[token]]["value"].get<std::string>();
+                    // std::cout << keywords[keywordNames[token]]["value"].get<std::string>();
                     if(config["type"].get<std::string>() == "natural"){
                         outputStream << " ";
                     }
@@ -244,7 +252,7 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
             else{
                 kind = "noinit";
             }
-            std::cout << type << "/" << kind << std::endl;
+            // std::cout << type << "/" << kind << std::endl;
 
             if(rule[type][kind].is_string()){
                 ruleName = type + "." + kind;
