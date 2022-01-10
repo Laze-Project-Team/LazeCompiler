@@ -96,17 +96,18 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
         }
         
         const json &keywords = tokens["keywords"];
+        std::map<std::string, unsigned> keywordNames = L_getKeywords();
         std::stringstream ruleStringStream(ruleString);
         std::stringstream outputStream;
         std::string token;
         while(ruleStringStream >> token){
             // std::cout << token << std::endl;
-            if(keywords.find(token) != keywords.end()){
+            if(keywordNames.find(token) != keywordNames.end()){
                 if(token == "string"){
-                    outputStream << "\"" << keywords[token].get<std::string>() << "\"";
+                    outputStream << "\"" << keywords[keywordNames[token]]["value"].get<std::string>() << "\"";
                 }
                 else if(token == tokens["stmliststart"].get<std::string>()){
-                    outputStream << keywords[token].get<std::string>();
+                    outputStream << keywords[keywordNames[token]]["value"].get<std::string>();
                     indentTabs += 1;
                     outputStream << "\n";
                 }
@@ -116,11 +117,11 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                     for(int i = 0; i < indentTabs; i++){
                         outputStream << "\t";
                     }
-                    outputStream << keywords[token].get<std::string>();
+                    outputStream << keywords[keywordNames[token]]["value"].get<std::string>();
                     outputStream << " ";
                 }
                 else{
-                    outputStream << keywords[token].get<std::string>();
+                    outputStream << keywords[keywordNames[token]]["value"].get<std::string>();
                     if(config["type"].get<std::string>() == "natural"){
                         outputStream << " ";
                     }

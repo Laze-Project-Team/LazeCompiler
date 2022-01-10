@@ -78,3 +78,4 @@ std::vector<std::pair<std::string, std::wregex>> L_genTokenNames(const std::stri
 L_errorPos L_getErrorPos(int cursorPos);
 std::map<std::string, unsigned> L_getOperators();
 std::deque<std::string> L_getTokenNames();
+std::map<std::string, unsigned> L_getKeywords();

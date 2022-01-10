@@ -15,6 +15,11 @@ std::map<std::string, unsigned> L_getOperators(){
     return operatorsPrecedence;
 }
 
+static std::map<std::string, unsigned> keywordNames;
+std::map<std::string, unsigned> L_getKeywords(){
+    return keywordNames;
+}
+
 std::wstring excludeKeywordRegex = L"";
 
 std::vector<std::vector<int>> lettersInLines;
@@ -53,11 +58,13 @@ std::vector<std::pair<std::string, std::wregex>> L_genTokenNames(const std::stri
     std::wstring separatorRegex = L"[^" + charRegex.substr(1, charRegex.size() - 2) + intRegex.substr(1, intRegex.size() - 2) + L"]";
     std::vector<std::pair<std::string, std::wregex>> regexMap;
     regexMap.push_back(std::make_pair("comment", std::wregex(converter.from_bytes(j["tokens"]["comment"].get<std::string>()))));
-    
+    unsigned keywordIndex = 0;
     for(const auto &item: keywords.items()){
         std::wstring reg = converter.from_bytes(item.value()["value"].get<std::string>());
         regexMap.push_back(std::make_pair(item.value()["name"], std::wregex(L"(?:^|"+separatorRegex+L")("+reg+L")(?:$|"+separatorRegex+L")")));
         // std::wcout << L"(?:^|"+separatorRegex+L")("+reg+L")(?:$|"+separatorRegex+L")" << std::endl;
+        keywordNames[item.value()["name"]] = keywordIndex;
+        keywordIndex += 1;
         tokenNames.push_back(item.value()["name"]);
         std::wstring word = L"";
         std::wstringstream wordStr(converter.from_bytes(item.value()["value"].get<std::string>()));
@@ -176,11 +183,6 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
     eof -> start = program.size();
     eof -> end = program.size();
     tokenList.push_back(eof);
-    // std::for_each(tokenList.begin(), tokenList.end(), [](L_token a){
-    //     std::cout << a -> start << a-> kind << a -> end << std::endl;
-    // });
-    std::cout << tokenList.size() << std::endl;
-    
     return tokenList;
 }
 
