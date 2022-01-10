@@ -80,6 +80,7 @@ std::vector<std::pair<std::string, std::wregex>> L_genTokenNames(const std::stri
         std::wstring reg = converter.from_bytes(item.value()["regex"].get<std::string>());
         if(item.value()["name"] == "."){
             reg = converter.from_bytes(item.value()["regex"].get<std::string>() + "\\s*[^0-9]");
+            std::cout << item.value()["regex"].get<std::string>() + "\\s*[^0-9]" << std::endl;
         }
         // std::wcout << reg << std::endl;
         regexMap.push_back(std::make_pair(item.value()["name"], std::wregex(reg)));
@@ -98,7 +99,7 @@ std::vector<std::pair<std::string, std::wregex>> L_genTokenNames(const std::stri
         tokenNames.push_back("real");
 
         std::wstring hexRegex = converter.from_bytes(j["tokens"]["hex"].get<std::string>());
-        regexMap.push_back(std::make_pair("int", std::wregex(idSeparatorStart+L"((" + hexRegex + L"|" + intRegex + L"+))"+idSeparatorEnd)));
+        regexMap.push_back(std::make_pair("int", std::wregex(idSeparatorStart + L"((" + hexRegex + L"|" + intRegex + L"+))" + idSeparatorEnd)));
         tokenNames.push_back("int");        
 
         tokenNames.push_back("eof");
@@ -118,25 +119,18 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
     std::stringstream tempStream;
     tempStream << programFile.rdbuf();
     std::wstring program = converter.from_bytes(tempStream.str());
-    std::wstringstream wprogramStream(program);
-    std::wstring programLine = L"";
-    int linePos = 0;
-    while(std::getline(wprogramStream, programLine)){
-        linePos += 1;
-        if(PP_getLinesInFile(linePos).fileNum == lettersInLines.size()){
-            lettersInLines.push_back(std::vector<int>());
-        }
-        lettersInLines.at(PP_getLinesInFile(linePos).fileNum).push_back(programLine.size() + 1);
-    }
     for(const auto &regex:regexMap){
-        // std::cout << regex.first << std::endl;
+        std::cout << regex.first << std::endl;
         std::wstring::const_iterator programIt(program.cbegin());
+        int offset = 0;
+        int a = 0;
         while(std::regex_search(programIt, program.cend(), match, regex.second)){
             L_token token = std::make_shared<L_token_>();
             token -> kind = regex.first;
-            token -> start = match[1].first - program.cbegin();
-            token -> end = match[1].second - program.cbegin();
-            programIt = match[1].second;
+            token -> start = match.position() + offset;
+            token -> end = match.position() + match[1].length() + offset;
+            offset += match.position() + match[1].length();
+            programIt = match.suffix().first;
             // replace match with same space
             if(regex.first == "char"){
                 std::strcpy(token -> u.charr, converter.to_bytes(match[2].str()).c_str());
@@ -159,28 +153,30 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             else if(regex.first == "id"){
                 token -> u.id = (char *)malloc(converter.to_bytes(match[2].str()).size() + 1);
                 std::strcpy(token -> u.id, converter.to_bytes(match[2].str()).c_str());
+                // std::cout << token -> u.id << std::endl;
             }
             if(regex.first != "comment"){
+                a++;
                 tokenList.push_back(token);
             }
-            std::fill(program.begin() + (match[1].first - program.cbegin()), program.begin() + (match[1].second - program.cbegin()), L' ');
+            for(auto it = match[1].first; it != match[1].second; it++){
+                program[it - program.cbegin()] = ' ';
+            }
         }
-        // std::cout << converter.to_bytes(program) << std::endl;
+        
+        std::cout << a << std::endl;
+        std::sort(tokenList.begin(), tokenList.end(), [](L_token a, L_token b){
+            // std::cout << a -> start << std::endl;
+            return a -> start < b -> start;
+        });
     }
-    std::sort(tokenList.begin(), tokenList.end(), [](L_token a, L_token b){
-        return a -> start < b -> start;
-    });
     int indentSize = 0;
+    std::cout << tokenList.size() << std::endl;
     L_token eof = std::make_shared<L_token_>();
     eof -> kind = "eof";
     eof -> start = program.size();
     eof -> end = program.size();
     tokenList.push_back(eof);
-    // std::for_each(tokenList.begin(), tokenList.end(), [](L_token a){
-    //     std::cout << a -> start << a-> kind << a -> end << std::endl;
-    // });
-    std::cout << tokenList.size() << std::endl;
-    
     return tokenList;
 }
 

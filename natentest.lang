@@ -65,30 +65,30 @@ Declare function sin that takes input as double and returns 結果 as double wit
 	Initialize variable plusminus as double with 1.0 . 
 	If rad  < 0.0 then execute code starting here
 		Assign rad  + ( 2.0  * PI ) to rad . 
-	ending here. 
+	ending here 
 	If rad  > PI then execute code starting here
 		Assign 0  - 1.0 to plusminus . 
 		If rad  > 1.5  * PI then execute code starting here
 			Assign ( 2.0  * PI )  - rad to rad . 
-		ending here. Otherwise execute code starting here
+		ending here Otherwise execute code starting here
 			Assign rad  - PI to rad . 
-		ending here. 
-	ending here. Otherwise execute code starting here
+		ending here 
+	ending here Otherwise execute code starting here
 		If rad  > 0.5  * PI then execute code starting here
 			Assign PI  - rad to rad . 
-		ending here. 
-	ending here. 
+		ending here 
+	ending here 
 	If rad  > 0.25  * PI then execute code starting here
 		Assign ( 0.5  * PI )  - rad to rad . 
 		Initialize variable doubleRad as double with rad  * rad . 
 		Assign 1.0  - ( doubleRad )  / 2.0  + ( doubleRad  * doubleRad )  / 24.0  - ( doubleRad  * doubleRad  * doubleRad )  / 720.0  + ( doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 40320.0  - ( doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 3628800.0  + ( doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 479001600.0 to 結果 . 
 		Assign 結果  * plusminus to 結果 . 
-	ending here. Otherwise execute code starting here
+	ending here Otherwise execute code starting here
 		Initialize variable doubleRad as double with rad  * rad . 
 		Assign rad  - ( rad  * doubleRad )  / 6.0  + ( rad  * doubleRad  * doubleRad )  / 120.0  - ( rad  * doubleRad  * doubleRad  * doubleRad )  / 5040.0  + ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 362880.0  - ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 39916800.0  + ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 6227020800.0  - ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 1307674368000.0 to 結果 . 
 		Assign 結果  * plusminus to 結果 . 
-	ending here. 
-ending here. 
+	ending here 
+ending here 
 Declare function cos that takes input as double and returns 結果 as double with code starting here
 	Initialize variable PI as double with 3.14159265358979312 . 
 	Initialize variable temp as int with input  / ( 2  * PI ) . 
@@ -96,88 +96,88 @@ Declare function cos that takes input as double and returns 結果 as double wit
 	Initialize variable plusminus as double with 1.0 . 
 	If rad  < 0.0 then execute code starting here
 		Assign rad  + ( 2.0  * PI ) to rad . 
-	ending here. 
+	ending here 
 	If rad  > PI then execute code starting here
 		If rad  > 1.5  * PI then execute code starting here
 			Assign ( 2.0  * PI )  - rad to rad . 
-		ending here. Otherwise execute code starting here
+		ending here Otherwise execute code starting here
 			Assign 0  - 1.0 to plusminus . 
 			Assign rad  - PI to rad . 
-		ending here. 
-	ending here. Otherwise execute code starting here
+		ending here 
+	ending here Otherwise execute code starting here
 		If rad  > 0.5  * PI then execute code starting here
 			Assign 0  - 1.0 to plusminus . 
 			Assign PI  - rad to rad . 
-		ending here. 
-	ending here. 
+		ending here 
+	ending here 
 	If rad  < 0.25  * PI then execute code starting here
 		Initialize variable doubleRad as double with rad  * rad . 
 		Assign 1.0  - ( doubleRad )  / 2.0  + ( doubleRad  * doubleRad )  / 24.0  - ( doubleRad  * doubleRad  * doubleRad )  / 720.0  + ( doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 40320.0  - ( doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 3628800.0  + ( doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 479001600.0 to 結果 . 
 		Assign 結果  * plusminus to 結果 . 
-	ending here. Otherwise execute code starting here
+	ending here Otherwise execute code starting here
 		Assign ( 0.5  * PI )  - rad to rad . 
 		Initialize variable doubleRad as double with rad  * rad . 
 		Assign rad  - ( rad  * doubleRad )  / 6.0  + ( rad  * doubleRad  * doubleRad )  / 120.0  - ( rad  * doubleRad  * doubleRad  * doubleRad )  / 5040.0  + ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 362880.0  - ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 39916800.0  + ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 6227020800.0  - ( rad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad  * doubleRad )  / 1307674368000.0 to 結果 . 
 		Assign 結果  * plusminus to 結果 . 
-	ending here. 
-ending here. 
+	ending here 
+ending here 
 Declare function tan that takes rad as double and returns 結果 as double with code starting here
 	Initialize variable PI as double with 3.14159265358979312 . 
 	Initialize variable sqRad as double with rad  * rad . 
 	Assign sin ( rad )  / cos ( rad ) to 結果 . 
-ending here. 
+ending here 
 Declare template that takes T . Declare function abs that takes a as T and returns b as T with code starting here
 	If a  >= 0 then execute code starting here
 		Assign a to b . 
-	ending here. Otherwise execute code starting here
+	ending here Otherwise execute code starting here
 		Assign 0  - a to b . 
-	ending here. 
-ending here. 
+	ending here 
+ending here 
 Declare function toRad that takes deg as double and returns rad as double with code starting here
 	Initialize variable PI as double with 3.14159265358979312 . 
 	Assign ( deg  / 180 )  * PI to rad . 
-ending here. 
+ending here 
 Declare function root that takes x as double and returns y as double with code starting here
 	Assign 5 to y . 
 	( Initialize variable i as int with 0 . ) from ( i  is 20 ) to ( Assign i  + 1 to i . ) starting here
 		Assign 0.5  * ( y  + ( x  / y ) ) to y . 
-	ending here. 
-ending here. 
+	ending here 
+ending here 
 Declare function length3d that takes x as double , y as double , z as double and returns length as double with code starting here
 	Assign root ( x  * x  + y  * y  + z  * z ) to length . 
-ending here. 
+ending here 
 Declare function normalize that takes element 3 in vector as double with code starting here
 	Initialize variable length as double with length3d ( element 0 in vector , element 1 in vector , element 2 in vector ) . 
 	If length  is 0.0 then execute code starting here
 		Return . 
-	ending here. 
+	ending here 
 	Assign element 0 in vector  / length to element 0 in vector . 
 	Assign element 1 in vector  / length to element 1 in vector . 
 	Assign element 2 in vector  / length to element 2 in vector . 
-ending here. 
+ending here 
 Declare function dot that takes element 3 in vec1 as double , element 3 in vec2 as double and returns 結果 as double with code starting here
 	Assign element 0 in vec1  * element 0 in vec2  + element 1 in vec1  * element 1 in vec2  + element 2 in vec1  * element 2 in vec2 to 結果 . 
-ending here. 
+ending here 
 Declare function cross that takes element 3 in output as double , element 3 in vec1 as double , element 3 in vec2 as double with code starting here
 	Assign element 1 in vec1  * element 2 in vec2  - element 2 in vec1  * element 1 in vec2 to element 0 in output . 
 	Assign element 2 in vec1  * element 0 in vec2  - element 0 in vec1  * element 2 in vec2 to element 1 in output . 
 	Assign element 0 in vec1  * element 1 in vec2  - element 1 in vec1  * element 0 in vec2 to element 2 in output . 
-ending here. 
+ending here 
 Declare function vecMultiply that takes element 3 in output as double , element 3 in vec as double , x as double with code starting here
 	Assign element 0 in vec  * x to element 0 in output . 
 	Assign element 1 in vec  * x to element 1 in output . 
 	Assign element 2 in vec  * x to element 2 in output . 
-ending here. 
+ending here 
 Declare function vecSub that takes element 3 in output as double , element 3 in vec1 as double , element 3 in vec2 as double with code starting here
 	Assign element 0 in vec1  - element 0 in vec2 to element 0 in output . 
 	Assign element 1 in vec1  - element 1 in vec2 to element 1 in output . 
 	Assign element 2 in vec1  - element 2 in vec2 to element 2 in output . 
-ending here. 
+ending here 
 Declare function vecAdd that takes element 3 in output as double , element 3 in vec1 as double , element 3 in vec2 as double with code starting here
 	Assign element 0 in vec1  + element 0 in vec2 to element 0 in output . 
 	Assign element 1 in vec1  + element 1 in vec2 to element 1 in output . 
 	Assign element 2 in vec1  + element 2 in vec2 to element 2 in output . 
-ending here. 
+ending here 
 Declare template that takes T . Declare class 配列 with members starting here
 public : 	Declare variable content as pointer of T . 
 	Declare variable size as int . 
@@ -185,10 +185,10 @@ public : 	Declare variable content as pointer of T .
 		Assign 0 to size . 
 		Assign 2 to allocated . 
 		Assign メモリ確保 ( sizeof ( variable at content )  * allocated ) to content . 
-	ending here. 
+	ending here 
 	Declare function 取得 that takes index as int and returns result as T with code starting here
 		Return value element index in content . 
-	ending here. 
+	ending here 
 	Declare function 追加 that takes new as T with code starting here
 		If size  is allocated then execute code starting here
 			Assign allocated  * 2 to allocated . 
@@ -196,105 +196,105 @@ public : 	Declare variable content as pointer of T .
 			Assign メモリ確保 ( sizeof ( variable at content )  * allocated ) to content . 
 			( Initialize variable i as int with 0 . ) from ( i  is allocated ) to ( Assign i  + 1 to i . ) starting here
 				Assign element i in temp to element i in content . 
-			ending here. 
-		ending here. 
+			ending here 
+		ending here 
 		Assign new to element size in content . 
 		Assign size  + 1 to size . 
-	ending here. 
+	ending here 
 	Declare function 長さ that returns a as int with code starting here
 		Assign size to a . 
-	ending here. 
+	ending here 
 	Declare function ポップ with code starting here
 		Assign size  - 1 to size . 
-	ending here. 
+	ending here 
 private : 	Declare variable allocated as int . 
-ending here. 
+ending here 
 Declare class 文字列 with members starting here
 public : 	function operator = ( offset as pointer of char , l as int ) => ( ) starting here
 		Assign offset to content . 
 		Assign l to length . 
-	ending here. 
+	ending here 
 	Declare function 代入 that takes offset as pointer of char , l as int with code starting here
 		Assign offset to content . 
 		Assign l to length . 
-	ending here. 
+	ending here 
 	Declare function 文字列 that takes offset as pointer of char , l as int with code starting here
 		Assign offset to content . 
 		Assign l to length . 
-	ending here. 
+	ending here 
 	Declare variable length as int . 
 	Declare variable content as pointer of char . 
-ending here. 
+ending here 
 Declare function 文字列表示 that takes a as 文字列 with code starting here
 	Call _文字列表示 with value content of a , length of a . 
-ending here. 
+ending here 
 Declare function 表示 that takes x as double with code starting here
 	Call 実数表示 with value x . 
-ending here. 
+ending here 
 Declare function 表示 that takes n as int with code starting here
 	Call 実数表示 with value n . 
-ending here. 
+ending here 
 Declare function 表示 that takes a as 文字列 with code starting here
 	Call 文字列表示 with value a . 
-ending here. 
+ending here 
 Declare function glGetUniformLocation that takes i as short , a as 文字列 and returns loc as short with code starting here
 	Assign _glGetUniformLocation ( i , content of a , length of a ) to loc . 
-ending here. 
+ending here 
 Declare class ベクトル3D with members starting here
 public : 	function : operator  + ( a as ベクトル3D ) => ( b as ベクトル3D ) starting here
 		Assign x of a  + x to x of b . 
 		Assign y of a  + y to y of b . 
 		Assign z of a  + z to z of b . 
-	ending here. 
+	ending here 
 	Declare function 正規化 with code starting here
 		Initialize variable l as double with root ( ( x  * x )  + ( y  * y )  + ( z  * z ) ) . 
 		Assign x  / l to x . 
 		Assign y  / l to y . 
 		Assign z  / l to z . 
-	ending here. 
+	ending here 
 	Declare function 長さ that returns l as double with code starting here
 		Assign root ( x  * x  + y  * y  + z  * z ) to l . 
-	ending here. 
+	ending here 
 	Declare function ベクトル3D that takes a as double , b as double , c as double with code starting here
 		Assign a to x . 
 		Assign b to y . 
 		Assign c to z . 
-	ending here. 
+	ending here 
 	Declare variable z as double . 
 	Declare variable y as double . 
 	Declare variable x as double . 
-ending here. 
+ending here 
 Declare function ベクトル3Dの和 that takes a as ベクトル3D , b as ベクトル3D and returns result as ベクトル3D with code starting here
 	Assign x of a  + x of b to x of result . 
 	Assign y of a  + y of b to y of result . 
 	Assign z of a  + z of b to z of result . 
-ending here. 
+ending here 
 Declare function ベクトル3Dの差 that takes a as ベクトル3D , b as ベクトル3D and returns result as ベクトル3D with code starting here
 	Assign x of a  - x of b to x of result . 
 	Assign y of a  - y of b to y of result . 
 	Assign z of a  - z of b to z of result . 
-ending here. 
+ending here 
 Declare function ベクトル3Dの内積 that takes a as ベクトル3D , b as ベクトル3D and returns x as double with code starting here
 	Assign ( x of a  * x of b )  + ( y of a  * y of b )  + ( z of a  * z of b ) to x . 
-ending here. 
+ending here 
 Declare function ベクトル3Dの外積 that takes a as ベクトル3D , b as ベクトル3D and returns result as ベクトル3D with code starting here
 	Assign ( y of a  * z of b )  - ( z of a  * y of b ) to x of result . 
 	Assign ( z of a  * x of b )  - ( x of a  * z of b ) to y of result . 
 	Assign ( x of a  * y of b )  - ( y of a  * x of b ) to z of result . 
-ending here. 
+ending here 
 Declare function ベクトル3D拡大 that takes a as ベクトル3D , x as double and returns result as ベクトル3D with code starting here
 	Assign x of a  * x to x of result . 
 	Assign y of a  * x to y of result . 
 	Assign z of a  * x to z of result . 
-ending here. 
+ending here 
 Declare function ベクトル3D縮小 that takes a as ベクトル3D , x as double and returns result as ベクトル3D with code starting here
 	If x  is 0.0 then execute code starting here
 		Call 表示 with value 10000000 . 
-	ending here. 
+	ending here 
 	Assign x of a  / x to x of result . 
 	Assign y of a  / x to y of result . 
 	Assign z of a  / x to z of result . 
-ending here. 
+ending here 
 Declare class 行列4x4 with members starting here
 public : 	Declare function 拡大縮小 that takes x as double , y as double , z as double with code starting here
 		Assign element 0 in matrix  * x to element 0 in matrix . 
@@ -309,7 +309,7 @@ public : 	Declare function 拡大縮小 that takes x as double , y as double , z
 		Assign element 9 in matrix  * z to element 9 in matrix . 
 		Assign element 10 in matrix  * z to element 10 in matrix . 
 		Assign element 11 in matrix  * z to element 11 in matrix . 
-	ending here. 
+	ending here 
 	Declare function 回転 that takes axis as ベクトル3D , theta as double with code starting here
 		Call 正規化 of axis . 
 		Initialize variable s as double with sin ( theta ) . 
@@ -348,7 +348,7 @@ public : 	Declare function 拡大縮小 that takes x as double , y as double , z
 		Assign a01  * b20  + a11  * b21  + a21  * b22 to element 9 in matrix . 
 		Assign a02  * b20  + a12  * b21  + a22  * b22 to element 10 in matrix . 
 		Assign a03  * b20  + a13  * b21  + a23  * b22 to element 11 in matrix . 
-	ending here. 
+	ending here 
 	Declare function 移動 that takes offset as ベクトル3D with code starting here
 		Initialize variable mat12 as double with element 12 in matrix . 
 		Initialize variable mat13 as double with element 13 in matrix . 
@@ -358,15 +358,15 @@ public : 	Declare function 拡大縮小 that takes x as double , y as double , z
 		Assign element 1 in matrix  * x of offset  + element 5 in matrix  * y of offset  + element 9 in matrix  * z of offset  + mat13 to element 13 in matrix . 
 		Assign element 2 in matrix  * x of offset  + element 6 in matrix  * y of offset  + element 10 in matrix  * z of offset  + mat13 to element 14 in matrix . 
 		Assign element 3 in matrix  * x of offset  + element 7 in matrix  * y of offset  + element 11 in matrix  * z of offset  + mat15 to element 15 in matrix . 
-	ending here. 
+	ending here 
 	Declare function 単位化 with code starting here
 		Assign [ 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 ] to matrix . 
-	ending here. 
+	ending here 
 	Declare function 行列4x4 with code starting here
 		Assign [ 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 ] to matrix . 
-	ending here. 
+	ending here 
 	Declare variable element 16 in matrix as double . 
-ending here. 
+ending here 
 Declare function カメラ行列 that takes m as 行列4x4 , pos as ベクトル3D , lookAt as ベクトル3D , up as ベクトル3D and returns res as 行列4x4 with code starting here
 	Initialize object newForward as ベクトル3D with x of lookAt  - x of pos , y of lookAt  - y of pos , z of lookAt  - z of pos . 
 	Initialize object a as ベクトル3D with 0.0 , 0.0 , 0.0 . 
@@ -377,7 +377,7 @@ Declare function カメラ行列 that takes m as 行列4x4 , pos as ベクトル
 	Assign ベクトル3Dの外積 ( newUp , newForward ) to newRight . 
 	Assign [ x of newRight , x of newUp , x of newForward , 0.0 , y of newRight , y of newUp , y of newForward , 0.0 , z of newRight , z of newUp , z of newForward , 0.0 , 0  - ベクトル3Dの内積 ( newRight , pos ) , 0  - ベクトル3Dの内積 ( newUp , pos ) , 0  - ベクトル3Dの内積 ( newForward , pos ) , 1.0 ] to matrix of m . 
 	Return value m . 
-ending here. 
+ending here 
 Declare function 視点行列3D that takes m as 行列4x4 , fov as double , width as double , height as double , zN as double , zF as double and returns result as 行列4x4 with code starting here
 	Initialize variable PI as double with 3.14159265358979312 . 
 	Initialize variable fov as double with 1.0  / tan ( ( 90.0  / 360.0 )  * PI ) . 
@@ -387,11 +387,11 @@ Declare function 視点行列3D that takes m as 行列4x4 , fov as double , widt
 	Initialize variable zQ as double with zF  / ( zF  - zN ) . 
 	Assign [ aspectRatio  * fov , 0.0 , 0.0 , 0.0 , 0.0 , fov , 0.0 , 0.0 , 0.0 , 0.0 , zQ , 1.0 , 0.0 , 0.0 , ( 0  - zFar  * zNear )  / ( zFar  - zNear ) , 0.0 ] to matrix of m . 
 	Return value m . 
-ending here. 
+ending here 
 Declare function 視点行列2D that takes m as 行列4x4 , left as double , right as double , bottom as double , top as double , near as double , far as double and returns result as 行列4x4 with code starting here
 	Assign [ 2.0  / ( right  - left ) , 0.0 , 0.0 , 0.0 , 0.0 , 2.0  / ( top  - bottom ) , 0.0 , 0.0 , 0.0 , 0.0 , 0  - 2.0  / ( near  - far ) , 0.0 , 0  - ( right  + left )  / ( right  - left ) , 0  - ( top  + bottom )  / ( top  - bottom ) , 0  - ( far  + near )  / ( far  - near ) , 1.0 ] to matrix of m . 
 	Return value m . 
-ending here. 
+ending here 
 Declare function 行列4x4の積 that takes a as 行列4x4 , b as 行列4x4 and returns out as 行列4x4 with code starting here
 	Assign element 0 in matrix of b  * element 0 in matrix of a  + element 1 in matrix of b  * element 4 in matrix of a  + element 2 in matrix of b  * element 8 in matrix of a  + element 3 in matrix of b  * element 12 in matrix of a to element 0 in matrix of out . 
 	Assign element 0 in matrix of b  * element 1 in matrix of a  + element 1 in matrix of b  * element 5 in matrix of a  + element 2 in matrix of b  * element 9 in matrix of a  + element 3 in matrix of b  * element 13 in matrix of a to element 1 in matrix of out . 
@@ -409,7 +409,7 @@ Declare function 行列4x4の積 that takes a as 行列4x4 , b as 行列4x4 and 
 	Assign element 12 in matrix of b  * element 1 in matrix of a  + element 13 in matrix of b  * element 5 in matrix of a  + element 14 in matrix of b  * element 9 in matrix of a  + element 15 in matrix of b  * element 13 in matrix of a to element 13 in matrix of out . 
 	Assign element 12 in matrix of b  * element 2 in matrix of a  + element 13 in matrix of b  * element 6 in matrix of a  + element 14 in matrix of b  * element 10 in matrix of a  + element 15 in matrix of b  * element 14 in matrix of a to element 14 in matrix of out . 
 	Assign element 12 in matrix of b  * element 3 in matrix of a  + element 13 in matrix of b  * element 7 in matrix of a  + element 14 in matrix of b  * element 11 in matrix of a  + element 15 in matrix of b  * element 15 in matrix of a to element 15 in matrix of out . 
-ending here. 
+ending here 
 Declare class モデル with members starting here
 public : 	Declare variable color as ベクトル3D . 
 	Declare variable pos as ベクトル3D . 
@@ -442,32 +442,32 @@ public : 	Declare variable color as ベクトル3D .
 			Assign glGetUniformLocation ( 0 , lightPosUniform ) to lightPosUniLoc . 
 			Assign glGetUniformLocation ( 0 , lightColorUniform ) to lightColorUniLoc . 
 			Assign glGetUniformLocation ( 0 , objectColorUniform ) to objectColorUniLoc . 
-		ending here. 
+		ending here 
 		Assign glGetUniformLocation ( shaderID , projUniform ) to projMatUniformLoc . 
 		Assign glGetUniformLocation ( shaderID , viewUniform ) to viewMatUniformLoc . 
 		Assign glGetUniformLocation ( shaderID , modelUniform ) to modelMatUniformLoc . 
 		Assign glCreateBuffer ( ) to buffer . 
 		Call glBindBuffer with value 34962 , buffer . 
 		Call glBufferData with value 34962 , vertices , num  * 6 , 35044 . 
-	ending here. 
+	ending here 
 	Declare function 座標設定 that takes coord as ベクトル3D with code starting here
 		Assign coord to pos . 
-	ending here. 
+	ending here 
 	Declare function 移動 that takes offset as ベクトル3D with code starting here
 		Assign ベクトル3Dの和 ( pos , offset ) to pos . 
-	ending here. 
+	ending here 
 	Declare function 拡大縮小 that takes x as double , y as double , z as double with code starting here
 		Initialize object temp as 行列4x4 with . 
 		Call 単位化 of temp . 
 		Call 拡大縮小 of temp with value x , y , z . 
 		Assign 行列4x4の積 ( temp , scaleMat ) to scaleMat . 
-	ending here. 
+	ending here 
 	Declare function 回転 that takes axis as ベクトル3D , t as double with code starting here
 		Initialize object temp as 行列4x4 with . 
 		Call 単位化 of temp . 
 		Call 回転 of temp with value axis , t . 
 		Assign 行列4x4の積 ( temp , rotateMat ) to rotateMat . 
-	ending here. 
+	ending here 
 	Declare function 描画 that takes projMat as 行列4x4 , viewMat as 行列4x4 , camera as ベクトル3D with code starting here
 		Initialize variable PI as double with 3.14159265358979312 . 
 		Call 移動 of transMat with value pos . 
@@ -486,7 +486,7 @@ public : 	Declare variable color as ベクトル3D .
 			Call glUniform3f with value lightColorUniLoc , 1.0 , 1.0 , 1.0 . 
 			Call glUniform3f with value objectColorUniLoc , x of color , y of color , z of color . 
 			Call glUniform3f with value viewPosUniLoc , x of camera , y of camera , z of camera . 
-		ending here. 
+		ending here 
 		Call glUniformMatrix4fv with value projMatUniformLoc , 0 , matrix of projMat . 
 		Call glUniformMatrix4fv with value viewMatUniformLoc , 0 , matrix of viewMat . 
 		Call glUniformMatrix4fv with value modelMatUniformLoc , 0 , matrix of modelMat . 
@@ -494,7 +494,7 @@ public : 	Declare variable color as ベクトル3D .
 		Call 単位化 of rotateMat . 
 		Call 単位化 of transMat . 
 		Call 単位化 of scaleMat . 
-	ending here. 
+	ending here 
 private : 	Declare variable modelMatUniformLoc as short . 
 	Declare variable viewMatUniformLoc as short . 
 	Declare variable projMatUniformLoc as short . 
@@ -510,7 +510,7 @@ private : 	Declare variable modelMatUniformLoc as short .
 	Declare variable buffer as short . 
 	Declare variable vertexNum as int . 
 	Declare variable vertices as pointer of double . 
-ending here. 
+ending here 
 Declare class カメラ with members starting here
 public : 	Declare variable 座標 as ベクトル3D . 
 	Declare variable 感度 as double . 
@@ -522,41 +522,41 @@ public : 	Declare variable 座標 as ベクトル3D .
 		Assign 90.0 to yaw . 
 		Assign 0.0 to pitch . 
 		Assign 0.100000000000000006 to 感度 . 
-	ending here. 
+	ending here 
 	Declare function 感度設定 that takes s as double with code starting here
 		Assign s to 感度 . 
-	ending here. 
+	ending here 
 	Declare function アップデート that takes xOffset as double , yOffset as double , elapsedTime as double and returns result as 行列4x4 with code starting here
 		If キーチェック ( 32 )  is 1 then execute code starting here
 			Assign y of 座標  + elapsedTime  * 5.0 to y of 座標 . 
-		ending here. 
+		ending here 
 		If キーチェック ( 16 )  is 1 then execute code starting here
 			Assign y of 座標  - elapsedTime  * 5.0 to y of 座標 . 
-		ending here. 
+		ending here 
 		If キーチェック ( 65 )  is 1 then execute code starting here
 			Assign z of 座標  - elapsedTime  * sin ( toRad ( yaw  - 90 ) )  * 5.0 to z of 座標 . 
 			Assign x of 座標  - elapsedTime  * cos ( toRad ( yaw  - 90 ) )  * 5.0 to x of 座標 . 
-		ending here. 
+		ending here 
 		If キーチェック ( 68 )  is 1 then execute code starting here
 			Assign z of 座標  + elapsedTime  * sin ( toRad ( yaw  - 90 ) )  * 5.0 to z of 座標 . 
 			Assign x of 座標  + elapsedTime  * cos ( toRad ( yaw  - 90 ) )  * 5.0 to x of 座標 . 
-		ending here. 
+		ending here 
 		If キーチェック ( 87 )  is 1 then execute code starting here
 			Assign z of 座標  + elapsedTime  * sin ( toRad ( yaw ) )  * 5.0 to z of 座標 . 
 			Assign x of 座標  + elapsedTime  * cos ( toRad ( yaw ) )  * 5.0 to x of 座標 . 
-		ending here. 
+		ending here 
 		If キーチェック ( 83 )  is 1 then execute code starting here
 			Assign z of 座標  - elapsedTime  * sin ( toRad ( yaw ) )  * 5.0 to z of 座標 . 
 			Assign x of 座標  - elapsedTime  * cos ( toRad ( yaw ) )  * 5.0 to x of 座標 . 
-		ending here. 
+		ending here 
 		Assign yaw  - xOffset  * 感度 to yaw . 
 		Assign pitch  - yOffset  * 感度 to pitch . 
 		If pitch  < 0  - 89.0 then execute code starting here
 			Assign 0  - 89.0 to pitch . 
-		ending here. 
+		ending here 
 		If pitch  > 89.0 then execute code starting here
 			Assign 89.0 to pitch . 
-		ending here. 
+		ending here 
 		Assign cos ( toRad ( yaw ) )  * cos ( toRad ( pitch ) ) to x of lookDir . 
 		Assign sin ( toRad ( pitch ) ) to y of lookDir . 
 		Assign sin ( toRad ( yaw ) )  * cos ( toRad ( pitch ) ) to z of lookDir . 
@@ -564,13 +564,13 @@ public : 	Declare variable 座標 as ベクトル3D .
 		Call 単位化 of result . 
 		Assign ベクトル3Dの和 ( lookDir , 座標 ) to view . 
 		Assign カメラ行列 ( result , 座標 , view , up ) to result . 
-	ending here. 
+	ending here 
 private : 	Declare variable pitch as double . 
 	Declare variable yaw as double . 
 	Declare variable up as ベクトル3D . 
 	Declare variable lookDir as ベクトル3D . 
 	Declare variable view as ベクトル3D . 
-ending here. 
+ending here 
 Declare class シーン with members starting here
 public : 	Declare variable スプライト as 配列 < pointer of モデル > . 
 	Declare variable 目 as カメラ . 
@@ -586,7 +586,7 @@ public : 	Declare variable スプライト as 配列 < pointer of モデル > .
 		Initialize object temp as ベクトル3D with 0.0 , 0.0 , 0  - 4.0 . 
 		Call カメラ of 目 with value temp . 
 		Call 配列 of スプライト . 
-	ending here. 
+	ending here 
 	Declare function 描画 with code starting here
 		Assign 時間計測 ( )  / 1000.0 to now . 
 		Assign now  - last to elapsedTime . 
@@ -604,22 +604,22 @@ public : 	Declare variable スプライト as 配列 < pointer of モデル > .
 		Assign アップデート of 目 ( xOffset , yOffset , elapsedTime ) to viewMat . 
 		( Initialize variable i as int with 0 . ) from ( i  is size of スプライト ) to ( Assign i  + 1 to i . ) starting here
 			Call 取得 of スプライト ( i ) -> 描画 with value projMat , viewMat , 座標 of 目 . 
-		ending here. 
-	ending here. 
+		ending here 
+	ending here 
 	Declare function キューブ追加 that takes size as double , color as ベクトル3D , pos as ベクトル3D and returns id as int with code starting here
 		Initialize variable element 6 in element 3 in element 12 in vertices as double with [ [ [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , 0  - size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] ] , [ [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] ] , [ [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] ] ] . 
 		Initialize variable cube as pointer of モデル with メモリ確保 ( sizeof ( variable at cube ) ) . 
 		Call cube -> モデル with value & vertices , 36 , color , pos , 0 . 
 		Call 追加 of スプライト with value cube . 
 		Assign 長さ of スプライト ( )  - 1 to id . 
-	ending here. 
+	ending here 
 	Declare function ライト追加 that takes size as double , color as ベクトル3D , pos as ベクトル3D and returns id as int with code starting here
 		Initialize variable element 6 in element 3 in element 12 in vertices as double with [ [ [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] , [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0.0 , 0  - 1.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] , [ size  / 2 , 0  - size  / 2 , size  / 2 , 1.0 , 0.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0.0 , 1.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] ] , [ [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0  - 1.0 , 0.0 , 0.0 ] ] , [ [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] , [ 0  - size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] ] , [ [ 0  - size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , size  / 2 , 0.0 , 1.0 , 0.0 ] , [ size  / 2 , size  / 2 , 0  - size  / 2 , 0.0 , 1.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] ] , [ [ size  / 2 , 0  - size  / 2 , size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] , [ size  / 2 , 0  - size  / 2 , 0  - size  / 2 , 0.0 , 0  - 1.0 , 0.0 ] ] ] . 
 		Initialize variable light as pointer of モデル with メモリ確保 ( sizeof ( variable at light ) ) . 
 		Call light -> モデル with value & vertices , 36 , color , pos , 1 . 
 		Call 追加 of スプライト with value light . 
 		Assign 長さ of スプライト ( )  - 1 to id . 
-	ending here. 
+	ending here 
 private : 	Declare variable lastY as double . 
 	Declare variable lastX as double . 
 	Declare variable elapsedTime as double . 
@@ -627,45 +627,45 @@ private : 	Declare variable lastY as double .
 	Declare variable last as double . 
 	Declare variable viewMat as 行列4x4 . 
 	Declare variable projMat as 行列4x4 . 
-ending here. 
+ending here 
 Declare class ベクトル2D with members starting here
 public : 	Declare function 正規化 with code starting here
 		Initialize variable l as double with root ( x  * x  + y  * y ) . 
 		Assign x  / l to x . 
 		Assign y  / l to y . 
-	ending here. 
+	ending here 
 	Declare function 長さ that returns l as double with code starting here
 		Assign root ( x  * x  + y  * y ) to l . 
-	ending here. 
+	ending here 
 	Declare function ベクトル2D that takes a as double , b as double with code starting here
 		Assign a to x . 
 		Assign b to y . 
-	ending here. 
+	ending here 
 	Declare variable y as double . 
 	Declare variable x as double . 
-ending here. 
+ending here 
 Declare function ベクトル2Dの和 that takes a as ベクトル2D , b as ベクトル2D and returns result as ベクトル2D with code starting here
 	Assign x of a  + x of b to x of result . 
 	Assign y of a  + y of b to y of result . 
-ending here. 
+ending here 
 Declare function ベクトル2Dの差 that takes a as ベクトル2D , b as ベクトル2D and returns result as ベクトル2D with code starting here
 	Assign x of a  - x of b to x of result . 
 	Assign y of a  - y of b to y of result . 
-ending here. 
+ending here 
 Declare function ベクトル2Dの内積 that takes a as ベクトル2D , b as ベクトル2D and returns x as double with code starting here
 	Assign x of a  * x of b  + y of a  * y of b to x . 
-ending here. 
+ending here 
 Declare function ベクトル2D拡大 that takes a as ベクトル2D , x as double and returns result as ベクトル2D with code starting here
 	Assign x of a  * x to x of result . 
 	Assign y of a  * x to y of result . 
-ending here. 
+ending here 
 Declare function ベクトル2D縮小 that takes a as ベクトル2D , x as double and returns result as ベクトル2D with code starting here
 	If x  is 0.0 then execute code starting here
 		Call 表示 with value 10000000 . 
-	ending here. 
+	ending here 
 	Assign x of a  / x to x of result . 
 	Assign y of a  / x to y of result . 
-ending here. 
+ending here 
 Declare class アニメーション情報 with members starting here
 public : 	Declare function アニメーション情報 that takes a as int , start as double , d as double , x as double , y as double with code starting here
 		Assign a to id . 
@@ -673,12 +673,12 @@ public : 	Declare function アニメーション情報 that takes a as int , sta
 		Assign d to duration . 
 		Assign x to x of info . 
 		Assign y to y of info . 
-	ending here. 
+	ending here 
 	Declare variable info as ベクトル2D . 
 	Declare variable duration as double . 
 	Declare variable startTime as double . 
 	Declare variable id as int . 
-ending here. 
+ending here 
 Declare class スプライト with members starting here
 public : 	Declare variable color as ベクトル3D . 
 	Declare variable pos as ベクトル2D . 
@@ -719,10 +719,10 @@ public : 	Declare variable color as ベクトル3D .
 		If shaderID  is 4 then execute code starting here
 			Assign glGetUniformLocation ( shaderID , transparencyUniform ) to transparencyUniLoc . 
 			Assign glGetUniformLocation ( shaderID , objectColorUniform ) to objectColorUniLoc . 
-		ending here. 
+		ending here 
 		If shaderID  is 3 then execute code starting here
 			Assign glGetUniformLocation ( shaderID , samplerUniform ) to samplerUniformLoc . 
-		ending here. 
+		ending here 
 		Assign glCreateBuffer ( ) to buffer . 
 		Call glBindBuffer with value 34962 , buffer . 
 		Call glBufferData with value 34962 , vertices , pnum  * 3 , 35044 . 
@@ -730,8 +730,8 @@ public : 	Declare variable color as ベクトル3D .
 			Assign glCreateBuffer ( ) to elementBuffer . 
 			Call glBindBuffer with value 34963 , elementBuffer . 
 			Call glElementBufferData with value 34963 , indices , vnum , 35044 . 
-		ending here. 
-	ending here. 
+		ending here 
+	ending here 
 	Declare function テクスチャ設定 that takes tex as pointer of double , url as 文字列 with code starting here
 		Assign 0 to shaderID . 
 		Assign tex to texCoords . 
@@ -740,7 +740,7 @@ public : 	Declare variable color as ベクトル3D .
 		Assign glCreateBuffer ( ) to texCoordBuffer . 
 		Call glBindBuffer with value 34962 , texCoordBuffer . 
 		Call glBufferData with value 34962 , tex , vertexNum  * 2 , 35044 . 
-	ending here. 
+	ending here 
 	Declare function リピートテクスチャ設定 that takes tex as pointer of double , テクスチャ as short with code starting here
 		Assign 0 to shaderID . 
 		Assign tex to texCoords . 
@@ -748,32 +748,32 @@ public : 	Declare variable color as ベクトル3D .
 		Assign glCreateBuffer ( ) to texCoordBuffer . 
 		Call glBindBuffer with value 34962 , texCoordBuffer . 
 		Call glBufferData with value 34962 , tex , vertexNum  * 2 , 35044 . 
-	ending here. 
+	ending here 
 	Declare function 座標設定 that takes coord as ベクトル2D with code starting here
 		Assign coord to pos . 
-	ending here. 
+	ending here 
 	Declare function 移動 that takes offset as ベクトル2D with code starting here
 		Assign ベクトル2Dの和 ( pos , offset ) to pos . 
-	ending here. 
+	ending here 
 	Declare function 拡大縮小 that takes x as double , y as double with code starting here
 		Assign scaleX  * x to scaleX . 
 		Assign scaleY  * y to scaleY . 
-	ending here. 
+	ending here 
 	Declare function 回転 that takes t as double with code starting here
 		Assign theta  + t to theta . 
-	ending here. 
+	ending here 
 	Declare function 角度設定 that takes t as double with code starting here
 		Assign t to theta . 
-	ending here. 
+	ending here 
 	Declare function zIndex設定 that takes x as double with code starting here
 		Assign x to zIndex . 
-	ending here. 
+	ending here 
 	Declare function 透明度設定 that takes x as double with code starting here
 		Assign x to 透明度 . 
-	ending here. 
+	ending here 
 	Declare function 色設定 that takes 色 as ベクトル3D with code starting here
 		Assign 色 to color . 
-	ending here. 
+	ending here 
 	Declare function 描画 that takes projMat as 行列4x4 with code starting here
 		Initialize variable PI as double with 3.14159265358979312 . 
 		( Initialize variable カウンタ as int with 0 . ) from ( カウンタ  is size of animations ) to ( Assign カウンタ  + 1 to カウンタ . ) starting here
@@ -782,17 +782,17 @@ public : 	Declare variable color as ベクトル3D .
 				If id of info  is 0 then execute code starting here
 					Initialize variable elapsedTime as double with 時間計測 ( )  - startTime of info . 
 					Call 回転 with value x of info of info  * elapsedTime . 
-				ending here. 
+				ending here 
 				If id of info  is 1 then execute code starting here
 					Call 拡大縮小 with value x of info of info , y of info of info . 
-				ending here. 
+				ending here 
 				If id of info  is 2 then execute code starting here
 					Initialize variable elapsedTime as double with 時間計測 ( )  - startTime of info . 
 					Initialize object offset as ベクトル2D with x of info of info  * elapsedTime , y of info of info  * elapsedTime . 
 					Call 移動 with value offset . 
-				ending here. 
-			ending here. 
-		ending here. 
+				ending here 
+			ending here 
+		ending here 
 		Initialize object pos3d as ベクトル3D with x of pos , y of pos , 0  - zIndex  * 0.00100000000000000002 . 
 		Call 単位化 of transMat . 
 		Call 移動 of transMat with value pos3d . 
@@ -812,7 +812,7 @@ public : 	Declare variable color as ベクトル3D .
 		If shaderID  is 4 then execute code starting here
 			Call glUniform1f with value transparencyUniLoc , 透明度 . 
 			Call glUniform3f with value objectColorUniLoc , x of color , y of color , z of color . 
-		ending here. 
+		ending here 
 		If shaderID  is 3 then execute code starting here
 			Call glBindBuffer with value 34962 , texCoordBuffer . 
 			Call glEnableVertexAttribArray with value 1 . 
@@ -820,33 +820,33 @@ public : 	Declare variable color as ベクトル3D .
 			Call glActiveTexture with value texture  + 33984 . 
 			Call glBindTexture with value 3553 , texture . 
 			Call glUniform1i with value samplerUniformLoc , texture . 
-		ending here. 
+		ending here 
 		Call glUniformMatrix4fv with value projMatUniformLoc , 0 , matrix of projMat . 
 		Call glUniformMatrix4fv with value modelMatUniformLoc , 0 , matrix of modelMat . 
 		If vertexNum  > 0 then execute code starting here
 			Call glBindBuffer with value 34963 , elementBuffer . 
 			Call glDrawElements with value 4 , vertexNum , 5123 , 0 . 
-		ending here. 
+		ending here 
 		If ( vertexNum  is 0 )  && ( shaderID  is 4 ) then execute code starting here
 			Call glBindBuffer with value 34962 , buffer . 
 			Call glDrawArrays with value 5 , 0 , pointNum . 
-		ending here. 
+		ending here 
 		Call 単位化 of rotateMat . 
 		Call 単位化 of transMat . 
 		Call 単位化 of scaleMat . 
-	ending here. 
+	ending here 
 	Declare function 回転アニメーション that takes theta as double , start as double , duration as double with code starting here
 		Initialize object temp as アニメーション情報 with 0 , start , duration , theta , 0.0 . 
 		Call 追加 of animations with value temp . 
-	ending here. 
+	ending here 
 	Declare function 拡大縮小アニメーション that takes x as double , y as double , start as double , duration as double with code starting here
 		Initialize object temp as アニメーション情報 with 1 , start , duration , x , y . 
 		Call 追加 of animations with value temp . 
-	ending here. 
+	ending here 
 	Declare function 移動アニメーション that takes offset as ベクトル2D , start as double , duration as double with code starting here
 		Initialize object temp as アニメーション情報 with 0 , start , duration , x of offset , y of offset . 
 		Call 追加 of animations with value temp . 
-	ending here. 
+	ending here 
 private : 	Declare variable animations as 配列 < アニメーション情報 > . 
 	Declare variable samplerUniformLoc as short . 
 	Declare variable modelMatUniformLoc as short . 
@@ -868,7 +868,7 @@ private : 	Declare variable animations as 配列 < アニメーション情報 >
 	Declare variable texCoords as pointer of double . 
 	Declare variable indices as pointer of short . 
 	Declare variable vertices as pointer of double . 
-ending here. 
+ending here 
 Declare class シーン2D with members starting here
 public : 	Declare variable スプライト配列 as 配列 < pointer of スプライト > . 
 	Declare variable 背景色 as ベクトル3D . 
@@ -882,10 +882,10 @@ public : 	Declare variable スプライト配列 as 配列 < pointer of スプ�
 		Call 配列 of スプライト配列 . 
 		Assign color to 背景色 . 
 		Assign 1.0 to 背景透明度 . 
-	ending here. 
+	ending here 
 	Declare function 背景透明度設定 that takes a as double with code starting here
 		Assign a to 背景透明度 . 
-	ending here. 
+	ending here 
 	Declare function 描画 with code starting here
 		Assign 時間計測 ( )  / 1000.0 to now . 
 		Assign now  - last to elapsedTime . 
@@ -899,8 +899,8 @@ public : 	Declare variable スプライト配列 as 配列 < pointer of スプ�
 		Call glClear with value 16640 . 
 		( Initialize variable i as int with 0 . ) from ( i  is size of スプライト配列 ) to ( Assign i  + 1 to i . ) starting here
 			Call 取得 of スプライト配列 ( i ) -> 描画 with value projMat . 
-		ending here. 
-	ending here. 
+		ending here 
+	ending here 
 	Declare function 正方形追加 that takes size as double , pos as ベクトル2D , color as ベクトル3D , zIndex as double and returns id as int with code starting here
 		Initialize variable element 3 in element 4 in vertices as double with [ [ size  / 2 , size  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ size  / 2 , 0  - size  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - size  / 2 , 0  - size  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - size  / 2 , size  / 2 , 0  - zIndex  * 0.00100000000000000002 ] ] . 
 		Initialize variable element 2 in element 4 in texCoords as double with [ [ 1.0 , 0.0 ] , [ 1.0 , 1.0 ] , [ 0.0 , 1.0 ] , [ 0.0 , 0.0 ] ] . 
@@ -909,7 +909,7 @@ public : 	Declare variable スプライト配列 as 配列 < pointer of スプ�
 		Call sprite -> スプライト with value & vertices , 4 , & indices , 6 , color , pos , 4 , zIndex . 
 		Call 追加 of スプライト配列 with value sprite . 
 		Assign 長さ of スプライト配列 ( )  - 1 to id . 
-	ending here. 
+	ending here 
 	Declare function スプライト追加 that takes width as double , height as double , pos as ベクトル2D , url as 文字列 , zIndex as double and returns id as int with code starting here
 		Initialize variable element 3 in element 4 in vertices as double with [ [ width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] ] . 
 		Initialize variable element 2 in element 4 in texCoords as double with [ [ 1.0 , 0.0 ] , [ 1.0 , 1.0 ] , [ 0.0 , 1.0 ] , [ 0.0 , 0.0 ] ] . 
@@ -920,7 +920,7 @@ public : 	Declare variable スプライト配列 as 配列 < pointer of スプ�
 		Call sprite -> テクスチャ設定 with value & texCoords , url . 
 		Call 追加 of スプライト配列 with value sprite . 
 		Assign 長さ of スプライト配列 ( )  - 1 to id . 
-	ending here. 
+	ending here 
 	Declare function リピートスプライト追加 that takes width as double , height as double , pos as ベクトル2D , texture as short , zIndex as double and returns id as int with code starting here
 		Initialize variable element 3 in element 4 in vertices as double with [ [ width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] ] . 
 		Initialize variable element 2 in element 4 in texCoords as double with [ [ 1.0 , 0.0 ] , [ 1.0 , 1.0 ] , [ 0.0 , 1.0 ] , [ 0.0 , 0.0 ] ] . 
@@ -931,20 +931,20 @@ public : 	Declare variable スプライト配列 as 配列 < pointer of スプ�
 		Call sprite -> リピートテクスチャ設定 with value & texCoords , texture . 
 		Call 追加 of スプライト配列 with value sprite . 
 		Assign 長さ of スプライト配列 ( )  - 1 to id . 
-	ending here. 
+	ending here 
 	Declare function 四角形追加 that takes width as double , height as double , pos as ベクトル2D , color as ベクトル3D , zIndex as double and returns id as int with code starting here
 		Initialize variable element 3 in element 4 in vertices as double with [ [ width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] , [ 0  - width  / 2 , 0  - height  / 2 , 0  - zIndex  * 0.00100000000000000002 ] ] . 
 		Initialize variable sprite as pointer of スプライト with メモリ確保 ( sizeof ( variable at sprite ) ) . 
 		Call sprite -> スプライト with value & vertices , 4 , メモリ確保 ( 0 ) , 0 , color , pos , 4 , zIndex . 
 		Call 追加 of スプライト配列 with value sprite . 
 		Assign 長さ of スプライト配列 ( )  - 1 to id . 
-	ending here. 
+	ending here 
 	Declare function 多角形追加 that takes points as pointer of void , size as int , pos as ベクトル2D , color as ベクトル3D , zIndex as double and returns id as int with code starting here
 		Initialize variable sprite as pointer of スプライト with メモリ確保 ( sizeof ( variable at sprite ) ) . 
 		Call sprite -> スプライト with value points , size , メモリ確保 ( 0 ) , 0 , color , pos , 4 , zIndex . 
 		Call 追加 of スプライト配列 with value sprite . 
 		Assign 長さ of スプライト配列 ( )  - 1 to id . 
-	ending here. 
+	ending here 
 	Declare function 円追加 that takes r as double , pos as ベクトル2D , color as ベクトル3D , zIndex as double and returns id as int with code starting here
 		Initialize variable PI as double with 3.14159265358979312 . 
 		Initialize object points as 配列 < ベクトル3D > with . 
@@ -953,41 +953,41 @@ public : 	Declare variable スプライト配列 as 配列 < pointer of スプ�
 			Initialize variable theta as double with 0 . 
 			If ( i  % 2 )  is 0 then execute code starting here
 				Assign 0.5  * PI  + ( ( PI  * i )  / 頂点数 ) to theta . 
-			ending here. 
+			ending here 
 			If ( i  % 2 )  is 1 then execute code starting here
 				Assign 0.5  * PI  - ( ( PI  * ( 1.0  + i ) )  / 頂点数 ) to theta . 
-			ending here. 
+			ending here 
 			Initialize object temp as ベクトル3D with r  * cos ( theta ) , r  * sin ( theta ) , 0  - zIndex  * 0.00100000000000000002 . 
 			Call 追加 of points with value temp . 
-		ending here. 
+		ending here 
 		Assign 多角形追加 ( content of points , size of points , pos , color , zIndex ) to id . 
-	ending here. 
+	ending here 
 private : 	Declare variable elapsedTime as double . 
 	Declare variable now as double . 
 	Declare variable last as double . 
 	Declare variable projMat as 行列4x4 . 
-ending here. 
+ending here 
 Declare function 引数なしjsリスナー呼び出し that takes callback as function : ( ) => ( ) with code starting here
 	Call callback . 
-ending here. 
+ending here 
 Export function 引数なしjsリスナー呼び出し to "jsCallListenerNoParam". 
 Declare function Arduino5V送る that takes ピン番号 as int with code starting here
 	Call Arduinoコマンド送信 with value 'H', ピン番号 . 
-ending here. 
+ending here 
 Declare function Arduino0V送る that takes ピン番号 as int with code starting here
 	Call Arduinoコマンド送信 with value 'L', ピン番号 . 
-ending here. 
+ending here 
 Declare function Arduinoピン入出力設定 that takes ピン番号 as int , 入出力 as char with code starting here
 	If 入出力  is '入'then execute code starting here
 		Call Arduinoコマンド送信 with value 'I', ピン番号 . 
-	ending here. 
+	ending here 
 	If 入出力  is '出'then execute code starting here
 		Call Arduinoコマンド送信 with value 'O', ピン番号 . 
-	ending here. 
-ending here. 
+	ending here 
+ending here 
 Declare function Arduinoアナログ入力ピン設定 that takes ピン番号 as int with code starting here
 	Call Arduinoコマンド送信 with value 'A', ピン番号 . 
-ending here. 
+ending here 
 Declare function main with code starting here
 	Call 表示 with value "ようこそ". 
-ending here. 
+ending here 

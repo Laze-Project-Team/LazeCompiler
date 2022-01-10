@@ -424,7 +424,6 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
     }
     //take out the part of the tokenlist that corresponds with the grammar rule.
     L_tokenList reduceList(list.end() - ruleSize, list.end());
-    // std::cout << ruleName << ": ";
     L_token result = std::make_shared<L_token_>();
     result -> kind = ruleName;
     if(reduceList.size() > 0){
@@ -883,6 +882,7 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
                     token = std::to_string(list.front() -> u.intt);
                 }
                 // std::cerr << "Unexpected " << list.front() -> kind << " on line " << errorPos.lineNum << " and column " << errorPos.columnNum << std::endl;
+                std::cout << list.front() -> start << std::endl;
                 EM_error(list.front() -> start, "parser.unexpectedtoken %s", token.c_str());
                 exit(0);
             }

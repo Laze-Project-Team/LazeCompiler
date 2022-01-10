@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <chrono>
 
 // extern YYSTYPE yylval;
 extern int yydebug;
@@ -31,6 +32,7 @@ extern "C" int preparse(void);
 
 int main(int argc, char **argv)
 {
+    auto start = std::chrono::steady_clock::now();
     // yydebug = 1;
     funcs = 0;
     // memorySize = 512 * 512 * 4;
@@ -89,7 +91,7 @@ int main(int argc, char **argv)
         }
     }
     if(strcmp(mode, "parserload") == 0){
-        std::vector<std::pair<std::string, std::regex>> regexMap = L_genTokenNames(parseJsonName);
+        std::vector<std::pair<std::string, std::wregex>> regexMap = L_genTokenNames(parseJsonName);
         P_generateParseFile(parseJsonName, parserOutput);
         std::cout << "Finished Generating Parser." << std::endl;
         return 0;
@@ -133,5 +135,8 @@ int main(int argc, char **argv)
         Pr_printTree(SEM_transProg(absyn_root), resultFilename);
         // printf("Finished Compiling.\n");
     }
+    auto end = std::chrono::steady_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    std::cout << "Execution Time:" << duration.count() << "ms" << std::endl;
     return 0;
 }
