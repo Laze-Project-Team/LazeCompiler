@@ -210,7 +210,7 @@ public : 	Declare variable content as pointer of T .
 private : 	Declare variable allocated as int . 
 ending here 
 Declare class 文字列 with members starting here
-public : 	function operator = ( offset as pointer of char , l as int ) => ( ) starting here
+public : 	function : operator = ( offset as pointer of char , l as int ) => ( ) starting here
 		Assign offset to content . 
 		Assign l to length . 
 	ending here 

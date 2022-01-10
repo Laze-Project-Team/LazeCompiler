@@ -215,10 +215,10 @@
                 "noparam":"function : operator oper ( ) => ( fieldlist(result) ) stm",
                 "noresult":"function : operator oper ( fieldlist(params) ) => ( ) stm",
                 "noparamnoresult":"function : operator oper ( ) => ( ) stm",
-                "assignnormal":"function operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-                "assignnoparam":"function operator = ( ) => ( fieldlist(result) ) stm",
-                "assignnoresult":"function operator = ( fieldlist(params) ) => ( ) stm",
-                "assignnoparamnoresult":"function operator = ( ) => ( ) stm"
+                "assignnormal":"function : operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+                "assignnoparam":"function : operator = ( ) => ( fieldlist(result) ) stm",
+                "assignnoresult":"function : operator = ( fieldlist(params) ) => ( ) stm",
+                "assignnoparamnoresult":"function : operator = ( ) => ( ) stm"
             },
             "template": "Declare template that takes id . dec"
         },
