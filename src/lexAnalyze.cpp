@@ -30,6 +30,28 @@ int prelex(void);
 // extern "C" int yyparse(void);
 extern "C" int preparse(void);
 
+A_decList getAST(char *fname, char *parseJsonName, char *mode, char *parserFileName){
+    string tempFileName = concat(".", fname);
+    string temptempFileName = concat("..", fname);
+    FILE *temp = fopen(tempFileName, "w");
+    fclose(temp);
+    temp = fopen(temptempFileName, "w");
+    fclose(temp);
+    copyFileContent(fname, temptempFileName);
+    transPPList(preprocess(temptempFileName), temptempFileName);
+    while(!toByte(temptempFileName, tempFileName));
+    L_tokenList list = L_Lexer(tempFileName, parseJsonName, mode);
+    remove(tempFileName);
+    remove(temptempFileName);
+    A_decList absyn_root = NULL;
+    if(parserFileName){
+        absyn_root = P_parseWithFile(list, parseJsonName, parserFileName);
+    }else{
+        absyn_root = P_parse(list, parseJsonName);
+    }
+    return absyn_root;
+}
+
 int main(int argc, char **argv)
 {
     auto start = std::chrono::steady_clock::now();
@@ -52,6 +74,7 @@ int main(int argc, char **argv)
     string parserOutput = "";
     string parserFileName = NULL;
     char *linkFile = NULL;
+    char *convertLinkFile = NULL;
     for(int i = 1; i < argc; i++){
         if(argv[i][0] == '-'){
             if(argv[i][1] == 'c'){
@@ -88,6 +111,10 @@ int main(int argc, char **argv)
                 i++;
                 parserFileName = argv[i];
             }
+            if(strcmp(argv[i], "--convert-link") == 0){
+                i++;
+                convertLinkFile = argv[i];
+            }
         }
     }
     if(strcmp(mode, "parserload") == 0){
@@ -110,21 +137,23 @@ int main(int argc, char **argv)
         includeFile(linkFile, temptempFileName);
     }
     transPPList(preprocess(temptempFileName), temptempFileName);
-    // EM_reset(tempFileName);
     while(!toByte(temptempFileName, tempFileName));
-    // printf("Finished Preprocessing...\n");
     L_tokenList list = L_Lexer(tempFileName, parseJsonName, mode);
     remove(tempFileName);
     remove(temptempFileName);
-    // std::cout << "Finished Lexing..." << std::endl;
     A_decList absyn_root = NULL;
     if(parserFileName){
         absyn_root = P_parseWithFile(list, parseJsonName, parserFileName);
     }else{
         absyn_root = P_parse(list, parseJsonName);
     }
-    // std::cout << "Finished Parsing..." << std::endl;
     if(strcmp(mode, "convert") == 0){
+        A_decList linkFileAST = getAST(convertLinkFile, parseJsonName, mode, parserFileName);
+        string convertResultJsonFile = concat(convertLinkFile, ".json");
+        jobj convertJsonAST = JS_toJson(linkFileAST);
+        fileContent(convertResultJsonFile, (string)json_object_to_json_string(convertJsonAST));
+        CON_convert(convertResultJsonFile, convertJsonName, convertOutput);
+        remove(convertResultJsonFile);
         string resultJsonFile = concat(tempFileName, ".json");
         jobj jsonAST = JS_toJson(absyn_root);
         fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));

@@ -15,6 +15,7 @@ std::map<std::string, std::string> nameConvertMap;
 extern std::string languageCode;
 
 void CON_convert(std::string ast, std::string targetLang, std::string fname){
+    // std::cout << nameConvertMap.size() << std::endl;
     std::ifstream ASTinput(ast);
     json inputAST;
     ASTinput >> inputAST;
@@ -35,6 +36,7 @@ void CON_convert(std::string ast, std::string targetLang, std::string fname){
     std::ofstream output(fname);
     output << jsonToString(inputAST, "declist", grammar, tokens, config);
     output.close();
+    // std::cout << nameConvertMap.size() << std::endl;
 
 }
 
