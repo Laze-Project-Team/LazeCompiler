@@ -30,7 +30,8 @@ int prelex(void);
 // extern "C" int yyparse(void);
 extern "C" int preparse(void);
 
-A_decList getAST(char *fname, char *parseJsonName, char *mode, char *parserFileName){
+A_decList getAST(char *fname, char *directory, char *currentDirectory, char *parseJsonName, char *mode, char *parserFileName){
+    chdir(directory);
     string tempFileName = concat(".", fname);
     string temptempFileName = concat("..", fname);
     FILE *temp = fopen(tempFileName, "w");
@@ -49,6 +50,7 @@ A_decList getAST(char *fname, char *parseJsonName, char *mode, char *parserFileN
     }else{
         absyn_root = P_parse(list, parseJsonName);
     }
+    chdir(currentDirectory);
     return absyn_root;
 }
 
@@ -75,6 +77,7 @@ int main(int argc, char **argv)
     string parserFileName = NULL;
     char *linkFile = NULL;
     char *convertLinkFile = NULL;
+    char *convertDirectory = NULL;
     for(int i = 1; i < argc; i++){
         if(argv[i][0] == '-'){
             if(argv[i][1] == 'c'){
@@ -115,6 +118,10 @@ int main(int argc, char **argv)
                 i++;
                 convertLinkFile = argv[i];
             }
+            if(strcmp(argv[i], "--convert-dir") == 0){
+                i++;
+                convertDirectory = argv[i];
+            }
         }
     }
     if(strcmp(mode, "parserload") == 0){
@@ -148,7 +155,7 @@ int main(int argc, char **argv)
         absyn_root = P_parse(list, parseJsonName);
     }
     if(strcmp(mode, "convert") == 0){
-        A_decList linkFileAST = getAST(convertLinkFile, parseJsonName, mode, parserFileName);
+        A_decList linkFileAST = getAST(convertLinkFile, convertDirectory, directory, parseJsonName, mode, parserFileName);
         string convertResultJsonFile = concat(convertLinkFile, ".json");
         jobj convertJsonAST = JS_toJson(linkFileAST);
         fileContent(convertResultJsonFile, (string)json_object_to_json_string(convertJsonAST));
