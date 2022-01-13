@@ -10,6 +10,9 @@ static std::string symbols[] = {",",":",";","(",")","[","]","{","}",".","->","<-
 static std::string convertOperToString(int oper, const json &rule);
 
 std::map<std::string, unsigned> keywordNames;
+std::map<std::string, std::string> nameConvertMap;
+
+extern std::string languageCode;
 
 void CON_convert(std::string ast, std::string targetLang, std::string fname){
     std::ifstream ASTinput(ast);
@@ -27,7 +30,7 @@ void CON_convert(std::string ast, std::string targetLang, std::string fname){
         keywordIndex += 1;
     }
     json grammar = rules["grammar"];
-    std::cout << config["type"].get<std::string>() << std::endl;
+    // std::cout << config["type"].get<std::string>() << std::endl;
     std::stringstream outputStream;
     std::ofstream output(fname);
     output << jsonToString(inputAST, "declist", grammar, tokens, config);
@@ -145,12 +148,6 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                 else if(token == "oper"){
                     outputStream << " " << convertOperToString(info[token], rule) << " ";
                 }
-                // else if(token == "int" || token == "real"){
-                //     outputStream << jsonToString(info[token], type, rule, tokens, config);
-                //     if(config["type"].get<std::string>() == "natural"){
-                //         outputStream << " ";
-                //     }
-                // }
                 else if(token == "int"){
                     outputStream << std::setprecision(18) << std::noshowpoint << info[token].get<int>();
                     if(config["type"].get<std::string>() == "natural"){
@@ -169,6 +166,36 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                 }
                 else if(token.substr(0, 2) == "id"){
                     std::string id = jsonToString(info[token], type, rule, tokens, config);
+                    if(id.front() == '{'){
+                        std::stringstream idStream(id);
+                        json idJson;
+                        idStream >> idJson;
+                        std::string from, to;
+                        if(idJson[languageCode].is_string()){
+                            from = idJson[languageCode].get<std::string>();
+                        }
+                        else if(idJson["default"].is_string()){
+                            from = idJson[languageCode].get<std::string>();
+                        }
+                        else{
+                            EM_error(0, "id.lang");
+                        }
+                        std::string toName = config["name"].get<std::string>();
+                        if(idJson[toName].is_string()){
+                            to = idJson[toName].get<std::string>();
+                        }
+                        else if(idJson["default"].is_string()){
+                            to = idJson[toName].get<std::string>();
+                        }
+                        else{
+                            EM_error(0, "id.lang");
+                        }
+                        nameConvertMap[from] = to;
+                        id = "$" + id + "$";
+                    }
+                    if(nameConvertMap.find(id) != nameConvertMap.end()){
+                        id = nameConvertMap[id];
+                    }
                     if(ruleName.substr(0, 8) == "dec.func"){
                         if(id == _mainFuncName){
                             id = tokens["main"];
@@ -238,46 +265,80 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
         std::stringstream outputStream;
         int i = 0;
         std::string output = "";
-        for(const auto &element: target){
-            std::string eachOutput = "";
-            if(i != 0 && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
-                eachOutput += ", ";
-            }
-            std::string ruleName;
-            std::string type = element["type"].get<std::string>();
-            std::string kind;
-            if(element["kind"].is_string()){
-                kind = element["kind"].get<std::string>();
-            }
-            else{
-                kind = "noinit";
-            }
-            // std::cout << type << "/" << kind << std::endl;
-
-            if(rule[type][kind].is_string()){
-                ruleName = type + "." + kind;
-            }
-            else if(rule[type][kind].is_object()){
-                std::string specificType = element["info"]["specificType"].get<std::string>();
-                ruleName = type + "." + kind + "." + specificType;
-            }
-            if(type == "dec" || type == "stm"){
-                for(int i = 0; i < indentTabs; i++){
-                    eachOutput += "\t";
+        if(parentRule == "mems"){
+            for(auto it = target.rbegin(); it != target.rend(); it++){
+                json element = *it;
+                std::string eachOutput = "";
+                if(i != 0 && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
+                    eachOutput += ", ";
                 }
-            }
-            eachOutput += jsonToString(element, type, rule, tokens, config);
-            if(type == "dec" || type == "stm"){
-                eachOutput += "\n";
-            }
-            i += 1;
-            if(parentRule == "mems"){
-                output = eachOutput + output;
-            }
-            else{
+                std::string ruleName;
+                std::string type = element["type"].get<std::string>();
+                std::string kind;
+                if(element["kind"].is_string()){
+                    kind = element["kind"].get<std::string>();
+                }
+                else{
+                    kind = "noinit";
+                }
+                // std::cout << type << "/" << kind << std::endl;
+
+                if(rule[type][kind].is_string()){
+                    ruleName = type + "." + kind;
+                }
+                else if(rule[type][kind].is_object()){
+                    std::string specificType = element["info"]["specificType"].get<std::string>();
+                    ruleName = type + "." + kind + "." + specificType;
+                }
+                if(type == "dec" || type == "stm"){
+                    for(int i = 0; i < indentTabs; i++){
+                        eachOutput += "\t";
+                    }
+                }
+                eachOutput += jsonToString(element, type, rule, tokens, config);
+                if(type == "dec" || type == "stm"){
+                    eachOutput += "\n";
+                }
+                i += 1;
                 output += eachOutput;
             }
+        }
+        else{
+            for(const auto &element: target){
+                std::string eachOutput = "";
+                if(i != 0 && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
+                    eachOutput += ", ";
+                }
+                std::string ruleName;
+                std::string type = element["type"].get<std::string>();
+                std::string kind;
+                if(element["kind"].is_string()){
+                    kind = element["kind"].get<std::string>();
+                }
+                else{
+                    kind = "noinit";
+                }
+                // std::cout << type << "/" << kind << std::endl;
 
+                if(rule[type][kind].is_string()){
+                    ruleName = type + "." + kind;
+                }
+                else if(rule[type][kind].is_object()){
+                    std::string specificType = element["info"]["specificType"].get<std::string>();
+                    ruleName = type + "." + kind + "." + specificType;
+                }
+                if(type == "dec" || type == "stm"){
+                    for(int i = 0; i < indentTabs; i++){
+                        eachOutput += "\t";
+                    }
+                }
+                eachOutput += jsonToString(element, type, rule, tokens, config);
+                if(type == "dec" || type == "stm"){
+                    eachOutput += "\n";
+                }
+                i += 1;
+                output += eachOutput;
+            }
         }
         outputStream << output;
         return outputStream.str();

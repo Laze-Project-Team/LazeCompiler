@@ -113,7 +113,7 @@ int main(int argc, char **argv)
     // EM_reset(tempFileName);
     while(!toByte(temptempFileName, tempFileName));
     // printf("Finished Preprocessing...\n");
-    L_tokenList list = L_Lexer(tempFileName, parseJsonName);
+    L_tokenList list = L_Lexer(tempFileName, parseJsonName, mode);
     remove(tempFileName);
     remove(temptempFileName);
     // std::cout << "Finished Lexing..." << std::endl;

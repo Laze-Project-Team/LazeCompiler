@@ -24,6 +24,7 @@ std::wstring excludeKeywordRegex = L"";
 
 std::vector<std::vector<int>> lettersInLines;
 static bool tabSensitive = false;
+std::string languageCode = "";
 
 L_errorPos L_getErrorPos(int cursorPos){
     L_errorPos result;
@@ -46,6 +47,7 @@ L_errorPos L_getErrorPos(int cursorPos){
     }
 }
 
+
 std::vector<std::pair<std::string, std::wregex>> L_genTokenNames(const std::string &inputFname){
     std::ifstream input(inputFname);
     json j;
@@ -53,6 +55,7 @@ std::vector<std::pair<std::string, std::wregex>> L_genTokenNames(const std::stri
     json keywords = j["tokens"]["keywords"];
     json ops = j["tokens"]["ops"];
     tabSensitive = j["config"]["tabsensitive"].get<bool>();
+    languageCode = j["config"]["name"].get<std::string>();
     std::wstring charRegex = converter.from_bytes(j["tokens"]["char"].get<std::string>());
     std::wstring intRegex = converter.from_bytes(j["tokens"]["int"].get<std::string>());
     std::wstring separatorRegex = L"[^" + charRegex.substr(1, charRegex.size() - 2) + intRegex.substr(1, intRegex.size() - 2) + L"]";
@@ -106,7 +109,7 @@ std::vector<std::pair<std::string, std::wregex>> L_genTokenNames(const std::stri
 
         std::wstring hexRegex = converter.from_bytes(j["tokens"]["hex"].get<std::string>());
         regexMap.push_back(std::make_pair("int", std::wregex(idSeparatorStart+L"((" + hexRegex + L"|" + intRegex + L"+))"+idSeparatorEnd)));
-        tokenNames.push_back("int");        
+        tokenNames.push_back("int");
 
         tokenNames.push_back("eof");
         tokenNames.push_back("");
@@ -114,7 +117,7 @@ std::vector<std::pair<std::string, std::wregex>> L_genTokenNames(const std::stri
     return regexMap;
 }
 
-L_tokenList L_Lexer(const char* filename1, const char* filename2)
+L_tokenList L_Lexer(const char* filename1, const char* filename2, std::string mode)
 {
     L_tokenList tokenList;
     std::vector<std::pair<std::string, std::wregex>> regexMap = L_genTokenNames(filename2);
@@ -134,6 +137,40 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2)
             lettersInLines.push_back(std::vector<int>());
         }
         lettersInLines.at(PP_getLinesInFile(linePos).fileNum).push_back(programLine.size() + 1);
+    }
+    std::wstring::const_iterator programIt(program.cbegin());
+    while(std::regex_search(programIt, program.cend(), match, std::wregex(L"(\\$(.*)\\$)"))){
+        // std::cout << "aaaaaaaa" << std::endl;
+        L_token token = std::make_shared<L_token_>();
+        token -> kind = "id";
+        token -> start = match[1].first - program.cbegin();
+        token -> end = match[1].second - program.cbegin();
+        programIt = match[1].second;
+        if(mode == "compile")
+        {
+            std::stringstream idStream(converter.to_bytes(match[2].str()));
+            json idJson;
+            idStream >> idJson;
+            if(idJson[languageCode].is_string()){
+                token -> u.id = (char *)malloc(idJson[languageCode].get<std::string>().size() + 1);
+                std::strcpy(token -> u.id, idJson[languageCode].get<std::string>().c_str());
+                // std::cout << token -> u.id << std::endl;
+            }
+            else if(idJson["default"].is_string()){
+                token -> u.id = (char *)malloc(idJson["default"].get<std::string>().size() + 1);
+                std::strcpy(token -> u.id, idJson[languageCode].get<std::string>().c_str());
+            }
+            else{
+                EM_error(token -> start, "id.lang");
+            }
+        }
+        else{
+            token -> u.id = (char *)malloc(converter.to_bytes(match[2].str()).size() + 3);
+            std::strcpy(token -> u.id, converter.to_bytes(match[2].str()).c_str());
+            // std::cout << token -> u.id << std::endl;
+        }
+        std::fill(program.begin() + (match[1].first - program.cbegin()), program.begin() + (match[1].second - program.cbegin()), L' ');
+        tokenList.push_back(token);
     }
     for(const auto &regex:regexMap){
         // std::cout << regex.first << std::endl;
