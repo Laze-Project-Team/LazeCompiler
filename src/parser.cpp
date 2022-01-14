@@ -596,7 +596,8 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         }
         else if(ruleName == "stm.loop"){
             // std::cout << "looooooooooooooop" << std::endl;
-            result -> u.stm = A_DeclarationStm(result -> start, A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol("loop"), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), tokenData.at("stm").stm), NULL)));
+            result -> u.stm = A_LoopStm(result -> start, tokenData.at("stm").stm);
+            // result -> u.stm = A_DeclarationStm(result -> start, A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol("loop"), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), tokenData.at("stm").stm), NULL)));
         }
         else if(ruleName == "stm.break"){
             result -> u.stm = A_BreakStm(result -> start);

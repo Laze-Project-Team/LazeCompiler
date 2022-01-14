@@ -655,7 +655,8 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
         }
         case A_loopStm:
         {
-            return expTy(Tr_LoopStm(stm->pos), Ty_Void());
+            return transStm(venv, tenv, A_DeclarationStm(stm -> pos, A_FunctionDec(stm -> pos, A_FundecList(A_Fundec(stm -> pos, S_Symbol("loop"), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), stm -> u.loop.body), NULL))), level, isLoop, classs);
+            // return expTy(Tr_LoopStm(stm->pos), Ty_Void());
         }
         case A_callStm:
         {
