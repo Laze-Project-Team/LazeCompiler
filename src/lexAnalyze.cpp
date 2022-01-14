@@ -155,12 +155,14 @@ int main(int argc, char **argv)
         absyn_root = P_parse(list, parseJsonName);
     }
     if(strcmp(mode, "convert") == 0){
-        A_decList linkFileAST = getAST(convertLinkFile, convertDirectory, directory, parseJsonName, mode, parserFileName);
-        string convertResultJsonFile = concat(convertLinkFile, ".json");
-        jobj convertJsonAST = JS_toJson(linkFileAST);
-        fileContent(convertResultJsonFile, (string)json_object_to_json_string(convertJsonAST));
-        CON_convert(convertResultJsonFile, convertJsonName, convertOutput);
-        remove(convertResultJsonFile);
+        if(convertLinkFile){
+            A_decList linkFileAST = getAST(convertLinkFile, convertDirectory, directory, parseJsonName, mode, parserFileName);
+            string convertResultJsonFile = concat(convertLinkFile, ".json");
+            jobj convertJsonAST = JS_toJson(linkFileAST);
+            fileContent(convertResultJsonFile, (string)json_object_to_json_string(convertJsonAST));
+            CON_convert(convertResultJsonFile, convertJsonName, convertOutput);
+            remove(convertResultJsonFile);
+        }
         string resultJsonFile = concat(tempFileName, ".json");
         jobj jsonAST = JS_toJson(absyn_root);
         fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));
