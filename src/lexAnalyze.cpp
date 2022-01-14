@@ -41,6 +41,8 @@ A_decList getAST(char *fname, char *directory, char *currentDirectory, char *par
     copyFileContent(fname, temptempFileName);
     transPPList(preprocess(temptempFileName), temptempFileName);
     while(!toByte(temptempFileName, tempFileName));
+    std::ifstream i(tempFileName);
+    // std::cout << i.rdbuf() << std::endl;
     L_tokenList list = L_Lexer(tempFileName, parseJsonName, mode);
     remove(tempFileName);
     remove(temptempFileName);

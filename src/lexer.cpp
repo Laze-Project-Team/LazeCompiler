@@ -89,7 +89,7 @@ std::vector<std::pair<std::string, std::wregex>> L_genTokenNames(const std::stri
     for(const auto &item: ops.items()){
         std::wstring reg = converter.from_bytes(item.value()["regex"].get<std::string>());
         if(item.value()["name"] == "."){
-            reg = converter.from_bytes(item.value()["regex"].get<std::string>() + "\\s*[^0-9]");
+            reg = converter.from_bytes(item.value()["regex"].get<std::string>() + "\\s*($|[^0-9])");
         }
         // std::wcout << reg << std::endl;
         regexMap.push_back(std::make_pair(item.value()["name"], std::wregex(reg)));
