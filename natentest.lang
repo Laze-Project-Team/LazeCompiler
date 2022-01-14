@@ -170,16 +170,16 @@ public : 	Declare variable content as pointer of T .
 private : 	Declare variable allocated as int . 
 ending here 
 Declare class ${"ja":"文字列", "natja":"文字列", "en":"string", "naten":"string"}$ with members starting here
-public : 	function : operator = ( offset as pointer of char , l as int ) => ( ) starting here
-		Assign offset to content . 
-		Assign l to length . 
-	ending here 
+public : 	Declare variable content as pointer of char . 
+	Declare variable length as int . 
 	Declare function string that takes offset as pointer of char , l as int with code starting here
 		Assign offset to content . 
 		Assign l to length . 
 	ending here 
-	Declare variable length as int . 
-	Declare variable content as pointer of char . 
+	function : operator = ( offset as pointer of char , l as int ) => ( ) starting here
+		Assign offset to content . 
+		Assign l to length . 
+	ending here 
 ending here 
 Declare function ${"ja":"文字列表示", "natja":"文字列表示", "en":"printString", "naten":"printString"}$ that takes a as string with code starting here
 	Call _printString with value content of a , length of a . 
@@ -200,10 +200,16 @@ Declare function ${"ja":"glGetUniformLocation", "natja":"glGetUniformLocation", 
 	Assign _glGetUniformLocation ( i , content of a , length of a ) to loc . 
 ending here 
 Declare class ${"ja":"ベクトル3D", "natja":"ベクトル3D", "en":"Vector3D", "naten":"Vector3D"}$ with members starting here
-public : 	function : operator  + ( a as Vector3D ) => ( b as Vector3D ) starting here
-		Assign x of a  + x to x of b . 
-		Assign y of a  + y to y of b . 
-		Assign z of a  + z to z of b . 
+public : 	Declare variable x as double . 
+	Declare variable y as double . 
+	Declare variable z as double . 
+	Declare function Vector3D that takes a as double , b as double , c as double with code starting here
+		Assign a to x . 
+		Assign b to y . 
+		Assign c to z . 
+	ending here 
+	Declare function ${"ja":"長さ", "natja":"長さ", "en":"length", "naten":"length"}$ that returns l as double with code starting here
+		Assign root ( x  * x  + y  * y  + z  * z ) to l . 
 	ending here 
 	Declare function ${"ja":"正規化", "natja":"正規化", "en":"normalize", "naten":"normalize"}$ with code starting here
 		Initialize variable l as double with root ( ( x  * x )  + ( y  * y )  + ( z  * z ) ) . 
@@ -211,17 +217,11 @@ public : 	function : operator  + ( a as Vector3D ) => ( b as Vector3D ) starting
 		Assign y  / l to y . 
 		Assign z  / l to z . 
 	ending here 
-	Declare function ${"ja":"長さ", "natja":"長さ", "en":"length", "naten":"length"}$ that returns l as double with code starting here
-		Assign root ( x  * x  + y  * y  + z  * z ) to l . 
+	function : operator  + ( a as Vector3D ) => ( b as Vector3D ) starting here
+		Assign x of a  + x to x of b . 
+		Assign y of a  + y to y of b . 
+		Assign z of a  + z to z of b . 
 	ending here 
-	Declare function Vector3D that takes a as double , b as double , c as double with code starting here
-		Assign a to x . 
-		Assign b to y . 
-		Assign c to z . 
-	ending here 
-	Declare variable z as double . 
-	Declare variable y as double . 
-	Declare variable x as double . 
 ending here 
 Declare function ${"ja":"ベクトル3Dの和", "natja":"ベクトル3Dの和", "en":"addVector3D", "naten":"addVector3D"}$ that takes a as Vector3D , b as Vector3D and returns result as Vector3D with code starting here
 	Assign x of a  + x of b to x of result . 
@@ -255,19 +255,22 @@ Declare function ${"ja":"ベクトル3D縮小", "natja":"ベクトル3D縮小", 
 	Assign z of a  / x to z of result . 
 ending here 
 Declare class ${"ja":"行列4x4", "natja":"行列4x4", "en":"Matrix4x4", "naten":"Matrix4x4"}$ with members starting here
-public : 	Declare function ${"ja":"拡大縮小", "natja":"拡大縮小", "en":"scale", "naten":"scale"}$ that takes x as double , y as double , z as double with code starting here
-		Assign element 0 in matrix  * x to element 0 in matrix . 
-		Assign element 1 in matrix  * x to element 1 in matrix . 
-		Assign element 2 in matrix  * x to element 2 in matrix . 
-		Assign element 3 in matrix  * x to element 3 in matrix . 
-		Assign element 4 in matrix  * y to element 4 in matrix . 
-		Assign element 5 in matrix  * y to element 5 in matrix . 
-		Assign element 6 in matrix  * y to element 6 in matrix . 
-		Assign element 7 in matrix  * y to element 7 in matrix . 
-		Assign element 8 in matrix  * z to element 8 in matrix . 
-		Assign element 9 in matrix  * z to element 9 in matrix . 
-		Assign element 10 in matrix  * z to element 10 in matrix . 
-		Assign element 11 in matrix  * z to element 11 in matrix . 
+public : 	Declare variable element 16 in matrix as double . 
+	Declare function Matrix4x4 with code starting here
+		Assign [ 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 ] to matrix . 
+	ending here 
+	Declare function ${"ja":"単位化", "natja":"単位化", "en":"identity", "naten":"identity"}$ with code starting here
+		Assign [ 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 ] to matrix . 
+	ending here 
+	Declare function ${"ja":"移動", "natja":"移動", "en":"translate", "naten":"translate"}$ that takes offset as Vector3D with code starting here
+		Initialize variable mat12 as double with element 12 in matrix . 
+		Initialize variable mat13 as double with element 13 in matrix . 
+		Initialize variable mat14 as double with element 14 in matrix . 
+		Initialize variable mat15 as double with element 15 in matrix . 
+		Assign element 0 in matrix  * x of offset  + element 4 in matrix  * y of offset  + element 8 in matrix  * z of offset  + mat12 to element 12 in matrix . 
+		Assign element 1 in matrix  * x of offset  + element 5 in matrix  * y of offset  + element 9 in matrix  * z of offset  + mat13 to element 13 in matrix . 
+		Assign element 2 in matrix  * x of offset  + element 6 in matrix  * y of offset  + element 10 in matrix  * z of offset  + mat13 to element 14 in matrix . 
+		Assign element 3 in matrix  * x of offset  + element 7 in matrix  * y of offset  + element 11 in matrix  * z of offset  + mat15 to element 15 in matrix . 
 	ending here 
 	Declare function ${"ja":"回転", "natja":"回転", "en":"rotate", "naten":"rotate"}$ that takes axis as Vector3D , theta as double with code starting here
 		Call normalize of axis . 
@@ -308,23 +311,20 @@ public : 	Declare function ${"ja":"拡大縮小", "natja":"拡大縮小", "en":"
 		Assign a02  * b20  + a12  * b21  + a22  * b22 to element 10 in matrix . 
 		Assign a03  * b20  + a13  * b21  + a23  * b22 to element 11 in matrix . 
 	ending here 
-	Declare function ${"ja":"移動", "natja":"移動", "en":"translate", "naten":"translate"}$ that takes offset as Vector3D with code starting here
-		Initialize variable mat12 as double with element 12 in matrix . 
-		Initialize variable mat13 as double with element 13 in matrix . 
-		Initialize variable mat14 as double with element 14 in matrix . 
-		Initialize variable mat15 as double with element 15 in matrix . 
-		Assign element 0 in matrix  * x of offset  + element 4 in matrix  * y of offset  + element 8 in matrix  * z of offset  + mat12 to element 12 in matrix . 
-		Assign element 1 in matrix  * x of offset  + element 5 in matrix  * y of offset  + element 9 in matrix  * z of offset  + mat13 to element 13 in matrix . 
-		Assign element 2 in matrix  * x of offset  + element 6 in matrix  * y of offset  + element 10 in matrix  * z of offset  + mat13 to element 14 in matrix . 
-		Assign element 3 in matrix  * x of offset  + element 7 in matrix  * y of offset  + element 11 in matrix  * z of offset  + mat15 to element 15 in matrix . 
+	Declare function ${"ja":"拡大縮小", "natja":"拡大縮小", "en":"scale", "naten":"scale"}$ that takes x as double , y as double , z as double with code starting here
+		Assign element 0 in matrix  * x to element 0 in matrix . 
+		Assign element 1 in matrix  * x to element 1 in matrix . 
+		Assign element 2 in matrix  * x to element 2 in matrix . 
+		Assign element 3 in matrix  * x to element 3 in matrix . 
+		Assign element 4 in matrix  * y to element 4 in matrix . 
+		Assign element 5 in matrix  * y to element 5 in matrix . 
+		Assign element 6 in matrix  * y to element 6 in matrix . 
+		Assign element 7 in matrix  * y to element 7 in matrix . 
+		Assign element 8 in matrix  * z to element 8 in matrix . 
+		Assign element 9 in matrix  * z to element 9 in matrix . 
+		Assign element 10 in matrix  * z to element 10 in matrix . 
+		Assign element 11 in matrix  * z to element 11 in matrix . 
 	ending here 
-	Declare function ${"ja":"単位化", "natja":"単位化", "en":"identity", "naten":"identity"}$ with code starting here
-		Assign [ 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 ] to matrix . 
-	ending here 
-	Declare function Matrix4x4 with code starting here
-		Assign [ 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 , 0.0 , 0.0 , 0.0 , 0.0 , 1.0 ] to matrix . 
-	ending here 
-	Declare variable element 16 in matrix as double . 
 ending here 
 Declare function ${"ja":"カメラ行列", "natja":"カメラ行列", "en":"setCameraMat", "naten":"setCameraMat"}$ that takes m as Matrix4x4 , pos as Vector3D , lookAt as Vector3D , up as Vector3D and returns res as Matrix4x4 with code starting here
 	Initialize object newForward as Vector3D with x of lookAt  - x of pos , y of lookAt  - y of pos , z of lookAt  - z of pos . 
@@ -454,21 +454,21 @@ public : 	Declare variable ${"ja":"色", "natja":"色", "en":"color", "naten":"c
 		Call identity of transMat . 
 		Call identity of scaleMat . 
 	ending here 
-private : 	Declare variable modelMatUniformLoc as short . 
-	Declare variable viewMatUniformLoc as short . 
-	Declare variable projMatUniformLoc as short . 
-	Declare variable objectColorUniLoc as short . 
-	Declare variable lightColorUniLoc as short . 
-	Declare variable lightPosUniLoc as short . 
-	Declare variable viewPosUniLoc as short . 
-	Declare variable shaderID as int . 
-	Declare variable rotateMat as Matrix4x4 . 
-	Declare variable scaleMat as Matrix4x4 . 
-	Declare variable transMat as Matrix4x4 . 
-	Declare variable modelMat as Matrix4x4 . 
-	Declare variable buffer as short . 
+private : 	Declare variable vertices as pointer of double . 
 	Declare variable vertexNum as int . 
-	Declare variable vertices as pointer of double . 
+	Declare variable buffer as short . 
+	Declare variable modelMat as Matrix4x4 . 
+	Declare variable transMat as Matrix4x4 . 
+	Declare variable scaleMat as Matrix4x4 . 
+	Declare variable rotateMat as Matrix4x4 . 
+	Declare variable shaderID as int . 
+	Declare variable viewPosUniLoc as short . 
+	Declare variable lightPosUniLoc as short . 
+	Declare variable lightColorUniLoc as short . 
+	Declare variable objectColorUniLoc as short . 
+	Declare variable projMatUniformLoc as short . 
+	Declare variable viewMatUniformLoc as short . 
+	Declare variable modelMatUniformLoc as short . 
 ending here 
 Declare class ${"ja":"カメラ", "natja":"カメラ", "en":"Camera", "naten":"Camera"}$ with members starting here
 public : 	Declare variable ${"ja":"座標", "natja":"座標", "en":"pos", "naten":"pos"}$ as Vector3D . 
@@ -524,11 +524,11 @@ public : 	Declare variable ${"ja":"座標", "natja":"座標", "en":"pos", "naten
 		Assign addVector3D ( lookDir , pos ) to view . 
 		Assign setCameraMat ( result , pos , view , up ) to result . 
 	ending here 
-private : 	Declare variable pitch as double . 
-	Declare variable yaw as double . 
-	Declare variable up as Vector3D . 
+private : 	Declare variable view as Vector3D . 
 	Declare variable lookDir as Vector3D . 
-	Declare variable view as Vector3D . 
+	Declare variable up as Vector3D . 
+	Declare variable yaw as double . 
+	Declare variable pitch as double . 
 ending here 
 Declare class ${"ja":"シーン", "natja":"シーン", "en":"Scene", "naten":"Scene"}$ with members starting here
 public : 	Declare variable ${"ja":"スプライト配列", "natja":"スプライト配列", "en":"sprites", "naten":"sprites"}$ as Array < pointer of Model > . 
@@ -579,29 +579,29 @@ public : 	Declare variable ${"ja":"スプライト配列", "natja":"スプライ
 		Call push of sprites with value light . 
 		Assign length of sprites ( )  - 1 to id . 
 	ending here 
-private : 	Declare variable lastY as double . 
-	Declare variable lastX as double . 
-	Declare variable elapsedTime as double . 
-	Declare variable now as double . 
-	Declare variable last as double . 
+private : 	Declare variable projMat as Matrix4x4 . 
 	Declare variable viewMat as Matrix4x4 . 
-	Declare variable projMat as Matrix4x4 . 
+	Declare variable last as double . 
+	Declare variable now as double . 
+	Declare variable elapsedTime as double . 
+	Declare variable lastX as double . 
+	Declare variable lastY as double . 
 ending here 
 Declare class ${"ja":"ベクトル2D", "natja":"ベクトル2D", "en":"Vector2D", "naten":"Vector2D"}$ with members starting here
-public : 	Declare function ${"ja":"正規化", "natja":"正規化", "en":"normalize", "naten":"normalize"}$ with code starting here
-		Initialize variable l as double with root ( x  * x  + y  * y ) . 
-		Assign x  / l to x . 
-		Assign y  / l to y . 
-	ending here 
-	Declare function ${"ja":"長さ", "natja":"長さ", "en":"length", "naten":"length"}$ that returns l as double with code starting here
-		Assign root ( x  * x  + y  * y ) to l . 
-	ending here 
+public : 	Declare variable x as double . 
+	Declare variable y as double . 
 	Declare function Vector2D that takes a as double , b as double with code starting here
 		Assign a to x . 
 		Assign b to y . 
 	ending here 
-	Declare variable y as double . 
-	Declare variable x as double . 
+	Declare function ${"ja":"長さ", "natja":"長さ", "en":"length", "naten":"length"}$ that returns l as double with code starting here
+		Assign root ( x  * x  + y  * y ) to l . 
+	ending here 
+	Declare function ${"ja":"正規化", "natja":"正規化", "en":"normalize", "naten":"normalize"}$ with code starting here
+		Initialize variable l as double with root ( x  * x  + y  * y ) . 
+		Assign x  / l to x . 
+		Assign y  / l to y . 
+	ending here 
 ending here 
 Declare function ${"ja":"ベクトル2Dの和", "natja":"ベクトル2Dの和", "en":"addVector2D", "naten":"addVector2D"}$ that takes a as Vector2D , b as Vector2D and returns result as Vector2D with code starting here
 	Assign x of a  + x of b to x of result . 
@@ -626,17 +626,17 @@ Declare function ${"ja":"ベクトル2D縮小", "natja":"ベクトル2D縮小", 
 	Assign y of a  / x to y of result . 
 ending here 
 Declare class ${"ja":"アニメーション情報", "natja":"アニメーション情報", "en":"AnimationInfo", "naten":"AnimationInfo"}$ with members starting here
-public : 	Declare function AnimationInfo that takes a as int , start as double , d as double , x as double , y as double with code starting here
+public : 	Declare variable id as int . 
+	Declare variable startTime as double . 
+	Declare variable duration as double . 
+	Declare variable info as Vector2D . 
+	Declare function AnimationInfo that takes a as int , start as double , d as double , x as double , y as double with code starting here
 		Assign a to id . 
 		Assign start to startTime . 
 		Assign d to duration . 
 		Assign x to x of info . 
 		Assign y to y of info . 
 	ending here 
-	Declare variable info as Vector2D . 
-	Declare variable duration as double . 
-	Declare variable startTime as double . 
-	Declare variable id as int . 
 ending here 
 Declare class ${"ja":"スプライト", "natja":"スプライト", "en":"Sprite", "naten":"Sprite"}$ with members starting here
 public : 	Declare variable color as Vector3D . 
@@ -806,27 +806,27 @@ public : 	Declare variable color as Vector3D .
 		Initialize object temp as AnimationInfo with 0 , start , duration , x of offset , y of offset . 
 		Call push of animations with value temp . 
 	ending here 
-private : 	Declare variable animations as Array < AnimationInfo > . 
-	Declare variable samplerUniformLoc as short . 
-	Declare variable modelMatUniformLoc as short . 
-	Declare variable projMatUniformLoc as short . 
-	Declare variable transparencyUniLoc as short . 
-	Declare variable objectColorUniLoc as short . 
-	Declare variable shaderID as int . 
-	Declare variable zIndex as double . 
-	Declare variable rotateMat as Matrix4x4 . 
-	Declare variable scaleMat as Matrix4x4 . 
-	Declare variable transMat as Matrix4x4 . 
-	Declare variable modelMat as Matrix4x4 . 
-	Declare variable texture as short . 
-	Declare variable elementBuffer as short . 
-	Declare variable texCoordBuffer as short . 
-	Declare variable buffer as short . 
-	Declare variable pointNum as int . 
-	Declare variable vertexNum as int . 
-	Declare variable texCoords as pointer of double . 
+private : 	Declare variable vertices as pointer of double . 
 	Declare variable indices as pointer of short . 
-	Declare variable vertices as pointer of double . 
+	Declare variable texCoords as pointer of double . 
+	Declare variable vertexNum as int . 
+	Declare variable pointNum as int . 
+	Declare variable buffer as short . 
+	Declare variable texCoordBuffer as short . 
+	Declare variable elementBuffer as short . 
+	Declare variable texture as short . 
+	Declare variable modelMat as Matrix4x4 . 
+	Declare variable transMat as Matrix4x4 . 
+	Declare variable scaleMat as Matrix4x4 . 
+	Declare variable rotateMat as Matrix4x4 . 
+	Declare variable zIndex as double . 
+	Declare variable shaderID as int . 
+	Declare variable objectColorUniLoc as short . 
+	Declare variable transparencyUniLoc as short . 
+	Declare variable projMatUniformLoc as short . 
+	Declare variable modelMatUniformLoc as short . 
+	Declare variable samplerUniformLoc as short . 
+	Declare variable animations as Array < AnimationInfo > . 
 ending here 
 Declare class ${"ja":"シーン2D", "natja":"シーン2D", "en":"Scene2D", "naten":"Scene2D"}$ with members starting here
 public : 	Declare variable ${"ja":"スプライト配列", "natja":"スプライト配列", "en":"sprites", "naten":"sprites"}$ as Array < pointer of Sprite > . 
@@ -921,15 +921,26 @@ public : 	Declare variable ${"ja":"スプライト配列", "natja":"スプライ
 		ending here 
 		Assign addPolygon ( content of points , size of points , pos , color , zIndex ) to id . 
 	ending here 
-private : 	Declare variable elapsedTime as double . 
-	Declare variable now as double . 
+private : 	Declare variable projMat as Matrix4x4 . 
 	Declare variable last as double . 
-	Declare variable projMat as Matrix4x4 . 
+	Declare variable now as double . 
+	Declare variable elapsedTime as double . 
 ending here 
 Declare function 引数なしjsリスナー呼び出し that takes callback as function : ( ) => ( ) with code starting here
 	Call callback . 
 ending here 
 Export function 引数なしjsリスナー呼び出し to "jsCallListenerNoParam". 
 Declare function main with code starting here
-	Call print with value "ようこそ". 
+	Call captureMouse . 
+	Initialize object ワールド as Scene with . 
+	Initialize object 光源座標 as Vector3D with 5.0 , 5.0 , 5.0 . 
+	Initialize object 回転軸 as Vector3D with 0.0 , 1.0 , 0.0 . 
+	Initialize object color as Vector3D with 0.900000000000000022 , 0.5 , 0.699999999999999956 . 
+	Initialize object 位置 as Vector3D with 0.0 , 0.0 , 0.0 . 
+	Initialize variable キューブID as int with addCube of ワールド ( 2.0 , color , 位置 ) . 
+	Initialize variable 光源ID as int with addLight of ワールド ( 1.0 , color , 光源座標 ) . 
+	Declare function loop with code starting here
+		Call get of sprites of ワールド ( キューブID ) -> rotate with value 回転軸 , getTime ( )  / 1000.0 . 
+		Call draw of ワールド . 
+	ending here 
 ending here 

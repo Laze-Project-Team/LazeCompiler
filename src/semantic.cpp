@@ -2737,7 +2737,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         }
 
         A_classMemberList memberList = d -> u.classs.members;
-        memberList = flipClassMemberList(memberList);
+        // memberList = flipClassMemberList(memberList);
         for(; memberList -> tail; memberList = memberList -> tail)
         {
             // printf("debug %d\n", memberList -> head -> dec -> kind);
@@ -2799,7 +2799,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         }
         T_moduleList modlist = T_ModuleList(NULL, NULL);
         memberList= d -> u.classs.members;
-        memberList= flipClassMemberList(memberList);
+        // memberList= flipClassMemberList(memberList);
         for(; memberList-> tail; memberList= memberList-> tail)
         {
             if(memberList-> head -> dec -> kind == A_functionDec || memberList -> head -> dec -> kind == A_operatorDec)

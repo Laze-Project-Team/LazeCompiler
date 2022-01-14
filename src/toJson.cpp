@@ -746,10 +746,10 @@ jobj JS_ClassMemberListToJson(A_classMemberList list)
     jobj memsArray = json_object_new_array();
     if(!list)
         return memsArray;
-    A_classMemberList memsTemp;
+    A_classMemberList memsTemp = NULL;
     A_classMemberSpecifier specifierBefore;
-    jobj memsJson;
-    for(specifierBefore = classMemberList -> head -> accessSpecifier, memsJson = json_object_new_array();classMemberList; classMemberList = classMemberList -> tail){
+    jobj memsJson = NULL;
+    for(specifierBefore = classMemberList -> head -> accessSpecifier, memsJson = json_object_new_array();classMemberList -> tail; classMemberList = classMemberList -> tail){
         if(classMemberList -> head){
             if(specifierBefore != classMemberList -> head -> accessSpecifier){
                 jobj mems = json_object_new_object();

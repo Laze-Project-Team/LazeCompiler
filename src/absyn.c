@@ -682,17 +682,27 @@ A_classMemberList A_ClassMemFromDecList(A_decList decs, A_classMemberSpecifier s
 
 A_classMemberList A_ClassMemFromTwoList(A_classMemberList list1, A_classMemberList list2)
 {
-    A_classMemberList p = (A_classMemberList)checked_malloc(sizeof(*p));
+    A_classMemberList p = A_ClassMemberList(NULL, NULL);
+    A_classMemberList result = p;
     
-    if(!list2){
+    if(!list1){
         p = A_ClassMemberList(NULL, NULL);
-    }
-    else{
-        p = list2;
     }
     for(A_classMemberList list = list1; list -> tail; list = list -> tail)
     {
-        p = A_ClassMemberList(list -> head, p);
+        p -> head = list -> head;
+        p -> tail = A_ClassMemberList(NULL, NULL);
+        p = p -> tail;
+        p -> head = NULL;
+        p -> tail = NULL;
     }
-    return p;
+    for(A_classMemberList list = list2; list -> tail; list = list -> tail)
+    {
+        p -> head = list -> head;
+        p -> tail = A_ClassMemberList(NULL, NULL);
+        p = p -> tail;
+        p -> head = NULL;
+        p -> tail = NULL;
+    }
+    return result;
 }

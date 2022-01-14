@@ -654,23 +654,23 @@
     local.get 1)
   (func (;60;) (type 22) (param i32 i32 i64)
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     local.get 1
     i32.store
     local.get 0
-    i32.const 0
+    i32.const 4
     i32.add
     local.get 2
     i64.store)
   (func (;61;) (type 22) (param i32 i32 i64)
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     local.get 1
     i32.store
     local.get 0
-    i32.const 0
+    i32.const 4
     i32.add
     local.get 2
     i64.store)
@@ -680,11 +680,11 @@
     i32.const 12
     memory.copy
     i32.const 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 0
-    i32.const 0
+    i32.const 4
     i32.add
     i64.load
     call 3)
@@ -714,162 +714,20 @@
     memory.copy
     local.get 0
     i32.const 24
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 24
-    i32.const 0
+    i32.const 4
     i32.add
     i64.load
     i32.wrap_i64
     call 19
     local.set 2
     local.get 2)
-  (func (;68;) (type 20) (param i32 i32) (result i32)
-    i32.const 36
-    local.get 1
-    i32.const 24
-    memory.copy
-    i32.const 60
-    i32.const 16
-    i32.add
-    i32.const 36
-    i32.const 16
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 16
-    i32.add
-    f64.load
-    f64.add
-    f64.store
-    i32.const 60
-    i32.const 8
-    i32.add
-    i32.const 36
-    i32.const 8
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
-    f64.add
-    f64.store
-    i32.const 60
-    i32.const 0
-    i32.add
-    i32.const 36
-    i32.const 0
-    i32.add
-    f64.load
+  (func (;68;) (type 13) (param i32 f64 f64 f64)
     local.get 0
     i32.const 0
-    i32.add
-    f64.load
-    f64.add
-    f64.store
-    i32.const 60)
-  (func (;69;) (type 2) (param i32)
-    (local f64)
-    local.get 0
-    i32.const 16
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 16
-    i32.add
-    f64.load
-    f64.mul
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    local.get 0
-    i32.const 0
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 0
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    call 59
-    local.set 1
-    local.get 0
-    i32.const 16
-    i32.add
-    local.get 0
-    i32.const 16
-    i32.add
-    f64.load
-    local.get 1
-    f64.div
-    f64.store
-    local.get 0
-    i32.const 8
-    i32.add
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
-    local.get 1
-    f64.div
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    f64.load
-    local.get 1
-    f64.div
-    f64.store)
-  (func (;70;) (type 24) (param i32) (result f64)
-    (local f64)
-    local.get 0
-    i32.const 16
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 16
-    i32.add
-    f64.load
-    f64.mul
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    local.get 0
-    i32.const 0
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 0
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    call 59
-    local.set 1
-    local.get 1)
-  (func (;71;) (type 13) (param i32 f64 f64 f64)
-    local.get 0
-    i32.const 16
     i32.add
     local.get 1
     f64.store
@@ -879,10 +737,152 @@
     local.get 2
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 16
     i32.add
     local.get 3
     f64.store)
+  (func (;69;) (type 24) (param i32) (result f64)
+    (local f64)
+    local.get 0
+    i32.const 0
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 0
+    i32.add
+    f64.load
+    f64.mul
+    local.get 0
+    i32.const 8
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 8
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 0
+    i32.const 16
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 16
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    call 59
+    local.set 1
+    local.get 1)
+  (func (;70;) (type 2) (param i32)
+    (local f64)
+    local.get 0
+    i32.const 0
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 0
+    i32.add
+    f64.load
+    f64.mul
+    local.get 0
+    i32.const 8
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 8
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 0
+    i32.const 16
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 16
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    call 59
+    local.set 1
+    local.get 0
+    i32.const 0
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    f64.load
+    local.get 1
+    f64.div
+    f64.store
+    local.get 0
+    i32.const 8
+    i32.add
+    local.get 0
+    i32.const 8
+    i32.add
+    f64.load
+    local.get 1
+    f64.div
+    f64.store
+    local.get 0
+    i32.const 16
+    i32.add
+    local.get 0
+    i32.const 16
+    i32.add
+    f64.load
+    local.get 1
+    f64.div
+    f64.store)
+  (func (;71;) (type 20) (param i32 i32) (result i32)
+    i32.const 36
+    local.get 1
+    i32.const 24
+    memory.copy
+    i32.const 60
+    i32.const 0
+    i32.add
+    i32.const 36
+    i32.const 0
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 0
+    i32.add
+    f64.load
+    f64.add
+    f64.store
+    i32.const 60
+    i32.const 8
+    i32.add
+    i32.const 36
+    i32.const 8
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 8
+    i32.add
+    f64.load
+    f64.add
+    f64.store
+    i32.const 60
+    i32.const 16
+    i32.add
+    i32.const 36
+    i32.const 16
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 16
+    i32.add
+    f64.load
+    f64.add
+    f64.store
+    i32.const 60)
   (func (;72;) (type 20) (param i32 i32) (result i32)
     i32.const 84
     local.get 0
@@ -893,14 +893,14 @@
     i32.const 24
     memory.copy
     i32.const 132
-    i32.const 16
+    i32.const 0
     i32.add
     i32.const 84
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     i32.const 108
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.add
@@ -919,14 +919,14 @@
     f64.add
     f64.store
     i32.const 132
-    i32.const 0
+    i32.const 16
     i32.add
     i32.const 84
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     i32.const 108
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.add
@@ -942,14 +942,14 @@
     i32.const 24
     memory.copy
     i32.const 204
-    i32.const 16
+    i32.const 0
     i32.add
     i32.const 156
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     i32.const 180
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.sub
@@ -968,14 +968,14 @@
     f64.sub
     f64.store
     i32.const 204
-    i32.const 0
+    i32.const 16
     i32.add
     i32.const 156
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     i32.const 180
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.sub
@@ -992,11 +992,11 @@
     i32.const 24
     memory.copy
     i32.const 228
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     i32.const 252
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.mul
@@ -1011,11 +1011,11 @@
     f64.mul
     f64.add
     i32.const 228
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     i32.const 252
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.mul
@@ -1032,19 +1032,19 @@
     i32.const 24
     memory.copy
     i32.const 324
-    i32.const 16
+    i32.const 0
     i32.add
     i32.const 276
     i32.const 8
     i32.add
     f64.load
     i32.const 300
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.mul
     i32.const 276
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     i32.const 300
@@ -1058,30 +1058,30 @@
     i32.const 8
     i32.add
     i32.const 276
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     i32.const 300
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.mul
     i32.const 276
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     i32.const 300
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.mul
     f64.sub
     f64.store
     i32.const 324
-    i32.const 0
+    i32.const 16
     i32.add
     i32.const 276
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     i32.const 300
@@ -1094,7 +1094,7 @@
     i32.add
     f64.load
     i32.const 300
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.mul
@@ -1107,10 +1107,10 @@
     i32.const 24
     memory.copy
     i32.const 372
-    i32.const 16
+    i32.const 0
     i32.add
     i32.const 348
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     local.get 1
@@ -1127,10 +1127,10 @@
     f64.mul
     f64.store
     i32.const 372
-    i32.const 0
+    i32.const 16
     i32.add
     i32.const 348
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     local.get 1
@@ -1150,10 +1150,10 @@
       call 64
     end
     i32.const 420
-    i32.const 16
+    i32.const 0
     i32.add
     i32.const 396
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     local.get 1
@@ -1170,17 +1170,17 @@
     f64.div
     f64.store
     i32.const 420
-    i32.const 0
+    i32.const 16
     i32.add
     i32.const 396
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     local.get 1
     f64.div
     f64.store
     i32.const 420)
-  (func (;78;) (type 13) (param i32 f64 f64 f64)
+  (func (;78;) (type 2) (param i32)
     local.get 0
     i32.const 0
     i32.add
@@ -1189,17 +1189,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 0
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 1
-    f64.mul
+    f64.const 0x1p+0 (;=1;)
     f64.store
     local.get 0
     i32.const 0
@@ -1209,17 +1199,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 1
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 1
-    f64.mul
+    f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
     i32.const 0
@@ -1229,17 +1209,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 2
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 1
-    f64.mul
+    f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
     i32.const 0
@@ -1249,17 +1219,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 3
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 1
-    f64.mul
+    f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
     i32.const 0
@@ -1269,17 +1229,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 4
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 2
-    f64.mul
+    f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
     i32.const 0
@@ -1289,17 +1239,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 5
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 2
-    f64.mul
+    f64.const 0x1p+0 (;=1;)
     f64.store
     local.get 0
     i32.const 0
@@ -1309,17 +1249,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 6
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 2
-    f64.mul
+    f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
     i32.const 0
@@ -1329,17 +1259,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 7
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 2
-    f64.mul
+    f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
     i32.const 0
@@ -1349,17 +1269,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 8
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 3
-    f64.mul
+    f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
     i32.const 0
@@ -1369,17 +1279,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 9
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 3
-    f64.mul
+    f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
     i32.const 0
@@ -1389,17 +1289,7 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 10
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.get 3
-    f64.mul
+    f64.const 0x1p+0 (;=1;)
     f64.store
     local.get 0
     i32.const 0
@@ -1409,26 +1299,483 @@
     i32.wrap_i64
     i32.mul
     i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
     local.get 0
     i32.const 0
     i32.add
     i32.const 8
-    i64.const 11
+    i64.const 12
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.load
-    local.get 3
-    f64.mul
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 13
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 14
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 15
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x1p+0 (;=1;)
     f64.store)
-  (func (;79;) (type 27) (param i32 i32 f64)
-    (local f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64)
+  (func (;79;) (type 2) (param i32)
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 0
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x1p+0 (;=1;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 1
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 2
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 3
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 4
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 5
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x1p+0 (;=1;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 6
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 7
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 8
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 9
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 10
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x1p+0 (;=1;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 11
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 12
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 13
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 14
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x0p+0 (;=0;)
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 15
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.const 0x1p+0 (;=1;)
+    f64.store)
+  (func (;80;) (type 6) (param i32 i32)
+    (local f64 f64 f64 f64)
     i32.const 444
     local.get 1
     i32.const 24
     memory.copy
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 12
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.set 2
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 13
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.set 3
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 14
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.set 4
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 15
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.set 5
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 12
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 0
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
     i32.const 444
-    call 69
+    i32.const 0
+    i32.add
+    f64.load
+    f64.mul
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 4
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 8
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 8
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 16
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 2
+    f64.add
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 13
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 1
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 0
+    i32.add
+    f64.load
+    f64.mul
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 5
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 8
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 9
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 16
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 3
+    f64.add
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 14
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 2
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 0
+    i32.add
+    f64.load
+    f64.mul
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 6
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 8
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 10
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 16
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 3
+    f64.add
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 15
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 3
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 0
+    i32.add
+    f64.load
+    f64.mul
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 7
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 8
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 11
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    i32.const 444
+    i32.const 16
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    local.get 5
+    f64.add
+    f64.store)
+  (func (;81;) (type 27) (param i32 i32 f64)
+    (local f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64 f64)
+    i32.const 468
+    local.get 1
+    i32.const 24
+    memory.copy
+    i32.const 468
+    call 70
     local.get 2
     call 55
     local.set 3
@@ -1559,12 +1906,12 @@
     i32.add
     f64.load
     local.set 17
-    i32.const 444
-    i32.const 16
+    i32.const 468
+    i32.const 0
     i32.add
     f64.load
-    i32.const 444
-    i32.const 16
+    i32.const 468
+    i32.const 0
     i32.add
     f64.load
     f64.mul
@@ -1573,37 +1920,37 @@
     local.get 4
     f64.add
     local.set 18
-    i32.const 444
+    i32.const 468
     i32.const 8
     i32.add
     f64.load
-    i32.const 444
-    i32.const 16
+    i32.const 468
+    i32.const 0
     i32.add
     f64.load
     f64.mul
     local.get 5
     f64.mul
-    i32.const 444
-    i32.const 0
+    i32.const 468
+    i32.const 16
     i32.add
     f64.load
     local.get 3
     f64.mul
     f64.add
     local.set 19
-    i32.const 444
-    i32.const 0
+    i32.const 468
+    i32.const 16
     i32.add
     f64.load
-    i32.const 444
-    i32.const 16
+    i32.const 468
+    i32.const 0
     i32.add
     f64.load
     f64.mul
     local.get 5
     f64.mul
-    i32.const 444
+    i32.const 468
     i32.const 8
     i32.add
     f64.load
@@ -1611,30 +1958,30 @@
     f64.mul
     f64.sub
     local.set 20
-    i32.const 444
-    i32.const 16
+    i32.const 468
+    i32.const 0
     i32.add
     f64.load
-    i32.const 444
+    i32.const 468
     i32.const 8
     i32.add
     f64.load
     f64.mul
     local.get 5
     f64.mul
-    i32.const 444
-    i32.const 0
+    i32.const 468
+    i32.const 16
     i32.add
     f64.load
     local.get 3
     f64.mul
     f64.sub
     local.set 21
-    i32.const 444
+    i32.const 468
     i32.const 8
     i32.add
     f64.load
-    i32.const 444
+    i32.const 468
     i32.const 8
     i32.add
     f64.load
@@ -1644,37 +1991,37 @@
     local.get 4
     f64.add
     local.set 22
-    i32.const 444
-    i32.const 0
+    i32.const 468
+    i32.const 16
     i32.add
     f64.load
-    i32.const 444
+    i32.const 468
     i32.const 8
     i32.add
     f64.load
     f64.mul
     local.get 5
     f64.mul
-    i32.const 444
-    i32.const 16
+    i32.const 468
+    i32.const 0
     i32.add
     f64.load
     local.get 3
     f64.mul
     f64.add
     local.set 23
-    i32.const 444
-    i32.const 16
+    i32.const 468
+    i32.const 0
     i32.add
     f64.load
-    i32.const 444
-    i32.const 0
+    i32.const 468
+    i32.const 16
     i32.add
     f64.load
     f64.mul
     local.get 5
     f64.mul
-    i32.const 444
+    i32.const 468
     i32.const 8
     i32.add
     f64.load
@@ -1682,31 +2029,31 @@
     f64.mul
     f64.add
     local.set 24
-    i32.const 444
+    i32.const 468
     i32.const 8
     i32.add
     f64.load
-    i32.const 444
-    i32.const 0
+    i32.const 468
+    i32.const 16
     i32.add
     f64.load
     f64.mul
     local.get 5
     f64.mul
-    i32.const 444
-    i32.const 16
+    i32.const 468
+    i32.const 0
     i32.add
     f64.load
     local.get 3
     f64.mul
     f64.sub
     local.set 25
-    i32.const 444
-    i32.const 0
+    i32.const 468
+    i32.const 16
     i32.add
     f64.load
-    i32.const 444
-    i32.const 0
+    i32.const 468
+    i32.const 16
     i32.add
     f64.load
     f64.mul
@@ -1955,74 +2302,95 @@
     f64.mul
     f64.add
     f64.store)
-  (func (;80;) (type 6) (param i32 i32)
-    (local f64 f64 f64 f64)
-    i32.const 468
+  (func (;82;) (type 13) (param i32 f64 f64 f64)
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 0
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 0
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
     local.get 1
-    i32.const 24
-    memory.copy
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 12
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.set 2
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 13
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.set 3
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 14
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.set 4
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 15
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    local.set 5
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 12
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 0
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 16
-    i32.add
-    f64.load
     f64.mul
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 1
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 1
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.get 1
+    f64.mul
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 2
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 2
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.get 1
+    f64.mul
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 3
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 3
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.get 1
+    f64.mul
+    f64.store
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 4
+    i32.wrap_i64
+    i32.mul
+    i32.add
     local.get 0
     i32.const 0
     i32.add
@@ -2032,245 +2400,8 @@
     i32.mul
     i32.add
     f64.load
-    i32.const 468
-    i32.const 8
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 8
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 0
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
     local.get 2
-    f64.add
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 13
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 1
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 16
-    i32.add
-    f64.load
     f64.mul
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 5
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 8
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 9
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 0
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    local.get 3
-    f64.add
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 14
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 2
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 16
-    i32.add
-    f64.load
-    f64.mul
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 6
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 8
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 10
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 0
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    local.get 3
-    f64.add
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 15
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 3
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 16
-    i32.add
-    f64.load
-    f64.mul
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 7
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 8
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 11
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.load
-    i32.const 468
-    i32.const 0
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    local.get 5
-    f64.add
-    f64.store)
-  (func (;81;) (type 2) (param i32)
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 0
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x1p+0 (;=1;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 1
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 2
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 3
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 4
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
     i32.const 0
@@ -2280,7 +2411,17 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.const 0x1p+0 (;=1;)
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 5
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.get 2
+    f64.mul
     f64.store
     local.get 0
     i32.const 0
@@ -2290,7 +2431,17 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.const 0x0p+0 (;=0;)
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 6
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.get 2
+    f64.mul
     f64.store
     local.get 0
     i32.const 0
@@ -2300,7 +2451,17 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.const 0x0p+0 (;=0;)
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 7
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.get 2
+    f64.mul
     f64.store
     local.get 0
     i32.const 0
@@ -2310,159 +2471,6 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 9
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 10
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x1p+0 (;=1;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 11
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 12
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 13
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 14
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 15
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x1p+0 (;=1;)
-    f64.store)
-  (func (;82;) (type 2) (param i32)
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 0
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x1p+0 (;=1;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 1
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 2
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 3
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 4
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 5
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x1p+0 (;=1;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 6
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 7
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
     local.get 0
     i32.const 0
     i32.add
@@ -2471,7 +2479,9 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.const 0x0p+0 (;=0;)
+    f64.load
+    local.get 3
+    f64.mul
     f64.store
     local.get 0
     i32.const 0
@@ -2481,7 +2491,17 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.const 0x0p+0 (;=0;)
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 9
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.get 3
+    f64.mul
     f64.store
     local.get 0
     i32.const 0
@@ -2491,7 +2511,17 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.const 0x1p+0 (;=1;)
+    local.get 0
+    i32.const 0
+    i32.add
+    i32.const 8
+    i64.const 10
+    i32.wrap_i64
+    i32.mul
+    i32.add
+    f64.load
+    local.get 3
+    f64.mul
     f64.store
     local.get 0
     i32.const 0
@@ -2501,47 +2531,17 @@
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
     local.get 0
     i32.const 0
     i32.add
     i32.const 8
-    i64.const 12
+    i64.const 11
     i32.wrap_i64
     i32.mul
     i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 13
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 14
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x0p+0 (;=0;)
-    f64.store
-    local.get 0
-    i32.const 0
-    i32.add
-    i32.const 8
-    i64.const 15
-    i32.wrap_i64
-    i32.mul
-    i32.add
-    f64.const 0x1p+0 (;=1;)
+    f64.load
+    local.get 3
+    f64.mul
     f64.store)
   (func (;83;) (type 28) (param i32 i32 i32 i32) (result i32)
     i32.const 492
@@ -2562,11 +2562,11 @@
     memory.copy
     i32.const 820
     i32.const 644
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     i32.const 620
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.sub
@@ -2580,20 +2580,20 @@
     f64.load
     f64.sub
     i32.const 644
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     i32.const 620
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.sub
-    call 71
+    call 68
     i32.const 844
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
-    call 71
+    call 68
     i32.const 844
     i32.const 820
     i32.const 668
@@ -2604,11 +2604,11 @@
     memory.copy
     i32.const 868
     i32.const 668
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     i32.const 844
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.sub
@@ -2622,17 +2622,17 @@
     f64.load
     f64.sub
     i32.const 668
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     i32.const 844
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.sub
-    call 71
+    call 68
     i32.const 868
-    call 69
+    call 70
     i32.const 892
     i64.const 0
     f64.convert_i64_s
@@ -2640,7 +2640,7 @@
     f64.convert_i64_s
     i64.const 0
     f64.convert_i64_s
-    call 71
+    call 68
     i32.const 892
     i32.const 868
     i32.const 820
@@ -2656,7 +2656,7 @@
     i32.mul
     i32.add
     i32.const 892
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.store
@@ -2669,7 +2669,7 @@
     i32.mul
     i32.add
     i32.const 868
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.store
@@ -2682,7 +2682,7 @@
     i32.mul
     i32.add
     i32.const 820
-    i32.const 16
+    i32.const 0
     i32.add
     f64.load
     f64.store
@@ -2754,7 +2754,7 @@
     i32.mul
     i32.add
     i32.const 892
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.store
@@ -2767,7 +2767,7 @@
     i32.mul
     i32.add
     i32.const 868
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.store
@@ -2780,7 +2780,7 @@
     i32.mul
     i32.add
     i32.const 820
-    i32.const 0
+    i32.const 16
     i32.add
     f64.load
     f64.store
@@ -4695,48 +4695,48 @@
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 560
+    i32.const 48
     i32.add
     local.get 1
     i32.store
     local.get 0
-    i32.const 552
+    i32.const 52
     i32.add
     local.get 2
     i64.store
     local.get 0
-    i32.const 564
+    i32.const 0
     i32.add
     i32.const 1812
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 588
+    i32.const 24
     i32.add
     i32.const 1836
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 28
+    i32.const 576
     i32.add
     local.get 5
     i64.store
     local.get 0
-    i32.const 420
+    i32.const 64
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 292
+    i32.const 192
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 164
+    i32.const 320
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 36
+    i32.const 448
     i32.add
-    call 81
+    call 79
     i32.const 1860
     i32.const 0
     i32.add
@@ -5045,40 +5045,40 @@
     i32.const 2108
     i32.const 1860
     i64.const 8
-    call 61
+    call 60
     i32.const 2120
     i32.const 1892
     i64.const 7
-    call 61
+    call 60
     i32.const 2132
     i32.const 1924
     i64.const 10
-    call 61
+    call 60
     i32.const 2144
     i32.const 1964
     i64.const 11
-    call 61
+    call 60
     i32.const 2156
     i32.const 2008
     i64.const 8
-    call 61
+    call 60
     i32.const 2168
     i32.const 2040
     i64.const 8
-    call 61
+    call 60
     i32.const 2180
     i32.const 2072
     i64.const 9
-    call 61
+    call 60
     local.get 0
-    i32.const 28
+    i32.const 576
     i32.add
     i64.load
     i64.const 0
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 24
+      i32.const 584
       i32.add
       i64.const 0
       i32.wrap_i64
@@ -5086,7 +5086,7 @@
       call 67
       i32.store
       local.get 0
-      i32.const 20
+      i32.const 588
       i32.add
       i64.const 0
       i32.wrap_i64
@@ -5094,7 +5094,7 @@
       call 67
       i32.store
       local.get 0
-      i32.const 16
+      i32.const 592
       i32.add
       i64.const 0
       i32.wrap_i64
@@ -5102,7 +5102,7 @@
       call 67
       i32.store
       local.get 0
-      i32.const 12
+      i32.const 596
       i32.add
       i64.const 0
       i32.wrap_i64
@@ -5111,10 +5111,10 @@
       i32.store
     end
     local.get 0
-    i32.const 8
+    i32.const 600
     i32.add
     local.get 0
-    i32.const 28
+    i32.const 576
     i32.add
     i64.load
     i32.wrap_i64
@@ -5122,10 +5122,10 @@
     call 67
     i32.store
     local.get 0
-    i32.const 4
+    i32.const 604
     i32.add
     local.get 0
-    i32.const 28
+    i32.const 576
     i32.add
     i64.load
     i32.wrap_i64
@@ -5133,10 +5133,10 @@
     call 67
     i32.store
     local.get 0
-    i32.const 0
+    i32.const 608
     i32.add
     local.get 0
-    i32.const 28
+    i32.const 576
     i32.add
     i64.load
     i32.wrap_i64
@@ -5144,21 +5144,21 @@
     call 67
     i32.store
     local.get 0
-    i32.const 548
+    i32.const 60
     i32.add
     call 10
     i32.store
     i64.const 34962
     i32.wrap_i64
     local.get 0
-    i32.const 548
+    i32.const 60
     i32.add
     i32.load
     call 11
     i64.const 34962
     i32.wrap_i64
     local.get 0
-    i32.const 560
+    i32.const 48
     i32.add
     i32.load
     local.get 2
@@ -5174,7 +5174,7 @@
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 588
+    i32.const 24
     i32.add
     i32.const 2192
     i32.const 24
@@ -5185,10 +5185,10 @@
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 588
+    i32.const 24
     i32.add
     local.get 0
-    i32.const 588
+    i32.const 24
     i32.add
     i32.const 2216
     call 72
@@ -5196,20 +5196,20 @@
     memory.copy)
   (func (;90;) (type 13) (param i32 f64 f64 f64)
     i32.const 2240
-    call 82
+    call 78
     i32.const 2240
-    call 81
+    call 79
     i32.const 2240
     local.get 1
     local.get 2
     local.get 3
-    call 78
+    call 82
     local.get 0
-    i32.const 164
+    i32.const 320
     i32.add
     i32.const 2240
     local.get 0
-    i32.const 164
+    i32.const 320
     i32.add
     call 86
     i32.const 128
@@ -5220,19 +5220,19 @@
     i32.const 24
     memory.copy
     i32.const 2392
-    call 82
+    call 78
     i32.const 2392
-    call 81
+    call 79
     i32.const 2392
     i32.const 2368
     local.get 2
-    call 79
+    call 81
     local.get 0
-    i32.const 36
+    i32.const 448
     i32.add
     i32.const 2392
     local.get 0
-    i32.const 36
+    i32.const 448
     i32.add
     call 86
     i32.const 128
@@ -5254,48 +5254,48 @@
     f64.const 0x1.921fb54442d18p+1 (;=3.14159;)
     local.set 4
     local.get 0
-    i32.const 292
+    i32.const 192
     i32.add
     local.get 0
-    i32.const 588
+    i32.const 24
     i32.add
     call 80
     local.get 0
-    i32.const 420
+    i32.const 64
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 420
-    i32.add
-    local.get 0
-    i32.const 164
+    i32.const 64
     i32.add
     local.get 0
-    i32.const 420
-    i32.add
-    call 86
-    i32.const 128
-    memory.copy
-    local.get 0
-    i32.const 420
+    i32.const 320
     i32.add
     local.get 0
-    i32.const 36
-    i32.add
-    local.get 0
-    i32.const 420
+    i32.const 64
     i32.add
     call 86
     i32.const 128
     memory.copy
     local.get 0
-    i32.const 420
+    i32.const 64
     i32.add
     local.get 0
-    i32.const 292
+    i32.const 448
     i32.add
     local.get 0
-    i32.const 420
+    i32.const 64
+    i32.add
+    call 86
+    i32.const 128
+    memory.copy
+    local.get 0
+    i32.const 64
+    i32.add
+    local.get 0
+    i32.const 192
+    i32.add
+    local.get 0
+    i32.const 64
     i32.add
     call 86
     i32.const 128
@@ -5303,7 +5303,7 @@
     i64.const 34962
     i32.wrap_i64
     local.get 0
-    i32.const 548
+    i32.const 60
     i32.add
     i32.load
     call 11
@@ -5346,20 +5346,20 @@
     i32.wrap_i64
     call 16
     local.get 0
-    i32.const 28
+    i32.const 576
     i32.add
     i64.load
     i32.wrap_i64
     call 14
     local.get 0
-    i32.const 28
+    i32.const 576
     i32.add
     i64.load
     i64.const 0
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 20
+      i32.const 588
       i32.add
       i32.load
       f64.const 0x1.4p+2 (;=5;)
@@ -5367,7 +5367,7 @@
       f64.const 0x1.4p+2 (;=5;)
       call 31
       local.get 0
-      i32.const 16
+      i32.const 592
       i32.add
       i32.load
       f64.const 0x1p+0 (;=1;)
@@ -5375,34 +5375,34 @@
       f64.const 0x1p+0 (;=1;)
       call 31
       local.get 0
-      i32.const 12
+      i32.const 596
       i32.add
       i32.load
       local.get 0
-      i32.const 564
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       f64.load
       local.get 0
-      i32.const 564
+      i32.const 0
       i32.add
       i32.const 8
       i32.add
       f64.load
       local.get 0
-      i32.const 564
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       f64.load
       call 31
       local.get 0
-      i32.const 24
+      i32.const 584
       i32.add
       i32.load
       i32.const 2776
-      i32.const 16
+      i32.const 0
       i32.add
       f64.load
       i32.const 2776
@@ -5410,13 +5410,13 @@
       i32.add
       f64.load
       i32.const 2776
-      i32.const 0
+      i32.const 16
       i32.add
       f64.load
       call 31
     end
     local.get 0
-    i32.const 8
+    i32.const 600
     i32.add
     i32.load
     i64.const 0
@@ -5426,7 +5426,7 @@
     i32.add
     call 22
     local.get 0
-    i32.const 4
+    i32.const 604
     i32.add
     i32.load
     i64.const 0
@@ -5436,13 +5436,13 @@
     i32.add
     call 22
     local.get 0
-    i32.const 0
+    i32.const 608
     i32.add
     i32.load
     i64.const 0
     i32.wrap_i64
     local.get 0
-    i32.const 420
+    i32.const 64
     i32.add
     i32.const 0
     i32.add
@@ -5455,67 +5455,67 @@
     i32.wrap_i64
     call 18
     local.get 0
-    i32.const 36
+    i32.const 448
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 292
+    i32.const 192
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 164
+    i32.const 320
     i32.add
-    call 81)
+    call 79)
   (func (;93;) (type 6) (param i32 i32)
     i32.const 2800
     local.get 1
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 88
+    i32.const 0
     i32.add
     i32.const 2800
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 64
+    i32.const 32
     i32.add
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
     f64.const 0x1p+0 (;=1;)
-    call 71
+    call 68
     local.get 0
-    i32.const 40
+    i32.const 56
     i32.add
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
     f64.const 0x1p+0 (;=1;)
-    call 71
+    call 68
     local.get 0
-    i32.const 16
+    i32.const 80
     i32.add
     f64.const 0x0p+0 (;=0;)
     f64.const 0x1p+0 (;=1;)
     f64.const 0x0p+0 (;=0;)
-    call 71
+    call 68
     local.get 0
-    i32.const 8
+    i32.const 104
     i32.add
     f64.const 0x1.68p+6 (;=90;)
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 112
     i32.add
     f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
-    i32.const 112
+    i32.const 24
     i32.add
     f64.const 0x1.999999999999ap-4 (;=0.1;)
     f64.store)
   (func (;94;) (type 11) (param i32 f64)
     local.get 0
-    i32.const 112
+    i32.const 24
     i32.add
     local.get 1
     f64.store)
@@ -5527,12 +5527,12 @@
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
       i32.const 8
       i32.add
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
       i32.const 8
       i32.add
@@ -5550,12 +5550,12 @@
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
       i32.const 8
       i32.add
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
       i32.const 8
       i32.add
@@ -5573,19 +5573,19 @@
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 88
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       local.get 0
-      i32.const 88
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       f64.load
       local.get 3
       local.get 0
-      i32.const 8
+      i32.const 104
       i32.add
       f64.load
       i64.const 90
@@ -5599,19 +5599,19 @@
       f64.sub
       f64.store
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       f64.load
       local.get 3
       local.get 0
-      i32.const 8
+      i32.const 104
       i32.add
       f64.load
       i64.const 90
@@ -5632,19 +5632,19 @@
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 88
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       local.get 0
-      i32.const 88
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       f64.load
       local.get 3
       local.get 0
-      i32.const 8
+      i32.const 104
       i32.add
       f64.load
       i64.const 90
@@ -5658,19 +5658,19 @@
       f64.add
       f64.store
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       f64.load
       local.get 3
       local.get 0
-      i32.const 8
+      i32.const 104
       i32.add
       f64.load
       i64.const 90
@@ -5691,19 +5691,19 @@
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 88
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       local.get 0
-      i32.const 88
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       f64.load
       local.get 3
       local.get 0
-      i32.const 8
+      i32.const 104
       i32.add
       f64.load
       call 58
@@ -5714,19 +5714,19 @@
       f64.add
       f64.store
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       f64.load
       local.get 3
       local.get 0
-      i32.const 8
+      i32.const 104
       i32.add
       f64.load
       call 58
@@ -5744,19 +5744,19 @@
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 88
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       local.get 0
-      i32.const 88
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       f64.load
       local.get 3
       local.get 0
-      i32.const 8
+      i32.const 104
       i32.add
       f64.load
       call 58
@@ -5767,19 +5767,19 @@
       f64.sub
       f64.store
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       local.get 0
-      i32.const 88
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       f64.load
       local.get 3
       local.get 0
-      i32.const 8
+      i32.const 104
       i32.add
       f64.load
       call 58
@@ -5791,37 +5791,37 @@
       f64.store
     end
     local.get 0
-    i32.const 8
+    i32.const 104
     i32.add
     local.get 0
-    i32.const 8
+    i32.const 104
     i32.add
     f64.load
     local.get 1
     local.get 0
-    i32.const 112
+    i32.const 24
     i32.add
     f64.load
     f64.mul
     f64.sub
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 112
     i32.add
     local.get 0
-    i32.const 0
+    i32.const 112
     i32.add
     f64.load
     local.get 2
     local.get 0
-    i32.const 112
+    i32.const 24
     i32.add
     f64.load
     f64.mul
     f64.sub
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 112
     i32.add
     f64.load
     i64.const 0
@@ -5831,7 +5831,7 @@
     f64.lt
     if  ;; label = @1
       local.get 0
-      i32.const 0
+      i32.const 112
       i32.add
       i64.const 0
       f64.convert_i64_s
@@ -5840,31 +5840,62 @@
       f64.store
     end
     local.get 0
-    i32.const 0
+    i32.const 112
     i32.add
     f64.load
     f64.const 0x1.64p+6 (;=89;)
     f64.gt
     if  ;; label = @1
       local.get 0
-      i32.const 0
+      i32.const 112
       i32.add
       f64.const 0x1.64p+6 (;=89;)
       f64.store
     end
     local.get 0
-    i32.const 40
+    i32.const 56
+    i32.add
+    i32.const 0
+    i32.add
+    local.get 0
+    i32.const 104
+    i32.add
+    f64.load
+    call 58
+    call 56
+    local.get 0
+    i32.const 112
+    i32.add
+    f64.load
+    call 58
+    call 56
+    f64.mul
+    f64.store
+    local.get 0
+    i32.const 56
+    i32.add
+    i32.const 8
+    i32.add
+    local.get 0
+    i32.const 112
+    i32.add
+    f64.load
+    call 58
+    call 55
+    f64.store
+    local.get 0
+    i32.const 56
     i32.add
     i32.const 16
     i32.add
     local.get 0
-    i32.const 8
+    i32.const 104
     i32.add
     f64.load
     call 58
-    call 56
+    call 55
     local.get 0
-    i32.const 0
+    i32.const 112
     i32.add
     f64.load
     call 58
@@ -5872,50 +5903,19 @@
     f64.mul
     f64.store
     local.get 0
-    i32.const 40
+    i32.const 56
     i32.add
-    i32.const 8
-    i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    f64.load
-    call 58
-    call 55
-    f64.store
-    local.get 0
-    i32.const 40
-    i32.add
-    i32.const 0
-    i32.add
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
-    call 58
-    call 55
-    local.get 0
-    i32.const 0
-    i32.add
-    f64.load
-    call 58
-    call 56
-    f64.mul
-    f64.store
-    local.get 0
-    i32.const 40
-    i32.add
-    call 69
+    call 70
     i32.const 2824
-    call 81
+    call 79
     local.get 0
-    i32.const 64
+    i32.const 32
     i32.add
     local.get 0
-    i32.const 40
+    i32.const 56
     i32.add
     local.get 0
-    i32.const 88
+    i32.const 0
     i32.add
     call 72
     i32.const 24
@@ -5923,13 +5923,13 @@
     i32.const 2824
     i32.const 2824
     local.get 0
-    i32.const 88
+    i32.const 0
     i32.add
     local.get 0
-    i32.const 64
+    i32.const 32
     i32.add
     local.get 0
-    i32.const 16
+    i32.const 80
     i32.add
     call 83
     i32.const 128
@@ -5937,22 +5937,22 @@
     i32.const 2824)
   (func (;96;) (type 2) (param i32)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.const 0
     i64.store
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.const 2
     i64.store
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.const 4
     i64.extend_i32_s
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.load
     i64.mul
@@ -5961,7 +5961,7 @@
     i32.store)
   (func (;97;) (type 33) (param i32 i64) (result i32)
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 4
@@ -5976,37 +5976,37 @@
   (func (;98;) (type 6) (param i32 i32)
     (local i32 i64)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.load
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       i64.load
       i64.const 2
       i64.mul
       i64.store
       local.get 0
-      i32.const 8
+      i32.const 0
       i32.add
       i32.load
       local.set 2
       local.get 0
-      i32.const 8
+      i32.const 0
       i32.add
       i32.const 4
       i64.extend_i32_s
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       i64.load
       i64.mul
@@ -6019,13 +6019,13 @@
         loop  ;; label = @3
           local.get 3
           local.get 0
-          i32.const 0
+          i32.const 12
           i32.add
           i64.load
           i64.eq
           br_if 1 (;@2;)
           local.get 0
-          i32.const 8
+          i32.const 0
           i32.add
           i32.load
           i32.const 4
@@ -6050,12 +6050,12 @@
       end
     end
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 4
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i32.wrap_i64
@@ -6064,10 +6064,10 @@
     local.get 1
     i32.store
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i64.const 1
@@ -6076,17 +6076,17 @@
   (func (;99;) (type 17) (param i32) (result i64)
     (local i64)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     local.set 1
     local.get 1)
   (func (;100;) (type 2) (param i32)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i64.const 1
@@ -6094,45 +6094,45 @@
     i64.store)
   (func (;101;) (type 2) (param i32)
     local.get 0
-    i32.const 32
+    i32.const 396
     i32.add
     call 4
     f64.const 0x1.f4p+9 (;=1000;)
     f64.div
     f64.store
     local.get 0
-    i32.const 24
+    i32.const 404
     i32.add
     f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
-    i32.const 16
+    i32.const 412
     i32.add
     f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
-    i32.const 8
+    i32.const 420
     i32.add
     call 47
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 428
     i32.add
     call 48
     f64.store
     local.get 0
-    i32.const 168
+    i32.const 140
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 40
+    i32.const 268
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 168
+    i32.const 140
     i32.add
     local.get 0
-    i32.const 168
+    i32.const 140
     i32.add
     f64.const 0x1.68p+6 (;=90;)
     f64.const 0x1.68p+9 (;=720;)
@@ -6149,43 +6149,43 @@
     f64.convert_i64_s
     f64.const 0x1p+2 (;=4;)
     f64.sub
-    call 71
+    call 68
     local.get 0
-    i32.const 316
+    i32.const 20
     i32.add
     i32.const 2960
     call 93
     local.get 0
-    i32.const 296
+    i32.const 0
     i32.add
     call 96)
   (func (;102;) (type 2) (param i32)
     (local f64 f64 i64)
     local.get 0
-    i32.const 24
+    i32.const 404
     i32.add
     call 4
     f64.const 0x1.f4p+9 (;=1000;)
     f64.div
     f64.store
     local.get 0
-    i32.const 16
+    i32.const 412
     i32.add
     local.get 0
-    i32.const 24
+    i32.const 404
     i32.add
     f64.load
     local.get 0
-    i32.const 32
+    i32.const 396
     i32.add
     f64.load
     f64.sub
     f64.store
     local.get 0
-    i32.const 32
+    i32.const 396
     i32.add
     local.get 0
-    i32.const 24
+    i32.const 404
     i32.add
     f64.load
     f64.store
@@ -6208,42 +6208,42 @@
     call 40
     call 47
     local.get 0
-    i32.const 8
+    i32.const 420
     i32.add
     f64.load
     f64.sub
     local.set 1
     call 48
     local.get 0
-    i32.const 0
+    i32.const 428
     i32.add
     f64.load
     f64.sub
     local.set 2
     local.get 0
-    i32.const 8
+    i32.const 420
     i32.add
     call 47
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 428
     i32.add
     call 48
     f64.store
     local.get 0
-    i32.const 40
+    i32.const 268
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 40
+    i32.const 268
     i32.add
     local.get 0
-    i32.const 316
+    i32.const 20
     i32.add
     local.get 1
     local.get 2
     local.get 0
-    i32.const 16
+    i32.const 412
     i32.add
     f64.load
     call 95
@@ -6255,28 +6255,28 @@
       loop  ;; label = @2
         local.get 3
         local.get 0
-        i32.const 296
+        i32.const 0
         i32.add
-        i32.const 12
+        i32.const 4
         i32.add
         i64.load
         i64.eq
         br_if 1 (;@1;)
         local.get 0
-        i32.const 296
+        i32.const 0
         i32.add
         local.get 3
         call 97
         local.get 0
-        i32.const 168
+        i32.const 140
         i32.add
         local.get 0
-        i32.const 40
+        i32.const 268
         i32.add
         local.get 0
-        i32.const 316
+        i32.const 20
         i32.add
-        i32.const 88
+        i32.const 0
         i32.add
         call 92
         local.get 3
@@ -10735,12 +10735,12 @@
     i64.const 0
     call 87
     local.get 0
-    i32.const 296
+    i32.const 0
     i32.add
     local.get 5
     call 98
     local.get 0
-    i32.const 296
+    i32.const 0
     i32.add
     call 99
     i64.const 1
@@ -15196,78 +15196,46 @@
     i64.const 1
     call 87
     local.get 0
-    i32.const 296
+    i32.const 0
     i32.add
     local.get 5
     call 98
     local.get 0
-    i32.const 296
+    i32.const 0
     i32.add
     call 99
     i64.const 1
     i64.sub
     local.set 4
     local.get 4)
-  (func (;105;) (type 2) (param i32)
-    (local f64)
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
-    f64.mul
+  (func (;105;) (type 12) (param i32 f64 f64)
     local.get 0
     i32.const 0
     i32.add
-    f64.load
-    local.get 0
-    i32.const 0
-    i32.add
-    f64.load
-    f64.mul
-    f64.add
-    call 59
-    local.set 1
-    local.get 0
-    i32.const 8
-    i32.add
-    local.get 0
-    i32.const 8
-    i32.add
-    f64.load
     local.get 1
-    f64.div
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 8
     i32.add
-    local.get 0
-    i32.const 0
-    i32.add
-    f64.load
-    local.get 1
-    f64.div
+    local.get 2
     f64.store)
   (func (;106;) (type 24) (param i32) (result f64)
     (local f64)
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     f64.mul
     local.get 0
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     local.get 0
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     f64.mul
@@ -15275,16 +15243,48 @@
     call 59
     local.set 1
     local.get 1)
-  (func (;107;) (type 12) (param i32 f64 f64)
-    local.get 0
-    i32.const 8
-    i32.add
-    local.get 1
-    f64.store
+  (func (;107;) (type 2) (param i32)
+    (local f64)
     local.get 0
     i32.const 0
     i32.add
-    local.get 2
+    f64.load
+    local.get 0
+    i32.const 0
+    i32.add
+    f64.load
+    f64.mul
+    local.get 0
+    i32.const 8
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 8
+    i32.add
+    f64.load
+    f64.mul
+    f64.add
+    call 59
+    local.set 1
+    local.get 0
+    i32.const 0
+    i32.add
+    local.get 0
+    i32.const 0
+    i32.add
+    f64.load
+    local.get 1
+    f64.div
+    f64.store
+    local.get 0
+    i32.const 8
+    i32.add
+    local.get 0
+    i32.const 8
+    i32.add
+    f64.load
+    local.get 1
+    f64.div
     f64.store)
   (func (;108;) (type 20) (param i32 i32) (result i32)
     i32.const 6536
@@ -15296,27 +15296,27 @@
     i32.const 16
     memory.copy
     i32.const 6568
-    i32.const 8
+    i32.const 0
     i32.add
     i32.const 6536
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     i32.const 6552
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     f64.add
     f64.store
     i32.const 6568
-    i32.const 0
+    i32.const 8
     i32.add
     i32.const 6536
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     i32.const 6552
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     f64.add
@@ -15332,27 +15332,27 @@
     i32.const 16
     memory.copy
     i32.const 6616
-    i32.const 8
+    i32.const 0
     i32.add
     i32.const 6584
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     i32.const 6600
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     f64.sub
     f64.store
     i32.const 6616
-    i32.const 0
+    i32.const 8
     i32.add
     i32.const 6584
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     i32.const 6600
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     f64.sub
@@ -15369,20 +15369,20 @@
     i32.const 16
     memory.copy
     i32.const 6632
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     i32.const 6648
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     f64.mul
     i32.const 6632
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     i32.const 6648
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     f64.mul
@@ -15395,20 +15395,20 @@
     i32.const 16
     memory.copy
     i32.const 6680
-    i32.const 8
+    i32.const 0
     i32.add
     i32.const 6664
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     local.get 1
     f64.mul
     f64.store
     i32.const 6680
-    i32.const 0
+    i32.const 8
     i32.add
     i32.const 6664
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     local.get 1
@@ -15428,20 +15428,20 @@
       call 64
     end
     i32.const 6712
-    i32.const 8
+    i32.const 0
     i32.add
     i32.const 6696
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     local.get 1
     f64.div
     f64.store
     i32.const 6712
-    i32.const 0
+    i32.const 8
     i32.add
     i32.const 6696
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     local.get 1
@@ -15450,12 +15450,12 @@
     i32.const 6712)
   (func (;113;) (type 35) (param i32 i64 f64 f64 f64 f64)
     local.get 0
-    i32.const 32
+    i32.const 0
     i32.add
     local.get 1
     i64.store
     local.get 0
-    i32.const 24
+    i32.const 8
     i32.add
     local.get 2
     f64.store
@@ -15465,37 +15465,37 @@
     local.get 3
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 24
     i32.add
-    i32.const 8
+    i32.const 0
     i32.add
     local.get 4
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 24
     i32.add
-    i32.const 0
+    i32.const 8
     i32.add
     local.get 5
     f64.store)
   (func (;114;) (type 2) (param i32)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.const 0
     i64.store
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.const 2
     i64.store
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.const 40
     i64.extend_i32_s
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.load
     i64.mul
@@ -15504,7 +15504,7 @@
     i32.store)
   (func (;115;) (type 33) (param i32 i64) (result i32)
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 40
@@ -15521,37 +15521,37 @@
     i32.const 40
     memory.copy
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.load
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       i64.load
       i64.const 2
       i64.mul
       i64.store
       local.get 0
-      i32.const 8
+      i32.const 0
       i32.add
       i32.load
       local.set 2
       local.get 0
-      i32.const 8
+      i32.const 0
       i32.add
       i32.const 40
       i64.extend_i32_s
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       i64.load
       i64.mul
@@ -15564,13 +15564,13 @@
         loop  ;; label = @3
           local.get 3
           local.get 0
-          i32.const 0
+          i32.const 12
           i32.add
           i64.load
           i64.eq
           br_if 1 (;@2;)
           local.get 0
-          i32.const 8
+          i32.const 0
           i32.add
           i32.load
           i32.const 40
@@ -15595,12 +15595,12 @@
       end
     end
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 40
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i32.wrap_i64
@@ -15610,10 +15610,10 @@
     i32.const 40
     memory.copy
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i64.const 1
@@ -15622,17 +15622,17 @@
   (func (;117;) (type 17) (param i32) (result i64)
     (local i64)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     local.set 1
     local.get 1)
   (func (;118;) (type 2) (param i32)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i64.const 1
@@ -15648,87 +15648,87 @@
     i32.const 16
     memory.copy
     local.get 0
-    i32.const 608
+    i32.const 72
     i32.add
     local.get 1
     i32.store
     local.get 0
-    i32.const 584
+    i32.const 92
     i32.add
     local.get 2
     i64.store
     local.get 0
-    i32.const 604
+    i32.const 76
     i32.add
     local.get 3
     i32.store
     local.get 0
-    i32.const 592
+    i32.const 84
     i32.add
     local.get 4
     i64.store
     local.get 0
-    i32.const 48
+    i32.const 628
     i32.add
     local.get 8
     f64.store
     local.get 0
-    i32.const 652
+    i32.const 40
     i32.add
     f64.const 0x1p+0 (;=1;)
     f64.store
     local.get 0
-    i32.const 612
+    i32.const 0
     i32.add
     i32.const 6808
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 636
+    i32.const 24
     i32.add
     i32.const 6832
     i32.const 16
     memory.copy
     local.get 0
-    i32.const 660
+    i32.const 48
     i32.add
     f64.const 0x1p+0 (;=1;)
     f64.store
     local.get 0
-    i32.const 668
+    i32.const 56
     i32.add
     f64.const 0x1p+0 (;=1;)
     f64.store
     local.get 0
-    i32.const 676
+    i32.const 64
     i32.add
     f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     local.get 7
     i64.store
     local.get 0
-    i32.const 0
+    i32.const 664
     i32.add
     call 114
     local.get 0
-    i32.const 440
+    i32.const 116
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 312
+    i32.const 244
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 184
+    i32.const 372
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 56
+    i32.const 500
     i32.add
-    call 81
+    call 79
     i32.const 6848
     i32.const 0
     i32.add
@@ -15962,28 +15962,28 @@
     i32.const 7032
     i32.const 6848
     i64.const 11
-    call 61
+    call 60
     i32.const 7044
     i32.const 6892
     i64.const 10
-    call 61
+    call 60
     i32.const 7056
     i32.const 6932
     i64.const 5
-    call 61
+    call 60
     i32.const 7068
     i32.const 6952
     i64.const 8
-    call 61
+    call 60
     i32.const 7080
     i32.const 6984
     i64.const 12
-    call 61
+    call 60
     local.get 0
-    i32.const 28
+    i32.const 652
     i32.add
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     i64.load
     i32.wrap_i64
@@ -15991,10 +15991,10 @@
     call 67
     i32.store
     local.get 0
-    i32.const 24
+    i32.const 656
     i32.add
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     i64.load
     i32.wrap_i64
@@ -16002,17 +16002,17 @@
     call 67
     i32.store
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     i64.load
     i64.const 4
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 32
+      i32.const 648
       i32.add
       local.get 0
-      i32.const 40
+      i32.const 636
       i32.add
       i64.load
       i32.wrap_i64
@@ -16020,10 +16020,10 @@
       call 67
       i32.store
       local.get 0
-      i32.const 36
+      i32.const 644
       i32.add
       local.get 0
-      i32.const 40
+      i32.const 636
       i32.add
       i64.load
       i32.wrap_i64
@@ -16032,17 +16032,17 @@
       i32.store
     end
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     i64.load
     i64.const 3
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 20
+      i32.const 660
       i32.add
       local.get 0
-      i32.const 40
+      i32.const 636
       i32.add
       i64.load
       i32.wrap_i64
@@ -16051,21 +16051,21 @@
       i32.store
     end
     local.get 0
-    i32.const 580
+    i32.const 100
     i32.add
     call 10
     i32.store
     i64.const 34962
     i32.wrap_i64
     local.get 0
-    i32.const 580
+    i32.const 100
     i32.add
     i32.load
     call 11
     i64.const 34962
     i32.wrap_i64
     local.get 0
-    i32.const 608
+    i32.const 72
     i32.add
     i32.load
     local.get 2
@@ -16080,21 +16080,21 @@
     i64.gt_s
     if  ;; label = @1
       local.get 0
-      i32.const 572
+      i32.const 108
       i32.add
       call 10
       i32.store
       i64.const 34963
       i32.wrap_i64
       local.get 0
-      i32.const 572
+      i32.const 108
       i32.add
       i32.load
       call 11
       i64.const 34963
       i32.wrap_i64
       local.get 0
-      i32.const 604
+      i32.const 76
       i32.add
       i32.load
       local.get 4
@@ -16109,47 +16109,47 @@
     i32.const 12
     memory.copy
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     i64.const 0
     i64.store
     local.get 0
-    i32.const 600
+    i32.const 80
     i32.add
     local.get 1
     i32.store
     local.get 0
-    i32.const 568
+    i32.const 112
     i32.add
     i32.const 7092
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 7092
-    i32.const 0
+    i32.const 4
     i32.add
     i64.load
     i32.wrap_i64
     call 51
     i32.store
     i32.const 7092
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 7092
-    i32.const 0
+    i32.const 4
     i32.add
     i64.load
     call 3
     local.get 0
-    i32.const 576
+    i32.const 104
     i32.add
     call 10
     i32.store
     i64.const 34962
     i32.wrap_i64
     local.get 0
-    i32.const 576
+    i32.const 104
     i32.add
     i32.load
     call 11
@@ -16157,7 +16157,7 @@
     i32.wrap_i64
     local.get 1
     local.get 0
-    i32.const 592
+    i32.const 84
     i32.add
     i64.load
     i64.const 2
@@ -16168,29 +16168,29 @@
     call 12)
   (func (;121;) (type 10) (param i32 i32 i32)
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     i64.const 0
     i64.store
     local.get 0
-    i32.const 600
+    i32.const 80
     i32.add
     local.get 1
     i32.store
     local.get 0
-    i32.const 568
+    i32.const 112
     i32.add
     local.get 2
     i32.store
     local.get 0
-    i32.const 576
+    i32.const 104
     i32.add
     call 10
     i32.store
     i64.const 34962
     i32.wrap_i64
     local.get 0
-    i32.const 576
+    i32.const 104
     i32.add
     i32.load
     call 11
@@ -16198,7 +16198,7 @@
     i32.wrap_i64
     local.get 1
     local.get 0
-    i32.const 592
+    i32.const 84
     i32.add
     i64.load
     i64.const 2
@@ -16213,7 +16213,7 @@
     i32.const 16
     memory.copy
     local.get 0
-    i32.const 636
+    i32.const 24
     i32.add
     i32.const 7104
     i32.const 16
@@ -16224,10 +16224,10 @@
     i32.const 16
     memory.copy
     local.get 0
-    i32.const 636
+    i32.const 24
     i32.add
     local.get 0
-    i32.const 636
+    i32.const 24
     i32.add
     i32.const 7120
     call 108
@@ -16235,20 +16235,20 @@
     memory.copy)
   (func (;124;) (type 12) (param i32 f64 f64)
     local.get 0
-    i32.const 660
+    i32.const 48
     i32.add
     local.get 0
-    i32.const 660
+    i32.const 48
     i32.add
     f64.load
     local.get 1
     f64.mul
     f64.store
     local.get 0
-    i32.const 668
+    i32.const 56
     i32.add
     local.get 0
-    i32.const 668
+    i32.const 56
     i32.add
     f64.load
     local.get 2
@@ -16256,10 +16256,10 @@
     f64.store)
   (func (;125;) (type 11) (param i32 f64)
     local.get 0
-    i32.const 676
+    i32.const 64
     i32.add
     local.get 0
-    i32.const 676
+    i32.const 64
     i32.add
     f64.load
     local.get 1
@@ -16267,19 +16267,19 @@
     f64.store)
   (func (;126;) (type 11) (param i32 f64)
     local.get 0
-    i32.const 676
+    i32.const 64
     i32.add
     local.get 1
     f64.store)
   (func (;127;) (type 11) (param i32 f64)
     local.get 0
-    i32.const 48
+    i32.const 628
     i32.add
     local.get 1
     f64.store)
   (func (;128;) (type 11) (param i32 f64)
     local.get 0
-    i32.const 652
+    i32.const 40
     i32.add
     local.get 1
     f64.store)
@@ -16306,29 +16306,29 @@
       loop  ;; label = @2
         local.get 3
         local.get 0
-        i32.const 0
+        i32.const 664
         i32.add
-        i32.const 12
+        i32.const 4
         i32.add
         i64.load
         i64.eq
         br_if 1 (;@1;)
         i32.const 7288
         local.get 0
-        i32.const 0
+        i32.const 664
         i32.add
         local.get 3
         call 115
         i32.const 40
         memory.copy
         i32.const 7288
-        i32.const 24
+        i32.const 8
         i32.add
         f64.load
         call 4
         f64.le
         i32.const 7288
-        i32.const 24
+        i32.const 8
         i32.add
         f64.load
         i32.const 7288
@@ -16341,7 +16341,7 @@
         i32.and
         if  ;; label = @3
           i32.const 7288
-          i32.const 32
+          i32.const 0
           i32.add
           i64.load
           i64.const 0
@@ -16349,16 +16349,16 @@
           if  ;; label = @4
             call 4
             i32.const 7288
-            i32.const 24
+            i32.const 8
             i32.add
             f64.load
             f64.sub
             local.set 4
             local.get 0
             i32.const 7288
-            i32.const 0
+            i32.const 24
             i32.add
-            i32.const 8
+            i32.const 0
             i32.add
             f64.load
             local.get 4
@@ -16366,7 +16366,7 @@
             call 125
           end
           i32.const 7288
-          i32.const 32
+          i32.const 0
           i32.add
           i64.load
           i64.const 1
@@ -16374,21 +16374,21 @@
           if  ;; label = @4
             local.get 0
             i32.const 7288
-            i32.const 0
+            i32.const 24
             i32.add
-            i32.const 8
+            i32.const 0
             i32.add
             f64.load
             i32.const 7288
-            i32.const 0
+            i32.const 24
             i32.add
-            i32.const 0
+            i32.const 8
             i32.add
             f64.load
             call 124
           end
           i32.const 7288
-          i32.const 32
+          i32.const 0
           i32.add
           i64.load
           i64.const 2
@@ -16396,29 +16396,29 @@
           if  ;; label = @4
             call 4
             i32.const 7288
-            i32.const 24
+            i32.const 8
             i32.add
             f64.load
             f64.sub
             local.set 5
             i32.const 7328
             i32.const 7288
+            i32.const 24
+            i32.add
             i32.const 0
+            i32.add
+            f64.load
+            local.get 5
+            f64.mul
+            i32.const 7288
+            i32.const 24
             i32.add
             i32.const 8
             i32.add
             f64.load
             local.get 5
             f64.mul
-            i32.const 7288
-            i32.const 0
-            i32.add
-            i32.const 0
-            i32.add
-            f64.load
-            local.get 5
-            f64.mul
-            call 107
+            call 105
             local.get 0
             i32.const 7328
             call 123
@@ -16433,113 +16433,113 @@
     end
     i32.const 7344
     local.get 0
-    i32.const 636
+    i32.const 24
     i32.add
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     local.get 0
-    i32.const 636
+    i32.const 24
     i32.add
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     i64.const 0
     f64.convert_i64_s
     local.get 0
-    i32.const 48
+    i32.const 628
     i32.add
     f64.load
     f64.const 0x1.0624dd2f1a9fcp-10 (;=0.001;)
     f64.mul
     f64.sub
-    call 71
+    call 68
     local.get 0
-    i32.const 312
+    i32.const 244
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 312
+    i32.const 244
     i32.add
     i32.const 7344
     call 80
     local.get 0
-    i32.const 184
+    i32.const 372
     i32.add
-    call 81
-    local.get 0
-    i32.const 184
-    i32.add
-    local.get 0
-    i32.const 660
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 668
-    i32.add
-    f64.load
-    f64.const 0x1p+0 (;=1;)
-    call 78
-    i32.const 7368
-    f64.const 0x0p+0 (;=0;)
-    f64.const 0x0p+0 (;=0;)
-    f64.const 0x1p+0 (;=1;)
-    call 71
-    local.get 0
-    i32.const 56
-    i32.add
-    call 81
-    local.get 0
-    i32.const 56
-    i32.add
-    i32.const 7368
-    local.get 0
-    i32.const 676
-    i32.add
-    f64.load
     call 79
     local.get 0
-    i32.const 440
-    i32.add
-    call 81
-    local.get 0
-    i32.const 440
+    i32.const 372
     i32.add
     local.get 0
-    i32.const 184
+    i32.const 48
     i32.add
-    local.get 0
-    i32.const 440
-    i32.add
-    call 86
-    i32.const 128
-    memory.copy
-    local.get 0
-    i32.const 440
-    i32.add
+    f64.load
     local.get 0
     i32.const 56
     i32.add
+    f64.load
+    f64.const 0x1p+0 (;=1;)
+    call 82
+    i32.const 7368
+    f64.const 0x0p+0 (;=0;)
+    f64.const 0x0p+0 (;=0;)
+    f64.const 0x1p+0 (;=1;)
+    call 68
     local.get 0
-    i32.const 440
+    i32.const 500
+    i32.add
+    call 79
+    local.get 0
+    i32.const 500
+    i32.add
+    i32.const 7368
+    local.get 0
+    i32.const 64
+    i32.add
+    f64.load
+    call 81
+    local.get 0
+    i32.const 116
+    i32.add
+    call 79
+    local.get 0
+    i32.const 116
+    i32.add
+    local.get 0
+    i32.const 372
+    i32.add
+    local.get 0
+    i32.const 116
     i32.add
     call 86
     i32.const 128
     memory.copy
     local.get 0
-    i32.const 440
+    i32.const 116
     i32.add
     local.get 0
-    i32.const 312
+    i32.const 500
     i32.add
     local.get 0
-    i32.const 440
+    i32.const 116
     i32.add
     call 86
     i32.const 128
     memory.copy
     local.get 0
-    i32.const 40
+    i32.const 116
+    i32.add
+    local.get 0
+    i32.const 244
+    i32.add
+    local.get 0
+    i32.const 116
+    i32.add
+    call 86
+    i32.const 128
+    memory.copy
+    local.get 0
+    i32.const 636
     i32.add
     i64.load
     i32.wrap_i64
@@ -16547,7 +16547,7 @@
     i64.const 34962
     i32.wrap_i64
     local.get 0
-    i32.const 580
+    i32.const 100
     i32.add
     i32.load
     call 11
@@ -16568,47 +16568,47 @@
     i32.wrap_i64
     call 16
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     i64.load
     i64.const 4
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 32
+      i32.const 648
       i32.add
       i32.load
       local.get 0
-      i32.const 652
+      i32.const 40
       i32.add
       f64.load
       call 23
       local.get 0
-      i32.const 36
+      i32.const 644
       i32.add
       i32.load
       local.get 0
-      i32.const 612
+      i32.const 0
       i32.add
-      i32.const 16
+      i32.const 0
       i32.add
       f64.load
       local.get 0
-      i32.const 612
+      i32.const 0
       i32.add
       i32.const 8
       i32.add
       f64.load
       local.get 0
-      i32.const 612
-      i32.add
       i32.const 0
+      i32.add
+      i32.const 16
       i32.add
       f64.load
       call 31
     end
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     i64.load
     i64.const 3
@@ -16617,7 +16617,7 @@
       i64.const 34962
       i32.wrap_i64
       local.get 0
-      i32.const 576
+      i32.const 104
       i32.add
       i32.load
       call 11
@@ -16638,7 +16638,7 @@
       i32.wrap_i64
       call 16
       local.get 0
-      i32.const 568
+      i32.const 112
       i32.add
       i32.load
       i64.extend_i32_s
@@ -16649,22 +16649,22 @@
       i64.const 3553
       i32.wrap_i64
       local.get 0
-      i32.const 568
+      i32.const 112
       i32.add
       i32.load
       call 53
       local.get 0
-      i32.const 20
+      i32.const 660
       i32.add
       i32.load
       local.get 0
-      i32.const 568
+      i32.const 112
       i32.add
       i32.load
       call 25
     end
     local.get 0
-    i32.const 28
+    i32.const 652
     i32.add
     i32.load
     i64.const 0
@@ -16674,19 +16674,19 @@
     i32.add
     call 22
     local.get 0
-    i32.const 24
+    i32.const 656
     i32.add
     i32.load
     i64.const 0
     i32.wrap_i64
     local.get 0
-    i32.const 440
+    i32.const 116
     i32.add
     i32.const 0
     i32.add
     call 22
     local.get 0
-    i32.const 592
+    i32.const 84
     i32.add
     i64.load
     i64.const 0
@@ -16695,14 +16695,14 @@
       i64.const 34963
       i32.wrap_i64
       local.get 0
-      i32.const 572
+      i32.const 108
       i32.add
       i32.load
       call 11
       i64.const 4
       i32.wrap_i64
       local.get 0
-      i32.const 592
+      i32.const 84
       i32.add
       i64.load
       i32.wrap_i64
@@ -16713,13 +16713,13 @@
       call 41
     end
     local.get 0
-    i32.const 592
+    i32.const 84
     i32.add
     i64.load
     i64.const 0
     i64.eq
     local.get 0
-    i32.const 40
+    i32.const 636
     i32.add
     i64.load
     i64.const 4
@@ -16729,7 +16729,7 @@
       i64.const 34962
       i32.wrap_i64
       local.get 0
-      i32.const 580
+      i32.const 100
       i32.add
       i32.load
       call 11
@@ -16738,24 +16738,24 @@
       i64.const 0
       i32.wrap_i64
       local.get 0
-      i32.const 584
+      i32.const 92
       i32.add
       i64.load
       i32.wrap_i64
       call 18
     end
     local.get 0
-    i32.const 56
+    i32.const 500
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 312
+    i32.const 244
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 184
+    i32.const 372
     i32.add
-    call 81)
+    call 79)
   (func (;131;) (type 13) (param i32 f64 f64 f64)
     i32.const 7392
     i64.const 0
@@ -16765,7 +16765,7 @@
     f64.const 0x0p+0 (;=0;)
     call 113
     local.get 0
-    i32.const 0
+    i32.const 664
     i32.add
     i32.const 7392
     call 116)
@@ -16778,7 +16778,7 @@
     local.get 2
     call 113
     local.get 0
-    i32.const 0
+    i32.const 664
     i32.add
     i32.const 7432
     call 116)
@@ -16792,37 +16792,37 @@
     local.get 2
     local.get 3
     i32.const 7472
-    i32.const 8
+    i32.const 0
     i32.add
     f64.load
     i32.const 7472
-    i32.const 0
+    i32.const 8
     i32.add
     f64.load
     call 113
     local.get 0
-    i32.const 0
+    i32.const 664
     i32.add
     i32.const 7488
     call 116)
   (func (;134;) (type 2) (param i32)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.const 0
     i64.store
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.const 2
     i64.store
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.const 4
     i64.extend_i32_s
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.load
     i64.mul
@@ -16831,7 +16831,7 @@
     i32.store)
   (func (;135;) (type 33) (param i32 i64) (result i32)
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 4
@@ -16846,37 +16846,37 @@
   (func (;136;) (type 6) (param i32 i32)
     (local i32 i64)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.load
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       i64.load
       i64.const 2
       i64.mul
       i64.store
       local.get 0
-      i32.const 8
+      i32.const 0
       i32.add
       i32.load
       local.set 2
       local.get 0
-      i32.const 8
+      i32.const 0
       i32.add
       i32.const 4
       i64.extend_i32_s
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       i64.load
       i64.mul
@@ -16889,13 +16889,13 @@
         loop  ;; label = @3
           local.get 3
           local.get 0
-          i32.const 0
+          i32.const 12
           i32.add
           i64.load
           i64.eq
           br_if 1 (;@2;)
           local.get 0
-          i32.const 8
+          i32.const 0
           i32.add
           i32.load
           i32.const 4
@@ -16920,12 +16920,12 @@
       end
     end
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 4
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i32.wrap_i64
@@ -16934,10 +16934,10 @@
     local.get 1
     i32.store
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i64.const 1
@@ -16946,17 +16946,17 @@
   (func (;137;) (type 17) (param i32) (result i64)
     (local i64)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     local.set 1
     local.get 1)
   (func (;138;) (type 2) (param i32)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i64.const 1
@@ -16968,31 +16968,31 @@
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 16
+    i32.const 180
     i32.add
     call 4
     f64.const 0x1.f4p+9 (;=1000;)
     f64.div
     f64.store
     local.get 0
-    i32.const 8
+    i32.const 188
     i32.add
     f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 196
     i32.add
     f64.const 0x0p+0 (;=0;)
     f64.store
     local.get 0
-    i32.const 24
+    i32.const 52
     i32.add
-    call 81
+    call 79
     local.get 0
-    i32.const 24
+    i32.const 52
     i32.add
     local.get 0
-    i32.const 24
+    i32.const 52
     i32.add
     i64.const 0
     f64.convert_i64_s
@@ -17031,76 +17031,76 @@
     i32.const 128
     memory.copy
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     call 134
     local.get 0
-    i32.const 172
+    i32.const 20
     i32.add
     i32.const 7536
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 196
+    i32.const 44
     i32.add
     f64.const 0x1p+0 (;=1;)
     f64.store)
   (func (;140;) (type 11) (param i32 f64)
     local.get 0
-    i32.const 196
+    i32.const 44
     i32.add
     local.get 1
     f64.store)
   (func (;141;) (type 2) (param i32)
     (local i64)
     local.get 0
-    i32.const 8
+    i32.const 188
     i32.add
     call 4
     f64.const 0x1.f4p+9 (;=1000;)
     f64.div
     f64.store
     local.get 0
-    i32.const 0
+    i32.const 196
     i32.add
     local.get 0
-    i32.const 8
+    i32.const 188
     i32.add
     f64.load
     local.get 0
-    i32.const 16
+    i32.const 180
     i32.add
     f64.load
     f64.sub
     f64.store
     local.get 0
-    i32.const 16
+    i32.const 180
     i32.add
     local.get 0
-    i32.const 8
+    i32.const 188
     i32.add
     f64.load
     f64.store
     local.get 0
-    i32.const 172
-    i32.add
-    i32.const 16
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 172
-    i32.add
-    i32.const 8
-    i32.add
-    f64.load
-    local.get 0
-    i32.const 172
+    i32.const 20
     i32.add
     i32.const 0
     i32.add
     f64.load
     local.get 0
-    i32.const 196
+    i32.const 20
+    i32.add
+    i32.const 8
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 20
+    i32.add
+    i32.const 16
+    i32.add
+    f64.load
+    local.get 0
+    i32.const 44
     i32.add
     f64.load
     call 39
@@ -17130,20 +17130,20 @@
       loop  ;; label = @2
         local.get 1
         local.get 0
-        i32.const 152
+        i32.const 0
         i32.add
-        i32.const 12
+        i32.const 4
         i32.add
         i64.load
         i64.eq
         br_if 1 (;@1;)
         local.get 0
-        i32.const 152
+        i32.const 0
         i32.add
         local.get 1
         call 135
         local.get 0
-        i32.const 24
+        i32.const 52
         i32.add
         call 130
         local.get 1
@@ -17547,12 +17547,12 @@
     local.get 4
     call 119
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     local.get 6
     call 136
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     call 137
     i64.const 1
@@ -17943,7 +17943,7 @@
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
-    call 71
+    call 68
     i32.const 684
     call 50
     local.set 7
@@ -17962,12 +17962,12 @@
     i32.const 7800
     call 120
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     local.get 7
     call 136
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     call 137
     i64.const 1
@@ -18354,7 +18354,7 @@
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
-    call 71
+    call 68
     i32.const 684
     call 50
     local.set 7
@@ -18373,12 +18373,12 @@
     local.get 4
     call 121
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     local.get 7
     call 136
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     call 137
     i64.const 1
@@ -18623,12 +18623,12 @@
     local.get 5
     call 119
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     local.get 7
     call 136
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     call 137
     i64.const 1
@@ -18661,12 +18661,12 @@
     local.get 5
     call 119
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     local.get 7
     call 136
     local.get 0
-    i32.const 152
+    i32.const 0
     i32.add
     call 137
     i64.const 1
@@ -18675,22 +18675,22 @@
     local.get 6)
   (func (;147;) (type 2) (param i32)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.const 0
     i64.store
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.const 2
     i64.store
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.const 24
     i64.extend_i32_s
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.load
     i64.mul
@@ -18699,7 +18699,7 @@
     i32.store)
   (func (;148;) (type 33) (param i32 i64) (result i32)
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 24
@@ -18716,37 +18716,37 @@
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     local.get 0
-    i32.const 0
+    i32.const 12
     i32.add
     i64.load
     i64.eq
     if  ;; label = @1
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       i64.load
       i64.const 2
       i64.mul
       i64.store
       local.get 0
-      i32.const 8
+      i32.const 0
       i32.add
       i32.load
       local.set 2
       local.get 0
-      i32.const 8
+      i32.const 0
       i32.add
       i32.const 24
       i64.extend_i32_s
       local.get 0
-      i32.const 0
+      i32.const 12
       i32.add
       i64.load
       i64.mul
@@ -18759,13 +18759,13 @@
         loop  ;; label = @3
           local.get 3
           local.get 0
-          i32.const 0
+          i32.const 12
           i32.add
           i64.load
           i64.eq
           br_if 1 (;@2;)
           local.get 0
-          i32.const 8
+          i32.const 0
           i32.add
           i32.load
           i32.const 24
@@ -18790,12 +18790,12 @@
       end
     end
     local.get 0
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 24
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i32.wrap_i64
@@ -18805,10 +18805,10 @@
     i32.const 24
     memory.copy
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i64.const 1
@@ -18817,17 +18817,17 @@
   (func (;150;) (type 17) (param i32) (result i64)
     (local i64)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     local.set 1
     local.get 1)
   (func (;151;) (type 2) (param i32)
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     local.get 0
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i64.const 1
@@ -18915,7 +18915,7 @@
         f64.const 0x1.0624dd2f1a9fcp-10 (;=0.001;)
         f64.mul
         f64.sub
-        call 71
+        call 68
         i32.const 8508
         i32.const 8528
         call 149
@@ -18928,11 +18928,11 @@
     end
     local.get 0
     i32.const 8508
-    i32.const 8
+    i32.const 0
     i32.add
     i32.load
     i32.const 8508
-    i32.const 12
+    i32.const 4
     i32.add
     i64.load
     i32.const 8420
@@ -18946,7 +18946,7 @@
     call_indirect (type 0))
   (func (;154;) (type 0)
     i32.const 8556
-    i32.const 296
+    i32.const 0
     i32.add
     i32.const 9088
     i64.load
@@ -18967,22 +18967,22 @@
     f64.const 0x1.4p+2 (;=5;)
     f64.const 0x1.4p+2 (;=5;)
     f64.const 0x1.4p+2 (;=5;)
-    call 71
+    call 68
     i32.const 9016
     f64.const 0x0p+0 (;=0;)
     f64.const 0x1p+0 (;=1;)
     f64.const 0x0p+0 (;=0;)
-    call 71
+    call 68
     i32.const 9040
     f64.const 0x1.ccccccccccccdp-1 (;=0.9;)
     f64.const 0x1p-1 (;=0.5;)
     f64.const 0x1.6666666666666p-1 (;=0.7;)
-    call 71
+    call 68
     i32.const 9064
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
     f64.const 0x0p+0 (;=0;)
-    call 71
+    call 68
     i32.const 8556
     f64.const 0x1p+1 (;=2;)
     i32.const 9040

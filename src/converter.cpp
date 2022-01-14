@@ -267,45 +267,45 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
         std::stringstream outputStream;
         int i = 0;
         std::string output = "";
-        if(parentRule == "mems"){
-            for(auto it = target.rbegin(); it != target.rend(); it++){
-                json element = *it;
-                std::string eachOutput = "";
-                if(i != 0 && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
-                    eachOutput += ", ";
-                }
-                std::string ruleName;
-                std::string type = element["type"].get<std::string>();
-                std::string kind;
-                if(element["kind"].is_string()){
-                    kind = element["kind"].get<std::string>();
-                }
-                else{
-                    kind = "noinit";
-                }
-                // std::cout << type << "/" << kind << std::endl;
+        // if(parentRule == "mems"){
+        //     for(auto it = target.rbegin(); it != target.rend(); it++){
+        //         json element = *it;
+        //         std::string eachOutput = "";
+        //         if(i != 0 && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
+        //             eachOutput += ", ";
+        //         }
+        //         std::string ruleName;
+        //         std::string type = element["type"].get<std::string>();
+        //         std::string kind;
+        //         if(element["kind"].is_string()){
+        //             kind = element["kind"].get<std::string>();
+        //         }
+        //         else{
+        //             kind = "noinit";
+        //         }
+        //         // std::cout << type << "/" << kind << std::endl;
 
-                if(rule[type][kind].is_string()){
-                    ruleName = type + "." + kind;
-                }
-                else if(rule[type][kind].is_object()){
-                    std::string specificType = element["info"]["specificType"].get<std::string>();
-                    ruleName = type + "." + kind + "." + specificType;
-                }
-                if(type == "dec" || type == "stm"){
-                    for(int i = 0; i < indentTabs; i++){
-                        eachOutput += "\t";
-                    }
-                }
-                eachOutput += jsonToString(element, type, rule, tokens, config);
-                if(type == "dec" || type == "stm"){
-                    eachOutput += "\n";
-                }
-                i += 1;
-                output += eachOutput;
-            }
-        }
-        else{
+        //         if(rule[type][kind].is_string()){
+        //             ruleName = type + "." + kind;
+        //         }
+        //         else if(rule[type][kind].is_object()){
+        //             std::string specificType = element["info"]["specificType"].get<std::string>();
+        //             ruleName = type + "." + kind + "." + specificType;
+        //         }
+        //         if(type == "dec" || type == "stm"){
+        //             for(int i = 0; i < indentTabs; i++){
+        //                 eachOutput += "\t";
+        //             }
+        //         }
+        //         eachOutput += jsonToString(element, type, rule, tokens, config);
+        //         if(type == "dec" || type == "stm"){
+        //             eachOutput += "\n";
+        //         }
+        //         i += 1;
+        //         output += eachOutput;
+        //     }
+        // }
+        // else{
             for(const auto &element: target){
                 std::string eachOutput = "";
                 if(i != 0 && ((element["type"].get<std::string>() == "exp") || (element["type"].get<std::string>() == "field"))){
@@ -341,7 +341,7 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                 i += 1;
                 output += eachOutput;
             }
-        }
+        // }
         outputStream << output;
         return outputStream.str();
     }
