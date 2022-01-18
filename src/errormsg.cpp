@@ -15,6 +15,8 @@ extern FILE *yyin;
 extern FILE *prein;
 
 json errorJson;
+json typeJson;
+json keywords;
 
 void EM_setErrorJson(const char *filename){
     std::ifstream input(filename);
@@ -22,6 +24,8 @@ void EM_setErrorJson(const char *filename){
     input >> j;
     json error;
     errorJson = j["errors"];
+    typeJson = j["grammar"]["ty"];
+    keywords = j["tokens"]["keywords"];
 }
 
 void EM_error(int pos, const char *message, ...)
@@ -62,7 +66,32 @@ void EM_error(int pos, const char *message, ...)
     if(errorJson[parent][child].is_string()){
         errorOutput = errorJson[parent][child].get<std::string>();
     }
+    std::map<std::string, unsigned> keywordNames;
+    unsigned keywordIndex = 0;
+    for(const auto &item: keywords){
+        // std::cout << item["name"] << std::endl;
+        keywordNames[item["name"]] = keywordIndex;
+        keywordIndex += 1;
+    }
     for(int i = 0; i < errorArgs.size(); i++){
+        if(errorArgs.at(i) == "int"){
+            errorArgs.at(i) = keywords[keywordNames["inttype"]]["value"].get<std::string>();
+        }
+        else if(errorArgs.at(i) == "void"){
+            errorArgs.at(i) = keywords[keywordNames["void"]]["value"].get<std::string>();
+        }
+        else if(errorArgs.at(i) == "real"){
+            errorArgs.at(i) = keywords[keywordNames["realtype"]]["value"].get<std::string>();
+        }
+        else if(errorArgs.at(i) == "short"){
+            errorArgs.at(i) = keywords[keywordNames["shorttype"]]["value"].get<std::string>();
+        }
+        else if(errorArgs.at(i) == "char"){
+            errorArgs.at(i) = keywords[keywordNames["chartype"]]["value"].get<std::string>();
+        }
+        else if(errorArgs.at(i) == "bool"){
+            errorArgs.at(i) = keywords[keywordNames["boolean"]]["value"].get<std::string>();
+        }
         errorOutput = std::regex_replace(errorOutput, std::regex("\\$" + std::to_string(i + 1)), errorArgs.at(i));
     }
     std::cerr << errorOutput << std::endl;
