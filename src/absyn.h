@@ -57,7 +57,8 @@ enum stmType
     A_continueStm,
     A_callStm,
     A_returnStm,
-    A_loopStm
+    A_loopStm,
+    A_repeatStm
 };
 struct A_stm_
 {
@@ -107,7 +108,11 @@ struct A_stm_
         {
             A_stm body;
         } loop;
-        
+        struct
+        {
+            A_exp count;
+            A_stm body;
+        } repeat;
     } u;
 };
 enum varType
@@ -454,6 +459,7 @@ A_stm A_DeclarationStm(A_pos pos, A_dec dec);
 A_stm A_CallStm(A_pos pos, A_exp func, A_expList args);
 A_stm A_ReturnStm(A_pos pos, A_exp exp);
 A_stm A_LoopStm(A_pos pos, A_stm body);
+A_stm A_RepeatStm(A_pos pos, A_exp count, A_stm body);
 
 A_var A_SimpleVar(A_pos pos, S_symbol sym);
 A_var A_LvalSimpleVar(A_pos pos, S_symbol sym);

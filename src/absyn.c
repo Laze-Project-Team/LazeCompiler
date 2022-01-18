@@ -104,6 +104,14 @@ A_stm A_LoopStm(A_pos pos, A_stm body)
     p -> u.loop.body = body;
     return p;
 }
+A_stm A_RepeatStm(A_pos pos, A_exp count, A_stm body){
+    A_stm p = (A_stm)checked_malloc(sizeof(*p));
+    p -> kind = A_repeatStm;
+    p -> pos = pos;
+    p -> u.repeat.count = count;
+    p -> u.repeat.body = body;
+    return p;
+}
 
 A_var A_SimpleVar(A_pos pos, S_symbol sym)
 {

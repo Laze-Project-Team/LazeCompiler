@@ -147,6 +147,15 @@ jobj JS_StmToJson(A_stm stm)
             json_object_object_add(info, "stm", body);
             break;
         }
+        case A_repeatStm:
+        {
+            name = json_object_new_string("repeat");
+            jobj body = JS_StmToJson(stm -> u.repeat.body);
+            json_object_object_add(info, "stm", body);
+            jobj count = JS_ExpToJson(stm -> u.repeat.count);
+            json_object_object_add(info, "exp", count);
+            break;
+        }
     } 
     json_object_object_add(result, "kind", name);
     json_object_object_add(result, "info", info);
@@ -462,8 +471,15 @@ jobj JS_DecToJson(A_dec dec)
             json_object_object_add(info, "ty", className);
             jobj objectName = JS_VarToJson(A_SimpleVar(dec -> pos, dec -> u.object.name));
             json_object_object_add(info, "var", objectName);
-            jobj expList = JS_ExpListToJson(dec -> u.object.explist);
-            json_object_object_add(info, "explist", expList);
+            if(dec -> u.object.explist -> head){
+                jobj expList = JS_ExpListToJson(dec -> u.object.explist);
+                json_object_object_add(info, "explist", expList);
+            }
+            else{
+                name = json_object_new_string("var");
+                jobj specificType = json_object_new_string("noinit");
+                json_object_object_add(info, "specificType", specificType);
+            }
             break;
         }
         case A_funcImportDec:

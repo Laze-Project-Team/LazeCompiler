@@ -103,7 +103,8 @@
     "main": "実行",
     "stringClass": "文字列",
     "stmliststart": "ここから",
-    "stmlistend":"ここまで実行"
+    "stmlistend":"ここまで実行",
+    "counter":"カウンタ"
   },
   "grammar": {
     "exp": {

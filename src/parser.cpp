@@ -2,6 +2,7 @@
 
 std::string _mainFuncName = "";
 std::string _stringClassName = "";
+std::string _counterName = "";
 
 // static std::string tokenNames[] = {"char","string","hex","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
 static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist", "oper", "funcAndVar", "funcAndVarList", "mems"};
@@ -609,7 +610,8 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.stm = A_ContinueStm(result -> start);
         }
         else if(ruleName == "stm.repeat"){
-            result -> u.stm = A_ForStm(EM_tokPos, A_DeclarationStm(EM_tokPos, A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_IntExp(EM_tokPos, 0), TRUE), A_NameTy(EM_tokPos, S_Symbol("int")))), A_OpExp(EM_tokPos, A_eqOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), tokenData.at("exp").exp), A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), A_IntExp(EM_tokPos, 1)), FALSE), tokenData.at("stm").stm);
+            result -> u.stm = A_RepeatStm(EM_tokPos, tokenData.at("exp").exp, tokenData.at("stm").stm);
+            // result -> u.stm = A_ForStm(EM_tokPos, A_DeclarationStm(EM_tokPos, A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_IntExp(EM_tokPos, 0), TRUE), A_NameTy(EM_tokPos, S_Symbol("int")))), A_OpExp(EM_tokPos, A_eqOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), tokenData.at("exp").exp), A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), A_IntExp(EM_tokPos, 1)), FALSE), tokenData.at("stm").stm);
         }
     }
     //dec
@@ -1079,6 +1081,7 @@ void P_generateGrammarList(const std::string inputFname, grammarListTy &grammarL
     jInput >> j;
     _mainFuncName = j["tokens"]["main"].get<std::string>();
     _stringClassName = j["tokens"]["stringClass"].get<std::string>();
+    _counterName = j["tokens"]["counter"].get<std::string>();
     
     std::string tok;
     std::regex tokenWithName("([a-zA-Z0-9]+)\\(([a-zA-Z0-9]+)\\)");

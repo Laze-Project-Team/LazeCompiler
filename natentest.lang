@@ -1,14 +1,54 @@
-Declare function main with code starting here
-	Call captureMouse . 
-	Initialize object ワールド as Scene with . 
-	Initialize object 光源座標 as Vector3D with 5.0 , 5.0 , 5.0 . 
-	Initialize object 回転軸 as Vector3D with 0.0 , 1.0 , 0.0 . 
-	Initialize object color as Vector3D with 0.900000000000000022 , 0.5 , 0.699999999999999956 . 
-	Initialize object 位置 as Vector3D with 0.0 , 0.0 , 0.0 . 
-	Initialize variable キューブID as int with addCube of ワールド ( 2.0 , color , 位置 ) . 
-	Initialize variable 光源ID as int with addLight of ワールド ( 1.0 , color , 光源座標 ) . 
-	loop starting here
-		Call get of sprites of ワールド ( キューブID ) -> rotate with value 回転軸 , getTime ( )  / 1000.0 . 
-		Call draw of ワールド . 
-	ending here 
-ending here
+Declare function __setUpVariableNamesForSamples with code starting here
+	Declare variable ${"ja":"前の数", "natja":"前の数", "en":"numberBefore", "naten":"numberBefore"}$ as double . 
+	Declare variable ${"ja":"数", "natja":"数", "en":"number", "naten":"number"}$ as double . 
+	Declare variable ${"ja":"入力", "natja":"入力", "en":"input", "naten":"input"}$ as double . 
+	Declare variable ${"ja":"出力", "natja":"出力", "en":"output", "naten":"output"}$ as double . 
+	Declare variable ${"ja":"返り値", "natja":"返り値", "en":"returnValue", "naten":"returnValue"}$ as double . 
+	Declare variable ${"ja":"初期数", "natja":"初期数", "en":"initialNumber", "naten":"initialNumber"}$ as double . 
+	Declare variable ${"ja":"コラッツ", "natja":"コラッツ", "en":"collatz", "naten":"collatz"}$ as double . 
+	Declare variable ${"ja":"結果", "natja":"結果", "en":"result", "naten":"result"}$ as double . 
+	Declare variable ${"ja":"かける数", "natja":"かける数", "en":"numberToMultiply", "naten":"numberToMultiply"}$ as double . 
+	Declare variable ${"ja":"ワールド", "natja":"ワールド", "en":"world", "naten":"world"}$ as double . 
+	Declare variable ${"ja":"光源座標", "natja":"光源座標", "en":"lightPosition", "naten":"lightPosition"}$ as double . 
+	Declare variable ${"ja":"回転軸", "natja":"回転軸", "en":"axis", "naten":"axis"}$ as double . 
+	Declare variable ${"ja":"位置", "natja":"位置", "en":"position", "naten":"position"}$ as double . 
+	Declare variable ${"ja":"キューブID", "natja":"キューブID", "en":"cubeID", "naten":"cubeID"}$ as double . 
+	Declare variable ${"ja":"光源ID", "natja":"光源ID", "en":"lightID", "naten":"lightID"}$ as double . 
+	Declare variable ${"ja":"キューブIDリスト", "natja":"キューブIDリスト", "en":"cubeIDlist", "naten":"cubeIDlist"}$ as double . 
+	Declare variable ${"ja":"回数", "natja":"回数", "en":"numberOfTimes", "naten":"numberOfTimes"}$ as double . 
+	Declare variable ${"ja":"初期位置", "natja":"初期位置", "en":"initialPosition", "naten":"initialPosition"}$ as double . 
+	Declare variable ${"ja":"幅", "natja":"幅", "en":"width", "naten":"width"}$ as double . 
+	Declare variable ${"ja":"高さ", "natja":"高さ", "en":"height", "naten":"height"}$ as double . 
+	Declare variable ${"ja":"質量", "natja":"質量", "en":"mass", "naten":"mass"}$ as double . 
+	Declare variable ${"ja":"慣性モーメント", "natja":"慣性モーメント", "en":"momentOfInertia", "naten":"momentOfInertia"}$ as double . 
+	Declare variable ${"ja":"速度", "natja":"速度", "en":"velocity", "naten":"velocity"}$ as double . 
+	Declare variable ${"ja":"角度", "natja":"角度", "en":"angle", "naten":"angle"}$ as double . 
+	Declare variable ${"ja":"角速度", "natja":"角速度", "en":"angularVelocity", "naten":"angularVelocity"}$ as double . 
+	Declare variable ${"ja":"力", "natja":"力", "en":"force", "naten":"force"}$ as double . 
+	Declare variable ${"ja":"トルク", "natja":"トルク", "en":"torque", "naten":"torque"}$ as double . 
+	Declare variable ${"ja":"形", "natja":"形", "en":"shape", "naten":"shape"}$ as double . 
+	Declare variable ${"ja":"物理ワールド2D", "natja":"物理ワールド2D", "en":"physicsWorld2D", "naten":"physicsWorld2D"}$ as double . 
+	Declare variable ${"ja":"物体配列", "natja":"物体配列", "en":"bodyArray", "naten":"bodyArray"}$ as double . 
+	Declare variable ${"ja":"重力加速度", "natja":"重力加速度", "en":"gravitationalAccelaration", "naten":"gravitationalAccelaration"}$ as double . 
+	Declare variable ${"ja":"前回の時間", "natja":"前回の時間", "en":"timeBefore", "naten":"timeBefore"}$ as double . 
+	Declare variable ${"ja":"物体追加", "natja":"物体追加", "en":"addBody", "naten":"addBody"}$ as double . 
+	Declare variable ${"ja":"重力", "natja":"重力", "en":"gravity", "naten":"gravity"}$ as double . 
+	Declare variable ${"ja":"アップデート", "natja":"アップデート", "en":"update", "naten":"update"}$ as double . 
+	Declare variable ${"ja":"経過時間", "natja":"経過時間", "en":"timePassed", "naten":"timePassed"}$ as double . 
+	Declare variable ${"ja":"角加速度", "natja":"角加速度", "en":"angularAccelaration", "naten":"angularAccelaration"}$ as double . 
+	Declare variable ${"ja":"物理ワールド", "natja":"物理ワールド", "en":"physicsWorld", "naten":"physicsWorld"}$ as double . 
+	Declare variable ${"ja":"初速度", "natja":"初速度", "en":"initialVelocity", "naten":"initialVelocity"}$ as double . 
+	Declare variable ${"ja":"初速度", "natja":"初速度", "en":"initialVelocity", "naten":"initialVelocity"}$ as double . 
+	Declare variable ${"ja":"素数", "natja":"素数", "en":"primeNumbers", "naten":"primeNumbers"}$ as double . 
+	Declare variable ${"ja":"フラグ", "natja":"フラグ", "en":"flag", "naten":"flag"}$ as double . 
+	Declare variable ${"ja":"漸化式", "natja":"漸化式", "en":"recursion", "naten":"recursion"}$ as double . 
+	Declare variable ${"ja":"変数1", "natja":"変数1", "en":"variable1", "naten":"variable1"}$ as double . 
+	Declare variable ${"ja":"変数2", "natja":"変数2", "en":"variable2", "naten":"variable2"}$ as double . 
+	Declare variable ${"ja":"変数3", "natja":"変数3", "en":"variable3", "naten":"variable3"}$ as double . 
+	Declare variable ${"ja":"変数4", "natja":"変数4", "en":"variable4", "naten":"variable4"}$ as double . 
+	Declare variable ${"ja":"変数5", "natja":"変数5", "en":"variable5", "naten":"variable5"}$ as double . 
+	Declare variable ${"ja":"変数6", "natja":"変数6", "en":"variable6", "naten":"variable6"}$ as double . 
+	Declare variable ${"ja":"変数7", "natja":"変数7", "en":"variable7", "naten":"variable7"}$ as double . 
+	Declare variable ${"ja":"変数8", "natja":"変数8", "en":"variable8", "naten":"variable8"}$ as double . 
+	Declare variable ${"ja":"変数9", "natja":"変数9", "en":"variable9", "naten":"variable9"}$ as double . 
+ending here 

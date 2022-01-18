@@ -6,6 +6,7 @@ extern int funcs;
 extern int memorySize;
 extern std::string _mainFuncName;
 extern std::string _stringClassName;
+extern std::string _counterName;
 
 extern A_decList absyn_root = NULL;
 static T_moduleList list = NULL;
@@ -657,6 +658,10 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
         {
             return transStm(venv, tenv, A_DeclarationStm(stm -> pos, A_FunctionDec(stm -> pos, A_FundecList(A_Fundec(stm -> pos, S_Symbol("loop"), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), stm -> u.loop.body), NULL))), level, isLoop, classs);
             // return expTy(Tr_LoopStm(stm->pos), Ty_Void());
+        }
+        case A_repeatStm:
+        {
+            return transStm(venv, tenv, A_ForStm(EM_tokPos, A_DeclarationStm(EM_tokPos, A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol((char *)_counterName.c_str())), A_IntExp(EM_tokPos, 0), TRUE), A_NameTy(EM_tokPos, S_Symbol("int")))), A_OpExp(EM_tokPos, A_eqOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol((char *)_counterName.c_str()))), stm -> u.repeat.count), A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol((char *)_counterName.c_str())), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol((char *)_counterName.c_str()))), A_IntExp(EM_tokPos, 1)), FALSE), stm -> u.repeat.body), level, isLoop, classs);
         }
         case A_callStm:
         {

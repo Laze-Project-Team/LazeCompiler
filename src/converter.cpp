@@ -5,6 +5,7 @@
 #include <iomanip>
 
 extern std::string _mainFuncName;
+extern std::string _counterName;
 
 static std::string symbols[] = {",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<","<=",">",">=","&&","||","=", "%","&"};
 static std::string convertOperToString(int oper, const json &rule);
@@ -32,6 +33,8 @@ void CON_convert(std::string ast, std::string targetLang, std::string fname){
     }
     json grammar = rules["grammar"];
     // std::cout << config["type"].get<std::string>() << std::endl;
+    nameConvertMap[_counterName] = tokens["counter"].get<std::string>();
+    nameConvertMap[_mainFuncName] = tokens["main"].get<std::string>();
     std::stringstream outputStream;
     std::ofstream output(fname);
     output << jsonToString(inputAST, "declist", grammar, tokens, config);
@@ -197,11 +200,6 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                     }
                     if(nameConvertMap.find(id) != nameConvertMap.end()){
                         id = nameConvertMap[id];
-                    }
-                    if(ruleName.substr(0, 8) == "dec.func"){
-                        if(id == _mainFuncName){
-                            id = tokens["main"];
-                        }
                     }
                     outputStream << id;
                     if(config["type"].get<std::string>() == "natural"){

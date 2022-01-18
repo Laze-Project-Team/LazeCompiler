@@ -75,7 +75,8 @@
         "main": "実行",
         "stringClass":"文字列",
         "stmliststart": "{",
-        "stmlistend":"}"
+        "stmlistend":"}",
+        "counter":"カウンタ"
     },
     "grammar":{
         "exp":{
@@ -163,7 +164,8 @@
             "jsexport": "jsexport ( id , string ) ;",
             "operator": {
                 "normal":"function : operator oper ( fieldlist(params) ) => ( fieldlist(result) ) stm",
-                "assignnormal":"function : operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm"
+                "assignnormal":"function : operator = ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+                "subscriptnormal":"function : operator [ ] ( fieldlist(params) ) => ( fieldlist(result) ) stm"
             },
             "template": "type < id > : dec"
         },
