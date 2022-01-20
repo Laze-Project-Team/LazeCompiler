@@ -24,7 +24,7 @@
             {"name":"type", "value":"type"},
             {"name":"void", "value":"void"},
             {"name":"nul", "value":"nul"},
-            {"name":"boolean", "value":"boolean"},
+            {"name":"boolean", "value":"bool"},
             {"name":"true", "value":"true"},
             {"name":"false", "value":"false"},
             {"name":"jsload", "value":"jsload"},
@@ -69,6 +69,7 @@
             {"name":"that", "value":"that"},
             {"name":"takes", "value":"takes"},
             {"name":"and", "value":"and"},
+            {"name":"or", "value":"or"},
             {"name":"returns", "value":"returns"},
             {"name":"code", "value":"code"},
             {"name":"times", "value":"times"},
@@ -154,8 +155,8 @@
             "gt":">",
             "le":"<=",
             "lt":"<",
-            "and":"&&",
-            "or":"||"
+            "and":"and",
+            "or":"or"
         },
         "stm":{
             "assign":{

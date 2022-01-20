@@ -257,9 +257,12 @@ jobj JS_ExpToJson(A_exp exp)
         }
         case A_boolExp:
         {
-            name = json_object_new_string("bool");
-            jobj booll = json_object_new_boolean(exp -> u.booll);
-            json_object_object_add(info, "bool", booll);
+            if(exp -> u.booll){
+                name = json_object_new_string("true");
+            }
+            else {
+                name = json_object_new_string("false");
+            }
             break;
         }
         case A_charExp:
@@ -543,7 +546,7 @@ jobj JS_DecToJson(A_dec dec)
             jobj d = JS_DecToJson(dec -> u.templatee.dec);
             json_object_object_add(info, "dec", d);
             jobj templateName = json_object_new_string(S_name(dec -> u.templatee.name));
-            printf("%s", S_name(dec -> u.templatee.name));
+            // printf("%s", S_name(dec -> u.templatee.name));
             json_object_object_add(info, "id", templateName);
             break;
         }

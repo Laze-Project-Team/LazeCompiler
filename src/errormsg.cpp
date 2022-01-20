@@ -77,7 +77,7 @@ void EM_error(int pos, const char *message, ...)
         if(errorArgs.at(i) == "int"){
             errorArgs.at(i) = keywords[keywordNames["inttype"]]["value"].get<std::string>();
         }
-        else if(errorArgs.at(i) == "void"){
+        else if(errorArgs.at(i) == "void"){ 
             errorArgs.at(i) = keywords[keywordNames["void"]]["value"].get<std::string>();
         }
         else if(errorArgs.at(i) == "real"){

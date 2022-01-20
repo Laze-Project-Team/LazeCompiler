@@ -23,7 +23,7 @@
             {"name":"type", "value":"template"},
             {"name":"void", "value":"void"},
             {"name":"nul", "value":"nul"},
-            {"name":"boolean", "value":"boolean"},
+            {"name":"boolean", "value":"bool"},
             {"name":"true", "value":"true"},
             {"name":"false", "value":"false"},
             {"name":"jsload", "value":"jsload"},
