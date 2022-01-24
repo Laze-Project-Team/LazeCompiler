@@ -1167,7 +1167,7 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                     {
                         if(x -> u.var.access -> access -> kind != inFrame)
                         {
-                            std::cout << S_name(level -> label) << std::endl;
+                            // std::cout << S_name(level -> label) << std::endl;
                             int arrayAddr = level -> frame -> offset + level -> frame -> frameSize;
                         //   printf("not inframe %d\n", arrayAddr);
                             loopVarsEnd -> head = Tr_AddrAssignStm(v -> pos, Tr_AddrExp(v -> pos, arrayAddr)->u.exp, Tr_VarExp(v->pos, convertType(x->u.var.ty), x->u.var.access, FALSE, FALSE)->u.exp)->u.stm;

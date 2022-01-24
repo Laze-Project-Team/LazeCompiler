@@ -173,6 +173,10 @@ public : 	Declare variable content as pointer of T .
 	Declare function ${"ja":"ポップ", "natja":"ポップ", "en":"pop", "naten":"pop"}$ with code starting here
 		Assign size  - 1 to size . 
 	ending here 
+	function : operator = ( offset as pointer of T , l as int ) => ( ) starting here
+		Assign offset to content . 
+		Assign l to size . 
+	ending here 
 private : 	Declare variable allocated as int . 
 ending here 
 Declare class ${"ja":"文字列", "natja":"文字列", "en":"string", "naten":"string"}$ with members starting here
@@ -774,7 +778,7 @@ public : 	Declare variable color as Vector3D .
 				ending here 
 			ending here 
 		ending here 
-		Initialize object pos3d as Vector3D with x of pos  * 16.0  / 9.0 , y of pos , 0  - zIndex  * 0.00100000000000000002 . 
+		Initialize object pos3d as Vector3D with x of pos , y of pos , 0  - zIndex  * 0.00100000000000000002 . 
 		Call identity of transMat . 
 		Call translate of transMat with value pos3d . 
 		Call identity of scaleMat . 
@@ -924,15 +928,21 @@ public : 	Declare variable ${"ja":"スプライト配列", "natja":"スプライ
 		Call push of sprites with value sprite . 
 		Assign length of sprites ( )  - 1 to id . 
 	ending here 
-	Declare function ${"ja":"多角形追加", "natja":"多角形追加", "en":"addPolygon", "naten":"addPolygon"}$ that takes points as pointer of void , size as int , pos as Vector2D , color as Vector3D , zIndex as double and returns id as int with code starting here
+	Declare function ${"ja":"多角形追加", "natja":"多角形追加", "en":"addPolygon", "naten":"addPolygon"}$ that takes points as Array < Vector2D > , pos as Vector2D , color as Vector3D , zIndex as double and returns id as int with code starting here
+		Declare variable temp as Array < double > . 
+		repeat length of points ( ) times starting here
+			Call push of temp with value x of get of points ( counter ) . 
+			Call push of temp with value y of get of points ( counter ) . 
+			Call push of temp with value 0  - zIndex  * 0.00100000000000000002 . 
+		ending here 
 		Initialize variable sprite as pointer of Sprite with allocMemory ( sizeof ( variable at sprite ) ) . 
-		Call sprite -> Sprite with value points , size , allocMemory ( 0 ) , 0 , color , pos , 4 , zIndex . 
+		Call sprite -> Sprite with value content of temp , length of temp ( )  / 3 , allocMemory ( 0 ) , 0 , color , pos , 4 , zIndex . 
 		Call push of sprites with value sprite . 
 		Assign length of sprites ( )  - 1 to id . 
 	ending here 
 	Declare function ${"ja":"円追加", "natja":"円追加", "en":"addCircle", "naten":"addCircle"}$ that takes r as double , pos as Vector2D , color as Vector3D , zIndex as double and returns id as int with code starting here
 		Initialize variable PI as double with 3.14159265358979312 . 
-		Declare variable points as Array < Vector3D > . 
+		Declare variable points as Array < Vector2D > . 
 		Initialize variable 頂点数 as int with 60 . 
 		( Initialize variable i as int with 0 . ) from ( i  is 頂点数 ) to ( Assign i  + 1 to i . ) starting here
 			Initialize variable theta as double with 0 . 
@@ -942,10 +952,10 @@ public : 	Declare variable ${"ja":"スプライト配列", "natja":"スプライ
 			If ( i  % 2 )  is 1 then execute code starting here
 				Assign 0.5  * PI  - ( ( PI  * ( 1.0  + i ) )  / 頂点数 ) to theta . 
 			ending here 
-			Initialize object temp as Vector3D with r  * cos ( theta ) , r  * sin ( theta ) , 0  - zIndex  * 0.00100000000000000002 . 
+			Initialize object temp as Vector2D with r  * cos ( theta ) , r  * sin ( theta ) . 
 			Call push of points with value temp . 
 		ending here 
-		Assign addPolygon ( content of points , size of points , pos , color , zIndex ) to id . 
+		Assign addPolygon ( points , pos , color , zIndex ) to id . 
 	ending here 
 private : 	Declare variable projMat as Matrix4x4 . 
 	Declare variable last as double . 
