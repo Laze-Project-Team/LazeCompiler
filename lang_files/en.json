@@ -74,6 +74,7 @@
         ],
         "main":"main",
         "stringClass":"string",
+        "arrayTemplate":"Array",
         "stmliststart": "{",
         "stmlistend":"}",
         "counter":"counter"

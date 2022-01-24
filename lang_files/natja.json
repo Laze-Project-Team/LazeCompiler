@@ -102,6 +102,7 @@
     ],
     "main": "実行",
     "stringClass": "文字列",
+    "arrayTemplate":"配列",
     "stmliststart": "ここから",
     "stmlistend":"ここまで実行",
     "counter":"カウンタ"

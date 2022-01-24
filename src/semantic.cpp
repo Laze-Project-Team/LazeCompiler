@@ -6,6 +6,7 @@ extern int funcs;
 extern int memorySize;
 extern std::string _mainFuncName;
 extern std::string _stringClassName;
+extern std::string _arrayTemplateName;
 extern std::string _counterName;
 
 extern A_decList absyn_root = NULL;
@@ -218,32 +219,56 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             A_var var = stm->u.assign.var;
             struct expty varExpty = transVar(venv, tenv, var, level, isLoop, FALSE, stm -> u.assign.isDec, classs);
             S_symbol varName = NULL;
-            if(varExpty.ty -> kind == Ty_name){
-                E_enventry classEntry = (E_enventry)S_look(tenv, varExpty.ty -> u.name.sym);
+            if(varExpty.ty -> kind == Ty_name || varExpty.ty -> kind == Ty_poly){
+                E_enventry classEntry = NULL;
+                if(varExpty.ty -> kind == Ty_name){
+                    classEntry = (E_enventry)S_look(tenv, varExpty.ty -> u.name.sym);
+                }
+                else if(varExpty.ty -> kind == Ty_poly){
+                    classEntry = (E_enventry)S_look(tenv, varExpty.ty -> u.poly.name);
+                }
                 if(classEntry){
-                    E_enventry funcEntry = (E_enventry)S_look(classEntry -> u.classs.methods, S_Symbol("="));
+                    E_enventry funcEntry = NULL;
+                    if(classEntry -> kind == E_classentry){
+                        funcEntry = (E_enventry)S_look(classEntry -> u.classs.methods, S_Symbol("="));
+                    }
+                    else if(classEntry -> kind == E_templateentry){
+                        E_enventry templateEntry = (E_enventry)TAB_search(classEntry -> u.templatee.specific, varExpty.ty -> u.poly.typeParam);
+                        if(templateEntry){
+                            if(templateEntry -> kind == E_classentry){
+                                funcEntry = (E_enventry)S_look(templateEntry -> u.classs.methods, S_Symbol("="));
+                            }
+                        }
+                    }
                     if(funcEntry){
                         if(funcEntry -> u.func.formals -> head){
                             Ty_ty lhs = funcEntry -> u.func.formals -> head;
                             struct expty assignExpty = transExp(venv, tenv, stm -> u.assign.exp, level, isLoop, classs);
                             if(compType(lhs, assignExpty.ty)){
-                                if(stm -> u.assign.exp -> kind == A_stringExp){
+                                if(stm -> u.assign.exp -> kind == A_stringExp || stm -> u.assign.exp -> kind == A_arrayExp ){
+                                    std::cout << S_name(varExpty.ty -> u.poly.name) << std::endl;
                                     T_stmList assignList = T_StmList(NULL, NULL);
                                     T_stmList result = assignList;
                                     int arrayAddr = memorySize;
-                                    T_expList list = assignExpty.exp -> u.exp -> u.seq.list;
-                                    for(int i = 0; i < assignExpty.ty -> u.pointer -> u.array.size; i++)
-                                    {
-                                        int elementAddr = arrayAddr + i * assignExpty.ty -> u.pointer -> u.array.type -> size;
-                                        memorySize += assignExpty.ty -> u.pointer -> u.array.type -> size;
-                                        level -> frame -> frameSize += assignExpty.ty -> u.pointer -> u.array.type -> size;
-                                        T_exp addrExp = Tr_AddrExp(stm -> pos, elementAddr)->u.exp;
-                                        assignList -> head = Tr_AddrAssignStm(stm -> pos, addrExp, list -> head)->u.stm;
-                                        assignList -> tail = T_StmList(NULL, NULL);
-                                        assignList = assignList -> tail;
-                                        assignList -> head = NULL;
-                                        assignList -> tail = NULL;
-                                        list = list -> tail;
+                                    if(assignExpty.ty -> u.pointer -> u.array.type -> kind != Ty_name && assignExpty.ty -> u.pointer -> u.array.type -> kind != Ty_poly){
+                                        std::cout << assignExpty.ty -> u.pointer -> u.array.type -> kind << std::endl;
+                                        T_expList list = assignExpty.exp -> u.exp -> u.seq.list;
+                                        for(int i = 0; i < assignExpty.ty -> u.pointer -> u.array.size; i++)
+                                        {
+                                            int elementAddr = arrayAddr + i * assignExpty.ty -> u.pointer -> u.array.type -> size;
+                                            memorySize += assignExpty.ty -> u.pointer -> u.array.type -> size;
+                                            level -> frame -> frameSize += assignExpty.ty -> u.pointer -> u.array.type -> size;
+                                            T_exp addrExp = Tr_AddrExp(stm -> pos, elementAddr)->u.exp;
+                                            assignList -> head = Tr_AddrAssignStm(stm -> pos, addrExp, list -> head)->u.stm;
+                                            assignList -> tail = T_StmList(NULL, NULL);
+                                            assignList = assignList -> tail;
+                                            assignList -> head = NULL;
+                                            assignList -> tail = NULL;
+                                            list = list -> tail;
+                                        }
+                                    }
+                                    else{
+                                        arrayAddr = assignExpty.exp -> u.exp -> u.constt.exp -> u.intt;
                                     }
                                     struct expty callStm = transStm(venv, tenv, A_CallStm(stm -> pos, A_VarExp(stm -> pos, A_FieldVar(stm -> pos, var, S_Symbol("="))), A_ExpList(A_AddrExp(stm -> u.assign.exp -> pos, arrayAddr), A_ExpList(A_IntExp(stm -> u.assign.exp -> pos, assignExpty.ty -> u.pointer -> u.array.size), NULL))), level, isLoop, classs);
                                     assignList -> head = callStm.exp -> u.stm;
@@ -256,7 +281,6 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                                 return transStm(venv, tenv, A_CallStm(stm -> pos, A_VarExp(stm -> pos, A_FieldVar(stm -> pos, var, S_Symbol("="))), A_ExpList(stm -> u.assign.exp, NULL)), level, isLoop, classs);
                             }
                         }
-                        
                     }
                 }
             }
@@ -283,7 +307,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         T_stmList result = assignList;
                         T_expList list = assignVal.exp -> u.exp -> u.seq.list;
                         A_exp expp = NULL;
-                        for(int i = 0; i < assignVal.ty -> u.array.size; i++)
+                        for(int i = 0; i < assignVal.ty -> u.pointer -> u.array.size; i++)
                         {
                             expp = stm -> u.assign.exp -> u.array.list -> head;
                             A_var assignVar = NULL;
@@ -446,7 +470,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         if(assignVal.exp -> u.exp)
                         {
                             list = assignVal.exp -> u.exp -> u.seq.list;
-                            for(int i = 0; i < assignVal.ty -> u.array.size; i++)
+                            for(int i = 0; i < assignVal.ty -> u.pointer -> u.array.size; i++)
                             {
                                 A_exp expp = explist -> head;
                                 A_var var;
@@ -832,6 +856,13 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                                         continue;
                                     }
                                 }
+                                else if(args -> head -> kind == A_arrayExp && paramType -> head -> kind == Ty_poly){
+                                    if(strcmp(_arrayTemplateName.c_str(), S_name(paramType -> head -> u.name.sym)) == 0){
+                                        if(compType(argType -> u.array.type, paramType -> head -> u.poly.typeParam)){
+                                            continue;
+                                        }
+                                    }
+                                }
                                 else{
                                     functionOk = false;
                                     break;
@@ -918,7 +949,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         struct expty expp = transExp(venv, tenv, exp, level, isLoop, classs);
                         T_exp translatedAddrExp = expp.exp->u.exp -> u.load.addr;
                         
-                        if(exp -> kind == A_stringExp && type -> kind == Ty_name ){
+                        if(exp -> kind == A_stringExp && type -> kind == Ty_name && strcmp(S_name(type -> u.name.sym), _stringClassName.c_str()) == 0){
                             if(type -> kind == Ty_name){
                                 stringLiterals -> head = transStm(venv, tenv, A_DeclarationStm(exp -> pos, A_VarDec(exp -> pos, A_AssignStm(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__string_literal")), exp, TRUE), A_NameTy(exp -> pos, type -> u.name.sym))), level, isLoop, classs).exp -> u.stm;
                                 stringLiterals -> tail = T_StmList(NULL, NULL);
@@ -927,6 +958,15 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                                 stringLiterals -> tail = NULL;
                             }
                             exp = A_VarExp(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__string_literal")));
+                            expp = transExp(venv, tenv, exp, level, isLoop, classs);
+                        }
+                        if(exp -> kind == A_arrayExp && type -> kind == Ty_poly && strcmp(S_name(type -> u.poly.name), _arrayTemplateName.c_str()) == 0){
+                            stringLiterals -> head = transStm(venv, tenv, A_DeclarationStm(exp -> pos, A_VarDec(exp -> pos, A_AssignStm(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")), exp, TRUE), A_PolyTy(exp -> pos, type -> u.poly.name, type -> u.poly.a_typeParam))), level, isLoop, classs).exp -> u.stm;
+                            stringLiterals -> tail = T_StmList(NULL, NULL);
+                            stringLiterals = stringLiterals -> tail;
+                            stringLiterals -> head = NULL;
+                            stringLiterals -> tail = NULL;
+                            exp = A_VarExp(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")));
                             expp = transExp(venv, tenv, exp, level, isLoop, classs);
                         }
                         if(expp.ty -> kind == Ty_array && expp.exp -> u.exp -> kind == T_loadExp){
@@ -1127,12 +1167,16 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                     {
                         if(x -> u.var.access -> access -> kind != inFrame)
                         {
-                            int arrayAddr = x->u.var.access->level->frame->offset + x->u.var.access->level -> frame -> frameSize;
-                          //printf("not inframe %d\n", arrayAddr);
+                            std::cout << S_name(level -> label) << std::endl;
+                            int arrayAddr = level -> frame -> offset + level -> frame -> frameSize;
+                        //   printf("not inframe %d\n", arrayAddr);
                             loopVarsEnd -> head = Tr_AddrAssignStm(v -> pos, Tr_AddrExp(v -> pos, arrayAddr)->u.exp, Tr_VarExp(v->pos, convertType(x->u.var.ty), x->u.var.access, FALSE, FALSE)->u.exp)->u.stm;
                             loopVarsEnd -> tail = T_StmList(NULL, NULL);
                             loopVarsEnd = loopVarsEnd -> tail;
-                            toInFrame(x->u.var.access->access, x->u.var.access->level->frame);
+                            x -> u.var.access -> access -> kind = inFrame;
+                            x -> u.var.access -> access -> u.offset = arrayAddr - x -> u.var.access -> level -> frame -> offset;
+                            level -> frame -> frameSize += x -> u.var.ty -> size;
+                            memorySize += x -> u.var.ty -> size;
                         }
                         //debug(v -> pos, "%s %s %d var type", S_name(x -> u.var.access -> level -> label), S_name(v -> u.simple), x -> u.var.access -> access -> kind);
                         return expTy(Tr_DerefExp(v->pos, Tr_AddrExp(v -> pos, x -> u.var.access -> access -> u.offset + x -> u.var.access -> level -> frame -> offset)->u.exp, convertType(x->u.var.access->access->type)), x->u.var.access->access->type);
@@ -1562,6 +1606,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
     {
         S_symbol name = NULL;
         bool isCalledInMethod = FALSE;
+        bool isConstructor = FALSE;
         if(e -> u.call.func -> kind == A_varExp || e -> u.call.func -> kind == A_fieldExp || e -> u.call.func -> kind == A_arrowFieldExp){
             E_enventry entry = NULL;
             if(e -> u.call.func -> kind == A_varExp)
@@ -1570,8 +1615,9 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                 if(var -> kind == A_simpleVar){
                     name = var -> u.simple;
                     entry = (E_enventry)S_look(venv, name);
+
                     if(entry == NULL){
-                        E_enventry classEntry;
+                        E_enventry classEntry = NULL;
                         if(classs -> kind == Ty_name){
                             classEntry = (E_enventry)S_look(tenv, classs -> u.name.sym);
                         }
@@ -1579,6 +1625,19 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                             entry = (E_enventry)S_look(classEntry -> u.classs.methods, var -> u.simple);
                             isCalledInMethod = TRUE;
                         }
+                        else{
+                            classEntry = (E_enventry)S_look(tenv, name);
+                            if(classEntry){
+                                stringLiterals -> head = transStm(venv, tenv, A_DeclarationStm(e -> pos, A_ObjectDec(e -> pos, A_NameTy(e -> pos, name), S_Symbol("__object_literal"), e -> u.call.args)), level, isLoop, classs).exp -> u.stm;
+                                stringLiterals -> tail = T_StmList(NULL, NULL);
+                                stringLiterals = stringLiterals -> tail;
+                                stringLiterals -> head = NULL;
+                                stringLiterals -> tail = NULL;
+                                return transExp(venv, tenv, A_VarExp(e -> pos, A_SimpleVar(e -> pos, S_Symbol("__object_literal"))), level, isLoop, classs);
+                            }
+                        }
+                    }
+                    else{
                     }
                 }
                 else if(var -> kind == A_fieldVar || var -> kind == A_arrowFieldVar){
@@ -1705,6 +1764,13 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                                     continue;
                                 }
                             }
+                            else if(args -> head -> kind == A_arrayExp && paramType -> head -> kind == Ty_poly){
+                                    if(strcmp(_arrayTemplateName.c_str(), S_name(paramType -> head -> u.name.sym)) == 0){
+                                        if(compType(argType -> u.array.type, paramType -> head -> u.poly.typeParam)){
+                                            continue;
+                                        }
+                                    }
+                                }
                             else{
                                 functionOk = false;
                                 break;
@@ -1797,6 +1863,15 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                             stringLiterals -> tail = NULL;
                         }
                         exp = A_VarExp(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__string_literal")));
+                        expp = transExp(venv, tenv, exp, level, isLoop, classs);
+                    }
+                    if(exp -> kind == A_arrayExp && type -> kind == Ty_poly && strcmp(S_name(type -> u.poly.name), _arrayTemplateName.c_str()) == 0){
+                        stringLiterals -> head = transStm(venv, tenv, A_DeclarationStm(exp -> pos, A_VarDec(exp -> pos, A_AssignStm(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")), exp, TRUE), A_PolyTy(exp -> pos, type -> u.poly.name, type -> u.poly.a_typeParam))), level, isLoop, classs).exp -> u.stm;
+                        stringLiterals -> tail = T_StmList(NULL, NULL);
+                        stringLiterals = stringLiterals -> tail;
+                        stringLiterals -> head = NULL;
+                        stringLiterals -> tail = NULL;
+                        exp = A_VarExp(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")));
                         expp = transExp(venv, tenv, exp, level, isLoop, classs);
                     }
                     if(expp.ty -> kind == Ty_array && expp.exp -> u.exp -> kind == T_loadExp)
@@ -1907,10 +1982,15 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         A_exp exp = NULL;
         struct expty expp;
         Ty_ty arrayType = NULL;
+        int arrayAddr = 0;
+        bool first = true;
         for(; explist; explist = explist -> tail, i++)
         {
             exp = explist -> head;
             expp = transExp(venv, tenv, exp, level, isLoop, classs);
+            if(first && expp.ty -> kind == Ty_name || expp.ty -> kind == Ty_poly){
+                arrayAddr = expp.exp -> u.exp -> u.constt.exp -> u.intt;
+            }
             // printf("%d kind\n", expp.ty -> kind);
             list -> head = expp.exp -> u.exp;
             if(arrayType && compType(arrayType, expp.ty))
@@ -1925,9 +2005,13 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             list = list -> tail;
             list -> head = NULL;
             list -> tail = NULL;
+            first = false;
         }
         // printf("testettsedtestest\n");
-        return expTy(Tr_ArrayExp(e -> pos, result), Ty_Array(arrayType, i));
+        if(arrayType -> kind == Ty_name || arrayType -> kind == Ty_poly){
+            return expTy(Tr_AddrExp(e -> pos, arrayAddr), Ty_Pointer(Ty_Array(arrayType, i)));
+        }
+        return expTy(Tr_ArrayExp(e -> pos, result), Ty_Pointer(Ty_Array(arrayType, i)));
     }
     case A_subscriptExp:
     {
@@ -2610,7 +2694,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                 list->head->escape = ESC_checkEscapeFromType(typeList->head);
                 if (typeList->head != NULL)
                     S_enter(venv, getName(list->head->var), E_VarEntry(accessList->head, typeList->head));
-                if(typeList -> head -> kind == Ty_name){
+                if(typeList -> head -> kind == Ty_name || typeList -> head -> kind == Ty_poly){
                     int addr = accessList -> head -> access -> u.offset + accessList -> head -> level -> frame -> offset;
                     T_stm assign = T_CopyStm(Tr_AddrExp(d -> pos, addr)->u.exp, T_GetLocalExp(T_i32, accessList -> head -> access -> paramIndex), Tr_AddrExp(d -> pos, accessList -> head -> access -> type -> size)->u.exp);
                     assignList -> head = assign;
@@ -2789,7 +2873,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         Ty_ty type = NULL;
         if(classs -> kind == Ty_poly)
         {
-            type = Ty_Poly(classs -> u.poly.name, classs -> u.poly.typeParam, classSize);
+            type = Ty_Poly(classs -> u.poly.name, classs -> u.poly.typeParam, classs ->u.poly.a_typeParam, classSize);
         }
         else
         {
@@ -2978,7 +3062,7 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
                 S_enter(templateEntry -> u.templatee.tenv, templateEntry -> u.templatee.name, E_PolyEntry(typeParam));
                 //translate the declaration using the type parameter
                 int temp = memorySize;
-                T_module dec = transDec(templateEntry -> u.templatee.venv, templateEntry -> u.templatee.tenv, templateEntry -> u.templatee.dec, Tr_outermost(), FALSE, templateEntry -> u.templatee.venv, Ty_Poly(ty -> u.poly.name, typeParam, 0));
+                T_module dec = transDec(templateEntry -> u.templatee.venv, templateEntry -> u.templatee.tenv, templateEntry -> u.templatee.dec, Tr_outermost(), FALSE, templateEntry -> u.templatee.venv, Ty_Poly(ty -> u.poly.name, typeParam, ty -> u.poly.typeParam, 0));
                 level -> frame -> frameSize += (memorySize - temp);
                 // E_enventry tempEntry = (E_enventry)S_look(templateEntry -> u.templatee.tenv, ty -> u.poly.name);
                 // S_enter(tenv, ty -> u.poly.name, tempEntry);
@@ -2993,7 +3077,7 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
                 // printf("%d classEntry check\n", classEntry);
             }
             classEntry = (E_enventry)TAB_search(templateEntry -> u.templatee.specific, typeParam);
-            return Ty_Poly(ty -> u.poly.name, typeParam, classEntry -> u.classs.size);
+            return Ty_Poly(ty -> u.poly.name, typeParam, ty -> u.poly.typeParam, classEntry -> u.classs.size);
         }
         else
             EM_error(ty -> pos, "noexist.template %s", ty -> u.poly.name);

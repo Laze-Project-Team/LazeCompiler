@@ -2,6 +2,7 @@
 
 std::string _mainFuncName = "";
 std::string _stringClassName = "";
+std::string _arrayTemplateName = "";
 std::string _counterName = "";
 
 // static std::string tokenNames[] = {"char","string","hex","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
@@ -1081,6 +1082,7 @@ void P_generateGrammarList(const std::string inputFname, grammarListTy &grammarL
     jInput >> j;
     _mainFuncName = j["tokens"]["main"].get<std::string>();
     _stringClassName = j["tokens"]["stringClass"].get<std::string>();
+    _arrayTemplateName = j["tokens"]["arrayTemplate"].get<std::string>();
     _counterName = j["tokens"]["counter"].get<std::string>();
     
     std::string tok;

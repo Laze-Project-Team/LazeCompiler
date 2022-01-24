@@ -9,6 +9,7 @@
 extern "C" {
 #endif
 #include "symbol.h"
+#include "absyn.h"
 
 typedef struct Ty_ty_ *Ty_ty;
 typedef struct Ty_tyList_ *Ty_tyList;
@@ -29,7 +30,7 @@ struct Ty_ty_ {
 		struct {S_symbol sym;} name;
 		//The type the pointer points to.
 	  	Ty_ty pointer;
-		struct {S_symbol name; Ty_ty typeParam;} poly;
+		struct {S_symbol name; Ty_ty typeParam; A_ty a_typeParam; } poly;
 		struct {Ty_tyList params; Ty_ty result; int typeIndex;} func;
 	} u;
 };
@@ -56,7 +57,7 @@ Ty_ty Ty_Record(Ty_fieldList fields);
 Ty_ty Ty_Array(Ty_ty ty, int size);
 Ty_ty Ty_Name(S_symbol sym, int classSize);
 Ty_ty Ty_Pointer(Ty_ty ty);
-Ty_ty Ty_Poly(S_symbol name, Ty_ty ty, int size);
+Ty_ty Ty_Poly(S_symbol name, Ty_ty ty, A_ty a_typeParam, int size);
 Ty_ty Ty_Func(Ty_tyList params, Ty_ty result, int funcIndex);
 
 Ty_tyList Ty_TyList(Ty_ty head, Ty_tyList tail);

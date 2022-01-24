@@ -667,10 +667,6 @@ ending here
 Declare class ${"ja":"スプライト", "natja":"スプライト", "en":"Sprite", "naten":"Sprite"}$ with members starting here
 public : 	Declare variable color as Vector3D . 
 	Declare variable pos as Vector2D . 
-	Declare variable 透明度 as double . 
-	Declare variable scaleX as double . 
-	Declare variable scaleY as double . 
-	Declare variable theta as double . 
 	Declare function Sprite that takes data as pointer of double , pnum as int , indicesData as pointer of short , vnum as int , c as Vector3D , p as Vector2D , s as int , zI as double with code starting here
 		Assign data to vertices . 
 		Assign pnum to pointNum . 
@@ -750,7 +746,7 @@ public : 	Declare variable color as Vector3D .
 	Declare function ${"ja":"角度設定", "natja":"角度設定", "en":"setAngle", "naten":"setAngle"}$ that takes t as double with code starting here
 		Assign t to theta . 
 	ending here 
-	Declare function ${"ja":"zIndex設定", "natja":"zIndex設定", "en":"setZIndex", "naten":"setZIndex"}$ that takes x as double with code starting here
+	Declare function ${"ja":"重なり順設定", "natja":"重なり順設定", "en":"setZIndex", "naten":"setZIndex"}$ that takes x as double with code starting here
 		Assign x to zIndex . 
 	ending here 
 	Declare function ${"ja":"透明度設定", "natja":"透明度設定", "en":"setTransparency", "naten":"setTransparency"}$ that takes x as double with code starting here
@@ -824,7 +820,7 @@ public : 	Declare variable color as Vector3D .
 		Initialize object temp as AnimationInfo with 0 , start , duration , theta , 0.0 . 
 		Call push of animations with value temp . 
 	ending here 
-	Declare function ${"ja":"拡大縮小設定", "natja":"拡大縮小設定", "en":"scaleAnimation", "naten":"scaleAnimation"}$ that takes x as double , y as double , start as double , duration as double with code starting here
+	Declare function ${"ja":"拡大縮小アニメーション", "natja":"拡大縮小アニメーション", "en":"scaleAnimation", "naten":"scaleAnimation"}$ that takes x as double , y as double , start as double , duration as double with code starting here
 		Initialize object temp as AnimationInfo with 1 , start , duration , x , y . 
 		Call push of animations with value temp . 
 	ending here 
@@ -853,6 +849,10 @@ private : 	Declare variable vertices as pointer of double .
 	Declare variable modelMatUniformLoc as short . 
 	Declare variable samplerUniformLoc as short . 
 	Declare variable animations as Array < AnimationInfo > . 
+	Declare variable 透明度 as double . 
+	Declare variable scaleX as double . 
+	Declare variable scaleY as double . 
+	Declare variable theta as double . 
 ending here 
 Declare class ${"ja":"シーン2D", "natja":"シーン2D", "en":"Scene2D", "naten":"Scene2D"}$ with members starting here
 public : 	Declare variable ${"ja":"スプライト配列", "natja":"スプライト配列", "en":"sprites", "naten":"sprites"}$ as Array < pointer of Sprite > . 

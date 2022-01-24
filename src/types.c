@@ -69,13 +69,14 @@ Ty_ty Ty_Pointer(Ty_ty ty)
   return p;
 }
 
-Ty_ty Ty_Poly(S_symbol name, Ty_ty typeParam, int size)
+Ty_ty Ty_Poly(S_symbol name, Ty_ty typeParam, A_ty a_typeParam, int size)
 {
   Ty_ty p = (Ty_ty)checked_malloc(sizeof(*p));
   p -> kind = Ty_poly;
   p -> size = size;
   p -> u.poly.name = name;
   p -> u.poly.typeParam = typeParam;
+  p -> u.poly.a_typeParam = a_typeParam;
   return p;
 }
 
