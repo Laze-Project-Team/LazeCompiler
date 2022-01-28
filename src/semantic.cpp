@@ -246,12 +246,12 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             struct expty assignExpty = transExp(venv, tenv, stm -> u.assign.exp, level, isLoop, classs);
                             if(compType(lhs, assignExpty.ty)){
                                 if(stm -> u.assign.exp -> kind == A_stringExp || stm -> u.assign.exp -> kind == A_arrayExp ){
-                                    std::cout << S_name(varExpty.ty -> u.poly.name) << std::endl;
+                                    // std::cout << S_name(varExpty.ty -> u.poly.name) << std::endl;
                                     T_stmList assignList = T_StmList(NULL, NULL);
                                     T_stmList result = assignList;
                                     int arrayAddr = memorySize;
                                     if(assignExpty.ty -> u.pointer -> u.array.type -> kind != Ty_name && assignExpty.ty -> u.pointer -> u.array.type -> kind != Ty_poly){
-                                        std::cout << assignExpty.ty -> u.pointer -> u.array.type -> kind << std::endl;
+                                        // std::cout << assignExpty.ty -> u.pointer -> u.array.type -> kind << std::endl;
                                         T_expList list = assignExpty.exp -> u.exp -> u.seq.list;
                                         for(int i = 0; i < assignExpty.ty -> u.pointer -> u.array.size; i++)
                                         {
