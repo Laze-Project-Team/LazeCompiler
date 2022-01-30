@@ -67,7 +67,7 @@ Tr_exp Tr_ForStm(A_pos pos, T_stm assign, T_exp condition, T_stm increment, T_st
 Tr_exp Tr_BreakStm(A_pos pos, int depth);
 Tr_exp Tr_ContinueStm(A_pos pos);
 Tr_exp Tr_CompoundStm(A_pos pos, T_stmList stmlist);
-Tr_exp Tr_CallStm(A_pos pos, int index, string func, T_expList args);
+Tr_exp Tr_CallStm(A_pos pos, int index, string func, T_expList args, T_type ty);
 Tr_exp Tr_ReturnStm(A_pos pos, T_exp exp);
 Tr_exp Tr_LoopStm(A_pos pos);
 Tr_exp Tr_MemCopyStm(A_pos pos, T_exp dest, T_exp src, int size);

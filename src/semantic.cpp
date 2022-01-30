@@ -3,6 +3,7 @@
 #include "semantic.hpp"
 
 extern int funcs;
+int importDoneIndex;
 extern int memorySize;
 extern std::string _mainFuncName;
 extern std::string _stringClassName;
@@ -26,6 +27,8 @@ static T_stmList loopVarsStart = NULL;
 static T_stmList loopVarsEnd = NULL;
 static T_stmList stringLiterals = NULL;
 static T_stmList stringLiteralsResult = NULL;
+static T_stmList stmListNow = NULL;
+static T_stmList stmListResult = NULL;
 
 struct expty expTy(Tr_exp exp, Ty_ty ty)
 {
@@ -93,8 +96,6 @@ T_moduleList SEM_transProg(A_decList declist)
     list->head = T_ImportMod("js", "mem", T_MemMod(100));
     list->tail = T_ModuleList(NULL, NULL);
     list = list->tail;
-    list->head = NULL;
-    list->tail = NULL;
     int importDone = 0;
     for (; decList != NULL; decList = decList->tail)
     {
@@ -107,14 +108,6 @@ T_moduleList SEM_transProg(A_decList declist)
         T_module decMod = transDec(venv, tenv, dec, Tr_outermost(), FALSE, venv, Ty_Void());
         if (decMod)
         {
-            if(!importDone){
-                if(decMod -> kind != T_import){
-                    importDone = 1;
-                }
-            }
-            if(importDone && decMod -> kind == T_import){
-                EM_error(dec -> pos, "code.import");
-            }
             if (decMod->kind == T_func)
             {
                 if (strcmp(decMod->u.func->name, "main") == 0)
@@ -131,6 +124,27 @@ T_moduleList SEM_transProg(A_decList declist)
             list = list->tail;
             list->head = NULL;
             list->tail = NULL;
+            if(!importDone){
+                if(decMod -> kind != T_import){
+                    importDoneIndex = funcs;
+                    list->head = T_FuncMod(T_Fundec(T_TypeList(T_i32, T_TypeList(T_none, NULL)), T_TypeList(T_none, NULL), T_none, NULL, "", funcs, NULL));
+                    list -> tail = T_ModuleList(NULL, NULL);
+                    list = list -> tail;
+                    funcs += 1;
+                    list->head = T_FuncMod(T_Fundec(T_TypeList(T_i64, T_TypeList(T_none, NULL)), T_TypeList(T_none, NULL), T_none, NULL, "", funcs, NULL));
+                    list -> tail = T_ModuleList(NULL, NULL);
+                    list = list -> tail;
+                    funcs += 1;
+                    list->head = T_FuncMod(T_Fundec(T_TypeList(T_f64, T_TypeList(T_none, NULL)), T_TypeList(T_none, NULL), T_none, NULL, "", funcs, NULL));
+                    list -> tail = T_ModuleList(NULL, NULL);
+                    list = list -> tail;
+                    funcs += 1;
+                    importDone = 1;
+                }
+            }
+            if(importDone && decMod -> kind == T_import){
+                EM_error(dec -> pos, "code.import");
+            }
         }
     }
     if(!mainFunc){
@@ -180,7 +194,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
         case A_compoundStm:
         {
             //debug(stm->pos, "Compound Statement");
-            A_stmList stmlist;
+            A_stmList stmlist = A_StmList(NULL, NULL);
             T_stmList list = T_StmList(NULL, NULL);
             T_stmList result = list;
             list->head = NULL;
@@ -194,7 +208,16 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                 {
                     A_stm stmHead = stmlist->head;
                     // printf("%d stmHead\n", stmHead->kind);
+                    stmListNow = T_StmList(NULL, NULL);
+                    stmListResult = stmListNow;
                     struct expty exp = transStm(venv, tenv, stmHead, level, isLoop, classs);
+                    if(stmListResult -> head){
+                        std::cout << "aaaaaa" << std::endl;
+                        list -> head = T_SeqStm(stmListResult);
+                        list->tail = T_StmList(NULL, NULL);
+                        list = list->tail;
+                    }
+                    // list = stmListNow;
                   //printf("hey %d\n", exp.exp -> kind);
                     if (exp.exp->kind == Tr_t_stm)
                     {
@@ -1031,8 +1054,8 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         S_enter(venv, name, templateTemp);
                     }
                     if (entry->u.func.result)
-                        return expTy(Tr_CallStm(stm->pos, entry->u.func.index, S_name(entry->u.func.label), result), entry->u.func.returnType);
-                    return expTy(Tr_CallStm(stm->pos, entry->u.func.index, S_name(entry->u.func.label), result), Ty_Void());
+                        return expTy(Tr_CallStm(stm->pos, entry->u.func.index, S_name(entry->u.func.label), result, convertType(entry->u.func.returnType)), entry->u.func.returnType);
+                    return expTy(Tr_CallStm(stm->pos, entry->u.func.index, S_name(entry->u.func.label), result, convertType(entry->u.func.returnType)), Ty_Void());
                 }
                 else if(entry != NULL && entry -> kind == E_varentry && entry -> u.var.ty -> kind == Ty_func)
                 {
@@ -1062,7 +1085,6 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             {
                                 expList -> head = convertAssign(type, argType, exp -> pos);
                             }
-
                         }
                         else
                         {
@@ -1628,11 +1650,12 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                         else{
                             classEntry = (E_enventry)S_look(tenv, name);
                             if(classEntry){
-                                stringLiterals -> head = transStm(venv, tenv, A_DeclarationStm(e -> pos, A_ObjectDec(e -> pos, A_NameTy(e -> pos, name), S_Symbol("__object_literal"), e -> u.call.args)), level, isLoop, classs).exp -> u.stm;
-                                stringLiterals -> tail = T_StmList(NULL, NULL);
-                                stringLiterals = stringLiterals -> tail;
-                                stringLiterals -> head = NULL;
-                                stringLiterals -> tail = NULL;
+                                std::cout << "aaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
+                                stmListNow -> head = transStm(venv, tenv, A_DeclarationStm(e -> pos, A_ObjectDec(e -> pos, A_NameTy(e -> pos, name), S_Symbol("__object_literal"), e -> u.call.args)), level, isLoop, classs).exp -> u.stm;
+                                stmListNow -> tail = T_StmList(NULL, NULL);
+                                stmListNow = stmListNow -> tail;
+                                stmListNow -> head = NULL;
+                                stmListNow -> tail = NULL;
                                 return transExp(venv, tenv, A_VarExp(e -> pos, A_SimpleVar(e -> pos, S_Symbol("__object_literal"))), level, isLoop, classs);
                             }
                         }

@@ -3,6 +3,8 @@
 #include "string.h"
 #define LAZEMAIN "placeholder"
 
+extern int importDoneIndex;
+
 static Tr_access newAccess(Tr_level level, F_access access)
 {
     Tr_access retValue = (Tr_access)checked_malloc(sizeof(*retValue));
@@ -185,12 +187,21 @@ Tr_exp Tr_CompoundStm(A_pos pos, T_stmList stmlist)
     return p;
 }
 // Tr_exp Tr_DeclarationStm(A_pos pos, A_dec dec);
-Tr_exp Tr_CallStm(A_pos pos, int index, string func, T_expList args)
+Tr_exp Tr_CallStm(A_pos pos, int index, string func, T_expList args, T_type ty)
 {
     // printf("Tr_CallStm %d\n", index);
     Tr_exp p = (Tr_exp)checked_malloc(sizeof(*p));
     p -> kind = Tr_t_stm;
     p -> u.stm = T_CallStm(index, func, args);
+    if(ty == T_i32){
+        p -> u.stm = T_CallStm(importDoneIndex, "", T_ExpList(T_CallExp(ty, index, func, args), T_ExpList(NULL, NULL)));
+    }
+    if(ty == T_i64){
+        p -> u.stm = T_CallStm(importDoneIndex + 1, "", T_ExpList(T_CallExp(ty, index, func, args), T_ExpList(NULL, NULL)));
+    }
+    if(ty == T_f64){
+        p -> u.stm = T_CallStm(importDoneIndex + 2, "", T_ExpList(T_CallExp(ty, index, func, args), T_ExpList(NULL, NULL)));
+    }
     return p;
 }
 Tr_exp Tr_ReturnStm(A_pos pos, T_exp exp)
