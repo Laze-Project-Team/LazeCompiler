@@ -204,7 +204,11 @@
                 "normal":"Declare function id that takes fieldlist(params) and returns fieldlist(result) with code stm",
                 "noparam":"Declare function id that returns fieldlist(result) with code stm",
                 "noresult":"Declare function id that takes fieldlist(params) with code stm",
-                "noparamnoresult":"Declare function id with code stm"
+                "noparamnoresult":"Declare function id with code stm",
+                "prototype":"Declare function id that takes fieldlist(params) and returns fieldlist(result) .",
+                "prototypenoparam":"Declare function id that returns fieldlist(result) .",
+                "prototypenoresult":"Declare function id that takes fieldlist(params) .",
+                "prototypenoparamnoresult":"Declare function id ."
             },
             "jsload": {
                 "normal":"Load function id from string(func) of string(module) that takes fieldlist(params) and returns fieldlist(result) .",
@@ -283,6 +287,7 @@
             "declist":"dec declist"
         },
         "fieldlist":{
+            "null":"",
             "field":"field",
             "fieldlist":"field , fieldlist"
         }
@@ -358,7 +363,8 @@
             "few":"This function call lacks arguments.",
             "many":"There are too many arguments in this function call.",
             "cannotcall":"This function cannot be called.",
-            "unknownfield":"Change this argument into a variable or an array."
+            "unknownfield":"Change this argument into a variable or an array.",
+            "notdefined":"Function $1 is declared but not defined."
         },
         "class":{
             "private":"Since $1 is a private member, you cannot access it outside the class.",

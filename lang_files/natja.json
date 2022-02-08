@@ -46,6 +46,7 @@
       {"name":"という", "value": "という"},
       {"name":"おく", "value": "おく"},
       {"name":"代入する", "value": "代入する"},
+      {"name":"宣言する", "value": "宣言する"},
       {"name":"足す", "value": "足す"},
       {"name":"引く", "value": "引く"},
       {"name":"かける", "value": "かける"},
@@ -188,7 +189,11 @@
         "normal":"( fieldlist(params) ) を とり ( fieldlist(result) ) を 返す id という function を おく 。 stm",
         "noparam":"( fieldlist(result) ) を 返す id という function を おく 。 stm",
         "noresult":"( fieldlist(params) ) を とり id という function を おく 。 stm",
-        "noparamnoresult":"function id を おく 。 stm"
+        "noparamnoresult":"function id を おく 。 stm",
+        "prototype":"( fieldlist(params) ) を とり ( fieldlist(result) ) を 返す id という function を 宣言する 。",
+        "prototypenoparam":"( fieldlist(result) ) を 返す id という function を 宣言する 。",
+        "prototypenoresult":"( fieldlist(params) ) を とり id という function を 宣言する 。",
+        "prototypenoparamnoresult":"function id を 宣言する 。"
       },
       "jsload": {
         "normal":"( fieldlist(params) ) を とり ( fieldlist(result) ) を 返す id という function を ( string(module) , string(func) ) から 読み込む 。",
@@ -343,7 +348,8 @@
           "few":"関数の引数が足りません。",
           "many":"関数の引数が多いです。",
           "cannotcall":"この関数は呼べません。",
-          "unknownfield":"この引数は変数か配列の形に直してください。"
+          "unknownfield":"この引数は変数か配列の形に直してください。",
+          "notdefined":"$1という関数は宣言されただけで定義されていません。"
       },
       "class":{
           "private":"$1は非公開メンバーなので、クラス外からアクセスできません。",

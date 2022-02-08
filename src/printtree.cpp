@@ -2,6 +2,7 @@
 #include <string.h>
 
 extern int memorySize;
+extern std::map<int, int> prototypeDecs;
 
 void Pr_printTree(T_moduleList list, string fileName)
 {
@@ -200,7 +201,16 @@ void Pr_printStm(T_stm stm, FILE *file)
         case T_callStm:
         {
             // printf("%d index\n", stm -> u.call.index);
-            fprintf(file, "(call %d", stm -> u.call.index);
+            int index = stm -> u.call.index;
+            if(index < 0){
+                if(prototypeDecs.find(stm -> u.call.index) != prototypeDecs.end()){
+                    index = prototypeDecs.find(stm -> u.call.index) -> second;
+                }
+                else{
+                    EM_error(0, "func.notdefined %s", stm -> u.call.label);
+                }
+            }
+            fprintf(file, "(call %d", index);
             T_expList list = stm -> u.call.args;
             for(; list -> tail!= NULL; list = list -> tail)
             {
@@ -419,7 +429,19 @@ void Pr_printExp(T_exp exp, FILE *file)
             Pr_printExp(exp -> u.load.addr, file);
             fprintf(file, ")");
             break;
-        }  
+        }
+        case T_callIndirectExp:
+        {
+            fprintf(file, "(call_indirect (type %d)", exp -> u.callIndirect.typeIndex);
+            T_expList list = exp -> u.callIndirect.args;
+            for(; list -> tail!= NULL; list = list -> tail)
+            {
+                Pr_printExp(list -> head, file);
+            }
+            Pr_printExp(exp -> u.callIndirect.index, file);
+            fprintf(file, ")");
+            break;
+        }
     }
 }
 void Pr_printFundec(T_fundec fundec, FILE *file)

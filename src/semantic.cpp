@@ -2,6 +2,7 @@
 #include <string.h>
 #include "semantic.hpp"
 
+std::map<int, int> prototypeDecs;
 extern int funcs;
 int importDoneIndex;
 extern int memorySize;
@@ -51,17 +52,17 @@ void copyTable(S_symbol sym, void *binding){
 }
 void printAll(S_symbol sym, void *binding)
 {
-  //printf("%s printf all\n", S_name(sym));
+    printf("%s printf all\n", S_name(sym));
 }
-static Ty_ty actual_ty(Ty_ty ty);
+static Ty_ty actual_ty(S_table tenv, Ty_ty ty);
 static Ty_tyList makeParamTypeList(S_table venv, S_table tenv, A_fieldList params, Tr_level level);
 static Ty_ty checkSymType(S_symbol sym);
 static S_symbol returnSymFromType(Ty_ty);
 static U_boolList makeEscapeList(A_fieldList list);
 static T_type convertType(Ty_ty type);
 static T_typeList convertAllType(Ty_tyList types);
-static bool compType(Ty_ty lhs, Ty_ty rhs);
-static T_exp convertAssign(Ty_ty type, struct expty exp, int pos);
+static bool compType(S_table tenv, Ty_ty lhs, Ty_ty rhs);
+static T_exp convertAssign(S_table tenv, Ty_ty type, struct expty exp, int pos);
 static A_ty reverseArrayTy(A_ty type);
 static A_var reverseSubVar(A_var var);
 static A_classMemberList flipClassMemberList(A_classMemberList list);
@@ -212,7 +213,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     stmListResult = stmListNow;
                     struct expty exp = transStm(venv, tenv, stmHead, level, isLoop, classs);
                     if(stmListResult -> head){
-                        std::cout << "aaaaaa" << std::endl;
+                        // std::cout << "aaaaaa" << std::endl;
                         list -> head = T_SeqStm(stmListResult);
                         list->tail = T_StmList(NULL, NULL);
                         list = list->tail;
@@ -263,11 +264,45 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             }
                         }
                     }
+                    if(funcEntry && funcEntry -> kind == E_listEntry){
+                        for(const auto &entries: *(funcEntry -> u.list)){
+                            if(entries -> kind == E_funcentry && entries -> u.func.prototype == FALSE){
+                                if(entries -> u.func.formals -> head != NULL){
+                                    Ty_ty paramType = entries -> u.func.formals -> head;
+                                    A_exp exp = stm -> u.assign.exp;
+                                    Ty_ty argType = transExp(venv, tenv, exp, level, isLoop, classs).ty;
+                                    if(compType(tenv, paramType, argType)){
+                                        funcEntry = entries;
+                                        break;
+                                    }
+                                    else if(exp -> kind == A_stringExp && paramType -> kind == Ty_name){
+                                        if(strcmp(_stringClassName.c_str(), S_name(paramType -> u.name.sym)) == 0){
+                                            funcEntry = entries;
+                                            break;
+                                        }
+                                    }
+                                    else if(exp -> kind == A_arrayExp && paramType -> kind == Ty_poly){
+                                        if(strcmp(_arrayTemplateName.c_str(), S_name(paramType -> u.name.sym)) == 0){
+                                            if(compType(tenv, argType -> u.pointer -> u.array.type, paramType -> u.poly.typeParam)){
+                                                std::cout << S_name(paramType -> u.poly.typeParam -> u.name.sym) << S_name(varExpty.ty -> u.poly.name) << L_getErrorPos(stm -> pos).lineNum << " " << L_getErrorPos(stm -> pos).columnNum << std::endl;
+                                                funcEntry = entries;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        funcEntry = NULL;
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     if(funcEntry){
                         if(funcEntry -> u.func.formals -> head){
                             Ty_ty lhs = funcEntry -> u.func.formals -> head;
                             struct expty assignExpty = transExp(venv, tenv, stm -> u.assign.exp, level, isLoop, classs);
-                            if(compType(lhs, assignExpty.ty)){
+                            if(compType(tenv, lhs, assignExpty.ty)){
                                 if(stm -> u.assign.exp -> kind == A_stringExp || stm -> u.assign.exp -> kind == A_arrayExp ){
                                     // std::cout << S_name(varExpty.ty -> u.poly.name) << std::endl;
                                     T_stmList assignList = T_StmList(NULL, NULL);
@@ -382,7 +417,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     struct expty assignExpty = transExp(venv, tenv, stm->u.assign.exp, level, isLoop, classs);
                     if((varExp.ty -> kind == Ty_name && assignExpty.ty -> kind == Ty_name) || (varExp.ty -> kind == Ty_poly && assignExpty.ty -> kind == Ty_poly))
                     {
-                        if(compType(varExp.ty, assignExpty.ty))
+                        if(compType(tenv, varExp.ty, assignExpty.ty))
                         {
                             if(assignExpty.exp -> u.exp -> kind == T_loadExp)
                                 return expTy(Tr_MemCopyStm(stm -> pos, varExp.exp -> u.exp, assignExpty.exp -> u.exp -> u.load.addr, varExp.ty -> size), Ty_Void());
@@ -407,9 +442,9 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             EM_error(stm -> pos, "type.nomatch %s %s", S_name(varExpName), S_name(assignExpName));
                         }
                     }
-                    if(!compType(varExp.ty, assignExpty.ty))
+                    if(!compType(tenv, varExp.ty, assignExpty.ty))
                     {
-                        return expTy(Tr_AddrAssignStm(stm -> pos, varExp.exp -> u.exp, convertAssign(varExp.ty, assignExpty, stm -> pos)), Ty_Void());
+                        return expTy(Tr_AddrAssignStm(stm -> pos, varExp.exp -> u.exp, convertAssign(tenv, varExp.ty, assignExpty, stm -> pos)), Ty_Void());
                     }
                     return expTy(Tr_AddrAssignStm(stm->pos, varExp.exp->u.exp, assignExpty.exp->u.exp), Ty_Void());
                 }
@@ -525,7 +560,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         struct expty varExpty = transVar(venv, tenv, var, level, isLoop, FALSE, stm -> u.assign.isDec, classs);
                         if((varExpty.ty -> kind == Ty_name && assignVal.ty -> kind == Ty_name) || (varExpty.ty -> kind == Ty_poly && assignVal.ty -> kind == Ty_poly))
                         {
-                            if(compType(varExpty.ty, assignVal.ty))
+                            if(compType(tenv, varExpty.ty, assignVal.ty))
                             {
                                 if(assignVal.exp -> u.exp -> kind == T_loadExp)
                                     return expTy(Tr_MemCopyStm(stm -> pos, varExpty.exp -> u.exp, assignVal.exp -> u.exp -> u.load.addr, varExpty.ty -> size), Ty_Void());
@@ -550,13 +585,13 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                                 EM_error(stm -> pos, "type.nomatch %s %s", S_name(varExpName), S_name(assignExpName));
                             }
                         }
-                        if (!compType(varExpty.ty, assignVal.ty))
+                        if (!compType(tenv, varExpty.ty, assignVal.ty))
                         {
                             if(varType){
-                                return expTy(Tr_AssignStm(stm -> pos, varType -> u.var.access, convertAssign(varType -> u.var.ty, assignVal, exp -> pos)), Ty_Void());
+                                return expTy(Tr_AssignStm(stm -> pos, varType -> u.var.access, convertAssign(tenv, varType -> u.var.ty, assignVal, exp -> pos)), Ty_Void());
                             }
                             else{
-                                return expTy(Tr_AddrAssignStm(stm -> pos, varExpty.exp->u.exp->u.load.addr, convertAssign(varExpty.ty, assignVal, exp -> pos)), Ty_Void());
+                                return expTy(Tr_AddrAssignStm(stm -> pos, varExpty.exp->u.exp->u.load.addr, convertAssign(tenv, varExpty.ty, assignVal, exp -> pos)), Ty_Void());
                             }
                         }
                         if(varExpty.ty -> kind == Ty_name)
@@ -597,12 +632,26 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             {
                 Ty_ty varDecType = transTy(venv, tenv, stm -> u.declaration.dec -> u.var.typ, level);
                 if((varDecType -> kind == Ty_name || varDecType -> kind == Ty_poly) && stm -> u.declaration.dec -> u.var.var -> kind == A_simpleVar && !(stm -> u.declaration.dec -> u.var.init)){
-                    // std::cout << S_name(stm -> u.declaration.dec -> u.var.var -> u.simple) << std::endl;
                     A_stm newStm = A_DeclarationStm(stm -> pos, A_ObjectDec(stm -> pos, stm -> u.declaration.dec -> u.var.typ, 
                     stm -> u.declaration.dec -> u.var.var -> u.simple, A_ExpList(NULL, NULL)));
                     exp = transStm(venv, tenv, newStm, level, isLoop, classs);
                     return exp;
                 }
+                // else if((varDecType -> kind == Ty_name || varDecType -> kind == Ty_poly) && stm -> u.declaration.dec -> u.var.var -> kind == A_simpleVar && (stm -> u.declaration.dec -> u.var.init)){
+                //     // std::cout << S_name(stm -> u.declaration.dec -> u.var.var -> u.simple) << std::endl;
+                //     A_stm newStm = A_DeclarationStm(stm -> pos, A_ObjectDec(stm -> pos, stm -> u.declaration.dec -> u.var.typ, 
+                //     stm -> u.declaration.dec -> u.var.var -> u.simple, A_ExpList(NULL, NULL)));
+                //     T_stmList stmList = T_StmList(NULL, NULL);
+                //     T_stmList stmListResult = stmList;
+                //     // std::cout << S_name(varDecType -> u.name.sym) << std::endl;
+                //     stmList -> head = transStm(venv, tenv, newStm, level, isLoop, classs).exp -> u.stm;
+                //     stmList -> tail = T_StmList(NULL, NULL);
+                //     stmList = stmList -> tail;
+                //     stmList -> head = transStm(venv, tenv, A_AssignStm(stm->pos, stm->u.declaration.dec->u.var.var, stm->u.declaration.dec->u.var.init, TRUE), level, FALSE, classs).exp -> u.stm;
+                //     stmList -> tail = T_StmList(NULL, NULL);
+                //     stmList = stmList -> tail;
+                //     return expTy(Tr_CompoundStm(stm -> pos, stmListResult), Ty_Void());
+                // }
                 T_module dec = transDec(venv, tenv, stm->u.declaration.dec, level, isLoop, venv, Ty_Void());
                 if(stm -> u.declaration.dec -> u.var.init)
                     exp = transStm(venv, tenv, A_AssignStm(stm->pos, stm->u.declaration.dec->u.var.var, stm->u.declaration.dec->u.var.init, TRUE), level, FALSE, classs);
@@ -730,6 +779,10 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             if(classs -> kind == Ty_name){
                                 classEntry = (E_enventry)S_look(tenv, classs -> u.name.sym);
                             }
+                            else if(classs -> kind == Ty_poly){
+                                classEntry = (E_enventry)S_look(tenv, classs -> u.poly.name);
+                                classEntry = (E_enventry)TAB_search(classEntry -> u.templatee.specific, classs -> u.poly.typeParam);
+                            }
                             if(classEntry){
                                 isCalledInMethod = TRUE;
                                 entry = (E_enventry)S_look(classEntry -> u.classs.methods, var -> u.simple);
@@ -855,23 +908,23 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                 }
                 if(entry != NULL && entry -> kind == E_listEntry && entry -> u.list -> size() > 0){
                     for(const auto &entries: *(entry -> u.list)){
-                        if(entries -> kind == E_funcentry){
+                        if(entries -> kind == E_funcentry && entries -> u.func.prototype == FALSE){
                             Ty_tyList paramType = entries -> u.func.formals;
                             A_expList args = stm -> u.call.args;
                             bool functionOk = true;
                             for(;args && paramType; paramType = paramType -> tail, args = args -> tail){
                                 if (args -> head == NULL && paramType -> head != NULL)
                                 {
-                                    EM_error(stm->pos, "func.few");
+                                    functionOk = false;
                                     break;
                                 }
                                 else if (args -> head != NULL && paramType -> head == NULL)
                                 {
-                                    EM_error(stm->pos, "func.many");
+                                    functionOk = false;
                                     break;
                                 }
                                 Ty_ty argType = transExp(venv, tenv, args -> head, level, isLoop, classs).ty;
-                                if(compType(paramType -> head, argType)){
+                                if(compType(tenv, paramType -> head, argType)){
                                     continue;
                                 }
                                 else if(args -> head -> kind == A_stringExp && paramType -> head -> kind == Ty_name){
@@ -881,7 +934,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                                 }
                                 else if(args -> head -> kind == A_arrayExp && paramType -> head -> kind == Ty_poly){
                                     if(strcmp(_arrayTemplateName.c_str(), S_name(paramType -> head -> u.name.sym)) == 0){
-                                        if(compType(argType -> u.array.type, paramType -> head -> u.poly.typeParam)){
+                                        if(compType(tenv, argType -> u.pointer -> u.array.type, paramType -> head -> u.poly.typeParam)){
                                             continue;
                                         }
                                     }
@@ -984,11 +1037,11 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                             expp = transExp(venv, tenv, exp, level, isLoop, classs);
                         }
                         if(exp -> kind == A_arrayExp && type -> kind == Ty_poly && strcmp(S_name(type -> u.poly.name), _arrayTemplateName.c_str()) == 0){
-                            stringLiterals -> head = transStm(venv, tenv, A_DeclarationStm(exp -> pos, A_VarDec(exp -> pos, A_AssignStm(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")), exp, TRUE), A_PolyTy(exp -> pos, type -> u.poly.name, type -> u.poly.a_typeParam))), level, isLoop, classs).exp -> u.stm;
-                            stringLiterals -> tail = T_StmList(NULL, NULL);
-                            stringLiterals = stringLiterals -> tail;
-                            stringLiterals -> head = NULL;
-                            stringLiterals -> tail = NULL;
+                            stmListNow -> head = transStm(venv, tenv, A_DeclarationStm(exp -> pos, A_VarDec(exp -> pos, A_AssignStm(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")), exp, TRUE), A_PolyTy(exp -> pos, type -> u.poly.name, type -> u.poly.a_typeParam))), level, isLoop, classs).exp -> u.stm;
+                            stmListNow -> tail = T_StmList(NULL, NULL);
+                            stmListNow = stmListNow -> tail;
+                            stmListNow -> head = NULL;
+                            stmListNow -> tail = NULL;
                             exp = A_VarExp(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")));
                             expp = transExp(venv, tenv, exp, level, isLoop, classs);
                         }
@@ -1004,9 +1057,9 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         if (exp != NULL && type != NULL)
                         {
                           //printf("argType.ty -> kind %d\n", type -> kind);
-                            if (!compType(type, expp.ty))
+                            if (!compType(tenv, type, expp.ty))
                             {
-                                expList -> head = convertAssign(type, expp, exp -> pos);
+                                expList -> head = convertAssign(tenv, type, expp, exp -> pos);
                             }
                         }
                         expList = expList->tail;
@@ -1081,9 +1134,9 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                         {
                             struct expty argType = transExp(venv, tenv, exp, level, isLoop, classs);
                           //printf("argType.ty -> kind %d\n", type -> kind);
-                            if (!compType(type, argType.ty))
+                            if (!compType(tenv, type, argType.ty))
                             {
-                                expList -> head = convertAssign(type, argType, exp -> pos);
+                                expList -> head = convertAssign(tenv, type, argType, exp -> pos);
                             }
                         }
                         else
@@ -1135,11 +1188,16 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                 Temp_label label = level->label;
                 E_enventry func = (E_enventry)S_look(venv, label);
                 // printf("%s\n", S_name(label));
-                if (func->kind == E_funcentry)
-                    if (func->u.func.result)
+                if (func->kind == E_funcentry){
+                    if (func->u.func.result){
+                        if(func -> u.func.returnType -> kind == Ty_name || func -> u.func.returnType -> kind == Ty_poly){
+                            return expTy(Tr_ReturnStm(stm->pos, Tr_VarExp(stm->pos, convertType(func->u.func.result->access->type), func->u.func.result, FALSE, TRUE)->u.exp), Ty_Void());
+                        }
                         return expTy(Tr_ReturnStm(stm->pos, Tr_VarExp(stm->pos, convertType(func->u.func.result->access->type), func->u.func.result, FALSE, FALSE)->u.exp), Ty_Void());
+                    }
                     else
                         return expTy(Tr_ReturnStm(stm->pos, NULL), Ty_Void());
+                }
             }
         }
         }
@@ -1206,9 +1264,9 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                     else
                     {
                         if (x->u.var.access->level->parent)
-                            return expTy(Tr_VarExp(v->pos, convertType(x->u.var.ty), x->u.var.access, FALSE, FALSE), actual_ty(x->u.var.ty));
+                            return expTy(Tr_VarExp(v->pos, convertType(x->u.var.ty), x->u.var.access, FALSE, FALSE), actual_ty(tenv, x->u.var.ty));
                         else
-                            return expTy(Tr_VarExp(v->pos, convertType(x->u.var.ty), x->u.var.access, TRUE, FALSE), actual_ty(x->u.var.ty));
+                            return expTy(Tr_VarExp(v->pos, convertType(x->u.var.ty), x->u.var.access, TRUE, FALSE), actual_ty(tenv, x->u.var.ty));
                     }
                     ////////asssiiiiiiiiiiiign to memorryyyyyyyy
                     
@@ -1374,9 +1432,9 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
     {
         if(depth == 0)
             v = reverseSubVar(v);
-        // printf("%s name\n", S_name(v -> u.subscript.name));
         struct expty varExpty;
         if(v -> u.subscript.var -> kind== A_simpleVar){
+            // printf("%s name %d\n", S_name(v -> u.subscript.name), v -> u.subscript.var -> kind);
             varExpty = transVar(venv, tenv, v -> u.subscript.var, level, isLoop, reverse, isDec, classs);
         }
         else if(v -> u.subscript.var -> kind == A_subscriptVar){
@@ -1438,7 +1496,6 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
             }
             else
             {
-                // printf("632 %d\n", entry -> u.var.ty -> kind);
                 EM_error(v->pos, "type.notarray %s", S_name(getName(v)));
             }
         }
@@ -1469,7 +1526,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
     {
         Ty_ty type1 = transTy(venv, tenv, e -> u.typeeq.type1, level);
         Ty_ty type2 = transTy(venv, tenv, e -> u.typeeq.type2, level);
-        return expTy(Tr_BoolExp(e -> pos, compType(type1, type2)), Ty_Bool());
+        return expTy(Tr_BoolExp(e -> pos, compType(tenv, type1, type2)), Ty_Bool());
     }
     case A_addrExp:
     {
@@ -1543,12 +1600,15 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             struct expty var = transVar(venv, tenv, e->u.var, level, isLoop, FALSE, FALSE, classs);
             if(var.ty -> kind == Ty_name || var.ty -> kind == Ty_array || var.ty -> kind == Ty_poly)
                 return var;
-            return expTy(Tr_DerefExp(e->pos, var.exp->u.exp, convertType(actual_ty(var.ty))), var.ty);
+            return expTy(Tr_DerefExp(e->pos, var.exp->u.exp, convertType(actual_ty(tenv, var.ty))), var.ty);
         }
         else if(e -> u.var -> kind == A_subscriptVar)
         {
             struct expty var = transVar(venv, tenv, e->u.var, level, isLoop, FALSE, FALSE, classs);
-            return expTy(Tr_DerefExp(e->pos, var.exp->u.exp, convertType(actual_ty(var.ty))), var.ty);
+            if(var.ty -> kind == Ty_name || var.ty -> kind == Ty_poly){
+                return var;
+            }
+            return expTy(Tr_DerefExp(e->pos, var.exp->u.exp, convertType(actual_ty(tenv, var.ty))), var.ty);
         }
         else if(e -> u.var -> kind == A_fieldVar || e -> u.var -> kind == A_arrowFieldVar)
         {
@@ -1563,7 +1623,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
     case A_derefExp:
     {
         E_enventry entry = (E_enventry)S_look(venv, e->u.deref->u.simple);
-        return expTy(Tr_DerefExp(e->pos, Tr_VarExp(e->pos, T_i32, entry->u.var.access, !(entry->u.var.access->level->parent), FALSE)->u.exp, convertType(actual_ty(entry->u.var.ty))), transVar(venv, tenv, e->u.deref, level, isLoop, FALSE, FALSE, classs).ty);
+        return expTy(Tr_DerefExp(e->pos, Tr_VarExp(e->pos, T_i32, entry->u.var.access, !(entry->u.var.access->level->parent), FALSE)->u.exp, convertType(actual_ty(tenv, entry->u.var.ty))), transVar(venv, tenv, e->u.deref, level, isLoop, FALSE, FALSE, classs).ty);
         break;
     }
     case A_addressExp:
@@ -1643,6 +1703,10 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                         if(classs -> kind == Ty_name){
                             classEntry = (E_enventry)S_look(tenv, classs -> u.name.sym);
                         }
+                        else if(classs -> kind == Ty_poly){
+                            classEntry = (E_enventry)S_look(tenv, classs -> u.poly.name);
+                            classEntry = (E_enventry)TAB_search(classEntry -> u.templatee.specific, classs -> u.poly.typeParam);
+                        }
                         if(classEntry){
                             entry = (E_enventry)S_look(classEntry -> u.classs.methods, var -> u.simple);
                             isCalledInMethod = TRUE;
@@ -1650,7 +1714,6 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                         else{
                             classEntry = (E_enventry)S_look(tenv, name);
                             if(classEntry){
-                                std::cout << "aaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
                                 stmListNow -> head = transStm(venv, tenv, A_DeclarationStm(e -> pos, A_ObjectDec(e -> pos, A_NameTy(e -> pos, name), S_Symbol("__object_literal"), e -> u.call.args)), level, isLoop, classs).exp -> u.stm;
                                 stmListNow -> tail = T_StmList(NULL, NULL);
                                 stmListNow = stmListNow -> tail;
@@ -1763,23 +1826,23 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             T_expList result = expList;
             if(entry != NULL && entry -> kind == E_listEntry && entry -> u.list -> size() > 0){
                 for(const auto &entries: *(entry -> u.list)){
-                    if(entries -> kind == E_funcentry){
+                    if(entries -> kind == E_funcentry && entries -> u.func.prototype == FALSE){
                         Ty_tyList paramType = entries -> u.func.formals;
                         A_expList args = e -> u.call.args;
                         bool functionOk = true;
                         for(;args && paramType; paramType = paramType -> tail, args = args -> tail){
                             if (args -> head == NULL && paramType -> head != NULL)
                             {
-                                EM_error(e->pos, "func.few");
+                                functionOk = false;
                                 break;
                             }
                             else if (args -> head != NULL && paramType -> head == NULL)
                             {
-                                EM_error(e->pos, "func.many");
+                                functionOk = false;
                                 break;
                             }
                             Ty_ty argType = transExp(venv, tenv, args -> head, level, isLoop, classs).ty;
-                            if(compType(paramType -> head, argType)){
+                            if(compType(tenv, paramType -> head, argType)){
                                 continue;
                             }
                             else if(args -> head -> kind == A_stringExp && paramType -> head -> kind == Ty_name){
@@ -1789,7 +1852,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                             }
                             else if(args -> head -> kind == A_arrayExp && paramType -> head -> kind == Ty_poly){
                                     if(strcmp(_arrayTemplateName.c_str(), S_name(paramType -> head -> u.name.sym)) == 0){
-                                        if(compType(argType -> u.array.type, paramType -> head -> u.poly.typeParam)){
+                                        if(compType(tenv, argType -> u.pointer -> u.array.type, paramType -> head -> u.poly.typeParam)){
                                             continue;
                                         }
                                     }
@@ -1889,11 +1952,11 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                         expp = transExp(venv, tenv, exp, level, isLoop, classs);
                     }
                     if(exp -> kind == A_arrayExp && type -> kind == Ty_poly && strcmp(S_name(type -> u.poly.name), _arrayTemplateName.c_str()) == 0){
-                        stringLiterals -> head = transStm(venv, tenv, A_DeclarationStm(exp -> pos, A_VarDec(exp -> pos, A_AssignStm(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")), exp, TRUE), A_PolyTy(exp -> pos, type -> u.poly.name, type -> u.poly.a_typeParam))), level, isLoop, classs).exp -> u.stm;
-                        stringLiterals -> tail = T_StmList(NULL, NULL);
-                        stringLiterals = stringLiterals -> tail;
-                        stringLiterals -> head = NULL;
-                        stringLiterals -> tail = NULL;
+                        stmListNow -> head = transStm(venv, tenv, A_DeclarationStm(exp -> pos, A_VarDec(exp -> pos, A_AssignStm(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")), exp, TRUE), A_PolyTy(exp -> pos, type -> u.poly.name, type -> u.poly.a_typeParam))), level, isLoop, classs).exp -> u.stm;
+                        stmListNow -> tail = T_StmList(NULL, NULL);
+                        stmListNow = stmListNow -> tail;
+                        stmListNow -> head = NULL;
+                        stmListNow -> tail = NULL;
                         exp = A_VarExp(exp -> pos, A_SimpleVar(exp -> pos, S_Symbol("__array_literal")));
                         expp = transExp(venv, tenv, exp, level, isLoop, classs);
                     }
@@ -1904,10 +1967,10 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     expList->tail = T_ExpList(NULL, NULL);
                     if (exp != NULL && type != NULL)
                     {
-                        if (!compType(type, expp.ty))
+                        if (!compType(tenv, type, expp.ty))
                         {
                             // printf("%d %d flaj\n", type -> kind, argType.ty -> kind);
-                            expList -> head = convertAssign(type, expp, e -> pos);
+                            expList -> head = convertAssign(tenv, type, expp, e -> pos);
                         }
                     }
                     expList = expList->tail;
@@ -1958,13 +2021,62 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                     entry->u.func.index, S_name(entry->u.func.label), result),
                     entry->u.func.returnType);
             }
+            else if(entry != NULL && entry -> kind == E_varentry && entry -> u.var.ty -> kind == Ty_func)
+            {
+                A_expList expArgs = NULL;
+                Ty_tyList entryArgsTy = NULL;
+                int i;
+                for (i = 1, expArgs = e->u.call.args, entryArgsTy = entry->u.var.ty -> u.func.params; expArgs != NULL && entryArgsTy != NULL;
+                    expArgs = expArgs->tail, entryArgsTy = entryArgsTy->tail, i++)
+                {
+                    A_exp exp = expArgs->head;
+                    struct expty expp = transExp(venv, tenv, exp, level, isLoop, classs);
+                    if(expp.ty -> kind == Ty_array && expp.exp -> u.exp -> kind == T_loadExp){   
+                        expList->head = expp.exp->u.exp -> u.load.addr;
+                    }
+                    else{
+                        expList->head = expp.exp->u.exp;
+                    }
+                    // printf("%d expList -> head\n", expp.ty -> kind );
+                    expList->tail = T_ExpList(NULL, NULL);
+                    Ty_ty type = entryArgsTy->head;
+                    if (exp != NULL && type != NULL)
+                    {
+                        struct expty argType = transExp(venv, tenv, exp, level, isLoop, classs);
+                      //printf("argType.ty -> kind %d\n", type -> kind);
+                        if (!compType(tenv, type, argType.ty))
+                        {
+                            expList -> head = convertAssign(tenv, type, argType, exp -> pos);
+                        }
+                    }
+                    else
+                    {
+                        if (exp == NULL && type != NULL)
+                        {
+                            EM_error(e->pos, "func.few");
+                            break;
+                        }
+                        else if (exp != NULL && type == NULL)
+                        {
+                            EM_error(e->pos, "func.many");
+                            break;
+                        }
+                    }
+                    expList = expList->tail;
+                    expList->head = NULL;
+                    expList->tail = NULL;
+                }
+                return expTy(Tr_CallIndirectExp(e -> pos, convertType(entry -> u.var.ty -> u.func.result), Tr_VarExp(e -> pos, T_i32, entry -> u.var.access, FALSE, FALSE) -> u.exp, result, entry -> u.var.ty -> u.func.typeIndex), entry -> u.var.ty -> u.func.result);
+            }
             else
             {
                 EM_error(e->pos, "noexist.func %s", S_name(name));
             }
         }
-        else
+        else{
+            std::cout << e -> u.call.func -> kind << std::endl;
             EM_error(e -> pos, "func.cannotcall");
+        }
     }
     case A_recordExp:
     {
@@ -1984,7 +2096,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         else if(e -> u.sizeOf -> kind == A_subscriptVar)
         {
             entry = (E_enventry)S_look(venv, e -> u.sizeOf -> u.subscript.name);
-            return expTy(Tr_AddrExp(e -> pos, actual_ty(entry -> u.var.ty) -> size), Ty_Short());
+            return expTy(Tr_AddrExp(e -> pos, actual_ty(tenv, entry -> u.var.ty) -> size), Ty_Short());
         }
         else if(e -> u.sizeOf -> kind == A_derefVar)
         {
@@ -2016,7 +2128,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             }
             // printf("%d kind\n", expp.ty -> kind);
             list -> head = expp.exp -> u.exp;
-            if(arrayType && compType(arrayType, expp.ty))
+            if(arrayType && compType(tenv, arrayType, expp.ty))
                 arrayType = expp.ty;
             else if(!arrayType)
                 arrayType = expp.ty;
@@ -2149,16 +2261,55 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         A_oper oper = e->u.op.oper;
         struct expty left = transExp(venv, tenv, e->u.op.left, level, isLoop, classs);
         struct expty right = transExp(venv, tenv, e->u.op.right, level, isLoop, classs);
-        if(left.ty -> kind == Ty_name){
+        if(left.ty -> kind == Ty_name || left.ty -> kind == Ty_poly){
             S_symbol opSym = operToSym(oper);
-            E_enventry classEntry = (E_enventry)S_look(tenv, left.ty -> u.name.sym);
+            E_enventry classEntry = NULL;
+            if(left.ty -> kind == Ty_name){
+                classEntry = (E_enventry)S_look(tenv, left.ty -> u.name.sym);
+            }
+            if(left.ty -> kind == Ty_poly){
+                classEntry = (E_enventry)S_look(tenv, left.ty -> u.poly.name);
+                if(classEntry){
+                    classEntry = (E_enventry)TAB_search(classEntry -> u.templatee.specific, left.ty -> u.poly.typeParam);
+                }
+            }
             if(classEntry){
                 E_enventry funcEntry = (E_enventry)S_look(classEntry -> u.classs.methods, opSym);
                 if(funcEntry){
+                    if(e -> u.op.right -> kind == A_stringExp || e -> u.op.right -> kind == A_arrayExp ){
+                        if(e -> u.op.left -> kind == A_varExp || e -> u.op.left -> kind == A_fieldExp || e -> u.op.left -> kind == A_arrowFieldExp){
+                            // std::cout << S_name(varExpty.ty -> u.poly.name) << std::endl;
+                            T_stmList assignList = T_StmList(NULL, NULL);
+                            T_stmList result = assignList;
+                            int arrayAddr = memorySize;
+                            if(right.ty -> u.pointer -> u.array.type -> kind != Ty_name && right.ty -> u.pointer -> u.array.type -> kind != Ty_poly){
+                                // std::cout << right.ty -> u.pointer -> u.array.type -> kind << std::endl;
+                                T_expList list = right.exp -> u.exp -> u.seq.list;
+                                for(int i = 0; i < right.ty -> u.pointer -> u.array.size; i++)
+                                {
+                                    int elementAddr = arrayAddr + i * right.ty -> u.pointer -> u.array.type -> size;
+                                    memorySize += right.ty -> u.pointer -> u.array.type -> size;
+                                    level -> frame -> frameSize += right.ty -> u.pointer -> u.array.type -> size;
+                                    T_exp addrExp = Tr_AddrExp(e -> u.op.right -> pos, elementAddr)->u.exp;
+                                    stringLiterals -> head = Tr_AddrAssignStm(e -> u.op.right -> pos, addrExp, list -> head)->u.stm;
+                                    stringLiterals -> tail = T_StmList(NULL, NULL);
+                                    stringLiterals = stringLiterals -> tail;
+                                    stringLiterals -> head = NULL;
+                                    stringLiterals -> tail = NULL;
+                                    list = list -> tail;
+                                }
+                            }
+                            else{
+                                arrayAddr = right.exp -> u.exp -> u.constt.exp -> u.intt;
+                            }
+                            return transExp(venv, tenv, A_CallExp(e -> u.op.right -> pos, A_FieldExp(e -> u.op.right -> pos, e -> u.op.left, operToSym(e -> u.op.oper)), A_ExpList(A_AddrExp(e -> u.op.right -> pos, arrayAddr), A_ExpList(A_IntExp(e -> u.op.right -> pos, right.ty -> u.pointer -> u.array.size), NULL))), level, isLoop, classs);
+                        }
+                    }
                     return transExp(venv, tenv, A_CallExp(e -> pos, A_FieldExp(e -> pos, e -> u.op.left, opSym), A_ExpList(e -> u.op.right, NULL)), level, isLoop, classs);
                 }
                 else{
-                    EM_error(e -> pos, "noexist.func %s", S_name(opSym));
+                    // S_dump(classEntry -> u.classs.methods, &printAll);
+                    EM_error(e -> pos, "class.nomember %s %s", S_name(left.ty -> u.name.sym), S_name(opSym));
                 }
             }
             else{
@@ -2654,6 +2805,46 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         return NULL;
         break;
     }
+    case A_funcprotoDec:
+    {
+        Ty_tyList paramTypes = makeParamTypeList(venv, tenv, d -> u.funcproto.params, level);
+        Tr_level newLevel = NULL;
+        if(venv == table){
+            newLevel = Tr_newLevel(level, d -> u.funcproto.name, makeEscapeList(d -> u.funcproto.params), paramTypes, FALSE, Ty_Void());
+        }
+        else{
+            newLevel = Tr_newLevel(level, d -> u.funcproto.name, makeEscapeList(d -> u.funcproto.params), paramTypes, TRUE, classs);
+        }
+        A_fieldList returnList = d -> u.funcproto.result;
+        if (returnList->tail)
+            EM_error(d->pos, "notsupport.multiplereturn");
+        T_typeList newTypeList = T_TypeList(T_none, NULL);
+        T_typeList result = newTypeList;
+        E_enventry entry = NULL;
+        A_field resultVar = NULL;
+        if (returnList->head)
+        {
+            resultVar = returnList->head;
+            Ty_ty type = transTy(venv, tenv, resultVar -> typ, newLevel);
+            entry = E_FuncEntry(level, d -> u.funcproto.name, paramTypes, Tr_allocLocal(newLevel, resultVar->escape, type), type, TRUE);
+        }
+        else
+            entry = E_FuncEntry(level, d -> u.funcproto.name, paramTypes, Tr_allocLocal(newLevel, FALSE, Ty_Void()), Ty_Void(), TRUE);
+        E_enventry funcEntry = NULL;
+        if(!(funcEntry = (E_enventry)S_look(table, d -> u.funcproto.name))){
+            S_enter(table, d -> u.funcproto.name, entry);
+        }
+        else if(funcEntry -> kind == E_funcentry){
+            E_enventry newEntry = E_ListEntry(funcEntry);
+            newEntry -> u.list -> push_back(entry);
+            S_enter(table, d -> u.funcproto.name, newEntry);
+        }
+        else if(funcEntry -> kind == E_listEntry){
+            funcEntry -> u.list -> push_back(entry);
+        }
+        return NULL;
+        break;
+    }
     case A_functionDec:
     {
         A_fundec func = d->u.function->head;
@@ -2675,22 +2866,51 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
         if (returnList->head)
         {
             resultVar = returnList->head;
-            Ty_ty type = transTy(venv, tenv, resultVar -> typ, level);
-            entry = E_FuncEntry(level, func->name, paramTypes, Tr_allocLocal(newLevel, resultVar->escape, type), type);
+            Ty_ty type = transTy(venv, tenv, resultVar -> typ, newLevel);
+            entry = E_FuncEntry(level, func->name, paramTypes, Tr_allocLocal(newLevel, resultVar->escape, type), type, FALSE);
         }
         else
-            entry = E_FuncEntry(level, func->name, paramTypes, Tr_allocLocal(newLevel, FALSE, Ty_Void()), Ty_Void());
+            entry = E_FuncEntry(level, func->name, paramTypes, Tr_allocLocal(newLevel, FALSE, Ty_Void()), Ty_Void(), FALSE);
         funcs--;
         E_enventry funcEntry = NULL;
-        if(!(funcEntry = (E_enventry)S_look(venv, func -> name))){
+        if(!(funcEntry = (E_enventry)S_look(table, func -> name))){
             S_enter(table, func->name, entry);
         }
         else if(funcEntry -> kind == E_funcentry){
+            if(funcEntry -> u.func.prototype){
+                bool prototype = true;
+                Ty_tyList nlist = paramTypes;
+                for(Ty_tyList tlist = funcEntry -> u.func.formals; tlist -> tail && nlist -> tail ; tlist = tlist -> tail, nlist = nlist -> tail){
+                    if(!compType(tenv, tlist -> head, nlist -> head)){
+                        prototype = false;
+                        break;
+                    }
+                }
+                if(prototype){
+                    prototypeDecs[funcEntry -> u.func.index] = entry -> u.func.index;
+                }
+            }
             E_enventry newEntry = E_ListEntry(funcEntry);
             newEntry -> u.list -> push_back(entry);
             S_enter(table, func -> name, newEntry);
         }
         else if(funcEntry -> kind == E_listEntry){
+            for(const auto &e: *(funcEntry -> u.list)){
+                if(e -> u.func.prototype){
+                    bool prototype = true;
+                    Ty_tyList nlist = paramTypes;
+                    for(Ty_tyList tlist = e -> u.func.formals; tlist -> tail && nlist -> tail; tlist = tlist -> tail, nlist = nlist -> tail){
+                        if(!compType(tenv, tlist -> head, nlist -> head)){
+                            prototype = false;
+                            break;
+                        }
+                    }
+                    if(prototype){
+                        prototypeDecs[e -> u.func.index] = entry -> u.func.index;
+                        break;
+                    }
+                }
+            }
             funcEntry -> u.list -> push_back(entry);
         }
 
@@ -2760,7 +2980,7 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
                 resultBody = body.exp -> u.stm;
             }
             if (entry->u.func.result){
-                if(entry -> u.func.returnType -> kind == Ty_name){
+                if(entry -> u.func.returnType -> kind == Ty_name || entry -> u.func.returnType -> kind == Ty_poly){
                     return T_FuncMod(T_Fundec(result, typeListt, convertType(transTy(venv, tenv, resultVar->typ, level)),
                     resultBody, name, entry->u.func.index,
                     Tr_VarExp(d->pos, convertType(entry->u.func.returnType), entry->u.func.result, FALSE, FALSE)->u.exp -> u.load.addr));
@@ -2799,10 +3019,10 @@ T_module transDec(S_table venv, S_table tenv, A_dec d, Tr_level level, bool isLo
             // printf("there is head\n");
             resultVar = returnList->head;
             Ty_ty type = transTy(venv, tenv, resultVar->typ, level);
-            entry = E_FuncEntry(level, d -> u.funcImport.name, paramTypes, Tr_allocLocal(newLevel, resultVar->escape, type), type);
+            entry = E_FuncEntry(level, d -> u.funcImport.name, paramTypes, Tr_allocLocal(newLevel, resultVar->escape, type), type, FALSE);
         }
         else
-            entry = E_FuncEntry(level, d -> u.funcImport.name, paramTypes, Tr_allocLocal(newLevel, FALSE, Ty_Void()), Ty_Void());
+            entry = E_FuncEntry(level, d -> u.funcImport.name, paramTypes, Tr_allocLocal(newLevel, FALSE, Ty_Void()), Ty_Void(), FALSE);
 
         S_enter(venv, d -> u.funcImport.name, entry);
         T_module func = NULL;
@@ -3079,25 +3299,24 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
             E_enventry classEntry = (E_enventry)TAB_search(templateEntry -> u.templatee.specific, typeParam);
             if(!classEntry)
             {
-                // if(typeParam -> kind == Ty_name)
-                    // printf("%s %s 2074444444444444444444444444444444444444444444444444444444444444444444\n", S_name(ty -> u.poly.name), S_name(typeParam -> u.name.sym));
                 //update the polymorphic type with type parameter
+                tempTable = S_empty();
+                S_dump(tenv, &copyTable);
+                templateEntry -> u.templatee.tenv = tempTable;
+                if(typeParam -> kind == Ty_name){
+                    typeParam = actual_ty(templateEntry -> u.templatee.tenv, typeParam);
+                }
                 S_enter(templateEntry -> u.templatee.tenv, templateEntry -> u.templatee.name, E_PolyEntry(typeParam));
                 //translate the declaration using the type parameter
                 int temp = memorySize;
                 T_module dec = transDec(templateEntry -> u.templatee.venv, templateEntry -> u.templatee.tenv, templateEntry -> u.templatee.dec, Tr_outermost(), FALSE, templateEntry -> u.templatee.venv, Ty_Poly(ty -> u.poly.name, typeParam, ty -> u.poly.typeParam, 0));
                 level -> frame -> frameSize += (memorySize - temp);
-                // E_enventry tempEntry = (E_enventry)S_look(templateEntry -> u.templatee.tenv, ty -> u.poly.name);
-                // S_enter(tenv, ty -> u.poly.name, tempEntry);
                 list -> head = dec;
                 list -> tail = T_ModuleList(NULL, NULL);
                 list = list -> tail;
                 list -> head = NULL;
                 list -> tail = NULL;
                 S_enter(tenv, ty -> u.poly.name, templateEntry);
-                // E_enventry tempEntry = (E_enventry)S_look(tenv, ty -> u.poly.name);
-                // classEntry = (E_enventry)TAB_search(tempEntry  -> u.templatee.specific, typeParam);
-                // printf("%d classEntry check\n", classEntry);
             }
             classEntry = (E_enventry)TAB_search(templateEntry -> u.templatee.specific, typeParam);
             return Ty_Poly(ty -> u.poly.name, typeParam, ty -> u.poly.typeParam, classEntry -> u.classs.size);
@@ -3122,15 +3341,23 @@ Ty_ty transTy(S_table venv, S_table tenv, A_ty ty, Tr_level level)
     }
 }
 
-static Ty_ty actual_ty(Ty_ty ty)
+static Ty_ty actual_ty(S_table tenv, Ty_ty ty)
 {
     if (ty->kind == Ty_pointer)
     {
-        return actual_ty(ty->u.pointer);
+        return actual_ty(tenv, ty->u.pointer);
     }
     else if (ty->kind == Ty_array)
     {
-        return actual_ty(ty->u.array.type);
+        return actual_ty(tenv, ty->u.array.type);
+    }
+    else if(ty -> kind == Ty_name){
+        E_enventry entry = (E_enventry)S_look(tenv, ty -> u.name.sym);
+        if(entry){
+            if(entry -> kind == E_polyentry){
+                return entry -> u.poly;
+            }
+        }
     }
     return ty;
 }
@@ -3176,7 +3403,7 @@ static Ty_tyList makeParamTypeList(S_table venv, S_table tenv, A_fieldList param
         }
         else
         {
-            S_symbol sym = returnSymFromType(actual_ty(transTy(venv, tenv, type, level)));
+            S_symbol sym = returnSymFromType(actual_ty(tenv, transTy(venv, tenv, type, level)));
             ty = (Ty_ty)S_look(tenv, sym);
             if (ty != NULL)
             {
@@ -3398,7 +3625,7 @@ static T_typeList convertAllType(Ty_tyList types)
     return result;
 }
 
-static bool compType(Ty_ty lhs, Ty_ty rhs)
+static bool compType(S_table tenv, Ty_ty lhs, Ty_ty rhs)
 {
     // printf("%d %d fldasjfkljo\n", lhs -> kind, rhs -> kind);
     bool result = TRUE;
@@ -3408,21 +3635,22 @@ static bool compType(Ty_ty lhs, Ty_ty rhs)
     {
         if (lhs->kind == Ty_array)
         {
-            result = compType(lhs->u.array.type, lhs->u.array.type);
+            result = compType(tenv, lhs->u.array.type, lhs->u.array.type);
         }
         else if (lhs->kind == Ty_pointer)
         {
             if(rhs -> u.pointer -> kind == Ty_void || lhs -> u.pointer -> kind == Ty_void)
                 result = TRUE;
-            else
-                result = (actual_ty(lhs -> u.pointer )-> kind == actual_ty(rhs->u.pointer)->kind);
-            // result = compType(lhs->u.pointer, rhs->u.pointer);
+            else{
+                result = (actual_ty(tenv, lhs -> u.pointer)-> kind == actual_ty(tenv, rhs->u.pointer)->kind);
+            }
+            // result = compType(tenv, lhs->u.pointer, rhs->u.pointer);
         }
         else if (lhs->kind == Ty_name)
         {
             if (lhs->u.name.sym != rhs->u.name.sym)
             {
-                result = FALSE;
+                result = compType(tenv, actual_ty(tenv, lhs), actual_ty(tenv, rhs));
             }
             else
                 result = TRUE;
@@ -3433,13 +3661,14 @@ static bool compType(Ty_ty lhs, Ty_ty rhs)
             {
                 result = FALSE;
             }
-            return compType(lhs -> u.poly.typeParam, lhs -> u.poly.typeParam);
+            E_enventry entry = (E_enventry)S_look(tenv, lhs -> u.poly.name);
+            return compType(tenv, lhs -> u.poly.typeParam, lhs -> u.poly.typeParam);
         }
     }
     return result;
 }
 
-static T_exp convertAssign(Ty_ty type, struct expty exp, int pos)
+static T_exp convertAssign(S_table tenv, Ty_ty type, struct expty exp, int pos)
 {
     T_exp result = NULL;
     if (type->kind == Ty_int && exp.ty->kind == Ty_short)
@@ -3455,7 +3684,7 @@ static T_exp convertAssign(Ty_ty type, struct expty exp, int pos)
     else if (type->kind == Ty_short && exp.ty->kind == Ty_real)
         result = T_ConvertExp(T_i32, exp.exp -> u.exp);
     else
-        EM_error(pos, "type.nomatch %s %s", S_name(returnSymFromType(actual_ty(exp.ty))), S_name(returnSymFromType(actual_ty(type))));
+        EM_error(pos, "type.nomatch %s %s", S_name(returnSymFromType(actual_ty(tenv, exp.ty))), S_name(returnSymFromType(actual_ty(tenv, type))));
     return result;
 }
 

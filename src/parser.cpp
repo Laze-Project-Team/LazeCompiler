@@ -644,6 +644,18 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "dec.func.noparamnoresult"){
             result -> u.dec = A_FunctionDec(result -> start, A_FundecList(A_Fundec(result -> start, S_Symbol(tokenData.at("id").id), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL), tokenData.at("stm").stm), NULL));
         }
+        else if(ruleName == "dec.func.prototype"){
+            result -> u.dec = A_FuncProtoDec(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList);
+        }
+        else if(ruleName == "dec.func.prototypenoparam"){
+            result -> u.dec = A_FuncProtoDec(result -> start, S_Symbol(tokenData.at("id").id), A_FieldList(NULL, NULL), tokenData.at("fieldlist(result)").fieldList);
+        }
+        else if(ruleName == "dec.func.prototypenoresult"){
+            result -> u.dec = A_FuncProtoDec(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("fieldlist(params)").fieldList, A_FieldList(NULL, NULL));
+        }
+        else if(ruleName == "dec.func.prototypenoresult"){
+            result -> u.dec = A_FuncProtoDec(result -> start, S_Symbol(tokenData.at("id").id), A_FieldList(NULL, NULL), A_FieldList(NULL, NULL));
+        }
         else if(ruleName == "dec.jsload.normal"){
             result -> u.dec = A_FuncImport(result -> start, S_Symbol(tokenData.at("id").id), tokenData.at("fieldlist(params)").fieldList, tokenData.at("fieldlist(result)").fieldList, tokenData.at("string(module)").stringg, tokenData.at("string(func)").stringg);
         }
@@ -850,12 +862,21 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
 }
 
 static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarListTy &grammarList, const grammarListTy &originalGrammarList){
+    int fromConflict = -1;
+    int secondTime = 0;
+    std::vector<int> conflictStack;
+    L_tokenList conflictList;
+    L_tokenList conflictResultList;
     std::vector<int> stack;
     L_tokenList resultList;
     stack.push_back(0);
     std::string action;
+    int actionIndex = 0;
+    int originalErrorPos = 0;
+    std::string originalErrorToken = "";
     do{
         std::string tokenToRead = list.front() -> kind;
+        // std::cout << list.front() -> kind << " " << stack.back() << std::endl;
         action = table.at(list.front() -> kind).at(stack.back());
         // std::cout << "Stack now: ";
         // for(const auto &j: stack){
@@ -886,25 +907,44 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
                     token = std::to_string(list.front() -> u.intt);
                 }
                 // std::cerr << "Unexpected " << list.front() -> kind << " on line " << errorPos.lineNum << " and column " << errorPos.columnNum << std::endl;
-                std::cout << list.front() -> start << std::endl;
-                EM_error(list.front() -> start, "parser.unexpectedtoken %s", token.c_str());
-                exit(0);
+                // std::cout << L_getErrorPos(list.front() -> start).lineNum << std::endl;
+                // std::cout << fromConflict << std::endl;
+                if(fromConflict > 0){
+                    if(secondTime){
+                        EM_error(originalErrorPos, "parser.unexpectedtoken %s", originalErrorToken.c_str());
+                    }
+                    originalErrorToken = token;
+                    originalErrorPos = list.front() -> start;
+                    secondTime = 1;
+                    stack = conflictStack;
+                    list = conflictList;
+                    resultList = conflictResultList;
+                    actionIndex = fromConflict;
+                    continue;
+                }
+                else{
+                    EM_error(list.front() -> start, "parser.unexpectedtoken %s", token.c_str());
+                    exit(0);
+                }
             }
         }
         if(action.at(0) == ' '){
             action = action.substr(1, action.size() - 1);
         }
-        if(std::count(action.begin(), action.end(), 's') > 0){
-            // std::cout << "conflict found " << action << std::endl;
+        if(list.front() -> start > originalErrorPos){
+            secondTime = 0;
         }
-        
         std::vector<std::string> actions;
         std::string order = "";
         std::stringstream actionStream(action);
+        std::string temp = action;
         while(actionStream >> order){
             actions.push_back(order);
         }
-        action = actions.at(0);
+        action = actions.at(actionIndex);
+        if(actionIndex > 0){
+            actionIndex = 0;
+        }
         if(actions.size() > 1){
             if(operators[tokenToRead] && actions.at(1) == "rexp.op"){
                 if(resultList.size() > 1){
@@ -917,6 +957,13 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
                         action = actions.at(1);
                     }
                 }
+            }
+            else{
+                // std::cout << "Shift/Reduce conflict found: " << temp << " when the token is " << list.front() -> kind << std::endl;
+                fromConflict = 1;
+                conflictStack = stack;
+                conflictList = list;
+                conflictResultList = resultList;
             }
         }
         // else{

@@ -64,7 +64,7 @@ struct T_stm_
 };
 enum T_expType { T_binOpExp, T_uniOpExp, T_constExp,
          T_getLocalExp, T_getGlobalExp, T_callExp, 
-         T_ifExp, T_convertExp, T_loadExp, T_seqExp };
+         T_ifExp, T_convertExp, T_loadExp, T_seqExp, T_callIndirectExp };
 struct T_exp_
 {
     enum T_expType kind;
@@ -81,6 +81,7 @@ struct T_exp_
         struct {T_exp exp;} convert;
         struct {T_exp addr;} load;
         struct {T_expList list;} seq;
+        struct { T_exp index; T_expList args; int typeIndex; } callIndirect;
     } u;
 };
 
@@ -141,6 +142,7 @@ T_exp T_IfExp(T_type type, T_exp test, T_exp then, T_exp elsee);
 T_exp T_ConvertExp(T_type type, T_exp exp);
 T_exp T_LoadExp(T_type type, T_exp addr);
 T_exp T_SeqExp(T_type type, T_expList list);
+T_exp T_CallIndirectExp(T_type type, T_exp index, T_expList args, int typeIndex);
 
 T_fundec T_Fundec(T_typeList params, T_typeList locals, T_type result, T_stm body, string name, int index, T_exp var);
 

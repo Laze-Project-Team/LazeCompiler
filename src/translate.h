@@ -90,6 +90,7 @@ Tr_exp Tr_SeqExp(A_pos pos, A_expList seq);
 Tr_exp Tr_AssignExp(A_pos pos, A_var var, A_exp exp);
 Tr_exp Tr_IfExp(A_pos pos, T_type type, T_exp test, T_exp then, T_exp elsee);
 Tr_exp Tr_ArrayExp(A_pos pos, T_expList list);
+Tr_exp Tr_CallIndirectExp(A_pos pos, T_type type, T_exp index, T_expList args, int typeIndex);
 #ifdef __cplusplus
 }
 #endif

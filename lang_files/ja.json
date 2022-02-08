@@ -158,7 +158,8 @@
                 "inherit":"class : id(name) <- id(inherit) { memlist }"
             },
             "func": {
-                "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm"
+                "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+                "prototype":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) ;"
             },
             "jsload": {
                 "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) ;"
@@ -296,7 +297,8 @@
             "few":"関数の引数が足りません。",
             "many":"関数の引数が多いです。",
             "cannotcall":"この関数は呼べません。",
-            "unknownfield":"この引数は変数か配列の形に直してください。"
+            "unknownfield":"この引数は変数か配列の形に直してください。",
+            "notdefined":"$1という関数は宣言されただけで定義されていません。"
         },
         "class":{
             "private":"$1は非公開メンバーなので、クラス外からアクセスできません。",

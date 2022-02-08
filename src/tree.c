@@ -199,6 +199,15 @@ T_exp T_SeqExp(T_type type, T_expList list)
     p -> u.seq.list = list;
     return p;
 }
+T_exp T_CallIndirectExp(T_type type, T_exp index, T_expList args, int typeIndex){
+    T_exp p = (T_exp)checked_malloc(sizeof(*p));
+    p -> kind = T_callIndirectExp;
+    p -> type = type;
+    p -> u.callIndirect.index = index;
+    p -> u.callIndirect.args = args;
+    p -> u.callIndirect.typeIndex = typeIndex;
+    return p;
+}
 
 T_fundec T_Fundec(T_typeList params, T_typeList locals, T_type result, T_stm body, string name, int index, T_exp var)
 {

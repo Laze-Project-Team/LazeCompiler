@@ -300,8 +300,21 @@ Tr_exp Tr_CharExp(A_pos pos, char *c)
     }
     else if(strlen(c) == 2)
     {
-        charVal+=(256+c[0])*256;
-        charVal+=(256+c[1]);
+        if(c[0] == '\\'){
+            if(c[1] == 'n'){
+                charVal += (int)'\n';
+            }
+            if(c[1] == 't'){
+                charVal += (int)'\t';
+            }
+            if(c[1] == '\\'){
+                charVal += (int)'\\';
+            }
+        }
+        else{
+            charVal+=(256+c[0])*256;
+            charVal+=(256+c[1]);
+        }
     }
     else if(strlen(c) == 3)
     {
@@ -378,7 +391,12 @@ Tr_exp Tr_ArrayExp(A_pos pos, T_expList list)
     p -> u.exp = T_SeqExp(list -> head -> type, list);
     return p;
 }
-
+Tr_exp Tr_CallIndirectExp(A_pos pos, T_type type, T_exp index, T_expList args, int typeIndex){
+    Tr_exp p = (Tr_exp)checked_malloc(sizeof(*p));
+    p -> kind = Tr_t_exp;
+    p -> u.exp = T_CallIndirectExp(type, index, args, typeIndex);
+    return p;
+}
 
 // Tr_exp Tr_FunctionDec(A_pos pos, T_typeList params, T_typeList locals, T_type result, T_stm body, bool isMain, int index)
 // {

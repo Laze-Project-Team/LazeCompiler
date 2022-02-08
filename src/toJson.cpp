@@ -451,6 +451,30 @@ jobj JS_DecToJson(A_dec dec)
             json_object_object_add(info, "specificType", specificType);
             break;
         }
+        case A_funcprotoDec:
+        {
+            name = json_object_new_string("func");
+            jobj funcName = json_object_new_string(S_name(dec -> u.funcproto.name));
+            json_object_object_add(info, "id", funcName);
+            std::string specificTypeStr = "prototype";
+            if(dec -> u.funcproto.params -> head){
+                jobj params = JS_FieldListToJson(dec -> u.funcproto.params);
+                json_object_object_add(info, "fieldlist(params)", params);
+            }
+            else{
+                specificTypeStr += "noparam";
+            }
+            if(dec -> u.funcproto.result -> head){
+                jobj result = JS_FieldListToJson(dec -> u.funcproto.result);
+                json_object_object_add(info, "fieldlist(result)", result);
+            }
+            else{
+                specificTypeStr += "noresult";
+            }
+            jobj specificType = json_object_new_string(specificTypeStr.c_str());
+            json_object_object_add(info, "specificType", specificType);
+            break;
+        }
         case A_varDec:
         {
             name = json_object_new_string("var");

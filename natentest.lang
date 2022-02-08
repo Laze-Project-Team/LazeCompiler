@@ -147,9 +147,10 @@ ending here
 Declare template that takes T . Declare class ${"ja":"配列", "natja":"配列", "en":"Array", "naten":"Array"}$ with members starting here
 public : 	Declare variable content as pointer of T . 
 	Declare variable size as int . 
+	Declare variable allocated as int . 
 	Declare function Array with code starting here
 		Assign 0 to size . 
-		Assign 2 to allocated . 
+		Assign 4 to allocated . 
 		Assign allocMemory ( sizeof ( variable at content )  * allocated ) to content . 
 	ending here 
 	Declare function ${"ja":"取得", "natja":"取得", "en":"get", "naten":"get"}$ that takes index as int and returns result as T with code starting here
@@ -160,7 +161,7 @@ public : 	Declare variable content as pointer of T .
 			Assign allocated  * 2 to allocated . 
 			Initialize variable temp as pointer of T with content . 
 			Assign allocMemory ( sizeof ( variable at content )  * allocated ) to content . 
-			( Initialize variable i as int with 0 . ) from ( i  is allocated ) to ( Assign i  + 1 to i . ) starting here
+			( Initialize variable i as int with 0 . ) from ( i  is ( allocated  - 1 ) ) to ( Assign i  + 1 to i . ) starting here
 				Assign element i in temp to element i in content . 
 			ending here 
 		ending here 
@@ -177,7 +178,197 @@ public : 	Declare variable content as pointer of T .
 		Assign offset to content . 
 		Assign l to size . 
 	ending here 
-private : 	Declare variable allocated as int . 
+	function : operator = ( a as Array < T > ) => ( ) starting here
+		Assign allocMemory ( sizeof ( variable at content )  * ( allocated of a ) ) to content . 
+		Assign size of a to size . 
+		Assign allocated of a to allocated . 
+		repeat size times starting here
+			Assign element counter in content of a to element counter in content . 
+		ending here 
+	ending here 
+	function : operator  is ( a as Array < T > ) => ( b as bool ) starting here
+		Assign true to b . 
+		If size  is not size of a then execute code starting here
+			Return value false . 
+		ending here 
+		repeat size times starting here
+			If element counter in content  is not element counter in content of a then execute code starting here
+				Return value false . 
+			ending here 
+		ending here 
+	ending here 
+	function : operator  is ( offset as pointer of T , l as int ) => ( b as bool ) starting here
+		Assign true to b . 
+		If size  is not l then execute code starting here
+			Return value false . 
+		ending here 
+		repeat size times starting here
+			If element counter in content  is not element counter in offset then execute code starting here
+				Return value false . 
+			ending here 
+		ending here 
+	ending here 
+	function : operator  is not ( a as Array < T > ) => ( b as bool ) starting here
+		Assign false to b . 
+		If size  is not size of a then execute code starting here
+			Return value true . 
+		ending here 
+		repeat size times starting here
+			If element counter in content  is not element counter in content of a then execute code starting here
+				Return value true . 
+			ending here 
+		ending here 
+	ending here 
+	function : operator  is not ( offset as pointer of T , l as int ) => ( b as bool ) starting here
+		Assign false to b . 
+		If size  is not l then execute code starting here
+			Return value true . 
+		ending here 
+		repeat size times starting here
+			If element counter in content  is not element counter in offset then execute code starting here
+				Return value true . 
+			ending here 
+		ending here 
+	ending here 
+	function : operator  + ( a as Array < T > ) => ( b as Array < T > ) starting here
+		Declare variable 結果 as Array < T > . 
+		repeat size times starting here
+			Call push of 結果 with value element counter in content . 
+		ending here 
+		repeat size of a times starting here
+			Call push of 結果 with value get of a ( counter ) . 
+		ending here 
+		Return value 結果 . 
+	ending here 
+	function : operator  + ( offset as pointer of T , l as int ) => ( b as Array < T > ) starting here
+		Declare variable 結果 as Array < T > . 
+		repeat size times starting here
+			Call push of 結果 with value element counter in content . 
+		ending here 
+		repeat l times starting here
+			Call push of 結果 with value element counter in offset . 
+		ending here 
+		Return value 結果 . 
+	ending here 
+	Declare function ${"ja":"全要素操作", "natja":"全要素操作", "en":"forEach", "naten":"forEach"}$ that takes c as function : ( a as T ) => ( ) with code starting here
+		repeat size times starting here
+			Call c with value element counter in content . 
+		ending here 
+	ending here 
+	Declare function ${"ja":"全要素変更", "natja":"全要素変更", "en":"map", "naten":"map"}$ that takes c as function : ( a as T ) => ( b as T ) with code starting here
+		Declare variable 結果 as Array < T > . 
+		Assign allocMemory ( sizeof ( variable at content )  * ( allocated ) ) to content of 結果 . 
+		Assign size to size of 結果 . 
+		Assign allocated to allocated of 結果 . 
+		repeat size times starting here
+			Assign c ( element counter in content ) to element counter in content of 結果 . 
+		ending here 
+		Return value 結果 . 
+	ending here 
+	Declare function __ソート that takes s as int , e as int , c as function : ( a as T , b as T ) => ( r as int ) with code starting here
+		If s  < e then execute code starting here
+			Initialize variable loc as int with e . 
+			Initialize variable pivot as T with element loc in content . 
+			Initialize variable i as int with s  - 1 . 
+			Initialize variable l as int with e  - s . 
+			repeat l times starting here
+				If c ( element counter  + s in content , pivot )  < 0 then execute code starting here
+					Assign i  + 1 to i . 
+					Initialize variable temp as T with element counter  + s in content . 
+					Assign element i in content to element counter  + s in content . 
+					Assign temp to element i in content . 
+				ending here 
+			ending here 
+			Initialize variable temp as T with element loc in content . 
+			Assign element i  + 1 in content to element loc in content . 
+			Assign temp to element i  + 1 in content . 
+			Call __ソート with value s , i , c . 
+			Call __ソート with value i  + 2 , e , c . 
+		ending here 
+	ending here 
+	Declare function ${"ja":"ソート", "natja":"ソート", "en":"sort", "naten":"sort"}$ that takes c as function : ( a as T , b as T ) => ( r as int ) with code starting here
+		Call __ソート with value 0 , size  - 1 , c . 
+	ending here 
+	Declare function ${"ja":"フィルター", "natja":"フィルター", "en":"filter", "naten":"filter"}$ that takes c as function : ( a as T ) => ( r as bool ) and returns b as Array < T > with code starting here
+		Declare variable 結果 as Array < T > . 
+		repeat size times starting here
+			If c ( element counter in content ) then execute code starting here
+				Call push of 結果 with value element counter in content . 
+			ending here 
+		ending here 
+		Return value 結果 . 
+	ending here 
+	Declare function ${"ja":"削除", "natja":"削除", "en":"remove", "naten":"remove"}$ that takes i as int and returns b as Array < T > with code starting here
+		Declare variable 結果 as Array < T > . 
+		repeat size times starting here
+			If counter  is not i then execute code starting here
+				Call push of 結果 with value element counter in content . 
+			ending here 
+		ending here 
+		Return value 結果 . 
+	ending here 
+	Declare function ${"ja":"範囲削除", "natja":"範囲削除", "en":"removeRange", "naten":"removeRange"}$ that takes i as int , r as int and returns b as Array < T > with code starting here
+		Declare variable 結果 as Array < T > . 
+		repeat size times starting here
+			If ( counter  < i )  or ( counter  >= ( i  + r ) ) then execute code starting here
+				Call push of 結果 with value element counter in content . 
+			ending here 
+		ending here 
+		Return value 結果 . 
+	ending here 
+	Declare function ${"ja":"部分列", "natja":"部分列", "en":"subseq", "naten":"subseq"}$ that takes s as int , e as int and returns b as Array < T > with code starting here
+		Declare variable 結果 as Array < T > . 
+		If s  >= e then execute code starting here
+			Return value 結果 . 
+		ending here 
+		repeat size times starting here
+			If ( s  <= counter )  and ( counter  < e ) then execute code starting here
+				Call push of 結果 with value element counter in content . 
+			ending here 
+		ending here 
+		Return value 結果 . 
+	ending here 
+	Declare function ${"ja":"範囲部分列", "natja":"範囲部分列", "en":"subseqRange", "naten":"subseqRange"}$ that takes s as int , l as int and returns b as Array < T > with code starting here
+		Declare variable 結果 as Array < T > . 
+		If s  >= size then execute code starting here
+			Return value 結果 . 
+		ending here 
+		repeat size times starting here
+			If ( s  <= counter )  and ( counter  < ( s  + l ) ) then execute code starting here
+				Call push of 結果 with value element counter in content . 
+			ending here 
+		ending here 
+		Return value 結果 . 
+	ending here 
+	Declare function ${"ja":"置換", "natja":"置換", "en":"replace", "naten":"replace"}$ that takes a as T , b as T with code starting here
+		repeat size times starting here
+			If element counter in content  is a then execute code starting here
+				Assign b to element counter in content . 
+			ending here 
+		ending here 
+	ending here 
+	Declare function ${"ja":"範囲置換", "natja":"範囲置換", "en":"replaceRange", "naten":"replaceRange"}$ that takes s as int , l as int , a as T with code starting here
+		repeat size times starting here
+			If ( s  <= counter )  and ( counter  < ( s  + l ) ) then execute code starting here
+				Assign a to element counter in content . 
+			ending here 
+		ending here 
+	ending here 
+	Declare function ${"ja":"範囲置換", "natja":"範囲置換", "en":"replaceRange", "naten":"replaceRange"}$ that takes s as int , l as int , a as Array < T > with code starting here
+		repeat size times starting here
+			If ( s  <= counter )  and ( counter  < ( s  + l ) ) then execute code starting here
+				Assign element counter  - s in content of a to element counter in content . 
+			ending here 
+		ending here 
+	ending here 
+	Declare function ${"ja":"探索", "natja":"探索", "en":"find", "naten":"find"}$ that takes b as T and returns i as int with code starting here
+		repeat size times starting here
+			If element counter in content  is b then execute code starting here
+				Return value counter . 
+			ending here 
+		ending here 
+		Return value size . 
+	ending here 
 ending here 
 Declare class ${"ja":"文字列", "natja":"文字列", "en":"string", "naten":"string"}$ with members starting here
 public : 	Declare variable content as pointer of char . 
@@ -186,9 +377,198 @@ public : 	Declare variable content as pointer of char .
 		Assign offset to content . 
 		Assign l to length . 
 	ending here 
+	Declare function string with code starting here
+		Assign allocMemory ( 0 ) to content . 
+		Assign 0 to length . 
+	ending here 
 	function : operator = ( offset as pointer of char , l as int ) => ( ) starting here
 		Assign offset to content . 
 		Assign l to length . 
+	ending here 
+	function : operator = ( a as string ) => ( ) starting here
+		Assign allocMemory ( sizeof ( variable at content )  * ( length of a ) ) to content . 
+		Assign length of a to length . 
+		repeat length times starting here
+			Assign element counter in content of a to element counter in content . 
+		ending here 
+	ending here 
+	function : operator  + ( a as char ) => ( b as string ) starting here
+		Assign allocMemory ( sizeof ( variable at content )  * ( length  + 1 ) ) to content of b . 
+		repeat length times starting here
+			Assign element counter in content to element counter in content of b . 
+		ending here 
+		Assign a to element length in content of b . 
+		Assign length  + 1 to length of b . 
+	ending here 
+	function : operator  + ( offset as pointer of char , l as int ) => ( b as string ) starting here
+		Assign allocMemory ( sizeof ( variable at content )  * ( length  + l ) ) to content of b . 
+		repeat length times starting here
+			Assign element counter in content to element counter in content of b . 
+		ending here 
+		repeat l times starting here
+			Assign element counter in offset to element length  + counter in content of b . 
+		ending here 
+		Assign length  + l to length of b . 
+	ending here 
+	function : operator  + ( a as string ) => ( b as string ) starting here
+		Assign allocMemory ( sizeof ( variable at content )  * ( length  + length of a ) ) to content of b . 
+		repeat length times starting here
+			Assign element counter in content to element counter in content of b . 
+		ending here 
+		repeat length of a times starting here
+			Assign element counter in content of a to element length  + counter in content of b . 
+		ending here 
+		Assign length  + length of a to length of b . 
+	ending here 
+	function : operator  is ( a as string ) => ( b as bool ) starting here
+		Assign true to b . 
+		If length  is not length of a then execute code starting here
+			Return value false . 
+		ending here 
+		repeat length times starting here
+			If element counter in content  is not element counter in content of a then execute code starting here
+				Return value false . 
+			ending here 
+		ending here 
+	ending here 
+	function : operator  is ( offset as pointer of char , l as int ) => ( b as bool ) starting here
+		Assign true to b . 
+		If length  is not l then execute code starting here
+			Return value false . 
+		ending here 
+		repeat length times starting here
+			If element counter in content  is not element counter in offset then execute code starting here
+				Return value false . 
+			ending here 
+		ending here 
+	ending here 
+	function : operator  is not ( a as string ) => ( b as bool ) starting here
+		Assign false to b . 
+		If length  is not length of a then execute code starting here
+			Return value true . 
+		ending here 
+		repeat length times starting here
+			If element counter in content  is not element counter in content of a then execute code starting here
+				Return value true . 
+			ending here 
+		ending here 
+	ending here 
+	function : operator  is not ( offset as pointer of char , l as int ) => ( b as bool ) starting here
+		Assign false to b . 
+		If length  is not l then execute code starting here
+			Return value true . 
+		ending here 
+		repeat length times starting here
+			If element counter in content  is not element counter in offset then execute code starting here
+				Return value true . 
+			ending here 
+		ending here 
+	ending here 
+	Declare function ${"ja":"切り取り", "natja":"切り取り", "en":"substr", "naten":"substr"}$ that takes s as int , e as int and returns b as string with code starting here
+		If s  > length then execute code starting here
+			Assign length to s . 
+		ending here 
+		If e  > length then execute code starting here
+			Assign length to e . 
+		ending here 
+		Assign allocMemory ( sizeof ( variable at content )  * ( e  - s ) ) to content of b . 
+		Assign e  - s to length of b . 
+		( Initialize variable i as int with s . ) from ( i  is e ) to ( Assign i  + 1 to i . ) starting here
+			Assign element i in content to element i  - s in content of b . 
+		ending here 
+	ending here 
+	Declare function ${"ja":"範囲切り取り", "natja":"範囲切り取り", "en":"substrRange", "naten":"substrRange"}$ that takes s as int , l as int and returns b as string with code starting here
+		If s  > length then execute code starting here
+			Assign length to s . 
+		ending here 
+		If s  + l  > length then execute code starting here
+			Assign length  - s to l . 
+		ending here 
+		Assign allocMemory ( sizeof ( variable at content )  * l ) to content of b . 
+		Assign l to length of b . 
+		( Initialize variable i as int with s . ) from ( i  is ( s  + l ) ) to ( Assign i  + 1 to i . ) starting here
+			Assign element i in content to element i  - s in content of b . 
+		ending here 
+	ending here 
+	Declare function ${"ja":"分割", "natja":"分割", "en":"separate", "naten":"separate"}$ that takes a as char and returns b as Array < string > with code starting here
+		Declare variable 結果 as Array < string > . 
+		Initialize variable 開始 as int with 0 . 
+		repeat length times starting here
+			If element counter in content  is a then execute code starting here
+				Call push of 結果 with value substr ( 開始 , counter ) . 
+				Assign counter  + 1 to 開始 . 
+			ending here 
+		ending here 
+		Call push of 結果 with value substr ( 開始 , length ) . 
+		Return value 結果 . 
+	ending here 
+	Declare function ${"ja":"整数変換", "natja":"整数変換", "en":"toInteger", "naten":"toInteger"}$ that returns a as int with code starting here
+		Assign 0 to a . 
+		repeat length times starting here
+			Initialize variable c as char with element counter in content . 
+			If c  is not '-'then execute code starting here
+				Assign a  * 10 to a . 
+			ending here 
+			If c  is '1'then execute code starting here
+				Assign a  + 1 to a . 
+			ending here 
+			If c  is '2'then execute code starting here
+				Assign a  + 2 to a . 
+			ending here 
+			If c  is '3'then execute code starting here
+				Assign a  + 3 to a . 
+			ending here 
+			If c  is '4'then execute code starting here
+				Assign a  + 4 to a . 
+			ending here 
+			If c  is '5'then execute code starting here
+				Assign a  + 5 to a . 
+			ending here 
+			If c  is '6'then execute code starting here
+				Assign a  + 6 to a . 
+			ending here 
+			If c  is '7'then execute code starting here
+				Assign a  + 7 to a . 
+			ending here 
+			If c  is '8'then execute code starting here
+				Assign a  + 8 to a . 
+			ending here 
+			If c  is '9'then execute code starting here
+				Assign a  + 9 to a . 
+			ending here 
+		ending here 
+		If element 0 in content  is '-'then execute code starting here
+			Assign a  * 0  - 1.0 to a . 
+		ending here 
+	ending here 
+	Declare function ${"ja":"実数変換", "natja":"実数変換", "en":"toDouble", "naten":"toDouble"}$ that returns a as double with code starting here
+		Assign 0 to a . 
+		Initialize variable b as Array < string > with separate ( '.') . 
+		If length of b ( )  is not 2 then execute code starting here
+			Return value 0.0 . 
+		ending here 
+		Assign a  + toInteger of element 0 in content of b ( ) to a . 
+		Initialize variable temp as double with toInteger of element 1 in content of b ( ) . 
+		repeat length of element 1 in content of b times starting here
+			Assign temp  * 0.100000000000000006 to temp . 
+		ending here 
+		Assign a  + temp to a . 
+	ending here 
+	Declare function ${"ja":"置換", "natja":"置換", "en":"replace", "naten":"replace"}$ that takes a as string , b as string and returns c as string with code starting here
+		Declare variable 結果 as string . 
+		Initialize variable 開始 as int with 0 . 
+		repeat length times starting here
+			If element counter in content  is element 0 in content of a then execute code starting here
+				If substrRange ( counter , length of a )  is a then execute code starting here
+					Assign 結果  + substr ( 開始 , counter ) to 結果 . 
+					Assign 結果  + b to 結果 . 
+					Assign counter  + length of a to counter . 
+					Assign counter to 開始 . 
+				ending here 
+			ending here 
+		ending here 
+		Assign 結果  + substr ( 開始 , length ) to 結果 . 
+		Return value 結果 . 
 	ending here 
 ending here 
 Declare function ${"ja":"文字列表示", "natja":"文字列表示", "en":"printString", "naten":"printString"}$ that takes a as string with code starting here
@@ -251,6 +631,12 @@ public : 	Declare variable x as double .
 		Assign x  / k to x of b . 
 		Assign y  / k to y of b . 
 		Assign z  / k to z of b . 
+	ending here 
+	function : operator  is ( a as Vector3D ) => ( b as bool ) starting here
+		Assign ( ( x of a  is x )  and ( y of a  is y )  and ( z of a  is z ) ) to b . 
+	ending here 
+	function : operator  is not ( a as Vector3D ) => ( b as bool ) starting here
+		Assign ( ( x of a  is not x )  or ( y of a  is not y )  or ( z of a  is not z ) ) to b . 
 	ending here 
 ending here 
 Declare function ${"ja":"ベクトル3Dの和", "natja":"ベクトル3Dの和", "en":"addVector3D", "naten":"addVector3D"}$ that takes a as Vector3D , b as Vector3D and returns result as Vector3D with code starting here
@@ -355,6 +741,24 @@ public : 	Declare variable element 16 in matrix as double .
 		Assign element 10 in matrix  * z to element 10 in matrix . 
 		Assign element 11 in matrix  * z to element 11 in matrix . 
 	ending here 
+	function : operator  * ( a as Matrix4x4 ) => ( b as Matrix4x4 ) starting here
+		Assign element 0 in matrix of a  * element 0 in matrix  + element 1 in matrix of a  * element 4 in matrix  + element 2 in matrix of a  * element 8 in matrix  + element 3 in matrix of a  * element 12 in matrix to element 0 in matrix of b . 
+		Assign element 0 in matrix of a  * element 1 in matrix  + element 1 in matrix of a  * element 5 in matrix  + element 2 in matrix of a  * element 9 in matrix  + element 3 in matrix of a  * element 13 in matrix to element 1 in matrix of b . 
+		Assign element 0 in matrix of a  * element 2 in matrix  + element 1 in matrix of a  * element 6 in matrix  + element 2 in matrix of a  * element 10 in matrix  + element 3 in matrix of a  * element 14 in matrix to element 2 in matrix of b . 
+		Assign element 0 in matrix of a  * element 3 in matrix  + element 1 in matrix of a  * element 7 in matrix  + element 2 in matrix of a  * element 11 in matrix  + element 3 in matrix of a  * element 15 in matrix to element 3 in matrix of b . 
+		Assign element 4 in matrix of a  * element 0 in matrix  + element 5 in matrix of a  * element 4 in matrix  + element 6 in matrix of a  * element 8 in matrix  + element 7 in matrix of a  * element 12 in matrix to element 4 in matrix of b . 
+		Assign element 4 in matrix of a  * element 1 in matrix  + element 5 in matrix of a  * element 5 in matrix  + element 6 in matrix of a  * element 9 in matrix  + element 7 in matrix of a  * element 13 in matrix to element 5 in matrix of b . 
+		Assign element 4 in matrix of a  * element 2 in matrix  + element 5 in matrix of a  * element 6 in matrix  + element 6 in matrix of a  * element 10 in matrix  + element 7 in matrix of a  * element 14 in matrix to element 6 in matrix of b . 
+		Assign element 4 in matrix of a  * element 3 in matrix  + element 5 in matrix of a  * element 7 in matrix  + element 6 in matrix of a  * element 11 in matrix  + element 7 in matrix of a  * element 15 in matrix to element 7 in matrix of b . 
+		Assign element 8 in matrix of a  * element 0 in matrix  + element 9 in matrix of a  * element 4 in matrix  + element 10 in matrix of a  * element 8 in matrix  + element 11 in matrix of a  * element 12 in matrix to element 8 in matrix of b . 
+		Assign element 8 in matrix of a  * element 1 in matrix  + element 9 in matrix of a  * element 5 in matrix  + element 10 in matrix of a  * element 9 in matrix  + element 11 in matrix of a  * element 13 in matrix to element 9 in matrix of b . 
+		Assign element 8 in matrix of a  * element 2 in matrix  + element 9 in matrix of a  * element 6 in matrix  + element 10 in matrix of a  * element 10 in matrix  + element 11 in matrix of a  * element 14 in matrix to element 10 in matrix of b . 
+		Assign element 8 in matrix of a  * element 3 in matrix  + element 9 in matrix of a  * element 7 in matrix  + element 10 in matrix of a  * element 11 in matrix  + element 11 in matrix of a  * element 15 in matrix to element 11 in matrix of b . 
+		Assign element 12 in matrix of a  * element 0 in matrix  + element 13 in matrix of a  * element 4 in matrix  + element 14 in matrix of a  * element 8 in matrix  + element 15 in matrix of a  * element 12 in matrix to element 12 in matrix of b . 
+		Assign element 12 in matrix of a  * element 1 in matrix  + element 13 in matrix of a  * element 5 in matrix  + element 14 in matrix of a  * element 9 in matrix  + element 15 in matrix of a  * element 13 in matrix to element 13 in matrix of b . 
+		Assign element 12 in matrix of a  * element 2 in matrix  + element 13 in matrix of a  * element 6 in matrix  + element 14 in matrix of a  * element 10 in matrix  + element 15 in matrix of a  * element 14 in matrix to element 14 in matrix of b . 
+		Assign element 12 in matrix of a  * element 3 in matrix  + element 13 in matrix of a  * element 7 in matrix  + element 14 in matrix of a  * element 11 in matrix  + element 15 in matrix of a  * element 15 in matrix to element 15 in matrix of b . 
+	ending here 
 ending here 
 Declare function ${"ja":"カメラ行列", "natja":"カメラ行列", "en":"setCameraMat", "naten":"setCameraMat"}$ that takes m as Matrix4x4 , pos as Vector3D , lookAt as Vector3D , up as Vector3D and returns res as Matrix4x4 with code starting here
 	Initialize object newForward as Vector3D with x of lookAt  - x of pos , y of lookAt  - y of pos , z of lookAt  - z of pos . 
@@ -412,29 +816,15 @@ public : 	Declare variable ${"ja":"色", "natja":"色", "en":"color", "naten":"c
 		Call identity of transMat . 
 		Call identity of scaleMat . 
 		Call identity of rotateMat . 
-		Initialize variable element 8 in _lightPosUniform as char with "lightPos". 
-		Initialize variable element 8 in _viewPosUniform as char with "viewPos". 
-		Initialize variable element 10 in _lightColorUniform as char with "lightColor". 
-		Initialize variable element 11 in _objectColorUniform as char with "objectColor". 
-		Initialize variable element 8 in _projUniform as char with "uProjMat". 
-		Initialize variable element 8 in _viewUniform as char with "uViewMat". 
-		Initialize variable element 9 in _modelUniform as char with "uModelMat". 
-		Initialize object lightPosUniform as string with & _lightPosUniform , 8 . 
-		Initialize object viewPosUniform as string with & _viewPosUniform , 7 . 
-		Initialize object lightColorUniform as string with & _lightColorUniform , 10 . 
-		Initialize object objectColorUniform as string with & _objectColorUniform , 11 . 
-		Initialize object projUniform as string with & _projUniform , 8 . 
-		Initialize object viewUniform as string with & _viewUniform , 8 . 
-		Initialize object modelUniform as string with & _modelUniform , 9 . 
 		If shaderID  is 0 then execute code starting here
-			Assign glGetUniformLocation ( 0 , viewPosUniform ) to viewPosUniLoc . 
-			Assign glGetUniformLocation ( 0 , lightPosUniform ) to lightPosUniLoc . 
-			Assign glGetUniformLocation ( 0 , lightColorUniform ) to lightColorUniLoc . 
-			Assign glGetUniformLocation ( 0 , objectColorUniform ) to objectColorUniLoc . 
+			Assign glGetUniformLocation ( 0 , "viewPos") to viewPosUniLoc . 
+			Assign glGetUniformLocation ( 0 , "lightPos") to lightPosUniLoc . 
+			Assign glGetUniformLocation ( 0 , "lightColor") to lightColorUniLoc . 
+			Assign glGetUniformLocation ( 0 , "objectColor") to objectColorUniLoc . 
 		ending here 
-		Assign glGetUniformLocation ( shaderID , projUniform ) to projMatUniformLoc . 
-		Assign glGetUniformLocation ( shaderID , viewUniform ) to viewMatUniformLoc . 
-		Assign glGetUniformLocation ( shaderID , modelUniform ) to modelMatUniformLoc . 
+		Assign glGetUniformLocation ( shaderID , "uProjMat") to projMatUniformLoc . 
+		Assign glGetUniformLocation ( shaderID , "uViewMat") to viewMatUniformLoc . 
+		Assign glGetUniformLocation ( shaderID , "uModelMat") to modelMatUniformLoc . 
 		Assign glCreateBuffer ( ) to buffer . 
 		Call glBindBuffer with value 34962 , buffer . 
 		Call glBufferData with value 34962 , vertices , num  * 6 , 35044 . 
@@ -632,6 +1022,12 @@ public : 	Declare variable x as double .
 		Assign x  / l to x . 
 		Assign y  / l to y . 
 	ending here 
+	function : operator  is ( a as Vector2D ) => ( b as bool ) starting here
+		Assign ( ( x of a  is x )  and ( y of a  is y ) ) to b . 
+	ending here 
+	function : operator  is not ( a as Vector2D ) => ( b as bool ) starting here
+		Assign ( ( x of a  is not x )  or ( y of a  is not y ) ) to b . 
+	ending here 
 ending here 
 Declare function ${"ja":"ベクトル2Dの和", "natja":"ベクトル2Dの和", "en":"addVector2D", "naten":"addVector2D"}$ that takes a as Vector2D , b as Vector2D and returns result as Vector2D with code starting here
 	Assign x of a  + x of b to x of result . 
@@ -666,6 +1062,19 @@ public : 	Declare variable id as int .
 		Assign d to duration . 
 		Assign x to x of info . 
 		Assign y to y of info . 
+	ending here 
+	Declare function AnimationInfo with code starting here
+		Assign 0 to id . 
+		Assign 0 to startTime . 
+		Assign 0 to duration . 
+		Assign 0 to x of info . 
+		Assign 0 to y of info . 
+	ending here 
+	function : operator  is ( a as AnimationInfo ) => ( b as bool ) starting here
+		Assign ( ( id of a  is id )  and ( startTime of a  is startTime )  and ( duration of a  is duration )  and ( info of a  is info )  and ( info of a  is info ) ) to b . 
+	ending here 
+	function : operator  is not ( a as AnimationInfo ) => ( b as bool ) starting here
+		Assign ( ( id of a  is not id )  or ( startTime of a  is not startTime )  or ( duration of a  is not duration )  or ( info of a  is not info )  or ( info of a  is not info ) ) to b . 
 	ending here 
 ending here 
 Declare class ${"ja":"スプライト", "natja":"スプライト", "en":"Sprite", "naten":"Sprite"}$ with members starting here
@@ -931,8 +1340,8 @@ public : 	Declare variable ${"ja":"スプライト配列", "natja":"スプライ
 	Declare function ${"ja":"多角形追加", "natja":"多角形追加", "en":"addPolygon", "naten":"addPolygon"}$ that takes points as Array < Vector2D > , pos as Vector2D , color as Vector3D , zIndex as double and returns id as int with code starting here
 		Declare variable temp as Array < double > . 
 		repeat length of points ( ) times starting here
-			Call push of temp with value x of get of points ( counter ) . 
-			Call push of temp with value y of get of points ( counter ) . 
+			Call push of temp with value x of element counter in content of points . 
+			Call push of temp with value y of element counter in content of points . 
 			Call push of temp with value 0  - zIndex  * 0.00100000000000000002 . 
 		ending here 
 		Initialize variable sprite as pointer of Sprite with allocMemory ( sizeof ( variable at sprite ) ) . 

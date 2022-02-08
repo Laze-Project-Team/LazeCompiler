@@ -71,10 +71,17 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
         }
         std::string ruleName = "";
         std::string specificType = "";
+        if(info["specificType"].is_string()){
+            specificType = info["specificType"].get<std::string>();
+        }
         if(config["type"].get<std::string>() == "programming"){
             if(type == "dec" && kind == "func"){
                 ruleName = "dec.func.normal";
                 ruleString = rule["dec"]["func"]["normal"].get<std::string>();
+                if(specificType.substr(0, 9) == "prototype"){
+                    ruleName = "dec.func.prototype";
+                    ruleString = rule["dec"]["func"]["prototype"].get<std::string>();
+                }
             }
             if(type == "dec" && kind == "jsload"){
                 ruleName = "dec.jsload.normal";

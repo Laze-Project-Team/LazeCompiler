@@ -157,7 +157,8 @@
                 "inherit":"class : id(name) <- id(inherit) { memlist }"
             },
             "func": {
-                "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm"
+                "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) stm",
+                "prototype":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) ;"
             },
             "jsload": {
                 "normal":"function : id ( fieldlist(params) ) => ( fieldlist(result) ) = jsload ( string(module) , string(func) ) ;"
@@ -300,7 +301,8 @@
             "few":"This function call lacks arguments.",
             "many":"There are too many arguments in this function call.",
             "cannotcall":"This function cannot be called.",
-            "unknownfield":"Change this argument into a variable or an array."
+            "unknownfield":"Change this argument into a variable or an array.",
+            "notdefined":"Function $1 is declared but not defined."
         },
         "class":{
             "private":"Since $1 is a private member, you cannot access it outside the class.",

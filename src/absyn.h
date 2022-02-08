@@ -279,7 +279,8 @@ enum decType
     A_funcExportDec,
     A_classDec,
     A_templateDec,
-    A_operatorDec
+    A_operatorDec,
+    A_funcprotoDec
 };
 struct A_dec_
 {
@@ -334,6 +335,12 @@ struct A_dec_
             A_fieldList result;
             A_stm body;
         } op;
+        struct
+        {
+            S_symbol name;
+            A_fieldList params;
+            A_fieldList result;
+        } funcproto;
     } u;
 };
 enum tyType
@@ -507,6 +514,7 @@ A_dec A_FuncExport(A_pos pos, S_symbol name, string exportName);
 A_dec A_ClassDec(A_pos pos, S_symbol name, A_classMemberList members, S_symbolList inheritance);
 A_dec A_TemplateDec(A_pos pos, S_symbol name, A_dec dec);
 A_dec A_OperatorDec(A_pos pos, A_oper oper, A_fieldList params, A_fieldList result, A_stm body);
+A_dec A_FuncProtoDec(A_pos pos, S_symbol name, A_fieldList params, A_fieldList result);
 
 A_ty A_NameTy(A_pos pos, S_symbol name);
 A_ty A_RecordTy(A_pos pos, A_fieldList record);

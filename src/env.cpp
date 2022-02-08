@@ -10,7 +10,7 @@ E_enventry E_VarEntry(Tr_access access, Ty_ty ty)
     p -> u.var.access = access;
     return p;
 }
-E_enventry E_FuncEntry(Tr_level level, Temp_label label, Ty_tyList params, Tr_access result, Ty_ty returnType)
+E_enventry E_FuncEntry(Tr_level level, Temp_label label, Ty_tyList params, Tr_access result, Ty_ty returnType, bool prototype)
 {
     E_enventry p = (E_enventry)checked_malloc(sizeof(*p));
     p -> kind = E_funcentry;
@@ -19,8 +19,12 @@ E_enventry E_FuncEntry(Tr_level level, Temp_label label, Ty_tyList params, Tr_ac
     p -> u.func.returnType = returnType;
     p -> u.func.level = level;
     p -> u.func.label = label;
-    p -> u.func.index = funcs;
-    funcs++;
+    p -> u.func.index = -funcs;
+    p -> u.func.prototype = prototype;
+    if(!prototype){
+        funcs++;
+        p -> u.func.index *= -1;
+    }
     return p;
 }
 E_enventry E_ClassEntry(S_symbol name, int size, S_table varTypes, S_table methods, Ty_ty type)

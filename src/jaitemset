@@ -1,0 +1,4022 @@
+itemSet0:
+start-> >>> declist
+additionalRules-> -------------------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+declist.dec-> >>> dec
+declist.null-> >>>
+additionalRules-> ------------------
+
+itemSet1:
+ty.funcnormal-> function >>> : ( fieldlist ) => ( fieldlist )
+dec.jsload.normal-> function >>> : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> function >>> : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> function >>> : id ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnormal-> function >>> : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.func.prototype-> function >>> : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> function >>> : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet2:
+ty.int-> inttype >>>
+additionalRules-> -------------------
+
+itemSet3:
+ty.short-> shorttype >>>
+additionalRules-> -------------------
+
+itemSet4:
+ty.real-> realtype >>>
+additionalRules-> -------------------
+
+itemSet5:
+ty.char-> chartype >>>
+additionalRules-> -------------------
+
+itemSet6:
+dec.template-> type >>> < id > : dec
+additionalRules-> -------------------
+
+itemSet7:
+ty.void-> void >>>
+additionalRules-> -------------------
+
+itemSet8:
+ty.bool-> boolean >>>
+additionalRules-> -------------------
+
+itemSet9:
+dec.jsexport-> jsexport >>> ( id , string ) ;
+additionalRules-> -------------------
+
+itemSet10:
+dec.class.noinherit-> class >>> : id { memlist }
+dec.class.inherit-> class >>> : id <- id { memlist }
+additionalRules-> -------------------
+
+itemSet11:
+ty.pointer-> * >>> ty
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+
+itemSet12:
+ty.poly-> id >>> < ty >
+ty.name-> id >>>
+additionalRules-> -------------------
+
+itemSet13:
+declist.null->  >>>
+additionalRules-> -------------------
+
+itemSet14:
+declist.declist-> dec >>> declist
+declist.dec-> dec >>>
+additionalRules-> -------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+declist.dec-> >>> dec
+declist.null-> >>>
+
+itemSet15:
+dec.var.noinit-> ty >>> : var ;
+dec.object-> ty >>> : var ( explist ) ;
+dec.var.init-> ty >>> : var = exp ;
+additionalRules-> -------------------
+
+itemSet16:
+start-> declist >>>
+additionalRules-> -------------------
+
+itemSet17:
+ty.funcnormal-> function : >>> ( fieldlist ) => ( fieldlist )
+dec.jsload.normal-> function : >>> id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> function : >>> operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> function : >>> id ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnormal-> function : >>> operator = ( fieldlist ) => ( fieldlist ) stm
+dec.func.prototype-> function : >>> id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> function : >>> operator [ ] ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet18:
+dec.template-> type < >>> id > : dec
+additionalRules-> -------------------
+
+itemSet19:
+dec.jsexport-> jsexport ( >>> id , string ) ; 
+additionalRules-> -------------------
+
+itemSet20:
+dec.class.noinherit-> class : >>> id { memlist }
+dec.class.inherit-> class : >>> id <- id { memlist }
+additionalRules-> -------------------
+
+itemSet21:
+ty.funcnormal-> function >>> : ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet22:
+ty.pointer-> * ty >>>
+additionalRules-> -------------------
+
+itemSet23:
+ty.poly-> id < >>> ty >
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+
+itemSet24:
+declist.declist-> dec declist >>>
+additionalRules-> -------------------
+
+itemSet25:
+dec.var.noinit-> ty : >>> var ;
+dec.object-> ty : >>> var ( explist ) ;
+dec.var.init-> ty : >>> var = exp ;
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+
+itemSet26:
+dec.operator.normal-> function : operator >>> oper ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnormal-> function : operator >>> = ( fieldlist ) => ( fieldlist ) stm
+dec.operator.subscriptnormal-> function : operator >>> [ ] ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet27:
+ty.funcnormal-> function : ( >>> fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet28:
+dec.jsload.normal-> function : id >>> ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id >>> ( fieldlist ) => ( fieldlist ) stm
+dec.func.prototype-> function : id >>> ( fieldlist ) => ( fieldlist ) ;
+additionalRules-> -------------------
+
+itemSet29:
+dec.template-> type < id >>> > : dec
+additionalRules-> -------------------
+
+itemSet30:
+dec.jsexport-> jsexport ( id >>> , string ) ;
+additionalRules-> -------------------
+
+itemSet31:
+dec.class.noinherit-> class : id >>> { memlist }
+dec.class.inherit-> class : id >>> <- id { memlist }
+additionalRules-> -------------------
+
+itemSet32:
+ty.funcnormal-> function : >>> ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet33:
+ty.poly-> id < ty >>> >
+additionalRules-> -------------------
+
+itemSet34:
+var.deref-> * >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+
+itemSet35:
+var.simple-> id >>>
+additionalRules-> -------------------
+
+itemSet36:
+dec.var.noinit-> ty : var >>> ;
+dec.object-> ty : var >>> ( explist ) ;
+dec.var.init-> ty : var >>> = exp ;
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet37:
+dec.operator.subscriptnormal-> function : operator [ >>> ] ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet38:
+oper.mul-> * >>>
+additionalRules-> -------------------
+
+itemSet39:
+oper.div-> / >>>
+additionalRules-> -------------------
+
+itemSet40:
+oper.mod-> % >>>
+additionalRules-> -------------------
+
+itemSet41:
+oper.add-> + >>>
+additionalRules-> -------------------
+
+itemSet42:
+oper.sub-> - >>>
+additionalRules-> -------------------
+
+itemSet43:
+oper.eq-> == >>>
+additionalRules-> -------------------
+
+itemSet44:
+oper.neq-> != >>>
+additionalRules-> -------------------
+
+itemSet45:
+oper.le-> <= >>>
+additionalRules-> -------------------
+
+itemSet46:
+oper.ge-> >= >>>
+additionalRules-> -------------------
+
+itemSet47:
+oper.lt-> < >>>
+additionalRules-> -------------------
+
+itemSet48:
+oper.gt-> > >>>
+additionalRules-> -------------------
+
+itemSet49:
+dec.operator.assignnormal-> function : operator = >>> ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet50:
+oper.and-> && >>>
+additionalRules-> -------------------
+
+itemSet51:
+oper.or-> || >>>
+additionalRules-> -------------------
+
+itemSet52:
+dec.operator.normal-> function : operator oper >>> ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet53:
+field.func-> function >>> : id ( fieldlist ) => ( fieldlist )
+ty.funcnormal-> function >>> : ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet54:
+fieldlist.null->  >>>
+additionalRules-> -------------------
+
+itemSet55:
+field.noinit-> ty >>> : var
+additionalRules-> -------------------
+
+itemSet56:
+fieldlist.field-> field >>>
+fieldlist.fieldlist-> field >>> , fieldlist
+additionalRules-> -------------------
+
+itemSet57:
+ty.funcnormal-> function : ( fieldlist >>> ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet58:
+dec.jsload.normal-> function : id ( >>> fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( >>> fieldlist ) => ( fieldlist ) stm
+dec.func.prototype-> function : id ( >>> fieldlist ) => ( fieldlist ) ; 
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet59:
+dec.template-> type < id > >>> : dec
+additionalRules-> -------------------
+
+itemSet60:
+dec.jsexport-> jsexport ( id , >>> string ) ;
+additionalRules-> -------------------
+
+itemSet61:
+dec.class.noinherit-> class : id { >>> memlist }
+additionalRules-> -------------------
+memlist.memlist-> >>> memlist mems
+memlist.mems-> >>> mems
+mems.nospecifier-> >>> declist
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+declist.dec-> >>> dec
+declist.null-> >>>
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+mems.public-> >>> public : declist
+
+itemSet62:
+dec.class.inherit-> class : id <- >>> id { memlist }
+additionalRules-> -------------------
+
+itemSet63:
+ty.poly-> id < ty > >>>
+additionalRules-> -------------------
+
+itemSet64:
+var.deref-> * var >>>
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet65:
+dec.var.noinit-> ty : var ; >>>
+additionalRules-> -------------------
+
+itemSet66:
+dec.object-> ty : var ( >>> explist ) ;
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp 
+
+itemSet67:
+var.subscript-> var [ >>> exp ]
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet68:
+var.field-> var . >>> id
+additionalRules-> -------------------
+
+itemSet69:
+var.arrowfield-> var -> >>> id
+additionalRules-> -------------------
+
+itemSet70:
+dec.var.init-> ty : var = >>> exp ;
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet71:
+dec.operator.subscriptnormal-> function : operator [ ] >>> ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet72:
+dec.operator.assignnormal-> function : operator = ( >>> fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet73:
+dec.operator.normal-> function : operator oper ( >>> fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty 
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet74:
+field.func-> function : >>> id ( fieldlist ) => ( fieldlist )
+ty.funcnormal-> function : >>> ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet75:
+field.noinit-> ty : >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+
+itemSet76:
+fieldlist.fieldlist-> field , >>> fieldlist
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet77:
+ty.funcnormal-> function : ( fieldlist ) >>> => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet78:
+dec.jsload.normal-> function : id ( fieldlist >>> ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist >>> ) => ( fieldlist ) stm
+dec.func.prototype-> function : id ( fieldlist >>> ) => ( fieldlist ) ;
+additionalRules-> -------------------
+
+itemSet79:
+dec.template-> type < id > : >>> dec
+additionalRules-> -------------------
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+
+itemSet80:
+dec.jsexport-> jsexport ( id , string >>> ) ;
+additionalRules-> -------------------
+
+itemSet81:
+mems.public-> public >>> : declist
+additionalRules-> -------------------
+
+itemSet82:
+mems.private-> private >>> : declist
+additionalRules-> -------------------
+
+itemSet83:
+mems.protected-> protected >>> : declist
+additionalRules-> -------------------
+
+itemSet84:
+mems.nospecifier-> declist >>>
+additionalRules-> -------------------
+
+itemSet85:
+dec.class.noinherit-> class : id { memlist >>> }
+memlist.memlist-> memlist >>> mems
+additionalRules-> -------------------
+mems.nospecifier-> >>> declist
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+declist.dec-> >>> dec
+declist.null-> >>>
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+mems.public-> >>> public : declist
+
+itemSet86:
+memlist.mems-> mems >>>
+additionalRules-> -------------------
+
+itemSet87:
+dec.class.inherit-> class : id <- id >>> { memlist }
+additionalRules-> -------------------
+
+itemSet88:
+exp.true-> true >>>
+additionalRules-> -------------------
+
+itemSet89:
+exp.false-> false >>>
+additionalRules-> -------------------
+
+itemSet90:
+exp.sizeof-> sizeof >>> ( var )
+additionalRules-> -------------------
+
+itemSet91:
+exp.typeeq-> typeComp >>> ( ty , ty )
+additionalRules-> -------------------
+
+itemSet92:
+exp.char-> char >>>
+additionalRules-> -------------------
+
+itemSet93:
+exp.string-> string >>>
+additionalRules-> -------------------
+
+itemSet94:
+exp.func-> ( >>> fieldlist ) => ( fieldlist ) stm
+exp.paren-> ( >>> exp )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet95:
+exp.array-> [ >>> explist ]
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet96:
+exp.record-> { >>> explist }
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet97:
+exp.minus-> - >>> exp
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet98:
+exp.address-> & >>> var
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+
+itemSet99:
+exp.real-> real >>>
+additionalRules-> -------------------
+
+itemSet100:
+exp.int-> int >>>
+additionalRules-> -------------------
+
+itemSet101:
+explist.null->  >>>
+additionalRules-> -------------------
+
+itemSet102:
+explist.explist-> exp >>> , explist
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+explist.exp-> exp >>>
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet103:
+exp.var-> var >>>
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet104:
+dec.object-> ty : var ( explist >>> ) ;
+additionalRules-> -------------------
+
+itemSet105:
+var.subscript-> var [ exp >>> ]
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet106:
+var.field-> var . id >>>
+additionalRules-> -------------------
+
+itemSet107:
+var.arrowfield-> var -> id >>>
+additionalRules-> -------------------
+
+itemSet108:
+dec.var.init-> ty : var = exp >>> ;
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet109:
+dec.operator.subscriptnormal-> function : operator [ ] ( >>> fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet110:
+dec.operator.assignnormal-> function : operator = ( fieldlist >>> ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet111:
+dec.operator.normal-> function : operator oper ( fieldlist >>> ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet112:
+field.func-> function : id >>> ( fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet113:
+field.noinit-> ty : var >>>
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet114:
+fieldlist.fieldlist-> field , fieldlist >>>
+additionalRules-> -------------------
+
+itemSet115:
+ty.funcnormal-> function : ( fieldlist ) => >>> ( fieldlist )
+additionalRules-> -------------------
+
+itemSet116:
+dec.jsload.normal-> function : id ( fieldlist ) >>> => ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) >>> => ( fieldlist ) stm
+dec.func.prototype-> function : id ( fieldlist ) >>> => ( fieldlist ) ;
+additionalRules-> -------------------
+
+itemSet117:
+dec.template-> type < id > : dec >>>
+additionalRules-> -------------------
+
+itemSet118:
+dec.jsexport-> jsexport ( id , string ) >>> ;
+additionalRules-> -------------------
+
+itemSet119:
+mems.public-> public : >>> declist
+additionalRules-> -------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+declist.dec-> >>> dec
+declist.null-> >>>
+
+itemSet120:
+mems.private-> private : >>> declist
+additionalRules-> -------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+declist.dec-> >>> dec
+declist.null-> >>>
+
+itemSet121:
+mems.protected-> protected : >>> declist
+additionalRules-> -------------------
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+declist.dec-> >>> dec
+declist.null-> >>>
+
+itemSet122:
+dec.class.noinherit-> class : id { memlist } >>>
+additionalRules-> -------------------
+
+itemSet123:
+memlist.memlist-> memlist mems >>>
+additionalRules-> -------------------
+
+itemSet124:
+dec.class.inherit-> class : id <- id { >>> memlist }
+additionalRules-> -------------------
+memlist.memlist-> >>> memlist mems
+memlist.mems-> >>> mems
+mems.nospecifier-> >>> declist
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+declist.dec-> >>> dec
+declist.null-> >>>
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+mems.public-> >>> public : declist
+
+itemSet125:
+exp.sizeof-> sizeof ( >>> var )
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+
+itemSet126:
+exp.typeeq-> typeComp ( >>> ty , ty )
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+
+itemSet127:
+ty.pointer-> * >>> ty
+var.deref-> * >>> var
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+
+itemSet128:
+ty.poly-> id >>> < ty >
+ty.name-> id >>>
+var.simple-> id >>>
+additionalRules-> -------------------
+
+itemSet129:
+exp.paren-> ( exp >>> )
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet130:
+exp.func-> ( fieldlist >>> ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet131:
+exp.array-> [ explist >>> ]
+additionalRules-> -------------------
+
+itemSet132:
+exp.record-> { explist >>> }
+additionalRules-> -------------------
+
+itemSet133:
+exp.minus-> - exp >>>
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet134:
+exp.address-> & var >>>
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet135:
+exp.call-> exp ( >>> explist )
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet136:
+exp.subscript-> exp [ >>> exp ]
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet137:
+exp.field-> exp . >>> id
+additionalRules-> -------------------
+
+itemSet138:
+exp.arrowfield-> exp -> >>> id
+additionalRules-> -------------------
+
+itemSet139:
+explist.explist-> exp , >>> explist
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet140:
+exp.op-> exp oper >>> exp
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var 
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet141:
+dec.object-> ty : var ( explist ) >>> ;
+additionalRules-> -------------------
+
+itemSet142:
+var.subscript-> var [ exp ] >>>
+additionalRules-> -------------------
+
+itemSet143:
+dec.var.init-> ty : var = exp ; >>>
+additionalRules-> -------------------
+
+itemSet144:
+dec.operator.subscriptnormal-> function : operator [ ] ( fieldlist >>> ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet145:
+dec.operator.assignnormal-> function : operator = ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet146:
+dec.operator.normal-> function : operator oper ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet147:
+field.func-> function : id ( >>> fieldlist ) => ( fieldlist )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet148:
+ty.funcnormal-> function : ( fieldlist ) => ( >>> fieldlist )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet149:
+dec.jsload.normal-> function : id ( fieldlist ) => >>> ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) => >>> ( fieldlist ) stm
+dec.func.prototype-> function : id ( fieldlist ) => >>> ( fieldlist ) ;
+additionalRules-> -------------------
+
+itemSet150:
+dec.jsexport-> jsexport ( id , string ) ; >>>
+additionalRules-> -------------------
+
+itemSet151:
+mems.public-> public : declist >>>
+additionalRules-> -------------------
+
+itemSet152:
+mems.private-> private : declist >>>
+additionalRules-> -------------------
+
+itemSet153:
+mems.protected-> protected : declist >>>
+additionalRules-> -------------------
+
+itemSet154:
+dec.class.inherit-> class : id <- id { memlist >>> }
+memlist.memlist-> memlist >>> mems
+additionalRules-> -------------------
+mems.nospecifier-> >>> declist
+declist.declist-> >>> dec declist
+dec.class.noinherit-> >>> class : id { memlist } 
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+declist.dec-> >>> dec
+declist.null-> >>>
+mems.protected-> >>> protected : declist
+mems.private-> >>> private : declist
+mems.public-> >>> public : declist
+
+itemSet155:
+exp.sizeof-> sizeof ( var >>> )
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet156:
+exp.typeeq-> typeComp ( ty >>> , ty )
+additionalRules-> -------------------
+
+itemSet157:
+exp.paren-> ( exp ) >>>
+additionalRules-> -------------------
+
+itemSet158:
+exp.func-> ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet159:
+exp.array-> [ explist ] >>>
+additionalRules-> -------------------
+
+itemSet160:
+exp.record-> { explist } >>>
+additionalRules-> -------------------
+
+itemSet161:
+exp.call-> exp ( explist >>> )
+additionalRules-> -------------------
+
+itemSet162:
+exp.subscript-> exp [ exp >>> ]
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet163:
+exp.field-> exp . id >>>
+additionalRules-> -------------------
+
+itemSet164:
+exp.arrowfield-> exp -> id >>>
+additionalRules-> -------------------
+
+itemSet165:
+explist.explist-> exp , explist >>>
+additionalRules-> -------------------
+
+itemSet166:
+exp.op-> exp oper exp >>>
+exp.arrowfield-> exp >>> -> id 
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet167:
+dec.object-> ty : var ( explist ) ; >>>
+additionalRules-> -------------------
+
+itemSet168:
+dec.operator.subscriptnormal-> function : operator [ ] ( fieldlist ) >>> => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet169:
+dec.operator.assignnormal-> function : operator = ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet170:
+dec.operator.normal-> function : operator oper ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet171:
+field.func-> function : id ( fieldlist >>> ) => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet172:
+ty.funcnormal-> function : ( fieldlist ) => ( fieldlist >>> )
+additionalRules-> -------------------
+
+itemSet173:
+dec.jsload.normal-> function : id ( fieldlist ) => ( >>> fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) => ( >>> fieldlist ) stm
+dec.func.prototype-> function : id ( fieldlist ) => ( >>> fieldlist ) ;
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet174:
+dec.class.inherit-> class : id <- id { memlist } >>>
+additionalRules-> -------------------
+
+itemSet175:
+exp.sizeof-> sizeof ( var ) >>>
+additionalRules-> -------------------
+
+itemSet176:
+exp.typeeq-> typeComp ( ty , >>> ty )
+additionalRules-> -------------------
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+
+itemSet177:
+exp.func-> ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet178:
+exp.call-> exp ( explist ) >>>
+additionalRules-> -------------------
+
+itemSet179:
+exp.subscript-> exp [ exp ] >>>
+additionalRules-> -------------------
+
+itemSet180:
+dec.operator.subscriptnormal-> function : operator [ ] ( fieldlist ) => >>> ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet181:
+dec.operator.assignnormal-> function : operator = ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet182:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet183:
+field.func-> function : id ( fieldlist ) >>> => ( fieldlist )
+additionalRules-> -------------------
+
+itemSet184:
+ty.funcnormal-> function : ( fieldlist ) => ( fieldlist ) >>>
+additionalRules-> -------------------
+
+itemSet185:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist >>> ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) => ( fieldlist >>> ) stm
+dec.func.prototype-> function : id ( fieldlist ) => ( fieldlist >>> ) ;
+additionalRules-> -------------------
+
+itemSet186:
+exp.typeeq-> typeComp ( ty , ty >>> )
+additionalRules-> -------------------
+
+itemSet187:
+exp.func-> ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet188:
+dec.operator.subscriptnormal-> function : operator [ ] ( fieldlist ) => ( >>> fieldlist ) stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var 
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet189:
+dec.operator.assignnormal-> function : operator = ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet190:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet191:
+field.func-> function : id ( fieldlist ) => >>> ( fieldlist )
+additionalRules-> -------------------
+
+itemSet192:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) >>> = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) => ( fieldlist ) >>> stm
+dec.func.prototype-> function : id ( fieldlist ) => ( fieldlist ) >>> ;
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet193:
+exp.typeeq-> typeComp ( ty , ty ) >>>
+additionalRules-> ------------------- 
+
+itemSet194:
+exp.func-> ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet195:
+dec.operator.subscriptnormal-> function : operator [ ] ( fieldlist ) => ( fieldlist >>> ) stm
+additionalRules-> -------------------
+
+itemSet196:
+dec.operator.assignnormal-> function : operator = ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet197:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec 
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet198:
+field.func-> function : id ( fieldlist ) => ( >>> fieldlist )
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet199:
+stm.if.ifelse-> if >>> ( exp ) then stm else stm
+stm.if.if-> if >>> ( exp ) then stm
+additionalRules-> -------------------
+
+itemSet200:
+stm.break-> break >>> ;
+additionalRules-> -------------------
+
+itemSet201:
+stm.continue-> continue >>> ;
+additionalRules-> -------------------
+
+itemSet202:
+stm.loop-> loop >>> stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm 
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet203:
+stm.return.exp-> return >>> ( exp ) ;
+stm.return.noexp-> return >>> ;
+additionalRules-> -------------------
+
+itemSet204:
+dec.func.prototype-> function : id ( fieldlist ) => ( fieldlist ) ; >>>
+additionalRules-> -------------------
+
+itemSet205:
+exp.func-> ( >>> fieldlist ) => ( fieldlist ) stm
+exp.paren-> ( >>> exp )
+stm.for-> ( >>> stm ) from ( exp ) to ( stm ) stm
+stm.while-> ( >>> exp ) to stm
+stm.repeat-> ( >>> exp ) repeat stm
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true 
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet206:
+exp.record-> { >>> explist }
+stm.compound-> { >>> stmlist }
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+stmlist.stmlist-> >>> stm stmlist
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+stmlist.stm-> >>> stm
+stmlist.null-> >>>
+
+itemSet207:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) = >>> jsload ( string , string ) ;
+additionalRules-> -------------------
+
+itemSet208:
+stm.call.normal-> exp >>> ( explist ) ;
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet209:
+exp.var-> var >>>
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+stm.assign.sub-> var >>> - = exp ;
+stm.assign.normal-> var >>> = exp ;
+stm.assign.mul-> var >>> * = exp ;
+stm.assign.increment-> var >>> + + ;
+stm.assign.div-> var >>> / = exp ;
+stm.assign.add-> var >>> + = exp ;
+stm.assign.decrement-> var >>> - - ;
+additionalRules-> -------------------
+
+itemSet210:
+stm.dec-> dec >>>
+additionalRules-> -------------------
+
+itemSet211:
+dec.func.normal-> function : id ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet212:
+exp.func-> ( fieldlist ) => ( fieldlist ) >>> stm 
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet213:
+dec.operator.subscriptnormal-> function : operator [ ] ( fieldlist ) => ( fieldlist ) >>> stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype 
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet214:
+dec.operator.assignnormal-> function : operator = ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet215:
+dec.operator.normal-> function : operator oper ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet216:
+field.func-> function : id ( fieldlist ) => ( fieldlist >>> )
+additionalRules-> -------------------
+
+itemSet217:
+stm.if.ifelse-> if ( >>> exp ) then stm else stm
+stm.if.if-> if ( >>> exp ) then stm
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp 
+exp.false-> >>> false
+
+itemSet218:
+stm.break-> break ; >>>
+additionalRules-> -------------------
+
+itemSet219:
+stm.continue-> continue ; >>>
+additionalRules-> -------------------
+
+itemSet220:
+stm.loop-> loop stm >>>
+additionalRules-> -------------------
+
+itemSet221:
+stm.return.noexp-> return ; >>>
+additionalRules-> -------------------
+
+itemSet222:
+stm.return.exp-> return ( >>> exp ) ;
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet223:
+field.func-> function >>> : id ( fieldlist ) => ( fieldlist )
+ty.funcnormal-> function >>> : ( fieldlist ) => ( fieldlist )
+dec.jsload.normal-> function >>> : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> function >>> : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> function >>> : id ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnormal-> function >>> : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.func.prototype-> function >>> : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> function >>> : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet224:
+exp.paren-> ( exp >>> )
+stm.while-> ( exp >>> ) to stm
+stm.repeat-> ( exp >>> ) repeat stm
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+stm.call.normal-> exp >>> ( explist ) ;
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet225:
+stm.for-> ( stm >>> ) from ( exp ) to ( stm ) stm
+additionalRules-> -------------------
+
+itemSet226:
+field.noinit-> ty >>> : var
+dec.var.noinit-> ty >>> : var ;
+dec.object-> ty >>> : var ( explist ) ;
+dec.var.init-> ty >>> : var = exp ;
+additionalRules-> -------------------
+
+itemSet227:
+var.deref-> * >>> var
+ty.pointer-> * >>> ty
+additionalRules-> -------------------
+var.simple-> >>> id 
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+
+itemSet228:
+var.simple-> id >>>
+ty.poly-> id >>> < ty >
+ty.name-> id >>>
+additionalRules-> -------------------
+
+itemSet229:
+explist.null->  >>>
+stmlist.null->  >>>
+additionalRules-> -------------------
+
+itemSet230:
+explist.explist-> exp >>> , explist
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+explist.exp-> exp >>>
+stm.call.normal-> exp >>> ( explist ) ;
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet231:
+stmlist.stmlist-> stm >>> stmlist
+stmlist.stm-> stm >>>
+additionalRules-> -------------------
+stmlist.stmlist-> >>> stm stmlist
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist ) 
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+stmlist.stm-> >>> stm
+stmlist.null-> >>>
+
+itemSet232:
+stm.compound-> { stmlist >>> }
+additionalRules-> -------------------
+
+itemSet233:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) = jsload >>> ( string , string ) ;
+additionalRules-> -------------------
+
+itemSet234:
+stm.call.normal-> exp ( >>> explist ) ;
+exp.call-> exp ( >>> explist )
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet235:
+stm.assign.mul-> var * >>> = exp ;
+additionalRules-> -------------------
+
+itemSet236:
+stm.assign.div-> var / >>> = exp ;
+additionalRules-> -------------------
+
+itemSet237:
+stm.assign.increment-> var + >>> + ;
+stm.assign.add-> var + >>> = exp ;
+additionalRules-> -------------------
+
+itemSet238:
+stm.assign.sub-> var - >>> = exp ;
+stm.assign.decrement-> var - >>> - ;
+additionalRules-> -------------------
+
+itemSet239:
+stm.assign.normal-> var = >>> exp ;
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet240:
+exp.func-> ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet241:
+dec.operator.subscriptnormal-> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm >>>
+additionalRules-> -------------------
+
+itemSet242:
+field.func-> function : id ( fieldlist ) => ( fieldlist ) >>>
+additionalRules-> -------------------
+
+itemSet243:
+stm.if.ifelse-> if ( exp >>> ) then stm else stm
+stm.if.if-> if ( exp >>> ) then stm
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet244:
+stm.return.exp-> return ( exp >>> ) ;
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet245:
+field.func-> function : >>> id ( fieldlist ) => ( fieldlist )
+ty.funcnormal-> function : >>> ( fieldlist ) => ( fieldlist )
+dec.jsload.normal-> function : >>> id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> function : >>> operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> function : >>> id ( fieldlist ) => ( fieldlist ) stm
+dec.operator.assignnormal-> function : >>> operator = ( fieldlist ) => ( fieldlist ) stm
+dec.func.prototype-> function : >>> id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> function : >>> operator [ ] ( fieldlist ) => ( fieldlist ) stm
+additionalRules-> -------------------
+
+itemSet246:
+exp.call-> exp ( >>> explist )
+stm.call.normal-> exp ( >>> explist ) ;
+additionalRules-> -------------------
+explist.explist-> >>> exp , explist
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+explist.null-> >>>
+explist.exp-> >>> exp
+
+itemSet247:
+exp.paren-> ( exp ) >>>
+stm.while-> ( exp ) >>> to stm
+stm.repeat-> ( exp ) >>> repeat stm
+additionalRules-> -------------------
+
+itemSet248:
+stm.for-> ( stm ) >>> from ( exp ) to ( stm ) stm
+additionalRules-> ------------------- 
+
+itemSet249:
+field.noinit-> ty : >>> var
+dec.var.noinit-> ty : >>> var ;
+dec.object-> ty : >>> var ( explist ) ;
+dec.var.init-> ty : >>> var = exp ;
+additionalRules-> -------------------
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+
+itemSet250:
+stmlist.null->  >>>
+additionalRules-> -------------------
+
+itemSet251:
+stmlist.stmlist-> stm stmlist >>>
+additionalRules-> -------------------
+
+itemSet252:
+stm.compound-> { stmlist } >>>
+additionalRules-> -------------------
+
+itemSet253:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( >>> string , string ) ;
+additionalRules-> -------------------
+
+itemSet254:
+stm.call.normal-> exp ( explist >>> ) ;
+exp.call-> exp ( explist >>> )
+additionalRules-> -------------------
+
+itemSet255:
+stm.assign.mul-> var * = >>> exp ;
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet256:
+stm.assign.div-> var / = >>> exp ;
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet257:
+stm.assign.increment-> var + + >>> ;
+additionalRules-> -------------------
+
+itemSet258:
+stm.assign.add-> var + = >>> exp ;
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ] 
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet259:
+stm.assign.decrement-> var - - >>> ;
+additionalRules-> -------------------
+
+itemSet260:
+stm.assign.sub-> var - = >>> exp ;
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet261:
+stm.assign.normal-> var = exp >>> ;
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet262:
+stm.if.ifelse-> if ( exp ) >>> then stm else stm
+stm.if.if-> if ( exp ) >>> then stm
+additionalRules-> -------------------
+
+itemSet263:
+stm.return.exp-> return ( exp ) >>> ;
+additionalRules-> -------------------
+
+itemSet264:
+field.func-> function : id >>> ( fieldlist ) => ( fieldlist )
+dec.jsload.normal-> function : id >>> ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id >>> ( fieldlist ) => ( fieldlist ) stm
+dec.func.prototype-> function : id >>> ( fieldlist ) => ( fieldlist ) ;
+additionalRules-> -------------------
+
+itemSet265:
+exp.call-> exp ( explist >>> )
+stm.call.normal-> exp ( explist >>> ) ;
+additionalRules-> -------------------
+
+itemSet266:
+stm.while-> ( exp ) to >>> stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm 
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet267:
+stm.repeat-> ( exp ) repeat >>> stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet268:
+stm.for-> ( stm ) from >>> ( exp ) to ( stm ) stm
+additionalRules-> -------------------
+
+itemSet269:
+field.noinit-> ty : var >>>
+dec.var.noinit-> ty : var >>> ; 
+dec.object-> ty : var >>> ( explist ) ;
+dec.var.init-> ty : var >>> = exp ;
+var.field-> var >>> . id
+var.arrowfield-> var >>> -> id
+var.subscript-> var >>> [ exp ]
+additionalRules-> -------------------
+
+itemSet270:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string >>> , string ) ;
+additionalRules-> -------------------
+
+itemSet271:
+stm.call.normal-> exp ( explist ) >>> ;
+exp.call-> exp ( explist ) >>>
+additionalRules-> -------------------
+
+itemSet272:
+stm.assign.mul-> var * = exp >>> ;
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet273:
+stm.assign.div-> var / = exp >>> ;
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet274:
+stm.assign.increment-> var + + ; >>>
+additionalRules-> -------------------
+
+itemSet275:
+stm.assign.add-> var + = exp >>> ;
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet276:
+stm.assign.decrement-> var - - ; >>>
+additionalRules-> ------------------- 
+
+itemSet277:
+stm.assign.sub-> var - = exp >>> ;
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet278:
+stm.assign.normal-> var = exp ; >>>
+additionalRules-> -------------------
+
+itemSet279:
+stm.if.ifelse-> if ( exp ) then >>> stm else stm
+stm.if.if-> if ( exp ) then >>> stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet280:
+stm.return.exp-> return ( exp ) ; >>>
+additionalRules-> -------------------
+
+itemSet281:
+field.func-> function : id ( >>> fieldlist ) => ( fieldlist )
+dec.jsload.normal-> function : id ( >>> fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( >>> fieldlist ) => ( fieldlist ) stm
+dec.func.prototype-> function : id ( >>> fieldlist ) => ( fieldlist ) ;
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet282:
+exp.call-> exp ( explist ) >>>
+stm.call.normal-> exp ( explist ) >>> ;
+additionalRules-> -------------------
+
+itemSet283:
+stm.while-> ( exp ) to stm >>>
+additionalRules-> -------------------
+
+itemSet284:
+stm.repeat-> ( exp ) repeat stm >>>
+additionalRules-> -------------------
+
+itemSet285:
+stm.for-> ( stm ) from ( >>> exp ) to ( stm ) stm
+additionalRules-> -------------------
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+
+itemSet286:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , >>> string ) ;
+additionalRules-> -------------------
+
+itemSet287:
+stm.call.normal-> exp ( explist ) ; >>>
+additionalRules-> -------------------
+
+itemSet288:
+stm.assign.mul-> var * = exp ; >>>
+additionalRules-> -------------------
+
+itemSet289:
+stm.assign.div-> var / = exp ; >>>
+additionalRules-> -------------------
+
+itemSet290:
+stm.assign.add-> var + = exp ; >>>
+additionalRules-> -------------------
+
+itemSet291:
+stm.assign.sub-> var - = exp ; >>>
+additionalRules-> -------------------
+
+itemSet292:
+stm.if.ifelse-> if ( exp ) then stm >>> else stm
+stm.if.if-> if ( exp ) then stm >>>
+additionalRules-> -------------------
+
+itemSet293:
+field.func-> function : id ( fieldlist >>> ) => ( fieldlist )
+dec.jsload.normal-> function : id ( fieldlist >>> ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist >>> ) => ( fieldlist ) stm
+dec.func.prototype-> function : id ( fieldlist >>> ) => ( fieldlist ) ;
+additionalRules-> -------------------
+
+itemSet294:
+stm.for-> ( stm ) from ( exp >>> ) to ( stm ) stm
+exp.arrowfield-> exp >>> -> id
+exp.call-> exp >>> ( explist )
+exp.op-> exp >>> oper exp
+exp.subscript-> exp >>> [ exp ]
+exp.field-> exp >>> . id
+additionalRules-> -------------------
+oper.or-> >>> ||
+oper.mul-> >>> *
+oper.sub-> >>> -
+oper.div-> >>> /
+oper.eq-> >>> ==
+oper.lt-> >>> <
+oper.add-> >>> +
+oper.mod-> >>> %
+oper.ge-> >>> >=
+oper.neq-> >>> !=
+oper.and-> >>> &&
+oper.gt-> >>> >
+oper.le-> >>> <=
+
+itemSet295:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string >>> ) ;
+additionalRules-> -------------------
+
+itemSet296:
+stm.if.ifelse-> if ( exp ) then stm else >>> stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ; 
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet297:
+field.func-> function : id ( fieldlist ) >>> => ( fieldlist )
+dec.jsload.normal-> function : id ( fieldlist ) >>> => ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) >>> => ( fieldlist ) stm
+dec.func.prototype-> function : id ( fieldlist ) >>> => ( fieldlist ) ;
+additionalRules-> -------------------
+
+itemSet298:
+stm.for-> ( stm ) from ( exp ) >>> to ( stm ) stm
+additionalRules-> -------------------
+
+itemSet299:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) >>> ;
+additionalRules-> -------------------
+
+itemSet300:
+stm.if.ifelse-> if ( exp ) then stm else stm >>>
+additionalRules-> -------------------
+
+itemSet301:
+field.func-> function : id ( fieldlist ) => >>> ( fieldlist )
+dec.jsload.normal-> function : id ( fieldlist ) => >>> ( fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) => >>> ( fieldlist ) stm
+dec.func.prototype-> function : id ( fieldlist ) => >>> ( fieldlist ) ;
+additionalRules-> -------------------
+
+itemSet302:
+stm.for-> ( stm ) from ( exp ) to >>> ( stm ) stm
+additionalRules-> -------------------
+
+itemSet303:
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ; >>>
+additionalRules-> -------------------
+
+itemSet304:
+field.func-> function : id ( fieldlist ) => ( >>> fieldlist )
+dec.jsload.normal-> function : id ( fieldlist ) => ( >>> fieldlist ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) => ( >>> fieldlist ) stm
+dec.func.prototype-> function : id ( fieldlist ) => ( >>> fieldlist ) ;
+additionalRules-> -------------------
+fieldlist.field-> >>> field
+field.func-> >>> function : id ( fieldlist ) => ( fieldlist )
+field.noinit-> >>> ty : var
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+fieldlist.fieldlist-> >>> field , fieldlist
+fieldlist.null-> >>>
+
+itemSet305:
+stm.for-> ( stm ) from ( exp ) to ( >>> stm ) stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var 
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet306:
+field.func-> function : id ( fieldlist ) => ( fieldlist >>> )
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist >>> ) = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) => ( fieldlist >>> ) stm
+dec.func.prototype-> function : id ( fieldlist ) => ( fieldlist >>> ) ;
+additionalRules-> -------------------
+
+itemSet307:
+stm.for-> ( stm ) from ( exp ) to ( stm >>> ) stm
+additionalRules-> -------------------
+
+itemSet308:
+field.func-> function : id ( fieldlist ) => ( fieldlist ) >>>
+dec.jsload.normal-> function : id ( fieldlist ) => ( fieldlist ) >>> = jsload ( string , string ) ;
+dec.func.normal-> function : id ( fieldlist ) => ( fieldlist ) >>> stm
+dec.func.prototype-> function : id ( fieldlist ) => ( fieldlist ) >>> ;
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet309:
+stm.for-> ( stm ) from ( exp ) to ( stm ) >>> stm
+additionalRules-> -------------------
+stm.return.exp-> >>> return ( exp ) ;
+stm.if.ifelse-> >>> if ( exp ) then stm else stm
+stm.dec-> >>> dec
+dec.class.noinherit-> >>> class : id { memlist }
+dec.var.noinit-> >>> ty : var ;
+ty.real-> >>> realtype
+ty.poly-> >>> id < ty >
+ty.name-> >>> id
+ty.pointer-> >>> * ty
+ty.char-> >>> chartype
+ty.bool-> >>> boolean
+ty.int-> >>> inttype
+ty.short-> >>> shorttype
+ty.funcnormal-> >>> function : ( fieldlist ) => ( fieldlist )
+ty.void-> >>> void
+dec.template-> >>> type < id > : dec
+dec.jsload.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) = jsload ( string , string ) ;
+dec.operator.normal-> >>> function : operator oper ( fieldlist ) => ( fieldlist ) stm
+dec.func.normal-> >>> function : id ( fieldlist ) => ( fieldlist ) stm
+dec.jsexport-> >>> jsexport ( id , string ) ;
+dec.class.inherit-> >>> class : id <- id { memlist }
+dec.object-> >>> ty : var ( explist ) ;
+dec.operator.assignnormal-> >>> function : operator = ( fieldlist ) => ( fieldlist ) stm
+dec.var.init-> >>> ty : var = exp ;
+dec.func.prototype-> >>> function : id ( fieldlist ) => ( fieldlist ) ;
+dec.operator.subscriptnormal-> >>> function : operator [ ] ( fieldlist ) => ( fieldlist ) stm
+stm.call.normal-> >>> exp ( explist ) ;
+exp.func-> >>> ( fieldlist ) => ( fieldlist ) stm
+exp.char-> >>> char
+exp.true-> >>> true
+exp.address-> >>> & var
+exp.sizeof-> >>> sizeof ( var )
+exp.paren-> >>> ( exp )
+exp.typeeq-> >>> typeComp ( ty , ty )
+exp.array-> >>> [ explist ]
+exp.real-> >>> real
+exp.arrowfield-> >>> exp -> id
+exp.call-> >>> exp ( explist )
+exp.op-> >>> exp oper exp
+exp.string-> >>> string
+exp.subscript-> >>> exp [ exp ]
+exp.var-> >>> var
+var.simple-> >>> id
+var.field-> >>> var . id
+var.arrowfield-> >>> var -> id
+var.subscript-> >>> var [ exp ]
+var.deref-> >>> * var
+exp.int-> >>> int
+exp.record-> >>> { explist }
+exp.field-> >>> exp . id
+exp.minus-> >>> - exp
+exp.false-> >>> false
+stm.assign.sub-> >>> var - = exp ;
+stm.assign.normal-> >>> var = exp ;
+stm.assign.mul-> >>> var * = exp ;
+stm.assign.increment-> >>> var + + ;
+stm.assign.div-> >>> var / = exp ;
+stm.for-> >>> ( stm ) from ( exp ) to ( stm ) stm
+stm.break-> >>> break ;
+stm.continue-> >>> continue ;
+stm.assign.add-> >>> var + = exp ;
+stm.while-> >>> ( exp ) to stm
+stm.loop-> >>> loop stm
+stm.repeat-> >>> ( exp ) repeat stm
+stm.compound-> >>> { stmlist }
+stm.return.noexp-> >>> return ;
+stm.if.if-> >>> if ( exp ) then stm
+stm.assign.decrement-> >>> var - - ;
+
+itemSet310:
+stm.for-> ( stm ) from ( exp ) to ( stm ) stm >>>
+additionalRules-> -------------------

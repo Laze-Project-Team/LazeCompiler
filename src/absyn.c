@@ -481,6 +481,7 @@ A_dec A_ObjectDec(A_pos pos, A_ty className, S_symbol varName, A_expList explist
 {
     A_dec p = (A_dec)checked_malloc(sizeof(*p));
     p -> kind = A_objectDec;
+    p -> pos = pos;
     p -> u.object.className = className;
     p -> u.object.name = varName;
     p -> u.object.explist = explist;
@@ -491,6 +492,7 @@ A_dec A_TemplateDec(A_pos pos, S_symbol name, A_dec dec)
 {
     A_dec p = (A_dec)checked_malloc(sizeof(*p));
     p -> kind = A_templateDec;
+    p -> pos = pos;
     p -> u.templatee.dec = dec;
     p -> u.templatee.name = name;
     return p;
@@ -499,10 +501,21 @@ A_dec A_TemplateDec(A_pos pos, S_symbol name, A_dec dec)
 A_dec A_OperatorDec(A_pos pos, A_oper oper, A_fieldList params, A_fieldList result, A_stm body){
     A_dec p = (A_dec)checked_malloc(sizeof(*p));
     p -> kind = A_operatorDec;
+    p -> pos = pos;
     p -> u.op.oper = oper;
     p -> u.op.params = params;
     p -> u.op.result = result;
     p -> u.op.body = body;
+    return p;
+}
+
+A_dec A_FuncProtoDec(A_pos pos, S_symbol name, A_fieldList params, A_fieldList result){
+    A_dec p = (A_dec)checked_malloc(sizeof(*p));
+    p -> kind = A_funcprotoDec;
+    p -> pos = pos;
+    p -> u.funcproto.params = params;
+    p -> u.funcproto.result = result;
+    p -> u.funcproto.name = name;
     return p;
 }
 
