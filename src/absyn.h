@@ -26,6 +26,8 @@ typedef struct A_efield_ *A_efield;
 typedef struct A_efieldList_ *A_efieldList;
 typedef struct A_classMember_ *A_classMember;
 typedef struct A_classMemberList_ *A_classMemberList;
+typedef struct A_ifelse_ *A_ifelse;
+typedef struct A_ifelseList_ *A_ifelseList;
 
 typedef enum
 {
