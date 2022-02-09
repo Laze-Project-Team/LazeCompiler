@@ -80,6 +80,9 @@ int main(int argc, char **argv)
     char *linkFile = NULL;
     char *convertLinkFile = NULL;
     char *convertDirectory = NULL;
+    std::ifstream infoJsonFile("./info.json");
+    json infoJson;
+    infoJsonFile >> infoJson;
     for(int i = 1; i < argc; i++){
         if(argv[i][0] == '-'){
             if(argv[i][1] == 'c'){
@@ -123,6 +126,10 @@ int main(int argc, char **argv)
             if(strcmp(argv[i], "--convert-dir") == 0){
                 i++;
                 convertDirectory = argv[i];
+            }
+            if(strcmp(argv[i], "-v") == 0){
+                std::cout << infoJson["version"].get<std::string>() << std::endl;
+                exit(0);
             }
         }
     }
