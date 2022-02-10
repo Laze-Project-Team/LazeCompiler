@@ -82,6 +82,13 @@ jobj JS_StmToJson(A_stm stm)
             json_object_object_add(info, "specificType", specificType);
             break;
         }
+        case A_ifelseStm:
+        {
+            name = json_object_new_string("if");
+            jobj ifelselist = JS_IfelseListToJson(stm -> u.ifelse.list);
+            json_object_object_add(info, "ifelselist", ifelselist);
+            break;
+        }
         case A_whileStm:
         {
             name = json_object_new_string("while");
@@ -263,6 +270,13 @@ jobj JS_ExpToJson(A_exp exp)
             else {
                 name = json_object_new_string("false");
             }
+            break;
+        }
+        case A_notboolExp:
+        {
+            name = json_object_new_string("notbool");
+            jobj boolExp = JS_ExpToJson(exp -> u.notbool.exp);
+            json_object_object_add(info, "exp", boolExp);
             break;
         }
         case A_charExp:
@@ -724,6 +738,30 @@ jobj JS_ClassMemberToJson(A_classMember member)
     json_object_object_add(result, "dec", dec);
     return result;
 }
+jobj JS_IfelseToJson(A_ifelse ifelse)
+{
+    jobj result = json_object_new_object();
+    if(!ifelse){
+        return result;
+    }
+    json_object_object_add(result, "type", json_object_new_string("ifelse"));
+    if(ifelse -> ty == A_elif){
+        json_object_object_add(result, "kind", json_object_new_string("ifelse"));
+    }
+    else if(ifelse -> ty == A_else){
+        json_object_object_add(result, "kind", json_object_new_string("else"));
+    }
+    else if(ifelse -> ty == A_if){
+        json_object_object_add(result, "kind", json_object_new_string("if"));
+    }
+    jobj info = json_object_new_object();
+    jobj exp = JS_ExpToJson(ifelse -> test);
+    json_object_object_add(info, "exp", exp);
+    jobj stm = JS_StmToJson(ifelse -> body);
+    json_object_object_add(info, "stm", stm);
+    json_object_object_add(result, "info", info);
+    return result;
+}
 
 jobj JS_StmListToJson(A_stmList list)
 {
@@ -860,4 +898,18 @@ jobj JS_ClassMemberListToJson(A_classMemberList list)
         json_object_array_add(memsArray, mems);
     }
     return memsArray;
+}
+jobj JS_IfelseListToJson(A_ifelseList list){
+    A_ifelseList ifelselist = list;
+    jobj ifelseArray = json_object_new_array();
+    if(!list){
+        return ifelseArray;
+    }
+    for(;ifelselist; ifelselist = ifelselist -> tail){
+        jobj ifelse = JS_IfelseToJson(ifelselist -> head);
+        if(ifelse){
+            json_object_array_add(ifelseArray, ifelse);
+        }
+    }
+    return ifelseArray;
 }

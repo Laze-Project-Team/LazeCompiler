@@ -169,7 +169,7 @@ Tr_exp Tr_BreakStm(A_pos pos, int depth)
 {
     Tr_exp p = (Tr_exp)checked_malloc(sizeof(*p));
     p -> kind = Tr_t_stm;
-    p -> u.stm = T_BreakStm(1);
+    p -> u.stm = T_BreakStm(depth);
     return p;
 }
 Tr_exp Tr_ContinueStm(A_pos pos)
@@ -237,6 +237,12 @@ Tr_exp Tr_CallIndirectStm(A_pos pos, T_exp index, T_expList args, int typeIndex)
     Tr_exp p = (Tr_exp)checked_malloc(sizeof(*p));
     p -> kind = Tr_t_stm;
     p -> u.stm = T_CallIndirectStm(index, args, typeIndex);
+    return p;
+}
+Tr_exp Tr_FromTStm(A_pos pos, T_stm stm){
+    Tr_exp p = (Tr_exp)checked_malloc(sizeof(*p));
+    p -> kind = Tr_t_stm;
+    p -> u.stm = stm;
     return p;
 }
 

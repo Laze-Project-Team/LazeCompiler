@@ -91,6 +91,7 @@
       {"name":"-", "regex": "(\\-)", "precedence": 5},
       {"name":"==", "regex": "(==|＝＝)", "precedence": 7},
       {"name":"!=", "regex": "(!=|！＝)", "precedence": 7},
+      {"name":"!", "regex": "(!|！)", "precedence": 10},
       {"name":"<=", "regex": "(\\<=|＜＝)", "precedence": 6},
       {"name":">=", "regex": "(\\>=|＞＝)", "precedence": 6},
       {"name":"<", "regex": "(\\<|＜)", "precedence": 6},
@@ -128,7 +129,8 @@
       "real": "real",
       "true": "true",
       "false": "false",
-      "typeeq": "typeComp ( ty(1) , ty(2) )"
+      "typeeq": "typeComp ( ty(1) , ty(2) )",
+      "notbool": "! exp"
     },
     "oper": {
       "add": "+",
@@ -151,12 +153,10 @@
         "add": "var に exp を 足す 。",
         "sub": "var から exp を 引く 。",
         "mul": "var に exp を かける 。",
-        "div": "var を exp で 割る 。"
+        "div": "var を exp で 割る 。",
+        "mod":"var % = exp ;"
       },
-      "if": {
-        "if": "if exp then stm(then)",
-        "ifelse": "if exp then stm(then) else stm(else)"
-      },
+      "if": "ifelselist",
       "while": "exp まで stm",
       "dec": "dec(stm)",
       "for": "( stm(init) ) から ( exp ) まで ( stm(incr) ) 繰り返し stm",
@@ -174,6 +174,17 @@
       "continue": "continue 。",
       "compound": "ここから stmlist ここまで実行",
       "repeat": "exp repeat stm"
+    },
+    "ifelse":{
+      "ifelse":"else if exp then stm",
+      "else":"else stm"
+    },
+    "ifelselist":{
+        "null":"",
+        "if":"if exp then stm",
+        "ifelse":"ifelse",
+        "ififelselist":"if exp then stm ifelse",
+        "ifelselist":"ifelse ifelselist"
     },
     "dec": {
       "var": {

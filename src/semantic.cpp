@@ -189,6 +189,7 @@ T_moduleList SEM_transProg(A_decList declist)
 
 struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, bool isLoop, Ty_ty classs)
 {
+    static int breakDepth = 1;
     assert(stm);
         switch (stm->kind)
         {
@@ -690,6 +691,48 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             return exp;
             break;
         }
+        case A_ifelseStm:
+        {
+            A_ifelseList list = stm -> u.ifelse.list;
+            T_stm finalIfStm = NULL;
+            T_stm resultFinalIfStm = finalIfStm;
+            // if(!list){
+            //     EM_error(stm -> pos, "if.notexist");
+            // }
+            breakDepth += 1;
+            if(list -> head){
+                if(list -> head -> test == NULL){
+                    EM_error(stm -> pos, "if.elsefirst");
+                }
+                finalIfStm = Tr_IfStm(stm -> pos, transExp(venv, tenv, list -> head -> test, level, isLoop, classs).exp -> u.exp, transStm(venv, tenv, list -> head -> body, level, isLoop, classs).exp -> u.stm, NULL) -> u.stm;
+                resultFinalIfStm = finalIfStm;
+                if(list -> tail){
+                    list = list -> tail;
+                }
+                else{
+                    breakDepth -= 1;
+                    return expTy(Tr_FromTStm(stm -> pos, resultFinalIfStm), Ty_Void());
+                }
+            }
+            for(;list; list = list -> tail){
+                if(list -> head -> test){
+                    if(list -> head -> ty == A_elif){
+                        struct expty testExpty = transExp(venv, tenv, list -> head -> test, level, isLoop, classs); 
+                        if(testExpty.ty != Ty_Bool()){
+                            EM_error(stm -> pos, "if.boolean");
+                        }
+                        finalIfStm -> u.iff.elsee = Tr_IfStm(stm -> pos, testExpty.exp -> u.exp, transStm(venv, tenv, list -> head -> body, level, isLoop, classs).exp -> u.stm, NULL) -> u.stm;
+                        finalIfStm = finalIfStm -> u.iff.elsee;
+                    }
+                }
+                else{
+                    finalIfStm -> u.iff.elsee = transStm(venv, tenv, list -> head -> body, level, isLoop, classs).exp -> u.stm;
+                }
+            }
+            breakDepth -= 1;
+            return expTy(Tr_FromTStm(stm -> pos, resultFinalIfStm), Ty_Void());
+            break;
+        }
         case A_ifStm:
         {
             //debug(stm->pos, "If Statement");
@@ -718,7 +761,9 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             {
                 EM_error(stm->pos, "while.boolean");
             }
+            breakDepth = 1;
             body = transStm(venv, tenv, stm->u.whilee.body, level, isLoop, classs);
+            breakDepth = 1;
             return expTy(Tr_WhileStm(stm->pos, transExp(venv, tenv, stm->u.whilee.test, level, isLoop, classs).exp->u.exp,
                 body.exp->u.stm),
                 Ty_Void());
@@ -734,7 +779,9 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                 EM_error(stm->pos, "for.boolean");
             }
             struct expty increment = transStm(venv, tenv, stm->u.forr.increment, level, isLoop, classs);
+            breakDepth = 1;
             struct expty body = transStm(venv, tenv, stm->u.forr.body, level, isLoop, classs);
+            breakDepth = 1;
             // E_enventry assignVar = S_look(venv, assignExp -> u.assign.var -> u.simple);
             return expTy(Tr_ForStm(stm->pos, assign.exp->u.stm,
                 condition.exp->u.exp, increment.exp->u.stm, body.exp->u.stm),
@@ -743,7 +790,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
         case A_breakStm:
         {
             //debug(stm->pos, "Break Statement");
-            return expTy(Tr_BreakStm(stm->pos, 1), Ty_Void());
+            return expTy(Tr_BreakStm(stm->pos, breakDepth), Ty_Void());
         }
         case A_continueStm:
         {
@@ -1522,6 +1569,14 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
     // assert(e);
     switch (e->kind)
     {
+    case A_notboolExp:
+    {
+        struct expty boolExp = transExp(venv, tenv, e -> u.notbool.exp, level, isLoop, classs);
+        if(boolExp.ty -> kind != Ty_bool){
+            EM_error(e -> pos, "type.notbool");
+        }
+        return expTy(Tr_OpExp(e -> pos, T_i32, T_eq, boolExp.exp -> u.exp, Tr_BoolExp(e -> pos, FALSE)->u.exp), Ty_Bool());
+    }
     case A_typeEqExp:
     {
         Ty_ty type1 = transTy(venv, tenv, e -> u.typeeq.type1, level);

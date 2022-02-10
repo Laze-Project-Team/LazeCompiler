@@ -73,6 +73,7 @@ Tr_exp Tr_LoopStm(A_pos pos);
 Tr_exp Tr_MemCopyStm(A_pos pos, T_exp dest, T_exp src, int size);
 Tr_exp Tr_CallIndirectStm(A_pos pos, T_exp index, T_expList args, int typeIndex);
 Tr_exp Tr_NoStm(A_pos pos);
+Tr_exp Tr_FromTStm(A_pos pos, T_stm stm);
 
 Tr_exp Tr_NoExp(A_pos pos);
 Tr_exp Tr_VarExp(A_pos pos, T_type type, Tr_access access, bool isGlobal, bool isArray);

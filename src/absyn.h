@@ -60,7 +60,8 @@ enum stmType
     A_callStm,
     A_returnStm,
     A_loopStm,
-    A_repeatStm
+    A_repeatStm,
+    A_ifelseStm
 };
 struct A_stm_
 {
@@ -115,6 +116,10 @@ struct A_stm_
             A_exp count;
             A_stm body;
         } repeat;
+        struct
+        {
+            A_ifelseList list;
+        } ifelse;
     } u;
 };
 enum varType
@@ -178,7 +183,8 @@ enum expType
     A_funcExp,
     A_parenExp,
     A_addrExp,
-    A_typeEqExp
+    A_typeEqExp,
+    A_notboolExp
 };
 struct A_exp_
 {
@@ -268,7 +274,10 @@ struct A_exp_
             A_ty type1;
             A_ty type2;
         } typeeq;
-        
+        struct
+        {
+            A_exp exp;
+        } notbool;
     } u;
 };
 enum decType
@@ -455,6 +464,22 @@ struct A_classMemberList_
     A_classMember head;
     A_classMemberList tail;
 };
+typedef enum {
+    A_if,
+    A_elif,
+    A_else
+} A_ifelseType;
+struct A_ifelse_
+{
+    A_ifelseType ty;
+    A_exp test;
+    A_stm body;
+};
+struct A_ifelseList_
+{
+    A_ifelse head;
+    A_ifelseList tail;
+};
 
 /* Function Prototypes */
 A_stm A_AssignStm(A_pos pos, A_var var, A_exp exp, bool isDec);
@@ -469,6 +494,7 @@ A_stm A_CallStm(A_pos pos, A_exp func, A_expList args);
 A_stm A_ReturnStm(A_pos pos, A_exp exp);
 A_stm A_LoopStm(A_pos pos, A_stm body);
 A_stm A_RepeatStm(A_pos pos, A_exp count, A_stm body);
+A_stm A_IfelseStm(A_pos pos, A_ifelseList list);
 
 A_var A_SimpleVar(A_pos pos, S_symbol sym);
 A_var A_LvalSimpleVar(A_pos pos, S_symbol sym);
@@ -506,6 +532,7 @@ A_exp A_AddressExp(A_pos pos, A_var address);
 A_exp A_ParenExp(A_pos pos, A_exp paren);
 A_exp A_AddrExp(A_pos pos, int addr);
 A_exp A_TypeEqExp(A_pos pos, A_ty type1, A_ty type2);
+A_exp A_NotboolExp(A_pos pos, A_exp exp);
 
 A_dec A_FunctionDec(A_pos pos, A_fundecList function);
 A_dec A_VarDec(A_pos pos, A_stm assign, A_ty typ);
@@ -541,6 +568,8 @@ A_classMember A_ClassMember(A_classMemberSpecifier specifier, A_dec dec);
 A_classMemberList A_ClassMemberList(A_classMember head, A_classMemberList tail);
 A_classMemberList A_ClassMemFromDecList(A_decList decs, A_classMemberSpecifier specifier);
 A_classMemberList A_ClassMemFromTwoList(A_classMemberList list1, A_classMemberList list2);
+A_ifelse A_Ifelse(A_ifelseType type, A_exp test, A_stm body);
+A_ifelseList A_IfelseList(A_ifelse head, A_ifelseList tail);
 #ifdef __cplusplus
 }
 #endif

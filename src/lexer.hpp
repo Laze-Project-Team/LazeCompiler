@@ -44,6 +44,8 @@ union L_tokenVal
     A_fieldList fieldList;
     A_decList decList;
     A_classMemberList memList;
+    A_ifelse ifelse;
+    A_ifelseList ifelseList;
 
     L_tokenVal(){
         none = nullptr;

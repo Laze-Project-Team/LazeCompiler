@@ -112,6 +112,13 @@ A_stm A_RepeatStm(A_pos pos, A_exp count, A_stm body){
     p -> u.repeat.body = body;
     return p;
 }
+A_stm A_IfelseStm(A_pos pos, A_ifelseList list){
+    A_stm p = (A_stm)checked_malloc(sizeof(*p));
+    p -> kind = A_ifelseStm;
+    p -> pos = pos;
+    p -> u.ifelse.list = list;
+    return p;
+}
 
 A_var A_SimpleVar(A_pos pos, S_symbol sym)
 {
@@ -411,6 +418,14 @@ A_exp A_TypeEqExp(A_pos pos, A_ty type1, A_ty type2){
     p -> pos = pos;
     p -> u.typeeq.type1 = type1;
     p -> u.typeeq.type2 = type2;
+    return p;
+}
+
+A_exp A_NotboolExp(A_pos pos, A_exp exp){
+    A_exp p = (A_exp)checked_malloc(sizeof(*p));
+    p -> kind = A_notboolExp;
+    p -> pos = pos;
+    p -> u.notbool.exp = exp;
     return p;
 }
 
@@ -726,4 +741,20 @@ A_classMemberList A_ClassMemFromTwoList(A_classMemberList list1, A_classMemberLi
         p -> tail = NULL;
     }
     return result;
+}
+
+A_ifelse A_Ifelse(A_ifelseType ty, A_exp test, A_stm body)
+{
+    A_ifelse p = (A_ifelse)checked_malloc(sizeof(*p));
+    p -> ty = ty;
+    p -> test = test;
+    p -> body = body;
+    return p;
+}
+A_ifelseList A_IfelseList(A_ifelse head, A_ifelseList tail)
+{
+    A_ifelseList p = (A_ifelseList)checked_malloc(sizeof(*p));
+    p -> head = head;
+    p -> tail = tail;
+    return p;
 }

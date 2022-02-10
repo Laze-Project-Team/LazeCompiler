@@ -6,7 +6,7 @@ std::string _arrayTemplateName = "";
 std::string _counterName = "";
 
 // static std::string tokenNames[] = {"char","string","hex","int","real",",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","<=","<",">=",">","&&","||","=","if","then","else","from","to","break","inttype","realtype","continue","return","type","void","nul","true","false","boolean","chartype","%","&","shorttype","function","loop","jsload","sizeof","class","private","public","protected","repeat","jsexport","id","uminus","lower_than_else", "eof", ""};
-static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist", "oper", "funcAndVar", "funcAndVarList", "mems"};
+static std::string nonTerminal[] = {"exp", "var", "varExp", "dec", "stm", "ty", "field", "explist", "stmlist", "declist", "memlist", "fieldlist", "oper", "funcAndVar", "funcAndVarList", "mems", "ifelse", "ifelselist"};
 
 static std::deque<std::string> tokenNames;
 static std::map<std::string, unsigned> operators;
@@ -492,13 +492,16 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.exp = A_RealExp(result -> start, tokenData.at("real").real);
         }
         else if(ruleName == "exp.true"){
-            result -> u.exp = A_BoolExp(EM_tokPos, TRUE);
+            result -> u.exp = A_BoolExp(result -> start, TRUE);
         }
         else if(ruleName == "exp.false"){
-            result -> u.exp = A_BoolExp(EM_tokPos, FALSE);
+            result -> u.exp = A_BoolExp(result -> start, FALSE);
         }
         else if(ruleName == "exp.typeeq"){
-            result -> u.exp = A_TypeEqExp(EM_tokPos, tokenData.at("ty(1)").type, tokenData.at("ty(2)").type);
+            result -> u.exp = A_TypeEqExp(result -> start, tokenData.at("ty(1)").type, tokenData.at("ty(2)").type);
+        }
+        else if(ruleName == "exp.notbool"){
+            result -> u.exp = A_NotboolExp(result -> start, tokenData.at("exp").exp);
         }
     }
     //oper
@@ -560,17 +563,23 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "stm.assign.div"){
             result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_divideOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
         }
+        else if(ruleName == "stm.assign.mod"){
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_modOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
+        }
         else if(ruleName == "stm.assign.increment"){
             result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_plusOp, A_VarExp(result -> start, tokenData.at("var").var), A_IntExp(result -> start, 1)), FALSE);
         }
         else if(ruleName == "stm.assign.decrement"){
             result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_minusOp, A_VarExp(result -> start, tokenData.at("var").var), A_IntExp(result -> start, 1)), FALSE);
         }
-        else if(ruleName == "stm.if.if"){
-            result -> u.stm = A_IfStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm(then)").stm, NULL);
-        }
-        else if(ruleName == "stm.if.ifelse"){
-            result -> u.stm = A_IfStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm(then)").stm, tokenData.at("stm(else)").stm);
+        // else if(ruleName == "stm.if.if"){
+        //     result -> u.stm = A_IfStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm(then)").stm, NULL);
+        // }
+        // else if(ruleName == "stm.if.ifelse"){
+        //     result -> u.stm = A_IfStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm(then)").stm, tokenData.at("stm(else)").stm);
+        // }
+        else if(ruleName == "stm.if"){
+            result -> u.stm = A_IfelseStm(result -> start, tokenData.at("ifelselist").ifelseList);
         }
         else if(ruleName == "stm.while"){
             result -> u.stm = A_WhileStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm);
@@ -611,8 +620,35 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.stm = A_ContinueStm(result -> start);
         }
         else if(ruleName == "stm.repeat"){
-            result -> u.stm = A_RepeatStm(EM_tokPos, tokenData.at("exp").exp, tokenData.at("stm").stm);
+            result -> u.stm = A_RepeatStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm);
             // result -> u.stm = A_ForStm(EM_tokPos, A_DeclarationStm(EM_tokPos, A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_IntExp(EM_tokPos, 0), TRUE), A_NameTy(EM_tokPos, S_Symbol("int")))), A_OpExp(EM_tokPos, A_eqOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), tokenData.at("exp").exp), A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), A_IntExp(EM_tokPos, 1)), FALSE), tokenData.at("stm").stm);
+        }
+    }
+    //ifelse
+    {
+        if(ruleName == "ifelse.ifelse"){
+            result -> u.ifelse = A_Ifelse(A_elif, tokenData.at("exp").exp, tokenData.at("stm").stm);
+        }
+        else if(ruleName == "ifelse.else"){
+            result -> u.ifelse = A_Ifelse(A_else, NULL, tokenData.at("stm").stm);
+        }
+    }
+    //ifelselist
+    {
+        if(ruleName == "ifelselist.null"){
+            result -> u.ifelseList = A_IfelseList(NULL, NULL);
+        }
+        else if(ruleName == "ifelselist.if"){
+            result -> u.ifelseList = A_IfelseList(A_Ifelse(A_if, tokenData.at("exp").exp, tokenData.at("stm").stm), NULL);
+        }
+        else if(ruleName == "ifelselist.ifelse"){
+            result -> u.ifelseList = A_IfelseList(tokenData.at("ifelse").ifelse, NULL);
+        }
+        else if(ruleName == "ifelselist.ifelselist"){
+            result -> u.ifelseList = A_IfelseList(tokenData.at("ifelse").ifelse, tokenData.at("ifelselist").ifelseList);
+        }
+        else if(ruleName == "ifelselist.ififelselist"){
+            result -> u.ifelseList = A_IfelseList(A_Ifelse(A_if, tokenData.at("exp").exp, tokenData.at("stm").stm), A_IfelseList(tokenData.at("ifelse").ifelse, NULL));
         }
     }
     //dec

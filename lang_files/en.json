@@ -62,6 +62,7 @@
             {"name":"-", "regex": "(\\-)", "precedence": 5},
             {"name":"==", "regex": "(==|＝＝)", "precedence": 7},
             {"name":"!=", "regex": "(!=|！＝)", "precedence": 7},
+            {"name":"!", "regex": "(!|！)", "precedence": 10},
             {"name":"<=", "regex": "(\\<=|＜＝)", "precedence": 6},
             {"name":">=", "regex": "(\\>=|＞＝)", "precedence": 6},
             {"name":"<", "regex": "(\\<|＜)", "precedence": 6},
@@ -99,7 +100,8 @@
             "real": "real",
             "true": "true",
             "false": "false",
-            "typeeq": "typeComp ( ty(1) , ty(2) )"
+            "typeeq": "typeComp ( ty(1) , ty(2) )",
+            "notbool":"! exp"
         },
         "oper": {
             "add":"+",
@@ -123,13 +125,11 @@
                 "sub":"var - = exp ;",
                 "mul":"var * = exp ;",
                 "div":"var / = exp ;",
+                "mod":"var % = exp ;",
                 "increment":"var + + ;",
                 "decrement":"var - - ;"
             },
-            "if":{
-                "if":"if ( exp ) stm(then)",
-                "ifelse":"if ( exp ) stm(then) else stm(else)"
-            },
+            "if":"ifelselist",
             "while":"( exp ) to stm",
             "dec": "dec(stm)",
             "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
@@ -145,6 +145,17 @@
             "continue":"continue ;",
             "compound":"{ stmlist }",
             "repeat":"repeat ( exp ) stm"
+        },
+        "ifelse":{
+            "ifelse":"else if ( exp ) stm",
+            "else":"else stm"
+        },
+        "ifelselist":{
+            "null":"",
+            "if":"if ( exp ) stm",
+            "ifelse":"ifelse",
+            "ififelselist":"if ( exp ) stm ifelse",
+            "ifelselist":"ifelse ifelselist"
         },
         "dec":{
             "var": {
