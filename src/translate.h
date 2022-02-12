@@ -65,7 +65,7 @@ Tr_exp Tr_IfStm(A_pos pos, T_exp test, T_stm then, T_stm elsee);
 Tr_exp Tr_WhileStm(A_pos pos, T_exp test, T_stm body);
 Tr_exp Tr_ForStm(A_pos pos, T_stm assign, T_exp condition, T_stm increment, T_stm body);
 Tr_exp Tr_BreakStm(A_pos pos, int depth);
-Tr_exp Tr_ContinueStm(A_pos pos);
+Tr_exp Tr_ContinueStm(A_pos pos, int depth);
 Tr_exp Tr_CompoundStm(A_pos pos, T_stmList stmlist);
 Tr_exp Tr_CallStm(A_pos pos, int index, string func, T_expList args, T_type ty);
 Tr_exp Tr_ReturnStm(A_pos pos, T_exp exp);
@@ -91,6 +91,7 @@ Tr_exp Tr_SeqExp(A_pos pos, A_expList seq);
 Tr_exp Tr_AssignExp(A_pos pos, A_var var, A_exp exp);
 Tr_exp Tr_IfExp(A_pos pos, T_type type, T_exp test, T_exp then, T_exp elsee);
 Tr_exp Tr_ArrayExp(A_pos pos, T_expList list);
+Tr_exp Tr_NullArrayExp(A_pos pos, T_type ty);
 Tr_exp Tr_CallIndirectExp(A_pos pos, T_type type, T_exp index, T_expList args, int typeIndex);
 #ifdef __cplusplus
 }

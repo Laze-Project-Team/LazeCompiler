@@ -34,6 +34,7 @@ void EM_error(int pos, const char *message, ...)
 
     anyErrors = TRUE;
     // printf("%s", fileName);
+    std::cout << pos << std::endl;
     L_errorPos errorPos = L_getErrorPos(pos);
 
     std::string fileName = errorPos.fileName;

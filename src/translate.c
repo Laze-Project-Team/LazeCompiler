@@ -172,11 +172,11 @@ Tr_exp Tr_BreakStm(A_pos pos, int depth)
     p -> u.stm = T_BreakStm(depth);
     return p;
 }
-Tr_exp Tr_ContinueStm(A_pos pos)
+Tr_exp Tr_ContinueStm(A_pos pos, int depth)
 {
     Tr_exp p = (Tr_exp)checked_malloc(sizeof(*p));
     p -> kind = Tr_t_stm;
-    p -> u.stm = T_BreakStm(0);
+    p -> u.stm = T_BreakStm(depth);
     return p;
 }
 Tr_exp Tr_CompoundStm(A_pos pos, T_stmList stmlist)
@@ -395,6 +395,12 @@ Tr_exp Tr_ArrayExp(A_pos pos, T_expList list)
     Tr_exp p = (Tr_exp)checked_malloc(sizeof(*p));
     p -> kind = Tr_t_exp;
     p -> u.exp = T_SeqExp(list -> head -> type, list);
+    return p;
+}
+Tr_exp Tr_NullArrayExp(A_pos pos, T_type ty){
+    Tr_exp p = (Tr_exp)checked_malloc(sizeof(*p));
+    p -> kind = Tr_t_exp;
+    p -> u.exp = T_SeqExp(ty, T_ExpList(NULL, NULL));
     return p;
 }
 Tr_exp Tr_CallIndirectExp(A_pos pos, T_type type, T_exp index, T_expList args, int typeIndex){

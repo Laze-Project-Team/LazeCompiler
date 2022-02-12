@@ -94,7 +94,7 @@ T_moduleList SEM_transProg(A_decList declist)
         EM_error(0, "code.none");
     }
     A_decList decList = declist;
-    list->head = T_ImportMod("js", "mem", T_MemMod(100));
+    list->head = T_ImportMod("js", "mem", T_MemMod(1000));
     list->tail = T_ModuleList(NULL, NULL);
     list = list->tail;
     int importDone = 0;
@@ -795,7 +795,7 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
         case A_continueStm:
         {
             //debug(stm->pos, "Continue Statement");
-            return expTy(Tr_ContinueStm(stm->pos), Ty_Void());
+            return expTy(Tr_ContinueStm(stm->pos, 0), Ty_Void());
         }
         case A_loopStm:
         {
@@ -1539,7 +1539,6 @@ struct expty transVar(S_table venv, S_table tenv, A_var v, Tr_level level, bool 
                 struct expty var = transVar(venv, tenv, v -> u.subscript.var, level, isLoop, FALSE, FALSE, classs);
                 depth = 0;
                 return expTy(Tr_OpExp(v->pos, T_i32, T_add, var.exp->u.exp, T_BinOpExp(T_i32, T_mul, T_ConstExp(T_i32, A_IntExp(v->pos, type->size)), T_ConvertExp(T_i32, exp.exp->u.exp))), varExpty.ty -> u.pointer);
-
             }
             else
             {
@@ -1599,6 +1598,9 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         T_expList list = T_ExpList(NULL, NULL);
         T_expList result = list;
         int size = 0;
+        if(strlen(e -> u.stringg) == 0){
+            return expTy(Tr_NullArrayExp(e -> pos, convertType(Ty_Char())), Ty_Pointer(Ty_Array(Ty_Char(), size)));
+        }
         for(int i = 0; i < strlen(e -> u.stringg);)
         {
             char moji[4];
@@ -1660,7 +1662,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         else if(e -> u.var -> kind == A_subscriptVar)
         {
             struct expty var = transVar(venv, tenv, e->u.var, level, isLoop, FALSE, FALSE, classs);
-            if(var.ty -> kind == Ty_name || var.ty -> kind == Ty_poly){
+            if(var.ty -> kind == Ty_name || var.ty -> kind == Ty_poly || var.ty -> kind == Ty_array){
                 return var;
             }
             return expTy(Tr_DerefExp(e->pos, var.exp->u.exp, convertType(actual_ty(tenv, var.ty))), var.ty);
@@ -2201,6 +2203,9 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         if(arrayType -> kind == Ty_name || arrayType -> kind == Ty_poly){
             return expTy(Tr_AddrExp(e -> pos, arrayAddr), Ty_Pointer(Ty_Array(arrayType, i)));
         }
+        if(i == 0){
+            return expTy(Tr_NullArrayExp(e -> pos, convertType(arrayType)), Ty_Pointer(Ty_Array(arrayType, i)));
+        }
         return expTy(Tr_ArrayExp(e -> pos, result), Ty_Pointer(Ty_Array(arrayType, i)));
     }
     case A_subscriptExp:
@@ -2211,15 +2216,22 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         if(arrayExpty.ty -> kind == Ty_array)
         {
             offset = Tr_OpExp(e -> pos, T_i32, T_mul, Tr_AddrExp(e -> pos, arrayExpty.ty -> u.array.type -> size)->u.exp, T_ConvertExp(T_i32, indexExpty.exp -> u.exp))->u.exp;
+            if(arrayExpty.ty -> u.array.type -> kind == Ty_name || arrayExpty.ty -> u.array.type -> kind == Ty_poly){
+                return expTy(Tr_OpExp(e -> pos, T_i32, T_add, arrayExpty.exp -> u.exp, offset), arrayExpty.ty -> u.array.type);
+            }
         }
         else if(arrayExpty.ty -> kind == Ty_pointer)
         {
             offset = Tr_OpExp(e -> pos, T_i32, T_mul, Tr_AddrExp(e -> pos, arrayExpty.ty -> u.pointer -> size)->u.exp, T_ConvertExp(T_i32, indexExpty.exp -> u.exp))->u.exp;
+            if(arrayExpty.ty -> u.pointer -> kind == Ty_name || arrayExpty.ty -> u.pointer -> kind == Ty_poly){
+                return expTy(Tr_OpExp(e -> pos, T_i32, T_add, arrayExpty.exp -> u.exp, offset), arrayExpty.ty -> u.array.type);
+            }
         }
         else
         {
             EM_error(e -> pos, "operator.subscript");
         }
+        
         return expTy(Tr_DerefExp(e -> pos, Tr_OpExp(e -> pos, T_i32, T_add, arrayExpty.exp -> u.exp, offset)->u.exp, convertType(arrayExpty.ty -> u.array.type)), arrayExpty.ty -> u.array.type);
     }
     case A_fieldExp:

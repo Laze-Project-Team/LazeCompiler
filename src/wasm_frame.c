@@ -62,7 +62,7 @@ F_accessList boolToF_access(F_frame f, U_boolList boolList, Ty_tyList types)
         for(;boolList -> tail != NULL && types -> tail != NULL; types = types -> tail, boolList = boolList -> tail)
         {
             bool isParam = TRUE;
-            if(types -> head -> kind == Ty_name)
+            if(types -> head -> kind == Ty_name || types -> head -> kind == Ty_poly)
             {
                 // printf("%s types -> headddddddddddddddddddddddddddddddddddddddddd\n", S_name(types -> head -> u.name.sym));
                 isParam = FALSE;
