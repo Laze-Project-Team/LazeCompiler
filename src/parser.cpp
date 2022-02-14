@@ -911,6 +911,7 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
     int originalErrorPos = 0;
     std::string originalErrorToken = "";
     do{
+
         std::string tokenToRead = list.front() -> kind;
         // std::cout << list.front() -> kind << " " << stack.back() << std::endl;
         action = table.at(list.front() -> kind).at(stack.back());

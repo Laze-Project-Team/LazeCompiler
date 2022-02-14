@@ -7,7 +7,8 @@
 extern std::string _mainFuncName;
 extern std::string _counterName;
 
-static std::string symbols[] = {",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","!","<","<=",">",">=","&&","||","=", "%","&"};
+// static std::string symbols[] = {",",":",";","(",")","[","]","{","}",".","->","<-","=>","+","-","*","/","==","!=","!","<","<=",">",">=","&&","||","=", "%","&"};
+static std::vector<std::string> symbols;
 static std::string convertOperToString(int oper, const json &rule);
 
 std::map<std::string, unsigned> keywordNames;
@@ -26,10 +27,14 @@ void CON_convert(std::string ast, std::string targetLang, std::string fname){
     json config = rules["config"];
     json tokens = rules["tokens"];
     json keywords = tokens["keywords"];
+    json operators = tokens["ops"];
     int keywordIndex = 0;
     for(const auto &item: keywords){
         keywordNames[item["name"]] = keywordIndex;
         keywordIndex += 1;
+    }
+    for(const auto &item: operators){
+        symbols.push_back(item["name"]);
     }
     json grammar = rules["grammar"];
     // std::cout << config["type"].get<std::string>() << std::endl;

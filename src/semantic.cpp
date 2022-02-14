@@ -94,7 +94,7 @@ T_moduleList SEM_transProg(A_decList declist)
         EM_error(0, "code.none");
     }
     A_decList decList = declist;
-    list->head = T_ImportMod("js", "mem", T_MemMod(1000));
+    list->head = T_ImportMod("js", "mem", T_MemMod(100));
     list->tail = T_ModuleList(NULL, NULL);
     list = list->tail;
     int importDone = 0;
