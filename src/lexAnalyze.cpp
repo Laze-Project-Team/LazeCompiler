@@ -171,12 +171,13 @@ int main(int argc, char **argv)
             jobj convertJsonAST = JS_toJson(linkFileAST);
             fileContent(convertResultJsonFile, (string)json_object_to_json_string(convertJsonAST));
             CON_convert(convertResultJsonFile, convertJsonName, convertOutput);
-            remove(convertResultJsonFile);
+            std::cout << remove(convertResultJsonFile) << std::endl;
         }
         string resultJsonFile = concat(tempFileName, ".json");
         jobj jsonAST = JS_toJson(absyn_root);
         fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));
         CON_convert(resultJsonFile, convertJsonName, convertOutput);
+        remove(resultJsonFile);
         // std::cout << "Finished Converting." << std::endl;
     }
     else if(strcmp(mode, "compile") == 0){
