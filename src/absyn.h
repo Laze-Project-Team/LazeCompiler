@@ -61,7 +61,9 @@ enum stmType
     A_returnStm,
     A_loopStm,
     A_repeatStm,
-    A_ifelseStm
+    A_ifelseStm,
+    A_forloopStm,
+    A_realwhileStm
 };
 struct A_stm_
 {
@@ -120,6 +122,15 @@ struct A_stm_
         {
             A_ifelseList list;
         } ifelse;
+        struct
+        {
+            A_stm actualFor;
+        } forloop;
+        struct
+        {
+            A_exp test;
+            A_stm body;
+        } realwhile;
     } u;
 };
 enum varType
@@ -495,6 +506,8 @@ A_stm A_ReturnStm(A_pos pos, A_exp exp);
 A_stm A_LoopStm(A_pos pos, A_stm body);
 A_stm A_RepeatStm(A_pos pos, A_exp count, A_stm body);
 A_stm A_IfelseStm(A_pos pos, A_ifelseList list);
+A_stm A_ForLoopStm(A_pos pos, A_stm actualFor);
+A_stm A_RealWhileStm(A_pos pos, A_exp test, A_stm body);
 
 A_var A_SimpleVar(A_pos pos, S_symbol sym);
 A_var A_LvalSimpleVar(A_pos pos, S_symbol sym);

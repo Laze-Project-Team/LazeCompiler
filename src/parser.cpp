@@ -581,7 +581,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         else if(ruleName == "stm.if"){
             result -> u.stm = A_IfelseStm(result -> start, tokenData.at("ifelselist").ifelseList);
         }
-        else if(ruleName == "stm.while"){
+        else if(ruleName == "stm.until"){
             result -> u.stm = A_WhileStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm);
         }
         else if(ruleName == "stm.dec"){
@@ -621,7 +621,13 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
         }
         else if(ruleName == "stm.repeat"){
             result -> u.stm = A_RepeatStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm);
-            // result -> u.stm = A_ForStm(EM_tokPos, A_DeclarationStm(EM_tokPos, A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_IntExp(EM_tokPos, 0), TRUE), A_NameTy(EM_tokPos, S_Symbol("int")))), A_OpExp(EM_tokPos, A_eqOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), tokenData.at("exp").exp), A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), A_IntExp(EM_tokPos, 1)), FALSE), tokenData.at("stm").stm);
+            // result -> u.stm = A_ForStm(result -> start, A_DeclarationStm(result -> start, A_VarDec(EM_tokPos, A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_IntExp(EM_tokPos, 0), TRUE), A_NameTy(EM_tokPos, S_Symbol("int")))), A_OpExp(EM_tokPos, A_eqOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), tokenData.at("exp").exp), A_AssignStm(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ")), A_OpExp(EM_tokPos, A_plusOp, A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S_Symbol("カウンタ"))), A_IntExp(EM_tokPos, 1)), FALSE), tokenData.at("stm").stm);
+        }
+        else if(ruleName == "stm.forloop"){
+            result -> u.stm = A_ForLoopStm(result -> start, A_ForStm(result -> start, A_DeclarationStm(result -> start, A_VarDec(result -> start, A_AssignStm(result -> start, A_SimpleVar(result -> start, S_Symbol(tokenData.at("id").stringg)), tokenData.at("exp(init)").exp, TRUE), A_NameTy(result -> start, S_Symbol("int")))), A_OpExp(result -> start, A_eqOp, A_VarExp(result -> start, A_SimpleVar(result -> start, S_Symbol(tokenData.at("id").stringg))), A_OpExp(result -> start, A_plusOp, tokenData.at("exp(until)").exp, tokenData.at("exp(incr)").exp)), A_AssignStm(result -> start, A_SimpleVar(result -> start, S_Symbol(tokenData.at("id").stringg)), A_OpExp(result -> start, A_plusOp, A_VarExp(result -> start, A_SimpleVar(result -> start, S_Symbol(tokenData.at("id").stringg))), tokenData.at("exp(incr)").exp), FALSE), tokenData.at("stm").stm));
+        }
+        else if(ruleName == "stm.while"){
+            result -> u.stm = A_RealWhileStm(result -> start, tokenData.at("exp").exp, tokenData.at("stm").stm);
         }
     }
     //ifelse

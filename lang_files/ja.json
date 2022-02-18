@@ -35,7 +35,10 @@
             {"name":"protected", "value":"保護"},
             {"name":"repeat", "value":"回繰り返す"},
             {"name":"operator", "value":"演算子"},
-            {"name":"typeComp", "value":"型比較"}
+            {"name":"typeComp", "value":"型比較"},
+            {"name":"を", "value":"を"},
+            {"name":"ずつ増やし繰り返す", "value":"ずつ増やし繰り返す"},
+            {"name":"の間", "value":"の間"}
         ],
         "int":"[0-9]",
         "hex":"0x[0-9A-F]+",
@@ -131,7 +134,7 @@
                 "decrement":"var - - ;"
             },
             "if":"ifelselist",
-            "while":"( exp ) to stm",
+            "until":"( exp ) to stm",
             "dec": "dec(stm)",
             "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
             "return":{
@@ -145,7 +148,9 @@
             "break":"break ;",
             "continue":"continue ;",
             "compound":"{ stmlist }",
-            "repeat":"( exp ) repeat stm"
+            "repeat":"( exp ) repeat stm",
+            "forloop":"( id ) を ( exp(init) ) from ( exp(until) ) to ( exp(incr) ) ずつ増やし繰り返す stm",
+            "while":"( exp ) の間 stm"
         },
         "ifelse":{
             "ifelse":"else if ( exp ) then stm",

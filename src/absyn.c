@@ -119,6 +119,21 @@ A_stm A_IfelseStm(A_pos pos, A_ifelseList list){
     p -> u.ifelse.list = list;
     return p;
 }
+A_stm A_ForLoopStm(A_pos pos, A_stm actualFor){
+    A_stm p = (A_stm)checked_malloc(sizeof(*p));
+    p -> kind = A_forloopStm;
+    p -> pos = pos;
+    p -> u.forloop.actualFor = actualFor;
+    return p;
+}
+A_stm A_RealWhileStm(A_pos pos, A_exp test, A_stm body){
+    A_stm p = (A_stm)checked_malloc(sizeof(*p));
+    p -> kind = A_realwhileStm;
+    p -> pos = pos;
+    p -> u.realwhile.test = test;
+    p -> u.realwhile.body = body;
+    return p;
+}
 
 A_var A_SimpleVar(A_pos pos, S_symbol sym)
 {

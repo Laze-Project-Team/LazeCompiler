@@ -94,7 +94,7 @@ T_moduleList SEM_transProg(A_decList declist)
         EM_error(0, "code.none");
     }
     A_decList decList = declist;
-    list->head = T_ImportMod("js", "mem", T_MemMod(100));
+    list->head = T_ImportMod("js", "mem", T_MemMod(1000));
     list->tail = T_ModuleList(NULL, NULL);
     list = list->tail;
     int importDone = 0;
@@ -767,6 +767,15 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             return expTy(Tr_WhileStm(stm->pos, transExp(venv, tenv, stm->u.whilee.test, level, isLoop, classs).exp->u.exp,
                 body.exp->u.stm),
                 Ty_Void());
+        }
+        case A_realwhileStm:
+        {
+            return transStm(venv, tenv, A_WhileStm(stm -> pos, A_NotboolExp(stm -> pos, stm ->  u.realwhile.test), stm -> u.realwhile.body), level, isLoop, classs);
+        }
+        case A_forloopStm:
+        {
+            struct expty result = transStm(venv, tenv, stm -> u.forloop.actualFor, level, isLoop, classs);
+            return result;
         }
         case A_forStm:
         {
@@ -1768,7 +1777,7 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
                             entry = (E_enventry)S_look(classEntry -> u.classs.methods, var -> u.simple);
                             isCalledInMethod = TRUE;
                         }
-                        else{
+                        if(!entry){
                             classEntry = (E_enventry)S_look(tenv, name);
                             if(classEntry){
                                 stmListNow -> head = transStm(venv, tenv, A_DeclarationStm(e -> pos, A_ObjectDec(e -> pos, A_NameTy(e -> pos, name), S_Symbol("__object_literal"), e -> u.call.args)), level, isLoop, classs).exp -> u.stm;
