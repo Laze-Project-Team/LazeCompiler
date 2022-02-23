@@ -65,7 +65,7 @@
             {"name":"-", "regex": "(\\-)", "precedence": 5},
             {"name":"==", "regex": "(==|＝＝)", "precedence": 7},
             {"name":"!=", "regex": "(!=|！＝)", "precedence": 7},
-            {"name":"!", "regex": "(!|！)", "precedence": 10},
+            {"name":"!", "regex": "(!|！)", "precedence": 1},
             {"name":"<=", "regex": "(\\<=|＜＝)", "precedence": 6},
             {"name":">=", "regex": "(\\>=|＞＝)", "precedence": 6},
             {"name":"<", "regex": "(\\<|＜)", "precedence": 6},
@@ -153,11 +153,10 @@
             "while":"( exp ) の間 stm"
         },
         "ifelse":{
-            "ifelse":"else if ( exp ) then stm",
+            "ifelse":"else , if ( exp ) then stm",
             "else":"else stm"
         },
         "ifelselist":{
-            "null":"",
             "if":"if ( exp ) then stm",
             "ifelse":"ifelse",
             "ififelselist":"if ( exp ) then stm ifelse",

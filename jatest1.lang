@@ -1,0 +1,1470 @@
+関数: ${"ja":"実数表示", "dncl":"実数表示", "natja":"実数表示", "en":"printDouble", "naten":"printDouble"}$(実数: x) => () = js読み込み("console", "log");
+関数: ${"ja":"行列表示", "dncl":"行列表示", "natja":"行列表示", "en":"printMatrix", "naten":"printMatrix"}$(実数: offset[4][4]) => () = js読み込み("console", "logMatrix");
+関数: ${"ja":"アドレス表示", "dncl":"アドレス表示", "natja":"アドレス表示", "en":"printAddress", "naten":"printAddress"}$(*無: x) => () = js読み込み("console", "log");
+関数: ${"ja":"_文字列表示", "dncl":"_文字列表示", "natja":"_文字列表示", "en":"_printString", "naten":"_printString"}$(*文字: x, 整数: 長さ) => () = js読み込み("console", "logstring");
+関数: ${"ja":"時間計測", "dncl":"時間計測", "natja":"時間計測", "en":"getTime", "naten":"getTime"}$() => (実数: 時間) = js読み込み("performance", "now");
+関数: ${"ja":"glClearDepth", "dncl":"glClearDepth", "natja":"glClearDepth", "en":"glClearDepth", "naten":"glClearDepth"}$(整数32: i) => () = js読み込み("webgl", "clearDepth");
+関数: ${"ja":"glDepthFunc", "dncl":"glDepthFunc", "natja":"glDepthFunc", "en":"glDepthFunc", "naten":"glDepthFunc"}$(整数32: i) => () = js読み込み("webgl", "depthFunc");
+関数: ${"ja":"glEnable", "dncl":"glEnable", "natja":"glEnable", "en":"glEnable", "naten":"glEnable"}$(整数32: i) => () = js読み込み("webgl", "enable");
+関数: ${"ja":"glDisable", "dncl":"glDisable", "natja":"glDisable", "en":"glDisable", "naten":"glDisable"}$(整数32: i) => () = js読み込み("webgl", "disable");
+関数: ${"ja":"glCreateProgram", "dncl":"glCreateProgram", "natja":"glCreateProgram", "en":"glCreateProgram", "naten":"glCreateProgram"}$() => (整数32: prog) = js読み込み("webgl", "createProgram");
+関数: ${"ja":"glCreateBuffer", "dncl":"glCreateBuffer", "natja":"glCreateBuffer", "en":"glCreateBuffer", "naten":"glCreateBuffer"}$() => (整数32: buffer) = js読み込み("webgl", "createBuffer");
+関数: ${"ja":"glBindBuffer", "dncl":"glBindBuffer", "natja":"glBindBuffer", "en":"glBindBuffer", "naten":"glBindBuffer"}$(整数32: i, 整数32: j) => () = js読み込み("webgl", "bindBuffer");
+関数: ${"ja":"glBufferData", "dncl":"glBufferData", "natja":"glBufferData", "en":"glBufferData", "naten":"glBufferData"}$(整数32: i, *実数: offset, 整数32: size, 整数32: j) => () = js読み込み("webgl", "bufferData");
+関数: ${"ja":"glElementBufferData", "dncl":"glElementBufferData", "natja":"glElementBufferData", "en":"glElementBufferData", "naten":"glElementBufferData"}$(整数32: i, *整数32: offset, 整数32: size, 整数32: j) => () = js読み込み("webgl", "elementBufferData");
+関数: ${"ja":"glUseProgram", "dncl":"glUseProgram", "natja":"glUseProgram", "en":"glUseProgram", "naten":"glUseProgram"}$(整数32: i) => () = js読み込み("webgl", "useProgram");
+関数: ${"ja":"glGetAttribLocation", "dncl":"glGetAttribLocation", "natja":"glGetAttribLocation", "en":"glGetAttribLocation", "naten":"glGetAttribLocation"}$(整数32: i, *文字: offset, 整数32: size) => (整数32: loc) = js読み込み("webgl", "getAttribLocation");
+関数: ${"ja":"glVertexAttribPointer", "dncl":"glVertexAttribPointer", "natja":"glVertexAttribPointer", "en":"glVertexAttribPointer", "naten":"glVertexAttribPointer"}$(整数32: index, 整数32: size, 整数32: ty, 整数32: normalized, 整数32: stride, 整数32: offset) => () = js読み込み("webgl", "vertexAttribPointer");
+関数: ${"ja":"glEnableVertexAttribArray", "dncl":"glEnableVertexAttribArray", "natja":"glEnableVertexAttribArray", "en":"glEnableVertexAttribArray", "naten":"glEnableVertexAttribArray"}$(整数32: index) => () = js読み込み("webgl", "enableVertexAttribArray");
+関数: ${"ja":"glDrawArrays", "dncl":"glDrawArrays", "natja":"glDrawArrays", "en":"glDrawArrays", "naten":"glDrawArrays"}$(整数32: i, 整数32: first, 整数32: count) => () = js読み込み("webgl", "drawArrays");
+関数: ${"ja":"_glGetUniformLocation", "dncl":"_glGetUniformLocation", "natja":"_glGetUniformLocation", "en":"_glGetUniformLocation", "naten":"_glGetUniformLocation"}$(整数32: i, *文字: offset, 整数32: size) => (整数32: loc) = js読み込み("webgl", "getUniformLocation");
+関数: ${"ja":"glUniformMatrix2fv", "dncl":"glUniformMatrix2fv", "natja":"glUniformMatrix2fv", "en":"glUniformMatrix2fv", "naten":"glUniformMatrix2fv"}$(整数32: loc, 整数32: trans, *実数: offset) => () = js読み込み("webgl", "uniformMatrix2fv");
+関数: ${"ja":"glUniformMatrix3fv", "dncl":"glUniformMatrix3fv", "natja":"glUniformMatrix3fv", "en":"glUniformMatrix3fv", "naten":"glUniformMatrix3fv"}$(整数32: loc, 整数32: trans, *実数: offset) => () = js読み込み("webgl", "uniformMatrix3fv");
+関数: ${"ja":"glUniformMatrix4fv", "dncl":"glUniformMatrix4fv", "natja":"glUniformMatrix4fv", "en":"glUniformMatrix4fv", "naten":"glUniformMatrix4fv"}$(整数32: loc, 整数32: trans, 実数: offset[16]) => () = js読み込み("webgl", "uniformMatrix4fv");
+関数: ${"ja":"glUniform1f", "dncl":"glUniform1f", "natja":"glUniform1f", "en":"glUniform1f", "naten":"glUniform1f"}$(整数32: loc, 実数: v0) => () = js読み込み("webgl", "uniform1f");
+関数: ${"ja":"glUniform1fv", "dncl":"glUniform1fv", "natja":"glUniform1fv", "en":"glUniform1fv", "naten":"glUniform1fv"}$(整数32: loc, 実数: v0) => () = js読み込み("webgl", "uniform1fv");
+関数: ${"ja":"glUniform1i", "dncl":"glUniform1i", "natja":"glUniform1i", "en":"glUniform1i", "naten":"glUniform1i"}$(整数32: loc, 整数32: v0) => () = js読み込み("webgl", "uniform1i");
+関数: ${"ja":"glUniform1iv", "dncl":"glUniform1iv", "natja":"glUniform1iv", "en":"glUniform1iv", "naten":"glUniform1iv"}$(整数32: loc, 整数32: v0) => () = js読み込み("webgl", "uniform1iv");
+関数: ${"ja":"glUniform2f", "dncl":"glUniform2f", "natja":"glUniform2f", "en":"glUniform2f", "naten":"glUniform2f"}$(整数32: loc, 実数: v0, 実数: v1) => () = js読み込み("webgl", "uniform2f");
+関数: ${"ja":"glUniform2fv", "dncl":"glUniform2fv", "natja":"glUniform2fv", "en":"glUniform2fv", "naten":"glUniform2fv"}$(整数32: loc, 実数: v0, 実数: v1) => () = js読み込み("webgl", "uniform2fv");
+関数: ${"ja":"glUniform2i", "dncl":"glUniform2i", "natja":"glUniform2i", "en":"glUniform2i", "naten":"glUniform2i"}$(整数32: loc, 整数32: v0, 整数32: v1) => () = js読み込み("webgl", "uniform2i");
+関数: ${"ja":"glUniform2iv", "dncl":"glUniform2iv", "natja":"glUniform2iv", "en":"glUniform2iv", "naten":"glUniform2iv"}$(整数32: loc, 整数32: v0, 整数32: v1) => () = js読み込み("webgl", "uniform2iv");
+関数: ${"ja":"glUniform3f", "dncl":"glUniform3f", "natja":"glUniform3f", "en":"glUniform3f", "naten":"glUniform3f"}$(整数32: loc, 実数: v0, 実数: v1, 実数: v2) => () = js読み込み("webgl", "uniform3f");
+関数: ${"ja":"glUniform3fv", "dncl":"glUniform3fv", "natja":"glUniform3fv", "en":"glUniform3fv", "naten":"glUniform3fv"}$(整数32: loc, 実数: v0, 実数: v1, 実数: v2) => () = js読み込み("webgl", "uniform3fv");
+関数: ${"ja":"glUniform3i", "dncl":"glUniform3i", "natja":"glUniform3i", "en":"glUniform3i", "naten":"glUniform3i"}$(整数32: loc, 整数32: v0, 整数32: v1, 整数32: v2) => () = js読み込み("webgl", "uniform3i");
+関数: ${"ja":"glUniform3iv", "dncl":"glUniform3iv", "natja":"glUniform3iv", "en":"glUniform3iv", "naten":"glUniform3iv"}$(整数32: loc, 整数32: v0, 整数32: v1, 整数32: v2) => () = js読み込み("webgl", "uniform3iv");
+関数: ${"ja":"glUniform4f", "dncl":"glUniform4f", "natja":"glUniform4f", "en":"glUniform4f", "naten":"glUniform4f"}$(整数32: loc, 実数: v0, 実数: v1, 実数: v2, 実数: v3) => () = js読み込み("webgl", "uniform4f");
+関数: ${"ja":"glUniform4fv", "dncl":"glUniform4fv", "natja":"glUniform4fv", "en":"glUniform4fv", "naten":"glUniform4fv"}$(整数32: loc, 実数: v0, 実数: v1, 実数: v2, 実数: v3) => () = js読み込み("webgl", "uniform4fv");
+関数: ${"ja":"glUniform4i", "dncl":"glUniform4i", "natja":"glUniform4i", "en":"glUniform4i", "naten":"glUniform4i"}$(整数32: loc, 整数32: v0, 整数32: v1, 整数32: v2, 整数32: v3) => () = js読み込み("webgl", "uniform4i");
+関数: ${"ja":"glUniform4iv", "dncl":"glUniform4iv", "natja":"glUniform4iv", "en":"glUniform4iv", "naten":"glUniform4iv"}$(整数32: loc, 整数32: v0, 整数32: v1, 整数32: v2, 整数32: v3) => () = js読み込み("webgl", "uniform4iv");
+関数: ${"ja":"glClearColor", "dncl":"glClearColor", "natja":"glClearColor", "en":"glClearColor", "naten":"glClearColor"}$(実数: r, 実数: g, 実数: b, 実数: a) => () = js読み込み("webgl", "clearColor");
+関数: ${"ja":"glClear", "dncl":"glClear", "natja":"glClear", "en":"glClear", "naten":"glClear"}$(整数32: color) => () = js読み込み("webgl", "clear");
+関数: ${"ja":"glDrawElements", "dncl":"glDrawElements", "natja":"glDrawElements", "en":"glDrawElements", "naten":"glDrawElements"}$(整数32: i, 整数32: count, 整数32: ty, 整数32: offset) => () = js読み込み("webgl", "drawElements");
+関数: ${"ja":"glBlendFunc", "dncl":"glBlendFunc", "natja":"glBlendFunc", "en":"glBlendFunc", "naten":"glBlendFunc"}$(整数32: i, 整数32: j) => () = js読み込み("webgl", "blendFunc");
+関数: ${"ja":"キーチェック", "dncl":"キーチェック", "natja":"キーチェック", "en":"checkKeyPress", "naten":"checkKeyPress"}$(整数32: keyCode) => (整数: pressed) = js読み込み("js", "checkKeyPress");
+関数: ${"ja":"マウスチェック", "dncl":"マウスチェック", "natja":"マウスチェック", "en":"checkMousePress", "naten":"checkMousePress"}$() => (整数: pressed) = js読み込み("js", "checkMousePress");
+関数: ${"ja":"マウス相対座標X", "dncl":"マウス相対座標X", "natja":"マウス相対座標X", "en":"checkRelativeMouseX", "naten":"checkRelativeMouseX"}$() => (実数: x) = js読み込み("js", "checkRelativeMouseX");
+関数: ${"ja":"マウス相対座標Y", "dncl":"マウス相対座標Y", "natja":"マウス相対座標Y", "en":"checkRelativeMouseY", "naten":"checkRelativeMouseY"}$() => (実数: x) = js読み込み("js", "checkRelativeMouseY");
+関数: ${"ja":"マウス絶対座標X", "dncl":"マウス絶対座標X", "natja":"マウス絶対座標X", "en":"checkAbsoluteMouseX", "naten":"checkAbsoluteMouseX"}$() => (実数: x) = js読み込み("js", "checkAbsoluteMouseX");
+関数: ${"ja":"マウス絶対座標Y", "dncl":"マウス絶対座標Y", "natja":"マウス絶対座標Y", "en":"checkAbsoluteMouseY", "naten":"checkAbsoluteMouseY"}$() => (実数: x) = js読み込み("js", "checkAbsoluteMouseY");
+関数: ${"ja":"ランダム数生成", "dncl":"ランダム数生成", "natja":"ランダム数生成", "en":"rand", "naten":"rand"}$() => (実数: x) = js読み込み("js", "rand");
+関数: ${"ja":"メモリ確保", "dncl":"メモリ確保", "natja":"メモリ確保", "en":"allocMemory", "naten":"allocMemory"}$(整数32: size) => (*無: p) = js読み込み("js", "alloc");
+関数: ${"ja":"テクスチャロード", "dncl":"テクスチャロード", "natja":"テクスチャロード", "en":"_loadTexture", "naten":"_loadTexture"}$(*文字: offset, 整数32: length) => (整数32: a) = js読み込み("webgl", "loadTexture");
+関数: ${"ja":"glActiveTexture", "dncl":"glActiveTexture", "natja":"glActiveTexture", "en":"glActiveTexture", "naten":"glActiveTexture"}$(整数32: i) => () = js読み込み("webgl", "activeTexture");
+関数: ${"ja":"glBindTexture", "dncl":"glBindTexture", "natja":"glBindTexture", "en":"glBindTexture", "naten":"glBindTexture"}$(整数32: i, 整数32: j) => () = js読み込み("webgl", "bindTexture");
+関数: ${"ja":"マウスキャプチャ", "dncl":"マウスキャプチャ", "natja":"マウスキャプチャ", "en":"captureMouse", "naten":"captureMouse"}$() => () = js読み込み("js", "lockPointer");
+関数:${"ja":"Arduino設定", "dncl":"Arduino設定", "natja":"Arduino設定", "en":"ArduinoSetup", "naten":"ArduinoSetup"}$(整数:vendorId, 関数:c() => ()) => () = js読み込み("arduino", "setUp");
+関数:${"ja":"Arduinoコマンド送信", "dncl":"Arduinoコマンド送信", "natja":"Arduinoコマンド送信", "en":"ArduinoSendCommand", "naten":"ArduinoSendCommand"}$(文字:コマンド, 整数32:data) => () = js読み込み("arduino", "sendCommand");
+関数:${"ja":"Arduinoデータ受信", "dncl":"Arduinoデータ受信", "natja":"Arduinoデータ受信", "en":"ArduinoReceiveData", "naten":"ArduinoReceiveData"}$() => () = js読み込み("arduino", "checkInput");
+関数:${"ja":"Arduinoアナログ入力", "dncl":"Arduinoアナログ入力", "natja":"Arduinoアナログ入力", "en":"ArduinoAnalogInput", "naten":"ArduinoAnalogInput"}$(整数:ピン番号) => (整数32:データ) = js読み込み("arduino", "analogRead");
+関数:${"ja":"Arduinoデジタル入力", "dncl":"Arduinoデジタル入力", "natja":"Arduinoデジタル入力", "en":"ArduinoDigitalInput", "naten":"ArduinoDigitalInput"}$(整数:ピン番号) => (整数32:データ) = js読み込み("arduino", "digitalRead");
+関数:${"ja":"ArduinoHCSR04距離入力", "dncl":"ArduinoHCSR04距離入力", "natja":"ArduinoHCSR04距離入力", "en":"ArduinoHCSR04DistanceInput", "naten":"ArduinoHCSR04DistanceInput"}$(整数:ピン番号) => (整数32:データ) = js読み込み("arduino", "distanceRead");
+
+関数: ${"ja":"sin", "dncl":"sin", "natja":"sin", "en":"sin", "naten":"sin"}$(実数: input) => (実数: 結果){
+	実数: PI = 3.14159265358979312;
+	整数: temp = input / (2.0 * PI);
+	実数: rad = input - (2.0 * PI * temp);
+	実数: plusminus = 1.0;
+	もし(rad < 0.0)ならば{
+		rad = rad + (2.0 * PI);
+	}
+	もし(rad > PI)ならば{
+		plusminus = 0 - 1.0;
+		もし(rad > 1.5 * PI)ならば{
+			rad = (2.0 * PI) - rad;
+		}でなければ{
+			rad = rad - PI;
+		}
+	}でなければ{
+		もし(rad > 0.5 * PI)ならば{
+			rad = PI - rad;
+		}
+	}
+	もし(rad > 0.25 * PI)ならば{
+		rad = (0.5 * PI) - rad;
+		実数: doubleRad = rad * rad;
+		結果 = 1.0 - (doubleRad) / 2.0 + (doubleRad * doubleRad) / 24.0 - (doubleRad * doubleRad * doubleRad) / 720.0 + (doubleRad * doubleRad * doubleRad * doubleRad) / 40320.0 - (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 3628800.0 + (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 479001600.0;
+		結果 = 結果 * plusminus;
+	}でなければ{
+		実数: doubleRad = rad * rad;
+		結果 = rad - (rad * doubleRad) / 6.0 + (rad * doubleRad * doubleRad) / 120.0 - (rad * doubleRad * doubleRad * doubleRad) / 5040.0 + (rad * doubleRad * doubleRad * doubleRad * doubleRad) / 362880.0 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 39916800.0 + (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 6227020800.0 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 1307674368000.0;
+		結果 = 結果 * plusminus;
+	}
+}
+関数: ${"ja":"cos", "dncl":"cos", "natja":"cos", "en":"cos", "naten":"cos"}$(実数: input) => (実数: 結果){
+	実数: PI = 3.14159265358979312;
+	整数: temp = input / (2 * PI);
+	実数: rad = input - (2 * PI * temp);
+	実数: plusminus = 1.0;
+	もし(rad < 0.0)ならば{
+		rad = rad + (2.0 * PI);
+	}
+	もし(rad > PI)ならば{
+		もし(rad > 1.5 * PI)ならば{
+			rad = (2.0 * PI) - rad;
+		}でなければ{
+			plusminus = 0 - 1.0;
+			rad = rad - PI;
+		}
+	}でなければ{
+		もし(rad > 0.5 * PI)ならば{
+			plusminus = 0 - 1.0;
+			rad = PI - rad;
+		}
+	}
+	もし(rad < 0.25 * PI)ならば{
+		実数: doubleRad = rad * rad;
+		結果 = 1.0 - (doubleRad) / 2.0 + (doubleRad * doubleRad) / 24.0 - (doubleRad * doubleRad * doubleRad) / 720.0 + (doubleRad * doubleRad * doubleRad * doubleRad) / 40320.0 - (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 3628800.0 + (doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 479001600.0;
+		結果 = 結果 * plusminus;
+	}でなければ{
+		rad = (0.5 * PI) - rad;
+		実数: doubleRad = rad * rad;
+		結果 = rad - (rad * doubleRad) / 6.0 + (rad * doubleRad * doubleRad) / 120.0 - (rad * doubleRad * doubleRad * doubleRad) / 5040.0 + (rad * doubleRad * doubleRad * doubleRad * doubleRad) / 362880.0 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 39916800.0 + (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 6227020800.0 - (rad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad * doubleRad) / 1307674368000.0;
+		結果 = 結果 * plusminus;
+	}
+}
+関数: ${"ja":"tan", "dncl":"tan", "natja":"tan", "en":"tan", "naten":"tan"}$(実数: rad) => (実数: 結果){
+	実数: PI = 3.14159265358979312;
+	実数: sqRad = rad * rad;
+	結果 = sin(rad) / cos(rad);
+}
+関数: ${"ja":"絶対値", "dncl":"絶対値", "natja":"絶対値", "en":"abs", "naten":"abs"}$(実数: a) => (実数: b){
+	もし(a >= 0)ならば{
+		b = a;
+	}でなければ{
+		b = - a;
+	}
+}
+関数: ${"ja":"ラジアンへ", "dncl":"ラジアンへ", "natja":"ラジアンへ", "en":"toRad", "naten":"toRad"}$(実数: deg) => (実数: rad){
+	実数: PI = 3.14159265358979312;
+	rad = (deg / 180) * PI;
+}
+関数: ${"ja":"平方根", "dncl":"平方根", "natja":"平方根", "en":"root", "naten":"root"}$(実数: x) => (実数: y){
+	y = 5;
+	(整数: i = 0;)から(i == 20)まで(i = i + 1;){
+		y = 0.5 * (y + (x / y));
+	}
+}
+型<T>: クラス: ${"ja":"配列", "dncl":"配列", "natja":"配列", "en":"Array", "naten":"Array"}${
+公開: 	*T: content;
+	整数: size;
+	整数: allocated;
+	関数: 配列() => (){
+		size = 0;
+		allocated = 4;
+		content = メモリ確保(バイト数(*content) * allocated);
+	}
+	関数: ${"ja":"取得", "dncl":"取得", "natja":"取得", "en":"get", "naten":"get"}$(整数: index) => (T: result){
+		終了(content[index]);
+	}
+	関数: ${"ja":"追加", "dncl":"追加", "natja":"追加", "en":"push", "naten":"push"}$(T: new) => (){
+		もし(size == allocated)ならば{
+			allocated = allocated * 2;
+			*T: temp = content;
+			content = メモリ確保(バイト数(*content) * allocated);
+			(整数: i = 0;)から(i == (allocated - 1))まで(i = i + 1;){
+				content[i] = temp[i];
+			}
+		}
+		content[size] = new;
+		size += 1;
+	}
+	関数: ${"ja":"長さ", "dncl":"長さ", "natja":"長さ", "en":"length", "naten":"length"}$() => (整数: a){
+		a = size;
+	}
+	関数: ${"ja":"ポップ", "dncl":"ポップ", "natja":"ポップ", "en":"pop", "naten":"pop"}$() => (){
+		size = size - 1;
+	}
+    関数: 演算子 = (*T: offset, 整数: l) => (){
+		content = offset;
+		size = l;
+	}
+	関数: 演算子 = (配列<T>:a) => (){
+		content = メモリ確保(バイト数(*content) * (a.allocated));
+		size = a.size;
+		allocated = a.allocated;
+		(size)回繰り返す{
+			content[カウンタ] = a.content[カウンタ];
+		}
+	}
+	関数: 演算子 == (配列<T>:a) => (真偽:b){
+		b = 真;
+		もし(size != a.size)ならば{
+			終了(偽);
+		}
+		(size)回繰り返す{
+			もし(content[カウンタ] != a.content[カウンタ])ならば{
+				終了(偽);
+			}
+		}
+	}
+	関数: 演算子 == (*T:offset, 整数:l) => (真偽:b){
+		b = 真;
+		もし(size != l)ならば{
+			終了(偽);
+		}
+		(size)回繰り返す{
+			もし(content[カウンタ] != offset[カウンタ])ならば{
+				終了(偽);
+			}
+		}
+	}
+	関数: 演算子 != (配列<T>:a) => (真偽:b){
+		b = 偽;
+		もし(size != a.size)ならば{
+			終了(真);
+		}
+		(size)回繰り返す{
+			もし(content[カウンタ] != a.content[カウンタ])ならば{
+				終了(真);
+			}
+		}
+	}
+	関数: 演算子 != (*T:offset, 整数:l) => (真偽:b){
+		b = 偽;
+		もし(size != l)ならば{
+			終了(真);
+		}
+		(size)回繰り返す{
+			もし(content[カウンタ] != offset[カウンタ])ならば{
+				終了(真);
+			}
+		}
+	}
+	関数: 演算子 + (配列<T>:a) => (配列<T>:b){
+		配列<T>:結果();
+		(size)回繰り返す{
+			結果.追加(content[カウンタ]);
+		}
+		(a.size)回繰り返す{
+			結果.追加(a.取得(カウンタ));
+		}
+		終了(結果);
+	}
+	関数: 演算子 + (*T:offset, 整数:l) => (配列<T>:b){
+		配列<T>:結果();
+		(size)回繰り返す{
+			結果.追加(content[カウンタ]);
+		}
+		(l)回繰り返す{
+			結果.追加(offset[カウンタ]);
+		}
+		終了(結果);
+	}
+	関数: ${"ja":"全要素操作", "dncl":"全要素操作", "natja":"全要素操作", "en":"forEach", "naten":"forEach"}$(関数:c(T:a) => ()) => (){
+		(size)回繰り返す{
+			c(content[カウンタ]);
+		}
+	}
+	関数: ${"ja":"全要素変更", "dncl":"全要素変更", "natja":"全要素変更", "en":"map", "naten":"map"}$(関数:c(T:a) => (T:b)) => (){
+		配列<T>:結果();
+		結果.content = メモリ確保(バイト数(*content) * (allocated));
+		結果.size = size;
+		結果.allocated = allocated;
+		(size)回繰り返す{
+			結果.content[カウンタ] = c(content[カウンタ]);
+		}
+		終了(結果);
+	}
+	関数:__ソート(整数: s, 整数: e, 関数:c(T:a, T:b) => (整数:r)) => (){
+		もし(s < e)ならば{
+			整数:loc = e;
+			T:pivot = content[loc];
+			整数:i = s - 1;
+			整数:l = e - s;
+			(l)回繰り返す{
+				もし(c(content[カウンタ + s], pivot) < 0)ならば{
+					i += 1;
+					T:temp = content[カウンタ + s];
+					content[カウンタ + s] = content[i];
+					content[i] = temp;
+				}
+			}
+			T:temp = content[loc];
+			content[loc] = content[i + 1];
+			content[i + 1] = temp;
+			__ソート(s, i, c);
+			__ソート(i + 2, e, c);
+		}
+	}
+	関数: ${"ja":"ソート", "dncl":"ソート", "natja":"ソート", "en":"sort", "naten":"sort"}$(関数:c(T:a, T:b) => (整数:r)) => (){
+		__ソート(0, size - 1, c);
+	}
+	関数: ${"ja":"フィルター", "dncl":"フィルター", "natja":"フィルター", "en":"filter", "naten":"filter"}$(関数:c(T:a) => (真偽:r)) => (配列<T>:b){
+		配列<T>:結果();
+		(size)回繰り返す{
+			もし(c(content[カウンタ]))ならば{
+				結果.追加(content[カウンタ]);
+			}
+		}
+		終了(結果);
+	}
+	関数: ${"ja":"削除", "dncl":"削除", "natja":"削除", "en":"remove", "naten":"remove"}$(整数:i) => (配列<T>:b){
+		配列<T>:結果();
+		(size)回繰り返す{
+			もし(カウンタ != i)ならば{
+				結果.追加(content[カウンタ]);
+			}
+		}
+		終了(結果);
+	}
+	関数: ${"ja":"範囲削除", "dncl":"範囲削除", "natja":"範囲削除", "en":"removeRange", "naten":"removeRange"}$(整数:i, 整数:r) => (配列<T>:b){
+		配列<T>:結果();
+		(size)回繰り返す{
+			もし((カウンタ < i) || (カウンタ >= (i + r)))ならば{
+				結果.追加(content[カウンタ]);
+			}
+		}
+		終了(結果);
+	}
+	関数: ${"ja":"部分列", "dncl":"部分列", "natja":"部分列", "en":"subseq", "naten":"subseq"}$(整数:s, 整数: e) => (配列<T>:b){
+		配列<T>:結果();
+		もし(s >= e)ならば{
+			終了(結果);
+		}
+		(size)回繰り返す{
+			もし((s <= カウンタ) && (カウンタ < e))ならば{
+				結果.追加(content[カウンタ]);
+			}
+		}
+		終了(結果);
+	}
+	関数: ${"ja":"範囲部分列", "dncl":"範囲部分列", "natja":"範囲部分列", "en":"subseqRange", "naten":"subseqRange"}$(整数:s, 整数: l) => (配列<T>:b){
+		配列<T>:結果();
+		もし(s >= size)ならば{
+			終了(結果);
+		}
+		(size)回繰り返す{
+			もし((s <= カウンタ) && (カウンタ < (s + l)))ならば{
+				結果.追加(content[カウンタ]);
+			}
+		}
+		終了(結果);
+	}
+	関数: ${"ja":"置換", "dncl":"置換", "natja":"置換", "en":"replace", "naten":"replace"}$(T:a, T:b) => (){
+		(size)回繰り返す{
+			もし(content[カウンタ] == a)ならば{
+				content[カウンタ] = b;
+			}
+		}
+	}
+	関数: ${"ja":"範囲置換", "dncl":"範囲置換", "natja":"範囲置換", "en":"replaceRange", "naten":"replaceRange"}$(整数:s, 整数:l, T:a) => (){
+		(size)回繰り返す{
+			もし((s <= カウンタ) && (カウンタ < (s + l)))ならば{
+				content[カウンタ] = a;
+			}
+		}
+	}
+	関数: ${"ja":"範囲置換", "dncl":"範囲置換", "natja":"範囲置換", "en":"replaceRange", "naten":"replaceRange"}$(整数:s, 整数:l, 配列<T>:a) => (){
+		(size)回繰り返す{
+			もし((s <= カウンタ) && (カウンタ < (s + l)))ならば{
+				content[カウンタ] = a.content[カウンタ - s];
+			}
+		}
+	}
+	関数: ${"ja":"探索", "dncl":"探索", "natja":"探索", "en":"find", "naten":"find"}$(T:b) => (整数:i){
+		(size)回繰り返す{
+			もし(content[カウンタ] == b)ならば{
+				終了(カウンタ);
+			}
+		}
+		終了(size);
+	}
+}
+
+クラス: ${"ja":"文字列", "dncl":"文字列", "natja":"文字列", "en":"string", "naten":"string"}${
+公開: 	*文字: content;
+	整数: 長さ;
+	関数: 文字列(*文字: offset, 整数: l) => (){
+		content = offset;
+		長さ = l;
+	}
+	関数:文字列() => (){
+		content = メモリ確保(0);
+		長さ = 0;
+	}
+	関数: 演算子 = (*文字: offset, 整数: l) => (){
+		content = offset;
+		長さ = l;
+	}
+	関数:演算子 = (文字列:a) => (){
+		content = メモリ確保(バイト数(*content) * (a.長さ));
+		長さ = a.長さ;
+		(長さ)回繰り返す{
+			content[カウンタ] = a.content[カウンタ];
+		}
+	}
+	関数: 演算子 + (文字:a) => (文字列:b){
+		b.content = メモリ確保(バイト数(*content) * (長さ + 1));
+		(長さ)回繰り返す{
+			b.content[カウンタ] = content[カウンタ];
+		}
+		b.content[長さ] = a;
+		b.長さ = 長さ + 1;
+	}
+	関数: 演算子 + (*文字:offset, 整数:l) =>(文字列:b){
+		b.content = メモリ確保(バイト数(*content) * (長さ + l));
+		(長さ)回繰り返す{
+			b.content[カウンタ] = content[カウンタ];
+		}
+		(l)回繰り返す{
+			b.content[長さ + カウンタ] = offset[カウンタ];
+		}
+		b.長さ = 長さ + l;
+	}
+	関数: 演算子 + (文字列:a) => (文字列:b){
+		b.content = メモリ確保(バイト数(*content) * (長さ + a.長さ));
+		(長さ)回繰り返す{
+			b.content[カウンタ] = content[カウンタ];
+		}
+		(a.長さ)回繰り返す{
+			b.content[長さ + カウンタ] = a.content[カウンタ];
+		}
+		b.長さ = 長さ + a.長さ;
+	}
+	関数: 演算子 == (文字列:a) => (真偽:b){
+		b = 真;
+		もし(長さ != a.長さ)ならば{
+			終了(偽);
+		}
+		(長さ)回繰り返す{
+			もし(content[カウンタ] != a.content[カウンタ])ならば{
+				終了(偽);
+			}
+		}
+	}
+	関数: 演算子 == (*文字:offset, 整数:l) => (真偽:b){
+		b = 真;
+		もし(長さ != l)ならば{
+			終了(偽);
+		}
+		(長さ)回繰り返す{
+			もし(content[カウンタ] != offset[カウンタ])ならば{
+				終了(偽);
+			}
+		}
+	}
+	関数: 演算子 != (文字列:a) => (真偽:b){
+		b = 偽;
+		もし(長さ != a.長さ)ならば{
+			終了(真);
+		}
+		(長さ)回繰り返す{
+			もし(content[カウンタ] != a.content[カウンタ])ならば{
+				終了(真);
+			}
+		}
+	}
+	関数: 演算子 != (*文字:offset, 整数:l) => (真偽:b){
+		b = 偽;
+		もし(長さ != l)ならば{
+			終了(真);
+		}
+		(長さ)回繰り返す{
+			もし(content[カウンタ] != offset[カウンタ])ならば{
+				終了(真);
+			}
+		}
+	}
+	関数:${"ja":"切り取り", "dncl":"切り取り", "natja":"切り取り", "en":"substr", "naten":"substr"}$(整数:s, 整数:e) => (文字列:b){
+		もし(s > 長さ)ならば{
+			s = 長さ;
+		}
+		もし(e > 長さ)ならば{
+			e = 長さ;
+		}
+		b.content = メモリ確保(バイト数(*content) * (e - s));
+		b.長さ = e - s;
+		(整数:i = s;)から(i == e)まで(i+=1;){
+			b.content[i - s] = content[i];
+		}
+	}
+	関数:${"ja":"範囲切り取り", "dncl":"範囲切り取り", "natja":"範囲切り取り", "en":"substrRange", "naten":"substrRange"}$(整数:s, 整数:l) => (文字列:b){
+		もし(s > 長さ)ならば{
+			s = 長さ;
+		}
+		もし(s + l > 長さ)ならば{
+			l = 長さ - s;
+		}
+		b.content = メモリ確保(バイト数(*content) * l);
+		b.長さ = l;
+		(整数:i = s;)から(i == (s + l))まで(i+=1;){
+			b.content[i - s] = content[i];
+		}
+	}
+	関数:${"ja":"分割", "dncl":"分割", "natja":"分割", "en":"separate", "naten":"separate"}$(文字:a) => (配列<文字列>:b){
+		配列<文字列>:結果();
+		整数:開始 = 0;
+		(長さ)回繰り返す{
+			もし(content[カウンタ] == a)ならば{
+				結果.追加(切り取り(開始, カウンタ));
+				開始 = カウンタ + 1;
+			}
+		}
+		結果.追加(切り取り(開始, 長さ));
+		終了(結果);
+	}
+	関数:${"ja":"整数変換", "dncl":"整数変換", "natja":"整数変換", "en":"toInteger", "naten":"toInteger"}$() => (整数:a){
+		a = 0;
+		(長さ)回繰り返す{
+			文字:c = content[カウンタ];
+			もし(c != '-')ならば{
+				a *= 10;
+			}
+			もし(c == '1')ならば{
+				a += 1;	
+			}
+			もし(c == '2')ならば{
+				a += 2;	
+			}
+			もし(c == '3')ならば{
+				a += 3;	
+			}
+			もし(c == '4')ならば{
+				a += 4;	
+			}
+			もし(c == '5')ならば{
+				a += 5;	
+			}
+			もし(c == '6')ならば{
+				a += 6;	
+			}
+			もし(c == '7')ならば{
+				a += 7;	
+			}
+			もし(c == '8')ならば{
+				a += 8;
+			}
+			もし(c == '9')ならば{
+				a += 9;
+			}
+		}
+		もし(content[0] == '-')ならば{
+			a *= -1.0;
+		}
+	}
+	関数:${"ja":"実数変換", "dncl":"実数変換", "natja":"実数変換", "en":"toDouble", "naten":"toDouble"}$() => (実数:a){
+		a = 0;
+		配列<文字列>:b = 分割('.');
+		もし(b.長さ() != 2)ならば{
+			終了(0.0);
+		}
+		a += b.content[0].整数変換();
+		実数:temp = b.content[1].整数変換();
+		(b.content[1].長さ)回繰り返す{
+			temp *= 0.1;
+		}
+		a += temp;
+	}
+	関数:${"ja":"置換", "dncl":"置換", "natja":"置換", "en":"replace", "naten":"replace"}$(文字列:a, 文字列:b) => (文字列:c){
+		文字列:結果();
+		整数:開始 = 0;
+		(長さ)回繰り返す{
+			もし(content[カウンタ] == a.content[0])ならば{
+				もし(範囲切り取り(カウンタ, a.長さ) == a)ならば{
+					結果 += 切り取り(開始, カウンタ);
+					結果 += b;
+					カウンタ += a.長さ;
+					開始 = カウンタ;
+				}
+			}
+		}
+		結果 += 切り取り(開始, 長さ);
+		終了(結果);
+	}
+}
+関数: ${"ja":"文字列表示", "dncl":"文字列表示", "natja":"文字列表示", "en":"printString", "naten":"printString"}$(文字列: a) => (){
+	_文字列表示(a.content, a.長さ);
+}
+関数: ${"ja":"表示", "dncl":"表示", "natja":"表示", "en":"print", "naten":"print"}$(実数: x) => (){
+	実数表示(x);
+}
+関数: ${"ja":"表示", "dncl":"表示", "natja":"表示", "en":"print", "naten":"print"}$(整数: n) => (){
+	実数表示(n);
+}
+関数: ${"ja":"表示", "dncl":"表示", "natja":"表示", "en":"print", "naten":"print"}$(整数32: n) => (){
+	実数表示(n);
+}
+関数: ${"ja":"表示", "dncl":"表示", "natja":"表示", "en":"print", "naten":"print"}$(文字列: a) => (){
+	文字列表示(a);
+}
+関数: ${"ja":"glGetUniformLocation", "dncl":"glGetUniformLocation", "natja":"glGetUniformLocation", "en":"glGetUniformLocation", "naten":"glGetUniformLocation"}$(整数32: i, 文字列: a) => (整数32: loc){
+	loc = _glGetUniformLocation(i, a.content, a.長さ);
+}
+クラス: ${"ja":"ベクトル3D", "dncl":"ベクトル3D", "natja":"ベクトル3D", "en":"Vector3D", "naten":"Vector3D"}${
+公開:
+	実数: x;
+	実数: y;
+	実数: z;
+	関数: ベクトル3D(実数: a, 実数: b, 実数: c) => (){
+		x = a;
+		y = b;
+		z = c;
+	}
+	関数: ${"ja":"長さ", "dncl":"長さ", "natja":"長さ", "en":"length", "naten":"length"}$() => (実数: l){
+		l = 平方根(x * x + y * y + z * z);
+	}
+	関数: ${"ja":"正規化", "dncl":"正規化", "natja":"正規化", "en":"normalize", "naten":"normalize"}$() => (){
+		実数: l = 平方根((x * x) + (y * y) + (z * z));
+		x = x / l;
+		y = y / l;
+		z = z / l;
+	}
+	関数: 演算子 + (ベクトル3D: a) => (ベクトル3D: b){
+		b.x = a.x + x;
+		b.y = a.y + y;
+		b.z = a.z + z;
+	}
+	関数: 演算子 - (ベクトル3D: a) => (ベクトル3D: b){
+		b.x = a.x - x;
+		b.y = a.y - y;
+		b.z = a.z - z;
+	}
+	関数: 演算子 * (実数: k) => (ベクトル3D: b){
+		b.x = x * k;
+		b.y = y * k;
+		b.z = z * k;
+	}
+	関数: 演算子 * (ベクトル3D: a) => (ベクトル3D: b){
+		b.x = y * a.z - z * a.y;
+		b.y = z * a.x - x * a.z;
+		b.z = x * a.y - y * a.x;
+	}
+	関数: 演算子 / (実数: k) => (ベクトル3D: b){
+		b.x = x / k;
+		b.y = y / k;
+		b.z = z / k;		
+	}
+	関数: 演算子 == (ベクトル3D:a) => (真偽:b){
+		b = ((a.x == x) && (a.y == y) && (a.z == z));
+	}
+	関数: 演算子 != (ベクトル3D:a) => (真偽:b){
+		b = ((a.x != x) || (a.y != y) || (a.z != z));
+	}
+}
+関数: ${"ja":"ベクトル3Dの和", "dncl":"ベクトル3Dの和", "natja":"ベクトル3Dの和", "en":"addVector3D", "naten":"addVector3D"}$(ベクトル3D: a, ベクトル3D: b) => (ベクトル3D: result){
+	result.x = a.x + b.x;
+	result.y = a.y + b.y;
+	result.z = a.z + b.z;
+}
+関数: ${"ja":"ベクトル3Dの差", "dncl":"ベクトル3Dの差", "natja":"ベクトル3Dの差", "en":"subVector3D", "naten":"subVector3D"}$(ベクトル3D: a, ベクトル3D: b) => (ベクトル3D: result){
+	result.x = a.x - b.x;
+	result.y = a.y - b.y;
+	result.z = a.z - b.z;
+}
+関数: ${"ja":"ベクトル3Dの内積", "dncl":"ベクトル3Dの内積", "natja":"ベクトル3Dの内積", "en":"dotVector3D", "naten":"dotVector3D"}$(ベクトル3D: a, ベクトル3D: b) => (実数: x){
+	x = (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
+}
+関数: ${"ja":"ベクトル3Dの外積", "dncl":"ベクトル3Dの外積", "natja":"ベクトル3Dの外積", "en":"crossVector3D", "naten":"crossVector3D"}$(ベクトル3D: a, ベクトル3D: b) => (ベクトル3D: result){
+	result.x = (a.y * b.z) - (a.z * b.y);
+	result.y = (a.z * b.x) - (a.x * b.z);
+	result.z = (a.x * b.y) - (a.y * b.x);
+}
+関数: ${"ja":"ベクトル3D拡大", "dncl":"ベクトル3D拡大", "natja":"ベクトル3D拡大", "en":"extendVector3D", "naten":"extendVector3D"}$(ベクトル3D: a, 実数: x) => (ベクトル3D: result){
+	result.x = a.x * x;
+	result.y = a.y * x;
+	result.z = a.z * x;
+}
+関数: ${"ja":"ベクトル3D縮小", "dncl":"ベクトル3D縮小", "natja":"ベクトル3D縮小", "en":"divVector3D", "naten":"divVector3D"}$(ベクトル3D: a, 実数: x) => (ベクトル3D: result){
+	もし(x == 0.0)ならば{
+		表示(10000000);
+	}
+	result.x = a.x / x;
+	result.y = a.y / x;
+	result.z = a.z / x;
+}
+クラス: ${"ja":"行列4x4", "dncl":"行列4x4", "natja":"行列4x4", "en":"Matrix4x4", "naten":"Matrix4x4"}${
+公開: 	実数: matrix[16];
+	関数: 行列4x4() => (){
+		matrix = [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0];
+	}
+	関数: ${"ja":"単位化", "dncl":"単位化", "natja":"単位化", "en":"identity", "naten":"identity"}$() => (){
+		matrix = [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0];
+	}
+	関数: ${"ja":"移動", "dncl":"移動", "natja":"移動", "en":"translate", "naten":"translate"}$(ベクトル3D: offset) => (){
+		実数: mat12 = matrix[12];
+		実数: mat13 = matrix[13];
+		実数: mat14 = matrix[14];
+		実数: mat15 = matrix[15];
+		matrix[12] = matrix[0] * offset.x + matrix[4] * offset.y + matrix[8] * offset.z + mat12;
+		matrix[13] = matrix[1] * offset.x + matrix[5] * offset.y + matrix[9] * offset.z + mat13;
+		matrix[14] = matrix[2] * offset.x + matrix[6] * offset.y + matrix[10] * offset.z + mat13;
+		matrix[15] = matrix[3] * offset.x + matrix[7] * offset.y + matrix[11] * offset.z + mat15;
+	}
+	関数: ${"ja":"回転", "dncl":"回転", "natja":"回転", "en":"rotate", "naten":"rotate"}$(ベクトル3D: axis, 実数: theta) => (){
+		axis.正規化();
+		実数: s = sin(theta);
+		実数: c = cos(theta);
+		実数: t = 1.0 - c;
+		実数: a00 = matrix[0];
+		実数: a01 = matrix[1];
+		実数: a02 = matrix[2];
+		実数: a03 = matrix[3];
+		実数: a10 = matrix[4];
+		実数: a11 = matrix[5];
+		実数: a12 = matrix[6];
+		実数: a13 = matrix[7];
+		実数: a20 = matrix[8];
+		実数: a21 = matrix[9];
+		実数: a22 = matrix[10];
+		実数: a23 = matrix[11];
+		実数: b00 = axis.x * axis.x * t + c;
+		実数: b01 = axis.y * axis.x * t + axis.z * s;
+		実数: b02 = axis.z * axis.x * t - axis.y * s;
+		実数: b10 = axis.x * axis.y * t - axis.z * s;
+		実数: b11 = axis.y * axis.y * t + c;
+		実数: b12 = axis.z * axis.y * t + axis.x * s;
+		実数: b20 = axis.x * axis.z * t + axis.y * s;
+		実数: b21 = axis.y * axis.z * t - axis.x * s;
+		実数: b22 = axis.z * axis.z * t + c;
+		matrix[0] = a00 * b00 + a10 * b01 + a20 * b02;
+		matrix[1] = a01 * b00 + a11 * b01 + a21 * b02;
+		matrix[2] = a02 * b00 + a12 * b01 + a22 * b02;
+		matrix[3] = a03 * b00 + a13 * b01 + a23 * b02;
+		matrix[4] = a00 * b10 + a10 * b11 + a20 * b12;
+		matrix[5] = a01 * b10 + a11 * b11 + a21 * b12;
+		matrix[6] = a02 * b10 + a12 * b11 + a22 * b12;
+		matrix[7] = a03 * b10 + a13 * b11 + a23 * b12;
+		matrix[8] = a00 * b20 + a10 * b21 + a20 * b22;
+		matrix[9] = a01 * b20 + a11 * b21 + a21 * b22;
+		matrix[10] = a02 * b20 + a12 * b21 + a22 * b22;
+		matrix[11] = a03 * b20 + a13 * b21 + a23 * b22;
+	}
+	関数: ${"ja":"拡大縮小", "dncl":"拡大縮小", "natja":"拡大縮小", "en":"scale", "naten":"scale"}$(実数: x, 実数: y, 実数: z) => (){
+		matrix[0] = matrix[0] * x;
+		matrix[1] = matrix[1] * x;
+		matrix[2] = matrix[2] * x;
+		matrix[3] = matrix[3] * x;
+		matrix[4] = matrix[4] * y;
+		matrix[5] = matrix[5] * y;
+		matrix[6] = matrix[6] * y;
+		matrix[7] = matrix[7] * y;
+		matrix[8] = matrix[8] * z;
+		matrix[9] = matrix[9] * z;
+		matrix[10] = matrix[10] * z;
+		matrix[11] = matrix[11] * z;
+	}
+	関数: 演算子 *(行列4x4:a) => (行列4x4:b){
+		b.matrix[0] = a.matrix[0] * matrix[0] + a.matrix[1] * matrix[4] + a.matrix[2] * matrix[8] + a.matrix[3] * matrix[12];
+		b.matrix[1] = a.matrix[0] * matrix[1] + a.matrix[1] * matrix[5] + a.matrix[2] * matrix[9] + a.matrix[3] * matrix[13];
+		b.matrix[2] = a.matrix[0] * matrix[2] + a.matrix[1] * matrix[6] + a.matrix[2] * matrix[10] + a.matrix[3] * matrix[14];
+		b.matrix[3] = a.matrix[0] * matrix[3] + a.matrix[1] * matrix[7] + a.matrix[2] * matrix[11] + a.matrix[3] * matrix[15];
+		b.matrix[4] = a.matrix[4] * matrix[0] + a.matrix[5] * matrix[4] + a.matrix[6] * matrix[8] + a.matrix[7] * matrix[12];
+		b.matrix[5] = a.matrix[4] * matrix[1] + a.matrix[5] * matrix[5] + a.matrix[6] * matrix[9] + a.matrix[7] * matrix[13];
+		b.matrix[6] = a.matrix[4] * matrix[2] + a.matrix[5] * matrix[6] + a.matrix[6] * matrix[10] + a.matrix[7] * matrix[14];
+		b.matrix[7] = a.matrix[4] * matrix[3] + a.matrix[5] * matrix[7] + a.matrix[6] * matrix[11] + a.matrix[7] * matrix[15];
+		b.matrix[8] = a.matrix[8] * matrix[0] + a.matrix[9] * matrix[4] + a.matrix[10] * matrix[8] + a.matrix[11] * matrix[12];
+		b.matrix[9] = a.matrix[8] * matrix[1] + a.matrix[9] * matrix[5] + a.matrix[10] * matrix[9] + a.matrix[11] * matrix[13];
+		b.matrix[10] = a.matrix[8] * matrix[2] + a.matrix[9] * matrix[6] + a.matrix[10] * matrix[10] + a.matrix[11] * matrix[14];
+		b.matrix[11] = a.matrix[8] * matrix[3] + a.matrix[9] * matrix[7] + a.matrix[10] * matrix[11] + a.matrix[11] * matrix[15];
+		b.matrix[12] = a.matrix[12] * matrix[0] + a.matrix[13] * matrix[4] + a.matrix[14] * matrix[8] + a.matrix[15] * matrix[12];
+		b.matrix[13] = a.matrix[12] * matrix[1] + a.matrix[13] * matrix[5] + a.matrix[14] * matrix[9] + a.matrix[15] * matrix[13];
+		b.matrix[14] = a.matrix[12] * matrix[2] + a.matrix[13] * matrix[6] + a.matrix[14] * matrix[10] + a.matrix[15] * matrix[14];
+		b.matrix[15] = a.matrix[12] * matrix[3] + a.matrix[13] * matrix[7] + a.matrix[14] * matrix[11] + a.matrix[15] * matrix[15];
+	}
+}
+関数: ${"ja":"カメラ行列", "dncl":"カメラ行列", "natja":"カメラ行列", "en":"setCameraMat", "naten":"setCameraMat"}$(行列4x4: m, ベクトル3D: pos, ベクトル3D: lookAt, ベクトル3D: up) => (行列4x4: res){
+	ベクトル3D: newForward(lookAt.x - pos.x, lookAt.y - pos.y, lookAt.z - pos.z);
+	ベクトル3D: a(0.0, 0.0, 0.0);
+	a = ベクトル3D拡大(newForward, ベクトル3Dの内積(up, newForward));
+	ベクトル3D: newUp(up.x - a.x, up.y - a.y, up.z - a.z);
+	newUp.正規化();
+	ベクトル3D: newRight(0, 0, 0);
+	newRight = ベクトル3Dの外積(newUp, newForward);
+	m.matrix = [newRight.x, newUp.x, newForward.x, 0.0, newRight.y, newUp.y, newForward.y, 0.0, newRight.z, newUp.z, newForward.z, 0.0, 0 - ベクトル3Dの内積(newRight, pos), 0 - ベクトル3Dの内積(newUp, pos), 0 - ベクトル3Dの内積(newForward, pos), 1.0];
+	終了(m);
+}
+関数: ${"ja":"視点行列3D", "dncl":"視点行列3D", "natja":"視点行列3D", "en":"perspectiveMat3D", "naten":"perspectiveMat3D"}$(行列4x4: m, 実数: fov, 実数: width, 実数: height, 実数: zN, 実数: zF) => (行列4x4: result){
+	実数: PI = 3.14159265358979312;
+	実数: fov = 1.0 / tan((90.0 / 360.0) * PI);
+	実数: aspectRatio = width / height;
+	実数: zNear = zN;
+	実数: zFar = zF;
+	実数: zQ = zF / (zF - zN);
+	m.matrix = [aspectRatio * fov, 0.0, 0.0, 0.0, 0.0, fov, 0.0, 0.0, 0.0, 0.0, zQ, 1.0, 0.0, 0.0, (0 - zFar * zNear) / (zFar - zNear), 0.0];
+	終了(m);
+}
+関数: ${"ja":"視点行列2D", "dncl":"視点行列2D", "natja":"視点行列2D", "en":"perspectiveMat2D", "naten":"perspectiveMat2D"}$(行列4x4: m, 実数: left, 実数: right, 実数: bottom, 実数: top, 実数: near, 実数: far) => (行列4x4: result){
+	m.matrix = [2.0 / (right - left), 0.0, 0.0, 0.0, 0.0, 2.0 / (top - bottom), 0.0, 0.0, 0.0, 0.0, 0 - 2.0 / (near - far), 0.0, 0 - (right + left) / (right - left), 0 - (top + bottom) / (top - bottom), 0 - (far + near) / (far - near), 1.0];
+	終了(m);
+}
+関数: ${"ja":"行列4x4の積", "dncl":"行列4x4の積", "natja":"行列4x4の積", "en":"mulMatrix4x4", "naten":"mulMatrix4x4"}$(行列4x4: a, 行列4x4: b) => (行列4x4: out){
+	out.matrix[0] = b.matrix[0] * a.matrix[0] + b.matrix[1] * a.matrix[4] + b.matrix[2] * a.matrix[8] + b.matrix[3] * a.matrix[12];
+	out.matrix[1] = b.matrix[0] * a.matrix[1] + b.matrix[1] * a.matrix[5] + b.matrix[2] * a.matrix[9] + b.matrix[3] * a.matrix[13];
+	out.matrix[2] = b.matrix[0] * a.matrix[2] + b.matrix[1] * a.matrix[6] + b.matrix[2] * a.matrix[10] + b.matrix[3] * a.matrix[14];
+	out.matrix[3] = b.matrix[0] * a.matrix[3] + b.matrix[1] * a.matrix[7] + b.matrix[2] * a.matrix[11] + b.matrix[3] * a.matrix[15];
+	out.matrix[4] = b.matrix[4] * a.matrix[0] + b.matrix[5] * a.matrix[4] + b.matrix[6] * a.matrix[8] + b.matrix[7] * a.matrix[12];
+	out.matrix[5] = b.matrix[4] * a.matrix[1] + b.matrix[5] * a.matrix[5] + b.matrix[6] * a.matrix[9] + b.matrix[7] * a.matrix[13];
+	out.matrix[6] = b.matrix[4] * a.matrix[2] + b.matrix[5] * a.matrix[6] + b.matrix[6] * a.matrix[10] + b.matrix[7] * a.matrix[14];
+	out.matrix[7] = b.matrix[4] * a.matrix[3] + b.matrix[5] * a.matrix[7] + b.matrix[6] * a.matrix[11] + b.matrix[7] * a.matrix[15];
+	out.matrix[8] = b.matrix[8] * a.matrix[0] + b.matrix[9] * a.matrix[4] + b.matrix[10] * a.matrix[8] + b.matrix[11] * a.matrix[12];
+	out.matrix[9] = b.matrix[8] * a.matrix[1] + b.matrix[9] * a.matrix[5] + b.matrix[10] * a.matrix[9] + b.matrix[11] * a.matrix[13];
+	out.matrix[10] = b.matrix[8] * a.matrix[2] + b.matrix[9] * a.matrix[6] + b.matrix[10] * a.matrix[10] + b.matrix[11] * a.matrix[14];
+	out.matrix[11] = b.matrix[8] * a.matrix[3] + b.matrix[9] * a.matrix[7] + b.matrix[10] * a.matrix[11] + b.matrix[11] * a.matrix[15];
+	out.matrix[12] = b.matrix[12] * a.matrix[0] + b.matrix[13] * a.matrix[4] + b.matrix[14] * a.matrix[8] + b.matrix[15] * a.matrix[12];
+	out.matrix[13] = b.matrix[12] * a.matrix[1] + b.matrix[13] * a.matrix[5] + b.matrix[14] * a.matrix[9] + b.matrix[15] * a.matrix[13];
+	out.matrix[14] = b.matrix[12] * a.matrix[2] + b.matrix[13] * a.matrix[6] + b.matrix[14] * a.matrix[10] + b.matrix[15] * a.matrix[14];
+	out.matrix[15] = b.matrix[12] * a.matrix[3] + b.matrix[13] * a.matrix[7] + b.matrix[14] * a.matrix[11] + b.matrix[15] * a.matrix[15];
+}
+クラス: ${"ja":"モデル", "dncl":"モデル", "natja":"モデル", "en":"Model", "naten":"Model"}${
+公開:
+    ベクトル3D: ${"ja":"色", "dncl":"色", "natja":"色", "en":"color", "naten":"color"}$;
+	ベクトル3D: ${"ja":"座標", "dncl":"座標", "natja":"座標", "en":"pos", "naten":"pos"}$;
+	関数: モデル(*実数: data, 整数: num, ベクトル3D: c, ベクトル3D: p, 整数: s) => (){
+		vertices = data;
+		vertexNum = num;
+		色 = c;
+		座標 = p;
+		shaderID = s;
+		modelMat.単位化();
+		transMat.単位化();
+		scaleMat.単位化();
+		rotateMat.単位化();
+		もし(shaderID == 0)ならば{
+			viewPosUniLoc = glGetUniformLocation(0, "viewPos");
+			lightPosUniLoc = glGetUniformLocation(0, "lightPos");
+			lightColorUniLoc = glGetUniformLocation(0, "lightColor");
+			objectColorUniLoc = glGetUniformLocation(0, "objectColor");
+		}
+		projMatUniformLoc = glGetUniformLocation(shaderID, "uProjMat");
+		viewMatUniformLoc = glGetUniformLocation(shaderID, "uViewMat");
+		modelMatUniformLoc = glGetUniformLocation(shaderID, "uModelMat");
+		buffer = glCreateBuffer();
+		glBindBuffer(34962, buffer);
+		glBufferData(34962, vertices, num * 6, 35044);
+	}
+	関数: ${"ja":"座標設定", "dncl":"座標設定", "natja":"座標設定", "en":"setPos", "naten":"setPos"}$(ベクトル3D: coord) => (){
+		座標 = coord;
+	}
+	関数: ${"ja":"移動", "dncl":"移動", "natja":"移動", "en":"translate", "naten":"translate"}$(ベクトル3D: offset) => (){
+		座標 = ベクトル3Dの和(座標, offset);
+	}
+	関数: ${"ja":"拡大縮小", "dncl":"拡大縮小", "natja":"拡大縮小", "en":"scale", "naten":"scale"}$(実数: x, 実数: y, 実数: z) => (){
+		行列4x4: temp();
+		temp.単位化();
+		temp.拡大縮小(x, y, z);
+		scaleMat = 行列4x4の積(temp, scaleMat);
+	}
+	関数: ${"ja":"回転", "dncl":"回転", "natja":"回転", "en":"rotate", "naten":"rotate"}$(ベクトル3D: axis, 実数: t) => (){
+		行列4x4: temp();
+		temp.単位化();
+		temp.回転(axis, t);
+		rotateMat = 行列4x4の積(temp, rotateMat);
+	}
+	関数: ${"ja":"描画", "dncl":"描画", "natja":"描画", "en":"draw", "naten":"draw"}$(行列4x4: projMat, 行列4x4: viewMat, ベクトル3D: camera) => (){
+		実数: PI = 3.14159265358979312;
+		transMat.移動(座標);
+		modelMat.単位化();
+		modelMat = 行列4x4の積(scaleMat, modelMat);
+		modelMat = 行列4x4の積(rotateMat, modelMat);
+		modelMat = 行列4x4の積(transMat, modelMat);
+		glBindBuffer(34962, buffer);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, 5126, 0, 6 * 4, 0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, 5126, 0, 6 * 4, 3 * 4);
+		glUseProgram(shaderID);
+		もし(shaderID == 0)ならば{
+			glUniform3f(lightPosUniLoc, 5.0, 5.0, 5.0);
+			glUniform3f(lightColorUniLoc, 1.0, 1.0, 1.0);
+			glUniform3f(objectColorUniLoc, 色.x, 色.y, 色.z);
+			glUniform3f(viewPosUniLoc, camera.x, camera.y, camera.z);
+		}
+		glUniformMatrix4fv(projMatUniformLoc, 0, projMat.matrix);
+		glUniformMatrix4fv(viewMatUniformLoc, 0, viewMat.matrix);
+		glUniformMatrix4fv(modelMatUniformLoc, 0, modelMat.matrix);
+		glDrawArrays(4, 0, 36);
+		rotateMat.単位化();
+		transMat.単位化();
+		scaleMat.単位化();
+	}
+非公開: 	*実数: vertices;
+	整数: vertexNum;
+	整数32: buffer;
+	行列4x4: modelMat;
+	行列4x4: transMat;
+	行列4x4: scaleMat;
+	行列4x4: rotateMat;
+	整数: shaderID;
+	整数32: viewPosUniLoc;
+	整数32: lightPosUniLoc;
+	整数32: lightColorUniLoc;
+	整数32: objectColorUniLoc;
+	整数32: projMatUniformLoc;
+	整数32: viewMatUniformLoc;
+	整数32: modelMatUniformLoc;
+}
+クラス: ${"ja":"カメラ", "dncl":"カメラ", "natja":"カメラ", "en":"Camera", "naten":"Camera"}${
+公開:
+    ベクトル3D: ${"ja":"座標", "dncl":"座標", "natja":"座標", "en":"pos", "naten":"pos"}$;
+	実数: ${"ja":"感度", "dncl":"感度", "natja":"感度", "en":"sensitivity", "naten":"sensitivity"}$;
+ 	関数: カメラ(ベクトル3D: p) => (){
+		座標 = p;
+		view.ベクトル3D(0.0, 0.0, 1.0);
+		lookDir.ベクトル3D(0.0, 0.0, 1.0);
+		up.ベクトル3D(0.0, 1.0, 0.0);
+		yaw = 90.0;
+		pitch = 0.0;
+		感度 = 0.100000000000000006;
+	}
+	関数: ${"ja":"感度設定", "dncl":"感度設定", "natja":"感度設定", "en":"setSensitivity", "naten":"setSensitivity"}$(実数: s) => (){
+		感度 = s;
+	}
+	関数: ${"ja":"アップデート", "dncl":"アップデート", "natja":"アップデート", "en":"update", "naten":"update"}$(実数: xOffset, 実数: yOffset, 実数: elapsedTime) => (行列4x4: result){
+		もし(キーチェック(32) == 1)ならば{
+			座標.y = 座標.y + elapsedTime * 5.0;
+		}
+		もし(キーチェック(16) == 1)ならば{
+			座標.y = 座標.y - elapsedTime * 5.0;
+		}
+		もし(キーチェック(65) == 1)ならば{
+			座標.z = 座標.z - elapsedTime * sin(ラジアンへ(yaw - 90)) * 5.0;
+			座標.x = 座標.x - elapsedTime * cos(ラジアンへ(yaw - 90)) * 5.0;
+		}
+		もし(キーチェック(68) == 1)ならば{
+			座標.z = 座標.z + elapsedTime * sin(ラジアンへ(yaw - 90)) * 5.0;
+			座標.x = 座標.x + elapsedTime * cos(ラジアンへ(yaw - 90)) * 5.0;
+		}
+		もし(キーチェック(87) == 1)ならば{
+			座標.z = 座標.z + elapsedTime * sin(ラジアンへ(yaw)) * 5.0;
+			座標.x = 座標.x + elapsedTime * cos(ラジアンへ(yaw)) * 5.0;
+		}
+		もし(キーチェック(83) == 1)ならば{
+			座標.z = 座標.z - elapsedTime * sin(ラジアンへ(yaw)) * 5.0;
+			座標.x = 座標.x - elapsedTime * cos(ラジアンへ(yaw)) * 5.0;
+		}
+		yaw = yaw - xOffset * 感度;
+		pitch = pitch - yOffset * 感度;
+		もし(pitch < 0 - 89.0)ならば{
+			pitch = 0 - 89.0;
+		}
+		もし(pitch > 89.0)ならば{
+			pitch = 89.0;
+		}
+		lookDir.x = cos(ラジアンへ(yaw)) * cos(ラジアンへ(pitch));
+		lookDir.y = sin(ラジアンへ(pitch));
+		lookDir.z = sin(ラジアンへ(yaw)) * cos(ラジアンへ(pitch));
+		lookDir.正規化();
+		result.単位化();
+		view = ベクトル3Dの和(lookDir, 座標);
+		result = カメラ行列(result, 座標, view, up);
+	}
+非公開: 	ベクトル3D: view;
+	ベクトル3D: lookDir;
+	ベクトル3D: up;
+	実数: yaw;
+	実数: pitch;
+}
+クラス: ${"ja":"シーン", "dncl":"シーン", "natja":"シーン", "en":"Scene", "naten":"Scene"}${
+公開:
+    配列<*モデル>: ${"ja":"スプライト配列", "dncl":"スプライト配列", "natja":"スプライト配列", "en":"sprites", "naten":"sprites"}$;
+	カメラ: ${"ja":"目", "dncl":"目", "natja":"目", "en":"camera", "naten":"camera"}$; 	
+    関数: シーン() => (){
+		last = 時間計測() / 1000.0;
+		now = 0.0;
+		elapsedTime = 0.0;
+		lastX = マウス絶対座標X();
+		lastY = マウス絶対座標Y();
+		projMat.単位化();
+		viewMat.単位化();
+		projMat = 視点行列3D(projMat, 90.0, 720.0, 1280.0, 0.100000000000000006, 100.0);
+		ベクトル3D: temp(0.0, 0.0, 0 - 4.0);
+		目.カメラ(temp);
+		スプライト配列.配列();
+	}
+	関数: ${"ja":"描画", "dncl":"描画", "natja":"描画", "en":"draw", "naten":"draw"}$() => (){
+		now = 時間計測() / 1000.0;
+		elapsedTime = now - last;
+		last = now;
+		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glClearDepth(1.0);
+		glEnable(2929);
+		glDepthFunc(515);
+		glClear(16640);
+		実数: xOffset = マウス絶対座標X() - lastX;
+		実数: yOffset = マウス絶対座標Y() - lastY;
+		lastX = マウス絶対座標X();
+		lastY = マウス絶対座標Y();
+		viewMat.単位化();
+		viewMat = 目.アップデート(xOffset, yOffset, elapsedTime);
+		(整数: i = 0;)から(i == スプライト配列.size)まで(i = i + 1;){
+			スプライト配列.取得(i)->描画(projMat, viewMat, 目.座標);
+		}
+	}
+	関数: ${"ja":"キューブ追加", "dncl":"キューブ追加", "natja":"キューブ追加", "en":"addCube", "naten":"addCube"}$(実数: size, ベクトル3D: 色, ベクトル3D: 座標) => (整数: id){
+		実数: vertices[12][3][6] = [[[0 - size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0], [0 - size / 2, size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0], [size / 2, size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0]], [[0 - size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0], [size / 2, size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0], [size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0]], [[size / 2, 0 - size / 2, 0 - size / 2, 1.0, 0.0, 0.0], [size / 2, size / 2, 0 - size / 2, 1.0, 0.0, 0.0], [size / 2, size / 2, size / 2, 1.0, 0.0, 0.0]], [[size / 2, 0 - size / 2, 0 - size / 2, 1.0, 0.0, 0.0], [size / 2, size / 2, size / 2, 1.0, 0.0, 0.0], [size / 2, 0 - size / 2, size / 2, 1.0, 0.0, 0.0]], [[size / 2, 0 - size / 2, size / 2, 0.0, 0.0, 1.0], [size / 2, size / 2, size / 2, 0.0, 0.0, 1.0], [0 - size / 2, size / 2, size / 2, 0.0, 0.0, 1.0]], [[size / 2, 0 - size / 2, size / 2, 0.0, 0.0, 1.0], [0 - size / 2, size / 2, size / 2, 0.0, 0.0, 1.0], [0 - size / 2, 0 - size / 2, size / 2, 0.0, 0.0, 1.0]], [[0 - size / 2, 0 - size / 2, size / 2, 0 - 1.0, 0.0, 0.0], [0 - size / 2, size / 2, size / 2, 0 - 1.0, 0.0, 0.0], [0 - size / 2, size / 2, 0 - size / 2, 0 - 1.0, 0.0, 0.0]], [[0 - size / 2, 0 - size / 2, size / 2, 0 - 1.0, 0.0, 0.0], [0 - size / 2, size / 2, 0 - size / 2, 0 - 1.0, 0.0, 0.0], [0 - size / 2, 0 - size / 2, 0 - size / 2, 0 - 1.0, 0.0, 0.0]], [[0 - size / 2, size / 2, 0 - size / 2, 0.0, 1.0, 0.0], [0 - size / 2, size / 2, size / 2, 0.0, 1.0, 0.0], [size / 2, size / 2, size / 2, 0.0, 1.0, 0.0]], [[0 - size / 2, size / 2, 0 - size / 2, 0.0, 1.0, 0.0], [size / 2, size / 2, size / 2, 0.0, 1.0, 0.0], [size / 2, size / 2, 0 - size / 2, 0.0, 1.0, 0.0]], [[size / 2, 0 - size / 2, size / 2, 0.0, 0 - 1.0, 0.0], [0 - size / 2, 0 - size / 2, size / 2, 0.0, 0 - 1.0, 0.0], [0 - size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0 - 1.0, 0.0]], [[size / 2, 0 - size / 2, size / 2, 0.0, 0 - 1.0, 0.0], [0 - size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0 - 1.0, 0.0], [size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0 - 1.0, 0.0]]];
+		*モデル: cube = メモリ確保(バイト数(*cube));
+		cube->モデル(&vertices, 36, 色, 座標, 0);
+		スプライト配列.追加(cube);
+		id = スプライト配列.長さ() - 1;
+	}
+	関数: ${"ja":"ライト追加", "dncl":"ライト追加", "natja":"ライト追加", "en":"addLight", "naten":"addLight"}$(実数: size, ベクトル3D: 色, ベクトル3D: 座標) => (整数: id){
+		実数: vertices[12][3][6] = [[[0 - size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0], [0 - size / 2, size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0], [size / 2, size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0]], [[0 - size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0], [size / 2, size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0], [size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0.0, 0 - 1.0]], [[size / 2, 0 - size / 2, 0 - size / 2, 1.0, 0.0, 0.0], [size / 2, size / 2, 0 - size / 2, 1.0, 0.0, 0.0], [size / 2, size / 2, size / 2, 1.0, 0.0, 0.0]], [[size / 2, 0 - size / 2, 0 - size / 2, 1.0, 0.0, 0.0], [size / 2, size / 2, size / 2, 1.0, 0.0, 0.0], [size / 2, 0 - size / 2, size / 2, 1.0, 0.0, 0.0]], [[size / 2, 0 - size / 2, size / 2, 0.0, 0.0, 1.0], [size / 2, size / 2, size / 2, 0.0, 0.0, 1.0], [0 - size / 2, size / 2, size / 2, 0.0, 0.0, 1.0]], [[size / 2, 0 - size / 2, size / 2, 0.0, 0.0, 1.0], [0 - size / 2, size / 2, size / 2, 0.0, 0.0, 1.0], [0 - size / 2, 0 - size / 2, size / 2, 0.0, 0.0, 1.0]], [[0 - size / 2, 0 - size / 2, size / 2, 0 - 1.0, 0.0, 0.0], [0 - size / 2, size / 2, size / 2, 0 - 1.0, 0.0, 0.0], [0 - size / 2, size / 2, 0 - size / 2, 0 - 1.0, 0.0, 0.0]], [[0 - size / 2, 0 - size / 2, size / 2, 0 - 1.0, 0.0, 0.0], [0 - size / 2, size / 2, 0 - size / 2, 0 - 1.0, 0.0, 0.0], [0 - size / 2, 0 - size / 2, 0 - size / 2, 0 - 1.0, 0.0, 0.0]], [[0 - size / 2, size / 2, 0 - size / 2, 0.0, 1.0, 0.0], [0 - size / 2, size / 2, size / 2, 0.0, 1.0, 0.0], [size / 2, size / 2, size / 2, 0.0, 1.0, 0.0]], [[0 - size / 2, size / 2, 0 - size / 2, 0.0, 1.0, 0.0], [size / 2, size / 2, size / 2, 0.0, 1.0, 0.0], [size / 2, size / 2, 0 - size / 2, 0.0, 1.0, 0.0]], [[size / 2, 0 - size / 2, size / 2, 0.0, 0 - 1.0, 0.0], [0 - size / 2, 0 - size / 2, size / 2, 0.0, 0 - 1.0, 0.0], [0 - size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0 - 1.0, 0.0]], [[size / 2, 0 - size / 2, size / 2, 0.0, 0 - 1.0, 0.0], [0 - size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0 - 1.0, 0.0], [size / 2, 0 - size / 2, 0 - size / 2, 0.0, 0 - 1.0, 0.0]]];
+		*モデル: light = メモリ確保(バイト数(*light));
+		light->モデル(&vertices, 36, 色, 座標, 1);
+		スプライト配列.追加(light);
+		id = スプライト配列.長さ() - 1;
+	}
+非公開: 	行列4x4: projMat;
+	行列4x4: viewMat;
+	実数: last;
+	実数: now;
+	実数: elapsedTime;
+	実数: lastX;
+	実数: lastY;
+}
+クラス: ${"ja":"ベクトル2D", "dncl":"ベクトル2D", "natja":"ベクトル2D", "en":"Vector2D", "naten":"Vector2D"}${
+公開: 	実数: x;
+	実数: y;
+	関数: ベクトル2D(実数: a, 実数: b) => (){
+		x = a;
+		y = b;
+	}
+	関数: ${"ja":"長さ", "dncl":"長さ", "natja":"長さ", "en":"length", "naten":"length"}$() => (実数: l){
+		l = 平方根(x * x + y * y);
+	}
+	関数: ${"ja":"正規化", "dncl":"正規化", "natja":"正規化", "en":"normalize", "naten":"normalize"}$() => (){
+		実数: l = 平方根(x * x + y * y);
+		x = x / l;
+		y = y / l;
+	}
+	関数: 演算子 == (ベクトル2D:a) => (真偽: b){
+		b = ((a.x == x) && (a.y == y));
+	}
+	関数: 演算子 != (ベクトル2D:a) => (真偽:b){
+		b = ((a.x != x) || (a.y != y));
+	}
+}
+関数: ${"ja":"ベクトル2Dの和", "dncl":"ベクトル2Dの和", "natja":"ベクトル2Dの和", "en":"addVector2D", "naten":"addVector2D"}$(ベクトル2D: a, ベクトル2D: b) => (ベクトル2D: result){
+	result.x = a.x + b.x;
+	result.y = a.y + b.y;
+}
+関数: ${"ja":"ベクトル2Dの差", "dncl":"ベクトル2Dの差", "natja":"ベクトル2Dの差", "en":"subVector2D", "naten":"subVector2D"}$(ベクトル2D: a, ベクトル2D: b) => (ベクトル2D: result){
+	result.x = a.x - b.x;
+	result.y = a.y - b.y;
+}
+関数: ${"ja":"ベクトル2Dの内積", "dncl":"ベクトル2Dの内積", "natja":"ベクトル2Dの内積", "en":"dotVector2D", "naten":"dotVector2D"}$(ベクトル2D: a, ベクトル2D: b) => (実数: x){
+	x = a.x * b.x + a.y * b.y;
+}
+関数: ${"ja":"ベクトル2D拡大", "dncl":"ベクトル2D拡大", "natja":"ベクトル2D拡大", "en":"extendVector2D", "naten":"extendVector2D"}$(ベクトル2D: a, 実数: x) => (ベクトル2D: result){
+	result.x = a.x * x;
+	result.y = a.y * x;
+}
+関数: ${"ja":"ベクトル2D縮小", "dncl":"ベクトル2D縮小", "natja":"ベクトル2D縮小", "en":"divVector2D", "naten":"divVector2D"}$(ベクトル2D: a, 実数: x) => (ベクトル2D: result){
+	もし(x == 0.0)ならば{
+		表示(10000000);
+	}
+	result.x = a.x / x;
+	result.y = a.y / x;
+}
+クラス: ${"ja":"アニメーション情報", "dncl":"アニメーション情報", "natja":"アニメーション情報", "en":"AnimationInfo", "naten":"AnimationInfo"}${
+公開: 	整数: id;
+	実数: startTime;
+	実数: duration;
+	ベクトル2D: info;
+	関数: アニメーション情報(整数: a, 実数: start, 実数: d, 実数: x, 実数: y) => (){
+		id = a;
+		startTime = start;
+		duration = d;
+		info.x = x;
+		info.y = y;
+	}
+	関数: アニメーション情報() => (){
+		id = 0;
+		startTime = 0;
+		duration = 0;
+		info.x = 0;
+		info.y = 0;
+	}
+	関数: 演算子 == (アニメーション情報: a) => (真偽:b){
+		b = ((a.id == id) && (a.startTime == startTime) && (a.duration == duration) && (a.info == info) && (a.info == info));
+	}
+	関数: 演算子 != (アニメーション情報: a) => (真偽:b){
+		b = ((a.id != id) || (a.startTime != startTime) || (a.duration != duration) || (a.info != info) || (a.info != info));
+	}
+}
+クラス: ${"ja":"スプライト", "dncl":"スプライト", "natja":"スプライト", "en":"Sprite", "naten":"Sprite"}${
+公開: 	ベクトル3D: 色;
+	ベクトル2D: 座標;
+	関数: スプライト(*実数: data, 整数: pnum, *整数32: indicesData, 整数: vnum, ベクトル3D: c, ベクトル2D: p, 整数: s, 実数: zI) => (){
+		vertices = data;
+		pointNum = pnum;
+		indices = indicesData;
+		vertexNum = vnum;
+		zIndex = zI;
+		透明度 = 1.0;
+		色 = c;
+		座標 = p;
+		scaleX = 1.0;
+		scaleY = 1.0;
+		theta = 0.0;
+		shaderID = s;
+		animations.配列();
+		modelMat.単位化();
+		transMat.単位化();
+		scaleMat.単位化();
+		rotateMat.単位化();
+		文字: _objectColorUniform[11] = "objectColor";
+		文字: _projUniform[10] = "projection";
+		文字: _modelUniform[5] = "model";
+		文字: _samplerUniform[8] = "uSampler";
+		文字: _transparencyUniform[12] = "transparency";
+		文字列: objectColorUniform(&_objectColorUniform, 11);
+		文字列: projUniform(&_projUniform, 10);
+		文字列: modelUniform(&_modelUniform, 5);
+		文字列: samplerUniform(&_samplerUniform, 8);
+		文字列: transparencyUniform(&_transparencyUniform, 12);
+		projMatUniformLoc = glGetUniformLocation(shaderID, projUniform);
+		modelMatUniformLoc = glGetUniformLocation(shaderID, modelUniform);
+		もし(shaderID == 4)ならば{
+			transparencyUniLoc = glGetUniformLocation(shaderID, transparencyUniform);
+			objectColorUniLoc = glGetUniformLocation(shaderID, objectColorUniform);
+		}
+		もし(shaderID == 3)ならば{
+			samplerUniformLoc = glGetUniformLocation(shaderID, samplerUniform);
+		}
+		buffer = glCreateBuffer();
+		glBindBuffer(34962, buffer);
+		glBufferData(34962, vertices, pnum * 3, 35044);
+		もし(vnum > 0)ならば{
+			elementBuffer = glCreateBuffer();
+			glBindBuffer(34963, elementBuffer);
+			glElementBufferData(34963, indices, vnum, 35044);
+		}
+	}
+	関数: ${"ja":"テクスチャ設定", "dncl":"テクスチャ設定", "natja":"テクスチャ設定", "en":"setTexture", "naten":"setTexture"}$(*実数: tex, 文字列: url) => (){
+		shaderID = 0;
+		texCoords = tex;
+		texture = テクスチャロード(url.content, url.長さ);
+		_文字列表示(url.content, url.長さ);
+		texCoordBuffer = glCreateBuffer();
+		glBindBuffer(34962, texCoordBuffer);
+		glBufferData(34962, tex, vertexNum * 2, 35044);
+	}
+	関数: ${"ja":"リピートテクスチャ設定", "dncl":"リピートテクスチャ設定", "natja":"リピートテクスチャ設定", "en":"setRepeatTexture", "naten":"setRepeatTexture"}$(*実数: tex, 整数32: テクスチャ) => (){
+		shaderID = 0;
+		texCoords = tex;
+		texture = テクスチャ;
+		texCoordBuffer = glCreateBuffer();
+		glBindBuffer(34962, texCoordBuffer);
+		glBufferData(34962, tex, vertexNum * 2, 35044);
+	}
+	関数: ${"ja":"座標設定", "dncl":"座標設定", "natja":"座標設定", "en":"setPos", "naten":"setPos"}$(ベクトル2D: coord) => (){
+		座標 = coord;
+	}
+	関数: ${"ja":"移動", "dncl":"移動", "natja":"移動", "en":"translate", "naten":"translate"}$(ベクトル2D: offset) => (){
+		座標 = ベクトル2Dの和(座標, offset);
+	}
+	関数: ${"ja":"拡大縮小", "dncl":"拡大縮小", "natja":"拡大縮小", "en":"scale", "naten":"scale"}$(実数: x, 実数: y) => (){
+		scaleX = scaleX * x;
+		scaleY = scaleY * y;
+	}
+	関数: ${"ja":"回転", "dncl":"回転", "natja":"回転", "en":"rotate", "naten":"rotate"}$(実数: t) => (){
+		theta = theta + t;
+	}
+	関数: ${"ja":"角度設定", "dncl":"角度設定", "natja":"角度設定", "en":"setAngle", "naten":"setAngle"}$(実数: t) => (){
+		theta = t;
+	}
+	関数: ${"ja":"重なり順設定", "dncl":"重なり順設定", "natja":"重なり順設定", "en":"setZIndex", "naten":"setZIndex"}$(実数: x) => (){
+		zIndex = x;
+	}
+	関数: ${"ja":"透明度設定", "dncl":"透明度設定", "natja":"透明度設定", "en":"setTransparency", "naten":"setTransparency"}$(実数: x) => (){
+		透明度 = x;
+	}
+	関数: ${"ja":"色設定", "dncl":"色設定", "natja":"色設定", "en":"setColor", "naten":"setColor"}$(ベクトル3D: 色) => (){
+		色 = 色;
+	}
+	関数: ${"ja":"描画", "dncl":"描画", "natja":"描画", "en":"draw", "naten":"draw"}$(行列4x4: projMat) => (){
+		実数: PI = 3.14159265358979312;
+		(整数: カウンタ = 0;)から(カウンタ == animations.size)まで(カウンタ = カウンタ + 1;){
+			アニメーション情報: info = animations.取得(カウンタ);
+			もし((info.startTime <= 時間計測()) && ((info.startTime + info.duration) >= 時間計測()))ならば{
+				もし(info.id == 0)ならば{
+					実数: elapsedTime = 時間計測() - info.startTime;
+					回転(info.info.x * elapsedTime);
+				}
+				もし(info.id == 1)ならば{
+					拡大縮小(info.info.x, info.info.y);
+				}
+				もし(info.id == 2)ならば{
+					実数: elapsedTime = 時間計測() - info.startTime;
+					ベクトル2D: offset(info.info.x * elapsedTime, info.info.y * elapsedTime);
+					移動(offset);
+				}
+			}
+		}
+		ベクトル3D: pos3d(座標.x, 座標.y, 0 - zIndex * 0.00100000000000000002);
+		transMat.単位化();
+		transMat.移動(pos3d);
+		scaleMat.単位化();
+		scaleMat.拡大縮小(scaleX, scaleY, 1.0);
+		ベクトル3D: 回転軸(0.0, 0.0, 1.0);
+		rotateMat.単位化();
+		rotateMat.回転(回転軸, theta);
+		modelMat.単位化();
+		modelMat = 行列4x4の積(scaleMat, modelMat);
+		modelMat = 行列4x4の積(rotateMat, modelMat);
+		modelMat = 行列4x4の積(transMat, modelMat);
+		glUseProgram(shaderID);
+		glBindBuffer(34962, buffer);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, 5126, 0, 0, 0);
+		もし(shaderID == 4)ならば{
+			glUniform1f(transparencyUniLoc, 透明度);
+			glUniform3f(objectColorUniLoc, 色.x, 色.y, 色.z);
+		}
+		もし(shaderID == 3)ならば{
+			glBindBuffer(34962, texCoordBuffer);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 2, 5126, 0, 0, 0);
+			glActiveTexture(texture + 33984);
+			glBindTexture(3553, texture);
+			glUniform1i(samplerUniformLoc, texture);
+		}
+		glUniformMatrix4fv(projMatUniformLoc, 0, projMat.matrix);
+		glUniformMatrix4fv(modelMatUniformLoc, 0, modelMat.matrix);
+		もし(vertexNum > 0)ならば{
+			glBindBuffer(34963, elementBuffer);
+			glDrawElements(4, vertexNum, 5123, 0);
+		}
+		もし((vertexNum == 0) && (shaderID == 4))ならば{
+			glBindBuffer(34962, buffer);
+			glDrawArrays(5, 0, pointNum);
+		}
+		rotateMat.単位化();
+		transMat.単位化();
+		scaleMat.単位化();
+	}
+	関数: ${"ja":"回転アニメーション", "dncl":"回転アニメーション", "natja":"回転アニメーション", "en":"rotateAnimation", "naten":"rotateAnimation"}$(実数: theta, 実数: start, 実数: duration) => (){
+		アニメーション情報: temp(0, start, duration, theta, 0.0);
+		animations.追加(temp);
+	}
+	関数: ${"ja":"拡大縮小アニメーション", "dncl":"拡大縮小アニメーション", "natja":"拡大縮小アニメーション", "en":"scaleAnimation", "naten":"scaleAnimation"}$(実数: x, 実数: y, 実数: start, 実数: duration) => (){
+		アニメーション情報: temp(1, start, duration, x, y);
+		animations.追加(temp);
+	}
+	関数: ${"ja":"移動アニメーション", "dncl":"移動アニメーション", "natja":"移動アニメーション", "en":"translateAnimation", "naten":"translateAnimation"}$(ベクトル2D: offset, 実数: start, 実数: duration) => (){
+		アニメーション情報: temp(0, start, duration, offset.x, offset.y);
+		animations.追加(temp);
+	}
+非公開: 	*実数: vertices;
+	*整数32: indices;
+	*実数: texCoords;
+	整数: vertexNum;
+	整数: pointNum;
+	整数32: buffer;
+	整数32: texCoordBuffer;
+	整数32: elementBuffer;
+	整数32: texture;
+	行列4x4: modelMat;
+	行列4x4: transMat;
+	行列4x4: scaleMat;
+	行列4x4: rotateMat;
+	実数: zIndex;
+	整数: shaderID;
+	整数32: objectColorUniLoc;
+	整数32: transparencyUniLoc;
+	整数32: projMatUniformLoc;
+	整数32: modelMatUniformLoc;
+	整数32: samplerUniformLoc;
+	配列<アニメーション情報>: animations;
+	実数: 透明度;
+	実数: scaleX;
+	実数: scaleY;
+	実数: theta;
+}
+クラス: ${"ja":"シーン2D", "dncl":"シーン2D", "natja":"シーン2D", "en":"Scene2D", "naten":"Scene2D"}${
+公開:
+    配列<*スプライト>: ${"ja":"スプライト配列", "dncl":"スプライト配列", "natja":"スプライト配列", "en":"sprites", "naten":"sprites"}$;
+	ベクトル3D: ${"ja":"背景色", "dncl":"背景色", "natja":"背景色", "en":"backgroundColor", "naten":"backgroundColor"}$;
+	実数: ${"ja":"背景透明度", "dncl":"背景透明度", "natja":"背景透明度", "en":"backgroundTransparency", "naten":"backgroundTransparency"}$; 	
+    関数: シーン2D(実数: 高さ, ベクトル3D: 色) => (){
+		last = 時間計測() / 1000.0;
+		now = 0.0;
+		elapsedTime = 0.0;
+		projMat.単位化();
+		projMat = 視点行列2D(projMat, (-高さ) * (16.0 / 9.0), (高さ) * (16.0 / 9.0), -高さ, 高さ, 0.0 - 5.0, 5.0);
+		スプライト配列.配列();
+		背景色 = 色;
+		背景透明度 = 1.0;
+	}
+	関数: ${"ja":"背景透明度設定", "dncl":"背景透明度設定", "natja":"背景透明度設定", "en":"setBackgroundTransparency", "naten":"setBackgroundTransparency"}$(実数: a) => (){
+		背景透明度 = a;
+	}
+	関数: ${"ja":"描画", "dncl":"描画", "natja":"描画", "en":"draw", "naten":"draw"}$() => (){
+		now = 時間計測() / 1000.0;
+		elapsedTime = now - last;
+		last = now;
+		glClearColor(背景色.x, 背景色.y, 背景色.z, 背景透明度);
+		glClearDepth(1.0);
+		glEnable(2929);
+		glDepthFunc(515);
+		glEnable(3042);
+		glBlendFunc(770, 771);
+		glClear(16640);
+		(整数: i = 0;)から(i == スプライト配列.size)まで(i = i + 1;){
+			スプライト配列.取得(i)->描画(projMat);
+		}
+	}
+	関数: ${"ja":"正方形追加", "dncl":"正方形追加", "natja":"正方形追加", "en":"addSquare", "naten":"addSquare"}$(実数: size, ベクトル2D: 座標, ベクトル3D: 色, 実数: zIndex) => (整数: id){
+		実数: vertices[4][3] = [[size / 2, size / 2, 0 - zIndex * 0.00100000000000000002], [size / 2, 0 - size / 2, 0 - zIndex * 0.00100000000000000002], [0 - size / 2, 0 - size / 2, 0 - zIndex * 0.00100000000000000002], [0 - size / 2, size / 2, 0 - zIndex * 0.00100000000000000002]];
+		実数: texCoords[4][2] = [[1.0, 0.0], [1.0, 1.0], [0.0, 1.0], [0.0, 0.0]];
+		整数32: indices[6] = [0, 1, 3, 1, 2, 3];
+		*スプライト: sprite = メモリ確保(バイト数(*sprite));
+		sprite->スプライト(&vertices, 4, &indices, 6, 色, 座標, 4, zIndex);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	関数: ${"ja":"スプライト追加", "dncl":"スプライト追加", "natja":"スプライト追加", "en":"addSprite", "naten":"addSprite"}$(実数: width, 実数: height, ベクトル2D: 座標, 文字列: url, 実数: zIndex) => (整数: id){
+		実数: vertices[4][3] = [[width / 2, height / 2, 0 - zIndex * 0.00100000000000000002], [width / 2, 0 - height / 2, 0 - zIndex * 0.00100000000000000002], [0 - width / 2, 0 - height / 2, 0 - zIndex * 0.00100000000000000002], [0 - width / 2, height / 2, 0 - zIndex * 0.00100000000000000002]];
+		実数: texCoords[4][2] = [[1.0, 0.0], [1.0, 1.0], [0.0, 1.0], [0.0, 0.0]];
+		整数32: indices[6] = [0, 1, 3, 1, 2, 3];
+		ベクトル3D: 色(0.0, 0.0, 0.0);
+		*スプライト: sprite = メモリ確保(バイト数(*sprite));
+		sprite->スプライト(&vertices, 4, &indices, 6, 色, 座標, 3, zIndex);
+		sprite->テクスチャ設定(&texCoords, url);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	関数: ${"ja":"リピートスプライト追加", "dncl":"リピートスプライト追加", "natja":"リピートスプライト追加", "en":"addRepeatSprite", "naten":"addRepeatSprite"}$(実数: width, 実数: height, ベクトル2D: 座標, 整数32: texture, 実数: zIndex) => (整数: id){
+		実数: vertices[4][3] = [[width / 2, height / 2, 0 - zIndex * 0.00100000000000000002], [width / 2, 0 - height / 2, 0 - zIndex * 0.00100000000000000002], [0 - width / 2, 0 - height / 2, 0 - zIndex * 0.00100000000000000002], [0 - width / 2, height / 2, 0 - zIndex * 0.00100000000000000002]];
+		実数: texCoords[4][2] = [[1.0, 0.0], [1.0, 1.0], [0.0, 1.0], [0.0, 0.0]];
+		整数32: indices[6] = [0, 1, 3, 1, 2, 3];
+		ベクトル3D: 色(0.0, 0.0, 0.0);
+		*スプライト: sprite = メモリ確保(バイト数(*sprite));
+		sprite->スプライト(&vertices, 4, &indices, 6, 色, 座標, 3, zIndex);
+		sprite->リピートテクスチャ設定(&texCoords, texture);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	関数: ${"ja":"四角形追加", "dncl":"四角形追加", "natja":"四角形追加", "en":"addRectangle", "naten":"addRectangle"}$(実数: width, 実数: height, ベクトル2D: 座標, ベクトル3D: 色, 実数: zIndex) => (整数: id){
+		実数: vertices[4][3] = [[width / 2, height / 2, 0 - zIndex * 0.00100000000000000002], [0 - width / 2, height / 2, 0 - zIndex * 0.00100000000000000002], [width / 2, 0 - height / 2, 0 - zIndex * 0.00100000000000000002], [0 - width / 2, 0 - height / 2, 0 - zIndex * 0.00100000000000000002]];
+		*スプライト: sprite = メモリ確保(バイト数(*sprite));
+		sprite->スプライト(&vertices, 4, メモリ確保(0), 0, 色, 座標, 4, zIndex);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	関数: ${"ja":"多角形追加", "dncl":"多角形追加", "natja":"多角形追加", "en":"addPolygon", "naten":"addPolygon"}$(配列<ベクトル2D>:points, ベクトル2D: 座標, ベクトル3D: 色, 実数: zIndex) => (整数: id){
+		配列<実数>:temp();
+		(points.長さ())回繰り返す{
+			temp.追加(points.content[カウンタ].x);
+			temp.追加(points.content[カウンタ].y);
+			temp.追加( -zIndex * 0.001);
+		}
+		*スプライト: sprite = メモリ確保(バイト数(*sprite));
+		sprite->スプライト(temp.content, temp.長さ()/3, メモリ確保(0), 0, 色, 座標, 4, zIndex);
+		スプライト配列.追加(sprite);
+		id = スプライト配列.長さ() - 1;
+	}
+	関数: ${"ja":"円追加", "dncl":"円追加", "natja":"円追加", "en":"addCircle", "naten":"addCircle"}$(実数: r, ベクトル2D: 座標, ベクトル3D: 色, 実数: zIndex) => (整数: id){
+		実数: PI = 3.14159265358979312;
+		配列<ベクトル2D>: points();
+		整数: 頂点数 = 60;
+		(整数: i = 0;)から(i == 頂点数)まで(i = i + 1;){
+			実数: theta = 0;
+			もし((i % 2) == 0)ならば{
+				theta = 0.5 * PI + ((PI * i) / 頂点数);
+			}
+			もし((i % 2) == 1)ならば{
+				theta = 0.5 * PI - ((PI * (1.0 + i)) / 頂点数);
+			}
+			ベクトル2D: temp(r * cos(theta), r * sin(theta));
+			points.追加(temp);
+		}
+		id = 多角形追加(points, 座標, 色, zIndex);
+	}
+非公開: 	行列4x4: projMat;
+	実数: last;
+	実数: now;
+	実数: elapsedTime;
+}
+関数: 引数なしjsリスナー呼び出し(関数: () => (): callback) => (){
+	callback();
+}
+js書き出し(引数なしjsリスナー呼び出し, "jsCallListenerNoParam");
+関数:__setUpVariableNamesForSamples() => (){
+	実数:${"ja":"前の数", "dncl":"前の数", "natja":"前の数", "en":"numberBefore", "naten":"numberBefore"}$;
+	実数:${"ja":"数", "dncl":"数", "natja":"数", "en":"number", "naten":"number"}$;
+	実数:${"ja":"入力", "dncl":"入力", "natja":"入力", "en":"input", "naten":"input"}$;
+	実数:${"ja":"出力", "dncl":"出力", "natja":"出力", "en":"output", "naten":"output"}$;
+	実数:${"ja":"返り値", "dncl":"返り値", "natja":"返り値", "en":"returnValue", "naten":"returnValue"}$;
+	実数:${"ja":"初期数", "dncl":"初期数", "natja":"初期数", "en":"initialNumber", "naten":"initialNumber"}$;
+	実数:${"ja":"コラッツ", "dncl":"コラッツ", "natja":"コラッツ", "en":"collatz", "naten":"collatz"}$;
+	実数:${"ja":"結果", "dncl":"結果", "natja":"結果", "en":"result", "naten":"result"}$;
+	実数:${"ja":"かける数", "dncl":"かける数", "natja":"かける数", "en":"numberToMultiply", "naten":"numberToMultiply"}$;
+	実数:${"ja":"ワールド", "dncl":"ワールド", "natja":"ワールド", "en":"world", "naten":"world"}$;
+	実数:${"ja":"光源座標", "dncl":"光源座標", "natja":"光源座標", "en":"lightPosition", "naten":"lightPosition"}$;
+	実数:${"ja":"回転軸", "dncl":"回転軸", "natja":"回転軸", "en":"axis", "naten":"axis"}$;
+	実数:${"ja":"位置", "dncl":"位置", "natja":"位置", "en":"position", "naten":"position"}$;
+	実数:${"ja":"キューブID", "dncl":"キューブID", "natja":"キューブID", "en":"cubeID", "naten":"cubeID"}$;
+	実数:${"ja":"光源ID", "dncl":"光源ID", "natja":"光源ID", "en":"lightID", "naten":"lightID"}$;
+	実数:${"ja":"キューブIDリスト", "dncl":"キューブIDリスト", "natja":"キューブIDリスト", "en":"cubeIDlist", "naten":"cubeIDlist"}$;
+	実数:${"ja":"回数", "dncl":"回数", "natja":"回数", "en":"numberOfTimes", "naten":"numberOfTimes"}$;
+	実数:${"ja":"初期位置", "dncl":"初期位置", "natja":"初期位置", "en":"initialPosition", "naten":"initialPosition"}$;
+	実数:${"ja":"幅", "dncl":"幅", "natja":"幅", "en":"width", "naten":"width"}$;
+	実数:${"ja":"高さ", "dncl":"高さ", "natja":"高さ", "en":"height", "naten":"height"}$;
+	実数:${"ja":"質量", "dncl":"質量", "natja":"質量", "en":"mass", "naten":"mass"}$;
+	実数:${"ja":"慣性モーメント", "dncl":"慣性モーメント", "natja":"慣性モーメント", "en":"momentOfInertia", "naten":"momentOfInertia"}$;
+	実数:${"ja":"速度", "dncl":"速度", "natja":"速度", "en":"velocity", "naten":"velocity"}$;
+	実数:${"ja":"角度", "dncl":"角度", "natja":"角度", "en":"angle", "naten":"angle"}$;
+	実数:${"ja":"角速度", "dncl":"角速度", "natja":"角速度", "en":"angularVelocity", "naten":"angularVelocity"}$;
+	実数:${"ja":"力", "dncl":"力", "natja":"力", "en":"force", "naten":"force"}$;
+	実数:${"ja":"トルク", "dncl":"トルク", "natja":"トルク", "en":"torque", "naten":"torque"}$;
+	実数:${"ja":"形", "dncl":"形", "natja":"形", "en":"shape", "naten":"shape"}$;
+	実数:${"ja":"物理ワールド2D", "dncl":"物理ワールド2D", "natja":"物理ワールド2D", "en":"physicsWorld2D", "naten":"physicsWorld2D"}$;
+	実数:${"ja":"物体配列", "dncl":"物体配列", "natja":"物体配列", "en":"bodyArray", "naten":"bodyArray"}$;
+	実数:${"ja":"重力加速度", "dncl":"重力加速度", "natja":"重力加速度", "en":"gravitationalAccelaration", "naten":"gravitationalAccelaration"}$;
+	実数:${"ja":"前回の時間", "dncl":"前回の時間", "natja":"前回の時間", "en":"timeBefore", "naten":"timeBefore"}$;
+	実数:${"ja":"物体追加", "dncl":"物体追加", "natja":"物体追加", "en":"addBody", "naten":"addBody"}$;
+	実数:${"ja":"重力", "dncl":"重力", "natja":"重力", "en":"gravity", "naten":"gravity"}$;
+	実数:${"ja":"アップデート", "dncl":"アップデート", "natja":"アップデート", "en":"update", "naten":"update"}$;
+	実数:${"ja":"経過時間", "dncl":"経過時間", "natja":"経過時間", "en":"timePassed", "naten":"timePassed"}$;
+	実数:${"ja":"角加速度", "dncl":"角加速度", "natja":"角加速度", "en":"angularAccelaration", "naten":"angularAccelaration"}$;
+	実数:${"ja":"物理ワールド", "dncl":"物理ワールド", "natja":"物理ワールド", "en":"physicsWorld", "naten":"physicsWorld"}$;
+	実数:${"ja":"初速度", "dncl":"初速度", "natja":"初速度", "en":"initialVelocity", "naten":"initialVelocity"}$;
+	実数:${"ja":"初速度", "dncl":"初速度", "natja":"初速度", "en":"initialVelocity", "naten":"initialVelocity"}$;
+	実数:${"ja":"素数", "dncl":"素数", "natja":"素数", "en":"primeNumbers", "naten":"primeNumbers"}$;
+	実数:${"ja":"フラグ", "dncl":"フラグ", "natja":"フラグ", "en":"flag", "naten":"flag"}$;
+	実数:${"ja":"漸化式", "dncl":"漸化式", "natja":"漸化式", "en":"recursion", "naten":"recursion"}$;
+	実数:${"ja":"変数1", "dncl":"変数1", "natja":"変数1", "en":"variable1", "naten":"variable1"}$;
+	実数:${"ja":"変数2", "dncl":"変数2", "natja":"変数2", "en":"variable2", "naten":"variable2"}$;
+	実数:${"ja":"変数3", "dncl":"変数3", "natja":"変数3", "en":"variable3", "naten":"variable3"}$;
+	実数:${"ja":"変数4", "dncl":"変数4", "natja":"変数4", "en":"variable4", "naten":"variable4"}$;
+	実数:${"ja":"変数5", "dncl":"変数5", "natja":"変数5", "en":"variable5", "naten":"variable5"}$;
+	実数:${"ja":"変数6", "dncl":"変数6", "natja":"変数6", "en":"variable6", "naten":"variable6"}$;
+	実数:${"ja":"変数7", "dncl":"変数7", "natja":"変数7", "en":"variable7", "naten":"variable7"}$;
+	実数:${"ja":"変数8", "dncl":"変数8", "natja":"変数8", "en":"variable8", "naten":"variable8"}$;
+	実数:${"ja":"変数9", "dncl":"変数9", "natja":"変数9", "en":"variable9", "naten":"variable9"}$;
+}
+クラス:ArduinoClass{
+	文字:${"ja":"出力ピン", "dncl":"出力ピン", "natja":"出力ピン", "en":"OUTPUT", "naten":"OUTPUT"}$;
+	文字:${"ja":"入力ピン", "dncl":"入力ピン", "natja":"入力ピン", "en":"INPUT", "naten":"INPUT"}$;
+	関数:ArduinoClass()=>(){
+		出力ピン = '出';
+		入力ピン = '入';
+	}
+}
+関数:${"ja":"Arduino5V送る", "dncl":"Arduino5V送る", "natja":"Arduino5V送る", "en":"ArduinoOutput5V", "naten":"ArduinoOutput5V"}$(整数:ピン番号) => (){
+	Arduinoコマンド送信('H', ピン番号);
+}
+関数:${"ja":"Arduino0V送る", "dncl":"Arduino0V送る", "natja":"Arduino0V送る", "en":"ArduinoOutput0V", "naten":"ArduinoOutput0V"}$(整数:ピン番号) => (){
+	Arduinoコマンド送信('L', ピン番号);
+}
+関数:${"ja":"Arduinoピン入出力設定", "dncl":"Arduinoピン入出力設定", "natja":"Arduinoピン入出力設定", "en":"ArduinoSetPinmode", "naten":"ArduinoSetPinmode"}$(整数:ピン番号, 文字:入出力) => (){
+	// Arduinoコマンド送信(入出力, ピン番号);
+	もし(入出力 == '入')ならば{
+		Arduinoコマンド送信('I', ピン番号);
+	}
+	もし(入出力 == '出')ならば{
+		Arduinoコマンド送信('O', ピン番号);
+	}
+}
+関数:${"ja":"Arduinoアナログ入力ピン設定", "dncl":"Arduinoアナログ入力ピン設定", "natja":"Arduinoアナログ入力ピン設定", "en":"ArduinoSetAnalogInputPin", "naten":"ArduinoSetAnalogInputPin"}$(整数:ピン番号) => (){
+    Arduinoコマンド送信('A', ピン番号);
+}
+関数:${"ja":"ArduinoHCSR04設定", "dncl":"ArduinoHCSR04設定", "natja":"ArduinoHCSR04設定", "en":"ArduinoHCSR04Trigger", "naten":"ArduinoHCSR04Trigger"}$(整数:ピン番号) => (){
+    Arduinoコマンド送信('T', ピン番号);
+}
+関数: 実行() => (){
+    文字列:a = "";
+}
