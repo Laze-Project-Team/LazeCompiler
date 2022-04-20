@@ -40,7 +40,7 @@ sudo apt-get install bison
 | filename | コンパイルするファイルの名前 |
 | dir | ファイルのディレクトリ (compilerとコンパイルするファイルが同じフォルダーなら省略可) |
 | lang-file | 言語ファイル (.json) |
-| parser-file | 言語ファイル (.json) |
+| parser-file | パーサーファイル (.parser) |
 
 #### 例
 
