@@ -44,6 +44,7 @@ sudo apt-get install bison
 ```
 
 | argument name | content |
+| :--- | :--- |
 | filename | name of the file to compile |
 | dir | directory of files (can be omitted if compiler and files to be compiled are in the same folder) |
 | lang-file | language file (.json) |
@@ -64,7 +65,7 @@ Compiling a Japanese program when compiler and test.lazy are in the same file
 ```
 
 | argument name | content |
-| ------ | ---- |
+| :--- | :--- |
 | filename | the name of the file to compile |
 | dir | directory of files (can be omitted if compiler and files to be compiled are in the same folder) |
 | lang-file | language file (.json) |
@@ -86,7 +87,7 @@ Convert a Japanese program to an English program when compiler and test.laze are
 ```
 
 | argument-name | argument-content |
-| --- | --- |
+| :--- | :--- |
 | lang-file | language file (.json) |
 | parser-file | destination parser file |
 
