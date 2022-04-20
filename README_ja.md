@@ -28,29 +28,63 @@ sudo apt-get install bison
 ```
 
 ## Lazeのコマンド
+
 ### コンパイル用
+
 ```
-./compiler <ファイル名> -c <ファイルのディレクトリ(compilerとコンパイルするファイルが同じフォルダーなら要らない)> --mode compile --parse-json <言語ファイル(.json)> --parser-opt <言語ファイル(.parser)>
+./compiler <filename> -c <dir> --mode compile --parse-json <lang-file> --parser-opt <parser-file>
 ```
+
+| 引数名 | 引数の内容 |
+| --- | --- |
+| filename | コンパイルするファイルの名前 |
+| dir | ファイルのディレクトリ (compilerとコンパイルするファイルが同じフォルダーなら省略可) |
+| lang-file | 言語ファイル (.json) |
+| parser-file | 言語ファイル (.json) |
+
 #### 例
+
 compilerとtest.lazeが同じファイルにある時、日本語のプログラムをコンパイルする
+
 ```
-./compiler test.laze --mode compiler --parse-json ./lang_files/jalang.json --parser-opt ./parsers/jalang.parser
+./compiler test.laze --mode compile --parse-json ./lang_files/jalang.json --parser-opt ./parsers/jalang.parser
 ```
+
 ### 言語変換用
+
 ```
-./compiler <ファイル名> -c <ファイルのディレクトリ(compilerと変換するファイルが同じフォルダーなら要らない)> --mode convert --parse-json <言語ファイル(.json)> --parser-opt <言語ファイル(.parser)> --convert-json <変換先の言語ファイル>
+./compiler <filaname> -c <dir> --mode convert --parse-json <lang-file> --parser-opt <parser-file> --convert-json <convert-lang-file>
 ```
+
+| 引数名 | 引数の内容 |
+| ------ | ---- |
+| filename | コンパイルするファイルの名前 |
+| dir | ファイルのディレクトリ (compilerと変換するファイルが同じフォルダーなら要らない) |
+| lang-file | 言語ファイル (.json) |
+| parser-file | パーサーファイル (.parser) |
+| convert-lang-file | 変換先の言語ファイル |
+
 #### 例
+  
 compilerとtest.lazeが同じファイルにある時、日本語のプログラムを英語のプログラムに変換する
+
 ```
 ./compiler test.laze --mode convert --parse-json ./lang_files/jalang.json --parser-opt ./parsers/jalang.parser --convert-json ./lang_files/enlang.json
 ```
+
 ### パーサー生成用
+
 ```
-./compiler --mode parserload --parse-json <言語ファイル(.json)> --parser-output <パーサーの生成先>
+./compiler --mode parserload --parse-json <lang-file> --parser-output <parer-file>
 ```
+
+| 引数名 | 引数の内容 |
+| --- | --- |
+| lang-file | 言語ファイル (.json) |
+| parser-file | 生成先のパーサーファイル |
+
 #### 例
+
 ```
 ./compiler --mode parserload --parse-json ./lang_files/jalang.json --parser-output ./lang_files/jalang.parser
 ```
