@@ -152,14 +152,14 @@
             "mul":"*",
             "div":"/",
             "mod":"%",
-            "eq":"is",
-            "neq":"is not",
+            "eq":"==",
+            "neq":"!=",
             "ge":">=",
             "gt":">",
             "le":"<=",
             "lt":"<",
-            "and":"and",
-            "or":"or"
+            "and":"&&",
+            "or":"||"
         },
         "stm":{
             "assign":{
@@ -173,7 +173,7 @@
                 "decrement":"Decrement var ."
             },
             "if":"ifelselist",
-            "while":"Until exp stm",
+            "until":"Until exp stm",
             "dec": "dec(stm)",
             "for":"( stm(init) ) from ( exp ) to ( stm(incr) ) stm",
             "return":{

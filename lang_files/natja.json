@@ -157,7 +157,7 @@
         "mod":"var % = exp ;"
       },
       "if": "ifelselist",
-      "while": "exp まで stm",
+      "until": "exp まで stm",
       "dec": "dec(stm)",
       "for": "( stm(init) ) から ( exp ) まで ( stm(incr) ) 繰り返し stm",
       "return": {

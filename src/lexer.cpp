@@ -27,7 +27,7 @@ static bool tabSensitive = false;
 std::string languageCode = "";
 
 L_errorPos L_getErrorPos(int cursorPos){
-    L_errorPos result;
+    L_errorPos result; 
     // std::cout << cursorPos << std::endl;
     for(int i = 0; i < lettersInLines.size(); i++){
         for(int j = 0; j < lettersInLines.at(i).size(); j++){
@@ -173,7 +173,6 @@ L_tokenList L_Lexer(const char* filename1, const char* filename2, std::string mo
         tokenList.push_back(token);
     }
     for(const auto &regex:regexMap){
-        // std::cout << regex.first << std::endl;
         std::wstring::const_iterator programIt(program.cbegin());
         while(std::regex_search(programIt, program.cend(), match, regex.second)){
             L_token token = std::make_shared<L_token_>();

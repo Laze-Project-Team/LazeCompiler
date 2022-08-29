@@ -67,12 +67,6 @@ compiler: ./dist/converter.o ./dist/parser.o ./dist/lexer.o ./dist/toJson.o ./di
 ./dist/errormsg.o: ./src/errormsg.cpp ./src/errormsg.hpp ./src/util.h
 	g++ -O2 -g -c ./src/errormsg.cpp -o ./dist/errormsg.o
 
-# lex.yy.o: lex../src/yy.c ./src/errormsg.hpp ./src/util.h
-# 	g++ -O2 -g -c lex../src/yy.c
-
-# lex../src/yy.c: lang.l
-# 	lex -w lang.l
-
 ./dist/pp.yy.o: ./src/pp.yy.c ./src/errormsg.hpp
 	g++ -O2 -g -c ./src/pp.yy.c -o ./dist/pp.yy.o
 

@@ -42,7 +42,7 @@ A_decList getAST(char *fname, char *directory, char *currentDirectory, char *par
     transPPList(preprocess(temptempFileName), temptempFileName);
     while(!toByte(temptempFileName, tempFileName));
     std::ifstream i(tempFileName);
-    // std::cout << i.rdbuf() << std::endl;
+    // std::cerr << i.rdbuf() << std::endl;
     L_tokenList list = L_Lexer(tempFileName, parseJsonName, mode);
     remove(tempFileName);
     remove(temptempFileName);
@@ -155,7 +155,7 @@ int main(int argc, char **argv)
     }
     transPPList(preprocess(temptempFileName), temptempFileName);
     while(!toByte(temptempFileName, tempFileName));
-    L_tokenList list = L_Lexer(tempFileName, parseJsonName, mode);
+    L_tokenList list = L_Lexer(tempFileName, parseJsonName, mode);    
     remove(tempFileName);
     remove(temptempFileName);
     A_decList absyn_root = NULL;
@@ -177,7 +177,7 @@ int main(int argc, char **argv)
         jobj jsonAST = JS_toJson(absyn_root);
         fileContent(resultJsonFile, (string)json_object_to_json_string(jsonAST));
         CON_convert(resultJsonFile, convertJsonName, convertOutput);
-        remove(resultJsonFile);
+        // remove(resultJsonFile);
         // std::cout << "Finished Converting." << std::endl;
     }
     else if(strcmp(mode, "compile") == 0){

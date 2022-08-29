@@ -307,12 +307,18 @@ std::string jsonToString(json target, std::string parentRule, const json &rule, 
                 type = "ifelselist";
                 kind = "if";
             }
-            if(rule[type][kind].is_string()){
-                ruleName = type + "." + kind;
-            }
-            else if(rule[type][kind].is_object()){
-                std::string specificType = element["info"]["specificType"].get<std::string>();
-                ruleName = type + "." + kind + "." + specificType;
+            try{
+                if(rule[type][kind].is_string()){
+                    ruleName = type + "." + kind;
+                }
+                else if(rule[type][kind].is_object()){
+                    std::string specificType = element["info"]["specificType"].get<std::string>();
+                    ruleName = type + "." + kind + "." + specificType;
+                }
+            } catch(std::exception e){
+                std::cerr << e.what() << std::endl;
+                std::cerr << type << std::endl;
+                std::cerr << kind << std::endl;
             }
             if(type == "dec" || type == "stm"){
                 for(int i = 0; i < indentTabs; i++){

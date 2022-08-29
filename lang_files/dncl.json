@@ -99,7 +99,7 @@
       {"name":"&", "regex": "(&|＆)", "precedence": 2},
       {"name":",", "regex": "(,|、)", "precedence": 20},
       {"name":"←", "regex": "(←)", "precedence": 20},
-      {"name":"|", "regex":"|", "precedence": 20},
+      {"name":"|", "regex":"(\\||｜)", "precedence": 20},
       {"name":"かつ", "regex": "(?:^|[^㐀-龯ぁ-んァ-ヶa-zA-Z_ー0-9])(かつ)(?:$|[^㐀-龯ぁ-んァ-ヶa-zA-Z_ー0-9])", "precedence": 8},
       {"name":"または", "regex": "(?:^|[^㐀-龯ぁ-んァ-ヶa-zA-Z_ー0-9])(または)(?:$|[^㐀-龯ぁ-んァ-ヶa-zA-Z_ー0-9])", "precedence": 8},
       {"name":"=", "regex": "(=)", "precedence": 7}

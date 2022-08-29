@@ -447,7 +447,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.exp = A_OpExp(result -> start, tokenData.at("oper").oper, tokenData.at("exp(1)").exp, tokenData.at("exp(2)").exp);
         }
         else if(ruleName == "exp.minus"){
-            result -> u.exp = A_OpExp(result -> start, A_minusOp, A_IntExp(0, 0), tokenData.at("exp").exp);
+            result -> u.exp = A_OpExp(result -> start, A_minusOp, A_IntExp(result -> start, 0), A_ParenExp(result -> start, tokenData.at("exp").exp));
         }
         else if(ruleName == "exp.paren"){
             result -> u.exp = A_ParenExp(result -> start, tokenData.at("exp").exp);
@@ -555,16 +555,16 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_plusOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
         }
         else if(ruleName == "stm.assign.sub"){
-            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_minusOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_minusOp, A_VarExp(result -> start, tokenData.at("var").var), A_ParenExp(result -> start, tokenData.at("exp").exp)), FALSE);
         }
         else if(ruleName == "stm.assign.mul"){
-            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_timesOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_timesOp, A_VarExp(result -> start, tokenData.at("var").var), A_ParenExp(result -> start, tokenData.at("exp").exp)), FALSE);
         }
         else if(ruleName == "stm.assign.div"){
-            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_divideOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_divideOp, A_VarExp(result -> start, tokenData.at("var").var), A_ParenExp(result -> start, tokenData.at("exp").exp)), FALSE);
         }
         else if(ruleName == "stm.assign.mod"){
-            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_modOp, A_VarExp(result -> start, tokenData.at("var").var), tokenData.at("exp").exp), FALSE);
+            result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_modOp, A_VarExp(result -> start, tokenData.at("var").var), A_ParenExp(result -> start, tokenData.at("exp").exp)), FALSE);
         }
         else if(ruleName == "stm.assign.increment"){
             result -> u.stm = A_AssignStm(result -> start, tokenData.at("var").var, A_OpExp(result -> start, A_plusOp, A_VarExp(result -> start, tokenData.at("var").var), A_IntExp(result -> start, 1)), FALSE);
@@ -917,7 +917,6 @@ static A_decList parseWithTable(L_tokenList list, tableTy table, const grammarLi
     int originalErrorPos = 0;
     std::string originalErrorToken = "";
     do{
-
         std::string tokenToRead = list.front() -> kind;
         // std::cout << list.front() -> kind << " " << stack.back() << std::endl;
         action = table.at(list.front() -> kind).at(stack.back());
@@ -1149,17 +1148,17 @@ tableTy P_generateParseTable(const grammarListTy &grammarList){
     itemSets.front().push_back(std::make_pair("additionalRules", std::deque<std::string>({"------------------"})));
     itemSets = createAllItemSets(itemSets, grammarList);
     itemSetTy extended = toExtendedGrammar(itemSets);
-    for(int i = 0; i < itemSets.size(); i++){
-        std::cout << "itemSet" << i << ":" << std::endl;
-        for(const auto &j: itemSets.at(i)){
-            std::cout << j.first << "-> ";
-            for(const auto &k: j.second){
-                std::cout << k << " ";
-            }
-        std::cout << std::endl;
-        }
-        std::cout << std::endl;
-    }
+    // for(int i = 0; i < itemSets.size(); i++){
+    //     std::cout << "itemSet" << i << ":" << std::endl;
+    //     for(const auto &j: itemSets.at(i)){
+    //         std::cout << j.first << "-> ";
+    //         for(const auto &k: j.second){
+    //             std::cout << k << " ";
+    //         }
+    //     std::cout << std::endl;
+    //     }
+    //     std::cout << std::endl;
+    // }
     // std::cout << itemSets.size() << std::endl;
     firstSetTy FIRSTset = generateFirstSet(extended);
     firstSetTy FOLLOWset = generateFollowSet(extended, FIRSTset);

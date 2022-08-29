@@ -821,7 +821,9 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
             T_expList result = expList;
             bool isCalledInMethod = FALSE;
             //debug(stm->pos, "Call Statement");
-            
+            if(stm -> u.call.func -> kind == A_parenExp){
+                stm -> u.call.func = stm -> u.call.func -> u.paren.paren;
+            }
             if(stm -> u.call.func -> kind == A_varExp || stm -> u.call.func -> kind == A_fieldExp || stm -> u.call.func -> kind == A_arrowFieldExp){
                 S_symbol name = NULL;
                 E_enventry entry = NULL;
@@ -1221,8 +1223,10 @@ struct expty transStm(S_table venv, S_table tenv, A_stm stm, Tr_level level, boo
                     EM_error(stm->pos, "noexist.func %s", S_name(name));
                 }
             }
-            else
+            else{
+                printf("%d", stm -> u.call.func -> kind);
                 EM_error(stm -> pos, "func.cannotcall");
+            }
         }
         case A_returnStm:
         {
@@ -1755,6 +1759,10 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
         S_symbol name = NULL;
         bool isCalledInMethod = FALSE;
         bool isConstructor = FALSE;
+
+        if(e -> u.call.func -> kind == A_parenExp){
+            e -> u.call.func = e -> u.call.func -> u.paren.paren;
+        }
         if(e -> u.call.func -> kind == A_varExp || e -> u.call.func -> kind == A_fieldExp || e -> u.call.func -> kind == A_arrowFieldExp){
             E_enventry entry = NULL;
             if(e -> u.call.func -> kind == A_varExp)
@@ -2140,7 +2148,6 @@ struct expty transExp(S_table venv, S_table tenv, A_exp e, Tr_level level, bool 
             }
         }
         else{
-            std::cout << e -> u.call.func -> kind << std::endl;
             EM_error(e -> pos, "func.cannotcall");
         }
     }

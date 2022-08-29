@@ -125,10 +125,15 @@ struct A_stm_
         struct
         {
             A_stm actualFor;
+            A_stm body;
+            S_symbol varName;
+            A_exp incr;
+            A_exp init;
+            A_exp until;
         } forloop;
         struct
         {
-            A_exp test;
+            A_exp test; 
             A_stm body;
         } realwhile;
     } u;

@@ -91,7 +91,7 @@ jobj JS_StmToJson(A_stm stm)
         }
         case A_whileStm:
         {
-            name = json_object_new_string("while");
+            name = json_object_new_string("until");
             jobj test = JS_ExpToJson(stm -> u.whilee.test);
             json_object_object_add(info, "exp", test);
             jobj body = JS_StmToJson(stm -> u.whilee.body);
@@ -163,6 +163,11 @@ jobj JS_StmToJson(A_stm stm)
             json_object_object_add(info, "exp", count);
             break;
         }
+        // case A_forloopStm:
+        // {
+        //     name = json_object_new_string("forloop");
+        //     jobj body = JS_StmToJson(stm ->u.forloop.actualFor.);
+        // }
     } 
     json_object_object_add(result, "kind", name);
     json_object_object_add(result, "info", info);
