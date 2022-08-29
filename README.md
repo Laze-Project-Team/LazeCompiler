@@ -1,56 +1,98 @@
-# Lazeとは
-Lazeはブラウザ上で実行する多言語対応プログラミング言語です。
-プログラミングを学習し始めたいけど英語やプログラミング前の環境構築が難しくて手こずっている人のための言語です。
+# What is Laze?
+Laze is a multilingual programming language that runs in your browser.
+It is a language for people who want to start learning programming but are daunted by the difficulties of building an English language or pre-programming environment.
 
-## 初心者の方へ
-初心者の方はこのリポジトリのコンパイラのコマンドを使うのではなく、[こちら](https://laze.ddns.net/editor)のウェブサイトでプログラミングを始めてみてください。
-[こちら](https://laze.ddns.net)がホームページです。
+## For beginners
+Beginners should start programming at the website [here](https://laze.ddns.net/editor) instead of using the compiler commands in this repository.
+[Here](https://laze.ddns.net) is the home page.
 
-## このコンパイラをローカルで使いたい方へ
-使用OSはWindows 10でUbuntu 20.04のWSL2です。
+## For those who want to use this compiler locally
+The OS used is WSL2 on Ubuntu 20.04 with Windows 10.
 
-## Lazeに必要なライブラリ
-・nlohmann
+## Libraries required for Laze
+
+nlohmann
+
 ```
 sudo apt-get install nlohmann-json3-dev
 ```
-・jsonc
+
+jsonc
+
 ```
 sudo apt-get install libjson-c-dev
 ```
-・lex(flex)
+
+lex(flex)
+
 ```
 sudo apt-get install flex
 ```
-・yacc(bison)
+
+yacc(bison)
+
 ```
 sudo apt-get install bison
 ```
 
-## Lazeのコマンド
-### コンパイル用
+## Laze commands
+
+### For compiling
+
 ```
-./compiler <ファイル名> -c <ファイルのディレクトリ(compilerとコンパイルするファイルが同じフォルダーなら要らない)> --mode compile --parse-json <言語ファイル(.json)> --parser-opt <言語ファイル(.parser)>
+./compiler <filename> -c <dir> --mode compile --parse-json <lang-file> --parser-opt <parser-file>
 ```
-#### 例
-compilerとtest.lazeが同じファイルにある時、日本語のプログラムをコンパイルする
+
+| argument name | content |
+| :--- | :--- |
+| filename | name of the file to compile |
+| dir | directory of files (can be omitted if compiler and files to be compiled are in the same folder) |
+| lang-file | language file (.json) |
+| parser-file | parser file (.parser) |
+
+#### Example
+
+Compiling a Japanese program when compiler and test.lazy are in the same file
+
 ```
-./compiler test.laze --mode compiler --parse-json ./lang_files/jalang.json --parser-opt ./parsers/jalang.parser
+./compiler test.laze --mode compile --parse-json . /lang_files/jalang.json --parser-opt . /parsers/jalang.parser
 ```
-### 言語変換用
+
+### For language conversion
+
 ```
-./compiler <ファイル名> -c <ファイルのディレクトリ(compilerと変換するファイルが同じフォルダーなら要らない)> --mode convert --parse-json <言語ファイル(.json)> --parser-opt <言語ファイル(.parser)> --convert-json <変換先の言語ファイル>
+./compiler <filaname> -c <dir> --mode convert --parse-json <lang-file> --parser-opt <parser-file> --convert-json <convert-lang-file>
 ```
-#### 例
-compilerとtest.lazeが同じファイルにある時、日本語のプログラムを英語のプログラムに変換する
+
+| argument name | content |
+| :--- | :--- |
+| filename | the name of the file to compile |
+| dir | directory of files (can be omitted if compiler and files to be compiled are in the same folder) |
+| lang-file | language file (.json) |
+| parser-file | parser file (.parser) |
+| convert-lang-file | language file of the language to convert (.json) |
+
+#### Example
+  
+Convert a Japanese program to an English program when compiler and test.laze are in the same file
+
 ```
-./compiler test.laze --mode convert --parse-json ./lang_files/jalang.json --parser-opt ./parsers/jalang.parser --convert-json ./lang_files/enlang.json
+./compiler test.laze --mode convert --parse-json . /lang_files/jalang.json --parser-opt . /parsers/jalang.parser --convert-json . /lang_files/enlang.json
 ```
-### パーサー生成用
+
+### for parser generation
+
 ```
-./compiler --mode parserload --parse-json <言語ファイル(.json)> --parser-output <パーサーの生成先>
+./compiler --mode parserload --parse-json <lang-file> --parser-output <parer-file>
 ```
-#### 例
+
+| argument-name | argument-content |
+| :--- | :--- |
+| lang-file | language file (.json) |
+| parser-file | destination parser file |
+
+#### Example.
+
 ```
-./compiler --mode parserload --parse-json ./lang_files/jalang.json --parser-output ./lang_files/jalang.parser
+./compiler --mode parserload --parse-json . /lang_files/jalang.json --parser-output . /lang_files/jalang.parser
 ```
