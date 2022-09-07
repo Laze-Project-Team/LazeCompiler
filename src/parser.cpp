@@ -447,7 +447,7 @@ static L_token reduce(L_tokenList &list, std::string ruleName, const grammarList
             result -> u.exp = A_OpExp(result -> start, tokenData.at("oper").oper, tokenData.at("exp(1)").exp, tokenData.at("exp(2)").exp);
         }
         else if(ruleName == "exp.minus"){
-            result -> u.exp = A_OpExp(result -> start, A_minusOp, A_IntExp(result -> start, 0), A_ParenExp(result -> start, tokenData.at("exp").exp));
+            result -> u.exp = A_ParenExp(result -> start, A_OpExp(result -> start, A_minusOp, A_IntExp(result -> start, 0), A_ParenExp(result -> start, tokenData.at("exp").exp)));
         }
         else if(ruleName == "exp.paren"){
             result -> u.exp = A_ParenExp(result -> start, tokenData.at("exp").exp);

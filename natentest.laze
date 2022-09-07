@@ -3,76 +3,77 @@ Load  function ${"ja":"デバッグ表示", "natja":"デバッグ表示", "en":"
 Load  function ${"ja":"行列表示", "natja":"行列表示", "en":"printMatrix", "naten":"printMatrix"}$ from "logMatrix"of "console"that  takes element 4 in element 4 in offset as double . 
 Load  function ${"ja":"アドレス表示", "natja":"アドレス表示", "en":"printAddress", "naten":"printAddress"}$ from "log"of "console"that  takes x as pointer  of void . 
 Load  function ${"ja":"_文字列表示", "natja":"_文字列表示", "en":"_printString", "naten":"_printString"}$ from "logstring"of "console"that  takes x as pointer  of char , 長さ as int . 
-Load  function ${"ja":"時間計測", "natja":"時間計測", "en":"getTime", "naten":"getTime"}$ from "now"of "performance"that  returns 時間 as double . 
-Load  function ${"ja":"glClearDepth", "natja":"glClearDepth", "en":"glClearDepth", "naten":"glClearDepth"}$ from "clearDepth"of "webgl"that  takes i as short . 
-Load  function ${"ja":"glDepthFunc", "natja":"glDepthFunc", "en":"glDepthFunc", "naten":"glDepthFunc"}$ from "depthFunc"of "webgl"that  takes i as short . 
-Load  function ${"ja":"glEnable", "natja":"glEnable", "en":"glEnable", "naten":"glEnable"}$ from "enable"of "webgl"that  takes i as short . 
-Load  function ${"ja":"glDisable", "natja":"glDisable", "en":"glDisable", "naten":"glDisable"}$ from "disable"of "webgl"that  takes i as short . 
-Load  function ${"ja":"glCreateProgram", "natja":"glCreateProgram", "en":"glCreateProgram", "naten":"glCreateProgram"}$ from "createProgram"of "webgl"that  returns prog as short . 
-Load  function ${"ja":"glCreateBuffer", "natja":"glCreateBuffer", "en":"glCreateBuffer", "naten":"glCreateBuffer"}$ from "createBuffer"of "webgl"that  returns buffer as short . 
-Load  function ${"ja":"glBindBuffer", "natja":"glBindBuffer", "en":"glBindBuffer", "naten":"glBindBuffer"}$ from "bindBuffer"of "webgl"that  takes i as short , j as short . 
-Load  function ${"ja":"glBufferData", "natja":"glBufferData", "en":"glBufferData", "naten":"glBufferData"}$ from "bufferData"of "webgl"that  takes i as short , offset as pointer  of double , size as short , j as short . 
-Load  function ${"ja":"glElementBufferData", "natja":"glElementBufferData", "en":"glElementBufferData", "naten":"glElementBufferData"}$ from "elementBufferData"of "webgl"that  takes i as short , offset as pointer  of short , size as short , j as short . 
-Load  function ${"ja":"glUseProgram", "natja":"glUseProgram", "en":"glUseProgram", "naten":"glUseProgram"}$ from "useProgram"of "webgl"that  takes i as short . 
-Load  function ${"ja":"glGetAttribLocation", "natja":"glGetAttribLocation", "en":"glGetAttribLocation", "naten":"glGetAttribLocation"}$ from "getAttribLocation"of "webgl"that  takes i as short , offset as pointer  of char , size as short and  returns loc as short . 
-Load  function ${"ja":"glVertexAttribPointer", "natja":"glVertexAttribPointer", "en":"glVertexAttribPointer", "naten":"glVertexAttribPointer"}$ from "vertexAttribPointer"of "webgl"that  takes index as short , size as short , ty as short , normalized as short , stride as short , offset as short . 
-Load  function ${"ja":"glEnableVertexAttribArray", "natja":"glEnableVertexAttribArray", "en":"glEnableVertexAttribArray", "naten":"glEnableVertexAttribArray"}$ from "enableVertexAttribArray"of "webgl"that  takes index as short . 
-Load  function ${"ja":"glDrawArrays", "natja":"glDrawArrays", "en":"glDrawArrays", "naten":"glDrawArrays"}$ from "drawArrays"of "webgl"that  takes i as short , first as short , count as short . 
-Load  function ${"ja":"_glGetUniformLocation", "natja":"_glGetUniformLocation", "en":"_glGetUniformLocation", "naten":"_glGetUniformLocation"}$ from "getUniformLocation"of "webgl"that  takes i as short , offset as pointer  of char , size as short and  returns loc as short . 
-Load  function ${"ja":"glUniformMatrix2fv", "natja":"glUniformMatrix2fv", "en":"glUniformMatrix2fv", "naten":"glUniformMatrix2fv"}$ from "uniformMatrix2fv"of "webgl"that  takes loc as short , trans as short , offset as pointer  of double . 
-Load  function ${"ja":"glUniformMatrix3fv", "natja":"glUniformMatrix3fv", "en":"glUniformMatrix3fv", "naten":"glUniformMatrix3fv"}$ from "uniformMatrix3fv"of "webgl"that  takes loc as short , trans as short , offset as pointer  of double . 
-Load  function ${"ja":"glUniformMatrix4fv", "natja":"glUniformMatrix4fv", "en":"glUniformMatrix4fv", "naten":"glUniformMatrix4fv"}$ from "uniformMatrix4fv"of "webgl"that  takes loc as short , trans as short , element 16 in offset as double . 
-Load  function ${"ja":"glUniform1f", "natja":"glUniform1f", "en":"glUniform1f", "naten":"glUniform1f"}$ from "uniform1f"of "webgl"that  takes loc as short , v0 as double . 
-Load  function ${"ja":"glUniform1fv", "natja":"glUniform1fv", "en":"glUniform1fv", "naten":"glUniform1fv"}$ from "uniform1fv"of "webgl"that  takes loc as short , v0 as double . 
-Load  function ${"ja":"glUniform1i", "natja":"glUniform1i", "en":"glUniform1i", "naten":"glUniform1i"}$ from "uniform1i"of "webgl"that  takes loc as short , v0 as short . 
-Load  function ${"ja":"glUniform1iv", "natja":"glUniform1iv", "en":"glUniform1iv", "naten":"glUniform1iv"}$ from "uniform1iv"of "webgl"that  takes loc as short , v0 as short . 
-Load  function ${"ja":"glUniform2f", "natja":"glUniform2f", "en":"glUniform2f", "naten":"glUniform2f"}$ from "uniform2f"of "webgl"that  takes loc as short , v0 as double , v1 as double . 
-Load  function ${"ja":"glUniform2fv", "natja":"glUniform2fv", "en":"glUniform2fv", "naten":"glUniform2fv"}$ from "uniform2fv"of "webgl"that  takes loc as short , v0 as double , v1 as double . 
-Load  function ${"ja":"glUniform2i", "natja":"glUniform2i", "en":"glUniform2i", "naten":"glUniform2i"}$ from "uniform2i"of "webgl"that  takes loc as short , v0 as short , v1 as short . 
-Load  function ${"ja":"glUniform2iv", "natja":"glUniform2iv", "en":"glUniform2iv", "naten":"glUniform2iv"}$ from "uniform2iv"of "webgl"that  takes loc as short , v0 as short , v1 as short . 
-Load  function ${"ja":"glUniform3f", "natja":"glUniform3f", "en":"glUniform3f", "naten":"glUniform3f"}$ from "uniform3f"of "webgl"that  takes loc as short , v0 as double , v1 as double , v2 as double . 
-Load  function ${"ja":"glUniform3fv", "natja":"glUniform3fv", "en":"glUniform3fv", "naten":"glUniform3fv"}$ from "uniform3fv"of "webgl"that  takes loc as short , v0 as double , v1 as double , v2 as double . 
-Load  function ${"ja":"glUniform3i", "natja":"glUniform3i", "en":"glUniform3i", "naten":"glUniform3i"}$ from "uniform3i"of "webgl"that  takes loc as short , v0 as short , v1 as short , v2 as short . 
-Load  function ${"ja":"glUniform3iv", "natja":"glUniform3iv", "en":"glUniform3iv", "naten":"glUniform3iv"}$ from "uniform3iv"of "webgl"that  takes loc as short , v0 as short , v1 as short , v2 as short . 
-Load  function ${"ja":"glUniform4f", "natja":"glUniform4f", "en":"glUniform4f", "naten":"glUniform4f"}$ from "uniform4f"of "webgl"that  takes loc as short , v0 as double , v1 as double , v2 as double , v3 as double . 
-Load  function ${"ja":"glUniform4fv", "natja":"glUniform4fv", "en":"glUniform4fv", "naten":"glUniform4fv"}$ from "uniform4fv"of "webgl"that  takes loc as short , v0 as double , v1 as double , v2 as double , v3 as double . 
-Load  function ${"ja":"glUniform4i", "natja":"glUniform4i", "en":"glUniform4i", "naten":"glUniform4i"}$ from "uniform4i"of "webgl"that  takes loc as short , v0 as short , v1 as short , v2 as short , v3 as short . 
-Load  function ${"ja":"glUniform4iv", "natja":"glUniform4iv", "en":"glUniform4iv", "naten":"glUniform4iv"}$ from "uniform4iv"of "webgl"that  takes loc as short , v0 as short , v1 as short , v2 as short , v3 as short . 
-Load  function ${"ja":"glClearColor", "natja":"glClearColor", "en":"glClearColor", "naten":"glClearColor"}$ from "clearColor"of "webgl"that  takes r as double , g as double , b as double , a as double . 
-Load  function ${"ja":"glClear", "natja":"glClear", "en":"glClear", "naten":"glClear"}$ from "clear"of "webgl"that  takes color as short . 
-Load  function ${"ja":"glDrawElements", "natja":"glDrawElements", "en":"glDrawElements", "naten":"glDrawElements"}$ from "drawElements"of "webgl"that  takes i as short , count as short , ty as short , offset as short . 
-Load  function ${"ja":"glBlendFunc", "natja":"glBlendFunc", "en":"glBlendFunc", "naten":"glBlendFunc"}$ from "blendFunc"of "webgl"that  takes i as short , j as short . 
-Load  function ${"ja":"キーチェック", "natja":"キーチェック", "en":"checkKeyPress", "naten":"checkKeyPress"}$ from "checkKeyPress"of "js"that  takes keyCode as short and  returns pressed as int . 
-Load  function ${"ja":"マウスチェック", "natja":"マウスチェック", "en":"checkMousePress", "naten":"checkMousePress"}$ from "checkMousePress"of "js"that  returns pressed as int . 
-Load  function ${"ja":"マウス相対座標X", "natja":"マウス相対座標X", "en":"checkRelativeMouseX", "naten":"checkRelativeMouseX"}$ from "checkRelativeMouseX"of "js"that  returns x as double . 
-Load  function ${"ja":"マウス相対座標Y", "natja":"マウス相対座標Y", "en":"checkRelativeMouseY", "naten":"checkRelativeMouseY"}$ from "checkRelativeMouseY"of "js"that  returns x as double . 
-Load  function ${"ja":"マウス絶対座標X", "natja":"マウス絶対座標X", "en":"checkAbsoluteMouseX", "naten":"checkAbsoluteMouseX"}$ from "checkAbsoluteMouseX"of "js"that  returns x as double . 
-Load  function ${"ja":"マウス絶対座標Y", "natja":"マウス絶対座標Y", "en":"checkAbsoluteMouseY", "naten":"checkAbsoluteMouseY"}$ from "checkAbsoluteMouseY"of "js"that  returns x as double . 
-Load  function ${"ja":"スクロール座標", "natja":"スクロール座標", "en":"checkScroll", "naten":"checkScroll"}$ from "checkScrollY"of "js"that  returns x as double . 
-Load  function ${"ja":"ランダム数生成", "natja":"ランダム数生成", "en":"rand", "naten":"rand"}$ from "rand"of "js"that  returns x as double . 
-Load  function ${"ja":"メモリ確保", "natja":"メモリ確保", "en":"allocMemory", "naten":"allocMemory"}$ from "alloc"of "js"that  takes size as short and  returns p as pointer  of void . 
-Load  function ${"ja":"テクスチャロード", "natja":"テクスチャロード", "en":"_loadTexture", "naten":"_loadTexture"}$ from "loadTexture"of "webgl"that  takes offset as pointer  of char , length as short and  returns a as short . 
-Load  function ${"ja":"glActiveTexture", "natja":"glActiveTexture", "en":"glActiveTexture", "naten":"glActiveTexture"}$ from "activeTexture"of "webgl"that  takes i as short . 
-Load  function ${"ja":"glBindTexture", "natja":"glBindTexture", "en":"glBindTexture", "naten":"glBindTexture"}$ from "bindTexture"of "webgl"that  takes i as short , j as short . 
-Load  function ${"ja":"マウスキャプチャ", "natja":"マウスキャプチャ", "en":"captureMouse", "naten":"captureMouse"}$ from "lockPointer"of "js". 
+Load  function ${"ja":"時間計測", "natja":"時間計測", "en":"getTime", "naten":"getTime"}$ from "performanceNow"of "std"that  returns 時間 as double . 
+Load  function ${"ja":"glClearDepth", "natja":"glClearDepth", "en":"glClearDepth", "naten":"glClearDepth"}$ from "clearDepth"of "graphics"that  takes i as short . 
+Load  function ${"ja":"glDepthFunc", "natja":"glDepthFunc", "en":"glDepthFunc", "naten":"glDepthFunc"}$ from "depthFunc"of "graphics"that  takes i as short . 
+Load  function ${"ja":"glEnable", "natja":"glEnable", "en":"glEnable", "naten":"glEnable"}$ from "enable"of "graphics"that  takes i as short . 
+Load  function ${"ja":"glDisable", "natja":"glDisable", "en":"glDisable", "naten":"glDisable"}$ from "disable"of "graphics"that  takes i as short . 
+Load  function ${"ja":"glCreateProgram", "natja":"glCreateProgram", "en":"glCreateProgram", "naten":"glCreateProgram"}$ from "createProgram"of "graphics"that  returns prog as short . 
+Load  function ${"ja":"glCreateBuffer", "natja":"glCreateBuffer", "en":"glCreateBuffer", "naten":"glCreateBuffer"}$ from "createBuffer"of "graphics"that  returns buffer as short . 
+Load  function ${"ja":"glBindBuffer", "natja":"glBindBuffer", "en":"glBindBuffer", "naten":"glBindBuffer"}$ from "bindBuffer"of "graphics"that  takes i as short , j as short . 
+Load  function ${"ja":"glBufferData", "natja":"glBufferData", "en":"glBufferData", "naten":"glBufferData"}$ from "bufferData"of "graphics"that  takes i as short , offset as pointer  of double , size as short , j as short . 
+Load  function ${"ja":"glElementBufferData", "natja":"glElementBufferData", "en":"glElementBufferData", "naten":"glElementBufferData"}$ from "elementBufferData"of "graphics"that  takes i as short , offset as pointer  of short , size as short , j as short . 
+Load  function ${"ja":"glUseProgram", "natja":"glUseProgram", "en":"glUseProgram", "naten":"glUseProgram"}$ from "useProgram"of "graphics"that  takes i as short . 
+Load  function ${"ja":"glGetAttribLocation", "natja":"glGetAttribLocation", "en":"glGetAttribLocation", "naten":"glGetAttribLocation"}$ from "getAttribLocation"of "graphics"that  takes i as short , offset as pointer  of char , size as short and  returns loc as short . 
+Load  function ${"ja":"glVertexAttribPointer", "natja":"glVertexAttribPointer", "en":"glVertexAttribPointer", "naten":"glVertexAttribPointer"}$ from "vertexAttribPointer"of "graphics"that  takes index as short , size as short , ty as short , normalized as short , stride as short , offset as short . 
+Load  function ${"ja":"glEnableVertexAttribArray", "natja":"glEnableVertexAttribArray", "en":"glEnableVertexAttribArray", "naten":"glEnableVertexAttribArray"}$ from "enableVertexAttribArray"of "graphics"that  takes index as short . 
+Load  function ${"ja":"glDrawArrays", "natja":"glDrawArrays", "en":"glDrawArrays", "naten":"glDrawArrays"}$ from "drawArrays"of "graphics"that  takes i as short , first as short , count as short . 
+Load  function ${"ja":"_glGetUniformLocation", "natja":"_glGetUniformLocation", "en":"_glGetUniformLocation", "naten":"_glGetUniformLocation"}$ from "getUniformLocation"of "graphics"that  takes i as short , offset as pointer  of char , size as short and  returns loc as short . 
+Load  function ${"ja":"glUniformMatrix2fv", "natja":"glUniformMatrix2fv", "en":"glUniformMatrix2fv", "naten":"glUniformMatrix2fv"}$ from "uniformMatrix2fv"of "graphics"that  takes loc as short , trans as short , offset as pointer  of double . 
+Load  function ${"ja":"glUniformMatrix3fv", "natja":"glUniformMatrix3fv", "en":"glUniformMatrix3fv", "naten":"glUniformMatrix3fv"}$ from "uniformMatrix3fv"of "graphics"that  takes loc as short , trans as short , offset as pointer  of double . 
+Load  function ${"ja":"glUniformMatrix4fv", "natja":"glUniformMatrix4fv", "en":"glUniformMatrix4fv", "naten":"glUniformMatrix4fv"}$ from "uniformMatrix4fv"of "graphics"that  takes loc as short , trans as short , element 16 in offset as double . 
+Load  function ${"ja":"glUniform1f", "natja":"glUniform1f", "en":"glUniform1f", "naten":"glUniform1f"}$ from "uniform1f"of "graphics"that  takes loc as short , v0 as double . 
+Load  function ${"ja":"glUniform1fv", "natja":"glUniform1fv", "en":"glUniform1fv", "naten":"glUniform1fv"}$ from "uniform1fv"of "graphics"that  takes loc as short , v0 as double . 
+Load  function ${"ja":"glUniform1i", "natja":"glUniform1i", "en":"glUniform1i", "naten":"glUniform1i"}$ from "uniform1i"of "graphics"that  takes loc as short , v0 as short . 
+Load  function ${"ja":"glUniform1iv", "natja":"glUniform1iv", "en":"glUniform1iv", "naten":"glUniform1iv"}$ from "uniform1iv"of "graphics"that  takes loc as short , v0 as short . 
+Load  function ${"ja":"glUniform2f", "natja":"glUniform2f", "en":"glUniform2f", "naten":"glUniform2f"}$ from "uniform2f"of "graphics"that  takes loc as short , v0 as double , v1 as double . 
+Load  function ${"ja":"glUniform2fv", "natja":"glUniform2fv", "en":"glUniform2fv", "naten":"glUniform2fv"}$ from "uniform2fv"of "graphics"that  takes loc as short , v0 as double , v1 as double . 
+Load  function ${"ja":"glUniform2i", "natja":"glUniform2i", "en":"glUniform2i", "naten":"glUniform2i"}$ from "uniform2i"of "graphics"that  takes loc as short , v0 as short , v1 as short . 
+Load  function ${"ja":"glUniform2iv", "natja":"glUniform2iv", "en":"glUniform2iv", "naten":"glUniform2iv"}$ from "uniform2iv"of "graphics"that  takes loc as short , v0 as short , v1 as short . 
+Load  function ${"ja":"glUniform3f", "natja":"glUniform3f", "en":"glUniform3f", "naten":"glUniform3f"}$ from "uniform3f"of "graphics"that  takes loc as short , v0 as double , v1 as double , v2 as double . 
+Load  function ${"ja":"glUniform3fv", "natja":"glUniform3fv", "en":"glUniform3fv", "naten":"glUniform3fv"}$ from "uniform3fv"of "graphics"that  takes loc as short , v0 as double , v1 as double , v2 as double . 
+Load  function ${"ja":"glUniform3i", "natja":"glUniform3i", "en":"glUniform3i", "naten":"glUniform3i"}$ from "uniform3i"of "graphics"that  takes loc as short , v0 as short , v1 as short , v2 as short . 
+Load  function ${"ja":"glUniform3iv", "natja":"glUniform3iv", "en":"glUniform3iv", "naten":"glUniform3iv"}$ from "uniform3iv"of "graphics"that  takes loc as short , v0 as short , v1 as short , v2 as short . 
+Load  function ${"ja":"glUniform4f", "natja":"glUniform4f", "en":"glUniform4f", "naten":"glUniform4f"}$ from "uniform4f"of "graphics"that  takes loc as short , v0 as double , v1 as double , v2 as double , v3 as double . 
+Load  function ${"ja":"glUniform4fv", "natja":"glUniform4fv", "en":"glUniform4fv", "naten":"glUniform4fv"}$ from "uniform4fv"of "graphics"that  takes loc as short , v0 as double , v1 as double , v2 as double , v3 as double . 
+Load  function ${"ja":"glUniform4i", "natja":"glUniform4i", "en":"glUniform4i", "naten":"glUniform4i"}$ from "uniform4i"of "graphics"that  takes loc as short , v0 as short , v1 as short , v2 as short , v3 as short . 
+Load  function ${"ja":"glUniform4iv", "natja":"glUniform4iv", "en":"glUniform4iv", "naten":"glUniform4iv"}$ from "uniform4iv"of "graphics"that  takes loc as short , v0 as short , v1 as short , v2 as short , v3 as short . 
+Load  function ${"ja":"glClearColor", "natja":"glClearColor", "en":"glClearColor", "naten":"glClearColor"}$ from "clearColor"of "graphics"that  takes r as double , g as double , b as double , a as double . 
+Load  function ${"ja":"glClear", "natja":"glClear", "en":"glClear", "naten":"glClear"}$ from "clear"of "graphics"that  takes color as short . 
+Load  function ${"ja":"glDrawElements", "natja":"glDrawElements", "en":"glDrawElements", "naten":"glDrawElements"}$ from "drawElements"of "graphics"that  takes i as short , count as short , ty as short , offset as short . 
+Load  function ${"ja":"glBlendFunc", "natja":"glBlendFunc", "en":"glBlendFunc", "naten":"glBlendFunc"}$ from "blendFunc"of "graphics"that  takes i as short , j as short . 
+Load  function ${"ja":"キーチェック", "natja":"キーチェック", "en":"checkKeyPress", "naten":"checkKeyPress"}$ from "checkKeyPress"of "std"that  takes keyCode as short and  returns pressed as int . 
+Load  function ${"ja":"マウスチェック", "natja":"マウスチェック", "en":"checkMousePress", "naten":"checkMousePress"}$ from "checkMousePress"of "std"that  returns pressed as int . 
+Load  function ${"ja":"マウス相対座標X", "natja":"マウス相対座標X", "en":"checkRelativeMouseX", "naten":"checkRelativeMouseX"}$ from "checkRelativeMouseX"of "std"that  returns x as double . 
+Load  function ${"ja":"マウス相対座標Y", "natja":"マウス相対座標Y", "en":"checkRelativeMouseY", "naten":"checkRelativeMouseY"}$ from "checkRelativeMouseY"of "std"that  returns x as double . 
+Load  function ${"ja":"マウス絶対座標X", "natja":"マウス絶対座標X", "en":"checkAbsoluteMouseX", "naten":"checkAbsoluteMouseX"}$ from "checkAbsoluteMouseX"of "std"that  returns x as double . 
+Load  function ${"ja":"マウス絶対座標Y", "natja":"マウス絶対座標Y", "en":"checkAbsoluteMouseY", "naten":"checkAbsoluteMouseY"}$ from "checkAbsoluteMouseY"of "std"that  returns x as double . 
+Load  function ${"ja":"スクロール座標", "natja":"スクロール座標", "en":"checkScroll", "naten":"checkScroll"}$ from "checkScrollY"of "std"that  returns x as double . 
+Load  function ${"ja":"ランダム数生成", "natja":"ランダム数生成", "en":"rand", "naten":"rand"}$ from "rand"of "std"that  returns x as double . 
+Load  function ${"ja":"メモリ確保", "natja":"メモリ確保", "en":"allocMemory", "naten":"allocMemory"}$ from "alloc"of "std"that  takes size as short and  returns p as pointer  of void . 
+Load  function ${"ja":"テクスチャロード", "natja":"テクスチャロード", "en":"_loadTexture", "naten":"_loadTexture"}$ from "loadTexture"of "graphics"that  takes offset as pointer  of char , length as short and  returns a as short . 
+Load  function ${"ja":"glActiveTexture", "natja":"glActiveTexture", "en":"glActiveTexture", "naten":"glActiveTexture"}$ from "activeTexture"of "graphics"that  takes i as short . 
+Load  function ${"ja":"glBindTexture", "natja":"glBindTexture", "en":"glBindTexture", "naten":"glBindTexture"}$ from "bindTexture"of "graphics"that  takes i as short , j as short . 
+Load  function ${"ja":"マウスキャプチャ", "natja":"マウスキャプチャ", "en":"captureMouse", "naten":"captureMouse"}$ from "lockPointer"of "graphics". 
 Load  function ${"ja":"Arduino設定", "natja":"Arduino設定", "en":"ArduinoSetup", "naten":"ArduinoSetup"}$ from "setUp"of "arduino"that  takes vendorId as int , c as function : ( ) => ( ) . 
 Load  function ${"ja":"Arduinoコマンド送信", "natja":"Arduinoコマンド送信", "en":"ArduinoSendCommand", "naten":"ArduinoSendCommand"}$ from "sendCommand"of "arduino"that  takes コマンド as char , data as short . 
 Load  function ${"ja":"Arduinoデータ受信", "natja":"Arduinoデータ受信", "en":"ArduinoReceiveData", "naten":"ArduinoReceiveData"}$ from "checkInput"of "arduino". 
 Load  function ${"ja":"Arduinoアナログ入力", "natja":"Arduinoアナログ入力", "en":"ArduinoAnalogInput", "naten":"ArduinoAnalogInput"}$ from "analogRead"of "arduino"that  takes ピン番号 as int and  returns データ as short . 
 Load  function ${"ja":"Arduinoデジタル入力", "natja":"Arduinoデジタル入力", "en":"ArduinoDigitalInput", "naten":"ArduinoDigitalInput"}$ from "digitalRead"of "arduino"that  takes ピン番号 as int and  returns データ as short . 
 Load  function ${"ja":"ArduinoHCSR04距離入力", "natja":"ArduinoHCSR04距離入力", "en":"ArduinoHCSR04DistanceInput", "naten":"ArduinoHCSR04DistanceInput"}$ from "distanceRead"of "arduino"that  takes ピン番号 as int and  returns データ as short . 
-Load  function getTeapot from "getTeapot"of "js"that  returns s as pointer  of void . 
-Load  function getMountains from "getMountains"of "js"that  returns s as pointer  of void . 
-Load  function getTeddybear from "getTeddybear"of "js"that  returns s as pointer  of void . 
-Load  function getCow from "getCow"of "js"that  returns s as pointer  of void . 
-Load  function getFox from "getFox"of "js"that  returns s as pointer  of void . 
-Load  function getRobot from "getRobot"of "js"that  returns s as pointer  of void . 
-Load  function jsArcSin from "asin"of "js"that  takes x as double and  returns r as double . 
-Load  function jsArcCos from "acos"of "js"that  takes x as double and  returns r as double . 
-Load  function jsArcTan from "atan"of "js"that  takes x as double and  returns r as double . 
-Load  function jsLog from "log"of "js"that  takes x as double and  returns r as double . 
-Load  function jsEPow from "ePow"of "js"that  takes x as double and  returns r as double . 
-Load  function jsPow from "exp"of "js"that  takes x as double , y as double and  returns r as double . 
+Load  function getTeapot from "getTeapot"of "graphics"that  returns s as pointer  of void . 
+Load  function getMountains from "getMountains"of "graphics"that  returns s as pointer  of void . 
+Load  function getTeddybear from "getTeddybear"of "graphics"that  returns s as pointer  of void . 
+Load  function getCow from "getCow"of "graphics"that  returns s as pointer  of void . 
+Load  function getFox from "getFox"of "graphics"that  returns s as pointer  of void . 
+Load  function getRobot from "getRobot"of "graphics"that  returns s as pointer  of void . 
+Load  function jsArcSin from "asin"of "std"that  takes x as double and  returns r as double . 
+Load  function jsArcCos from "acos"of "std"that  takes x as double and  returns r as double . 
+Load  function jsArcTan from "atan"of "std"that  takes x as double and  returns r as double . 
+Load  function jsLog from "log"of "std"that  takes x as double and  returns r as double . 
+Load  function jsEPow from "ePow"of "std"that  takes x as double and  returns r as double . 
+Load  function jsPow from "exp"of "std"that  takes x as double , y as double and  returns r as double . 
+Load  function updateLinetraceTime from "updateLinetraceTime"of "linetrace"that  takes x as double . 
 Declare  function ${"ja":"sin", "natja":"sin", "en":"sin", "naten":"sin"}$ that  takes input as double and  returns 結果 as double with  code starting here
 	Initialize  variable PI as double with 3.14159265358979312 . 
 	Initialize  variable temp as int with input  / ( 2.0  * PI ) . 
@@ -145,7 +146,7 @@ Declare  function ${"ja":"絶対値", "natja":"絶対値", "en":"abs", "naten":"
 	If a  >= 0 then  execute  code starting here
 		Assign a to b . 
 	ending here Otherwise  execute  code starting here
-		Assign 0  - ( a ) to b . 
+		Assign ( 0  - ( a ) ) to b . 
 	ending here 
 ending here 
 Declare  function ${"ja":"ラジアンへ", "natja":"ラジアンへ", "en":"toRad", "naten":"toRad"}$ that  takes deg as double and  returns rad as double with  code starting here
@@ -157,6 +158,13 @@ Declare  function ${"ja":"平方根", "natja":"平方根", "en":"root", "naten":
 	( Initialize  variable i as int with 0 . ) from ( i  == 20 ) to ( Assign i  + 1 to i . ) starting here
 		Assign 0.5  * ( y  + ( x  / y ) ) to y . 
 	ending here 
+ending here 
+Declare  function ${"ja":"線分当たり判定", "natja":"線分当たり判定", "en":"checkLineCross", "naten":"checkLineCross"}$ that  takes ax as double , ay as double , bx as double , byp as double , cx as double , cy as double , dx as double , dy as double and  returns b as bool with  code starting here
+	Initialize  variable ta as double with ( cx  - dx )  * ( ay  - cy )  + ( cy  - dy )  * ( cx  - ax ) . 
+	Initialize  variable tb as double with ( cx  - dx )  * ( byp  - cy )  + ( cy  - dy )  * ( cx  - bx ) . 
+	Initialize  variable tc as double with ( ax  - bx )  * ( cy  - ay )  + ( ay  - byp )  * ( ax  - cx ) . 
+	Initialize  variable td as double with ( ax  - bx )  * ( dy  - ay )  + ( ay  - byp )  * ( ax  - dx ) . 
+	Assign ( ( tc  * td )  < 0 )  && ( ( ta  * tb )  < 0 ) to b . 
 ending here 
 Declare  template  that  takes T . Declare  class ${"ja":"配列", "natja":"配列", "en":"Array", "naten":"Array"}$ with  members starting here
 public : 	Declare  variable content as pointer  of T . 
@@ -324,7 +332,7 @@ public : 	Declare  variable content as pointer  of T .
 	Declare  function ${"ja":"範囲削除", "natja":"範囲削除", "en":"removeRange", "naten":"removeRange"}$ that  takes i as int , r as int and  returns b as Array < T > with  code starting here
 		Declare  variable 結果 as Array < T > . 
 		repeat size times starting here
-			If ( counter  < i ) || ( counter  >= i  + r ) then  execute  code starting here
+			If ( counter  < i )  || ( counter  >= ( i  + r ) ) then  execute  code starting here
 				Call push of 結果 with  value element counter in content . 
 			ending here 
 		ending here 
@@ -969,7 +977,7 @@ public : 	Declare  variable ${"ja":"色", "natja":"色", "en":"color", "naten":"
 		Assign c to color . 
 		Assign p to pos . 
 		Assign s to shaderID . 
-		Assign 0  - ( 1 ) to lightID . 
+		Assign ( 0  - ( 1 ) ) to lightID . 
 		Call identity of modelMat . 
 		Call identity of transMat . 
 		Call identity of scaleMat . 
@@ -1136,6 +1144,13 @@ public : 	Declare  variable ${"ja":"座標", "natja":"座標", "en":"pos", "nate
 		Assign 0.0 to pitch . 
 		Assign 1.0 to sensitivity . 
 	ending here 
+	Declare  function ${"ja":"座標設定", "natja":"座標設定", "en":"setPos", "naten":"setPos"}$ that  takes p as Vector3D with  code starting here
+		Assign p to pos . 
+	ending here 
+	Declare  function ${"ja":"視点角度設定", "natja":"視点角度設定", "en":"setAngle", "naten":"setAngle"}$ that  takes y as double , p as double with  code starting here
+		Assign y to yaw . 
+		Assign p to pitch . 
+	ending here 
 	Declare  function ${"ja":"感度設定", "natja":"感度設定", "en":"setSensitivity", "naten":"setSensitivity"}$ that  takes s as double with  code starting here
 		Assign s to sensitivity . 
 	ending here 
@@ -1202,6 +1217,15 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 		Call Camera of camera with  value temp . 
 		Call Array of sprites . 
 		Call Array of lights . 
+		Initialize  object 方向 as Vector3D with ( 0  - ( 1.0 ) ) , ( 0  - ( 1.0 ) ) , ( 0  - ( 1.0 ) ) . 
+		Initialize  object 白 as Vector3D with 1.0 , 1.0 , 1.0 . 
+		Assign 方向 to pos of 平行光源 . 
+		Assign 白  * 0.5 to ambient of 平行光源 . 
+		Assign 白  * 0.5 to diffuse of 平行光源 . 
+		Assign 白  * 0.0 to specular of 平行光源 . 
+	ending here 
+	Declare  function ${"ja":"感度設定", "natja":"感度設定", "en":"setSensitivity", "naten":"setSensitivity"}$ that  takes sensitivity as double with  code starting here
+		Call setSensitivity of camera with  value sensitivity . 
 	ending here 
 	Declare  function ${"ja":"描画", "natja":"描画", "en":"draw", "naten":"draw"}$ with  code starting here
 		Assign getTime ( )  / 1000.0 to now . 
@@ -1258,12 +1282,12 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 		Declare  variable vertices as Array < double > . 
 		If length of normals ( )  > 0 then  execute  code starting here
 			repeat length of vertexIndices ( ) times starting here
-				Call push of vertices with  value x of (get of data ( get of vertexIndices ( counter )  - 1 )) . 
-				Call push of vertices with  value y of (get of data ( get of vertexIndices ( counter )  - 1 )) . 
-				Call push of vertices with  value z of (get of data ( get of vertexIndices ( counter )  - 1 )) . 
-				Call push of vertices with  value x of (get of normals ( get of normalIndices ( counter )  - 1 )) . 
-				Call push of vertices with  value y of (get of normals ( get of normalIndices ( counter )  - 1 )) . 
-				Call push of vertices with  value z of (get of normals ( get of normalIndices ( counter )  - 1 )) . 
+				Call push of vertices with  value x of get of data ( get of vertexIndices ( counter )  - 1 ) . 
+				Call push of vertices with  value y of get of data ( get of vertexIndices ( counter )  - 1 ) . 
+				Call push of vertices with  value z of get of data ( get of vertexIndices ( counter )  - 1 ) . 
+				Call push of vertices with  value x of get of normals ( get of normalIndices ( counter )  - 1 ) . 
+				Call push of vertices with  value y of get of normals ( get of normalIndices ( counter )  - 1 ) . 
+				Call push of vertices with  value z of get of normals ( get of normalIndices ( counter )  - 1 ) . 
 			ending here 
 		ending here Otherwise  execute  code starting here
 			Declare  variable 三角形 as Array < Vector3D > . 
@@ -1275,9 +1299,9 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 					Initialize  variable normal as Vector3D with crossVector3D ( 辺1 , 辺2 ) . 
 					Call normalize of normal . 
 					repeat length of 三角形 ( ) times starting here
-						Call push of vertices with  value x of (get of 三角形 ( counter )) . 
-						Call push of vertices with  value y of (get of 三角形 ( counter )) . 
-						Call push of vertices with  value z of (get of 三角形 ( counter )) . 
+						Call push of vertices with  value x of get of 三角形 ( counter ) . 
+						Call push of vertices with  value y of get of 三角形 ( counter ) . 
+						Call push of vertices with  value z of get of 三角形 ( counter ) . 
 						Call push of vertices with  value x of normal . 
 						Call push of vertices with  value y of normal . 
 						Call push of vertices with  value z of normal . 
@@ -1302,23 +1326,23 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 			Initialize  variable line as string with get of lines ( counter ) . 
 			Initialize  variable words as Array < string > with separate of line ( ' ') . 
 			If get of words ( 0 )  == "v"then  execute  code starting here
-				Initialize  object temp as Vector3D with (toDouble of (get of words ( 1 ))) ( ) , (toDouble of (get of words ( 2 ))) ( ) , (toDouble of (get of words ( 3 ))) ( ) . 
+				Initialize  object temp as Vector3D with toDouble of get of words ( 1 ) ( ) , toDouble of get of words ( 2 ) ( ) , toDouble of get of words ( 3 ) ( ) . 
 				Call push of vertices with  value temp . 
 			ending here 
 			If get of words ( 0 )  == "f"then  execute  code starting here
 				repeat length of words ( ) times starting here
 					If counter  != 0 then  execute  code starting here
-						Initialize  variable faceData as Array < string > with (separate of (get of words ( counter ))) ( '/') . 
-						Call push of vertexIndices with  value (toInteger of (get of faceData ( 0 ))) ( ) . 
+						Initialize  variable faceData as Array < string > with separate of get of words ( counter ) ( '/') . 
+						Call push of vertexIndices with  value toInteger of get of faceData ( 0 ) ( ) . 
 						If length of faceData ( )  == 3 then  execute  code starting here
-							Call push of uvIndices with  value (toInteger of (get of faceData ( 1 ))) ( ) . 
-							Call push of normalIndices with  value (toInteger of (get of faceData ( 2 ))) ( ) . 
+							Call push of uvIndices with  value toInteger of get of faceData ( 1 ) ( ) . 
+							Call push of normalIndices with  value toInteger of get of faceData ( 2 ) ( ) . 
 						ending here 
 					ending here 
 				ending here 
 			ending here 
 			If get of words ( 0 )  == "vn"then  execute  code starting here
-				Initialize  object temp as Vector3D with (toDouble of (get of words ( 1 ))) ( ) , (toDouble of (get of words ( 2 ))) ( ) , (toDouble of (get of words ( 3 ))) ( ) . 
+				Initialize  object temp as Vector3D with toDouble of get of words ( 1 ) ( ) , toDouble of get of words ( 2 ) ( ) , toDouble of get of words ( 3 ) ( ) . 
 				Call push of normals with  value temp . 
 			ending here 
 		ending here 
@@ -1367,7 +1391,7 @@ public : 	Declare  variable x as double .
 		Assign ( ( x of a  == x )  && ( y of a  == y ) ) to b . 
 	ending here 
 	function : operator  != ( a as Vector2D ) => ( b as bool ) starting here
-		Assign ( ( x of a  != x ) || ( y of a  != y ) ) to b . 
+		Assign ( ( x of a  != x )  || ( y of a  != y ) ) to b . 
 	ending here 
 ending here 
 Declare  function ${"ja":"ベクトル2Dの和", "natja":"ベクトル2Dの和", "en":"addVector2D", "naten":"addVector2D"}$ that  takes a as Vector2D , b as Vector2D and  returns result as Vector2D with  code starting here
@@ -1620,7 +1644,7 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 		Assign 0.0 to now . 
 		Assign 0.0 to elapsedTime . 
 		Call identity of projMat . 
-		Assign perspectiveMat2D ( projMat , ( 0  - ( 高さ ) )  * ( 16.0  / 9.0 ) , ( 高さ )  * ( 16.0  / 9.0 ) , 0  - ( 高さ ) , 高さ , 0.0  - 5.0 , 5.0 ) to projMat . 
+		Assign perspectiveMat2D ( projMat , ( ( 0  - ( 高さ ) ) )  * ( 16.0  / 9.0 ) , ( 高さ )  * ( 16.0  / 9.0 ) , ( 0  - ( 高さ ) ) , 高さ , 0.0  - 5.0 , 5.0 ) to projMat . 
 		Call Array of sprites . 
 		Assign color to backgroundColor . 
 		Assign 1.0 to backgroundTransparency . 
@@ -1694,7 +1718,7 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 		repeat length of points ( ) times starting here
 			Call push of temp with  value x of element counter in content of points . 
 			Call push of temp with  value y of element counter in content of points . 
-			Call push of temp with  value 0  - ( zIndex  * 0.00100000000000000002 ) . 
+			Call push of temp with  value ( 0  - ( zIndex  * 0.00100000000000000002 ) ) . 
 		ending here 
 		Initialize  variable sprite as pointer  of Sprite with allocMemory ( sizeof ( variable  at sprite ) ) . 
 		Call sprite -> Sprite with  value content of temp , length of temp ( )  / 3 , allocMemory ( 0 ) , 0 , color , pos , 4 , 0 , zIndex . 
@@ -1722,10 +1746,10 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 		Declare  variable points as Array < double > . 
 		Call push of points with  value x of start . 
 		Call push of points with  value y of start . 
-		Call push of points with  value 0  - ( zIndex  * 0.00100000000000000002 ) . 
+		Call push of points with  value ( 0  - ( zIndex  * 0.00100000000000000002 ) ) . 
 		Call push of points with  value x of end . 
 		Call push of points with  value y of end . 
-		Call push of points with  value 0  - ( zIndex  * 0.00100000000000000002 ) . 
+		Call push of points with  value ( 0  - ( zIndex  * 0.00100000000000000002 ) ) . 
 		Initialize  variable sprite as pointer  of Sprite with allocMemory ( sizeof ( variable  at sprite ) ) . 
 		Call sprite -> Sprite with  value content of points , length of points ( )  / 3 , allocMemory ( 0 ) , 0 , color , Vector2D ( 0.0 , 0.0 ) , 4 , 1 , zIndex . 
 		Call push of sprites with  value sprite . 
@@ -1736,7 +1760,7 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 		( Initialize  variable x as double with start . ) from ( x  >= end ) to ( Assign x  + dx to x . ) starting here
 			Call push of points with  value x . 
 			Call push of points with  value c ( x ) . 
-			Call push of points with  value 0  - ( zIndex  * 0.00100000000000000002 ) . 
+			Call push of points with  value ( 0  - ( zIndex  * 0.00100000000000000002 ) ) . 
 		ending here 
 		Initialize  variable sprite as pointer  of Sprite with allocMemory ( sizeof ( variable  at sprite ) ) . 
 		Call sprite -> Sprite with  value content of points , length of points ( )  / 3 , allocMemory ( 0 ) , 0 , color , pos , 4 , 1 , zIndex . 
@@ -1749,7 +1773,7 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 			Initialize  variable temp as Vector2D with c ( x ) . 
 			Call push of points with  value x of temp . 
 			Call push of points with  value y of temp . 
-			Call push of points with  value 0  - ( zIndex  * 0.00100000000000000002 ) . 
+			Call push of points with  value ( 0  - ( zIndex  * 0.00100000000000000002 ) ) . 
 		ending here 
 		Initialize  variable sprite as pointer  of Sprite with allocMemory ( sizeof ( variable  at sprite ) ) . 
 		Call sprite -> Sprite with  value content of points , length of points ( )  / 3 , allocMemory ( 0 ) , 0 , color , pos , 4 , 1 , zIndex . 
@@ -1818,6 +1842,8 @@ Declare  function __setUpVariableNamesForSamples with  code starting here
 	Declare  variable ${"ja":"変数7", "natja":"変数7", "en":"variable7", "naten":"variable7"}$ as double . 
 	Declare  variable ${"ja":"変数8", "natja":"変数8", "en":"variable8", "naten":"variable8"}$ as double . 
 	Declare  variable ${"ja":"変数9", "natja":"変数9", "en":"variable9", "naten":"variable9"}$ as double . 
+	Declare  variable ${"ja":"ロボット", "natja":"ロボット", "en":"robot", "naten":"robot"}$ as double . 
+	Declare  variable ${"ja":"コース", "natja":"コース", "en":"course", "naten":"course"}$ as double . 
 ending here 
 Declare  class ArduinoClass with  members starting here
 public : 	Declare  variable ${"ja":"出力ピン", "natja":"出力ピン", "en":"OUTPUT", "naten":"OUTPUT"}$ as char . 
@@ -1850,23 +1876,30 @@ ending here
 Declare  class ${"ja":"ライントレースシミュレーション", "natja":"ライントレースシミュレーション", "en":"linetraceSimulation", "naten":"linetraceSimulation"}$ with  members starting here
 public : 	Declare  variable world as Scene . 
 	Declare  variable 直線データ as Array < Vector2D > . 
-	Declare  variable element 2 in センサー値 as double . 
-	Declare  variable 左モーターON as int . 
-	Declare  variable 右モーターON as int . 
-	Declare  variable 左モーター向き as int . 
-	Declare  variable 右モーター向き as int . 
-	Declare  variable 左モーター速度 as double . 
-	Declare  variable 右モーター速度 as double . 
-	Declare  function linetraceSimulation that  takes points as Array < double > , firstPos as Vector2D with  code starting here
+	Declare  variable element 2 in ${"ja":"センサー値", "natja":"センサー値", "en":"sensorValue", "naten":"sensorValue"}$ as double . 
+	Declare  variable ${"ja":"左モーターON", "natja":"左モーターON", "en":"leftMotorON", "naten":"leftMotorON"}$ as int . 
+	Declare  variable ${"ja":"右モーターON", "natja":"右モーターON", "en":"rightMotorON", "naten":"rightMotorON"}$ as int . 
+	Declare  variable ${"ja":"左モーター向き", "natja":"左モーター向き", "en":"leftMotorSequence", "naten":"leftMotorSequence"}$ as int . 
+	Declare  variable ${"ja":"右モーター向き", "natja":"右モーター向き", "en":"rightMotorSequence", "naten":"rightMotorSequence"}$ as int . 
+	Declare  variable ${"ja":"左モーター速度", "natja":"左モーター速度", "en":"leftMotorSpeed", "naten":"leftMotorSpeed"}$ as double . 
+	Declare  variable ${"ja":"右モーター速度", "natja":"右モーター速度", "en":"rightMotorSpeed", "naten":"rightMotorSpeed"}$ as double . 
+	Declare  variable スタートタイム as double . 
+	Declare  variable エンドタイム as double . 
+	Declare  function linetraceSimulation that  takes points as Array < double > , firstPos as Vector2D , ax as double , ay as double , bx as double , byp as double with  code starting here
 		Call Array of 直線データ . 
 		Call Scene of world . 
 		Call Vector2D of ロボット移動方向 with  value 0.0 , 1.0 . 
-		Assign 3 to 左モーター速度 . 
-		Assign 3 to 右モーター速度 . 
-		Assign 1 to 左モーター向き . 
-		Assign 1 to 右モーター向き . 
-		Assign 0 to 左モーターON . 
-		Assign 0 to 右モーターON . 
+		Assign ax to element 0 in スタートマーク . 
+		Assign ay to element 1 in スタートマーク . 
+		Assign bx to element 2 in スタートマーク . 
+		Assign byp to element 3 in スタートマーク . 
+		Assign 3 to leftMotorSpeed . 
+		Assign 3 to rightMotorSpeed . 
+		Assign 1 to leftMotorSequence . 
+		Assign 1 to rightMotorSequence . 
+		Assign 0 to leftMotorON . 
+		Assign 0 to rightMotorON . 
+		Assign getTime ( ) to スタートタイム . 
 		Assign 1.0 to ロボット速度 . 
 		Assign firstPos to ロボット座標 . 
 		Initialize  object 灰色 as Vector3D with 0.800000000000000044 , 0.800000000000000044 , 0.800000000000000044 . 
@@ -1874,11 +1907,15 @@ public : 	Declare  variable world as Scene .
 		Initialize  object 黒 as Vector3D with 0.0 , 0.0 , 0.0 . 
 		Initialize  object 初期位置1 as Vector3D with x of firstPos , 0.0 , y of firstPos . 
 		Initialize  object 初期位置2 as Vector3D with 5.0 , 5.0 , 5.0 . 
-		Initialize  object 初期位置3 as Vector3D with 0.0 , 0  - ( 0.5 ) , 0.0 . 
+		Initialize  object 初期位置3 as Vector3D with 0.0 , ( 0  - ( 0.5 ) ) , 0.0 . 
+		Initialize  object 初期位置4 as Vector3D with x of firstPos , 10.0 , y of firstPos . 
 		Initialize  object axis as Vector3D with 0.0 , 1.0 , 0.0 . 
 		Call push of points with  value get of points ( 0 ) . 
 		Call push of points with  value get of points ( 1 ) . 
 		Call setDirectionalLight of world with  value 初期位置3 , 白 , 0.0500000000000000028 , 0.0500000000000000028 , 0.0 . 
+		Call setSensitivity of camera of world with  value 5.0 . 
+		Call setPos of camera of world with  value 初期位置4 . 
+		Call setAngle of camera of world with  value 90.0 , ( 0  - ( 90.0 ) ) . 
 		Assign addModel of world ( loadSampleModel ( "robot") , 灰色 , 初期位置1 ) to ロボットID . 
 		Call get of sprites of world ( ロボットID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( 180 ) . 
 		Assign addLight of world ( 1.0 , 白 , 初期位置2 , 1000.0 ) to ライトID . 
@@ -1897,22 +1934,22 @@ public : 	Declare  variable world as Scene .
 				Initialize  variable temp座標 as Vector2D with 和  * 0.5 . 
 				Initialize  object temp3D座標 as Vector3D with x of temp座標 , 0.0 , y of temp座標 . 
 				Initialize  variable tempID as int with addCuboid of world ( length , 0.25 , 0.25 , 黒 , temp3D座標 ) . 
-				Call get of sprites of world ( tempID ) -> setRotate with  value axis , 0  - ( jsArcTan ( 傾き ) ) . 
+				Call get of sprites of world ( tempID ) -> setRotate with  value axis , ( 0  - ( jsArcTan ( 傾き ) ) ) . 
 			ending here 
 		ending here 
 		Call push of 直線データ with  value Vector2D ( get of points ( 0 ) , get of points ( 1 ) ) . 
 	ending here 
 	Declare  function translate with  code starting here
 		Initialize  variable PI as double with 3.14159265358979312 . 
-		Initialize  variable 左モーター距離 as double with 左モーター速度  * 左モーターON  * 左モーター向き  * 0.0160000000000000003 . 
-		Initialize  variable 右モーター距離 as double with 右モーター速度  * 右モーターON  * 右モーター向き  * 0.0160000000000000003 . 
+		Initialize  variable 左モーター距離 as double with leftMotorSpeed  * leftMotorON  * leftMotorSequence  * 0.0160000000000000003 . 
+		Initialize  variable 右モーター距離 as double with rightMotorSpeed  * rightMotorON  * rightMotorSequence  * 0.0160000000000000003 . 
 		Initialize  variable 基本距離 as double with 右モーター距離 . 
 		Initialize  variable a as double with 1.0 . 
 		If 右モーター距離  >= 左モーター距離 then  execute  code starting here
 			Assign 左モーター距離 to 基本距離 . 
-			Assign 0  - ( 1.0 ) to a . 
+			Assign ( 0  - ( 1.0 ) ) to a . 
 		ending here 
-		Initialize  variable b as double with 0  - ( 1.0 ) . 
+		Initialize  variable b as double with ( 0  - ( 1.0 ) ) . 
 		Initialize  variable theta as double with 180.0  * jsArcTan ( 右モーター距離  - 左モーター距離 )  / PI . 
 		If 右モーター距離  == 左モーター距離 then  execute  code starting here
 			Assign 0 to theta . 
@@ -1928,61 +1965,68 @@ public : 	Declare  variable world as Scene .
 		Assign x of ロボット座標  - ( a  * cos ( toRad ( ロボット角度  - theta ) )  - b  * sin ( toRad ( ロボット角度  - theta ) )  - a ) to x of ロボット座標 . 
 		Assign y of ロボット座標  + a  * sin ( toRad ( ロボット角度 ) )  + b  * cos ( toRad ( ロボット角度 ) )  - b to y of ロボット座標 . 
 		Assign y of ロボット座標  - ( a  * sin ( toRad ( ロボット角度  - theta ) )  + b  * cos ( toRad ( ロボット角度  - theta ) )  - b ) to y of ロボット座標 . 
-		Call get of sprites of world ( ロボットID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( 0  - ( ロボット角度  + 180 ) ) . 
+		Call get of sprites of world ( ロボットID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( ( 0  - ( ロボット角度  + 180 ) ) ) . 
 		Assign ロボット座標  + ( ロボット移動方向  * 基本距離 ) to ロボット座標 . 
 	ending here 
 	Declare  function update with  code starting here
-		Call translate . 
 		Initialize  variable element 2 in センサー座標 as Vector2D with ロボット座標 . 
-		Assign 1.75  * cos ( toRad ( ロボット角度  + 79.0 ) )  + x of ロボット座標 to x of element 0 in センサー座標 . 
-		Assign 1.75  * sin ( toRad ( ロボット角度  + 79.0 ) )  + y of ロボット座標 to y of element 0 in センサー座標 . 
-		Assign 1.75  * cos ( toRad ( ロボット角度  + 101.0 ) )  + x of ロボット座標 to x of element 1 in センサー座標 . 
-		Assign 1.75  * sin ( toRad ( ロボット角度  + 101.0 ) )  + y of ロボット座標 to y of element 1 in センサー座標 . 
-		Call get of sprites of world ( センサー1ID ) -> setPos with  value Vector3D ( x of element 0 in センサー座標 , 0.400000000000000022 , y of element 0 in センサー座標 ) . 
-		Call get of sprites of world ( センサー2ID ) -> setPos with  value Vector3D ( x of element 1 in センサー座標 , 0.400000000000000022 , y of element 1 in センサー座標 ) . 
-		Call get of sprites of world ( センサー1ID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( 0  - ( ロボット角度  + 180 ) ) . 
-		Call get of sprites of world ( センサー2ID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( 0  - ( ロボット角度  + 180 ) ) . 
-		Initialize  variable element 2 in センサー距離 as double with [ 10000.0 , 10000.0 ] . 
-		Initialize  variable センサー数 as int with 2 . 
-		repeat センサー数 times starting here
-			( Initialize  variable i as int with 0 . ) from ( i  == ( length of 直線データ ( )  - 1 ) ) to ( Assign i  + 1 to i . ) starting here
-				Initialize  variable A as Vector2D with get of 直線データ ( i ) . 
-				Initialize  variable B as Vector2D with get of 直線データ ( i  + 1 ) . 
-				Initialize  variable AB as Vector2D with B  - A . 
-				Initialize  variable Aセンサー座標 as Vector2D with element counter in センサー座標  - A . 
-				Initialize  variable Bセンサー座標 as Vector2D with element counter in センサー座標  - B . 
-				If ( dotVector2D ( AB , Aセンサー座標 )  >= 0 )  && ( dotVector2D ( AB  * ( 0  - ( 1.0 ) ) , Bセンサー座標 )  >= 0 ) then  execute  code starting here
-					Initialize  variable 傾き as double with ( y of A  - y of B )  / ( x of A  - x of B ) . 
-					Initialize  variable y切片 as double with y of A  - ( 傾き  * x of A ) . 
-					Initialize  variable 距離 as double with abs ( 傾き  * x of element counter in センサー座標  - y of element counter in センサー座標  + y切片 )  / root ( 1.0  + 傾き  * 傾き ) . 
-					If abs ( 傾き )  > 10000.0 then  execute  code starting here
-						Assign abs ( x of A  - x of element counter in センサー座標 ) to 距離 . 
-					ending here 
-					If element counter in センサー距離  > 距離 then  execute  code starting here
-						Assign 距離 to element counter in センサー距離 . 
-					ending here 
-				ending here Otherwise  execute  code starting here
-					If element counter in センサー距離  > length of Aセンサー座標 ( ) then  execute  code starting here
-						Assign length of Aセンサー座標 ( ) to element counter in センサー距離 . 
-					ending here 
-					If element counter in センサー距離  > length of Bセンサー座標 ( ) then  execute  code starting here
-						Assign length of Bセンサー座標 ( ) to element counter in センサー距離 . 
+		If ( ! おわり )  && checkLineCross ( x of element 0 in センサー座標 , y of element 0 in センサー座標 , x of element 1 in センサー座標 , y of element 1 in センサー座標 , element 0 in スタートマーク , element 1 in スタートマーク , element 2 in スタートマーク , element 3 in スタートマーク ) then  execute  code starting here
+			Assign true to おわり . 
+			Assign getTime ( ) to エンドタイム . 
+			Call updateLinetraceTime with  value ( エンドタイム  - スタートタイム )  / 1000 . 
+		ending here 
+		If ! おわり then  execute  code starting here
+			Call translate . 
+			Assign 1.75  * cos ( toRad ( ロボット角度  + 79.0 ) )  + x of ロボット座標 to x of element 0 in センサー座標 . 
+			Assign 1.75  * sin ( toRad ( ロボット角度  + 79.0 ) )  + y of ロボット座標 to y of element 0 in センサー座標 . 
+			Assign 1.75  * cos ( toRad ( ロボット角度  + 101.0 ) )  + x of ロボット座標 to x of element 1 in センサー座標 . 
+			Assign 1.75  * sin ( toRad ( ロボット角度  + 101.0 ) )  + y of ロボット座標 to y of element 1 in センサー座標 . 
+			Call get of sprites of world ( センサー1ID ) -> setPos with  value Vector3D ( x of element 0 in センサー座標 , 0.400000000000000022 , y of element 0 in センサー座標 ) . 
+			Call get of sprites of world ( センサー2ID ) -> setPos with  value Vector3D ( x of element 1 in センサー座標 , 0.400000000000000022 , y of element 1 in センサー座標 ) . 
+			Call get of sprites of world ( センサー1ID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( ( 0  - ( ロボット角度  + 180 ) ) ) . 
+			Call get of sprites of world ( センサー2ID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( ( 0  - ( ロボット角度  + 180 ) ) ) . 
+			Initialize  variable element 2 in センサー距離 as double with [ 10000.0 , 10000.0 ] . 
+			Initialize  variable センサー数 as int with 2 . 
+			repeat センサー数 times starting here
+				( Initialize  variable i as int with 0 . ) from ( i  == ( length of 直線データ ( )  - 1 ) ) to ( Assign i  + 1 to i . ) starting here
+					Initialize  variable A as Vector2D with get of 直線データ ( i ) . 
+					Initialize  variable B as Vector2D with get of 直線データ ( i  + 1 ) . 
+					Initialize  variable AB as Vector2D with B  - A . 
+					Initialize  variable Aセンサー座標 as Vector2D with element counter in センサー座標  - A . 
+					Initialize  variable Bセンサー座標 as Vector2D with element counter in センサー座標  - B . 
+					If ( dotVector2D ( AB , Aセンサー座標 )  >= 0 )  && ( dotVector2D ( AB  * ( 0  - ( 1.0 ) ) , Bセンサー座標 )  >= 0 ) then  execute  code starting here
+						Initialize  variable 傾き as double with ( y of A  - y of B )  / ( x of A  - x of B ) . 
+						Initialize  variable y切片 as double with y of A  - ( 傾き  * x of A ) . 
+						Initialize  variable 距離 as double with abs ( 傾き  * x of element counter in センサー座標  - y of element counter in センサー座標  + y切片 )  / root ( 1.0  + 傾き  * 傾き ) . 
+						If abs ( 傾き )  > 10000.0 then  execute  code starting here
+							Assign abs ( x of A  - x of element counter in センサー座標 ) to 距離 . 
+						ending here 
+						If element counter in センサー距離  > 距離 then  execute  code starting here
+							Assign 距離 to element counter in センサー距離 . 
+						ending here 
+					ending here Otherwise  execute  code starting here
+						If element counter in センサー距離  > length of Aセンサー座標 ( ) then  execute  code starting here
+							Assign length of Aセンサー座標 ( ) to element counter in センサー距離 . 
+						ending here 
+						If element counter in センサー距離  > length of Bセンサー座標 ( ) then  execute  code starting here
+							Assign length of Bセンサー座標 ( ) to element counter in センサー距離 . 
+						ending here 
 					ending here 
 				ending here 
 			ending here 
+			Assign element 0 in センサー距離  * 768.0 to element 0 in sensorValue . 
+			Assign element 1 in センサー距離  * 768.0 to element 1 in sensorValue . 
+			If element 0 in sensorValue  > 255 then  execute  code starting here
+				Assign 255.0 to element 0 in sensorValue . 
+			ending here 
+			If element 1 in sensorValue  > 255 then  execute  code starting here
+				Assign 255.0 to element 1 in sensorValue . 
+			ending here 
+			Initialize  object ロボット座標3D as Vector3D with x of ロボット座標 , 0.0 , y of ロボット座標 . 
+			Initialize  object ライト座標3D as Vector3D with x of ロボット座標  + 5.0 , 5.0 , y of ロボット座標  + 5.0 . 
+			Call get of sprites of world ( ロボットID ) -> setPos with  value ロボット座標3D . 
+			Call get of sprites of world ( ライトID ) -> setPos with  value ライト座標3D . 
 		ending here 
-		Assign element 0 in センサー距離  * 768.0 to element 0 in センサー値 . 
-		Assign element 1 in センサー距離  * 768.0 to element 1 in センサー値 . 
-		If element 0 in センサー値  > 255 then  execute  code starting here
-			Assign 255.0 to element 0 in センサー値 . 
-		ending here 
-		If element 1 in センサー値  > 255 then  execute  code starting here
-			Assign 255.0 to element 1 in センサー値 . 
-		ending here 
-		Initialize  object ロボット座標3D as Vector3D with x of ロボット座標 , 0.0 , y of ロボット座標 . 
-		Initialize  object ライト座標3D as Vector3D with x of ロボット座標  + 5.0 , 5.0 , y of ロボット座標  + 5.0 . 
-		Call get of sprites of world ( ロボットID ) -> setPos with  value ロボット座標3D . 
-		Call get of sprites of world ( ライトID ) -> setPos with  value ライト座標3D . 
 		Call draw of world . 
 	ending here 
 private : 	Declare  variable ロボットID as int . 
@@ -1991,7 +2035,10 @@ private : 	Declare  variable ロボットID as int .
 	Declare  variable ロボット移動方向 as Vector2D . 
 	Declare  variable ロボット速度 as double . 
 	Declare  variable ロボット座標 as Vector2D . 
+	Declare  variable ロボット初期位置 as Vector2D . 
 	Declare  variable センサー1ID as int . 
 	Declare  variable センサー2ID as int . 
 	Declare  variable ロボットoffset as Vector2D . 
+	Declare  variable おわり as bool . 
+	Declare  variable element 4 in スタートマーク as double . 
 ending here 
