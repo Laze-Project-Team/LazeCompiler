@@ -67,6 +67,7 @@ Load  function getTeddybear from "getTeddybear"of "graphics"that  returns s as p
 Load  function getCow from "getCow"of "graphics"that  returns s as pointer  of void . 
 Load  function getFox from "getFox"of "graphics"that  returns s as pointer  of void . 
 Load  function getRobot from "getRobot"of "graphics"that  returns s as pointer  of void . 
+Load  function getCheckpoint from "getCheckpoint"of "graphics"that  returns s as pointer  of void . 
 Load  function jsArcSin from "asin"of "std"that  takes x as double and  returns r as double . 
 Load  function jsArcCos from "acos"of "std"that  takes x as double and  returns r as double . 
 Load  function jsArcTan from "atan"of "std"that  takes x as double and  returns r as double . 
@@ -714,6 +715,9 @@ Declare  function ${"ja":"サンプルモデルロード", "natja":"サンプル
 	If a  == "robot"then  execute  code starting here
 		Assign getRobot ( ) to data . 
 	ending here 
+	If a  == "checkpoint"then  execute  code starting here
+		Assign getCheckpoint ( ) to data . 
+	ending here 
 	Assign variable  at data to b . 
 ending here 
 Declare  class ${"ja":"ベクトル3D", "natja":"ベクトル3D", "en":"Vector3D", "naten":"Vector3D"}$ with  members starting here
@@ -1067,6 +1071,9 @@ public : 	Declare  variable ${"ja":"色", "natja":"色", "en":"color", "naten":"
 		Call rotate of temp with  value axis , t . 
 		Assign mulMatrix4x4 ( temp , rotateMat ) to rotateMat . 
 	ending here 
+	Declare  function ${"ja":"色設定", "natja":"色設定", "en":"setColor", "naten":"setColor"}$ that  takes c as Vector3D with  code starting here
+		Assign c to color . 
+	ending here 
 	Declare  function ${"ja":"描画", "natja":"描画", "en":"draw", "naten":"draw"}$ that  takes projMat as Matrix4x4 , viewMat as Matrix4x4 , camera as Vector3D , lights as Array < pointer  of LightClass > , dirLight as LightClass with  code starting here
 		Initialize  variable PI as double with 3.14159265358979312 . 
 		Call identity of scaleMat . 
@@ -1282,26 +1289,26 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 		Declare  variable vertices as Array < double > . 
 		If length of normals ( )  > 0 then  execute  code starting here
 			repeat length of vertexIndices ( ) times starting here
-				Call push of vertices with  value x of get of data ( get of vertexIndices ( counter )  - 1 ) . 
-				Call push of vertices with  value y of get of data ( get of vertexIndices ( counter )  - 1 ) . 
-				Call push of vertices with  value z of get of data ( get of vertexIndices ( counter )  - 1 ) . 
-				Call push of vertices with  value x of get of normals ( get of normalIndices ( counter )  - 1 ) . 
-				Call push of vertices with  value y of get of normals ( get of normalIndices ( counter )  - 1 ) . 
-				Call push of vertices with  value z of get of normals ( get of normalIndices ( counter )  - 1 ) . 
+				Call push of vertices with  value x of (get of data ( get of vertexIndices ( counter )  - 1 )) . 
+				Call push of vertices with  value y of (get of data ( get of vertexIndices ( counter )  - 1 )) . 
+				Call push of vertices with  value z of (get of data ( get of vertexIndices ( counter )  - 1 )) . 
+				Call push of vertices with  value x of (get of normals ( get of normalIndices ( counter )  - 1 )) . 
+				Call push of vertices with  value y of (get of normals ( get of normalIndices ( counter )  - 1 )) . 
+				Call push of vertices with  value z of (get of normals ( get of normalIndices ( counter )  - 1 )) . 
 			ending here 
 		ending here Otherwise  execute  code starting here
 			Declare  variable 三角形 as Array < Vector3D > . 
 			repeat length of vertexIndices ( ) times starting here
-				Call push of 三角形 with  value get of data ( get of vertexIndices ( counter )  - 1 ) . 
+				Call push of 三角形 with  value (get of data ( get of vertexIndices ( counter )  - 1 )) . 
 				If ( counter  % 3 )  == 2 then  execute  code starting here
 					Initialize  variable 辺1 as Vector3D with get of 三角形 ( 1 )  - get of 三角形 ( 0 ) . 
 					Initialize  variable 辺2 as Vector3D with get of 三角形 ( 2 )  - get of 三角形 ( 0 ) . 
 					Initialize  variable normal as Vector3D with crossVector3D ( 辺1 , 辺2 ) . 
 					Call normalize of normal . 
 					repeat length of 三角形 ( ) times starting here
-						Call push of vertices with  value x of get of 三角形 ( counter ) . 
-						Call push of vertices with  value y of get of 三角形 ( counter ) . 
-						Call push of vertices with  value z of get of 三角形 ( counter ) . 
+						Call push of vertices with  value x of (get of 三角形 ( counter )) . 
+						Call push of vertices with  value y of (get of 三角形 ( counter )) . 
+						Call push of vertices with  value z of (get of 三角形 ( counter )) . 
 						Call push of vertices with  value x of normal . 
 						Call push of vertices with  value y of normal . 
 						Call push of vertices with  value z of normal . 
@@ -1326,23 +1333,23 @@ public : 	Declare  variable ${"ja":"スプライト配列", "natja":"スプラ�
 			Initialize  variable line as string with get of lines ( counter ) . 
 			Initialize  variable words as Array < string > with separate of line ( ' ') . 
 			If get of words ( 0 )  == "v"then  execute  code starting here
-				Initialize  object temp as Vector3D with toDouble of get of words ( 1 ) ( ) , toDouble of get of words ( 2 ) ( ) , toDouble of get of words ( 3 ) ( ) . 
+				Initialize  object temp as Vector3D with (toDouble of (get of words ( 1 ))) ( ) , (toDouble of (get of words ( 2 ))) ( ) , (toDouble of (get of words ( 3 ))) ( ) . 
 				Call push of vertices with  value temp . 
 			ending here 
 			If get of words ( 0 )  == "f"then  execute  code starting here
 				repeat length of words ( ) times starting here
 					If counter  != 0 then  execute  code starting here
-						Initialize  variable faceData as Array < string > with separate of get of words ( counter ) ( '/') . 
-						Call push of vertexIndices with  value toInteger of get of faceData ( 0 ) ( ) . 
+						Initialize  variable faceData as Array < string > with (separate of (get of words ( counter ))) ( '/') . 
+						Call push of vertexIndices with  value (toInteger of (get of faceData ( 0 ))) ( ) . 
 						If length of faceData ( )  == 3 then  execute  code starting here
-							Call push of uvIndices with  value toInteger of get of faceData ( 1 ) ( ) . 
-							Call push of normalIndices with  value toInteger of get of faceData ( 2 ) ( ) . 
+							Call push of uvIndices with  value (toInteger of (get of faceData ( 1 ))) ( ) . 
+							Call push of normalIndices with  value (toInteger of (get of faceData ( 2 ))) ( ) . 
 						ending here 
 					ending here 
 				ending here 
 			ending here 
 			If get of words ( 0 )  == "vn"then  execute  code starting here
-				Initialize  object temp as Vector3D with toDouble of get of words ( 1 ) ( ) , toDouble of get of words ( 2 ) ( ) , toDouble of get of words ( 3 ) ( ) . 
+				Initialize  object temp as Vector3D with (toDouble of (get of words ( 1 ))) ( ) , (toDouble of (get of words ( 2 ))) ( ) , (toDouble of (get of words ( 3 ))) ( ) . 
 				Call push of normals with  value temp . 
 			ending here 
 		ending here 
@@ -1873,10 +1880,30 @@ ending here
 Declare  function ${"ja":"ArduinoHCSR04設定", "natja":"ArduinoHCSR04設定", "en":"ArduinoHCSR04Trigger", "naten":"ArduinoHCSR04Trigger"}$ that  takes ピン番号 as int with  code starting here
 	Call ArduinoSendCommand with  value 'T', ピン番号 . 
 ending here 
+Declare  class ${"ja":"ベクトル4D", "natja":"ベクトル4D", "en":"Vector4D", "naten":"Vector4D"}$ with  members starting here
+public : 	Declare  variable element 4 in データ as double . 
+	Declare  function Vector4D that  takes ax as double , ay as double , bx as double , byp as double with  code starting here
+		Assign ax to element 0 in データ . 
+		Assign ay to element 1 in データ . 
+		Assign bx to element 2 in データ . 
+		Assign byp to element 3 in データ . 
+	ending here 
+	function : operator  != ( a as Vector4D ) => ( b as bool ) starting here
+		Assign ( element 0 in データ  != element 0 in データ of a  || element 1 in データ  != element 1 in データ of a  || element 2 in データ  != element 2 in データ of a  || element 3 in データ  != element 3 in データ of a ) to b . 
+	ending here 
+	function : operator  == ( a as Vector4D ) => ( b as bool ) starting here
+		Assign ( element 0 in データ  == element 0 in データ of a  && element 1 in データ  == element 1 in データ of a  && element 2 in データ  == element 2 in データ of a  && element 3 in データ  == element 3 in データ of a ) to b . 
+	ending here 
+	Declare  function 交わるか that  takes a as Vector4D and  returns b as bool with  code starting here
+		Assign checkLineCross ( element 0 in データ , element 1 in データ , element 2 in データ , element 3 in データ , element 0 in データ of a , element 1 in データ of a , element 2 in データ of a , element 3 in データ of a ) to b . 
+	ending here 
+ending here 
 Declare  class ${"ja":"ライントレースシミュレーション", "natja":"ライントレースシミュレーション", "en":"linetraceSimulation", "naten":"linetraceSimulation"}$ with  members starting here
 public : 	Declare  variable world as Scene . 
 	Declare  variable 直線データ as Array < Vector2D > . 
 	Declare  variable element 2 in ${"ja":"センサー値", "natja":"センサー値", "en":"sensorValue", "naten":"sensorValue"}$ as double . 
+	Declare  variable ${"ja":"左センサー値", "natja":"左センサー値", "en":"leftSensorValue", "naten":"leftSensorValue"}$ as double . 
+	Declare  variable ${"ja":"右センサー値", "natja":"右センサー値", "en":"rightSensorValue", "naten":"rightSensorValue"}$ as double . 
 	Declare  variable ${"ja":"左モーターON", "natja":"左モーターON", "en":"leftMotorON", "naten":"leftMotorON"}$ as int . 
 	Declare  variable ${"ja":"右モーターON", "natja":"右モーターON", "en":"rightMotorON", "naten":"rightMotorON"}$ as int . 
 	Declare  variable ${"ja":"左モーター向き", "natja":"左モーター向き", "en":"leftMotorSequence", "naten":"leftMotorSequence"}$ as int . 
@@ -1887,6 +1914,8 @@ public : 	Declare  variable world as Scene .
 	Declare  variable エンドタイム as double . 
 	Declare  function linetraceSimulation that  takes points as Array < double > , firstPos as Vector2D , ax as double , ay as double , bx as double , byp as double with  code starting here
 		Call Array of 直線データ . 
+		Call Array of 通過点 . 
+		Call Array of 通過点ID . 
 		Call Scene of world . 
 		Call Vector2D of ロボット移動方向 with  value 0.0 , 1.0 . 
 		Assign ax to element 0 in スタートマーク . 
@@ -1899,6 +1928,7 @@ public : 	Declare  variable world as Scene .
 		Assign 1 to rightMotorSequence . 
 		Assign 0 to leftMotorON . 
 		Assign 0 to rightMotorON . 
+		Assign ( 0  - ( 1 ) ) to 通過済み . 
 		Assign getTime ( ) to スタートタイム . 
 		Assign 1.0 to ロボット速度 . 
 		Assign firstPos to ロボット座標 . 
@@ -1916,6 +1946,138 @@ public : 	Declare  variable world as Scene .
 		Call setSensitivity of camera of world with  value 5.0 . 
 		Call setPos of camera of world with  value 初期位置4 . 
 		Call setAngle of camera of world with  value 90.0 , ( 0  - ( 90.0 ) ) . 
+		Assign addModel of world ( loadSampleModel ( "robot") , 灰色 , 初期位置1 ) to ロボットID . 
+		Call get of sprites of world ( ロボットID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( 180 ) . 
+		Assign addLight of world ( 1.0 , 白 , 初期位置2 , 1000.0 ) to ライトID . 
+		Assign addCube of world ( 0.200000000000000011 , Vector3D ( 0.0 , 0.0 , 0.0 ) , Vector3D ( 0.0 , 0.0 , 0.0 ) ) to センサー1ID . 
+		Assign addCube of world ( 0.200000000000000011 , Vector3D ( 0.0 , 0.0 , 0.0 ) , Vector3D ( 0.0 , 0.0 , 0.0 ) ) to センサー2ID . 
+		Call addCuboid of world with  value 100.0 , 1.0 , 100.0 , 白 , 初期位置3 . 
+		( Initialize  variable counter as int with 0 . ) from ( counter  == ( length of points ( )  - 2 ) ) to ( Assign counter  + 2 to counter . ) starting here
+			Initialize  object A as Vector2D with get of points ( counter ) , get of points ( counter  + 1 ) . 
+			Initialize  object B as Vector2D with get of points ( counter  + 2 ) , get of points ( counter  + 3 ) . 
+			If A  != B then  execute  code starting here
+				Initialize  variable 差 as Vector2D with B  - A . 
+				Initialize  variable 和 as Vector2D with A  + B . 
+				Initialize  variable 傾き as double with ( y of A  - y of B )  / ( x of A  - x of B ) . 
+				Call push of 直線データ with  value A . 
+				Initialize  variable length as double with length of 差 ( ) . 
+				Initialize  variable temp座標 as Vector2D with 和  * 0.5 . 
+				Initialize  object temp3D座標 as Vector3D with x of temp座標 , 0.0 , y of temp座標 . 
+				Initialize  variable tempID as int with addCuboid of world ( length , 0.25 , 0.25 , 黒 , temp3D座標 ) . 
+				Call get of sprites of world ( tempID ) -> setRotate with  value axis , ( 0  - ( jsArcTan ( 傾き ) ) ) . 
+			ending here 
+		ending here 
+		Call push of 直線データ with  value Vector2D ( get of points ( 0 ) , get of points ( 1 ) ) . 
+	ending here 
+	Declare  function linetraceSimulation that  takes level as int with  code starting here
+		Call Array of 通過点 . 
+		Call Array of 通過点ID . 
+		Declare  variable points as Array < double > . 
+		Call Scene of world . 
+		Initialize  object firstPos as Vector2D with 0.0 , 0.0 . 
+		If level  == 0 then  execute  code starting here
+			Call setPos of camera of world with  value Vector3D ( 2.0 , 10.0 , 3.0 ) . 
+			Call setAngle of camera of world with  value 45.0 , ( 0  - ( 45.0 ) ) . 
+			Initialize  variable number as int with 12 . 
+			repeat 12 times starting here
+				Call push of points with  value 10.0  * cos ( toRad ( ( 360.0  / number )  * counter ) )  + 10.0 . 
+				Call push of points with  value 10.0  * sin ( toRad ( ( 360.0  / number )  * counter ) )  + 10.0 . 
+			ending here 
+			Assign 0.0 to x of firstPos . 
+			Assign 10.0 to y of firstPos . 
+			Initialize  object チェックポイント as Vector4D with 19.0 , 10.5 , 21.0 , 9.5 . 
+			Call push of 通過点 with  value チェックポイント . 
+			Initialize  object ゴール as Vector4D with ( 0  - ( 1.0 ) ) , 9.5 , 1.0 , 8.5 . 
+			Call push of 通過点 with  value ゴール . 
+		ending here 
+		If level  == 1 then  execute  code starting here
+			Call setPos of camera of world with  value Vector3D ( ( 0  - ( 10.0 ) ) , 10.0 , ( 0  - ( 15.0 ) ) ) . 
+			Call setAngle of camera of world with  value 45.0 , ( 0  - ( 45.0 ) ) . 
+			Initialize  variable number as int with 12 . 
+			repeat 6 times starting here
+				Call push of points with  value 10.0  * cos ( toRad ( ( 360.0  / number )  * ( counter  + 1 ) ) ) . 
+				Call push of points with  value 10.0  * sin ( toRad ( ( 360.0  / number )  * ( counter  + 1 ) ) )  + 10.0 . 
+			ending here 
+			repeat 6 times starting here
+				Call push of points with  value 10.0  * cos ( toRad ( ( 360.0  / number )  * ( counter  + 7 ) ) ) . 
+				Call push of points with  value 10.0  * sin ( toRad ( ( 360.0  / number )  * ( counter  + 7 ) ) )  - 10.0 . 
+			ending here 
+			Assign 9.0 to x of firstPos . 
+			Assign 1.0 to y of firstPos . 
+			Initialize  object チェックポイント as Vector4D with ( 0  - ( 8.0 ) ) , ( 0  - ( 1.0 ) ) , ( 0  - ( 10.0 ) ) , 0.0 . 
+			Call push of 通過点 with  value チェックポイント . 
+			Initialize  object ゴール as Vector4D with 8.0 , 0.0 , 10.0 , ( 0  - ( 1.0 ) ) . 
+			Call push of 通過点 with  value ゴール . 
+		ending here 
+		If level  == 2 then  execute  code starting here
+			Call setPos of camera of world with  value Vector3D ( ( 0  - ( 10.0 ) ) , 10.0 , ( 0  - ( 15.0 ) ) ) . 
+			Call setAngle of camera of world with  value 45.0 , ( 0  - ( 45.0 ) ) . 
+			Assign 45.0 to ロボット角度 . 
+			Initialize  variable number as int with 12 . 
+			Call push of points with  value 10.0 . 
+			Call push of points with  value 10.0 . 
+			Call push of points with  value 10.0 . 
+			Call push of points with  value 16.0 . 
+			repeat 6 times starting here
+				Call push of points with  value 10.0  * cos ( toRad ( ( 360.0  / number )  * ( counter  + 1 ) ) ) . 
+				Call push of points with  value 10.0  * sin ( toRad ( ( 360.0  / number )  * ( counter  + 1 ) ) )  + 16.0 . 
+			ending here 
+			Call push of points with  value 10.0  * cos ( toRad ( ( 360.0  / number )  * 6 ) ) . 
+			Call push of points with  value 10.0  * sin ( toRad ( ( 360.0  / number )  * 6 ) )  + 10.0 . 
+			Call push of points with  value 10.0 . 
+			Call push of points with  value ( 0  - ( 8.0 ) ) . 
+			repeat 7 times starting here
+				Call push of points with  value 10.0  * cos ( toRad ( ( 360.0  / number )  * ( ( 0  - ( counter ) ) ) ) ) . 
+				Call push of points with  value 10.0  * sin ( toRad ( ( 360.0  / number )  * ( ( 0  - ( counter ) ) ) ) )  - 10.0 . 
+			ending here 
+			Call push of points with  value ( 0  - ( 10.0 ) ) . 
+			Call push of points with  value ( 0  - ( 8.0 ) ) . 
+			Assign 3.0 to x of firstPos . 
+			Assign ( 0  - ( 2.0 ) ) to y of firstPos . 
+			Initialize  object チェックポイント1 as Vector4D with ( 0  - ( 1.0 ) ) , 24.0 , 1.0 , 28.0 . 
+			Call push of 通過点 with  value チェックポイント1 . 
+			Initialize  object チェックポイント2 as Vector4D with 2.0 , ( 0  - ( 16.0 ) ) , ( 0  - ( 2.0 ) ) , ( 0  - ( 24.0 ) ) . 
+			Call push of 通過点 with  value チェックポイント2 . 
+			Initialize  object ゴール as Vector4D with 4.0 , 0.0 , 4.0 , ( 0  - ( 4.0 ) ) . 
+			Call push of 通過点 with  value ゴール . 
+		ending here 
+		Call Array of 直線データ . 
+		Call Vector2D of ロボット移動方向 with  value 0.0 , 1.0 . 
+		Assign 3 to leftMotorSpeed . 
+		Assign 3 to rightMotorSpeed . 
+		Assign 1 to leftMotorSequence . 
+		Assign 1 to rightMotorSequence . 
+		Assign 0 to leftMotorON . 
+		Assign 0 to rightMotorON . 
+		Assign ( 0  - ( 1 ) ) to 通過済み . 
+		Assign getTime ( ) to スタートタイム . 
+		Assign 1.0 to ロボット速度 . 
+		Assign firstPos to ロボット座標 . 
+		Initialize  object 灰色 as Vector3D with 0.800000000000000044 , 0.800000000000000044 , 0.800000000000000044 . 
+		Initialize  object 白 as Vector3D with 1.0 , 1.0 , 1.0 . 
+		Initialize  object 黒 as Vector3D with 0.0 , 0.0 , 0.0 . 
+		Initialize  object 初期位置1 as Vector3D with x of firstPos , 0.0 , y of firstPos . 
+		Initialize  object 初期位置2 as Vector3D with 5.0 , 5.0 , 5.0 . 
+		Initialize  object 初期位置3 as Vector3D with 0.0 , ( 0  - ( 0.5 ) ) , 0.0 . 
+		Initialize  object 初期位置4 as Vector3D with x of firstPos , 10.0 , y of firstPos . 
+		Initialize  object axis as Vector3D with 0.0 , 1.0 , 0.0 . 
+		Call push of points with  value get of points ( 0 ) . 
+		Call push of points with  value get of points ( 1 ) . 
+		Call setDirectionalLight of world with  value 初期位置3 , 白 , 0.0500000000000000028 , 0.0500000000000000028 , 0.0 . 
+		Call setSensitivity of camera of world with  value 5.0 . 
+		repeat length of 通過点 ( ) times starting here
+			Initialize  variable color as Vector3D with 灰色 . 
+			Initialize  variable チェックポイント as Vector4D with get of 通過点 ( counter ) . 
+			Initialize  object position as Vector3D with ( element 0 in データ of チェックポイント  + element 2 in データ of チェックポイント )  / 2.0 , 0.0 , ( element 1 in データ of チェックポイント  + element 3 in データ of チェックポイント )  / 2.0 . 
+			If counter  == ( 通過済み  + 1 ) then  execute  code starting here
+				Assign Vector3D ( 0.699999999999999956 , 0.299999999999999989 , 0.0 ) to color . 
+			ending here 
+			Initialize  variable id as int with addModel of world ( loadSampleModel ( "checkpoint") , color , position ) . 
+			Call push of 通過点ID with  value id . 
+			Initialize  variable PI as double with 3.14159265358979312 . 
+			Initialize  variable angle as double with jsArcTan ( ( element 3 in データ of チェックポイント  - element 1 in データ of チェックポイント )  / ( element 2 in データ of チェックポイント  - element 0 in データ of チェックポイント ) )  + PI  / 6.0 . 
+			Call get of sprites of world ( id ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , angle . 
+		ending here 
 		Assign addModel of world ( loadSampleModel ( "robot") , 灰色 , 初期位置1 ) to ロボットID . 
 		Call get of sprites of world ( ロボットID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( 180 ) . 
 		Assign addLight of world ( 1.0 , 白 , 初期位置2 , 1000.0 ) to ライトID . 
@@ -1970,11 +2132,6 @@ public : 	Declare  variable world as Scene .
 	ending here 
 	Declare  function update with  code starting here
 		Initialize  variable element 2 in センサー座標 as Vector2D with ロボット座標 . 
-		If ( ! おわり )  && checkLineCross ( x of element 0 in センサー座標 , y of element 0 in センサー座標 , x of element 1 in センサー座標 , y of element 1 in センサー座標 , element 0 in スタートマーク , element 1 in スタートマーク , element 2 in スタートマーク , element 3 in スタートマーク ) then  execute  code starting here
-			Assign true to おわり . 
-			Assign getTime ( ) to エンドタイム . 
-			Call updateLinetraceTime with  value ( エンドタイム  - スタートタイム )  / 1000 . 
-		ending here 
 		If ! おわり then  execute  code starting here
 			Call translate . 
 			Assign 1.75  * cos ( toRad ( ロボット角度  + 79.0 ) )  + x of ロボット座標 to x of element 0 in センサー座標 . 
@@ -1985,6 +2142,23 @@ public : 	Declare  variable world as Scene .
 			Call get of sprites of world ( センサー2ID ) -> setPos with  value Vector3D ( x of element 1 in センサー座標 , 0.400000000000000022 , y of element 1 in センサー座標 ) . 
 			Call get of sprites of world ( センサー1ID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( ( 0  - ( ロボット角度  + 180 ) ) ) . 
 			Call get of sprites of world ( センサー2ID ) -> setRotate with  value Vector3D ( 0.0 , 1.0 , 0.0 ) , toRad ( ( 0  - ( ロボット角度  + 180 ) ) ) . 
+			Initialize  object 緑 as Vector3D with 0.0 , 1.0 , 0.0 . 
+			If length of 通過点 ( )  >= 1  && length of 通過点ID ( )  >= 1 then  execute  code starting here
+				Initialize  variable チェックポイント as Vector4D with get of 通過点 ( 通過済み  + 1 ) . 
+				Initialize  object ロボット線分 as Vector4D with 2.0  * cos ( toRad ( ロボット角度 ) )  + x of ロボット座標 , 2.0  * sin ( toRad ( ロボット角度 ) )  + y of ロボット座標 , 2.0  * cos ( toRad ( ロボット角度  + 180 ) )  + x of ロボット座標 , 2.0  * sin ( toRad ( ロボット角度  + 180 ) )  + y of ロボット座標 . 
+				If 交わるか of チェックポイント ( ロボット線分 ) then  execute  code starting here
+					If ( 通過済み  + 2 )  == length of 通過点 ( ) then  execute  code starting here
+						Call get of sprites of world ( get of 通過点ID ( 通過済み  + 1 ) ) -> setColor with  value 緑 . 
+						Assign true to おわり . 
+						Assign getTime ( ) to エンドタイム . 
+						Call updateLinetraceTime with  value ( エンドタイム  - スタートタイム )  / 1000 . 
+					ending here Otherwise  execute  code starting here
+						Assign 通過済み  + 1 to 通過済み . 
+						Call get of sprites of world ( get of 通過点ID ( 通過済み ) ) -> setColor with  value 緑 . 
+						Call get of sprites of world ( get of 通過点ID ( 通過済み  + 1 ) ) -> setColor with  value Vector3D ( 0.699999999999999956 , 0.299999999999999989 , 0.0 ) . 
+					ending here 
+				ending here 
+			ending here 
 			Initialize  variable element 2 in センサー距離 as double with [ 10000.0 , 10000.0 ] . 
 			Initialize  variable センサー数 as int with 2 . 
 			repeat センサー数 times starting here
@@ -2022,6 +2196,8 @@ public : 	Declare  variable world as Scene .
 			If element 1 in sensorValue  > 255 then  execute  code starting here
 				Assign 255.0 to element 1 in sensorValue . 
 			ending here 
+			Assign element 0 in sensorValue to rightSensorValue . 
+			Assign element 1 in sensorValue to leftSensorValue . 
 			Initialize  object ロボット座標3D as Vector3D with x of ロボット座標 , 0.0 , y of ロボット座標 . 
 			Initialize  object ライト座標3D as Vector3D with x of ロボット座標  + 5.0 , 5.0 , y of ロボット座標  + 5.0 . 
 			Call get of sprites of world ( ロボットID ) -> setPos with  value ロボット座標3D . 
@@ -2041,4 +2217,7 @@ private : 	Declare  variable ロボットID as int .
 	Declare  variable ロボットoffset as Vector2D . 
 	Declare  variable おわり as bool . 
 	Declare  variable element 4 in スタートマーク as double . 
+	Declare  variable 通過点 as Array < Vector4D > . 
+	Declare  variable 通過点ID as Array < int > . 
+	Declare  variable 通過済み as int . 
 ending here 
